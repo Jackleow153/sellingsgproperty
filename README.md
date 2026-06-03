@@ -41,22 +41,51 @@ Note: Some advanced features (history, certain interactions) work more reliably 
 
 **Recommended: GitHub + Netlify (for updates, history, and clean deploys)**
 
-1. In the folder:
+**Note:** The local folder already has a git repo initialized with the current code (if you pulled the latest from Downloads or the workspace). If starting fresh from an old zip, run the init steps first.
+
+1. Make sure you're in the folder:
+   ```bash
+   cd /Users/jackleow/sellingsgproperty   # or wherever you have the folder
+   ```
+
+2. (If no .git yet) Initialize and commit:
    ```bash
    git init
    git add .
-   git commit -m "SEO & AEO optimized version"
+   git commit -m "SEO & AEO optimized version with 13 insights, clean URLs, sitemap, dynamic schema"
    ```
-2. Create a new repo on GitHub and push:
+
+3. Create a **new empty repository** on GitHub.com named `sellingsgproperty` (do **not** initialize with README, .gitignore, or license).
+
+4. Add the remote and push (tailored for your GitHub `jackleow`):
    ```bash
-   git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
+   git remote add origin https://github.com/jackleow/sellingsgproperty.git
    git branch -M main
    git push -u origin main
    ```
-3. In Netlify: "Add new site" → "Import an existing project" → connect GitHub repo.
-4. Build settings:
-   - Build command: (leave empty)
-   - Publish directory: `.`
+
+   - First time, GitHub will prompt for login (use browser auth or personal access token with repo scope).
+   - If using SSH, change to `git@github.com:jackleow/sellingsgproperty.git`
+
+5. In Netlify dashboard:
+   - "Add new site" → "Import an existing project"
+   - Connect GitHub → select the `sellingsgproperty` repo
+   - Build settings:
+     - Build command: (leave empty)
+     - Publish directory: `.`
+   - Netlify will auto-detect `netlify.toml` and `_redirects`
+
+6. After first deploy, future updates are just:
+   ```bash
+   git add .
+   git commit -m "Updated insights article / SEO tweaks"
+   git push
+   ```
+   Netlify will automatically rebuild and deploy.
+
+**Important:** Update the placeholder domain in `sitemap.xml` and any hardcoded `sellingsgproperty.com` references to your actual Netlify URL (or custom domain) once deployed, e.g. `https://your-site.netlify.app`
+
+The site now supports clean URLs like `https://your-site.netlify.app/insights/hdb-phantom-fear` thanks to `_redirects` + client-side router.
    - Netlify will automatically use netlify.toml and _redirects.
 
 The site is 100% static — no build step.
