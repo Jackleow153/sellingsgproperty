@@ -1,0 +1,25 @@
+# Netlify rewrites for cleaner shareable/SEO-friendly article URLs (optional)
+# These still load the same single index.html but give nicer paths in address bar and some backlinks.
+# Point your internal links or future sitemap to the clean version if desired.
+# The JS router now supports both clean paths (/insights/slug) and old hash paths.
+
+# All 13 insights articles (clean slugs)
+ /insights/hdb-phantom-fear               /index.html   200
+ /insights/absd-foreigners                /index.html   200
+ /insights/decoupling                     /index.html   200
+ /insights/resolution-2026                /index.html   200
+ /insights/new-launch-vs-resale           /index.html   200
+ /insights/cpf-private                    /index.html   200
+ /insights/district-guide                 /index.html   200
+ /insights/hdb-sell-signs                 /index.html   200
+ /insights/fomo-new-launch-2026           /index.html   200
+ /insights/first-condo-anxiety            /index.html   200
+ /insights/progressive-payment-psychology /index.html   200
+ /insights/absorption-herd-2026           /index.html   200
+ /insights/developer-incentives-psych     /index.html   200
+
+# Legacy hash support (still works)
+ /#insights/*                             /index.html   200
+
+# Fallback: everything else serves the SPA (required for client-side routing)
+ /*                                       /index.html   200

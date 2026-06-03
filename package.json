@@ -1,0 +1,12 @@
+{
+  "name": "sellingsgproperty",
+  "version": "1.0.0",
+  "description": "SellingSgProperty — Singapore New Launch Condos site (static)",
+  "scripts": {
+    "start": "python3 -m http.server 8080 || npx http-server -p 8080 -c-1",
+    "serve": "npm run start",
+    "dev": "npm run start"
+  },
+  "license": "UNLICENSED",
+  "private": true
+}

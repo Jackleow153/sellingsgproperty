@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap for all deep-linked articles (hash URLs are followed by modern crawlers)
+Sitemap: https://sellingsgproperty.com/sitemap.xml
+
+# Encourage fast indexing of fresh 2026 content
+Crawl-delay: 1
