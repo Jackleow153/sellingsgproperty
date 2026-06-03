@@ -83,22 +83,100 @@ Note: Some advanced features (history, certain interactions) work more reliably 
    ```
    Netlify will automatically rebuild and deploy.
 
-**Important:** Update the placeholder domain in `sitemap.xml` and any hardcoded `sellingsgproperty.com` references to your actual Netlify URL (or custom domain) once deployed, e.g. `https://your-site.netlify.app`
+**Important:** Update the placeholder domain in `sitemap.xml` and any hardcoded `sellingsgproperty.com` references to your actual custom domain once connected (see "Connecting a Custom Domain" section below). Run this command in the folder (replace `yourdomain.com`):
 
-The site now supports clean URLs like `https://your-site.netlify.app/insights/hdb-phantom-fear` thanks to `_redirects` + client-side router.
-   - Netlify will automatically use netlify.toml and _redirects.
+```bash
+sed -i '' 's/sellingsgproperty.com/yourdomain.com/g' index.html sitemap.xml robots.txt README.md
+```
+
+Then re-deploy.
+
+The site now supports clean URLs like `https://yourdomain.com/insights/hdb-phantom-fear` thanks to `_redirects` + client-side router.
 
 The site is 100% static — no build step.
 
 After deploy:
-- Your clean article URLs will be like `https://yoursite.netlify.app/insights/hdb-phantom-fear`
 - Verify SEO files: visit `/sitemap.xml` and `/robots.txt` on your live site.
 - The JS router supports both clean paths and legacy `#insights/...` links.
 
 **If the navigation buttons or project/Insights cards are missing after deploy:**
-Open the site, press F12 → Console tab, and look for red errors. Copy the first error here. We added better error handling + a visible fallback message in the latest version so you should see a red box with instructions if something breaks. Hard-refresh (Shift + Reload) after re-deploying.
+Open the site, press F12 → Console tab, and look for red errors. We added better error handling + a visible fallback message in the latest version.
 
 Optional: the included `_redirects` file + updated router now uses clean paths by default for better SEO.
+
+## Connecting a Custom Domain (Namecheap + Netlify)
+
+Your current Netlify URL is `https://marvelous-begonia-99ba7b.netlify.app`. To use your domain from Namecheap (e.g. `yourdomain.com`):
+
+### Step 1: Add the domain in Netlify (do this first)
+1. Log into Netlify → go to your site (marvelous-begonia-99ba7b).
+2. In the left sidebar: **Domain management**.
+3. Under "Custom domains", click **Add custom domain**.
+4. Enter your domain name (e.g. `yourdomain.com` or `www.yourdomain.com`).
+5. Click "Add".
+6. Netlify will show you the required DNS records (usually an A record for the apex and a CNAME for www). 
+   - Note the exact values (Netlify's recommended IP is typically `75.2.60.5` for A records, and the target for CNAME will be your Netlify subdomain or an alias they provide).
+7. **Recommended option**: Instead of manual records, click to use **Netlify DNS** — Netlify will give you 4 nameservers (like `dns1.p03.nsone.net`). This is simpler for SSL and future changes.
+
+### Step 2: Update DNS at Namecheap
+1. Log into Namecheap → **Domain List** → find your domain → click **Manage**.
+2. Go to the **Advanced DNS** tab.
+3. **Delete** any existing A records for `@` or CNAME for `www` (to avoid conflicts).
+4. Add the records from Netlify:
+
+   **If using manual DNS (recommended for most):**
+   - Type: **A Record**
+     - Host: `@`
+     - Value: `75.2.60.5` (or the IP Netlify showed you)
+     - TTL: Automatic or 5 min
+   - Type: **CNAME Record**
+     - Host: `www`
+     - Value: `marvelous-begonia-99ba7b.netlify.app` (or the exact alias Netlify gave)
+     - TTL: Automatic or 5 min
+
+   **If using Netlify DNS (easier):**
+   - Go to the **Nameservers** tab in Namecheap.
+   - Change from "Namecheap BasicDNS" to **Custom DNS**.
+   - Enter the 4 nameservers Netlify provided (one per line).
+   - Save.
+
+5. Wait for propagation (usually 5–30 minutes, up to 48 hours). Check with https://www.whatsmydns.net/ or `dig yourdomain.com`.
+
+### Step 3: Enable HTTPS and set primary domain in Netlify
+1. Back in Netlify Domain management.
+2. Click **Verify** next to your domain (it may take a minute).
+3. Once verified, scroll to **HTTPS** section:
+   - Toggle on **HTTPS**.
+   - Toggle on **Force HTTPS**.
+   - Netlify will provision a free Let's Encrypt certificate (can take a few minutes).
+4. Under your domains list, click the three dots next to the domain and set it as **Primary domain**.
+5. (Optional but recommended) Add both `yourdomain.com` and `www.yourdomain.com`, and set up a redirect from one to the other in Netlify (under Domain redirects).
+
+### Step 4: Update your site code for the new domain (critical for SEO)
+After the domain is live:
+1. In your local `sellingsgproperty` folder, run (replace `yourdomain.com` with your real domain, e.g. `sellingsgproperty.com`):
+   ```bash
+   sed -i '' 's/sellingsgproperty.com/yourdomain.com/g' index.html sitemap.xml robots.txt README.md
+   ```
+2. Also check and update any other references in the code (canonicals, schema.org JSON-LD, sitemap, robots.txt, share functions, etc.).
+3. Commit and push (if using Git) or re-drag the whole folder to Netlify drop.
+4. In Netlify, trigger a new deploy if needed.
+
+### Step 5: Test
+- Visit `https://yourdomain.com` and `https://www.yourdomain.com`.
+- Check that HTTPS padlock shows.
+- Verify structured data with Google's Rich Results Test: https://search.google.com/test/rich-results
+- Submit your updated sitemap in Google Search Console.
+
+**Common issues:**
+- Propagation delay — be patient and use DNS checkers.
+- If using Netlify DNS, make sure you changed nameservers at Namecheap.
+- SSL not provisioning? Make sure the DNS records are correct and the domain is verified in Netlify.
+- Old domain in code will cause mixed content or SEO issues — update it!
+
+Once done, update any links in your LinkedIn, email signatures, etc. to the new domain.
+
+If you tell me the **exact domain name** you registered on Namecheap, I can run the sed replacements here for you and give you an updated zip/folder ready to deploy.
 
 ## Notes
 - All project images are loaded from external condo marketing sites (same as original).

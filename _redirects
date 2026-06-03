@@ -3,7 +3,7 @@
 # Point your internal links or future sitemap to the clean version if desired.
 # The JS router now supports both clean paths (/insights/slug) and old hash paths.
 
-# All 13 insights articles (clean slugs)
+# All 14 insights articles (clean slugs)
  /insights/hdb-phantom-fear               /index.html   200
  /insights/absd-foreigners                /index.html   200
  /insights/decoupling                     /index.html   200
@@ -17,6 +17,7 @@
  /insights/progressive-payment-psychology /index.html   200
  /insights/absorption-herd-2026           /index.html   200
  /insights/developer-incentives-psych     /index.html   200
+ /insights/dunearn-house-2026             /index.html   200
 
 # Legacy hash support (still works)
  /#insights/*                             /index.html   200
