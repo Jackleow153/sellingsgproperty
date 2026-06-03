@@ -143,14 +143,33 @@ Your current Netlify URL is `https://marvelous-begonia-99ba7b.netlify.app`. To u
 5. Wait for propagation (usually 5–30 minutes, up to 48 hours). Check with https://www.whatsmydns.net/ or `dig yourdomain.com`.
 
 ### Step 3: Enable HTTPS and set primary domain in Netlify
-1. Back in Netlify Domain management.
-2. Click **Verify** next to your domain (it may take a minute).
-3. Once verified, scroll to **HTTPS** section:
-   - Toggle on **HTTPS**.
-   - Toggle on **Force HTTPS**.
-   - Netlify will provision a free Let's Encrypt certificate (can take a few minutes).
-4. Under your domains list, click the three dots next to the domain and set it as **Primary domain**.
-5. (Optional but recommended) Add both `yourdomain.com` and `www.yourdomain.com`, and set up a redirect from one to the other in Netlify (under Domain redirects).
+HTTPS is usually **automatic** with Netlify (Let's Encrypt certs are provisioned for free once DNS points correctly).
+
+1. In Netlify, go to your site dashboard.
+2. Left sidebar: **Domain management**.
+3. You should see your added domains listed under Custom domains.
+4. Look for the **HTTPS** section (it may be a heading, or use the browser URL anchor by adding `#https` at the end, e.g. `https://app.netlify.com/projects/marvelous-begonia-99ba7b/domain-management#https` — replace the project slug with yours if different).
+5. You will typically see:
+   - Status like "Your project has HTTPS enabled."
+   - A **Force HTTPS** toggle or button (this creates the redirect from HTTP to HTTPS).
+   - Certificate details (issued by Let's Encrypt, auto-renews).
+6. Click **Force HTTPS** if not already on.
+7. Once the domain is verified (green check or "Active"), set `sellingsgproperty.com` (or the www version) as the **Primary domain** using the menu (three dots ⋮) next to it.
+8. (Strongly recommended) Also add `www.sellingsgproperty.com` if not already, and create a redirect from the non-primary to the primary (in Domain management > Domain redirects or via _redirects file).
+
+**If you still don't see any HTTPS section:**
+- The domain must first be added under "Custom domains" (do this in the same Domain management page if you haven't already).
+- DNS records must be correctly set at Namecheap and propagated (use https://www.whatsmydns.net/ to check both sellingsgproperty.com and www.sellingsgproperty.com).
+- Refresh the Domain management page (hard refresh with Cmd/Ctrl + Shift + R).
+- Wait 5-30 minutes after DNS changes.
+- Make sure you're viewing the correct Netlify site (the one with URL containing "marvelous-begonia-99ba7b" or your project slug).
+- Try appending `#https` to the Domain management URL in your browser address bar:  
+  `https://app.netlify.com/projects/marvelous-begonia-99ba7b/domain-management#https`  
+  (replace "marvelous-begonia-99ba7b" with your actual project slug if different – it's in the browser URL when you're on the site).
+
+The HTTPS section usually shows the status "Your project has HTTPS enabled." and has a **Force HTTPS** toggle/button once the domain is at least partially verified.
+
+If the section is still missing after the domain shows "Active", reply here with exactly what you see on the Domain management page (e.g. "I see the domain listed with status Pending DNS" or paste any error messages). I'll give the next precise step.
 
 ### Step 4: Update your site code for the new domain (critical for SEO)
 After the domain is live:
