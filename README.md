@@ -186,6 +186,10 @@ After the domain is live:
 - Check that HTTPS padlock shows.
 - Verify structured data with Google's Rich Results Test: https://search.google.com/test/rich-results
 - Submit your updated sitemap in Google Search Console.
+- For Google Search Console ownership verification (recommended for stronger "more ownership" proof):
+  - The file `google3a98157436f9af5a.html` is included in the project root. After deploy it will be available at `https://www.sellingsgproperty.com/google3a98157436f9af5a.html`.
+  - The HTML meta tag `<meta name="google-site-verification" content="HJatZUkjl8rPDeowDSv9V9ERFRZF77nDMxaaIGYpZKU" />` is in the `<head>` of index.html.
+  - You can verify with **both** the HTML file method and the HTML tag method in GSC (they give redundant ownership). Do not delete the file or the meta tag.
 
 **Common issues:**
 - Propagation delay — be patient and use DNS checkers.
