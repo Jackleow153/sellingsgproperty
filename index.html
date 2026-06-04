@@ -73,6 +73,16 @@
   </script>
 
   <!-- ===== ARTICLE SCHEMA (all 18 articles - updated for SEO/AEO) ===== -->
+  <!-- To add a 19th article: 
+       1. Add a new <article class="blog-card" ...> card in the Insights grid (before the Newsletter CTA).
+       2. Add a new 'post-xxx': { ... } entry to the ARTICLES object before the final }; 
+       3. Add a new {"@type": "ListItem", "position": 19, ... } to the ItemList in the head schema.
+       4. Append a new <url> entry to sitemap.xml (use next date).
+       5. Add a new redirect rule to _redirects.
+       6. Update the 3 count places (hero text, sidebar "X in-depth articles", and this comment).
+       7. git add . ; git commit -m "Add new Insights article: XXX" ; git push
+       Netlify will auto-deploy.
+  -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",

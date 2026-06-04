@@ -7,6 +7,9 @@
  /google3a98157436f9af5a.html  /google3a98157436f9af5a.html  200
 
 # All 18 insights articles (clean slugs)
+# To add a new one: append another line like
+#  /insights/my-new-slug                 /index.html   200
+# Then update counts in index.html and sitemap.xml, commit & push.
  /insights/hdb-phantom-fear               /index.html   200
  /insights/absd-foreigners                /index.html   200
  /insights/decoupling                     /index.html   200

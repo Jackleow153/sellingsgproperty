@@ -2,8 +2,17 @@
 
 Exact replica of the Singapore New Launch Condos website (single-file static site).
 
+## Current State
+- 39 verified new launch condo projects
+- 18 in-depth Insights articles (SEO + AEO optimized with tables, FAQs as accordions, auto-generated TOC, Article+FAQPage JSON-LD, dynamic per-article meta/OG)
+- Clean URLs via Netlify `_redirects` + client-side router (e.g. `/insights/which-condo-to-buy-2026`)
+- GitHub → Netlify continuous deployment (push to `main` auto-deploys)
+- Google Search Console verified (HTML file + meta tag)
+- Custom domain `www.sellingsgproperty.com` live with HTTPS
+
 ## Files
-- `index.html` — The complete self-contained website (Tailwind via CDN + Font Awesome via CDN + all JS/data inline). 39 projects + 13 full articles (SEO/AEO optimized, 5 new on condo buyer psychology).
+- `index.html` — The complete self-contained website (Tailwind via CDN + Font Awesome via CDN + all JS/data inline). 39 projects + 18 full articles.
+- `sitemap.xml`, `robots.txt`, `_redirects`, `netlify.toml` — SEO + deployment config.
 
 Articles now open as a **dedicated full page** (under the Insights section) instead of a popup modal. Deep links like `#insights/post-hdb-phantom-fear` are supported, with proper browser back/forward and Escape-to-go-back.
 
@@ -52,20 +61,20 @@ Note: Some advanced features (history, certain interactions) work more reliably 
    ```bash
    git init
    git add .
-   git commit -m "SEO & AEO optimized version with 13 insights, clean URLs, sitemap, dynamic schema"
+   git commit -m "SEO & AEO optimized version with 18 insights, clean URLs, sitemap, dynamic schema, GSC verification"
    ```
 
 3. Create a **new empty repository** on GitHub.com named `sellingsgproperty` (do **not** initialize with README, .gitignore, or license).
 
-4. Add the remote and push (tailored for your GitHub `jackleow`):
+4. Add the remote and push (tailored for your GitHub `Jackleow153`):
    ```bash
-   git remote add origin https://github.com/jackleow/sellingsgproperty.git
+   git remote add origin https://github.com/Jackleow153/sellingsgproperty.git
    git branch -M main
    git push -u origin main
    ```
 
-   - First time, GitHub will prompt for login (use browser auth or personal access token with repo scope).
-   - If using SSH, change to `git@github.com:jackleow/sellingsgproperty.git`
+   - First time, GitHub will prompt for login (use browser auth or personal access token with `repo` scope).
+   - If using SSH, change to `git@github.com:Jackleow153/sellingsgproperty.git`
 
 5. In Netlify dashboard:
    - "Add new site" → "Import an existing project"
@@ -83,15 +92,120 @@ Note: Some advanced features (history, certain interactions) work more reliably 
    ```
    Netlify will automatically rebuild and deploy.
 
-**Important:** Update the placeholder domain in `sitemap.xml` and any hardcoded `sellingsgproperty.com` references to your actual custom domain once connected (see "Connecting a Custom Domain" section below). Run this command in the folder (replace `yourdomain.com`):
+## How to Add a New Blog Post to Insights (GitHub → Netlify workflow)
+
+This is the recommended way now that the site deploys from GitHub.
+
+### 1. Prepare your content
+- Write the article as a Markdown file (e.g. on your Desktop).
+- Typical structure we use for AEO/SEO:
+  - Strong lead paragraph with `<p><strong>...</strong></p>`
+  - `<h2>` and `<h3>` headings
+  - Comparison or data tables (`<table>`)
+  - Numbered lists / steps
+  - `<div class="key-takeaway">` callout boxes (copy style from existing)
+  - FAQ section turned into `<details class="faq-item">` accordions (these feed the FAQPage schema automatically)
+  - Short disclaimer at the bottom
+  - Suggested internal links at the end
+
+### 2. Convert to the site's format (in `index.html`)
+You will make 6 coordinated changes (use search/replace in your editor or VS Code for safety).
+
+**A. Add the visible card (in the Insights grid)**
+- Find the last card (search for the most recent article's `onclick="showArticle('post-...')"` or the comment `<!-- ===== NEW CARD 18`).
+- Insert a new `<article data-category="..." class="blog-card ...">` block **immediately before** the `<!-- Newsletter CTA -->` div.
+- Copy the structure from an existing card (e.g. the last one). Update:
+  - `data-category` (e.g. "new-launch", "wealth", "hdb")
+  - `onclick="showArticle('post-your-slug-2026')"`
+  - `<img src="...">` (use a relevant image URL or picsum)
+  - Chip label and class (`chip-newlaunch`, `chip-wealth`, etc.)
+  - `<time>` and read time
+  - `<h2>` title (short)
+  - The 3-line description `<p class="...">`
+  - The `datetime` attribute
+
+**B. Add the data entry (big JS object)**
+- Find the end of the ARTICLES object: search for `}; // end ARTICLES`
+- Insert the new entry **before** that closing `};`
+- Use this template (fill in the real content converted from your MD):
+
+```js
+  /* ======================================================
+     NEW ARTICLE 19 — YOUR TITLE
+  ====================================================== */
+  'post-your-slug-2026': {
+    title: 'Your Full Title Here',
+    date: 'DD Mon 2026',
+    readTime: 'XX min read',
+    category: 'NEW LAUNCH',           // or WEALTH BUILDING, etc. (used in the article header chip)
+    chipClass: 'chip-newlaunch',      // matches the CSS chip style
+    img: 'https://...image-url...',
+    linkedinUrl: 'https://www.linkedin.com/...', // optional
+    body: `
+      <p><strong>Your lead paragraph here with **bold** if needed.</strong></p>
+
+      <h2>First Heading</h2>
+      ... full converted HTML (tables, lists, <details class="faq-item"> for every FAQ, key-takeaway divs, etc.) ...
+
+      <p><em>Disclaimer: ...</em></p>
+    `
+  },
+```
+
+**C. Update the static schema (for Google rich results)**
+- In the `<head>` there is a big `<script type="application/ld+json">` ItemList.
+- Add one more object at the end of the `itemListElement` array, with `"position": 19` (increment), the headline, a short description, the publish date, and the clean URL `https://www.sellingsgproperty.com/insights/your-slug`.
+
+**D. Update the visible counts (3 places)**
+- Hero text: "Read our in-depth Property Insights (18 articles)" → 19
+- Sidebar: `<span class="text-white font-bold">18</span> in-depth articles`
+- The big comment block at the top of the schema (and the one we added) — update the numbers and example.
+
+**E. Add to sitemap.xml**
+- Add a new `<url>` block before `</urlset>`.
+- Use the clean URL, a recent `lastmod` (today or publish date), `changefreq` monthly, `priority` 0.8.
+
+**F. Add the clean URL redirect**
+- In `_redirects`, add a line before the `# Legacy hash support` section:
+  ```
+   /insights/your-slug-2026             /index.html   200
+  ```
+
+### 3. Test locally
+```bash
+cd /Users/jackleow/sellingsgproperty
+python3 -m http.server 8080
+```
+Open http://localhost:8080 , go to Insights, click your new card. Check that it opens the full article page, TOC generates, FAQs are accordions, etc.
+
+### 4. Deploy via GitHub (this is the magic)
+```bash
+git add .
+git commit -m "Add new Insights article: Your Title (2026)"
+git push
+```
+
+Netlify will automatically detect the push to `main`, run the (empty) build, and publish the new version. Your live site at www.sellingsgproperty.com will update within ~30-60 seconds.
+
+### 5. After deploy
+- Hard-refresh the live site.
+- Re-submit the sitemap in Google Search Console.
+- Request indexing for the new article URL in GSC URL Inspection tool.
+- Optionally update the big JSON-LD positions if you added more than one.
+
+**Pro tip:** Keep a folder of your source .md files (e.g. ~/Desktop/Blogs/). Convert one at a time using the template above. The conversion is mostly mechanical (MD → the HTML patterns we already use).
+
+---
+
+**Important (if you ever change the domain again):** Update any remaining hardcoded references. Run (replace with your real domain):
 
 ```bash
 sed -i '' 's/sellingsgproperty.com/yourdomain.com/g' index.html sitemap.xml robots.txt README.md
 ```
 
-Then re-deploy.
+Then commit & push again.
 
-The site now supports clean URLs like `https://yourdomain.com/insights/hdb-phantom-fear` thanks to `_redirects` + client-side router.
+The site supports clean URLs like `https://www.sellingsgproperty.com/insights/which-condo-to-buy-2026` thanks to `_redirects` + the client-side router in `showArticle` / `initializeWebsite`.
 
 The site is 100% static — no build step.
 

@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- To add a new article:
+     1. Add a <url> block with next lastmod date (use today's or publish date).
+     2. Increment the count references in index.html.
+     3. Add matching redirect in _redirects.
+     4. Add card + ARTICLES entry + schema ListItem.
+     Then git push to trigger Netlify deploy.
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.sellingsgproperty.com/</loc>
