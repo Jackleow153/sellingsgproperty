@@ -4,7 +4,7 @@ Exact replica of the Singapore New Launch Condos website (single-file static sit
 
 ## Current State
 - 39 verified new launch condo projects
-- 18 in-depth Insights articles (SEO + AEO optimized with tables, FAQs as accordions, auto-generated TOC, Article+FAQPage JSON-LD, dynamic per-article meta/OG)
+- 19 in-depth Insights articles (SEO + AEO optimized with tables, FAQs as accordions, auto-generated TOC, Article+FAQPage JSON-LD, dynamic per-article meta/OG)
 - Clean URLs via Netlify `_redirects` + client-side router (e.g. `/insights/which-condo-to-buy-2026`)
 - GitHub → Netlify continuous deployment (push to `main` auto-deploys)
 - Google Search Console verified (HTML file + meta tag)
