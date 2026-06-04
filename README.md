@@ -11,10 +11,41 @@ Exact replica of the Singapore New Launch Condos website (single-file static sit
 - Custom domain `www.sellingsgproperty.com` live with HTTPS
 
 ## Files
-- `index.html` — The complete self-contained website (Tailwind via CDN + Font Awesome via CDN + all JS/data inline). 39 projects + 18 full articles.
+- `index.html` — The complete self-contained website (Tailwind via CDN + Font Awesome via CDN + all JS/data inline). 39 projects + 19 full articles.
 - `sitemap.xml`, `robots.txt`, `_redirects`, `netlify.toml` — SEO + deployment config.
 
 Articles now open as a **dedicated full page** (under the Insights section) instead of a popup modal. Deep links like `#insights/post-hdb-phantom-fear` are supported, with proper browser back/forward and Escape-to-go-back.
+
+## Ongoing Workflow for Any Future Changes (You + Grok via this chat)
+
+**Yes — this is exactly how it works now:**
+
+1. You tell me the change here in the chat (e.g. "add this new blog post from /path/to/new-blog.md", "update the hero text to say X", "fix a bug in the Dunearn article", "add a new project to the grid", etc.). You can paste Markdown content, describe the edit, or give me a file path.
+
+2. I will:
+   - Use tools to inspect the current code (git, read_file, grep, etc.).
+   - Make the precise edits directly in your local `/Users/jackleow/sellingsgproperty/` folder (using search_replace for accuracy, or writing new files as needed).
+   - Handle any supporting files (sitemap.xml, _redirects, schema in index.html, counts, README updates, etc.).
+   - Test locally if useful (e.g. via http.server).
+
+3. I will then:
+   - `git add .`
+   - `git commit -m "Clear message describing the change"`
+   - `git push origin main`
+
+4. Because your Netlify site (`marvelous-begonia-99ba7b`) is already connected to this GitHub repo for **continuous deployment** on the `main` branch:
+   - Netlify automatically detects the push.
+   - It runs a fresh build (using your `netlify.toml` — publish dir is `.`, no build command needed since it's pure static HTML/JS).
+   - The update goes live on `https://www.sellingsgproperty.com/` within ~30-60 seconds.
+
+**No manual drag-and-drop to Netlify needed ever again.** No need for you to run git commands yourself unless you want to.
+
+This chat (with me as Grok) is your control panel for all future updates. Just describe what you want changed.
+
+The repo is already correctly set up:
+- Local path: `/Users/jackleow/sellingsgproperty/`
+- Git remote: `https://github.com/Jackleow153/sellingsgproperty.git` (main)
+- Netlify CD: enabled and working (Deploys from GitHub)
 
 ## Quick Start (local preview)
 
@@ -84,13 +115,7 @@ Note: Some advanced features (history, certain interactions) work more reliably 
      - Publish directory: `.`
    - Netlify will auto-detect `netlify.toml` and `_redirects`
 
-6. After first deploy, future updates are just:
-   ```bash
-   git add .
-   git commit -m "Updated insights article / SEO tweaks"
-   git push
-   ```
-   Netlify will automatically rebuild and deploy.
+6. After first deploy, future updates are just: describe the change to me in this chat. I will edit the files, commit, and push (see the new "Ongoing Workflow for Any Future Changes" section above for the full details). Netlify will automatically rebuild and deploy.
 
 ## How to Add a New Blog Post to Insights (GitHub → Netlify workflow)
 
