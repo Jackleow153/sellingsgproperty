@@ -1,8 +1,15 @@
 User-agent: *
 Allow: /
 
-# Sitemap for all deep-linked articles (hash URLs are followed by modern crawlers)
+# Sitemap for all deep-linked articles (hash URLs are followed by modern crawlers and AI agents)
 Sitemap: https://www.sellingsgproperty.com/sitemap.xml
 
-# Encourage fast indexing of fresh 2026 content
+# Encourage fast indexing of fresh 2026 Singapore property content for SEO, AEO, GEO and AI Overviews
 Crawl-delay: 1
+
+# AI crawlers / GPTBot etc. - full access for training/answers (optional but signals openness for GEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /

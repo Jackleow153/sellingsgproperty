@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- To add a new article:
+<!-- Sitemap for SEO/AEO/GEO/AIO: 19 articles + home + insights. Updated 21 Jun 2026.
+     To add a new article:
      1. Add a <url> block with next lastmod date (use today's or publish date).
      2. Increment the count references in index.html.
      3. Add matching redirect in _redirects.

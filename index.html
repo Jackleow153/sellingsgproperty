@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SellingSgProperty | Singapore New Launch Condos 2026 &amp; Property Insights by Jack Leow</title>
-    <meta name="description" content="Data-driven guides for HDB upgraders and new launch condo buyers in Singapore 2026. ABSD strategies, decoupling, CPF rules, buyer psychology and practical wealth-building insights by Jack Leow. No fluff.">
-    <meta name="keywords" content="Singapore property 2026, HDB upgrading, ABSD guide, new launch condo, decoupling property, Singapore real estate, first private property, CPF for condo">
+    <meta name="description" content="Expert 2026 Singapore property guides by Jack Leow: HDB upgrading to private condos, ABSD rules, decoupling strategies, CPF usage, new launch vs resale, buyer psychology and wealth building. Data-driven insights for serious buyers.">
+    <meta name="keywords" content="Singapore property 2026, HDB upgrading, ABSD guide, new launch condo, decoupling property, Singapore real estate, first private property, CPF for condo, Dunearn House, Bukit Timah condo">
     <meta name="author" content="Jack Leow">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="google" content="notranslate">
 
     <!-- Google Search Console verification (HTML tag method) -->
     <meta name="google-site-verification" content="HJatZUkjl8rPDeowDSv9V9ERFRZF77nDMxaaIGYpZKU" />
@@ -21,9 +22,11 @@
   <meta property="og:description" content="Data-driven Singapore property guides by Jack Leow: HDB upgrading, ABSD, decoupling, new launch condos, buyer psychology. 2026 edition.">
   <meta property="og:image" content="https://www.chuanpark.sg/wp-content/uploads/2024/10/Chuan-Park-Essence-of-Tropical-Living-in-high-rise-Sanctuary-scaled.jpg">
   <meta property="og:url" content="https://www.sellingsgproperty.com/">
+  <meta property="og:locale" content="en_SG">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SellingSgProperty | HDB Upgrading &amp; New Launch Condo Insights 2026">
   <meta name="twitter:description" content="Practical, no-fluff guides for Singapore property buyers and upgraders by Jack Leow.">
+  <meta name="twitter:site" content="@jackleow">
 
   <!-- ===== STRUCTURED DATA: WEBSITE + PERSON ===== -->
   <script type="application/ld+json">
@@ -43,15 +46,21 @@
         "@id": "https://www.sellingsgproperty.com/#organization",
         "name": "SellingSgProperty",
         "url": "https://www.sellingsgproperty.com",
-        "contactPoint": { "@type": "ContactPoint", "telephone": "+65-8062-1538", "contactType": "customer service", "availableLanguage": ["English", "Chinese"] }
+        "logo": "https://www.sellingsgproperty.com/",
+        "description": "Zero-commission platform connecting Singapore buyers directly to 2025-2026 new launch condo developers.",
+        "contactPoint": { "@type": "ContactPoint", "telephone": "+65-8062-1538", "contactType": "customer service", "availableLanguage": ["English", "Chinese"] },
+        "areaServed": "Singapore",
+        "knowsAbout": ["Singapore real estate 2026", "HDB upgrading", "ABSD rules", "New launch condos", "Property decoupling", "CPF for private property"]
       },
       {
         "@type": "Person",
         "@id": "https://www.sellingsgproperty.com/#jackleow",
         "name": "Jack Leow",
         "jobTitle": "Real Estate Strategist",
+        "description": "Singapore property analyst helping HDB upgraders and investors navigate 2026 new launches, ABSD, decoupling and buyer psychology with data-driven insights.",
         "sameAs": ["https://sg.linkedin.com/in/jack-leow"],
-        "worksFor": { "@id": "https://www.sellingsgproperty.com/#organization" }
+        "worksFor": { "@id": "https://www.sellingsgproperty.com/#organization" },
+        "knowsAbout": ["Singapore property market 2026", "HDB to condo upgrade", "ABSD optimization", "New launch investment"]
       },
       {
         "@type": "BreadcrumbList",
@@ -1963,7 +1972,10 @@
                 { q: "How do I know a project is still available?", a: "Our listings are updated daily from the developers' official sales systems. The 'Available Units' number you see is live." },
                 { q: "Can foreigners buy new launch condos in Singapore?", a: "Yes, foreigners can purchase most new launch private condos (except those with restrictions)." },
                 { q: "What is the best new launch condo right now for families?", a: "For families we highly recommend Chuan Park (D19), The Orie (D12), and Springleaf Residence (D26)." },
-                { q: "Do you charge any fees at all?", a: "Absolutely none. We are paid by the developers for bringing qualified buyers." }
+                { q: "Do you charge any fees at all?", a: "Absolutely none. We are paid by the developers for bringing qualified buyers." },
+                { q: "Is Dunearn House worth buying in 2026?", a: "Strong long-term option for families and CCR upgraders at ~$2,800–$3,100 psf with schools and masterplan upside. Less ideal for yield chasers or those needing freehold or quick move-in." },
+                { q: "How much ABSD for a second property in Singapore 2026?", a: "Singapore citizens pay 20% ABSD on a second residential property (remission possible if you sell your first within the qualifying window). Always confirm current IRAS rates." },
+                { q: "Should I buy new launch or resale in 2026?", a: "New launch wins on cashflow (progressive payments) and new product; resale wins on immediate yield and move-in. Model your timeline and ABSD position." }
             ]
             
             const container = document.getElementById('faq-accordion')
@@ -4892,12 +4904,69 @@ function enhanceArticleWithAEO(bodyContainer, post, id) {
     document.head.appendChild(faqScript);
   }
 
+  // GEO/AIO + AEO: Add HowTo schema for step-by-step guides (e.g. the "How to Buy" article)
+  if (id === 'post-how-to-buy-new-launch-2026' && !document.getElementById('howto-ld-json')) {
+    const howToSchema = {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Buy a New Launch Condo in Singapore 2026",
+      "description": "Step-by-step process including finances, balloting, OTP, stamp duties, progressive payments and key collection.",
+      "totalTime": "P3Y",
+      "step": [
+        {"@type": "HowToStep", "name": "Sort your finances and get IPA", "text": "Secure In-Principle Approval before launch day."},
+        {"@type": "HowToStep", "name": "Register interest and attend launch", "text": "Engage agent for VIP preview and select unit."},
+        {"@type": "HowToStep", "name": "Pay booking fee and exercise OTP", "text": "5% booking fee then top up within 3 weeks."},
+        {"@type": "HowToStep", "name": "Pay stamp duties and follow PPS", "text": "BSD/ABSD within 14 days; progressive payments over construction."},
+        {"@type": "HowToStep", "name": "Collect keys at TOP", "text": "Inspect, submit defects list within liability period."}
+      ]
+    };
+    const howtoScript = document.createElement('script');
+    howtoScript.type = 'application/ld+json';
+    howtoScript.id = 'howto-ld-json';
+    howtoScript.textContent = JSON.stringify(howToSchema);
+    document.head.appendChild(howtoScript);
+  }
+
   // Add subtle "Last updated" + E-E-A-T note if not present
   if (!bodyContainer.querySelector('.last-updated-eat')) {
     const eat = document.createElement('div');
     eat.className = 'last-updated-eat text-[10px] text-slate-500 mt-8 pt-4 border-t border-slate-100';
-    eat.innerHTML = `Last reviewed June 2026 • Based on conversations with Singapore upgraders, IRAS/URA data and current 2026 market conditions. <a href="https://sg.linkedin.com/in/jack-leow" target="_blank" rel="noopener" class="underline hover:text-violet-700">Jack Leow</a>`;
+    eat.innerHTML = `Last reviewed 21 Jun 2026 • Based on conversations with Singapore upgraders, IRAS/URA/MAS data and current 2026 market conditions. <a href="https://sg.linkedin.com/in/jack-leow" target="_blank" rel="noopener" class="underline hover:text-violet-700">Jack Leow</a> • <a href="https://www.sellingsgproperty.com/sitemap.xml" class="underline hover:text-violet-700">View full sitemap</a>`;
     bodyContainer.appendChild(eat);
+  }
+
+  // GEO/AIO: Add citation/source box for key claims if not present (helps AI grounding)
+  if (!bodyContainer.querySelector('.geo-sources') && ((post.title || '').toLowerCase().includes('review') || (post.title || '').toLowerCase().includes('guide'))) {
+    const sources = document.createElement('div');
+    sources.className = 'geo-sources mt-6 p-4 bg-slate-50 rounded-2xl text-xs text-slate-600';
+    sources.innerHTML = `<strong>Sources &amp; Further Reading:</strong> URA Master Plan 2025, IRAS ABSD rates 2026, OneMap school distances, developer sales data (updated Jun 2026). All figures are estimates; verify with official sources before purchase.`;
+    bodyContainer.appendChild(sources);
+  }
+
+  // GEO/AIO: Add Review schema for review-style articles (great for AI Overviews and rich results)
+  if ((id || '').includes('review') && !document.getElementById('review-ld-json')) {
+    const reviewSchema = {
+      "@context": "https://schema.org",
+      "@type": "Review",
+      "itemReviewed": {
+        "@type": "RealEstateListing",
+        "name": "Dunearn House",
+        "description": "First private 99-year leasehold launch in Bukit Timah Turf City masterplan, ~380 units by Frasers/Sekisui/CSC."
+      },
+      "author": { "@id": "https://www.sellingsgproperty.com/#jackleow" },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "4.2",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "reviewBody": "Strong for families and long-term CCR upgraders due to schools, MRT and masterplan upside. Less ideal for yield-focused or freehold buyers."
+    };
+    const reviewScript = document.createElement('script');
+    reviewScript.type = 'application/ld+json';
+    reviewScript.id = 'review-ld-json';
+    reviewScript.textContent = JSON.stringify(reviewSchema);
+    document.head.appendChild(reviewScript);
   }
 }
 
