@@ -3,7 +3,10 @@
 # Point your internal links or future sitemap to the clean version if desired.
 # The JS router now supports both clean paths (/insights/slug) and old hash paths.
 
-# All 14 insights articles (clean slugs)
+# Google Search Console ownership verification files (serve statically, do not redirect to SPA)
+ /google3a98157436f9af5a.html  /google3a98157436f9af5a.html  200
+
+# All 18 insights articles (clean slugs)
  /insights/hdb-phantom-fear               /index.html   200
  /insights/absd-foreigners                /index.html   200
  /insights/decoupling                     /index.html   200
