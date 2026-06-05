@@ -248,14 +248,14 @@
         <div class="max-w-screen-2xl mx-auto px-8">
             <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
-                <div class="flex items-center gap-x-3">
-                    <div class="flex items-center gap-x-2">
-                        <div>
-                            <span class="font-black text-3xl tracking-tighter text-slate-900">SellingSgProperty.</span>
-                            <span class="block text-[9px] text-violet-600 -mt-1 font-medium tracking-widest">SG</span>
-                        </div>
+                <button data-page="home"
+                        class="flex items-center gap-x-2 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2 rounded-2xl -ml-1 pl-1 pr-3 py-1 hover:bg-slate-100 active:bg-slate-200 active:scale-[0.985] transition-all"
+                        aria-label="Go to home page">
+                    <div>
+                        <span class="font-black text-3xl tracking-tighter text-slate-900">SellingSgProperty.</span>
+                        <span class="block text-[9px] text-violet-600 -mt-1 font-medium tracking-widest">SG</span>
                     </div>
-                </div>
+                </button>
 
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center gap-x-2 text-sm font-medium">
@@ -2196,7 +2196,10 @@
                     nav.innerHTML = `
                         <div class="bg-white w-72 p-8" onclick="event.stopImmediatePropagation()">
                             <div class="flex justify-between mb-8">
-                                <span class="font-black text-2xl">SellingSgProperty.</span>
+                                <button class="mobile-logo text-left focus:outline-none active:opacity-70 -ml-1 p-1 rounded-lg active:bg-slate-100" data-page="home">
+                                    <span class="font-black text-2xl">SellingSgProperty.</span>
+                                    <span class="block text-[9px] text-violet-600 -mt-1 font-medium tracking-widest">SG</span>
+                                </button>
                                 <button class="text-3xl">×</button>
                             </div>
                             
@@ -2213,7 +2216,9 @@
                         </div>
                     `
                     document.body.appendChild(nav)
-                    nav.querySelector('button').onclick = () => nav.remove()
+                    // Target the close button (×) specifically, not the logo button which is also a <button>
+                    const closeBtn = nav.querySelector('button.text-3xl');
+                    if (closeBtn) closeBtn.onclick = () => nav.remove();
                 })
             }
         }
@@ -2238,25 +2243,28 @@
                 const navHome = document.getElementById('nav-home');
                 if (navHome) navHome.classList.add('nav-active')
                 
-                // Robust nav button handlers (avoids inline onclick + global lookup timing issues)
-                document.querySelectorAll('[data-page]').forEach(btn => {
+                // Delegated nav handler — works for static + dynamically added buttons (e.g. mobile menu, future elements)
+                document.addEventListener('click', (e) => {
+                    const btn = e.target.closest('[data-page]');
+                    if (!btn) return;
                     const page = btn.dataset.page;
                     if (!page) return;
-                    btn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        if (page === 'faq') {
-                            showPage('home');
-                            setTimeout(() => {
-                                const faqEl = document.getElementById('faq');
-                                if (faqEl) faqEl.scrollIntoView({ behavior: 'smooth' });
-                            }, 150);
-                        } else {
-                            showPage(page);
-                        }
-                        // Close mobile menu if this button is inside one
-                        const menu = btn.closest('.fixed');
-                        if (menu) menu.remove();
-                    });
+                    
+                    e.preventDefault();
+                    
+                    // Close mobile menu if this button is inside one
+                    const menu = btn.closest('.fixed');
+                    if (menu) menu.remove();
+                    
+                    if (page === 'faq') {
+                        showPage('home');
+                        setTimeout(() => {
+                            const faqEl = document.getElementById('faq');
+                            if (faqEl) faqEl.scrollIntoView({ behavior: 'smooth' });
+                        }, 150);
+                    } else {
+                        showPage(page);
+                    }
                 });
                 
                 document.addEventListener('keydown', function(e) {
