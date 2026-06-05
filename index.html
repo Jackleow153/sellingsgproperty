@@ -262,7 +262,7 @@
                     <button data-page="home" class="nav-link px-5 py-2 rounded-3xl nav-active" id="nav-home">Home</button>
                     <button data-page="about" class="nav-link px-5 py-2 rounded-3xl" id="nav-about">About</button>
                     <button data-page="blog" class="nav-link px-5 py-2 rounded-3xl" id="nav-blog">Insights</button>
-                    <button data-page="home" class="nav-link px-5 py-2 rounded-3xl" id="nav-faq">FAQ</button>
+                    <button data-page="contact" class="nav-link px-5 py-2 rounded-3xl text-sm font-semibold" id="nav-situation">Get my free situation check.</button>
                 </div>
 
                 <div class="flex items-center gap-x-3">
@@ -1311,50 +1311,36 @@
             <div class="max-w-5xl mx-auto">
                 <div class="text-center mb-12">
                     <div class="inline px-5 py-1.5 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-3xl">RESPONSE TIME: &lt; 8 MINUTES</div>
-                    <h1 class="text-5xl font-black tracking-tighter mt-5">Let's find your perfect new launch home.</h1>
-                    <p class="text-xl text-slate-600 mt-4 max-w-md mx-auto">Ask Jack one question — no obligation, no commission.</p>
+                    <h1 class="text-5xl font-black tracking-tighter mt-5">Get your free situation check.</h1>
+                    <p class="text-xl text-slate-600 mt-4 max-w-md mx-auto">Name, mobile &amp; your situation. Jack will review and WhatsApp you — no obligation.</p>
                 </div>
                 
                 <div class="grid lg:grid-cols-5 gap-8">
                     <div class="lg:col-span-3 bg-white rounded-3xl border p-9 shadow-sm">
-                        <form id="contact-form" onsubmit="handleEnquirySubmit(event)">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label class="block text-xs font-semibold mb-2 text-slate-600">FULL NAME</label>
-                                    <input type="text" id="name" value="Jack Tan" class="w-full border border-slate-300 focus:border-violet-500 rounded-2xl px-5 py-3.5 text-sm outline-none" required>
-                                </div>
-                                
-                                <div>
-                                    <label class="block text-xs font-semibold mb-2 text-slate-600">PHONE (WHATSAPP)</label>
-                                    <input type="tel" id="phone" value="+65 8062 1538" class="w-full border border-slate-300 focus:border-violet-500 rounded-2xl px-5 py-3.5 text-sm outline-none" required>
-                                </div>
+                        <form name="situation-check" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form" onsubmit="handleEnquirySubmit(event)">
+                            <input type="hidden" name="form-name" value="situation-check" />
+                            <div style="display:none;">
+                                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-xs font-semibold mb-2 text-slate-600">NAME</label>
+                                <input type="text" id="name" name="name" class="w-full border border-slate-300 focus:border-violet-500 rounded-2xl px-5 py-3.5 text-sm outline-none" required>
                             </div>
                             
                             <div class="mt-6">
-                                <label class="block text-xs font-semibold mb-2 text-slate-600">EMAIL ADDRESS</label>
-                                <input type="email" id="email" value="jack.tan@email.com" class="w-full border border-slate-300 focus:border-violet-500 rounded-2xl px-5 py-3.5 text-sm outline-none" required>
+                                <label class="block text-xs font-semibold mb-2 text-slate-600">MOBILE (WHATSAPP)</label>
+                                <input type="tel" id="phone" name="mobile" class="w-full border border-slate-300 focus:border-violet-500 rounded-2xl px-5 py-3.5 text-sm outline-none" required>
                             </div>
                             
                             <div class="mt-6">
-                                <label class="block text-xs font-semibold mb-2 text-slate-600">WHICH PROJECT ARE YOU INTERESTED IN?</label>
-                                <select id="project" class="w-full border border-slate-300 focus:border-violet-500 rounded-2xl px-5 py-3.5 text-sm outline-none" required>
-                                    <option value="" selected>I'm open to recommendations</option>
-                                    <option value="Chuan Park">Chuan Park (D19)</option>
-                                    <option value="The Orie">The Orie (D12)</option>
-                                    <option value="Parktown Residence">Parktown Residence (D18)</option>
-                                    <option value="Springleaf Residence">Springleaf Residence (D26)</option>
-                                    <option value="Narra Residences">Narra Residences (D23)</option>
-                                    <option value="Others">Others</option>
-                                </select>
-                            </div>
-                            
-                            <div class="mt-6">
-                                <label class="block text-xs font-semibold mb-2 text-slate-600">YOUR BUDGET &amp; REQUIREMENTS</label>
-                                <textarea id="message" rows="4" class="w-full border border-slate-300 focus:border-violet-500 rounded-3xl px-5 py-3.5 text-sm outline-none" placeholder="Looking for 3-4 bedroom, near good schools, max $2.8M..." required></textarea>
+                                <label class="block text-xs font-semibold mb-2 text-slate-600">WHAT'S MY SITUATION? (max 1000 words)</label>
+                                <textarea id="message" name="situation" rows="6" maxlength="1000" class="w-full border border-slate-300 focus:border-violet-500 rounded-3xl px-5 py-3.5 text-sm outline-none" placeholder="Tell me about your current HDB, upgrade goals, budget, timeline, concerns, or any questions..." required></textarea>
+                                <div class="text-[10px] text-slate-400 mt-1 text-right">1000 characters max</div>
                             </div>
                             
                             <button type="submit" class="mt-8 w-full py-4 bg-violet-700 hover:bg-violet-800 transition text-white font-semibold rounded-3xl flex items-center justify-center gap-x-2 text-sm">
-                                <span>See if upgrading makes sense for me</span>
+                                <span>Get my free situation check</span>
                             </button>
                         </form>
                     </div>
@@ -1381,6 +1367,45 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- CONTACT MODAL (simple 3-field for free situation check) -->
+    <div id="contact-modal" onclick="if (event.target.id === 'contact-modal') hideContactModal()" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+      <div onclick="event.stopImmediatePropagation()" class="bg-white w-full max-w-md rounded-3xl overflow-hidden shadow-2xl">
+        <div class="px-8 py-5 border-b flex items-center justify-between bg-slate-50">
+          <div class="font-bold text-lg">Get my free situation check</div>
+          <button onclick="hideContactModal()" class="w-9 h-9 flex items-center justify-center text-slate-400 hover:text-slate-600">
+            <i class="fa-solid fa-times text-2xl"></i>
+          </button>
+        </div>
+        <div class="p-8">
+          <form name="situation-check-modal" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitEnquiry(event)">
+            <input type="hidden" name="form-name" value="situation-check-modal" />
+            <div style="display:none;">
+              <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+            </div>
+            
+            <div>
+              <label class="block text-xs font-semibold mb-2 text-slate-600">NAME</label>
+              <input type="text" name="name" class="w-full border border-slate-300 focus:border-violet-500 rounded-2xl px-5 py-3.5 text-sm outline-none" required>
+            </div>
+            
+            <div class="mt-4">
+              <label class="block text-xs font-semibold mb-2 text-slate-600">MOBILE (WHATSAPP)</label>
+              <input type="tel" name="mobile" class="w-full border border-slate-300 focus:border-violet-500 rounded-2xl px-5 py-3.5 text-sm outline-none" required>
+            </div>
+            
+            <div class="mt-4">
+              <label class="block text-xs font-semibold mb-2 text-slate-600">WHAT'S MY SITUATION? (max 1000 words)</label>
+              <textarea name="situation" rows="5" maxlength="1000" class="w-full border border-slate-300 focus:border-violet-500 rounded-3xl px-5 py-3.5 text-sm outline-none" placeholder="Tell me about your current HDB, upgrade goals, budget, timeline, concerns..." required></textarea>
+            </div>
+            
+            <button type="submit" class="mt-6 w-full py-3.5 bg-violet-700 hover:bg-violet-800 transition text-white font-semibold rounded-3xl text-sm">
+              Get my free situation check
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
 
     <!-- PROJECT MODAL -->
@@ -1727,7 +1752,7 @@
             
             document.querySelectorAll('[id^="nav-"]').forEach(nav => {
                 nav.classList.remove('nav-active')
-                if (nav.id === `nav-${page}`) nav.classList.add('nav-active')
+                if (nav.id === `nav-${page}` || (page === 'contact' && nav.id === 'nav-situation')) nav.classList.add('nav-active')
             })
             
             window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -1955,7 +1980,7 @@
                 const modal = document.getElementById('contact-modal')
                 modal.classList.remove('hidden')
                 modal.classList.add('flex')
-                if (currentProject) document.getElementById('enq-project').value = currentProject.name
+                // no preselect field in simplified form
             }, 300)
         }
         
@@ -1963,13 +1988,7 @@
             const modal = document.getElementById('contact-modal')
             modal.classList.remove('hidden')
             modal.classList.add('flex')
-            
-            if (preSelectedProject) {
-                setTimeout(() => {
-                    const select = document.getElementById('enq-project')
-                    if (select) select.value = preSelectedProject
-                }, 100)
-            }
+            // preSelectedProject ignored in simplified 3-field form
         }
         
         function hideContactModal() {
@@ -1980,11 +1999,19 @@
         
         function submitEnquiry(e) {
             e.preventDefault()
-            const btn = e.target.querySelector('button[type="submit"]')
+            const form = e.target
+            const btn = form.querySelector('button[type="submit"]')
             btn.innerHTML = `<span class="flex items-center justify-center gap-x-2"><i class="fa-solid fa-spinner fa-spin"></i> Sending...</span>`
             btn.disabled = true
             
-            setTimeout(() => {
+            const formData = new FormData(form)
+            
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData).toString()
+            })
+            .then(() => {
                 btn.innerHTML = `✓ Thanks — you'll get a free check shortly`
                 btn.classList.add('!bg-emerald-600')
                 
@@ -2002,30 +2029,43 @@
                         setTimeout(() => toast.remove(), 400)
                     }, 4200)
                 }, 1800)
-            }, 1350)
+            })
+            .catch(() => {
+                btn.innerHTML = `Get my free situation check`
+                btn.disabled = false
+                alert("Thanks! Please WhatsApp +65 8062 1538 with your details (or enable Netlify Forms).")
+            })
         }
         
         function handleEnquirySubmit(e) {
             e.preventDefault()
-            const btn = e.target.querySelector('button[type="submit"]')
+            const form = e.target
+            const btn = form.querySelector('button[type="submit"]')
             btn.innerHTML = `<span class="flex items-center justify-center gap-x-2"><i class="fa-solid fa-spinner fa-spin"></i> Sending...</span>`
             btn.disabled = true
             
-            // Immediate send simulation (static HTML cannot send real email server-side without backend hosting e.g. Netlify + Resend or Formspree)
-            setTimeout(() => {
-                btn.innerHTML = `✓ Thanks — check coming soon`
+            const formData = new FormData(form)
+            
+            // Submit to Netlify Forms (will email you once enabled in Netlify dashboard > Forms)
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData).toString()
+            })
+            .then(() => {
+                btn.innerHTML = `✓ Thanks — you'll get a free check shortly`
                 btn.classList.add('!bg-emerald-600')
                 
                 setTimeout(() => {
-                    e.target.reset()
-                    btn.innerHTML = `See if upgrading makes sense for me`
+                    form.reset()
+                    btn.innerHTML = `Get my free situation check`
                     btn.disabled = false
                     btn.classList.remove('!bg-emerald-600')
                     btn.classList.add('bg-violet-700')
                     
                     const success = document.createElement('div')
                     success.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 bg-emerald-600 text-white px-8 py-4 rounded-3xl shadow-2xl flex items-center gap-x-3 text-sm z-[200]'
-                    success.innerHTML = `<div><div class="font-semibold">Thanks — Jack will send your free situation check shortly.</div><div class="text-xs opacity-90">No pressure, zero obligation.</div></div>`
+                    success.innerHTML = `<div><div class="font-semibold">Thanks! Jack will WhatsApp your free situation check shortly.</div><div class="text-xs opacity-90">No pressure, zero obligation.</div></div>`
                     document.body.appendChild(success)
                     
                     setTimeout(() => {
@@ -2034,7 +2074,13 @@
                         setTimeout(() => success.remove(), 400)
                     }, 4500)
                 }, 1800)
-            }, 600)
+            })
+            .catch(() => {
+                // Fallback if Netlify Forms not enabled yet
+                btn.innerHTML = `Get my free situation check`
+                btn.disabled = false
+                alert("Thanks! Please WhatsApp +65 8062 1538 with your details (or enable Netlify Forms in dashboard for auto-email).")
+            })
         }
         
         function initializeFAQ() {
@@ -2101,11 +2147,11 @@
                                 <button data-page="home" class="block w-full text-left font-medium">Home</button>
                                 <button data-page="about" class="block w-full text-left font-medium">About Us</button>
                                 <button data-page="blog" class="block w-full text-left font-medium">Insights</button>
-                                <button data-page="contact" class="block w-full text-left font-medium">Contact</button>
+                                <button data-page="contact" class="block w-full text-left font-medium">Get my free situation check.</button>
                             </div>
                             
                             <div class="mt-10">
-                                <button onclick="this.closest('.fixed').remove(); showContactModal()" class="w-full py-3 bg-violet-700 text-white rounded-3xl font-semibold">Ask Jack one question</button>
+                                <button onclick="this.closest('.fixed').remove(); showContactModal()" class="w-full py-3 bg-violet-700 text-white rounded-3xl font-semibold">Get my free situation check</button>
                             </div>
                         </div>
                     `
