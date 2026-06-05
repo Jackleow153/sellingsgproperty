@@ -1317,6 +1317,17 @@
                 
                 <div class="grid lg:grid-cols-5 gap-8">
                     <div class="lg:col-span-3 bg-white rounded-3xl border p-9 shadow-sm">
+                        <!-- 
+                          Netlify Forms setup for "situation-check":
+                          - data-netlify="true" + hidden form-name lets Netlify detect and capture submissions at deploy time.
+                          - First real submission after this HTML is live will register the form in your Netlify dashboard.
+                          - Submissions ALWAYS appear in Netlify UI (Forms tab) if processed — email is a separate notification you must enable.
+                          To receive email:
+                            1. Go to https://app.netlify.com/ → your "sellingsgproperty" site → "Forms" in sidebar.
+                            2. Find "situation-check" (and "situation-check-modal").
+                            3. Click the form → set up "Email notifications" → enter your email (e.g. sellingsgproperty@gmail.com) and save.
+                          Test after the next deploy finishes. Check both the Forms list (for capture) and your inbox/spam.
+                        -->
                         <form name="situation-check" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form" onsubmit="handleEnquirySubmit(event)">
                             <input type="hidden" name="form-name" value="situation-check" />
                             <div style="display:none;">
@@ -1379,6 +1390,11 @@
           </button>
         </div>
         <div class="p-8">
+          <!-- 
+            Same Netlify Forms as above ("situation-check-modal" is tracked separately).
+            See the comment on the main contact form for dashboard setup steps to get emails.
+            The JS below does a fetch POST (standard for custom UX on Netlify Forms); Netlify processes it server-side.
+          -->
           <form name="situation-check-modal" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitEnquiry(event)">
             <input type="hidden" name="form-name" value="situation-check-modal" />
             <div style="display:none;">
@@ -2011,29 +2027,33 @@
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: new URLSearchParams(formData).toString()
             })
-            .then(() => {
-                btn.innerHTML = `✓ Thanks — you'll get a free check shortly`
-                btn.classList.add('!bg-emerald-600')
-                
-                setTimeout(() => {
-                    hideContactModal()
-                    
-                    const toast = document.createElement('div')
-                    toast.className = `fixed bottom-8 left-1/2 -translate-x-1/2 bg-emerald-600 text-white px-8 py-3 rounded-3xl flex items-center gap-x-3 shadow-xl text-sm z-[200]`
-                    toast.innerHTML = `Thanks — you'll get your free situation check shortly.`
-                    document.body.appendChild(toast)
+            .then(response => {
+                if (response.ok) {
+                    btn.innerHTML = `✓ Thanks — you'll get a free check shortly`
+                    btn.classList.add('!bg-emerald-600')
                     
                     setTimeout(() => {
-                        toast.style.transition = 'all 0.4s'
-                        toast.style.opacity = '0'
-                        setTimeout(() => toast.remove(), 400)
-                    }, 4200)
-                }, 1800)
+                        hideContactModal()
+                        
+                        const toast = document.createElement('div')
+                        toast.className = `fixed bottom-8 left-1/2 -translate-x-1/2 bg-emerald-600 text-white px-8 py-4 rounded-3xl shadow-2xl flex items-center gap-x-3 text-sm z-[200]`
+                        toast.innerHTML = `<div><div class="font-semibold">Thanks! Jack will WhatsApp your free situation check shortly.</div><div class="text-xs opacity-90">No pressure, zero obligation.</div></div>`
+                        document.body.appendChild(toast)
+                        
+                        setTimeout(() => {
+                            toast.style.transition = 'all .4s'
+                            toast.style.opacity = '0'
+                            setTimeout(() => toast.remove(), 400)
+                        }, 4500)
+                    }, 1800)
+                } else {
+                    throw new Error('Submission failed');
+                }
             })
             .catch(() => {
                 btn.innerHTML = `Get my free situation check`
                 btn.disabled = false
-                alert("Thanks! Please WhatsApp +65 8062 1538 with your details (or enable Netlify Forms).")
+                alert("Thanks! Please WhatsApp +65 8062 1538 with your details (or enable Netlify Forms in dashboard for auto-email).")
             })
         }
         
@@ -2052,28 +2072,32 @@
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: new URLSearchParams(formData).toString()
             })
-            .then(() => {
-                btn.innerHTML = `✓ Thanks — you'll get a free check shortly`
-                btn.classList.add('!bg-emerald-600')
-                
-                setTimeout(() => {
-                    form.reset()
-                    btn.innerHTML = `Get my free situation check`
-                    btn.disabled = false
-                    btn.classList.remove('!bg-emerald-600')
-                    btn.classList.add('bg-violet-700')
-                    
-                    const success = document.createElement('div')
-                    success.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 bg-emerald-600 text-white px-8 py-4 rounded-3xl shadow-2xl flex items-center gap-x-3 text-sm z-[200]'
-                    success.innerHTML = `<div><div class="font-semibold">Thanks! Jack will WhatsApp your free situation check shortly.</div><div class="text-xs opacity-90">No pressure, zero obligation.</div></div>`
-                    document.body.appendChild(success)
+            .then(response => {
+                if (response.ok) {
+                    btn.innerHTML = `✓ Thanks — you'll get a free check shortly`
+                    btn.classList.add('!bg-emerald-600')
                     
                     setTimeout(() => {
-                        success.style.transition = 'all .4s'
-                        success.style.opacity = '0'
-                        setTimeout(() => success.remove(), 400)
-                    }, 4500)
-                }, 1800)
+                        form.reset()
+                        btn.innerHTML = `Get my free situation check`
+                        btn.disabled = false
+                        btn.classList.remove('!bg-emerald-600')
+                        btn.classList.add('bg-violet-700')
+                        
+                        const success = document.createElement('div')
+                        success.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 bg-emerald-600 text-white px-8 py-4 rounded-3xl shadow-2xl flex items-center gap-x-3 text-sm z-[200]'
+                        success.innerHTML = `<div><div class="font-semibold">Thanks! Jack will WhatsApp your free situation check shortly.</div><div class="text-xs opacity-90">No pressure, zero obligation.</div></div>`
+                        document.body.appendChild(success)
+                        
+                        setTimeout(() => {
+                            success.style.transition = 'all .4s'
+                            success.style.opacity = '0'
+                            setTimeout(() => success.remove(), 400)
+                        }, 4500)
+                    }, 1800)
+                } else {
+                    throw new Error('Submission failed');
+                }
             })
             .catch(() => {
                 // Fallback if Netlify Forms not enabled yet
