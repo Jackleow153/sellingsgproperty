@@ -1328,6 +1328,8 @@
                             3. Click the form → set up "Email notifications" → enter your email (e.g. sellingsgproperty@gmail.com) and save.
                           Test after the next deploy finishes. Check both the Forms list (for capture) and your inbox/spam.
                           The JS now uses raw FormData (multipart) + explicitly clears honeypot + forces form-name for maximum compatibility with Netlify's processor.
+                          IMPORTANT: If a submission lands in "Spam submissions" (separate tab in Netlify Forms), select it and click "Mark as verified".
+                          This trains the filter. Use realistic buyer-sounding text in the situation field (see placeholder example) — pure gibberish or ultra-short random text often gets auto-flagged.
                         -->
                         <form name="situation-check" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form" onsubmit="handleEnquirySubmit(event)">
                             <input type="hidden" name="form-name" value="situation-check" />
@@ -1347,8 +1349,9 @@
                             
                             <div class="mt-6">
                                 <label class="block text-xs font-semibold mb-2 text-slate-600">WHAT'S MY SITUATION? (max 1000 words)</label>
-                                <textarea id="message" name="situation" rows="6" maxlength="1000" class="w-full border border-slate-300 focus:border-violet-500 rounded-3xl px-5 py-3.5 text-sm outline-none" placeholder="Tell me about your current HDB, upgrade goals, budget, timeline, concerns, or any questions..." required></textarea>
+                                <textarea id="message" name="situation" rows="6" maxlength="1000" class="w-full border border-slate-300 focus:border-violet-500 rounded-3xl px-5 py-3.5 text-sm outline-none" placeholder="E.g. HDB 4-room in Punggol, married with 2 kids, targeting 3-bed in Serangoon / D19 area around 2026. Worried about cashflow after selling current flat and ABSD timing." required></textarea>
                                 <div class="text-[10px] text-slate-400 mt-1 text-right">1000 characters max</div>
+                                <p class="text-[10px] text-emerald-600 mt-1">Real sentences help us prepare accurate numbers and avoid spam filters.</p>
                             </div>
                             
                             <button type="submit" class="mt-8 w-full py-4 bg-violet-700 hover:bg-violet-800 transition text-white font-semibold rounded-3xl flex items-center justify-center gap-x-2 text-sm">
@@ -1395,6 +1398,7 @@
             Same Netlify Forms as above ("situation-check-modal" is tracked separately).
             See the comment on the main contact form for dashboard setup steps to get emails.
             The JS below does a fetch POST (standard for custom UX on Netlify Forms); Netlify processes it server-side.
+            Submissions can land in Spam submissions (see main form comment for how to "Mark as verified").
           -->
           <form name="situation-check-modal" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitEnquiry(event)">
             <input type="hidden" name="form-name" value="situation-check-modal" />
@@ -1414,7 +1418,8 @@
             
             <div class="mt-4">
               <label class="block text-xs font-semibold mb-2 text-slate-600">WHAT'S MY SITUATION? (max 1000 words)</label>
-              <textarea name="situation" rows="5" maxlength="1000" class="w-full border border-slate-300 focus:border-violet-500 rounded-3xl px-5 py-3.5 text-sm outline-none" placeholder="Tell me about your current HDB, upgrade goals, budget, timeline, concerns..." required></textarea>
+              <textarea name="situation" rows="5" maxlength="1000" class="w-full border border-slate-300 focus:border-violet-500 rounded-3xl px-5 py-3.5 text-sm outline-none" placeholder="E.g. HDB 5-room in Bedok, 2 kids, looking at RCR 3-bed mid-2026. Concerned about monthly payments after HDB sale." required></textarea>
+              <p class="text-[10px] text-emerald-600 mt-1">Real sentences help us prepare accurate numbers and avoid spam filters.</p>
             </div>
             
             <button type="submit" class="mt-6 w-full py-3.5 bg-violet-700 hover:bg-violet-800 transition text-white font-semibold rounded-3xl text-sm">
