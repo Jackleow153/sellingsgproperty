@@ -180,8 +180,8 @@
     .toc-link:hover { color: #6D28D9; }
 
     /* ---- Prose ---- */
-    .article-body h2 { font-size: 1.5rem; font-weight: 800; margin: 2rem 0 0.75rem; color: #0F172A; }
-    .article-body h3 { font-size: 1.15rem; font-weight: 700; margin: 1.5rem 0 0.5rem; color: #1E293B; }
+    .article-body h2 { font-size: 1.5rem; font-weight: 700; margin: 2rem 0 0.75rem; color: #0F172A; }
+    .article-body h3 { font-size: 1.15rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: #1E293B; }
     .article-body p  { line-height: 1.8; color: #334155; margin-bottom: 1rem; }
     .article-body ul, .article-body ol { padding-left: 1.4rem; margin-bottom: 1rem; }
     .article-body li { margin-bottom: 0.45rem; color: #334155; line-height: 1.7; }
@@ -222,11 +222,13 @@
     }
     #page-article .article-body h2 {
       font-size: 1.55rem;
+      font-weight: 700;
       margin-top: 2.25rem;
       margin-bottom: 0.85rem;
     }
     #page-article .article-body h3 {
       font-size: 1.2rem;
+      font-weight: 600;
       margin-top: 1.75rem;
     }
     #page-article .article-body blockquote {
@@ -289,7 +291,7 @@
 
 
                     
-                    <h1 class="heading-display text-6xl md:text-7xl leading-[1.05] tracking-tighter font-black mb-6">
+                    <h1 class="heading-display text-6xl md:text-7xl leading-[1.05] tracking-tighter font-bold mb-6 text-white">
                         New Launch<br>Condos.<br>Direct from<br>Developers.
                     </h1>
                     
@@ -317,15 +319,9 @@
                         </button>
                     </div>
                     
-                    <div class="flex items-center gap-x-6 mt-10 text-sm">
-                        <div class="flex -space-x-2">
-                            <img src="https://ui-avatars.com/api/?name=S+T&background=6D28D9&color=fff&size=32" class="w-8 h-8 rounded-full ring-2 ring-white object-cover" alt="">
-                            <img src="https://ui-avatars.com/api/?name=L+K&background=059669&color=fff&size=32" class="w-8 h-8 rounded-full ring-2 ring-white object-cover" alt="">
-                            <img src="https://ui-avatars.com/api/?name=R+N&background=1E40AF&color=fff&size=32" class="w-8 h-8 rounded-full ring-2 ring-white object-cover" alt="">
-                        </div>
-                        <div class="text-slate-400">
-                            <span class="font-semibold text-white">6,214</span> Singaporeans bought through us since 2025
-                        </div>
+                    <div class="flex items-center gap-x-3 mt-10 text-sm text-slate-300">
+                        <i class="fa-solid fa-users text-emerald-400"></i>
+                        <span><span class="font-semibold text-white">6,214</span> Singaporeans bought through us since 2025</span>
                     </div>
                 </div>
                 
@@ -363,12 +359,12 @@
             <div class="bg-white border-t border-b border-slate-100 py-3">
                 <div class="max-w-screen-2xl mx-auto px-8">
                     <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs opacity-75">
-                        <div class="flex items-center gap-x-2"><span class="font-semibold">As seen on</span></div>
-                        <div class="flex items-center gap-x-6 text-slate-500">
-                            <span class="font-bold">THE STRAITS TIMES</span>
-                            <span class="font-bold">BUSINESS TIMES</span>
-                            <span class="font-bold">TODAY</span>
-                            <span class="font-bold">ZaoBao</span>
+                        <div class="flex items-center gap-x-2"><span class="font-medium text-slate-500">As seen on</span></div>
+                        <div class="flex items-center gap-x-6 text-slate-400 text-sm tracking-wide">
+                            <span>The Straits Times</span>
+                            <span>Business Times</span>
+                            <span>TODAY</span>
+                            <span>ZaoBao</span>
                         </div>
                     </div>
                 </div>
@@ -376,34 +372,34 @@
         </header>
 
         <!-- STATS -->
-        <section class="max-w-screen-2xl mx-auto px-8 -mt-6 relative z-20">
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col justify-center">
+        <section class="max-w-screen-2xl mx-auto px-8 pt-12 pb-8 relative z-20">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 flex flex-col justify-center">
                     <div class="flex items-baseline gap-x-2">
-                        <span class="text-5xl font-black stat-number">39</span>
+                        <span class="text-4xl font-bold text-slate-900">39</span>
                         <span class="text-emerald-600"><i class="fa-solid fa-arrow-trend-up"></i></span>
                     </div>
-                    <div class="text-sm font-medium text-slate-500">Active New Launches (2025-2026)</div>
-                    <div class="text-[10px] text-emerald-600 mt-1">+9 this month</div>
+                    <div class="text-sm font-medium text-slate-500 mt-1">Active New Launches (2025-2026)</div>
+                    <div class="text-xs text-emerald-600 mt-1">+9 this month</div>
                 </div>
                 
-                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col justify-center">
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 flex flex-col justify-center">
                     <div class="flex items-baseline gap-x-2">
-                        <span class="text-5xl font-black stat-number">1,248</span>
+                        <span class="text-4xl font-bold text-slate-900">1,248</span>
                     </div>
-                    <div class="text-sm font-medium text-slate-500">Units Still Available</div>
-                    <div class="text-[10px] text-emerald-600 mt-1">64% absorption rate</div>
+                    <div class="text-sm font-medium text-slate-500 mt-1">Units Still Available</div>
+                    <div class="text-xs text-emerald-600 mt-1">64% absorption rate</div>
                 </div>
                 
 
 
                 
-                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col justify-center">
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 flex flex-col justify-center">
                     <div class="flex items-baseline gap-x-2">
-                        <span class="text-5xl font-black stat-number">0</span>
+                        <span class="text-4xl font-bold text-slate-900">0</span>
                     </div>
-                    <div class="text-sm font-medium text-slate-500">Commission Charged</div>
-                    <div class="text-emerald-600 text-xs font-bold mt-1">100% developer direct</div>
+                    <div class="text-sm font-medium text-slate-500 mt-1">Commission Charged</div>
+                    <div class="text-emerald-600 text-xs font-medium mt-1">100% developer direct</div>
                 </div>
             </div>
         </section>
@@ -411,8 +407,8 @@
         <!-- HOW IT WORKS -->
         <section class="max-w-screen-2xl mx-auto px-8 py-16">
             <div class="text-center mb-12">
-                <div class="inline px-4 py-1 bg-violet-100 text-violet-700 text-xs font-bold tracking-widest rounded-3xl">3 SIMPLE STEPS</div>
-                <h2 class="text-4xl font-black tracking-tight mt-3">Buy Smarter.<br>Pay Nothing Extra.</h2>
+                <div class="inline px-4 py-1 bg-violet-100 text-violet-600 text-xs font-semibold tracking-normal rounded-3xl">3 simple steps</div>
+                <h2 class="text-4xl font-bold tracking-tight mt-4 text-slate-900">Buy Smarter.<br>Pay Nothing Extra.</h2>
             </div>
             
             <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -420,15 +416,15 @@
                     <div class="w-12 h-12 bg-violet-100 text-violet-700 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
                         <i class="fa-solid fa-search text-2xl"></i>
                     </div>
-                    <h3 class="font-bold text-xl mb-3">1. Browse &amp; Filter</h3>
-                    <p class="text-slate-600">Filter 39+ launches from 2025 &amp; 2026 by district, price, developer, and MRT proximity.</p>
+                    <h3 class="font-semibold text-xl mb-2 text-slate-900">1. Browse &amp; Filter</h3>
+                    <p class="text-slate-600">Filter dozens of launches from 2025 &amp; 2026 by district, price, developer, and MRT proximity.</p>
                 </div>
                 
                 <div class="bg-white p-8 rounded-3xl border border-slate-100 group">
                     <div class="w-12 h-12 bg-violet-100 text-violet-700 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
                         <i class="fa-solid fa-balance-scale text-2xl"></i>
                     </div>
-                    <h3 class="font-bold text-xl mb-3">2. Compare &amp; Shortlist</h3>
+                    <h3 class="font-semibold text-xl mb-2 text-slate-900">2. Compare &amp; Shortlist</h3>
                     <p class="text-slate-600">Side-by-side unit mix, PSF, developer track record, and live balance units.</p>
                 </div>
                 
@@ -436,7 +432,7 @@
                     <div class="w-12 h-12 bg-violet-100 text-violet-700 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
                         <i class="fa-solid fa-handshake text-2xl"></i>
                     </div>
-                    <h3 class="font-bold text-xl mb-3">3. Enquire Direct</h3>
+                    <h3 class="font-semibold text-xl mb-2 text-slate-900">3. Enquire Direct</h3>
                     <p class="text-slate-600">Connect straight to developer sales team. Zero commission. Best price guaranteed.</p>
                 </div>
             </div>
@@ -446,7 +442,7 @@
         <section id="browse-section" class="max-w-screen-2xl mx-auto px-8 pb-16">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-y-4">
                 <div>
-                    <h2 class="text-4xl font-black tracking-tight">39 Verified New Launch &amp; Resale Condos (2025-2026)</h2>
+                    <h2 class="text-4xl font-bold tracking-tight text-slate-900">39 Verified New Launch &amp; Resale Condos (2025-2026)</h2>
                     <p class="text-slate-500 mt-1">Past • Current • Upcoming • Updated today. <strong>New launch condos vs resale condos Singapore 2026</strong> — progressive payments and fresh facilities vs immediate move-in and proven yield.</p>
                 </div>
                 
@@ -493,7 +489,7 @@
             
             <div class="text-center mt-10">
                 <button onclick="showAllProjects()" class="px-8 py-3 border border-violet-700 text-violet-700 hover:bg-violet-50 font-semibold rounded-3xl text-sm flex items-center gap-x-2 mx-auto transition">
-                    <span>Show All 39 Projects</span>
+                    <span>Show all projects</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
             </div>
@@ -504,23 +500,23 @@
             <div class="max-w-screen-2xl mx-auto px-8">
                 <div class="grid md:grid-cols-12 gap-12 items-center">
                     <div class="md:col-span-5">
-                        <div class="text-emerald-400 text-xs tracking-[2px] font-bold mb-3">Q2 2026 MARKET PULSE</div>
-                        <h2 class="text-5xl font-black tracking-tight leading-none mb-6">New launch<br>absorption remains<br>strong at 64%.</h2>
+                        <div class="text-emerald-400 text-xs tracking-normal font-medium mb-3">Q2 2026 market pulse</div>
+                        <h2 class="text-5xl font-bold tracking-tight leading-none mb-6">New launch<br>absorption remains<br>strong at 64%.</h2>
                         <p class="text-lg text-slate-300 max-w-md">Despite global uncertainties, Singapore new launches and resale condos continue to see healthy demand, especially in CCR and RCR. New launch absorption at 64%.</p>
                     </div>
                     
                     <div class="md:col-span-7">
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div class="bg-white/10 backdrop-blur p-6 rounded-3xl border border-white/10">
-                                <div class="text-emerald-400 text-4xl font-black">+6.2%</div>
+                                <div class="text-emerald-400 text-3xl font-semibold">+6.2%</div>
                                 <div class="text-white/70 text-sm mt-1">YoY price growth in CCR</div>
                             </div>
                             <div class="bg-white/10 backdrop-blur p-6 rounded-3xl border border-white/10">
-                                <div class="text-emerald-400 text-4xl font-black">27</div>
+                                <div class="text-emerald-400 text-3xl font-semibold">27</div>
                                 <div class="text-white/70 text-sm mt-1">New launches launched in 2026 so far</div>
                             </div>
                             <div class="bg-white/10 backdrop-blur p-6 rounded-3xl border border-white/10">
-                                <div class="text-emerald-400 text-4xl font-black">8,472</div>
+                                <div class="text-emerald-400 text-3xl font-semibold">8,472</div>
                                 <div class="text-white/70 text-sm mt-1">Units transacted via SellingSgProperty.</div>
                             </div>
                         </div>
@@ -533,7 +529,7 @@
         <section class="max-w-screen-2xl mx-auto px-8 py-16" id="faq">
             <div class="max-w-3xl mx-auto">
                 <div class="text-center mb-10">
-                    <h2 class="text-4xl font-black tracking-tight">Frequently Asked Questions</h2>
+                    <h2 class="text-4xl font-bold tracking-tight text-slate-900">Frequently Asked Questions</h2>
                     <p class="text-slate-500 mt-3">Direct answers for serious buyers</p>
                 </div>
                 
@@ -546,7 +542,7 @@
         <!-- FINAL CTA -->
         <section class="bg-violet-700 py-16 text-white">
             <div class="max-w-screen-2xl mx-auto px-8 text-center">
-                <h2 class="text-4xl md:text-5xl font-black tracking-tight mb-4">Ready to secure your new launch or resale condo?</h2>
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">Ready to secure your new launch or resale condo?</h2>
                 <p class="max-w-md mx-auto text-violet-200 mb-8">Join 6,214 Singaporeans who bought smarter with zero commission since 2025.</p>
                 
                 <button onclick="window.open('https://wa.me/6580621538', '_blank')" class="px-10 py-4 bg-white text-violet-700 font-bold rounded-3xl flex items-center justify-center gap-x-3 text-lg hover:bg-amber-50 transition mx-auto">
@@ -562,9 +558,9 @@
         <div class="bg-gradient-to-br from-slate-900 to-violet-950 text-white py-20">
             <div class="max-w-screen-2xl mx-auto px-8">
                 <div class="max-w-3xl">
-                    <div class="inline-flex items-center px-4 py-1 bg-white/10 rounded-3xl text-xs tracking-widest mb-6">EST. 2024 • SINGAPORE</div>
+                    <div class="inline-flex items-center px-4 py-1 bg-white/10 rounded-3xl text-xs tracking-normal mb-6">Est. 2024 • Singapore</div>
                     
-                    <h1 class="heading-display text-6xl md:text-7xl tracking-tighter font-black leading-none">We make buying<br>new launch condos<br>simple and fair.</h1>
+                    <h1 class="heading-display text-6xl md:text-7xl tracking-tighter font-bold leading-none">We make buying<br>new launch condos<br>simple and fair.</h1>
                     
                     <p class="mt-6 max-w-lg text-xl text-white/70">No agents. No commission. No outdated listings. Just direct access to Singapore’s best new launch condos and resale condos from 2025 &amp; 2026.</p>
                     
@@ -575,23 +571,19 @@
             </div>
         </div>
 
-        <div class="max-w-screen-2xl mx-auto px-8 -mt-8 relative z-20">
-            <div class="bg-white rounded-3xl shadow-xl border border-slate-100 grid grid-cols-2 md:grid-cols-4 gap-px overflow-hidden">
-                <div class="p-8 text-center border-r border-slate-100">
-                    <div class="text-6xl font-black text-violet-700">6,214</div>
-                    <div class="text-sm font-medium text-slate-500 mt-2">Families helped since 2025</div>
+        <div class="max-w-screen-2xl mx-auto px-8 pt-8 pb-12">
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-100 grid grid-cols-1 md:grid-cols-3 gap-px overflow-hidden">
+                <div class="p-10 text-center">
+                    <div class="text-5xl font-bold text-violet-700">6,214</div>
+                    <div class="text-sm font-medium text-slate-500 mt-3">Families helped since 2025</div>
                 </div>
-                <div class="p-8 text-center border-r border-slate-100">
-                    <div class="text-6xl font-black text-violet-700">39</div>
-                    <div class="text-sm font-medium text-slate-500 mt-2">Active verified launches</div>
+                <div class="p-10 text-center border-t md:border-t-0 md:border-l border-slate-100">
+                    <div class="text-5xl font-bold text-violet-700">0</div>
+                    <div class="text-sm font-medium text-slate-500 mt-3">Commission ever charged</div>
                 </div>
-                <div class="p-8 text-center border-r border-slate-100">
-                    <div class="text-6xl font-black text-violet-700">0</div>
-                    <div class="text-sm font-medium text-slate-500 mt-2">Commission ever charged</div>
-                </div>
-                <div class="p-8 text-center">
-                    <div class="text-6xl font-black text-violet-700">98.4%</div>
-                    <div class="text-sm font-medium text-slate-500 mt-2">Buyer satisfaction score</div>
+                <div class="p-10 text-center border-t md:border-t-0 md:border-l border-slate-100">
+                    <div class="text-5xl font-bold text-violet-700">98.4%</div>
+                    <div class="text-sm font-medium text-slate-500 mt-3">Buyer satisfaction score</div>
                 </div>
             </div>
         </div>
@@ -599,8 +591,8 @@
         <div class="max-w-screen-2xl mx-auto px-8 py-20">
             <div class="grid md:grid-cols-12 gap-16 items-center">
                 <div class="md:col-span-6">
-                    <div class="text-violet-600 font-semibold tracking-widest text-xs mb-3">THE PROBLEM WE SOLVED</div>
-                    <h2 class="text-5xl font-black tracking-tight leading-none">Singapore’s new launch market was broken.</h2>
+                    <div class="text-violet-600 font-medium tracking-normal text-xs mb-3">The problem we solved</div>
+                    <h2 class="text-5xl font-bold tracking-tight leading-none">Singapore’s new launch market was broken.</h2>
                     
                     <div class="mt-8 space-y-6 text-lg text-slate-600">
                         <p>Before SellingSgProperty., buyers faced painful realities:</p>
@@ -620,11 +612,11 @@
                 </div>
                 
                 <div class="md:col-span-6 bg-white p-9 rounded-3xl border border-slate-100 shadow-sm">
-                    <div class="uppercase tracking-[1.5px] text-xs font-bold text-violet-600 mb-4">OUR SOLUTION</div>
+                    <div class="text-xs font-medium text-violet-600 mb-4">Our solution</div>
                     
                     <div class="space-y-7">
                         <div class="flex gap-5">
-                            <div class="w-9 h-9 flex-shrink-0 bg-violet-100 text-violet-700 rounded-2xl flex items-center justify-center font-black">01</div>
+                            <div class="w-9 h-9 flex-shrink-0 bg-violet-100 text-violet-700 rounded-2xl flex items-center justify-center font-semibold">01</div>
                             <div>
                                 <div class="font-semibold">100% Developer Direct Partnership</div>
                                 <div class="text-sm text-slate-600 mt-1">We work directly with UOL, CapitalLand, SingLand, Hong Leong, Kheng Leong, City Developments, and more.</div>
@@ -632,7 +624,7 @@
                         </div>
                         
                         <div class="flex gap-5">
-                            <div class="w-9 h-9 flex-shrink-0 bg-violet-100 text-violet-700 rounded-2xl flex items-center justify-center font-black">02</div>
+                            <div class="w-9 h-9 flex-shrink-0 bg-violet-100 text-violet-700 rounded-2xl flex items-center justify-center font-semibold">02</div>
                             <div>
                                 <div class="font-semibold">Zero Commission. Forever.</div>
                                 <div class="text-sm text-slate-600 mt-1">We are paid by developers for qualified buyer introductions.</div>
@@ -640,7 +632,7 @@
                         </div>
                         
                         <div class="flex gap-5">
-                            <div class="w-9 h-9 flex-shrink-0 bg-violet-100 text-violet-700 rounded-2xl flex items-center justify-center font-black">03</div>
+                            <div class="w-9 h-9 flex-shrink-0 bg-violet-100 text-violet-700 rounded-2xl flex items-center justify-center font-semibold">03</div>
                             <div>
                                 <div class="font-semibold">Real-time Data + AI Matching</div>
                                 <div class="text-sm text-slate-600 mt-1">Live balance units, accurate PSF, and intelligent filters.</div>
@@ -661,10 +653,10 @@
           <div class="absolute inset-0 bg-gradient-to-br from-violet-900/30 via-transparent to-slate-900/60"></div>
           <div class="max-w-screen-2xl mx-auto px-8 pt-14 pb-18 relative z-10">
             <div class="max-w-3xl">
-              <div class="inline-flex items-center gap-x-2 px-4 py-1.5 bg-violet-600/20 border border-violet-500/30 rounded-3xl text-violet-300 text-xs font-bold tracking-[2px] mb-6">
-                PROPERTY INSIGHTS BY JACK LEOW
+              <div class="inline-flex items-center gap-x-2 px-4 py-1.5 bg-violet-600/20 border border-violet-500/30 rounded-3xl text-violet-300 text-xs font-medium tracking-normal mb-6">
+                Property insights by Jack Leow
               </div>
-              <h1 class="heading-display text-5xl md:text-7xl tracking-tighter font-black mb-5 leading-[1.02]">
+              <h1 class="heading-display text-5xl md:text-7xl tracking-tighter font-bold mb-5 leading-[1.02]">
                 Singapore Property<br>Insights.<br><span class="text-violet-400">Data-driven.</span><br>No fluff.
               </h1>
               <p class="text-xl text-slate-300 mb-8 max-w-2xl leading-relaxed">
@@ -677,8 +669,8 @@
                 </button>
               </div>
               <div class="flex flex-wrap gap-x-8 gap-y-3 text-sm text-slate-400">
-                <div><span class="text-white font-bold">20</span> in-depth articles</div>
-                <div><span class="text-white font-bold">Updated</span> 2026</div>
+                <div><span class="text-white font-semibold">20</span> in-depth articles</div>
+                <div><span class="text-white font-semibold">Updated</span> 2026</div>
               </div>
             </div>
           </div>
@@ -704,7 +696,7 @@
   <!-- Section label -->
   <div class="flex items-center justify-between mb-8">
     <div>
-      <h2 class="text-3xl font-black tracking-tight">Latest Insights</h2>
+      <h2 class="text-3xl font-bold tracking-tight text-slate-900">Latest Insights</h2>
       <p class="text-slate-500 text-sm mt-1">From the <em>Find Your Treasure</em> newsletter • Singapore property 2025–2026</p>
     </div>
   </div>
@@ -726,7 +718,7 @@
           <time class="text-slate-400" datetime="2026-03-21">21 Mar 2026</time>
           <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 8 min</span>
         </div>
-        <h2 class="font-black text-base leading-tight mb-2 line-clamp-2">HDB Upgraders: Are You Trapped by Your Own "Phantom Fear"? (2026 Edition)</h2>
+        <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">HDB Upgraders: Are You Trapped by Your Own "Phantom Fear"? (2026 Edition)</h2>
         <p class="text-sm text-slate-600 line-clamp-3 flex-1">The "Phantom Fear" paralyzes HDB owners from upgrading to private condos — but in most cases it's unfounded. Learn the numbers that matter and the simple 5-step upgrade path.</p>
         <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
           <div class="flex items-center gap-x-2 text-xs">
@@ -750,7 +742,7 @@
           <time class="text-slate-400" datetime="2026-03-07">7 Mar 2026</time>
           <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 7 min</span>
         </div>
-        <h2 class="font-black text-base leading-tight mb-2 line-clamp-2">60% ABSD for Foreigners: Is Singapore Property Still Investable in 2026?</h2>
+        <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">60% ABSD for Foreigners: Is Singapore Property Still Investable in 2026?</h2>
         <p class="text-sm text-slate-600 line-clamp-3 flex-1">With 60% ABSD making Singapore the world's most expensive market for foreign buyers, smart money is pivoting to commercial, shophouses and FTA exemptions.</p>
         <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
           <div class="flex items-center gap-x-2 text-xs">
@@ -774,7 +766,7 @@
           <time class="text-slate-400" datetime="2026-02-27">27 Feb 2026</time>
           <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 9 min</span>
         </div>
-        <h2 class="font-black text-base leading-tight mb-2 line-clamp-2">The Decoupling Guide 2026: Legal Costs vs. ABSD Savings</h2>
+        <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">The Decoupling Guide 2026: Legal Costs vs. ABSD Savings</h2>
         <p class="text-sm text-slate-600 line-clamp-3 flex-1">Decoupling can save 20% ABSD on a second property — but only makes sense above ~$1.5M. Below that, legal fees and early redemption penalties often wipe out the gain.</p>
         <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
           <div class="flex items-center gap-x-2 text-xs">
@@ -798,7 +790,7 @@
           <time class="text-slate-400" datetime="2026-01-01">1 Jan 2026</time>
           <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 10 min</span>
         </div>
-        <h2 class="font-black text-base leading-tight mb-2 line-clamp-2">Why Buying a Private Property Should Be Your #1 Resolution for 2026 (Especially If You're Scared)</h2>
+        <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">Why Buying a Private Property Should Be Your #1 Resolution for 2026 (Especially If You're Scared)</h2>
         <p class="text-sm text-slate-600 line-clamp-3 flex-1">Fear of the mortgage is the single biggest wealth-drag for Singapore's middle class. Here's why 2026's fundamentals make this the best time in years to take the leap.</p>
         <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
           <div class="flex items-center gap-x-2 text-xs">
@@ -822,7 +814,7 @@
           <time class="text-slate-400" datetime="2026-02-14">14 Feb 2026</time>
           <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 7 min</span>
         </div>
-        <h2 class="font-black text-base leading-tight mb-2 line-clamp-2">New Launch vs Resale Condo in 2026: Which Should You Buy?</h2>
+        <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">New Launch vs Resale Condo in 2026: Which Should You Buy?</h2>
         <p class="text-sm text-slate-600 line-clamp-3 flex-1">New launches offer deferred payment, fresh facilities and developer discounts — but resale can mean instant rental yield and proven locations. Here's the full breakdown.</p>
         <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
           <div class="flex items-center gap-x-2 text-xs">
@@ -846,7 +838,7 @@
           <time class="text-slate-400" datetime="2026-01-20">20 Jan 2026</time>
           <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 6 min</span>
         </div>
-        <h2 class="font-black text-base leading-tight mb-2 line-clamp-2">How Much CPF Can You Use for a Private Property in Singapore? (2026 Guide)</h2>
+        <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">How Much CPF Can You Use for a Private Property in Singapore? (2026 Guide)</h2>
         <p class="text-sm text-slate-600 line-clamp-3 flex-1">CPF OA can fund your downpayment, legal fees and monthly instalments — but there are Withdrawal Limits and Basic Retirement Sum rules you must understand first.</p>
         <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
           <div class="flex items-center gap-x-2 text-xs">
@@ -870,7 +862,7 @@
           <time class="text-slate-400" datetime="2025-12-15">15 Dec 2025</time>
           <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 8 min</span>
         </div>
-        <h2 class="font-black text-base leading-tight mb-2 line-clamp-2">Which Singapore District Should You Buy In? The 2026 Growth Map</h2>
+        <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">Which Singapore District Should You Buy In? The 2026 Growth Map</h2>
         <p class="text-sm text-slate-600 line-clamp-3 flex-1">From the booming D19 Serangoon corridor to the under-valued D22 Jurong Lake District, here's where the next 5-year capital growth story is being written.</p>
         <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
           <div class="flex items-center gap-x-2 text-xs">
@@ -894,7 +886,7 @@
           <time class="text-slate-400" datetime="2025-11-30">30 Nov 2025</time>
           <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 6 min</span>
         </div>
-        <h2 class="font-black text-base leading-tight mb-2 line-clamp-2">5 Signs Your HDB Flat Is Ready to Sell — And How to Time It Right in 2026</h2>
+        <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">5 Signs Your HDB Flat Is Ready to Sell — And How to Time It Right in 2026</h2>
         <p class="text-sm text-slate-600 line-clamp-3 flex-1">From MOP completion to peak COV conditions, these are the five indicators that tell you your HDB window is open — and when waiting longer could cost you.</p>
         <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
           <div class="flex items-center gap-x-2 text-xs">
@@ -920,7 +912,7 @@
         <time class="text-slate-400" datetime="2026-04-12">12 Apr 2026</time>
         <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 9 min</span>
       </div>
-      <h2 class="font-black text-base leading-tight mb-2 line-clamp-2">FOMO vs Rational Analysis: The Psychology of Buying New Launch Condos in Singapore 2026</h2>
+      <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">FOMO vs Rational Analysis: The Psychology of Buying New Launch Condos in Singapore 2026</h2>
       <p class="text-sm text-slate-600 line-clamp-3 flex-1">The single biggest driver of new launch purchases right now is not price or location — it is FOMO. Here's how to recognise it and buy with data instead of emotion.</p>
       <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
         <div class="flex items-center gap-x-2 text-xs">
@@ -944,7 +936,7 @@
         <time class="text-slate-400" datetime="2026-04-18">18 Apr 2026</time>
         <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 8 min</span>
       </div>
-      <h2 class="font-black text-base leading-tight mb-2 line-clamp-2">First Private Condo Anxiety: The Hidden Psychology Costing Singapore Upgraders Millions in 2026</h2>
+      <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">First Private Condo Anxiety: The Hidden Psychology Costing Singapore Upgraders Millions in 2026</h2>
       <p class="text-sm text-slate-600 line-clamp-3 flex-1">The biggest barrier for many capable HDB upgraders is not money — it is a specific form of decision paralysis called first condo anxiety. Here's how to overcome it.</p>
       <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
         <div class="flex items-center gap-x-2 text-xs">
@@ -968,7 +960,7 @@
         <time class="text-slate-400" datetime="2026-04-25">25 Apr 2026</time>
         <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 7 min</span>
       </div>
-      <h2 class="font-black text-base leading-tight mb-2 line-clamp-2">Why Progressive Payments Make New Launch Condos Psychologically Easier to Buy in 2026</h2>
+      <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">Why Progressive Payments Make New Launch Condos Psychologically Easier to Buy in 2026</h2>
       <p class="text-sm text-slate-600 line-clamp-3 flex-1">The progressive payment scheme is one of the most powerful psychological advantages of new launches. It spreads the pain of paying and aligns perfectly with HDB sale timelines.</p>
       <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
         <div class="flex items-center gap-x-2 text-xs">
@@ -995,7 +987,7 @@
         <time class="text-slate-400" datetime="2026-05-03">3 May 2026</time>
         <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 8 min</span>
       </div>
-      <h2 class="font-black text-base leading-tight mb-2 line-clamp-2">High Absorption Rates in Singapore New Launches: Smart Signal or Dangerous Herd Mentality?</h2>
+      <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">High Absorption Rates in Singapore New Launches: Smart Signal or Dangerous Herd Mentality?</h2>
       <p class="text-sm text-slate-600 line-clamp-3 flex-1">When a launch hits 70%+ in the first weekend, is it genuine demand or engineered social proof? Learn how to read the numbers instead of following the crowd.</p>
       <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
         <div class="flex items-center gap-x-2 text-xs">
@@ -1019,7 +1011,7 @@
         <time class="text-slate-400" datetime="2026-05-10">10 May 2026</time>
         <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 7 min</span>
       </div>
-      <h2 class="font-black text-base leading-tight mb-2 line-clamp-2">How Developer Incentives in New Launch Condos Exploit Buyer Psychology in 2026</h2>
+      <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">How Developer Incentives in New Launch Condos Exploit Buyer Psychology in 2026</h2>
       <p class="text-sm text-slate-600 line-clamp-3 flex-1">Stamp duty absorption, furniture credits, and early-bird discounts are not gifts. They are psychological tools. Here's exactly how to evaluate the real net price.</p>
       <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
         <div class="flex items-center gap-x-2 text-xs">
@@ -1043,7 +1035,7 @@
         <time class="text-slate-400" datetime="2026-06-11">11 Jun 2026</time>
         <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 14 min</span>
       </div>
-      <h2 class="font-black text-base leading-tight mb-2 line-clamp-2">Dunearn House 2026: Why It's a Smart Buy in Prime Bukit Timah</h2>
+      <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">Dunearn House 2026: Why It's a Smart Buy in Prime Bukit Timah</h2>
       <p class="text-sm text-slate-600 line-clamp-3 flex-1">First private launch in the Turf City masterplan. Education belt, world-class developers, competitive land cost. Here's the full case for why this CCR project stands out.</p>
       <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
         <div class="flex items-center gap-x-2 text-xs">
@@ -1067,7 +1059,7 @@
         <time class="text-slate-400" datetime="2026-06-12">12 Jun 2026</time>
         <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 13 min</span>
       </div>
-      <h2 class="font-black text-base leading-tight mb-2 line-clamp-2">Dunearn House vs Fourth Avenue Residences: Which Is the Better Investment?</h2>
+      <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">Dunearn House vs Fourth Avenue Residences: Which Is the Better Investment?</h2>
       <p class="text-sm text-slate-600 line-clamp-3 flex-1">New launch first-mover potential vs proven completed asset with immediate yield in the same Bukit Timah catchment.</p>
       <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
         <div class="flex items-center gap-x-2 text-xs">
@@ -1091,7 +1083,7 @@
         <time class="text-slate-400" datetime="2026-06-13">13 Jun 2026</time>
         <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 15 min</span>
       </div>
-      <h2 class="font-black text-base leading-tight mb-2 line-clamp-2">How to Buy a New Launch Condo in Singapore: A Step-by-Step 2026 Guide</h2>
+      <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">How to Buy a New Launch Condo in Singapore: A Step-by-Step 2026 Guide</h2>
       <p class="text-sm text-slate-600 line-clamp-3 flex-1">From IPA and balloting to booking fee, OTP exercise, stamp duties, progressive payments and key collection at TOP.</p>
       <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
         <div class="flex items-center gap-x-2 text-xs">
@@ -1115,7 +1107,7 @@
         <time class="text-slate-400" datetime="2026-06-14">14 Jun 2026</time>
         <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 12 min</span>
       </div>
-      <h2 class="font-black text-base leading-tight mb-2 line-clamp-2">Are New Launch Condos Cheaper Than Resale? A 2026 Buyer's Guide</h2>
+      <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">Are New Launch Condos Cheaper Than Resale? A 2026 Buyer's Guide</h2>
       <p class="text-sm text-slate-600 line-clamp-3 flex-1">PSF is usually higher for new launches, but progressive payments and zero reno often make total cost and cash flow better in the first years.</p>
       <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
         <div class="flex items-center gap-x-2 text-xs">
@@ -1139,7 +1131,7 @@
         <time class="text-slate-400" datetime="2026-06-15">15 Jun 2026</time>
         <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 14 min</span>
       </div>
-      <h2 class="font-black text-base leading-tight mb-2 line-clamp-2">Which Condo to Buy in Singapore in 2026: A Practical Buyer's Guide</h2>
+      <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">Which Condo to Buy in Singapore in 2026: A Practical Buyer's Guide</h2>
       <p class="text-sm text-slate-600 line-clamp-3 flex-1">Buyer profiles, CCR/RCR/OCR comparison, new vs resale, freehold vs leasehold, stress-testing affordability and a proven shortlisting process.</p>
       <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
         <div class="flex items-center gap-x-2 text-xs">
@@ -1163,7 +1155,7 @@
         <time class="text-slate-400" datetime="2026-06-20">20 Jun 2026</time>
         <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 14 min</span>
       </div>
-      <h2 class="font-black text-base leading-tight mb-2 line-clamp-2">Dunearn House Review 2026: Is It Worth Buying? (Honest Pros &amp; Cons)</h2>
+      <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">Dunearn House Review 2026: Is It Worth Buying? (Honest Pros &amp; Cons)</h2>
       <p class="text-sm text-slate-600 line-clamp-3 flex-1">Honest review of Dunearn House: pros, cons, expected $2,800–$3,100 psf pricing, Turf City location, schools, and who should actually buy.</p>
       <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
         <div class="flex items-center gap-x-2 text-xs">
@@ -1187,7 +1179,7 @@
         <time class="text-slate-400" datetime="2026-06-22">22 Jun 2026</time>
         <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 12 min</span>
       </div>
-      <h2 class="font-black text-base leading-tight mb-2 line-clamp-2">Turf City Masterplan 2026: What Dunearn House Buyers Need to Know</h2>
+      <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">Turf City Masterplan 2026: What Dunearn House Buyers Need to Know</h2>
       <p class="text-sm text-slate-600 line-clamp-3 flex-1">Complete guide to the Bukit Timah Turf City transformation: timeline, conserved buildings, future MRT, parks, and how it affects Dunearn House value in 2026 and beyond.</p>
       <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
         <div class="flex items-center gap-x-2 text-xs">
@@ -1203,7 +1195,7 @@
   <div class="mt-16 bg-slate-900 rounded-3xl p-10 md:p-14 flex flex-col md:flex-row items-center gap-8 text-white relative overflow-hidden">
     <div class="hero-grid absolute inset-0 opacity-50"></div>
     <div class="relative z-10 flex-1">
-      <div class="text-violet-400 text-xs font-bold tracking-widest mb-2">PROPERTY INSIGHTS BY JACK LEOW</div>
+      <div class="text-violet-400 text-xs font-medium tracking-normal text-slate-500 mb-2">PROPERTY INSIGHTS BY JACK LEOW</div>
       <h2 class="heading-display text-3xl md:text-4xl font-black mb-3">Never miss a property insight.</h2>
       <p class="text-slate-300 max-w-lg">Get Jack's latest analysis on new launches, ABSD changes, and Singapore's market shifts — direct to your inbox.</p>
     </div>
@@ -1632,7 +1624,7 @@
                         <div class="p-5">
                             <div class="flex items-start justify-between">
                                 <div>
-                                    <h3 class="font-bold text-xl tracking-tight">${project.name}</h3>
+                                    <h3 class="font-semibold text-xl tracking-tight text-slate-900">${project.name}</h3>
                                     <div class="flex items-center text-xs text-slate-500 mt-0.5">
                                         <i class="fa-solid fa-map-marker-alt mr-1.5 text-violet-400"></i>
                                         <span>${project.location.split(',')[0]}</span>
