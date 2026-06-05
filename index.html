@@ -1327,11 +1327,12 @@
                             2. Find "situation-check" (and "situation-check-modal").
                             3. Click the form → set up "Email notifications" → enter your email (e.g. sellingsgproperty@gmail.com) and save.
                           Test after the next deploy finishes. Check both the Forms list (for capture) and your inbox/spam.
+                          The JS now uses raw FormData (multipart) + explicitly clears honeypot + forces form-name for maximum compatibility with Netlify's processor.
                         -->
                         <form name="situation-check" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form" onsubmit="handleEnquirySubmit(event)">
                             <input type="hidden" name="form-name" value="situation-check" />
-                            <div style="display:none;">
-                                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                            <div style="display:none;" aria-hidden="true">
+                                <label>Don't fill this out if you're human: <input type="text" name="bot-field" tabindex="-1" autocomplete="off" /></label>
                             </div>
                             
                             <div>
@@ -1397,8 +1398,8 @@
           -->
           <form name="situation-check-modal" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitEnquiry(event)">
             <input type="hidden" name="form-name" value="situation-check-modal" />
-            <div style="display:none;">
-              <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+            <div style="display:none;" aria-hidden="true">
+              <label>Don't fill this out if you're human: <input type="text" name="bot-field" tabindex="-1" autocomplete="off" /></label>
             </div>
             
             <div>
@@ -2021,11 +2022,24 @@
             btn.disabled = true
             
             const formData = new FormData(form)
+            // Robust Netlify Forms serialization:
+            // - Force honeypot empty (prevents silent spam discard)
+            // - Force form-name from the <form name="..."> attribute
+            // - Send raw FormData (lets fetch set proper multipart/form-data)
+            formData.set('bot-field', '')
+            formData.set('form-name', form.getAttribute('name') || 'situation-check-modal')
+            
+            // Debug helper — open DevTools > Console when you test
+            console.group('[Netlify Form Debug] submitEnquiry (modal)')
+            console.log('Form name attr:', form.getAttribute('name'))
+            console.log('Serialized entries:')
+            for (let [k, v] of formData.entries()) { console.log('  ' + k + ':', v) }
+            console.groupEnd()
             
             fetch('/', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(formData).toString()
+                body: formData
+                // Intentionally no Content-Type header — browser sets multipart boundary
             })
             .then(response => {
                 if (response.ok) {
@@ -2065,12 +2079,25 @@
             btn.disabled = true
             
             const formData = new FormData(form)
+            // Robust Netlify Forms serialization:
+            // - Force honeypot empty (prevents silent spam discard)
+            // - Force form-name from the <form name="..."> attribute
+            // - Send raw FormData (lets fetch set proper multipart/form-data)
+            formData.set('bot-field', '')
+            formData.set('form-name', form.getAttribute('name') || 'situation-check')
+            
+            // Debug helper — open DevTools > Console when you test
+            console.group('[Netlify Form Debug] handleEnquirySubmit (contact page)')
+            console.log('Form name attr:', form.getAttribute('name'))
+            console.log('Serialized entries:')
+            for (let [k, v] of formData.entries()) { console.log('  ' + k + ':', v) }
+            console.groupEnd()
             
             // Submit to Netlify Forms (will email you once enabled in Netlify dashboard > Forms)
             fetch('/', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(formData).toString()
+                body: formData
+                // Intentionally no Content-Type header — browser sets multipart boundary
             })
             .then(response => {
                 if (response.ok) {
