@@ -2194,7 +2194,7 @@
                     const nav = document.createElement('div')
                     nav.className = `fixed inset-0 bg-black/70 z-[200] flex md:hidden`
                     nav.innerHTML = `
-                        <div class="bg-white w-72 p-8" onclick="event.stopImmediatePropagation()">
+                        <div class="bg-white w-72 p-8">
                             <div class="flex justify-between mb-8">
                                 <button class="mobile-logo text-left focus:outline-none active:opacity-70 -ml-1 p-1 rounded-lg active:bg-slate-100" data-page="home">
                                     <span class="font-black text-2xl">SellingSgProperty.</span>
@@ -2212,6 +2212,12 @@
                         </div>
                     `
                     document.body.appendChild(nav)
+
+                    // Click on the backdrop (outside the white panel) closes the menu
+                    nav.onclick = (e) => {
+                        if (e.target === nav) nav.remove();
+                    };
+
                     // Target the close button (×) specifically, not the logo button which is also a <button>
                     const closeBtn = nav.querySelector('button.text-3xl');
                     if (closeBtn) closeBtn.onclick = () => nav.remove();
