@@ -318,32 +318,8 @@
                 </div>
                 
                 <div class="md:col-span-5 relative mt-8 md:mt-0">
-                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-gradient-to-br from-indigo-700 via-violet-700 to-slate-900 aspect-[16/13] flex items-center justify-center p-8 text-white">
-                        <div class="absolute inset-0 bg-[radial-gradient(#ffffff12_1px,transparent_1px)] bg-[length:4px_4px]"></div>
-                        <div class="relative z-10 w-full">
-                            <div class="flex items-center gap-x-2 mb-3">
-                                <span class="text-violet-300 text-xs font-bold tracking-[2px] bg-white/10 px-3 py-1 rounded-full">FEATURED THIS WEEK</span>
-                                <span class="text-[10px] bg-white/20 px-2 py-px rounded">UPCOMING</span>
-                            </div>
-                            <div class="font-black text-5xl tracking-[-2px] leading-none">Thomson Reserve</div>
-                            <div class="mt-2 text-xl opacity-90">Upper Thomson • D20</div>
-                            
-                            <div class="mt-3 flex items-center gap-x-2 text-amber-300">
-                                <span class="text-xl">★★★★☆</span>
-                                <span class="text-sm font-medium text-white/90">4.1/5</span>
-                            </div>
-                            
-                            <div class="mt-6 flex items-end justify-between">
-                                <div>
-                                    <div class="text-sm opacity-75">from</div>
-                                    <div class="text-4xl font-bold tabular-nums">$1.12M</div>
-                                </div>
-                                <div class="text-right text-sm">
-                                    <div class="font-medium">1,240 units • 99yr</div>
-                                    <div class="opacity-75">420m to Bright Hill MRT</div>
-                                </div>
-                            </div>
-                        </div>
+                    <div id="featured-project" class="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 aspect-[16/13] text-white bg-slate-900">
+                        <!-- Populated dynamically by JS from projects array (Thomson Reserve) -->
                     </div>
                 </div>
             </div>
@@ -1444,6 +1420,90 @@
             document.getElementById('browse-section').scrollIntoView({ behavior: 'smooth' })
         }
         
+        // Fully dynamic FEATURED THIS WEEK promo — pulls image + all fields from projects array (Thomson Reserve as featured)
+        function renderFeaturedThisWeek() {
+            const container = document.getElementById('featured-project')
+            if (!container) return
+            
+            let proj = projects.find(p => p.id === 28)
+            if (!proj) proj = projects.find(p => p.year === 'upcoming') || projects[0]
+            if (!proj) return
+            
+            const score = getReviewScore(proj)
+            const stars = getStarDisplay(score)
+            const priceM = (proj.startingPrice / 1000000).toFixed(2).replace(/\.?0+$/, '')
+            const psf = proj.avgPSF ? proj.avgPSF.toLocaleString() : '—'
+            const unitCount = proj.totalUnits || '—'
+            
+            const statusBadge = proj.year === 'upcoming'
+                ? '<span class="text-[10px] bg-white/20 px-2 py-px rounded">UPCOMING</span>'
+                : (proj.year === '2025' ? '<span class="text-[10px] bg-white/20 px-2 py-px rounded">2025</span>' : '<span class="text-[10px] bg-white/20 px-2 py-px rounded">2026</span>')
+            
+            const hasImage = proj.image && proj.image.startsWith('http')
+            let visualLayers = ''
+            
+            if (hasImage) {
+                visualLayers = `
+                    <img src="${proj.image}" class="absolute inset-0 w-full h-full object-cover" alt="${proj.name}">
+                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-700/60 via-violet-700/50 to-slate-900/75"></div>
+                    <div class="absolute inset-0 bg-[radial-gradient(#ffffff10_1px,transparent_1px)] bg-[length:4px_4px]"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                `
+            } else {
+                const gradient = getDistrictGradient(proj.district)
+                visualLayers = `
+                    <div class="absolute inset-0 bg-gradient-to-br ${gradient}"></div>
+                    <div class="absolute inset-0 bg-[radial-gradient(#ffffff12_1px,transparent_1px)] bg-[length:4px_4px]"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                `
+            }
+            
+            const locDisplay = proj.location.replace(/, D(\d+)/, ' • D$1')
+            
+            container.innerHTML = `
+                ${visualLayers}
+                <div class="absolute inset-0 flex items-center">
+                    <div class="relative z-10 w-full px-8 py-7">
+                        <div class="flex items-center gap-x-2 mb-3">
+                            <span class="text-violet-300 text-xs font-bold tracking-[2px] bg-white/10 px-3 py-1 rounded-full">FEATURED THIS WEEK</span>
+                            ${statusBadge}
+                        </div>
+                        <div class="font-black text-5xl tracking-[-2px] leading-[1.05]">${proj.name}</div>
+                        <div class="mt-1.5 text-xl opacity-90">${locDisplay}</div>
+                        
+                        <div class="mt-3 flex items-center gap-x-2 text-amber-300">
+                            <span class="text-xl">${stars}</span>
+                            <span class="text-sm font-medium text-white/90">${score}/5</span>
+                        </div>
+                        
+                        <div class="mt-6 flex items-end justify-between text-sm">
+                            <div>
+                                <div class="text-white/70 text-xs">from</div>
+                                <div class="text-4xl font-bold tabular-nums tracking-tighter">$${priceM}M</div>
+                                <div class="text-white/70 text-xs mt-0.5">$${psf} psf</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-medium">${unitCount} units • ${proj.tenure.includes('Freehold') ? 'Freehold' : '99yr'}</div>
+                                <div class="opacity-80 mt-0.5">${proj.mrt}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-5">
+                            <button onclick="event.stopImmediatePropagation(); showProjectModal(${proj.id});" class="px-5 py-2 text-sm font-semibold bg-white/90 hover:bg-white active:bg-white text-slate-900 rounded-2xl transition">View details →</button>
+                        </div>
+                    </div>
+                </div>
+            `
+            
+            // Whole card opens the project modal (except explicit button)
+            container.style.cursor = 'pointer'
+            container.onclick = function(e) {
+                if (!e.target.closest('button')) {
+                    showProjectModal(proj.id)
+                }
+            }
+        }
+        
         // Page Navigation
         function showPage(page) {
             // If leaving an article page, clean up listeners + title
@@ -1916,6 +1976,7 @@
                 initializeTailwind()
                 
                 renderProjects(projects)
+                renderFeaturedThisWeek()
                 
                 const searchInput = document.getElementById('search-input')
                 const sortSelect = document.getElementById('sort-select')
