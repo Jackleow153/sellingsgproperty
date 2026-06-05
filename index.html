@@ -410,8 +410,8 @@
                     <div class="w-12 h-12 bg-violet-100 text-violet-700 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
                         <i class="fa-solid fa-handshake text-2xl"></i>
                     </div>
-                    <h3 class="font-semibold text-xl mb-2 text-slate-900">3. Ask one question</h3>
-                    <p class="text-slate-600">Connect straight to developer sales team. Same developer price — you just skip the commission.</p>
+                    <h3 class="font-semibold text-xl mb-2 text-slate-900">3. Get in early</h3>
+                    <p class="text-slate-600">We work directly with developers, so you get first pick of units at launch pricing, with zero commission. We're on your side, not theirs.</p>
                 </div>
             </div>
         </section>
@@ -420,16 +420,10 @@
         <section id="browse-section" class="max-w-screen-2xl mx-auto px-8 pb-16">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-y-4">
                 <div>
-                    <h2 class="text-4xl font-bold tracking-tight text-slate-900">39 Verified New Launch &amp; Resale Condos (2025-2026)</h2>
-                    <p class="text-slate-500 mt-1">Past • Current • Upcoming • Updated today. <strong>New launch condos vs resale condos Singapore 2026</strong> — progressive payments and fresh facilities vs immediate move-in and proven yield.</p>
+                    <h2 class="text-4xl font-bold tracking-tight text-slate-900">39+ Verified New Launch &amp; Resale Condos (2025-2026)</h2>
                 </div>
                 
                 <div class="flex flex-wrap items-center gap-3">
-                    <div class="relative w-full md:w-72">
-                        <input id="search-input" type="text" placeholder="Search project or developer..." class="w-full bg-white border border-slate-300 focus:border-violet-400 pl-11 py-3 text-sm rounded-3xl outline-none">
-                        <i class="fa-solid fa-search absolute left-4 top-4 text-slate-400"></i>
-                    </div>
-                    
                     <select id="sort-select" class="bg-white border border-slate-300 text-sm py-3 px-4 rounded-3xl outline-none cursor-pointer">
                         <option value="newest">Newest Launch</option>
                         <option value="lowest-price">Lowest Starting Price</option>
@@ -452,12 +446,6 @@
                 <div onclick="applyQuickFilter('upcoming')" class="quick-filter px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="upcoming">Upcoming 2026</div>
                 <div onclick="applyQuickFilter('ccr')" class="quick-filter px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="ccr">Core Central (CCR)</div>
                 <div onclick="applyQuickFilter('family')" class="quick-filter px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="family">Family Friendly (3+ BR)</div>
-            </div>
-
-            <!-- Direct Answer: New Launch Condos vs Resale Condos (static for SEO/AEO/GEO crawlers) -->
-            <div class="mb-8 p-6 bg-white border border-slate-200 rounded-3xl text-sm">
-              <p class="font-bold text-slate-900 mb-2">New Launch Condos vs Resale Condos in Singapore 2026 — Short Answer:</p>
-              <p class="text-slate-600">New launch condos usually cost more per sq ft (15-35% premium) but win on lower upfront cash via progressive payments, brand-new facilities, and first-mover price in growth areas. Resale condos are cheaper on PSF, offer immediate rental yield and move-in, but often require renovation and have older facilities. For HDB upgraders with 5+ year horizon and equity, new launch condos in RCR/CCR often deliver better long-term wealth building. Always model total cost + your ABSD/timeline. See our full guides: <a href="#page-blog" class="underline">New Launch vs Resale</a> and <a href="#page-blog" class="underline">Are New Launch Condos Cheaper?</a></p>
             </div>
             
             <!-- Projects Grid -->
@@ -1396,7 +1384,8 @@
         let currentFilter = 'all'
         
         function filterProjects() {
-            const searchTerm = document.getElementById('search-input').value.toLowerCase()
+            const searchInputEl = document.getElementById('search-input')
+            const searchTerm = searchInputEl ? searchInputEl.value.toLowerCase() : ''
             const sortMode = document.getElementById('sort-select').value
             
             let filtered = projects
@@ -1437,7 +1426,8 @@
         
         function resetFilters() {
             currentFilter = 'all'
-            document.getElementById('search-input').value = ''
+            const searchInputEl = document.getElementById('search-input')
+            if (searchInputEl) searchInputEl.value = ''
             document.getElementById('sort-select').value = 'newest'
             
             document.querySelectorAll('.quick-filter').forEach(el => {
