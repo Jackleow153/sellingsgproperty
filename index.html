@@ -15,6 +15,12 @@
 
     <link rel="canonical" href="https://www.sellingsgproperty.com/">
 
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <!-- ===== OPEN GRAPH (Social Sharing) — base, JS overrides per article -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SellingSgProperty">
@@ -129,10 +135,9 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap');
-        
         body { font-family: 'Inter', system_ui, sans-serif; }
         .heading-display { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; line-height: 1.05; }
         
@@ -302,10 +307,10 @@
                     </div>
                     
                     <div class="flex flex-wrap gap-3">
-                        <button onclick="window.open('https://wa.me/6580621538', '_blank')" class="group px-8 py-4 bg-white text-emerald-700 font-semibold rounded-3xl flex items-center gap-x-3 hover:bg-amber-50 transition-all text-lg active:scale-[0.985]">
+                        <a href="https://wa.me/6580621538" target="_blank" rel="noopener noreferrer" class="group px-8 py-4 bg-white text-emerald-700 font-semibold rounded-3xl flex items-center gap-x-3 hover:bg-amber-50 transition-all text-lg active:scale-[0.985]">
                             <span>Ask one question</span>
                             <i class="fa-brands fa-whatsapp group-active:rotate-12 transition"></i>
-                        </button>
+                        </a>
                         
                         <button onclick="document.getElementById('browse-section').scrollIntoView({ behavior: 'smooth' })" class="px-8 py-4 border border-white/40 hover:bg-white/10 font-semibold rounded-3xl flex items-center gap-x-3 transition-all text-lg">
                             <i class="fa-solid fa-search"></i>
@@ -488,10 +493,10 @@
                 <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">Not sure if upgrading is right for you?</h2>
                 <p class="max-w-md mx-auto text-violet-200 mb-8">Get Jack's free 30-min situation check. Zero obligation. Same developer price — you skip the commission.</p>
                 
-                <button onclick="window.open('https://wa.me/6580621538', '_blank')" class="px-10 py-4 bg-white text-violet-700 font-bold rounded-3xl flex items-center justify-center gap-x-3 text-lg hover:bg-amber-50 transition mx-auto">
+                <a href="https://wa.me/6580621538" target="_blank" rel="noopener noreferrer" class="px-10 py-4 bg-white text-violet-700 font-bold rounded-3xl flex items-center justify-center gap-x-3 text-lg hover:bg-amber-50 transition mx-auto">
                     <i class="fa-brands fa-whatsapp text-xl"></i>
                     <span>Get my free 30-min check</span>
-                </button>
+                </a>
             </div>
         </section>
     </div>
@@ -636,10 +641,10 @@
                 Practical guides for HDB upgraders choosing new launch condos vs resale condos 2026, first-time private property buyers, foreign investors navigating ABSD, and anyone building long-term wealth through Singapore real estate (new launch or resale).
               </p>
               <div class="flex flex-wrap gap-3 mb-10">
-                <button onclick="window.open('https://wa.me/6580621538', '_blank')"
+                <a href="https://wa.me/6580621538" target="_blank" rel="noopener noreferrer"
                    class="px-6 py-3 border border-white/30 hover:bg-white/10 font-semibold rounded-3xl flex items-center gap-x-2 transition text-sm">
                   <i class="fa-brands fa-whatsapp text-emerald-400"></i> Ask Jack one question
-                </button>
+                </a>
               </div>
               <div class="flex flex-wrap gap-x-8 gap-y-3 text-sm text-slate-400">
                 <div><span class="text-white font-semibold">22</span> in-depth articles</div>
@@ -675,203 +680,8 @@
   </div>
 
   <div id="blog-grid" class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <!-- Populated dynamically by JS (renderBlogGrid) for better mobile performance (smaller initial HTML payload improves FCP, LCP, TTI). Static cards removed to reduce bloat. -->
 
-    <!-- ===== CARD 1 ===== -->
-    <article data-category="hdb" class="blog-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" onclick="showArticle('post-hdb-phantom-fear')">
-      <div class="h-48 bg-gradient-to-br from-emerald-700 to-green-800 flex items-end p-5 relative overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(#ffffff10_1px,transparent_1px)] bg-[length:3px_3px]"></div>
-        <span class="chip-hdb absolute top-4 left-4">HDB UPGRADERS</span>
-        <div class="relative text-white">
-          <div class="font-black text-xl leading-none tracking-tight">Phantom Fear</div>
-          <div class="text-sm opacity-90 mt-0.5">HDB Upgraders • 2026</div>
-        </div>
-      </div>
-      <div class="p-6 flex-1 flex flex-col">
-        <div class="flex items-center justify-between text-xs mb-3">
-          <time class="text-slate-400" datetime="2026-03-21">21 Mar 2026</time>
-          <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 8 min</span>
-        </div>
-        <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">HDB Upgraders: Are You Trapped by Your Own "Phantom Fear"? (2026 Edition)</h2>
-        <p class="text-sm text-slate-600 line-clamp-3 flex-1">The "Phantom Fear" paralyzes HDB owners from upgrading to private condos — but in most cases it's unfounded. Learn the numbers that matter and the simple 5-step upgrade path.</p>
-        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
-          <div class="flex items-center gap-x-2 text-xs">
-            <div class="w-6 h-6 bg-violet-100 rounded-full flex items-center justify-center"><span class="text-violet-700 text-[10px] font-black">JL</span></div>
-            <span class="font-medium text-slate-700">Jack Leow</span>
-          </div>
-          <span class="text-violet-600 text-xs font-semibold">Read article →</span>
-        </div>
-      </div>
-    </article>
-
-    <!-- ===== CARD 2 ===== -->
-    <article data-category="absd foreign" class="blog-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" onclick="showArticle('post-absd-foreigners')">
-      <div class="relative overflow-hidden">
-        <img src="https://theaureacondo.com.sg/wp-content/uploads/2025/02/Aurea-Perspective5.jpg" class="w-full h-48 object-cover" alt="60% ABSD Foreigners Singapore Property 2026" loading="lazy">
-        <div class="absolute top-4 left-4"><span class="chip-absd px-3 py-1 text-xs font-bold rounded-2xl">FOREIGN BUYERS</span></div>
-        <div class="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-black/40 to-transparent"></div>
-      </div>
-      <div class="p-6 flex-1 flex flex-col">
-        <div class="flex items-center justify-between text-xs mb-3">
-          <time class="text-slate-400" datetime="2026-03-07">7 Mar 2026</time>
-          <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 7 min</span>
-        </div>
-        <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">60% ABSD for Foreigners: Is Singapore Property Still Investable in 2026?</h2>
-        <p class="text-sm text-slate-600 line-clamp-3 flex-1">With 60% ABSD making Singapore the world's most expensive market for foreign buyers, smart money is pivoting to commercial, shophouses and FTA exemptions.</p>
-        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
-          <div class="flex items-center gap-x-2 text-xs">
-            <div class="w-6 h-6 bg-violet-100 rounded-full flex items-center justify-center"><span class="text-violet-700 text-[10px] font-black">JL</span></div>
-            <span class="font-medium text-slate-700">Jack Leow</span>
-          </div>
-          <span class="text-violet-600 text-xs font-semibold">Read article →</span>
-        </div>
-      </div>
-    </article>
-
-    <!-- ===== CARD 3 ===== -->
-    <article data-category="absd hdb" class="blog-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" onclick="showArticle('post-decoupling')">
-      <div class="relative overflow-hidden">
-        <img src="https://bagnallhauscondo.com.sg/wp-content/uploads/2025/01/Bagnall-Haus-Condo-Facade-View-from-Street-Level.jpg" class="w-full h-48 object-cover" alt="Singapore Property Decoupling Guide 2026" loading="lazy">
-        <div class="absolute top-4 left-4"><span class="chip-decouple px-3 py-1 text-xs font-bold rounded-2xl">DECOUPLING</span></div>
-        <div class="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-black/40 to-transparent"></div>
-      </div>
-      <div class="p-6 flex-1 flex flex-col">
-        <div class="flex items-center justify-between text-xs mb-3">
-          <time class="text-slate-400" datetime="2026-02-27">27 Feb 2026</time>
-          <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 9 min</span>
-        </div>
-        <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">The Decoupling Guide 2026: Legal Costs vs. ABSD Savings</h2>
-        <p class="text-sm text-slate-600 line-clamp-3 flex-1">Decoupling can save 20% ABSD on a second property — but only makes sense above ~$1.5M. Below that, legal fees and early redemption penalties often wipe out the gain.</p>
-        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
-          <div class="flex items-center gap-x-2 text-xs">
-            <div class="w-6 h-6 bg-violet-100 rounded-full flex items-center justify-center"><span class="text-violet-700 text-[10px] font-black">JL</span></div>
-            <span class="font-medium text-slate-700">Jack Leow</span>
-          </div>
-          <span class="text-violet-600 text-xs font-semibold">Read article →</span>
-        </div>
-      </div>
-    </article>
-
-    <!-- ===== CARD 4 ===== -->
-    <article data-category="wealth" class="blog-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" onclick="showArticle('post-resolution-2026')">
-      <div class="relative overflow-hidden">
-        <img src="https://thesoracondo.sg/wp-content/uploads/2024/01/Sora-Condo-Facade-View-from-Lake.jpg" class="w-full h-48 object-cover" alt="Buy Private Property Singapore 2026" loading="lazy">
-        <div class="absolute top-4 left-4"><span class="chip-wealth px-3 py-1 text-xs font-bold rounded-2xl">WEALTH BUILDING</span></div>
-        <div class="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-black/40 to-transparent"></div>
-      </div>
-      <div class="p-6 flex-1 flex flex-col">
-        <div class="flex items-center justify-between text-xs mb-3">
-          <time class="text-slate-400" datetime="2026-01-01">1 Jan 2026</time>
-          <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 10 min</span>
-        </div>
-        <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">Why Buying a Private Property Should Be Your #1 Resolution for 2026 (Especially If You're Scared)</h2>
-        <p class="text-sm text-slate-600 line-clamp-3 flex-1">Fear of the mortgage is the single biggest wealth-drag for Singapore's middle class. Here's why 2026's fundamentals make this the best time in years to take the leap.</p>
-        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
-          <div class="flex items-center gap-x-2 text-xs">
-            <div class="w-6 h-6 bg-violet-100 rounded-full flex items-center justify-center"><span class="text-violet-700 text-[10px] font-black">JL</span></div>
-            <span class="font-medium text-slate-700">Jack Leow</span>
-          </div>
-          <span class="text-violet-600 text-xs font-semibold">Read article →</span>
-        </div>
-      </div>
-    </article>
-
-    <!-- ===== CARD 5 ===== -->
-    <article data-category="new-launch" class="blog-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" onclick="showArticle('post-new-launch-vs-resale')">
-      <div class="relative overflow-hidden">
-        <img src="https://emerald-katong.sg/wp-content/uploads/2024/11/Emerald-of-Katong-Aerial-View.jpg" class="w-full h-48 object-cover" alt="New Launch vs Resale Condo Singapore 2026" loading="lazy">
-        <div class="absolute top-4 left-4"><span class="chip-newlaunch px-3 py-1 text-xs font-bold rounded-2xl">NEW LAUNCH</span></div>
-        <div class="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-black/40 to-transparent"></div>
-      </div>
-      <div class="p-6 flex-1 flex flex-col">
-        <div class="flex items-center justify-between text-xs mb-3">
-          <time class="text-slate-400" datetime="2026-02-14">14 Feb 2026</time>
-          <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 7 min</span>
-        </div>
-        <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">New Launch vs Resale Condo in 2026: Which Should You Buy?</h2>
-        <p class="text-sm text-slate-600 line-clamp-3 flex-1">New launches offer deferred payment, fresh facilities and developer discounts — but resale can mean instant rental yield and proven locations. Here's the full breakdown.</p>
-        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
-          <div class="flex items-center gap-x-2 text-xs">
-            <div class="w-6 h-6 bg-violet-100 rounded-full flex items-center justify-center"><span class="text-violet-700 text-[10px] font-black">JL</span></div>
-            <span class="font-medium text-slate-700">Jack Leow</span>
-          </div>
-          <span class="text-violet-600 text-xs font-semibold">Read article →</span>
-        </div>
-      </div>
-    </article>
-
-    <!-- ===== CARD 6 ===== -->
-    <article data-category="wealth hdb" class="blog-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" onclick="showArticle('post-cpf-private')">
-      <div class="relative overflow-hidden">
-        <img src="https://www.nava-grove.sg/wp-content/uploads/2024/10/Nava-Grove-Aerial-View-Pine-Grove.jpg" class="w-full h-48 object-cover" alt="CPF for Private Property Singapore" loading="lazy">
-        <div class="absolute top-4 left-4"><span class="chip-cpf px-3 py-1 text-xs font-bold rounded-2xl">CPF &amp; FINANCING</span></div>
-        <div class="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-black/40 to-transparent"></div>
-      </div>
-      <div class="p-6 flex-1 flex flex-col">
-        <div class="flex items-center justify-between text-xs mb-3">
-          <time class="text-slate-400" datetime="2026-01-20">20 Jan 2026</time>
-          <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 6 min</span>
-        </div>
-        <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">How Much CPF Can You Use for a Private Property in Singapore? (2026 Guide)</h2>
-        <p class="text-sm text-slate-600 line-clamp-3 flex-1">CPF OA can fund your downpayment, legal fees and monthly instalments — but there are Withdrawal Limits and Basic Retirement Sum rules you must understand first.</p>
-        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
-          <div class="flex items-center gap-x-2 text-xs">
-            <div class="w-6 h-6 bg-violet-100 rounded-full flex items-center justify-center"><span class="text-violet-700 text-[10px] font-black">JL</span></div>
-            <span class="font-medium text-slate-700">Jack Leow</span>
-          </div>
-          <span class="text-violet-600 text-xs font-semibold">Read article →</span>
-        </div>
-      </div>
-    </article>
-
-    <!-- ===== CARD 7 ===== -->
-    <article data-category="new-launch wealth" class="blog-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" onclick="showArticle('post-district-guide')">
-      <div class="relative overflow-hidden">
-        <img src="https://www.theparktownresidences.sg/wp-content/uploads/2025/01/parktown-residence-Green-Boulevard-by-UOL-capitaland-.jpg" class="w-full h-48 object-cover" alt="Singapore Property District Guide 2026" loading="lazy">
-        <div class="absolute top-4 left-4"><span class="chip-district px-3 py-1 text-xs font-bold rounded-2xl">DISTRICT GUIDE</span></div>
-        <div class="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-black/40 to-transparent"></div>
-      </div>
-      <div class="p-6 flex-1 flex flex-col">
-        <div class="flex items-center justify-between text-xs mb-3">
-          <time class="text-slate-400" datetime="2025-12-15">15 Dec 2025</time>
-          <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 8 min</span>
-        </div>
-        <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">Which Singapore District Should You Buy In? The 2026 Growth Map</h2>
-        <p class="text-sm text-slate-600 line-clamp-3 flex-1">From the booming D19 Serangoon corridor to the under-valued D22 Jurong Lake District, here's where the next 5-year capital growth story is being written.</p>
-        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
-          <div class="flex items-center gap-x-2 text-xs">
-            <div class="w-6 h-6 bg-violet-100 rounded-full flex items-center justify-center"><span class="text-violet-700 text-[10px] font-black">JL</span></div>
-            <span class="font-medium text-slate-700">Jack Leow</span>
-          </div>
-          <span class="text-violet-600 text-xs font-semibold">Read article →</span>
-        </div>
-      </div>
-    </article>
-
-    <!-- ===== CARD 8 ===== -->
-    <article data-category="hdb" class="blog-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" onclick="showArticle('post-hdb-sell-signs')">
-      <div class="relative overflow-hidden">
-        <img src="https://norwoodgrand-condo.sg/wp-content/uploads/2024/10/Norwood-Grand-Condo-Facade.jpg" class="w-full h-48 object-cover" alt="When to Sell HDB Singapore 2026" loading="lazy">
-        <div class="absolute top-4 left-4"><span class="chip-sell px-3 py-1 text-xs font-bold rounded-2xl">SELL YOUR HDB</span></div>
-        <div class="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-black/40 to-transparent"></div>
-      </div>
-      <div class="p-6 flex-1 flex flex-col">
-        <div class="flex items-center justify-between text-xs mb-3">
-          <time class="text-slate-400" datetime="2025-11-30">30 Nov 2025</time>
-          <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 6 min</span>
-        </div>
-        <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">5 Signs Your HDB Flat Is Ready to Sell — And How to Time It Right in 2026</h2>
-        <p class="text-sm text-slate-600 line-clamp-3 flex-1">From MOP completion to peak COV conditions, these are the five indicators that tell you your HDB window is open — and when waiting longer could cost you.</p>
-        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
-          <div class="flex items-center gap-x-2 text-xs">
-            <div class="w-6 h-6 bg-violet-100 rounded-full flex items-center justify-center"><span class="text-violet-700 text-[10px] font-black">JL</span></div>
-            <span class="font-medium text-slate-700">Jack Leow</span>
-          </div>
-          <span class="text-violet-600 text-xs font-semibold">Read article →</span>
-        </div>
-      </div>
-    </article>
-
-  </div><!-- /blog-grid -->
 
   <div id="load-more-container" class="mt-8 text-center">
     <button id="load-more-btn" class="px-8 py-3 bg-violet-700 hover:bg-violet-800 text-white rounded-3xl font-semibold text-sm transition active:scale-[0.985]">
@@ -1146,10 +956,10 @@
             <div class="border-t px-8 py-5 bg-white flex flex-col sm:flex-row items-center gap-3 justify-between">
                 <div class="text-xs text-slate-500">The information is for general guidance only. Please seek professional advice before committing.</div>
                 <div class="flex gap-x-3 w-full sm:w-auto">
-                    <button onclick="window.open('https://wa.me/6580621538', '_blank'); hideProjectModal()" class="flex-1 sm:flex-none px-8 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-3xl flex items-center justify-center gap-x-2 transition">
+                    <a href="https://wa.me/6580621538" target="_blank" rel="noopener noreferrer" onclick="hideProjectModal()" class="flex-1 sm:flex-none px-8 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-3xl flex items-center justify-center gap-x-2 transition">
                         <i class="fa-brands fa-whatsapp"></i> 
                         <span>find out more</span>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -1297,7 +1107,7 @@
             const hasUniqueImage = project.image && project.image.startsWith('http') && !project.image.includes('chuanpark.sg');
 
             if (hasUniqueImage) {
-                return `<img src="${project.image}" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="${project.name}">`;
+                return `<img src="${project.image}" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="${project.name}" loading="lazy" width="400" height="224">`;
             }
 
             // Clean typographic card — project name + district + PSF on solid colour block
@@ -1475,7 +1285,7 @@
             
             if (hasImage) {
                 visualLayers = `
-                    <img src="${proj.image}" class="absolute inset-0 w-full h-full object-cover" alt="${proj.name}">
+                    <img src="${proj.image}" class="absolute inset-0 w-full h-full object-cover" alt="${proj.name}" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-br from-indigo-700/60 via-violet-700/50 to-slate-900/75"></div>
                     <div class="absolute inset-0 bg-[radial-gradient(#ffffff10_1px,transparent_1px)] bg-[length:4px_4px]"></div>
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
@@ -6258,12 +6068,11 @@ function filterPosts(cat) {
     </footer>
 
     <!-- Sticky WhatsApp floating button (bottom right, always visible on scroll) -->
-    <button 
-      onclick="window.open('https://wa.me/6580621538', '_blank')"
+    <a href="https://wa.me/6580621538" target="_blank" rel="noopener noreferrer"
       class="fixed bottom-6 right-6 z-[9999] flex h-14 w-14 items-center justify-center rounded-full bg-emerald-600 text-white shadow-xl transition-all hover:bg-emerald-700 hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2"
       aria-label="Chat with Jack on WhatsApp"
       title="Chat with Jack on WhatsApp">
       <i class="fa-brands fa-whatsapp text-2xl"></i>
-    </button>
+    </a>
 </body>
 </html>
