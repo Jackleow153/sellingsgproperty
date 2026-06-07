@@ -1861,35 +1861,29 @@
         
         function initializeFAQ() {
             const faqData = [
-                { q: "What is the difference between buying through sellingsgproperty vs a regular agent?", a: "We are 100% developer-direct. You pay nothing — we're paid by the developer (saves you 2-3% or $30k–$80k+)." },
-                { q: "Are the prices on your site the final developer prices?", a: "Yes. All prices shown are the official developer pricing. There is no mark-up." },
-                { q: "How do I know a project is still available?", a: "Our listings are updated daily from the developers' official sales systems. The 'Available Units' number you see is live." },
-                { q: "Can foreigners buy new launch condos in Singapore?", a: "Yes, foreigners can purchase most new launch private condos (except those with restrictions)." },
-                { q: "What is the best new launch condo right now for families?", a: "For families we highly recommend Chuan Park (D19), The Orie (D12), and Springleaf Residence (D26)." },
-                { q: "Do you charge any fees at all?", a: "Absolutely none. We are paid by the developers for bringing qualified buyers." },
-                { q: "Is Dunearn House worth buying in 2026?", a: "Strong long-term option for families and CCR upgraders at ~$2,800–$3,100 psf with schools and masterplan upside. Less ideal for yield chasers or those needing freehold or quick move-in." },
-                { q: "How much ABSD for a second property in Singapore 2026?", a: "Singapore citizens pay 20% ABSD on a second residential property (remission possible if you sell your first within the qualifying window). Always confirm current IRAS rates." },
-                { q: "Should I buy new launch or resale in 2026?", a: "New launch wins on cashflow (progressive payments) and new product; resale wins on immediate yield and move-in. Model your timeline and ABSD position." },
-                { q: "Are new launch condos cheaper than resale in Singapore 2026?", a: "Usually no on PSF (new launches 15-35% premium). But new launch condos often win on lower upfront cash via progressive payments + no reno. Total cost depends on your horizon. Full comparison in our guides." },
-                { q: "New launch condos vs resale condos Singapore 2026 — which is better?", a: "New launch condos for 5-10+ year hold, families wanting new facilities and growth precincts. Resale condos for immediate move-in, rental yield now, or established locations. See our New Launch vs Resale and Cheaper? articles." },
-                { q: "Best new launch condos for HDB upgraders 2026?", a: "Look for RCR/CCR with MRT + schools (e.g. Dunearn House in Bukit Timah, projects in D19/D20). Prioritize developer track record, net price after incentives, and progressive payment fit with your HDB sale timeline." }
+                { q: "Do buyers pay any commission when purchasing new launch condos through SellingSgProperty?", a: "No. We charge zero commission to buyers. We are paid directly by the developer, so you get the same launch price with no extra cost." },
+                { q: "What is the indicative price range for Dunearn House in 2026?", a: "Indicative prices for Dunearn House range from approximately $1.9M to $3.3M, or roughly $2,800–$3,100 psf depending on unit type and floor." },
+                { q: "Is Dunearn House suitable for families with young children?", a: "Yes. It is one of the most family-friendly new launches in 2026 — just a 7-minute walk to Sixth Avenue MRT, close to top schools, with lush greenery and the major Turf City masterplan transformation coming." },
+                { q: "How does ABSD affect buying a new launch condo in Singapore?", a: "ABSD rates depend on your residency status (Singaporean, PR, or foreigner) and whether it is your first or subsequent property. We provide clear guidance tailored to your situation during the free situation check." },
+                { q: "Should I buy a new launch condo or a resale condo?", a: "It depends on your timeline, budget, and goals. New launches offer progressive payment schemes and developer incentives but require waiting for TOP. Resales allow immediate move-in but may have higher entry prices in prime locations." },
+                { q: "What should I check before booking a new launch unit?", a: "Pressure-test your budget, loan eligibility, TDSR, and Seller's Stamp Duty timeline. Map out your exit plan (resale or rental demand) and avoid rushing into a booking fee without proper analysis." },
+                { q: "Can foreigners or PRs buy new launch condos like Dunearn House?", a: "Yes, foreigners and PRs can purchase new launch condos, subject to ABSD and other rules. We give transparent advice based on your profile with no obligation." },
+                { q: "How do I get personalized advice for my property situation?", a: "Book a free 30-minute situation check with Jack Leow. It is completely obligation-free and developer-paid — you pay nothing extra." }
             ]
             
             const container = document.getElementById('faq-accordion')
             
             faqData.forEach((item, index) => {
-                const div = document.createElement('div')
-                div.className = `border border-slate-200 rounded-3xl overflow-hidden ${index > 0 ? 'mt-3' : ''}`
-                div.innerHTML = `
-                    <button onclick="toggleFAQ(this)" class="w-full px-6 py-4 flex justify-between items-center text-left font-medium hover:bg-slate-50 transition">
+                const details = document.createElement('details')
+                details.className = `faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden ${index === 0 ? '' : ''}`
+                details.innerHTML = `
+                    <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition cursor-pointer">
                         <span>${item.q}</span>
-                        <i class="fa-solid fa-chevron-down text-violet-400 transition-transform"></i>
-                    </button>
-                    <div class="hidden px-6 pb-6 text-sm text-slate-600 border-t pt-4">
-                        ${item.a}
-                    </div>
+                        <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+                    </summary>
+                    <p class="px-4 pb-4 text-sm text-slate-600">${item.a}</p>
                 `
-                container.appendChild(div)
+                container.appendChild(details)
             })
         }
         
