@@ -449,7 +449,7 @@
         </section>
 
         <!-- Homepage FAQ Schema for SEO/AEO (inserted per request) -->
-        <script type="application/ld+json">
+        <script id="home-faq-ld-json" type="application/ld+json">
         {
           "@context": "https://schema.org",
           "@type": "FAQPage",
@@ -6436,6 +6436,8 @@ function setBaseMeta() {
   if (oldArt) oldArt.remove();
   const oldFaq = document.getElementById('faq-ld-json');
   if (oldFaq) oldFaq.remove();
+  const oldHomeFaq = document.getElementById('home-faq-ld-json');
+  if (oldHomeFaq) oldHomeFaq.remove();
 }
 
 function slugify(text) {
@@ -6515,6 +6517,8 @@ function updateArticleSEO(post, id) {
   // 5. Detailed Article + optional FAQPage schema (injected)
   const old = document.getElementById('article-ld-json');
   if (old) old.remove();
+  const oldHomeFaq2 = document.getElementById('home-faq-ld-json');
+  if (oldHomeFaq2) oldHomeFaq2.remove();
 
   // Map human dates to ISO (simple, no extra deps)
   const dateMap = {
@@ -6550,17 +6554,44 @@ function updateArticleSEO(post, id) {
 
   // 6. FAQPage if we can parse some from the (soon to be injected) body
   // (will be called again after body is set in showArticle)
+  //
+  // NOTE FOR FUTURE BLOGS:
+  // To get valid FAQ rich results (no GSC "invalid items" or duplicates):
+  // - In the article's .body template literal, include a FAQ section using exactly:
+  //   <h2>Some FAQ Title</h2>
+  //   <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+  //     <summary class="...">Question text here (no leading numbers needed)</summary>
+  //     <p class="px-4 pb-4 ...">Short clear answer text.</p>
+  //   </details>
+  //   (repeat up to ~8)
+  // - The JS will auto-generate a single clean FAQPage schema and remove any homepage/previous ones.
+  // - Keep answers concise (< 300 chars ideal).
+  // - This ensures Google sees exactly one FAQPage with valid Question/Answer items matching visible content.
 }
 
 function enhanceArticleWithAEO(bodyContainer, post, id) {
   // Generate TOC (AEO + UX win)
   generateTOC(bodyContainer, id);
 
+  // Clean any embedded FAQPage scripts from the article body HTML (prevents duplicates with dynamic one or home)
+  bodyContainer.querySelectorAll('script[type="application/ld+json"]').forEach(script => {
+    try {
+      const txt = (script.textContent || '').trim();
+      if (!txt) return;
+      const data = JSON.parse(txt);
+      const hasFaq = data && (data['@type'] === 'FAQPage' || (Array.isArray(data['@graph']) && data['@graph'].some(item => item && item['@type'] === 'FAQPage')));
+      if (hasFaq) {
+        script.remove();
+      }
+    } catch (e) {}
+  });
+
   // Parse FAQs for rich FAQPage schema (great for AEO / PAA / AI answers)
   const faqs = [];
   const details = bodyContainer.querySelectorAll('details.faq-item');
   details.forEach(d => {
-    const q = d.querySelector('summary') ? d.querySelector('summary').textContent.trim() : '';
+    let q = d.querySelector('summary') ? d.querySelector('summary').textContent.trim() : '';
+    q = q.replace(/^\s*\d+[\.\)]\s*/, ''); // strip leading "1. " or "2) " for cleaner schema
     let a = '';
     const p = d.querySelector('p');
     if (p) a = p.textContent.trim();
@@ -6570,6 +6601,8 @@ function enhanceArticleWithAEO(bodyContainer, post, id) {
   if (faqs.length > 0) {
     const oldFaq = document.getElementById('faq-ld-json');
     if (oldFaq) oldFaq.remove();
+    const oldHomeFaq3 = document.getElementById('home-faq-ld-json');
+    if (oldHomeFaq3) oldHomeFaq3.remove();
 
     const faqSchema = {
       "@context": "https://schema.org",
