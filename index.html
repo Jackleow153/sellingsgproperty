@@ -2764,30 +2764,42 @@
             The JS below does a fetch POST (standard for custom UX on Netlify Forms); Netlify processes it server-side.
             Submissions can land in Spam submissions (see main form comment for how to "Mark as verified").
           -->
-          <form name="situation-check-modal" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitEnquiry(event)">
-            <input type="hidden" name="form-name" value="situation-check-modal" />
-            <div style="display:none;" aria-hidden="true">
-              <label>Don't fill this out if you're human: <input type="text" name="bot-field" tabindex="-1" autocomplete="off" /></label>
+          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitEnquiry(event)">
+            <input type="hidden" name="form-name" value="contact" />
+
+            <!-- Honeypot (spam protection) -->
+            <div class="hidden">
+              <label>Don’t fill this out if you’re human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
             </div>
-            
+
+            <!-- Name -->
             <div>
-              <label class="block text-xs font-semibold mb-2 text-slate-600">NAME</label>
-              <input type="text" name="name" class="w-full border border-slate-300 focus:border-violet-500 rounded-2xl px-5 py-3.5 text-sm outline-none" required>
+              <label class="block text-xs font-semibold mb-2 text-slate-600" for="modal-name">Full Name *</label>
+              <input type="text" id="modal-name" name="name" class="w-full border border-slate-300 focus:border-violet-500 rounded-2xl px-5 py-3.5 text-sm outline-none" required placeholder="Enter your full name">
             </div>
-            
+
+            <!-- Mobile No. -->
             <div class="mt-4">
-              <label class="block text-xs font-semibold mb-2 text-slate-600">MOBILE (WHATSAPP)</label>
-              <input type="tel" name="mobile" class="w-full border border-slate-300 focus:border-violet-500 rounded-2xl px-5 py-3.5 text-sm outline-none" required>
+              <label class="block text-xs font-semibold mb-2 text-slate-600" for="modal-mobile">Mobile No. *</label>
+              <input type="tel" id="modal-mobile" name="mobile" class="w-full border border-slate-300 focus:border-violet-500 rounded-2xl px-5 py-3.5 text-sm outline-none" required placeholder="e.g. 8123 4567">
             </div>
-            
+
+            <!-- Message with suggestions -->
             <div class="mt-4">
-              <label class="block text-xs font-semibold mb-2 text-slate-600">WHAT'S MY SITUATION? (max 1000 words)</label>
-              <textarea name="situation" rows="5" maxlength="1000" class="w-full border border-slate-300 focus:border-violet-500 rounded-3xl px-5 py-3.5 text-sm outline-none" placeholder="E.g. HDB 5-room in Bedok, 2 kids, looking at RCR 3-bed mid-2026. Concerned about monthly payments after HDB sale." required></textarea>
-              <p class="text-[10px] text-slate-500 mt-2">By submitting this form, you consent to the collection and use of your personal data in accordance with our Privacy Policy to respond to your inquiry and provide relevant property information.</p>
+              <label class="block text-xs font-semibold mb-2 text-slate-600" for="modal-message">Message *</label>
+              <textarea 
+                id="modal-message" 
+                name="message" 
+                rows="5" 
+                required 
+                class="w-full border border-slate-300 focus:border-violet-500 rounded-3xl px-5 py-3.5 text-sm outline-none"
+                placeholder="Example: I'm interested in Union Square Residences or Thomson Reserve. My budget is around $2.5M - $3M. Looking to buy for own stay / investment in 2026. Please advise on the best options."
+              ></textarea>
+              <p class="text-sm text-slate-500 mt-1">Tip: Mention the project name, your budget, and whether you're buying for own stay or investment.</p>
             </div>
-            
+
             <button type="submit" class="mt-6 w-full py-3.5 bg-violet-700 hover:bg-violet-800 transition text-white font-semibold rounded-3xl text-sm">
-              Get my free situation check
+              Send Message
             </button>
           </form>
         </div>
