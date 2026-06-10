@@ -2671,18 +2671,14 @@
                 <div class="grid lg:grid-cols-5 gap-8">
                     <div class="lg:col-span-3 bg-white rounded-3xl border p-9 shadow-sm">
                         <!-- 
-                          Netlify Forms setup for "situation-check":
-                          - data-netlify="true" + hidden form-name lets Netlify detect and capture submissions at deploy time.
-                          - First real submission after this HTML is live will register the form in your Netlify dashboard.
-                          - Submissions ALWAYS appear in Netlify UI (Forms tab) if processed — email is a separate notification you must enable.
-                          To receive email:
-                            1. Go to https://app.netlify.com/ → your "sellingsgproperty" site → "Forms" in sidebar.
-                            2. Find "situation-check" (and "situation-check-modal").
-                            3. Click the form → set up "Email notifications" → enter your email (e.g. sellingsgproperty@gmail.com) and save.
-                          Test after the next deploy finishes. Check both the Forms list (for capture) and your inbox/spam.
-                          The JS now uses raw FormData (multipart) + explicitly clears honeypot + forces form-name for maximum compatibility with Netlify's processor.
-                          IMPORTANT: If a submission lands in "Spam submissions" (separate tab in Netlify Forms), select it and click "Mark as verified".
-                          This trains the filter. Use realistic buyer-sounding text in the situation field (see placeholder example) — pure gibberish or ultra-short random text often gets auto-flagged.
+                          Netlify Forms for "contact" (unified name for main form + modal).
+                          - Use data-netlify="true" + hidden form-name so Netlify captures submissions.
+                          - Submissions appear in Netlify dashboard > Forms > "contact".
+                          - For Gmail email notifications: In Netlify dashboard, go to Forms > "contact" > "Add notification" > Email.
+                            Set it specifically for the "contact" form (avoid relying only on "any form" for reliability).
+                          - After code changes/deploys, re-save the notification settings.
+                          - Test submissions with realistic data (use the placeholder suggestions).
+                          - Check spam in Gmail. Netlify's built-in email can have 5-30+ min delays or batching.
                         -->
 <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form">
   <input type="hidden" name="form-name" value="contact" />
@@ -2759,10 +2755,10 @@
         </div>
         <div class="p-8">
           <!-- 
-            Same Netlify Forms as above ("situation-check-modal" is tracked separately).
-            See the comment on the main contact form for dashboard setup steps to get emails.
-            The JS below does a fetch POST (standard for custom UX on Netlify Forms); Netlify processes it server-side.
-            Submissions can land in Spam submissions (see main form comment for how to "Mark as verified").
+            Netlify Forms submission for "contact" (unified with the main contact page form).
+            The JS does a fetch POST for custom UX (no page reload). Netlify captures the submission.
+            For email notifications: Go to Netlify dashboard > Forms > "contact" > set up Email notifications.
+            If emails are delayed, the "contact" form notifications may need re-saving after deploys.
           -->
           <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitEnquiry(event)">
             <input type="hidden" name="form-name" value="contact" />
@@ -3703,7 +3699,7 @@
             // - Force form-name from the <form name="..."> attribute
             // - Send raw FormData (lets fetch set proper multipart/form-data)
             formData.set('bot-field', '')
-            formData.set('form-name', form.getAttribute('name') || 'situation-check-modal')
+            formData.set('form-name', form.getAttribute('name') || 'contact')
             
             // Debug helper — open DevTools > Console when you test
             console.group('[Netlify Form Debug] submitEnquiry (modal)')
@@ -3761,7 +3757,7 @@
             // - Force form-name from the <form name="..."> attribute
             // - Send raw FormData (lets fetch set proper multipart/form-data)
             formData.set('bot-field', '')
-            formData.set('form-name', form.getAttribute('name') || 'situation-check')
+            formData.set('form-name', form.getAttribute('name') || 'contact')
             
             // Debug helper — open DevTools > Console when you test
             console.group('[Netlify Form Debug] handleEnquirySubmit (contact page)')
