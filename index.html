@@ -6433,20 +6433,18 @@ function showArticle(id, pushHistory = true) {
   if (navBlog) navBlog.classList.add('nav-active');
 
   // Populate content
+  // Always use clean gradient banner for blog/insight posts (no post-specific images in hero)
+  // Only the generic "Singapore Property Insights. Data-driven. No fluff." in the dark banner.
+  // Actual post title appears in the white content area below (#article-title).
   const heroImg = document.getElementById('article-hero-img');
-  if (post.img && heroImg) {
-    heroImg.src = post.img;
-    heroImg.alt = post.title || '';
-    heroImg.style.display = '';
-  } else if (heroImg) {
-    // Typographic hero for general / non-project articles
+  if (heroImg) {
+    heroImg.style.display = 'none'; // never show blog image in hero
     const heroWrap = heroImg.parentElement;
     if (heroWrap) {
       heroWrap.innerHTML = `
         <div class="w-full h-[280px] md:h-[380px] bg-gradient-to-br from-slate-800 to-zinc-900 flex items-center justify-center text-white">
           <div class="text-center px-8">
             <div class="text-xs tracking-[2px] opacity-60 mb-2">Singapore Property Insights. Data-driven. No fluff.</div>
-            <div class="text-3xl md:text-4xl font-black tracking-tighter leading-none">${(post.title || '').split(/[:—]/)[0].trim()}</div>
           </div>
         </div>
         <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
