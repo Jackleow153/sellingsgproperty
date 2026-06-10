@@ -2680,7 +2680,7 @@
                           - Test submissions with realistic data (use the placeholder suggestions).
                           - Check spam in Gmail. Netlify's built-in email can have 5-30+ min delays or batching.
                         -->
-<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form">
+<form name="contact" method="POST" netlify-honeypot="bot-field" id="contact-form" onsubmit="handleEnquirySubmit(event)">
   <input type="hidden" name="form-name" value="contact" />
 
   <!-- Honeypot (spam protection) -->
@@ -2760,7 +2760,7 @@
             For email notifications: Go to Netlify dashboard > Forms > "contact" > set up Email notifications.
             If emails are delayed, the "contact" form notifications may need re-saving after deploys.
           -->
-          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitEnquiry(event)">
+          <form name="contact" method="POST" netlify-honeypot="bot-field" onsubmit="submitEnquiry(event)">
             <input type="hidden" name="form-name" value="contact" />
 
             <!-- Honeypot (spam protection) -->
@@ -3708,7 +3708,7 @@
             for (let [k, v] of formData.entries()) { console.log('  ' + k + ':', v) }
             console.groupEnd()
             
-            fetch('/', {
+            fetch('/.netlify/functions/contact', {
                 method: 'POST',
                 body: formData
                 // Intentionally no Content-Type header — browser sets multipart boundary
@@ -3767,7 +3767,7 @@
             console.groupEnd()
             
             // Submit to Netlify Forms (will email you once enabled in Netlify dashboard > Forms)
-            fetch('/', {
+            fetch('/.netlify/functions/contact', {
                 method: 'POST',
                 body: formData
                 // Intentionally no Content-Type header — browser sets multipart boundary
