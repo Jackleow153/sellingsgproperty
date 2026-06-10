@@ -3738,9 +3738,9 @@
                 }
             })
             .catch(() => {
-                btn.innerHTML = `Get my free situation check`
+                btn.innerHTML = `Send Message`
                 btn.disabled = false
-                alert("Thanks! Please WhatsApp +65 8062 1538 with your details (or enable Netlify Forms in dashboard for auto-email).")
+                alert("Thanks! Please WhatsApp +65 8062 1538 with your details.")
             })
         }
         
@@ -3766,7 +3766,7 @@
             for (let [k, v] of formData.entries()) { console.log('  ' + k + ':', v) }
             console.groupEnd()
             
-            // Submit to Netlify Forms (will email you once enabled in Netlify dashboard > Forms)
+            // Submit to our custom handler (sends instant email via Resend + logs to Netlify Forms dashboard)
             fetch('/.netlify/functions/contact', {
                 method: 'POST',
                 body: formData
@@ -3779,7 +3779,7 @@
                     
                     setTimeout(() => {
                         form.reset()
-                        btn.innerHTML = `Get my free situation check`
+                        btn.innerHTML = `Send Message`
                         btn.disabled = false
                         btn.classList.remove('!bg-emerald-600')
                         btn.classList.add('bg-violet-700')
@@ -3800,10 +3800,10 @@
                 }
             })
             .catch(() => {
-                // Fallback if Netlify Forms not enabled yet
-                btn.innerHTML = `Get my free situation check`
+                // Fallback if the Netlify Function failed (e.g. missing RESEND_API_KEY)
+                btn.innerHTML = `Send Message`
                 btn.disabled = false
-                alert("Thanks! Please WhatsApp +65 8062 1538 with your details (or enable Netlify Forms in dashboard for auto-email).")
+                alert("Thanks! Please WhatsApp +65 8062 1538 with your details.")
             })
         }
         

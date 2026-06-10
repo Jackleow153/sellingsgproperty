@@ -25,7 +25,7 @@ export default async (req, context) => {
       });
     }
 
-    // Send instant email via Resend
+    // Send instant email via Resend (best effort - don't block the user if it fails)
     const emailHtml = `
       <h2>New Enquiry from sellingsgproperty.com</h2>
       <p><strong>Name:</strong> ${name}</p>
@@ -36,14 +36,18 @@ export default async (req, context) => {
       <p><small>Submitted via contact form on www.sellingsgproperty.com</small></p>
     `;
 
-    await resend.emails.send({
-      from: 'Sellingsgproperty <enquiries@sellingsgproperty.com>', // Update to your verified domain in Resend
-      to: ['questrepreneur@gmail.com', 'hr@tech2reach.com'],
-      subject: `New Enquiry from ${name}`,
-      html: emailHtml,
-    });
-
-    console.log('Email sent instantly via Resend for:', name);
+    try {
+      await resend.emails.send({
+        from: 'Sellingsgproperty <enquiries@sellingsgproperty.com>', // Update to your verified domain in Resend
+        to: ['questrepreneur@gmail.com', 'hr@tech2reach.com'],
+        subject: `New Enquiry from ${name}`,
+        html: emailHtml,
+      });
+      console.log('Email sent instantly via Resend for:', name);
+    } catch (emailError) {
+      console.error('Resend email failed (user will see WhatsApp fallback):', emailError);
+      // Continue anyway so the form submission succeeds for the user
+    }
 
     // Forward to Netlify Forms so the submission appears in the dashboard
     // This keeps the "Verified submissions" list working as before
