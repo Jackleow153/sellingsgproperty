@@ -643,9 +643,32 @@
   </div>
 
   <div id="blog-grid" class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-    <!-- First 5 latest articles pre-rendered statically for immediate content, SEO/crawlers, and better initial LCP/FCP on mobile (avoids empty state while JS loads). "Click for more" loads the rest dynamically from the full ARTICLES data to keep overall page size reasonable for performance. All 23 articles are still fully accessible via the button, category filters, direct URLs, sitemap, and schema. -->
+    <!-- First 6 latest articles pre-rendered statically for immediate content, SEO/crawlers, and better initial LCP/FCP on mobile (avoids empty state while JS loads). "Click for more" loads the rest dynamically from the full ARTICLES data to keep overall page size reasonable for performance. All 24 articles are still fully accessible via the button, category filters, direct URLs, sitemap, and schema. -->
 
-    <!-- Latest 1: Investment Analysis -->
+    <!-- Latest 1: HDB vs EC vs Private -->
+    <article data-category="hdb" class="blog-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" onclick="showArticle('post-hdb-vs-ec-vs-private-property-2026')">
+      <div class="h-48 bg-gradient-to-br from-blue-700 to-indigo-800 flex items-end p-5 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(#ffffff10_1px,transparent_1px)] bg-[length:3px_3px]"></div>
+        <span class="chip-hdb absolute top-4 left-4">HDB UPGRADERS</span>
+        <div class="relative text-white">
+          <div class="font-black text-xl leading-none tracking-tight">HDB vs EC vs Private (2026)</div>
+          <div class="text-sm opacity-90 mt-0.5">Which Should You Buy?</div>
+        </div>
+      </div>
+      <div class="p-6 flex-1 flex flex-col">
+        <div class="flex items-center justify-between text-xs mb-3">
+          <time class="text-slate-400" datetime="2026-06-10">10 Jun 2026</time>
+          <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 11 min</span>
+        </div>
+        <h3 class="font-bold text-lg leading-tight mb-2">HDB vs EC vs Private Property: 2026 Comparison</h3>
+        <p class="text-sm text-slate-600 line-clamp-3 flex-1">Income ceilings, grants, MOP rules, ABSD — clear 2026 guide to choose the right home for your budget and timeline. Direct answers for upgraders.</p>
+        <div class="mt-4 text-xs text-violet-700 font-semibold flex items-center gap-x-1 group-hover:gap-x-2 transition-all">
+          Read the comparison <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </div>
+      </div>
+    </article>
+
+    <!-- Latest 2: Investment Analysis -->
     <article data-category="new-launch" class="blog-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" onclick="showArticle('post-dunearn-house-investment-analysis-2026')">
       <div class="relative overflow-hidden">
         <img src="https://dunearnhousecondo.com.sg/wp-content/uploads/2026/01/Dunearn-House.png" class="w-full h-48 object-cover" alt="Dunearn House Investment Analysis 2026" loading="lazy">
@@ -6118,6 +6141,274 @@ const ARTICLES = {
 
       <p><em>Disclaimer: This article is for general informational purposes and does not constitute financial, tax, or investment advice. All projections, land costs, PSF estimates, and ROI scenarios are illustrative and based on publicly available data as of June 2026. Property values can go down as well as up. Always conduct your own due diligence and consult a licensed financial advisor, solicitor, and property professional before making any decision.</em></p>
     `
+  },
+
+  /* ======================================================
+     NEW ARTICLE — HDB VS EC VS PRIVATE 2026
+  ====================================================== */
+  'post-hdb-vs-ec-vs-private-property-2026': {
+    title: 'HDB vs EC vs Private Property: Which Should You Buy? (2026)',
+    date: '10 Jun 2026',
+    readTime: '11 min read',
+    category: 'HDB UPGRADERS',
+    chipClass: 'chip-hdb',
+    img: null,
+    linkedinUrl: 'https://www.linkedin.com/pulse/hdb-vs-ec-vs-private-property-2026-which-buy-jack-leow',
+    body: `
+      <p><strong>Short answer: it depends on your household income, how long you plan to stay, and what your next move looks like.</strong> If your household earns under $14,000 a month and you want the most affordable entry point with the biggest grants, an HDB flat usually makes the most sense. If you earn between $14,000 and $16,000 — too much for a BTO, but a private condo feels like a stretch — an Executive Condominium (EC) is built for exactly your situation. And if you earn above $16,000, want full flexibility, or plan to invest, private property is likely your lane.</p>
+
+      <p>That's the one-paragraph version. But the right choice isn't just about price. It's about waiting time, eligibility rules, resale potential, and whether you plan to upgrade later. Let's walk through it properly — the way I'd explain it to a friend over kopi.</p>
+
+      <h2>The Quick Comparison: HDB vs EC vs Private Condo</h2>
+
+      <p>Here's how the three property types stack up in 2026:</p>
+
+      <table>
+        <thead><tr><th>Factor</th><th>HDB (BTO/Resale)</th><th>Executive Condo (EC)</th><th>Private Condo</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Income ceiling</strong></td><td>$14,000 (BTO families)*</td><td>$16,000 (new EC)</td><td>None</td></tr>
+          <tr><td><strong>Who can buy</strong></td><td>Singaporeans/PRs, family nucleus rules</td><td>At least 1 SC + family nucleus</td><td>Anyone (foreigners pay 60% ABSD)</td></tr>
+          <tr><td><strong>CPF housing grants</strong></td><td>Up to $120,000 EHG (BTO); up to $230,000 total (resale)</td><td>CPF Housing Grant up to $30,000 for eligible first-timers</td><td>None</td></tr>
+          <tr><td><strong>MOP</strong></td><td>5 years (Standard); 10 years (Plus/Prime)</td><td>5 years (existing projects); 10 years (new sites from 8 May 2026)</td><td>None — but SSD applies within 4 years</td></tr>
+          <tr><td><strong>Can foreigners buy?</strong></td><td>No</td><td>Only after privatisation</td><td>Yes</td></tr>
+          <tr><td><strong>Loan type</strong></td><td>HDB loan (75% LTV) or bank loan</td><td>Bank loan only</td><td>Bank loan only</td></tr>
+          <tr><td><strong>Facilities</strong></td><td>Basic (some have pavilions, gyms nearby)</td><td>Full condo facilities</td><td>Full condo facilities</td></tr>
+          <tr><td><strong>Typical entry price (2026)</strong></td><td>~$550k–$800k (4-room resale, non-mature)</td><td>~$1.3M–$1.7M (3-bedroom new EC)</td><td>~$1.6M–$2.3M (3-bedroom OCR new launch)</td></tr>
+        </tbody>
+      </table>
+
+      <p>*$21,000 for extended/multi-generation families. Resale HDB flats have no income ceiling, though grants do.</p>
+
+      <p>Now let's go deeper into each option — because the table only tells half the story.</p>
+
+      <h2>When HDB Makes the Most Sense</h2>
+
+      <p><strong>An HDB flat is the right choice if affordability and grants matter more to you than condo facilities or investment flexibility.</strong></p>
+
+      <p>Here's why HDB remains the strongest entry point for most first-time buyers:</p>
+
+      <h3>The grants are genuinely substantial</h3>
+
+      <p>The Enhanced CPF Housing Grant (EHG) now gives eligible first-timer families up to $120,000, and singles up to $60,000 — these amounts were raised after National Day Rally 2024. The catch: your average household income must be $9,000 or below to qualify for the EHG, and the full $120,000 only goes to the lowest income tiers.</p>
+
+      <p>Buying resale? You can stack grants:</p>
+
+      <ul>
+        <li><strong>Family Grant</strong> — up to $80,000 for a 4-room or smaller resale flat ($50,000 for 5-room or larger)</li>
+        <li><strong>EHG</strong> — up to $120,000, income-tiered</li>
+        <li><strong>Proximity Housing Grant</strong> — $30,000 if you live with parents or children, $20,000 if within 4km</li>
+      </ul>
+
+      <p>That's a theoretical maximum of $230,000 in grants for a first-timer family buying resale. No EC or private condo comes close to this level of support.</p>
+
+      <h3>Lower financing pressure</h3>
+
+      <p>HDB loans let you borrow up to 75% of the price at the concessionary rate (pegged at 0.1% above the CPF Ordinary Account rate), with a smaller cash outlay than most private purchases. You can also pay your downpayment entirely with CPF if you have enough — something bank loans don't allow, since they require at least 5% in cash.</p>
+
+      <h3>The trade-offs to be honest about</h3>
+
+      <ul>
+        <li><strong>BTO waiting time</strong> is typically 3–5 years. If you need a home now, resale is your only HDB route — and resale prices in mature estates have climbed significantly.</li>
+        <li><strong>Plus and Prime flats</strong> (the newer classification for better-located BTOs) come with a 10-year MOP, subsidy clawback on resale, and rental restrictions. Great homes, but they lock you in longer.</li>
+        <li><strong>No rental income during MOP</strong> — you can't rent out the whole flat for at least 5 years.</li>
+        <li><strong>Capital growth is real but capped.</strong> HDB resale prices have risen steadily, but the buyer pool is restricted to Singaporeans and PRs, which naturally limits the ceiling compared to private property.</li>
+      </ul>
+
+      <p><strong>Best for:</strong> First-time buyers, young couples with combined income under $14,000, and anyone who wants maximum grants with minimum financial stress.</p>
+
+      <h2>When an EC Makes the Most Sense</h2>
+
+      <p><strong>An EC is the right choice if your household earns between roughly $14,000 and $16,000 a month — the classic "sandwiched" income bracket — and you're committed to staying put for the long haul.</strong></p>
+
+      <p>ECs are private condos built by private developers, but sold with HDB-style rules at a discount of roughly 20–25% compared to similar private condos. The land is sold to developers at lower prices, and that saving is passed on to you.</p>
+
+      <h3>The big rule change you must know (May 2026)</h3>
+
+      <p>On 8 May 2026, the Government announced the biggest overhaul of the EC scheme since 2013. For new EC sites with land tenders closing on or after 8 May 2026:</p>
+
+      <ul>
+        <li><strong>MOP doubles from 5 to 10 years</strong> — you can't sell, rent out the whole unit, or buy another property during this time</li>
+        <li><strong>Privatisation stretches from 10 to 15 years</strong> after TOP — that's when foreigners and companies can buy your unit</li>
+        <li><strong>The Deferred Payment Scheme (DPS) is abolished</strong> — no more paying 20% upfront and deferring the rest until completion</li>
+        <li><strong>First-timer quota rises from 70% to 90%</strong> of units, with the priority window extended to two years</li>
+      </ul>
+
+      <p>Important nuance: ECs already launched or on sites tendered before 8 May 2026 keep the old rules — 5-year MOP, 10-year privatisation. So if you're shopping for an EC right now, <em>ask which rule set applies to that specific project.</em> The tender closing date of the land determines everything.</p>
+
+      <h3>Why ECs still work for the right buyer</h3>
+
+      <ul>
+        <li><strong>No ABSD upfront for upgraders.</strong> This is the EC's superpower. If you own an HDB flat, you can buy a new EC without paying Additional Buyer's Stamp Duty first — you just need to sell your HDB flat within six months of collecting your keys. Upgrading to a private condo instead means paying 20% ABSD upfront and claiming a refund later (if you qualify).</li>
+        <li><strong>CPF Housing Grants apply.</strong> Eligible first-timer EC buyers can receive up to $30,000 in CPF grants, depending on income and citizenship.</li>
+        <li><strong>The historical returns have been strong.</strong> ECs that crossed their MOP and privatised have consistently delivered some of the best capital appreciation in the market — average resale gains hit roughly $659,000 in 2025. (That outsized profit pattern is precisely why the Government tightened the rules.)</li>
+      </ul>
+
+      <h3>The trade-offs</h3>
+
+      <ul>
+        <li><strong>Eligibility is strict.</strong> Combined household income must not exceed $16,000 — exceed it by even a dollar at application and you're out. You also can't have owned private property in the last 30 months, and you must form a valid family nucleus.</li>
+        <li><strong>Bank loan only, with MSR.</strong> No HDB loans for ECs. Your monthly repayment is capped at 30% of gross income (Mortgage Servicing Ratio), which limits how much you can borrow compared to a private condo purchase, where only the 55% TDSR applies.</li>
+        <li><strong>The new 10-year MOP is a serious commitment.</strong> Add roughly 3 years of construction, and a buyer of a new-rules EC could wait about 13 years before selling on the open market. If your life plans might change in 6–7 years, think carefully.</li>
+      </ul>
+
+      <p><strong>Best for:</strong> HDB upgraders and sandwiched-class families earning $14,000–$16,000 who want condo living at a discount and are genuinely planning to stay long-term.</p>
+
+      <h2>When Private Property Makes the Most Sense</h2>
+
+      <p><strong>Private property is the right choice if you earn above the EC income ceiling, want full flexibility, or have investment goals that public housing rules don't allow.</strong></p>
+
+      <h3>What you're really paying for: optionality</h3>
+
+      <ul>
+        <li><strong>No income ceiling, no family nucleus rules.</strong> Singles under 35, high earners, anyone.</li>
+        <li><strong>No MOP.</strong> You can sell anytime — though the Seller's Stamp Duty applies if you sell within 4 years of purchase (16% in year one, tapering to 4% in year four, for properties bought on or after 4 July 2025).</li>
+        <li><strong>Rent it out from day one.</strong> Full unit, immediately — something neither HDB nor new ECs allow.</li>
+        <li><strong>The widest buyer pool at exit.</strong> When you sell, your buyers include foreigners, PRs, companies, and every Singaporean. That liquidity matters for resale potential.</li>
+      </ul>
+
+      <h3>The honest costs</h3>
+
+      <ul>
+        <li><strong>Higher entry price.</strong> A 3-bedroom new launch in the Outside Central Region now commonly starts around $1.6M–$2M+. You'll need at least 5% in cash and 25% total downpayment.</li>
+        <li><strong>ABSD if it's not your first property.</strong> Singapore Citizens pay 0% on their first residential property, but 20% on the second and 30% on the third. PRs pay 5% on the first and 30% on the second. Upgraders selling their HDB and buying a condo as a couple may qualify for ABSD remission — check the current conditions and timeline with IRAS before committing, as the sequencing matters.</li>
+        <li><strong>No grants. None.</strong></li>
+        <li><strong>Maintenance fees</strong> typically run $300–$500+ a month for a mid-sized condo.</li>
+      </ul>
+
+      <p><strong>Best for:</strong> Households earning above $16,000, investors, buyers who already own property, and anyone who values flexibility over subsidies.</p>
+
+      <h2>A Practical Decision Framework</h2>
+
+      <p>Forget the property type for a second. Ask yourself these four questions:</p>
+
+      <ol>
+        <li><strong>What's our gross monthly household income?</strong>
+          <ul>
+            <li>Under $9,000 → HDB with maximum EHG support</li>
+            <li>$9,000–$14,000 → HDB (BTO or resale), with partial grants</li>
+            <li>$14,000–$16,000 → EC territory, or resale HDB</li>
+            <li>Above $16,000 → Private property (or resale EC, which has no income ceiling)</li>
+          </ul>
+        </li>
+        <li><strong>How soon do we need to move in?</strong>
+          <ul>
+            <li>Can wait 3–5 years → BTO or new launch EC/condo</li>
+            <li>Need a home within months → Resale HDB, resale EC, or resale condo</li>
+          </ul>
+        </li>
+        <li><strong>How long will we realistically stay?</strong>
+          <ul>
+            <li>10+ years comfortably → Any option works, including new-rules ECs</li>
+            <li>Might move in 5–7 years → Resale HDB (5-year MOP) or private property; avoid Plus/Prime flats and new-rules ECs</li>
+          </ul>
+        </li>
+        <li><strong>What's the next move after this one?</strong>
+          <ul>
+            <li>Planning to upgrade later → An HDB or EC first home preserves your "first-timer" advantages and avoids ABSD complications</li>
+            <li>This is the forever home → Optimise for location and living quality, not exit value</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3>Common mistakes I see buyers make</h3>
+
+      <ul>
+        <li><strong>Stretching to a private condo when an EC would do.</strong> If you qualify for an EC, the 20–25% discount on comparable condo living is hard to beat — provided the longer commitment suits your life stage.</li>
+        <li><strong>Ignoring the MSR when budgeting for an EC.</strong> Buyers calculate affordability using TDSR logic, then discover the 30% MSR cuts their loan quantum sharply.</li>
+        <li><strong>Letting a pay rise kill EC eligibility.</strong> Income is assessed at application. If a promotion is coming and your household is near $16,000, timing matters.</li>
+        <li><strong>Buying a Plus or Prime BTO without reading the resale conditions.</strong> The 10-year MOP and subsidy clawback are fine if you're staying — painful if you're not.</li>
+        <li><strong>Treating "no ABSD on first property" as the whole story.</strong> Buyer's Stamp Duty (BSD) still applies to everyone, on every purchase, at progressive rates.</li>
+      </ul>
+
+      <h2>The Bottom Line</h2>
+
+      <p>There's no universally "best" option — only the best fit for your income, timeline, and plans.</p>
+
+      <ul>
+        <li><strong>HDB</strong> wins on affordability and grants. It's the lowest-risk entry into home ownership in Singapore.</li>
+        <li><strong>EC</strong> wins on value for the sandwiched class — condo living at a discount — but the May 2026 rule changes make it a longer, more deliberate commitment than before.</li>
+        <li><strong>Private property</strong> wins on freedom: no ceilings, no MOP, full rental and resale flexibility — at a meaningfully higher price.</li>
+      </ul>
+
+      <p>If you take one thing away, let it be this: <strong>compare the rules and the timeline, not just the price tag.</strong> A cheaper home with a 10-year lock-in may cost you more in lost flexibility than a pricier one with none.</p>
+
+      <p>Thinking through your own numbers — grants, loan limits, ABSD scenarios? It's worth mapping out your specific situation before you commit to any showflat visit. If you'd like a second pair of eyes on your upgrade math, <a href="https://wa.me/6580621538" target="_blank" rel="noopener noreferrer" class="underline hover:text-violet-700"><strong>contact Jack for a free situation check</strong></a>.</p>
+
+      <h2>Frequently Asked Questions</h2>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          What is the income ceiling for buying an EC in Singapore?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">The household income ceiling for a new Executive Condominium is $16,000 per month in gross combined income. This was unchanged in Budget 2026. The ceiling applies only to new ECs bought from developers — resale ECs that have passed privatisation have no income ceiling at all.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          Can I buy an EC if I currently own an HDB flat?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">Yes, if you've met your 5-year MOP and meet all other eligibility conditions (income ceiling, family nucleus, no private property in the past 30 months). You must sell your HDB flat within six months of collecting your EC keys. This is the classic HDB upgrader route, because you avoid paying ABSD upfront.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          How much in grants can a first-time HDB buyer get in 2026?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">First-timer families can receive up to $120,000 through the Enhanced CPF Housing Grant for a BTO flat. For resale flats, total grants can reach up to $230,000 when you stack the EHG, the Family Grant (up to $80,000), and the Proximity Housing Grant (up to $30,000). Actual amounts depend on income, flat type, and proximity to family.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          What changed for ECs in May 2026?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">For new EC land sites with tenders closing on or after 8 May 2026: the MOP doubles from 5 to 10 years, full privatisation moves from 10 to 15 years after TOP, the Deferred Payment Scheme is removed, and the first-timer quota rises to 90% of units with a two-year priority window. ECs on sites tendered before that date keep the old rules.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          Do I pay ABSD if I buy a private condo as my first property?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">No. Singapore Citizens pay 0% ABSD on their first residential property — only the standard Buyer's Stamp Duty applies. ABSD kicks in at 20% on a second property and 30% on a third. PRs pay 5% even on their first property, and foreigners pay 60% on any residential purchase.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          Is an EC a good investment compared to a private condo?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">Historically, ECs have delivered strong returns — the discount at purchase plus full privatisation later created significant upside, with average resale gains reaching about $659,000 in 2025. However, the new 10-year MOP for future ECs means your capital is locked in much longer. For projects under the old rules, the value proposition remains compelling for eligible buyers. Past performance doesn't guarantee future results, so assess each project on its own merits.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          Should I buy a resale HDB or a BTO if I want to upgrade later?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">If upgrading in 5–7 years is the plan, a Standard BTO or resale flat (both 5-year MOP) keeps your timeline flexible. Avoid Plus and Prime flats, which carry a 10-year MOP and subsidy clawback. Resale also lets you move in immediately and start your MOP clock sooner — though you'll typically pay more than BTO prices.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          Can singles buy an EC or BTO in Singapore?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">Singles aged 35 and above can buy BTO flats (now in all locations, subject to flat-type rules) and can receive up to $60,000 in EHG support. For new ECs, singles must apply under the Joint Singles Scheme with another eligible single, both aged 35 or above. Singles of any age can buy resale ECs that have privatised, or private property.</p>
+      </details>
+
+      <h2>Related Reads</h2>
+      <p>1. <a href="/insights/hdb-phantom-fear" onclick="showArticle('post-hdb-phantom-fear'); return false;" class="underline hover:text-violet-700"><strong>HDB Upgraders: Are You Trapped by Your Own "Phantom Fear"? (2026 Edition)</strong></a></p>
+      <p>2. <a href="/insights/new-launch-vs-resale" onclick="showArticle('post-new-launch-vs-resale'); return false;" class="underline hover:text-violet-700"><strong>New Launch vs Resale Condo in 2026: Which Should You Buy?</strong></a></p>
+      <p>3. <a href="/insights/cpf-private" onclick="showArticle('post-cpf-private'); return false;" class="underline hover:text-violet-700"><strong>How Much CPF Can You Use for a Private Property in Singapore? (2026 Guide)</strong></a></p>
+      <p>4. <a href="/insights/which-condo-to-buy-2026" onclick="showArticle('post-which-condo-to-buy-2026'); return false;" class="underline hover:text-violet-700"><strong>Which Condo to Buy in Singapore in 2026: A Practical Buyer's Guide</strong></a></p>
+      <p>5. <a href="/insights/hdb-sell-signs" onclick="showArticle('post-hdb-sell-signs'); return false;" class="underline hover:text-violet-700"><strong>5 Signs Your HDB Flat Is Ready to Sell — And How to Time It Right in 2026</strong></a></p>
+
+      <p><em>Disclaimer: This article is for general informational purposes and does not constitute financial, tax, or investment advice. All figures, rules, and comparisons are based on publicly available information as of June 2026 and are subject to change. Always verify with HDB, CPF, IRAS, and consult a licensed CEA-registered salesperson before making any property decision.</em></p>
+    `
   }
 
 }; // end ARTICLES
@@ -6456,7 +6747,7 @@ function updateArticleSEO(post, id) {
     '10 May 2026': '2026-05-10',
     '28 May 2026': '2026-05-28', '29 May 2026': '2026-05-29', '30 May 2026': '2026-05-30',
     '31 May 2026': '2026-05-31', '1 Jun 2026': '2026-06-01', '2 Jun 2026': '2026-06-02',
-    '3 Jun 2026': '2026-06-03', '4 Jun 2026': '2026-06-04', '5 Jun 2026': '2026-06-05', '7 Jun 2026': '2026-06-07'
+    '3 Jun 2026': '2026-06-03', '4 Jun 2026': '2026-06-04', '5 Jun 2026': '2026-06-05', '7 Jun 2026': '2026-06-07', '10 Jun 2026': '2026-06-10'
   };
   const isoDate = dateMap[post.date] || '2026-01-01';
 
@@ -6809,7 +7100,8 @@ function filterPosts(cat) {
       {"@type": "ListItem", "position": 20, "item": {"@type": "Article", "headline": "Turf City Masterplan 2026: What Dunearn House Buyers Need to Know", "description": "Complete guide to the Bukit Timah Turf City transformation: timeline, conserved buildings, future MRT, parks, and impact on Dunearn House value.", "datePublished": "2026-06-03", "dateModified": "2026-06-03", "author": {"@id": "https://www.sellingsgproperty.com/#jackleow"}, "publisher": {"@id": "https://www.sellingsgproperty.com/#organization"}, "url": "https://www.sellingsgproperty.com/insights/turf-city-masterplan-2026"}},
       {"@type": "ListItem", "position": 21, "item": {"@type": "Article", "headline": "Dunearn House Buyer's Guide 2026: Price, Eligibility & Compare", "description": "Complete Dunearn House buyer's guide: indicative prices ($1.9M–$3.3M), unit types, eligibility, payment scheme & comparison to D11 condos. Updated 2026.", "datePublished": "2026-06-04", "dateModified": "2026-06-04", "author": {"@id": "https://www.sellingsgproperty.com/#jackleow"}, "publisher": {"@id": "https://www.sellingsgproperty.com/#organization"}, "url": "https://www.sellingsgproperty.com/insights/dunearn-house-buyers-guide-2026"}},
       {"@type": "ListItem", "position": 22, "item": {"@type": "Article", "headline": "Why Families Love Dunearn House Bukit Timah: Prime Location Near Sixth Avenue MRT, Top Schools & Green Living in Turf City", "description": "Why families love Dunearn House Bukit Timah — 7-min walk to Sixth Avenue MRT, top schools, lush greenery & Turf City living in District 11.", "datePublished": "2026-06-05", "dateModified": "2026-06-05", "author": {"@id": "https://www.sellingsgproperty.com/#jackleow"}, "publisher": {"@id": "https://www.sellingsgproperty.com/#organization"}, "url": "https://www.sellingsgproperty.com/insights/dunearn-house-family-living-guide-2026"}},
-      {"@type": "ListItem", "position": 23, "item": {"@type": "Article", "headline": "Dunearn House Investment Analysis 2026: First-Mover ROI in Turf City", "description": "Dunearn House new launch 2026 investment analysis: Turf City first-mover advantage, $1,410 psf ppr land bid, ROI outlook, risks and why launch entry can win for long-horizon CCR buyers.", "datePublished": "2026-06-07", "dateModified": "2026-06-07", "author": {"@id": "https://www.sellingsgproperty.com/#jackleow"}, "publisher": {"@id": "https://www.sellingsgproperty.com/#organization"}, "url": "https://www.sellingsgproperty.com/insights/dunearn-house-investment-analysis-2026"}}
+      {"@type": "ListItem", "position": 23, "item": {"@type": "Article", "headline": "Dunearn House Investment Analysis 2026: First-Mover ROI in Turf City", "description": "Dunearn House new launch 2026 investment analysis: Turf City first-mover advantage, $1,410 psf ppr land bid, ROI outlook, risks and why launch entry can win for long-horizon CCR buyers.", "datePublished": "2026-06-07", "dateModified": "2026-06-07", "author": {"@id": "https://www.sellingsgproperty.com/#jackleow"}, "publisher": {"@id": "https://www.sellingsgproperty.com/#organization"}, "url": "https://www.sellingsgproperty.com/insights/dunearn-house-investment-analysis-2026"}},
+      {"@type": "ListItem", "position": 24, "item": {"@type": "Article", "headline": "HDB vs EC vs Private Property: Which Should You Buy? (2026)", "description": "HDB vs EC vs private condo Singapore 2026: income ceilings, grants, MOP, ABSD rules compared. Clear decision framework for upgraders and first-timers.", "datePublished": "2026-06-10", "dateModified": "2026-06-10", "author": {"@id": "https://www.sellingsgproperty.com/#jackleow"}, "publisher": {"@id": "https://www.sellingsgproperty.com/#organization"}, "url": "https://www.sellingsgproperty.com/insights/hdb-vs-ec-vs-private-property-2026"}}
     ]
   }
   </script>
