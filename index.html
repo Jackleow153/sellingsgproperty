@@ -448,7 +448,7 @@
             </div>
         </section>
 
-        <!-- Homepage FAQ Schema is now added dynamically via JS (see addHomeFAQSchema) to avoid it appearing on article pages. -->
+        <!-- Homepage FAQ section (visible details) has no attached FAQPage schema for consistency with blog post fixes. -->
 
         <!-- FINAL CTA -->
         <section class="bg-slate-900 py-16 text-white">
@@ -1465,7 +1465,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' })
 
             if (page === 'home') {
-                addHomeFAQSchema();
+                // no FAQPage schema for blog posts (or home, for consistency)
             }
 
             // Update URL for blog list (clean path for SEO)
@@ -2111,7 +2111,6 @@
                 if (sortSelect) sortSelect.addEventListener('change', filterProjects)
                 
                 initializeFAQ()
-                addHomeFAQSchema()
                 initMobileMenu()
                 
                 const navHome = document.getElementById('nav-home');
@@ -2184,87 +2183,6 @@
         }
         
         window.onload = initializeWebsite
-
-        function addHomeFAQSchema() {
-            // Dynamically add homepage FAQ schema only when home is active.
-            // This prevents the static FAQPage from being present on article pages (fixes duplicate/invalid FAQ in GSC).
-            if (document.getElementById('home-faq-ld-json')) return;
-            const homeFaqSchema = {
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": [
-                {
-                  "@type": "Question",
-                  "name": "Do buyers pay any commission when purchasing new launch condos through SellingSgProperty?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "No. We charge zero commission to buyers. We are paid directly by the developer, so you get the same launch price with no extra cost."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "What is the indicative price range for Dunearn House in 2026?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Indicative prices for Dunearn House range from approximately $1.9M to $3.3M, or roughly $2,800–$3,100 psf depending on unit type and floor."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "Is Dunearn House suitable for families with young children?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Yes. It is one of the most family-friendly new launches in 2026 — just a 7-minute walk to Sixth Avenue MRT, close to top schools, with lush greenery and the major Turf City masterplan transformation coming."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "How does ABSD affect buying a new launch condo in Singapore?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "ABSD rates depend on your residency status (Singaporean, PR, or foreigner) and whether it is your first or subsequent property. We provide clear guidance tailored to your situation during the free situation check."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "Should I buy a new launch condo or a resale condo?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "It depends on your timeline, budget, and goals. New launches offer progressive payment schemes and developer incentives but require waiting for TOP. Resales allow immediate move-in but may have higher entry prices in prime locations."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "What should I check before booking a new launch unit?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Pressure-test your budget, loan eligibility, TDSR, and Seller's Stamp Duty timeline. Map out your exit plan (resale or rental demand) and avoid rushing into a booking fee without proper analysis."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "Can foreigners or PRs buy new launch condos like Dunearn House?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Yes, foreigners and PRs can purchase new launch condos, subject to ABSD and other rules. We give transparent advice based on your profile with no obligation."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "How do I get personalized advice for my property situation?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Book a free 30-minute situation check with Jack Leow. It is completely obligation-free and developer-paid — you pay nothing extra."
-                  }
-                }
-              ]
-            };
-            const script = document.createElement('script');
-            script.type = 'application/ld+json';
-            script.id = 'home-faq-ld-json';
-            script.textContent = JSON.stringify(homeFaqSchema);
-            document.head.appendChild(script);
-        }
 
 const ARTICLES = {
 
@@ -6447,10 +6365,7 @@ function setBaseMeta() {
   // remove any injected per-article schema
   const oldArt = document.getElementById('article-ld-json');
   if (oldArt) oldArt.remove();
-  const oldFaq = document.getElementById('faq-ld-json');
-  if (oldFaq) oldFaq.remove();
-  const oldHomeFaq = document.getElementById('home-faq-ld-json');
-  if (oldHomeFaq) oldHomeFaq.remove();
+  // FAQ schemas are completely disabled for all blog posts (see enhanceArticleWithAEO)
 }
 
 function slugify(text) {
@@ -6527,11 +6442,10 @@ function updateArticleSEO(post, id) {
   const canon = document.querySelector('link[rel="canonical"]');
   if (canon) canon.setAttribute('href', fullUrl);
 
-  // 5. Detailed Article + optional FAQPage schema (injected)
+  // 5. Detailed Article schema (injected)
   const old = document.getElementById('article-ld-json');
   if (old) old.remove();
-  const oldHomeFaq2 = document.getElementById('home-faq-ld-json');
-  if (oldHomeFaq2) oldHomeFaq2.remove();
+  // No FAQPage schema for blog posts (see enhanceArticleWithAEO)
 
   // Map human dates to ISO (simple, no extra deps)
   const dateMap = {
@@ -6565,28 +6479,20 @@ function updateArticleSEO(post, id) {
   artScript.textContent = JSON.stringify(articleSchema);
   document.head.appendChild(artScript);
 
-  // 6. FAQPage if we can parse some from the (soon to be injected) body
-  // (will be called again after body is set in showArticle)
-  //
-  // NOTE FOR FUTURE BLOGS:
-  // To get valid FAQ rich results (no GSC "invalid items" or duplicates):
-  // - In the article's .body template literal, include a FAQ section using exactly:
-  //   <h2>Some FAQ Title</h2>
-  //   <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
-  //     <summary class="...">Question text here (no leading numbers needed)</summary>
-  //     <p class="px-4 pb-4 ...">Short clear answer text.</p>
-  //   </details>
-  //   (repeat up to ~8)
-  // - The JS will auto-generate a single clean FAQPage schema and remove any homepage/previous ones.
-  // - Keep answers concise (< 300 chars ideal).
-  // - This ensures Google sees exactly one FAQPage with valid Question/Answer items matching visible content.
+  // FAQPage schema deliberately omitted for all blog posts (see enhanceArticleWithAEO)
+  // This fixes GSC "FAQ - 2 invalid items detected" errors.
 }
 
 function enhanceArticleWithAEO(bodyContainer, post, id) {
   // Generate TOC (AEO + UX win)
   generateTOC(bodyContainer, id);
 
-  // Clean any embedded FAQPage scripts from the article body HTML (prevents duplicates with dynamic one or home)
+  // FAQ schema removed - fixes GSC invalid items (Google deprioritized FAQ rich results in 2026)
+  // No FAQPage JSON-LD is added for any blog posts (existing or new).
+  // Visible "Frequently Asked Questions" section (if kept) has no schema attached.
+  // This change is in the central blog post template/rendering (enhanceArticleWithAEO + updateArticleSEO) so it applies to every post automatically.
+
+  // Remove any FAQPage schema scripts from the article body HTML
   bodyContainer.querySelectorAll('script[type="application/ld+json"]').forEach(script => {
     try {
       const txt = (script.textContent || '').trim();
@@ -6599,39 +6505,11 @@ function enhanceArticleWithAEO(bodyContainer, post, id) {
     } catch (e) {}
   });
 
-  // Parse FAQs for rich FAQPage schema (great for AEO / PAA / AI answers)
-  const faqs = [];
-  const details = bodyContainer.querySelectorAll('details.faq-item');
-  details.forEach(d => {
-    let q = d.querySelector('summary') ? d.querySelector('summary').textContent.trim() : '';
-    q = q.replace(/^\s*\d+[\.\)]\s*/, ''); // strip leading "1. " or "2) " for cleaner schema
-    let a = '';
-    const p = d.querySelector('p');
-    if (p) a = p.textContent.trim();
-    if (q && a && faqs.length < 8) faqs.push({q, a});
-  });
-
-  if (faqs.length > 0) {
-    const oldFaq = document.getElementById('faq-ld-json');
-    if (oldFaq) oldFaq.remove();
-    const oldHomeFaq3 = document.getElementById('home-faq-ld-json');
-    if (oldHomeFaq3) oldHomeFaq3.remove();
-
-    const faqSchema = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": faqs.map(f => ({
-        "@type": "Question",
-        "name": f.q,
-        "acceptedAnswer": { "@type": "Answer", "text": f.a }
-      }))
-    };
-    const faqScript = document.createElement('script');
-    faqScript.type = 'application/ld+json';
-    faqScript.id = 'faq-ld-json';
-    faqScript.textContent = JSON.stringify(faqSchema);
-    document.head.appendChild(faqScript);
-  }
+  // Also remove any previously injected FAQ schemas from head
+  const oldFaq = document.getElementById('faq-ld-json');
+  if (oldFaq) oldFaq.remove();
+  const oldHomeFaq = document.getElementById('home-faq-ld-json');
+  if (oldHomeFaq) oldHomeFaq.remove();
 
   // GEO/AIO + AEO: Add HowTo schema for step-by-step guides (e.g. the "How to Buy" article)
   if (id === 'post-how-to-buy-new-launch-2026' && !document.getElementById('howto-ld-json')) {
