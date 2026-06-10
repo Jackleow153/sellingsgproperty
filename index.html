@@ -2684,33 +2684,45 @@
                           IMPORTANT: If a submission lands in "Spam submissions" (separate tab in Netlify Forms), select it and click "Mark as verified".
                           This trains the filter. Use realistic buyer-sounding text in the situation field (see placeholder example) — pure gibberish or ultra-short random text often gets auto-flagged.
                         -->
-                        <form name="situation-check" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form" onsubmit="handleEnquirySubmit(event)">
-                            <input type="hidden" name="form-name" value="situation-check" />
-                            <div style="display:none;" aria-hidden="true">
-                                <label>Don't fill this out if you're human: <input type="text" name="bot-field" tabindex="-1" autocomplete="off" /></label>
-                            </div>
-                            
-                            <div>
-                                <label class="block text-xs font-semibold mb-2 text-slate-600">NAME</label>
-                                <input type="text" id="name" name="name" class="w-full border border-slate-300 focus:border-violet-500 rounded-2xl px-5 py-3.5 text-sm outline-none" required>
-                            </div>
-                            
-                            <div class="mt-6">
-                                <label class="block text-xs font-semibold mb-2 text-slate-600">MOBILE (WHATSAPP)</label>
-                                <input type="tel" id="phone" name="mobile" class="w-full border border-slate-300 focus:border-violet-500 rounded-2xl px-5 py-3.5 text-sm outline-none" required>
-                            </div>
-                            
-                            <div class="mt-6">
-                                <label class="block text-xs font-semibold mb-2 text-slate-600">WHAT'S MY SITUATION? (max 1000 words)</label>
-                                <textarea id="message" name="situation" rows="6" maxlength="1000" class="w-full border border-slate-300 focus:border-violet-500 rounded-3xl px-5 py-3.5 text-sm outline-none" placeholder="E.g. HDB 4-room in Punggol, married with 2 kids, targeting 3-bed in Serangoon / D19 area around 2026. Worried about cashflow after selling current flat and ABSD timing." required></textarea>
-                                <div class="text-[10px] text-slate-400 mt-1 text-right">1000 characters max</div>
-                                <p class="text-[10px] text-slate-500 mt-2">By submitting this form, you consent to the collection and use of your personal data in accordance with our Privacy Policy to respond to your inquiry and provide relevant property information.</p>
-                            </div>
-                            
-                            <button type="submit" class="mt-8 w-full py-4 bg-violet-700 hover:bg-violet-800 transition text-white font-semibold rounded-3xl flex items-center justify-center gap-x-2 text-sm">
-                                <span>Get my free situation check</span>
-                            </button>
-                        </form>
+<form 
+  name="contact" 
+  method="POST" 
+  data-netlify="true" 
+  netlify-honeypot="bot-field"
+  id="contact-form"
+>
+  <input type="hidden" name="form-name" value="contact" />
+
+  <!-- Honeypot (spam protection) -->
+  <div class="hidden">
+    <label>Don’t fill this out if you’re human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+  </div>
+
+  <div>
+    <label class="block text-xs font-semibold mb-2 text-slate-600" for="name">Full Name *</label>
+    <input type="text" id="name" name="name" class="w-full border border-slate-300 focus:border-violet-500 rounded-2xl px-5 py-3.5 text-sm outline-none" required />
+  </div>
+
+  <div class="mt-6">
+    <label class="block text-xs font-semibold mb-2 text-slate-600" for="email">Email Address *</label>
+    <input type="email" id="email" name="email" class="w-full border border-slate-300 focus:border-violet-500 rounded-2xl px-5 py-3.5 text-sm outline-none" required />
+  </div>
+
+  <div class="mt-6">
+    <label class="block text-xs font-semibold mb-2 text-slate-600" for="phone">Phone Number</label>
+    <input type="tel" id="phone" name="phone" class="w-full border border-slate-300 focus:border-violet-500 rounded-2xl px-5 py-3.5 text-sm outline-none" />
+  </div>
+
+  <div class="mt-6">
+    <label class="block text-xs font-semibold mb-2 text-slate-600" for="message">Message / Your Situation *</label>
+    <textarea id="message" name="message" rows="5" class="w-full border border-slate-300 focus:border-violet-500 rounded-3xl px-5 py-3.5 text-sm outline-none" required></textarea>
+    <p class="text-[10px] text-slate-500 mt-2">By submitting this form, you consent to the collection and use of your personal data in accordance with our Privacy Policy to respond to your inquiry and provide relevant property information.</p>
+  </div>
+
+  <button type="submit" class="mt-8 w-full py-4 bg-violet-700 hover:bg-violet-800 transition text-white font-semibold rounded-3xl flex items-center justify-center gap-x-2 text-sm">
+    <span>Send Message</span>
+  </button>
+</form>
                     </div>
                     
                     <div class="lg:col-span-2 space-y-6">
