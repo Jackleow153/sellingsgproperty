@@ -112,6 +112,7 @@
       --emerald:#1E6E5C;
       --claret:#A93B2A;
     }
+    #page-mortgage-calculator body{font-family:'Hanken Grotesk',sans-serif;background:var(--porcelain);color:var(--ink);}
     #page-mortgage-calculator .serif{font-family:'Marcellus',serif;}
     #page-mortgage-calculator .num{font-variant-numeric:tabular-nums;}
     #page-mortgage-calculator .eyebrow{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--slate);font-weight:600;}
@@ -126,6 +127,7 @@
     #page-mortgage-calculator input[type="range"]{accent-color:var(--brass);}
     #page-mortgage-calculator .toggle-btn{flex:1;padding:.7rem 0;font-size:.8rem;font-weight:600;letter-spacing:.05em;border:1px solid var(--hairline);color:var(--slate);transition:all .2s;background:var(--paper);}
     #page-mortgage-calculator .toggle-btn.active{background:var(--ink);color:#EDE6D6;border-color:var(--ink);}
+    #page-mortgage-calculator .toggle-btn:disabled{opacity:.35;cursor:not-allowed;}
     #page-mortgage-calculator .chip{cursor:pointer;border:1px solid var(--hairline);padding:.25rem .7rem;font-size:.7rem;letter-spacing:.06em;color:var(--slate);transition:all .2s;}
     #page-mortgage-calculator .chip:hover{border-color:var(--brass);color:var(--brass-deep);}
     #page-mortgage-calculator .bar-track{height:3px;background:var(--hairline);}
@@ -134,7 +136,35 @@
     #page-mortgage-calculator .status-pass{color:var(--emerald);}
     #page-mortgage-calculator .status-fail{color:var(--claret);}
     #page-mortgage-calculator .rule{border-top:1px solid var(--hairline);}
+    #page-mortgage-calculator .rule-dark{border-top:1px solid rgba(237,230,214,.18);}
+    #page-mortgage-calculator .card.fail-card{background:#FBEFEB;border-color:#E5BBAF;}
     #page-mortgage-calculator .highlight-card{background:#FAF5E9;border:1px solid #DCCB9F;border-top:3px solid var(--brass);}
+    #page-mortgage-calculator .highlight-card .rule{border-top-color:#E6D9B8;}
+    #page-mortgage-calculator .hero-stat{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;}
+    @media (min-width:640px){
+      #page-mortgage-calculator .hero-stat{display:block;}
+      #page-mortgage-calculator .hero-stat + .hero-stat{border-left:1px solid rgba(237,230,214,.18);padding-left:1.5rem;}
+    }
+    #page-mortgage-calculator .reveal{animation:fadeUp .45s ease both;}
+    #page-mortgage-calculator .step-locked{opacity:.45;pointer-events:none;}
+    /* Step progress icons (top banner) */
+    #page-mortgage-calculator .prog-icon{width:2.7rem;height:2.7rem;border:1px solid var(--hairline-strong);border-radius:9999px;display:flex;align-items:center;justify-content:center;color:var(--slate);transition:all .3s ease;background:var(--paper);}
+    #page-mortgage-calculator .prog-icon svg{width:1.15rem;height:1.15rem;}
+    #page-mortgage-calculator .prog-icon.done{background:var(--ink);border-color:var(--ink);color:#EDE6D6;}
+    #page-mortgage-calculator .prog-line{height:1px;width:2rem;background:var(--hairline-strong);}
+    @media (min-width:640px){#page-mortgage-calculator .prog-line{width:4rem;}}
+    /* Progressive schedule: stacked rows on mobile, 6-column grid on sm+ */
+    #page-mortgage-calculator .prog-row{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:1rem;row-gap:.2rem;align-items:baseline;padding:.8rem 1.5rem;border-top:1px solid var(--hairline);}
+    #page-mortgage-calculator .prog-cell{display:none;}
+    #page-mortgage-calculator .prog-meta{grid-column:1/-1;font-size:.68rem;color:var(--slate);font-variant-numeric:tabular-nums;}
+    #page-mortgage-calculator .prog-head{border-top:none;}
+    @media (min-width:640px){
+      #page-mortgage-calculator .prog-row{grid-template-columns:minmax(0,2.4fr) .7fr .5fr 1.1fr 1fr 1.2fr;}
+      #page-mortgage-calculator .prog-cell{display:block;text-align:right;}
+      #page-mortgage-calculator .prog-meta{display:none;}
+    }
+    @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+    #page-mortgage-calculator ::selection{background:var(--brass);color:#fff;}
     </style>
     
     <style>
@@ -2856,339 +2886,795 @@
 
     <!-- MORTGAGE LOAN CALCULATOR SUBPAGE -->
     <div id="page-mortgage-calculator" class="page-section bg-[#F6F4EF]">
-      <!-- Calculator content from provided RTF - integrated here -->
       <div class="max-w-6xl mx-auto px-6 py-12">
-        <!-- Masthead -->
-        <header class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 pb-8 mb-10" style="border-bottom:1px solid #E3DDD0">
+
+  <!-- Masthead -->
+  <header class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 pb-8 mb-10" style="border-bottom:1px solid var(--hairline)">
+    <div>
+      <h1 class="serif text-4xl md:text-5xl leading-tight">Singapore Mortgage Calculator</h1>
+      <p class="text-sm mt-2" style="color:var(--slate)">Three quick steps — your instalment, MSR • TDSR affordability, stamp duties, and upfront cash & CPF under current MAS rules.</p>
+    </div>
+    <div class="text-right">
+      <div class="eyebrow mb-1">Reference rates</div>
+      <div class="serif text-lg num">HDB 2.60% <span style="color:var(--hairline)">•</span> Bank from ~1.80%</div>
+      <div class="text-[11px]" style="color:var(--slate)">Indicative only — verify current bank packages</div>
+    </div>
+  </header>
+
+  <!-- Progress banner (shown until all steps complete) -->
+  <div id="resultsPending" class="card p-6 sm:p-8 mb-8 text-center">
+    <div class="flex items-center justify-center">
+      <div class="flex flex-col items-center gap-2">
+        <div class="text-[10px] tracking-widest uppercase font-semibold" style="color:var(--brass-deep)">Step 1</div>
+        <div id="stepIcon1" class="prog-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></svg>
+        </div>
+        <div class="text-[10px] tracking-widest uppercase font-semibold" style="color:var(--slate)">Property</div>
+      </div>
+      <div class="prog-line mx-2 sm:mx-4"></div>
+      <div class="flex flex-col items-center gap-2">
+        <div class="text-[10px] tracking-widest uppercase font-semibold" style="color:var(--brass-deep)">Step 2</div>
+        <div id="stepIcon2" class="prog-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.2"/><circle cx="17.5" cy="17.5" r="2.2"/></svg>
+        </div>
+        <div class="text-[10px] tracking-widest uppercase font-semibold" style="color:var(--slate)">Loan</div>
+      </div>
+      <div class="prog-line mx-2 sm:mx-4"></div>
+      <div class="flex flex-col items-center gap-2">
+        <div class="text-[10px] tracking-widest uppercase font-semibold" style="color:var(--brass-deep)">Step 3</div>
+        <div id="stepIcon3" class="prog-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="text-[10px] tracking-widest uppercase font-semibold" style="color:var(--slate)">Household</div>
+      </div>
+    </div>
+    <p class="text-sm mt-5 max-w-md mx-auto" style="color:var(--slate)">Complete the three steps to see your monthly instalment, upfront cash & CPF, and stamp duties.</p>
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
+
+    <!-- ============ LEFT: STEPS ============ -->
+    <div id="stepsCol" class="xl:col-span-5 space-y-6">
+
+      <!-- STEP 1 -->
+      <section class="step-card p-8">
+        <div class="flex items-center gap-3 mb-7">
+          <div class="step-badge">1</div>
+          <div class="eyebrow">Step 1 • The Property</div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
-            <h1 class="serif text-4xl md:text-5xl leading-tight">Singapore Mortgage Calculator</h1>
-            <p class="text-sm mt-2" style="color:#5C6B7A">Three quick steps — your instalment, MSR • TDSR affordability, stamp duties, and upfront cash & CPF under current MAS rules.</p>
+            <label class="block text-xs font-medium mb-2" style="color:var(--slate)">Property type</label>
+            <select id="propertyType" class="field text-sm">
+              <option value="HDB">HDB flat</option>
+              <option value="Private">Resale Pte Condo / Apt</option>
+              <option value="NewLaunch" selected>New Launch Condo</option>
+              <option value="EC">EC</option>
+            </select>
           </div>
-          <div class="text-right">
-            <div class="eyebrow mb-1">Reference rates</div>
-            <div class="serif text-lg num">HDB 2.60% <span style="color:#E3DDD0">•</span> Bank from ~1.80%</div>
-            <div class="text-[11px]" style="color:#5C6B7A">Indicative only — verify current bank packages</div>
-          </div>
-        </header>
-
-        <div class="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
-
-          <!-- LEFT: STEPS -->
-          <div class="xl:col-span-5 space-y-6">
-
-            <!-- STEP 1 -->
-            <section class="step-card p-8" style="background:#FFFFFF;border:1.5px solid #CFC2A0">
-              <div class="flex items-center gap-3 mb-7">
-                <div class="step-badge" style="width:1.7rem;height:1.7rem;flex:none;border:1px solid #B89B5E;color:#9A7F45;font-family:'Marcellus',serif;display:flex;align-items:center;justify-content:center;font-size:.85rem">1</div>
-                <div class="eyebrow">Step 1 • The Property</div>
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label class="block text-xs font-medium mb-2" style="color:#5C6B7A">Property type</label>
-                  <select id="propertyType" class="field text-sm" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem;outline:none">
-                    <option value="HDB">HDB flat</option>
-                    <option value="Private">Resale Pte Condo / Apt</option>
-                    <option value="NewLaunch" selected>New Launch Condo</option>
-                    <option value="EC">EC</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="block text-xs font-medium mb-2" style="color:#5C6B7A">Purchase price</label>
-                  <div class="relative">
-                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm" style="color:#B89B5E">S$</span>
-                    <input type="text" inputmode="numeric" id="propertyPrice" value="2,500,000" class="field num pl-11 text-xl serif" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem;outline:none">
-                  </div>
-                </div>
-              </div>
-
-              <div class="mt-6">
-                <label class="block text-xs font-medium mb-2" style="color:#5C6B7A">Loan type</label>
-                <div class="flex">
-                  <button onclick="setLoanType('HDB')" id="btnHDB" class="toggle-btn" style="flex:1;padding:.7rem 0;font-size:.8rem;font-weight:600;letter-spacing:.05em;border:1px solid #E3DDD0;color:#5C6B7A;transition:all .2s;background:#FFFFFF">HDB Loan</button>
-                  <button onclick="setLoanType('Bank')" id="btnBank" class="toggle-btn active" style="flex:1;padding:.7rem 0;font-size:.8rem;font-weight:600;letter-spacing:.05em;border:1px solid #E3DDD0;color:#0C1B2A;transition:all .2s;background:#0C1B2A;border-left:none">Bank Loan</button>
-                </div>
-                <div id="loanTypeNote" class="text-[11px] mt-2" style="color:#5C6B7A">Compare fixed vs floating packages across banks</div>
-              </div>
-
-              <div id="downpaymentBlock" class="rule mt-7 pt-7" style="border-top:1px solid #E3DDD0">
-                <div class="eyebrow-brass mb-5">Your Downpayment</div>
-                <div class="grid grid-cols-3 gap-4">
-                  <div>
-                    <label class="block text-[11px] mb-1" style="color:#5C6B7A">Percentage (%)</label>
-                    <input type="number" id="downpaymentPercent" value="25" min="25" max="60" step="0.5" class="field num serif text-xl" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem">
-                  </div>
-                  <div>
-                    <label class="block text-[11px] mb-1" style="color:#5C6B7A">Amount (S$)</label>
-                    <input type="text" inputmode="numeric" id="downpaymentAmount" value="625,000" class="field num text-sm" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem">
-                  </div>
-                  <div>
-                    <label class="block text-[11px] mb-1" style="color:#5C6B7A">Loan amount (S$)</label>
-                    <input type="text" inputmode="numeric" id="loanAmount" value="1,875,000" class="field num text-sm" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem">
-                  </div>
-                </div>
-                <div id="ltvWarning" class="hidden text-[11px] mt-2 status-fail" style="color:#A93B2A">Minimum downpayment is 25% — the loan exceeds the 75% LTV limit for a first housing loan.</div>
-
-                <div class="mt-6 grid grid-cols-2 gap-4">
-                  <div>
-                    <label class="block text-[11px] mb-1" style="color:#5C6B7A">Paid with CPF OA (S$)</label>
-                    <input type="text" inputmode="numeric" id="cpfAmount" value="500,000" class="field num text-sm" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem">
-                    <div id="cpfMaxNote" class="text-[11px] mt-1" style="color:#9A7F45"></div>
-                  </div>
-                  <div>
-                    <label class="block text-[11px] mb-1" style="color:#5C6B7A">Cash required (S$)</label>
-                    <div id="cashAmount" class="field-static num text-sm" style="width:100%;background:#F6F4EF;border:1px solid #E3DDD0;padding:.8rem 1rem;color:#0C1B2A">125,000</div>
-                    <div id="cashMinNote" class="text-[11px] mt-1" style="color:#5C6B7A"></div>
-                  </div>
-                </div>
-                <p id="downpaymentRule" class="text-[11px] mt-4 leading-relaxed" style="color:#5C6B7A"></p>
-              </div>
-            </section>
-
-            <!-- STEP 2 -->
-            <section id="step2Card" class="step-card p-8" style="background:#FFFFFF;border:1.5px solid #CFC2A0">
-              <div class="flex items-center gap-3 mb-7">
-                <div class="step-badge" style="width:1.7rem;height:1.7rem;flex:none;border:1px solid #B89B5E;color:#9A7F45;font-family:'Marcellus',serif;display:flex;align-items:center;justify-content:center;font-size:.85rem">2</div>
-                <div class="eyebrow">Step 2 • The Loan</div>
-              </div>
-
-              <div>
-                <label class="block text-xs font-medium mb-2" style="color:#5C6B7A">Your age (youngest borrower)</label>
-                <input type="number" id="buyerAge" min="21" max="75" placeholder="e.g. 35" class="field num serif text-2xl" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem">
-                <div class="text-[11px] mt-2" style="color:#5C6B7A">Banks generally lend up to <strong>age 65</strong>, max tenure <strong>30 years</strong> — whichever is shorter. HDB loans are capped at <strong>25 years</strong>.</div>
-              </div>
-
-              <div class="mt-6">
-                <label class="block text-xs font-medium mb-2" style="color:#5C6B7A">Interest rate (% p.a.)</label>
-                <input type="number" id="interestRate" value="1.80" step="0.01" class="field num serif text-2xl" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem">
-                <div class="flex gap-2 mt-2">
-                  <span onclick="quickRate(2.60)" class="chip" style="cursor:pointer;border:1px solid #E3DDD0;padding:.25rem .7rem;font-size:.7rem;letter-spacing:.06em;color:#5C6B7A">HDB 2.60</span>
-                  <span onclick="quickRate(1.80)" class="chip" style="cursor:pointer;border:1px solid #E3DDD0;padding:.25rem .7rem;font-size:.7rem;letter-spacing:.06em;color:#5C6B7A">Bank ~1.80</span>
-                  <span onclick="quickRate(2.20)" class="chip" style="cursor:pointer;border:1px solid #E3DDD0;padding:.25rem .7rem;font-size:.7rem;letter-spacing:.06em;color:#5C6B7A">Bank ~2.20</span>
-                </div>
-                <div class="text-[11px] mt-2" style="color:#5C6B7A">Indicative rate only and may not be up to date — check the latest packages with your bank or broker.</div>
-              </div>
-
-              <div id="loanDetailsBlock" class="hidden rule mt-7 pt-7" style="border-top:1px solid #E3DDD0">
-                <div class="eyebrow-brass mb-5">Your Loan Tenure</div>
-                <div>
-                  <div class="flex justify-between items-baseline mb-2">
-                    <label class="text-xs font-medium" style="color:#5C6B7A">Loan tenure</label>
-                    <span class="serif num text-lg"><span id="tenureYears">30</span> yrs</span>
-                  </div>
-                  <input type="range" id="tenure" min="5" max="30" value="30" class="w-full mt-3">
-                  <div id="tenureNote" class="text-[11px] mt-2 leading-relaxed" style="color:#5C6B7A"></div>
-                </div>
-              </div>
-            </section>
-
-            <!-- STEP 3 -->
-            <section id="step3Card" class="step-card step-locked p-8" style="background:#FFFFFF;border:1.5px solid #CFC2A0">
-              <div class="flex items-center justify-between mb-7">
-                <div class="flex items-center gap-3">
-                  <div class="step-badge" style="width:1.7rem;height:1.7rem;flex:none;border:1px solid #B89B5E;color:#9A7F45;font-family:'Marcellus',serif;display:flex;align-items:center;justify-content:center;font-size:.85rem">3</div>
-                  <div class="eyebrow">Step 3 • The Household</div>
-                </div>
-                <div id="step3Hint" class="text-[11px]" style="color:#9A7F45">Enter your age in Step 2 first</div>
-              </div>
-
-              <div class="grid grid-cols-2 gap-5">
-                <div>
-                  <label class="block text-[11px] mb-1" style="color:#5C6B7A">Gross monthly income (S$)</label>
-                  <input type="text" inputmode="numeric" id="grossIncome" placeholder="e.g. 25,000" class="field num text-sm" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem">
-                </div>
-                <div>
-                  <label class="block text-[11px] mb-1" style="color:#5C6B7A">Other monthly debts (S$)</label>
-                  <input type="text" inputmode="numeric" id="otherDebts" placeholder="enter 0 if none" class="field num text-sm" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem">
-                </div>
-              </div>
-              <p class="text-[11px] mt-3" style="color:#5C6B7A">Used for the MSR (HDB & EC only) and the TDSR stress test at a 4% floor rate.</p>
-            </section>
-
-            <div id="ratioCards" class="hidden space-y-6">
-              <div id="msrCard" class="card p-7" style="background:#FFFFFF;border:1px solid #E3DDD0">
-                <div class="flex justify-between items-baseline">
-                  <div class="eyebrow">MSR • HDB & EC</div>
-                  <div id="msrStatus" class="text-[11px] font-semibold tracking-wide status-pass">WITHIN LIMIT</div>
-                </div>
-                <div id="msrPercent" class="serif num text-5xl mt-3">25%</div>
-                <div class="bar-track mt-4" style="height:3px;background:#E3DDD0"><div id="msrBar" class="bar-fill" style="height:3px;background:#B89B5E;width:83%"></div></div>
-                <div class="flex justify-between text-[11px] mt-2" style="color:#5C6B7A">
-                  <span>Mortgage vs gross income</span><span>Limit 30%</span>
-                </div>
-              </div>
-              <div id="tdsrCard" class="card p-7" style="background:#FFFFFF;border:1px solid #E3DDD0">
-                <div class="flex justify-between items-baseline">
-                  <div class="eyebrow">TDSR • Stress test 4%</div>
-                  <div id="tdsrStatus" class="text-[11px] font-semibold tracking-wide status-pass">WITHIN LIMIT</div>
-                </div>
-                <div id="tdsrPercent" class="serif num text-5xl mt-3">41%</div>
-                <div class="bar-track mt-4" style="height:3px;background:#E3DDD0"><div id="tdsrBar" class="bar-fill" style="height:3px;background:#B89B5E;width:74%"></div></div>
-                <div class="flex justify-between text-[11px] mt-2" style="color:#5C6B7A">
-                  <span>All debts at the floor rate</span><span>Limit 55%</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- RIGHT: RESULTS -->
-          <div class="xl:col-span-7">
-
-            <div id="resultsPending" class="card p-12 text-center" style="background:#FFFFFF;border:1px solid #E3DDD0">
-              <div class="serif text-3xl mb-3" style="color:#CFC2A0">1 • 2 • 3</div>
-              <div class="eyebrow mb-2">Your Results</div>
-              <p class="text-sm" style="color:#5C6B7A">Complete the three steps on the left to see your monthly instalment, upfront cash & CPF, and stamp duties.</p>
-            </div>
-
-            <div id="resultsColumn" class="hidden space-y-6">
-
-              <div class="p-9 text-white" style="background:#0C1B2A">
-                <div class="flex flex-col sm:flex-row justify-between items-start gap-6">
-                  <div>
-                    <div class="eyebrow-brass mb-2">Monthly instalment</div>
-                    <div id="monthlyInstalment" class="serif num text-6xl md:text-7xl" style="color:#EDE6D6">S$6,745</div>
-                    <div id="instalmentSub" class="text-xs mt-3 num" style="color:#8FA0B0">on a loan of S$1,875,000 at 1.80% over 30 years</div>
-                  </div>
-                  <div class="relative shrink-0">
-                    <canvas id="pieChart" width="128" height="128"></canvas>
-                    <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
-                      <span id="interestShare" class="serif num text-xl" style="color:#EDE6D6">23%</span>
-                      <span class="text-[9px] tracking-widest uppercase" style="color:#8FA0B0">interest</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="rule-dark mt-8 pt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6" style="border-top:1px solid rgba(237,230,214,.18)">
-                  <div class="hero-stat">
-                    <div class="text-[10px] tracking-widest uppercase whitespace-nowrap sm:mb-1" style="color:#8FA0B0">Total interest</div>
-                    <div id="totalInterest" class="serif num text-lg md:text-xl" style="color:#EDE6D6">S$553,000</div>
-                  </div>
-                  <div class="hero-stat">
-                    <div class="text-[10px] tracking-widest uppercase whitespace-nowrap sm:mb-1" style="color:#8FA0B0">Total repayment</div>
-                    <div id="totalRepayment" class="serif num text-lg md:text-xl" style="color:#EDE6D6">S$2,428,000</div>
-                  </div>
-                  <div class="hero-stat">
-                    <div class="text-[10px] tracking-widest uppercase whitespace-nowrap sm:mb-1" style="color:#8FA0B0">Loan-to-value</div>
-                    <div class="flex items-baseline gap-2">
-                      <div id="ltvRatio" class="serif num text-lg md:text-xl" style="color:#EDE6D6">75%</div>
-                      <div id="ltvStatus" class="text-[10px] whitespace-nowrap" style="color:#8FA0B0">Within 75% cap</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="highlight-card p-8" style="background:#FAF5E9;border:1px solid #DCCB9F;border-top:3px solid #B89B5E">
-                <div class="flex justify-between items-baseline mb-6">
-                  <div class="eyebrow">Upfront Payment Summary</div>
-                  <select id="dutiesPayment" class="text-[11px] border-0 bg-transparent font-semibold outline-none cursor-pointer" style="color:#9A7F45">
-                    <option value="cpf">Stamp duties via CPF</option>
-                    <option value="cash">Stamp duties via cash</option>
-                  </select>
-                </div>
-                <div class="space-y-3 text-sm num">
-                  <div class="flex justify-between"><span style="color:#5C6B7A">Downpayment — cash</span><span id="sumCashDown" class="font-medium">S$125,000</span></div>
-                  <div class="flex justify-between"><span style="color:#5C6B7A">Downpayment — CPF OA</span><span id="sumCpfDown" class="font-medium">S$500,000</span></div>
-                  <div class="flex justify-between"><span style="color:#5C6B7A">Buyer's Stamp Duty</span><span id="sumBSD" class="font-medium">S$94,600</span></div>
-                  <div class="flex justify-between"><span style="color:#5C6B7A">Additional Buyer's Stamp Duty</span><span id="sumABSD" class="font-medium">S$0</span></div>
-                </div>
-                <div class="rule mt-5 pt-5 grid grid-cols-3 gap-6 text-center" style="border-top:1px solid #E6D9B8">
-                  <div>
-                    <div class="text-[10px] tracking-widest uppercase mb-1" style="color:#5C6B7A">Total cash</div>
-                    <div id="sumTotalCash" class="serif num text-xl md:text-2xl">S$125,000</div>
-                  </div>
-                  <div style="border-left:1px solid #E6D9B8">
-                    <div class="text-[10px] tracking-widest uppercase mb-1" style="color:#5C6B7A">Total CPF</div>
-                    <div id="sumTotalCpf" class="serif num text-xl md:text-2xl" style="color:#9A7F45">S$594,600</div>
-                  </div>
-                  <div style="border-left:1px solid #E6D9B8">
-                    <div class="text-[10px] tracking-widest uppercase mb-1" style="color:#5C6B7A">Total upfront</div>
-                    <div id="sumTotal" class="serif num text-xl md:text-2xl">S$719,600</div>
-                  </div>
-                </div>
-                <p class="text-[11px] mt-5 leading-relaxed" style="color:#5C6B7A">
-                  Excludes legal/conveyancing fees, valuation, and buffer funds. For private resale purchases, stamp duties are typically paid in cash first and reimbursed from CPF OA after completion.
-                </p>
-              </div>
-
-              <div class="card p-8" style="background:#FFFFFF;border:1px solid #E3DDD0">
-                <div class="eyebrow mb-7">Stamp Duty Detail</div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                  <div>
-                    <div class="text-xs mb-1" style="color:#5C6B7A">Buyer's Stamp Duty</div>
-                    <div id="bsdAmount" class="serif num text-3xl">S$94,600</div>
-                    <div id="bsdBreakdown" class="text-[11px] mt-2 num" style="color:#5C6B7A"></div>
-                  </div>
-                  <div>
-                    <div class="text-xs mb-1" style="color:#5C6B7A">Additional Buyer's Stamp Duty</div>
-                    <div id="absdAmount" class="serif num text-3xl" style="color:#9A7F45">S$0</div>
-                    <select id="absdRate" class="field text-xs mt-3" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem">
-                      <option value="0">Singapore Citizen • 1st property — 0%</option>
-                      <option value="20">Singapore Citizen • 2nd property — 20%</option>
-                      <option value="30">Singapore Citizen • 3rd+ property — 30%</option>
-                      <option value="5">Singapore PR • 1st property — 5%</option>
-                      <option value="30">Singapore PR • 2nd property — 30%</option>
-                      <option value="35">Singapore PR • 3rd+ property — 35%</option>
-                      <option value="60">Foreigner — 60%</option>
-                      <option value="65">Entities / trusts — 65%</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="rule mt-7 pt-5 text-[11px] leading-relaxed" style="color:#5C6B7A;border-top:1px solid #E3DDD0">
-                  Verify ABSD rates against IRAS before committing — rates shown are the prevailing residential schedule.
-                </div>
-              </div>
-
-              <div id="amortCard" class="card" style="background:#FFFFFF;border:1px solid #E3DDD0">
-                <button onclick="toggleAmortization()" class="w-full p-7 flex justify-between items-center text-left">
-                  <div>
-                    <div class="eyebrow mb-1">Amortisation schedule</div>
-                    <div class="text-xs" style="color:#5C6B7A">First twelve months of principal and interest</div>
-                  </div>
-                  <span id="amortArrow" class="serif text-3xl transition-transform" style="color:#B89B5E">▼</span>
-                </button>
-                <div id="amortizationTable" class="hidden rule" style="border-top:1px solid #E3DDD0">
-                  <table class="w-full text-sm num">
-                    <thead>
-                      <tr class="text-[10px] tracking-widest uppercase" style="color:#5C6B7A">
-                        <th class="text-left px-7 py-4 font-semibold">Month</th>
-                        <th class="text-right px-7 py-4 font-semibold">Principal</th>
-                        <th class="text-right px-7 py-4 font-semibold">Interest</th>
-                        <th class="text-right px-7 py-4 font-semibold">Balance</th>
-                      </tr>
-                    </thead>
-                    <tbody id="amortBody"></tbody>
-                  </table>
-                </div>
-              </div>
-
-              <div id="progressiveCard" class="hidden card" style="background:#FFFFFF;border:1px solid #E3DDD0">
-                <div class="p-7">
-                  <div class="eyebrow mb-1">Progressive Payment Schedule</div>
-                  <div class="text-xs" style="color:#5C6B7A">Standard payment scheme for new launches — construction stages with indicative months</div>
-                </div>
-                <div class="rule" style="border-top:1px solid #E3DDD0">
-                  <div class="prog-row prog-head text-[10px] tracking-widest uppercase font-semibold" style="color:#5C6B7A">
-                    <div>Construction stage</div>
-                    <div class="prog-cell">Est. mth</div>
-                    <div class="prog-cell">%</div>
-                    <div class="prog-cell">Amount</div>
-                    <div class="prog-cell">Funded by</div>
-                    <div class="text-right">Instalment after</div>
-                  </div>
-                  <div id="progBody"></div>
-                </div>
-                <div class="rule p-5 text-[11px] leading-relaxed" style="color:#5C6B7A;border-top:1px solid #E3DDD0">
-                  Months are indicative — actual milestones vary by project and are certified by the developer's architect. Your monthly instalment is recalculated each time the bank disburses, on the cumulative loan drawn over the remaining tenure, so it steps up as construction progresses.
-                </div>
-              </div>
-
-              <p class="text-[11px] text-center leading-relaxed px-8" style="color:#5C6B7A">
-                Estimates only, based on the standard amortising-loan formula and prevailing MAS rules (MSR 30%, TDSR 55%, 4% stress-test floor, 75% LTV for a first housing loan). Always verify with HDB, your bank, or a licensed adviser. This is not financial advice.
-              </p>
+          <div>
+            <label class="block text-xs font-medium mb-2" style="color:var(--slate)">Purchase price</label>
+            <div class="relative">
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm" style="color:var(--brass)">S$</span>
+              <input type="text" inputmode="numeric" id="propertyPrice" placeholder="e.g. 2,500,000" class="field num pl-11 text-xl serif">
             </div>
           </div>
         </div>
+
+        <div class="mt-6">
+          <label class="block text-xs font-medium mb-2" style="color:var(--slate)">Loan type</label>
+          <div class="flex">
+            <button onclick="setLoanType('HDB')" id="btnHDB" class="toggle-btn">HDB Loan</button>
+            <button onclick="setLoanType('Bank')" id="btnBank" class="toggle-btn active" style="border-left:none">Bank Loan</button>
+          </div>
+          <div id="loanTypeNote" class="text-[11px] mt-2" style="color:var(--slate)">Compare fixed vs floating packages across banks</div>
+        </div>
+
+        <!-- Step 1 result: downpayment -->
+        <div id="downpaymentBlock" class="rule mt-7 pt-7">
+          <div class="eyebrow-brass mb-5">Your Downpayment</div>
+          <div class="grid grid-cols-3 gap-4">
+            <div>
+              <label class="block text-[11px] mb-1" style="color:var(--slate)">Percentage (%)</label>
+              <input type="number" id="downpaymentPercent" value="25" min="25" max="60" step="0.5" class="field num serif text-xl">
+            </div>
+            <div>
+              <label class="block text-[11px] mb-1" style="color:var(--slate)">Amount (S$)</label>
+              <input type="text" inputmode="numeric" id="downpaymentAmount" value="625,000" class="field num text-sm">
+            </div>
+            <div>
+              <label class="block text-[11px] mb-1" style="color:var(--slate)">Loan amount (S$)</label>
+              <input type="text" inputmode="numeric" id="loanAmount" value="1,875,000" class="field num text-sm">
+            </div>
+          </div>
+          <div id="ltvWarning" class="hidden text-[11px] mt-2 status-fail">Minimum downpayment is 25% — the loan exceeds the 75% LTV limit for a first housing loan.</div>
+
+          <div class="mt-6 grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[11px] mb-1" style="color:var(--slate)">Paid with CPF OA (S$)</label>
+              <input type="text" inputmode="numeric" id="cpfAmount" value="500,000" class="field num text-sm">
+              <div id="cpfMaxNote" class="text-[11px] mt-1" style="color:var(--brass-deep)"></div>
+            </div>
+            <div>
+              <label class="block text-[11px] mb-1" style="color:var(--slate)">Cash required (S$)</label>
+              <div id="cashAmount" class="field-static num text-sm">125,000</div>
+              <div id="cashMinNote" class="text-[11px] mt-1" style="color:var(--slate)"></div>
+            </div>
+          </div>
+          <p id="downpaymentRule" class="text-[11px] mt-4 leading-relaxed" style="color:var(--slate)"></p>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section id="step2Card" class="step-card p-8">
+        <div class="flex items-center justify-between mb-7">
+          <div class="flex items-center gap-3">
+            <div class="step-badge">2</div>
+            <div class="eyebrow">Step 2 • The Loan</div>
+          </div>
+          <div id="step2Hint" class="hidden text-[11px]" style="color:var(--brass-deep)">Enter your purchase price in Step 1 first</div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium mb-2" style="color:var(--slate)">Your age (youngest borrower)</label>
+          <input type="number" id="buyerAge" min="21" max="75" placeholder="e.g. 35" class="field num serif text-2xl">
+          <div class="text-[11px] mt-2" style="color:var(--slate)">Banks generally lend up to <strong>age 65</strong>, max tenure <strong>30 years</strong> — whichever is shorter. HDB loans are capped at <strong>25 years</strong>.</div>
+        </div>
+
+        <div class="mt-6">
+          <label class="block text-xs font-medium mb-2" style="color:var(--slate)">Interest rate (% p.a.)</label>
+          <input type="number" id="interestRate" value="1.80" step="0.01" class="field num serif text-2xl">
+          <div class="flex gap-2 mt-2">
+            <span onclick="quickRate(2.60)" class="chip">HDB 2.60</span>
+            <span onclick="quickRate(1.80)" class="chip">Bank ~1.80</span>
+            <span onclick="quickRate(2.20)" class="chip">Bank ~2.20</span>
+          </div>
+          <div class="text-[11px] mt-2" style="color:var(--slate)">Indicative rate only and may not be up to date — check the latest packages with your bank or broker.</div>
+        </div>
+
+        <!-- Step 2 result: tenure -->
+        <div id="loanDetailsBlock" class="hidden rule mt-7 pt-7">
+          <div class="eyebrow-brass mb-5">Your Loan Tenure</div>
+          <div>
+            <div class="flex justify-between items-baseline mb-2">
+              <label class="text-xs font-medium" style="color:var(--slate)">Loan tenure</label>
+              <span class="serif num text-lg"><span id="tenureYears">30</span> yrs</span>
+            </div>
+            <input type="range" id="tenure" min="5" max="30" value="30" class="w-full mt-3">
+            <div id="tenureNote" class="text-[11px] mt-2 leading-relaxed" style="color:var(--slate)"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section id="step3Card" class="step-card step-locked p-8">
+        <div class="flex items-center justify-between mb-7">
+          <div class="flex items-center gap-3">
+            <div class="step-badge">3</div>
+            <div class="eyebrow">Step 3 • The Household</div>
+          </div>
+          <div id="step3Hint" class="text-[11px]" style="color:var(--brass-deep)">Enter your age in Step 2 first</div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-5">
+          <div>
+            <label class="block text-[11px] mb-1" style="color:var(--slate)">Gross monthly income (S$)</label>
+            <input type="text" inputmode="numeric" id="grossIncome" placeholder="e.g. 25,000" class="field num text-sm">
+          </div>
+          <div>
+            <label class="block text-[11px] mb-1" style="color:var(--slate)">Other monthly debts (S$)</label>
+            <input type="text" inputmode="numeric" id="otherDebts" placeholder="enter 0 if none" class="field num text-sm">
+          </div>
+        </div>
+        <p class="text-[11px] mt-3" style="color:var(--slate)">Used for the MSR (HDB & EC only) and the TDSR stress test at a 4% floor rate.</p>
+      </section>
+
+      <!-- Step 3 results: MSR / TDSR (left side, below step 3) -->
+      <div id="ratioCards" class="hidden space-y-6">
+        <div id="msrCard" class="card p-7">
+          <div class="flex justify-between items-baseline">
+            <div class="eyebrow">MSR • HDB & EC</div>
+            <div id="msrStatus" class="text-[11px] font-semibold tracking-wide status-pass">WITHIN LIMIT</div>
+          </div>
+          <div id="msrPercent" class="serif num text-5xl mt-3">25%</div>
+          <div class="bar-track mt-4"><div id="msrBar" class="bar-fill" style="width:83%"></div></div>
+          <div class="flex justify-between text-[11px] mt-2" style="color:var(--slate)">
+            <span>Mortgage vs gross income</span><span>Limit 30%</span>
+          </div>
+        </div>
+        <div id="tdsrCard" class="card p-7">
+          <div class="flex justify-between items-baseline">
+            <div class="eyebrow">TDSR • Stress test 4%</div>
+            <div id="tdsrStatus" class="text-[11px] font-semibold tracking-wide status-pass">WITHIN LIMIT</div>
+          </div>
+          <div id="tdsrPercent" class="serif num text-5xl mt-3">41%</div>
+          <div class="bar-track mt-4"><div id="tdsrBar" class="bar-fill" style="width:74%"></div></div>
+          <div class="flex justify-between text-[11px] mt-2" style="color:var(--slate)">
+            <span>All debts at the floor rate</span><span>Limit 55%</span>
+          </div>
+        </div>
       </div>
+    </div>
+
+    <!-- ============ RIGHT: RESULTS ============ -->
+    <div id="resWrap" class="xl:col-span-7">
+
+      <div id="resultsColumn" class="hidden space-y-6">
+
+        <!-- Hero -->
+        <div class="p-9 text-white" style="background:var(--ink)">
+          <div class="flex flex-col sm:flex-row justify-between items-start gap-6">
+            <div>
+              <div class="eyebrow-brass mb-2">Monthly instalment</div>
+              <div id="monthlyInstalment" class="serif num text-6xl md:text-7xl" style="color:#EDE6D6">S$6,745</div>
+              <div id="instalmentSub" class="text-xs mt-3 num" style="color:#8FA0B0">on a loan of S$1,875,000 at 1.80% over 30 years</div>
+            </div>
+            <div class="relative shrink-0">
+              <canvas id="pieChart" width="128" height="128"></canvas>
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span id="interestShare" class="serif num text-xl" style="color:#EDE6D6">23%</span>
+                <span class="text-[9px] tracking-widest uppercase" style="color:#8FA0B0">interest</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="rule-dark mt-8 pt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6">
+            <div class="hero-stat">
+              <div class="text-[10px] tracking-widest uppercase whitespace-nowrap sm:mb-1" style="color:#8FA0B0">Total interest</div>
+              <div id="totalInterest" class="serif num text-lg md:text-xl" style="color:#EDE6D6">S$553,000</div>
+            </div>
+            <div class="hero-stat">
+              <div class="text-[10px] tracking-widest uppercase whitespace-nowrap sm:mb-1" style="color:#8FA0B0">Total repayment</div>
+              <div id="totalRepayment" class="serif num text-lg md:text-xl" style="color:#EDE6D6">S$2,428,000</div>
+            </div>
+            <div class="hero-stat">
+              <div class="text-[10px] tracking-widest uppercase whitespace-nowrap sm:mb-1" style="color:#8FA0B0">Loan-to-value</div>
+              <div class="flex items-baseline gap-2">
+                <div id="ltvRatio" class="serif num text-lg md:text-xl" style="color:#EDE6D6">75%</div>
+                <div id="ltvStatus" class="text-[10px] whitespace-nowrap" style="color:#8FA0B0">Within 75% cap</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upfront payment summary -->
+        <div class="highlight-card p-8">
+          <div class="flex justify-between items-baseline mb-6">
+            <div class="eyebrow">Upfront Payment Summary</div>
+            <select id="dutiesPayment" class="text-[11px] border-0 bg-transparent font-semibold outline-none cursor-pointer" style="color:var(--brass-deep)">
+              <option value="cpf">Stamp duties via CPF</option>
+              <option value="cash">Stamp duties via cash</option>
+            </select>
+          </div>
+          <div class="space-y-3 text-sm num">
+            <div class="flex justify-between"><span style="color:var(--slate)">Downpayment — cash</span><span id="sumCashDown" class="font-medium">S$125,000</span></div>
+            <div class="flex justify-between"><span style="color:var(--slate)">Downpayment — CPF OA</span><span id="sumCpfDown" class="font-medium">S$500,000</span></div>
+            <div class="flex justify-between"><span style="color:var(--slate)">Buyer's Stamp Duty</span><span id="sumBSD" class="font-medium">S$94,600</span></div>
+            <div class="flex justify-between"><span style="color:var(--slate)">Additional Buyer's Stamp Duty</span><span id="sumABSD" class="font-medium">S$0</span></div>
+          </div>
+          <div class="rule mt-5 pt-5 grid grid-cols-3 gap-6 text-center">
+            <div>
+              <div class="text-[10px] tracking-widest uppercase mb-1" style="color:var(--slate)">Total cash</div>
+              <div id="sumTotalCash" class="serif num text-xl md:text-2xl">S$125,000</div>
+            </div>
+            <div style="border-left:1px solid #E6D9B8">
+              <div class="text-[10px] tracking-widest uppercase mb-1" style="color:var(--slate)">Total CPF</div>
+              <div id="sumTotalCpf" class="serif num text-xl md:text-2xl" style="color:var(--brass-deep)">S$594,600</div>
+            </div>
+            <div style="border-left:1px solid #E6D9B8">
+              <div class="text-[10px] tracking-widest uppercase mb-1" style="color:var(--slate)">Total upfront</div>
+              <div id="sumTotal" class="serif num text-xl md:text-2xl">S$719,600</div>
+            </div>
+          </div>
+          <p class="text-[11px] mt-5 leading-relaxed" style="color:var(--slate)">
+            Excludes legal/conveyancing fees, valuation, and buffer funds. For private resale purchases, stamp duties are typically paid in cash first and reimbursed from CPF OA after completion.
+          </p>
+        </div>
+
+        <!-- Stamp duty detail -->
+        <div class="card p-8">
+          <div class="eyebrow mb-7">Stamp Duty Detail</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div>
+              <div class="text-xs mb-1" style="color:var(--slate)">Buyer's Stamp Duty</div>
+              <div id="bsdAmount" class="serif num text-3xl">S$94,600</div>
+              <div id="bsdBreakdown" class="text-[11px] mt-2 num" style="color:var(--slate)"></div>
+            </div>
+            <div>
+              <div class="text-xs mb-1" style="color:var(--slate)">Additional Buyer's Stamp Duty</div>
+              <div id="absdAmount" class="serif num text-3xl" style="color:var(--brass-deep)">S$0</div>
+              <select id="absdRate" class="field text-xs mt-3">
+                <option value="0">Singapore Citizen • 1st property — 0%</option>
+                <option value="20">Singapore Citizen • 2nd property — 20%</option>
+                <option value="30">Singapore Citizen • 3rd+ property — 30%</option>
+                <option value="5">Singapore PR • 1st property — 5%</option>
+                <option value="30">Singapore PR • 2nd property — 30%</option>
+                <option value="35">Singapore PR • 3rd+ property — 35%</option>
+                <option value="60">Foreigner — 60%</option>
+                <option value="65">Entities / trusts — 65%</option>
+              </select>
+            </div>
+          </div>
+          <div class="rule mt-7 pt-5 text-[11px] leading-relaxed" style="color:var(--slate)">
+            Verify ABSD rates against IRAS before committing — rates shown are the prevailing residential schedule.
+          </div>
+        </div>
+
+        <!-- Amortization (completed / resale) -->
+        <div id="amortCard" class="card">
+          <button onclick="toggleAmortization()" class="w-full p-7 flex justify-between items-center text-left">
+            <div>
+              <div class="eyebrow mb-1">Amortisation schedule</div>
+              <div class="text-xs" style="color:var(--slate)">First twelve months of principal and interest</div>
+            </div>
+            <span id="amortArrow" class="serif text-3xl transition-transform" style="color:var(--brass)">▼</span>
+          </button>
+          <div id="amortizationTable" class="hidden rule">
+            <table class="w-full text-sm num">
+              <thead>
+                <tr class="text-[10px] tracking-widest uppercase" style="color:var(--slate)">
+                  <th class="text-left px-7 py-4 font-semibold">Month</th>
+                  <th class="text-right px-7 py-4 font-semibold">Principal</th>
+                  <th class="text-right px-7 py-4 font-semibold">Interest</th>
+                  <th class="text-right px-7 py-4 font-semibold">Balance</th>
+                </tr>
+              </thead>
+              <tbody id="amortBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Progressive payment schedule (new launch) -->
+        <div id="progressiveCard" class="hidden card">
+          <div class="p-7">
+            <div class="eyebrow mb-1">Progressive Payment Schedule</div>
+            <div class="text-xs" style="color:var(--slate)">Standard payment scheme for new launches — construction stages with indicative months</div>
+          </div>
+          <div class="rule">
+            <div class="prog-row prog-head text-[10px] tracking-widest uppercase font-semibold" style="color:var(--slate)">
+              <div>Construction stage</div>
+              <div class="prog-cell">Est. mth</div>
+              <div class="prog-cell">%</div>
+              <div class="prog-cell">Amount</div>
+              <div class="prog-cell">Funded by</div>
+              <div class="text-right">Instalment after</div>
+            </div>
+            <div id="progBody"></div>
+          </div>
+          <div class="rule p-5 text-[11px] leading-relaxed" style="color:var(--slate)">
+            Months are indicative — actual milestones vary by project and are certified by the developer's architect. Your monthly instalment is recalculated each time the bank disburses, on the cumulative loan drawn over the remaining tenure, so it steps up as construction progresses.
+          </div>
+        </div>
+
+        <p class="text-[11px] text-center leading-relaxed px-8" style="color:var(--slate)">
+          Estimates only, based on the standard amortising-loan formula and prevailing MAS rules (MSR 30%, TDSR 55%, 4% stress-test floor, 75% LTV for a first housing loan).
+          Always verify with HDB, your bank, or a licensed adviser. This is not financial advice.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id)
+const LTV_CAP = 75
+let loanType = 'Bank'
+let downSource = 'percent'
+let cpfTouched = false
+let tenureTouched = false
+let pieChartInstance = null
+
+function fmt(n){ return "S$" + Math.round(n).toLocaleString("en-SG") }
+function fmtPlain(n){ return Math.round(n).toLocaleString("en-SG") }
+function parseNum(v){ return parseFloat(String(v).replace(/[^0-9.]/g,'')) || 0 }
+
+// Comma formatting that preserves the caret position
+function attachComma(el){
+  el.addEventListener("input", () => {
+    const caret = el.selectionStart
+    const digitsBefore = el.value.slice(0, caret).replace(/[^\\d]/g,'').length
+    const digits = el.value.replace(/[^\\d]/g,'')
+    el.value = digits ? Number(digits).toLocaleString("en-SG") : ""
+    let pos = 0, count = 0
+    while (pos < el.value.length && count < digitsBefore){
+      if (/\\d/.test(el.value[pos])) count++
+      pos++
+    }
+    el.setSelectionRange(pos, pos)
+  })
+}
+
+function monthlyPayment(P, annualRate, years){
+  const r = annualRate/100/12, n = years*12
+  if (r === 0) return P/n
+  const f = Math.pow(1+r, n)
+  return P * r * f / (f - 1)
+}
+
+// BSD — residential rates from Feb 2023
+function calcBSD(price){
+  const tiers = [
+    {limit:180000, rate:.01},{limit:180000, rate:.02},{limit:640000, rate:.03},
+    {limit:500000, rate:.04},{limit:1500000, rate:.05},{limit:Infinity, rate:.06}
+  ]
+  let bsd = 0, remaining = price, parts = []
+  for (const t of tiers){
+    const slice = Math.min(remaining, t.limit)
+    if (slice <= 0) break
+    bsd += slice * t.rate
+    parts.push(`${(t.rate*100)}% on ${fmt(slice)}`)
+    remaining -= slice
+  }
+  return { total: bsd, breakdown: parts.join(" • ") }
+}
+
+function buyerAge(){ return parseFloat($("buyerAge").value) || 0 }
+
+// Standard Progressive Payment Scheme stages with indicative months
+const BUC_STAGES = [
+  {name:"Booking fee (OTP)",                pct:5,  month:0},
+  {name:"Exercise of S&P",                  pct:15, month:2},
+  {name:"Foundation completed",             pct:10, month:9},
+  {name:"Reinforced concrete framework",    pct:10, month:15},
+  {name:"Partition walls",                  pct:5,  month:18},
+  {name:"Ceilings",                         pct:5,  month:21},
+  {name:"Doors, windows & wiring",          pct:5,  month:24},
+  {name:"Car park, roads & drains",         pct:5,  month:27},
+  {name:"TOP — keys collection",            pct:25, month:33},
+  {name:"CSC — legal completion",           pct:15, month:45}
+]
+
+function payMonths(P, r, n){
+  if (n <= 0) return P
+  if (r === 0) return P/n
+  const f = Math.pow(1+r, n)
+  return P * r * f / (f - 1)
+}
+
+// Simulate progressive disbursement: buyer's funds cover the early stages,
+// then the bank disburses; instalment recalculated on cumulative loan each time.
+function bucPlan(price, down, rate, years){
+  const r = rate/100/12
+  let buyerLeft = down, cumLoan = 0, firstDisb = null
+  const rows = BUC_STAGES.map(s => {
+    const amt = price * s.pct/100
+    const fromBuyer = Math.min(buyerLeft, amt)
+    buyerLeft -= fromBuyer
+    const fromLoan = amt - fromBuyer
+    if (fromLoan > 0.005 && firstDisb === null) firstDisb = s.month
+    cumLoan += fromLoan
+    return {...s, amt, fromBuyer, fromLoan, cumLoan}
+  })
+  let bal = 0, totalInterest = 0, instalment = 0, firstInstalment = 0
+  if (firstDisb !== null){
+    const endMonth = firstDisb + years*12
+    const byMonth = {}
+    rows.forEach(x => { if (x.fromLoan > 0.005) byMonth[x.month] = (byMonth[x.month]||0) + x.fromLoan })
+    for (let m = 0; m <= endMonth; m++){
+      if (byMonth[m]){
+        bal += byMonth[m]
+        instalment = payMonths(bal, r, endMonth - m)
+        if (!firstInstalment) firstInstalment = instalment
+        rows.forEach(x => { if (x.month === m && x.fromLoan > 0.005) x.instalment = instalment })
+      }
+      if (bal > 0){
+        const i = bal * r
+        const p = Math.min(instalment - i, bal)
+        totalInterest += i
+        bal -= p
+      }
+    }
+  }
+  return {rows, firstInstalment, finalInstalment: instalment, totalInterest}
+}
+
+function renderProgressive(rows){
+  const body = $("progBody")
+  body.innerHTML = ""
+  rows.forEach(x => {
+    const funded = x.fromLoan <= 0.005
+      ? (x.month === 0 ? "Cash" : "CPF / cash")
+      : (x.fromBuyer <= 0.005 ? "Bank loan" : "CPF + loan")
+    const row = document.createElement("div")
+    row.className = "prog-row num"
+    row.innerHTML = `
+      <div class="text-sm">${x.name}</div>
+      <div class="prog-cell text-sm">${x.month}</div>
+      <div class="prog-cell text-sm">${x.pct}%</div>
+      <div class="prog-cell text-sm">${fmt(x.amt)}</div>
+      <div class="prog-cell text-xs" style="color:var(--slate)">${funded}</div>
+      <div class="text-right text-sm font-medium" style="color:var(--brass-deep)">${x.instalment ? fmt(x.instalment) + "/mo" : "—"}</div>
+      <div class="prog-meta">Mth ${x.month} • ${x.pct}% • ${fmt(x.amt)} • ${funded}</div>`
+    body.appendChild(row)
+  })
+}
+
+function applyTenureRules(){
+  const cap = loanType === 'HDB' ? 25 : 30
+  const age = buyerAge()
+  let max = cap
+  if (age >= 21) max = Math.max(Math.min(cap, 65 - age), 5)
+  const slider = $("tenure")
+  slider.max = max
+  if (parseFloat(slider.value) > max) slider.value = max
+  else if (age >= 21 && !tenureTouched) slider.value = max
+  if (age >= 21){
+    $("tenureNote").innerHTML = loanType === 'HDB'
+      ? `At age ${age}: up to age 65 and the HDB cap of <strong>25 years</strong> → max <strong>${max} years</strong>.`
+      : `At age ${age}: banks lend up to <strong>age 65</strong> (cap 30 years) → max <strong>${max} years</strong>.`
+  } else {
+    $("tenureNote").innerHTML = loanType === 'HDB'
+      ? "HDB loan tenure is capped at <strong>25 years</strong>."
+      : "Banks generally lend up to <strong>age 65</strong>; max tenure <strong>30 years</strong> (whichever is shorter)."
+  }
+}
+
+function applyPropertyRules(){
+  const type = $("propertyType").value
+  const hdbAllowed = type === 'HDB'
+  $("btnHDB").disabled = !hdbAllowed
+  if (!hdbAllowed && loanType === 'HDB') setLoanType('Bank', true)
+  applyTenureRules()
+}
+
+function setLoanType(type, silent){
+  loanType = type
+  $("btnHDB").classList.toggle("active", type === 'HDB')
+  $("btnBank").classList.toggle("active", type === 'Bank')
+  $("loanTypeNote").textContent = type === 'HDB'
+    ? "HDB concessionary loan — CPF OA rate + 0.1%"
+    : "Compare fixed vs floating packages across banks"
+  $("interestRate").value = type === 'HDB' ? "2.60" : "1.80"
+  cpfTouched = false
+  tenureTouched = false
+  applyTenureRules()
+  if (!silent) update()
+}
+
+function quickRate(r){ $("interestRate").value = r; update() }
+
+function updateSteps(price, income){
+  const s1done = price > 0
+  const ageOk = buyerAge() >= 21
+  const s2done = s1done && ageOk
+  const debtsEntered = $("otherDebts").value.trim() !== ""
+  const s3done = s2done && income > 0 && debtsEntered
+
+  toggleReveal("downpaymentBlock", s1done)
+  $("step2Card").classList.toggle("step-locked", !s1done)
+  $("step2Hint").classList.toggle("hidden", s1done)
+  toggleReveal("loanDetailsBlock", ageOk)
+  $("step3Card").classList.toggle("step-locked", !s2done)
+  $("step3Hint").classList.toggle("hidden", s2done)
+  toggleReveal("ratioCards", s3done)
+  toggleReveal("resultsColumn", s3done)
+  $("resultsPending").classList.toggle("hidden", s3done)
+
+  // progress icons
+  $("stepIcon1").classList.toggle("done", s1done)
+  $("stepIcon2").classList.toggle("done", s2done)
+  $("stepIcon3").classList.toggle("done", s3done)
+
+  // layout: centre the steps while pending; two columns once complete
+  const stepsCol = $("stepsCol"), resWrap = $("resWrap")
+  if (s3done){
+    stepsCol.style.gridColumn = ""
+    stepsCol.style.maxWidth = ""
+    stepsCol.style.marginLeft = ""
+    stepsCol.style.marginRight = ""
+    stepsCol.style.width = ""
+    resWrap.style.display = ""
+  } else {
+    stepsCol.style.gridColumn = "1 / -1"
+    stepsCol.style.maxWidth = "720px"
+    stepsCol.style.marginLeft = "auto"
+    stepsCol.style.marginRight = "auto"
+    stepsCol.style.width = "100%"
+    resWrap.style.display = "none"
+  }
+  return s3done
+}
+
+function toggleReveal(id, show){
+  const el = $(id)
+  const wasHidden = el.classList.contains("hidden")
+  el.classList.toggle("hidden", !show)
+  if (show && wasHidden) el.classList.add("reveal")
+}
+
+function update(){
+  const price = parseNum($("propertyPrice").value)
+  const income = parseNum($("grossIncome").value)
+  updateSteps(price, income)
+  if (price <= 0) return
+
+  // --- two-way downpayment sync ---
+  let down, pct
+  if (downSource === 'amount'){
+    down = parseNum($("downpaymentAmount").value)
+    pct = down/price*100
+  } else if (downSource === 'loan'){
+    down = price - parseNum($("loanAmount").value)
+    pct = down/price*100
+  } else {
+    pct = parseFloat($("downpaymentPercent").value) || 25
+    down = price * pct/100
+  }
+  const loan = price - down
+
+  if (downSource !== 'amount') $("downpaymentAmount").value = fmtPlain(down)
+  if (downSource !== 'loan')   $("loanAmount").value = fmtPlain(loan)
+  if (downSource !== 'percent') $("downpaymentPercent").value = (Math.round(pct*10)/10)
+
+  const ltv = loan/price*100
+  const ltvOk = ltv <= LTV_CAP + 0.01
+  $("ltvWarning").classList.toggle("hidden", ltvOk)
+
+  // --- CPF / cash split ---
+  const minCash = loanType === 'Bank' ? price * 0.05 : 0
+  const maxCpf = Math.max(down - minCash, 0)
+  let cpf = cpfTouched ? Math.min(parseNum($("cpfAmount").value), maxCpf) : maxCpf
+  if (!cpfTouched || parseNum($("cpfAmount").value) > maxCpf) $("cpfAmount").value = fmtPlain(cpf)
+  const cashDown = down - cpf
+  $("cashAmount").textContent = fmtPlain(cashDown)
+  $("cpfMaxNote").textContent = `Max CPF here: ${fmt(maxCpf)}`
+  $("cashMinNote").textContent = loanType === 'Bank' ? `Min cash: ${fmt(minCash)} (5% of price)` : "No minimum cash for HDB loans"
+  $("downpaymentRule").innerHTML = loanType === 'HDB'
+    ? "<strong>HDB loan:</strong> the full 25% downpayment can be paid entirely with CPF OA, cash, or any mix."
+    : ($("propertyType").value === 'NewLaunch'
+      ? "<strong>New launch (progressive payment):</strong> <strong>5% booking fee in cash</strong>, <strong>15% on exercising the S&P</strong> (CPF OA and/or cash); the bank then disburses stage by stage as construction completes."
+      : "<strong>Bank loan (incl. Pte Condo & EC):</strong> at least <strong>5% in cash</strong>; the remaining <strong>20% can be CPF OA</strong> and/or cash.")
+
+  const rate = parseFloat($("interestRate").value) || 0
+  const years = parseFloat($("tenure").value) || 25
+  $("tenureYears").textContent = years
+  const debts = parseNum($("otherDebts").value)
+  const propType = $("propertyType").value
+  if (loan <= 0 || years <= 0) return
+
+  const monthly = monthlyPayment(loan, rate, years)
+  const isBUC = propType === 'NewLaunch'
+  let totalRepay, totalInterest, plan = null
+  if (isBUC){
+    plan = bucPlan(price, down, rate, years)
+    totalInterest = plan.totalInterest
+    totalRepay = loan + totalInterest
+    $("monthlyInstalment").textContent = fmt(plan.finalInstalment)
+    $("instalmentSub").textContent = `progressive — from ${fmt(plan.firstInstalment)}/mo at first bank disbursement to this after completion — loan ${fmt(loan)} at ${rate}% over ${years} yrs`
+  } else {
+    totalRepay = monthly * years * 12
+    totalInterest = totalRepay - loan
+    $("monthlyInstalment").textContent = fmt(monthly)
+    $("instalmentSub").textContent = `on a loan of ${fmt(loan)} at ${rate}% over ${years} years`
+  }
+  $("progressiveCard").classList.toggle("hidden", !isBUC)
+  $("amortCard").classList.toggle("hidden", isBUC)
+  if (isBUC) renderProgressive(plan.rows)
+
+  $("totalInterest").textContent = fmt(totalInterest)
+  $("totalRepayment").textContent = fmt(totalRepay)
+  $("ltvRatio").textContent = ltv.toFixed(0) + "%"
+  $("ltvStatus").textContent = ltvOk ? "Within 75% cap" : "Exceeds 75% cap"
+  $("ltvStatus").style.color = ltvOk ? "#8FA0B0" : "#E08A7A"
+  $("interestShare").textContent = (totalInterest/totalRepay*100).toFixed(0) + "%"
+
+  // MSR — HDB & EC only
+  const msrApplies = propType === 'HDB' || propType === 'EC'
+  if (msrApplies && income > 0){
+    const msr = monthly/income*100
+    const pass = msr <= 30
+    $("msrPercent").textContent = msr.toFixed(0) + "%"
+    $("msrStatus").textContent = pass ? "WITHIN LIMIT" : "EXCEEDS LIMIT"
+    $("msrStatus").className = "text-[11px] font-semibold tracking-wide " + (pass ? "status-pass" : "status-fail")
+    $("msrStatus").style.color = ""
+    $("msrBar").style.width = Math.min(msr/30*100,100) + "%"
+    $("msrBar").classList.toggle("fail", !pass)
+    $("msrCard").classList.toggle("fail-card", !pass)
+  } else {
+    $("msrPercent").textContent = "N/A"
+    $("msrStatus").textContent = "NOT APPLICABLE"
+    $("msrStatus").className = "text-[11px] font-semibold tracking-wide"
+    $("msrStatus").style.color = "var(--slate)"
+    $("msrBar").style.width = "0%"
+    $("msrCard").classList.remove("fail-card")
+  }
+
+  // TDSR stress test — higher of actual rate and the 4% floor
+  if (income > 0){
+    const stressMonthly = monthlyPayment(loan, Math.max(rate,4), years)
+    const tdsr = (stressMonthly + debts)/income*100
+    const pass = tdsr <= 55
+    $("tdsrPercent").textContent = tdsr.toFixed(0) + "%"
+    $("tdsrStatus").textContent = pass ? "WITHIN LIMIT" : "EXCEEDS LIMIT"
+    $("tdsrStatus").className = "text-[11px] font-semibold tracking-wide " + (pass ? "status-pass" : "status-fail")
+    $("tdsrBar").style.width = Math.min(tdsr/55*100,100) + "%"
+    $("tdsrBar").classList.toggle("fail", !pass)
+    $("tdsrCard").classList.toggle("fail-card", !pass)
+  }
+
+  // Duties
+  const bsd = calcBSD(price)
+  const absdPct = parseFloat($("absdRate").value) || 0
+  const absd = price * absdPct/100
+  $("bsdAmount").textContent = fmt(bsd.total)
+  $("bsdBreakdown").textContent = bsd.breakdown
+  $("absdAmount").textContent = fmt(absd)
+
+  // Upfront summary
+  const duties = bsd.total + absd
+  const dutiesViaCpf = $("dutiesPayment").value === 'cpf'
+  $("sumCashDown").textContent = fmt(cashDown)
+  $("sumCpfDown").textContent = fmt(cpf)
+  $("sumBSD").textContent = fmt(bsd.total)
+  $("sumABSD").textContent = fmt(absd)
+  $("sumTotalCash").textContent = fmt(cashDown + (dutiesViaCpf ? 0 : duties))
+  $("sumTotalCpf").textContent = fmt(cpf + (dutiesViaCpf ? duties : 0))
+  $("sumTotal").textContent = fmt(down + duties)
+
+  drawPie(loan, totalInterest)
+  if (!$("amortizationTable").classList.contains("hidden"))
+    renderAmortization(loan, rate, years)
+}
+
+function drawPie(principal, interest){
+  if (pieChartInstance) pieChartInstance.destroy()
+  pieChartInstance = new Chart($("pieChart"), {
+    type: "doughnut",
+    data: { labels:["Principal","Interest"],
+      datasets:[{ data:[principal, interest], backgroundColor:["#3E5C76","#B89B5E"], borderWidth:0 }] },
+    options: { cutout:"82%", plugins:{ legend:{display:false}, tooltip:{enabled:false} } }
+  })
+}
+
+function renderAmortization(P, annualRate, years){
+  const tbody = $("amortBody")
+  tbody.innerHTML = ""
+  const r = annualRate/100/12
+  let bal = P
+  const pay = monthlyPayment(P, annualRate, years)
+  for (let m = 1; m <= 12; m++){
+    const i = bal * r, p = pay - i
+    bal -= p
+    const tr = document.createElement("tr")
+    tr.style.borderTop = "1px solid var(--hairline)"
+    tr.innerHTML = `<td class="px-7 py-3.5">${m}</td>
+      <td class="text-right px-7 py-3.5">${fmt(p)}</td>
+      <td class="text-right px-7 py-3.5" style="color:var(--brass-deep)">${fmt(i)}</td>
+      <td class="text-right px-7 py-3.5 font-medium">${fmt(Math.max(bal,0))}</td>`
+    tbody.appendChild(tr)
+  }
+  const tr = document.createElement("tr")
+  tr.style.borderTop = "1px solid var(--hairline)"
+  tr.innerHTML = `<td colspan="4" class="px-7 py-4 text-center text-[11px]" style="color:var(--slate)">Full schedule runs ${years*12} months — totals shown above</td>`
+  tbody.appendChild(tr)
+}
+
+function toggleAmortization(){
+  const t = $("amortizationTable")
+  t.classList.toggle("hidden")
+  $("amortArrow").style.transform = t.classList.contains("hidden") ? "" : "rotate(90deg)"
+  if (!t.classList.contains("hidden")) update()
+}
+
+window.onload = function(){
+  ;["propertyPrice","downpaymentAmount","loanAmount","cpfAmount","grossIncome","otherDebts"].forEach(id => attachComma($(id)))
+
+  $("downpaymentPercent").addEventListener("input", () => { downSource='percent'; cpfTouched=false; update() })
+  $("downpaymentAmount").addEventListener("input", () => { downSource='amount'; cpfTouched=false; update() })
+  $("loanAmount").addEventListener("input", () => { downSource='loan'; cpfTouched=false; update() })
+  $("cpfAmount").addEventListener("input", () => { cpfTouched=true; update() })
+  $("buyerAge").addEventListener("input", () => { tenureTouched=false; applyTenureRules(); update() })
+  $("tenure").addEventListener("input", () => { tenureTouched=true; update() })
+  ;["propertyPrice","interestRate","grossIncome","otherDebts","absdRate","dutiesPayment"].forEach(id => {
+    $(id).addEventListener("input", update)
+    $(id).addEventListener("change", update)
+  })
+  $("propertyType").addEventListener("change", () => { applyPropertyRules(); cpfTouched=false; update() })
+  applyPropertyRules()
+  update()
+}
+</script>
     </div>
 
     <!-- DEEP ANALYSIS SUBPAGE FOR ARINA EAST RESIDENCES -->
