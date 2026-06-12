@@ -3001,9 +3001,6 @@
           </div>
           <p id="downpaymentRule" class="text-[11px] mt-4 leading-relaxed" style="color:var(--slate)"></p>
         </div>
-
-        <!-- Step 1 submit: unlocks Step 2 on click -->
-        <button id="step1Submit" onclick="submitStep1()" class="mt-6 w-full py-3 text-sm font-semibold tracking-[0.5px] bg-[#B89B5E] hover:bg-[#9A7F45] active:bg-[#7D6640] text-[#F6F4EF] rounded-3xl transition disabled:opacity-40 disabled:cursor-not-allowed" disabled>Submit &amp; Unlock Step 2</button>
       </section>
 
       <!-- STEP 2 -->
@@ -3045,9 +3042,6 @@
             <div id="tenureNote" class="text-[11px] mt-2 leading-relaxed" style="color:var(--slate)"></div>
           </div>
         </div>
-
-        <!-- Step 2 submit: unlocks Step 3 on click -->
-        <button id="step2Submit" onclick="submitStep2()" class="mt-6 w-full py-3 text-sm font-semibold tracking-[0.5px] bg-[#B89B5E] hover:bg-[#9A7F45] active:bg-[#7D6640] text-[#F6F4EF] rounded-3xl transition disabled:opacity-40 disabled:cursor-not-allowed" disabled>Submit &amp; Unlock Step 3</button>
       </section>
 
       <!-- STEP 3 -->
@@ -3071,9 +3065,6 @@
           </div>
         </div>
         <p class="text-[11px] mt-3" style="color:var(--slate)">Used for the MSR (HDB & EC only) and the TDSR stress test at a 4% floor rate.</p>
-
-        <!-- Step 3 submit: shows results on click -->
-        <button id="step3Submit" onclick="submitStep3()" class="mt-6 w-full py-3 text-sm font-semibold tracking-[0.5px] bg-[#B89B5E] hover:bg-[#9A7F45] active:bg-[#7D6640] text-[#F6F4EF] rounded-3xl transition disabled:opacity-40 disabled:cursor-not-allowed" disabled>Submit &amp; Show Results</button>
       </section>
 
       <!-- Step 3 results: MSR / TDSR (left side, below step 3) -->
@@ -3271,9 +3262,6 @@ let cpfTouched = false
 let tenureTouched = false
 let pieChartInstance = null
 
-let step2Unlocked = false
-let step3Unlocked = false
-
 function fmt(n){ return "S$" + Math.round(n).toLocaleString("en-SG") }
 function fmtPlain(n){ return Math.round(n).toLocaleString("en-SG") }
 function parseNum(v){ return parseFloat(String(v).replace(/[^0-9.]/g,'')) || 0 }
@@ -3461,15 +3449,11 @@ function updateSteps(price, income){
   const s3done = s1done && ageEntered && income > 0 && debtsEntered
 
   toggleReveal("downpaymentBlock", s1done)
-  // Card locks are now primarily driven by explicit submit buttons (step2Unlocked / step3Unlocked flags).
-  // Fall back to data-driven only if never submitted via button.
-  const effectiveStep2Locked = !step2Unlocked && !s1done
-  const effectiveStep3Locked = !step3Unlocked && !(s1done && ageEntered)
-  $("step2Card").classList.toggle("step-locked", effectiveStep2Locked)
-  $("step2Hint").classList.toggle("hidden", !effectiveStep2Locked)
+  $("step2Card").classList.toggle("step-locked", !s1done)
+  $("step2Hint").classList.toggle("hidden", s1done)
   toggleReveal("loanDetailsBlock", ageOk)
-  $("step3Card").classList.toggle("step-locked", effectiveStep3Locked)
-  $("step3Hint").classList.toggle("hidden", !effectiveStep3Locked)
+  $("step3Card").classList.toggle("step-locked", !(s1done && ageEntered))
+  $("step3Hint").classList.toggle("hidden", s1done && ageEntered)
   toggleReveal("ratioCards", s3done)
   toggleReveal("resultsColumn", s3done)
   $("resultsPending").classList.toggle("hidden", s3done)
@@ -3497,103 +3481,14 @@ function updateSteps(price, income){
     resWrap.style.display = "none"
   }
 
-  // Explicitly control disabled state using the submit-unlocked flags (or data if not yet submitted)
-  const step2Active = step2Unlocked || s1done
-  const step3Active = step3Unlocked || (s1done && ageEntered)
-  if ($("buyerAge")) $("buyerAge").disabled = !step2Active
-  if ($("interestRate")) $("interestRate").disabled = !step2Active
-  if ($("tenure")) $("tenure").disabled = !step2Active
-  if ($("grossIncome")) $("grossIncome").disabled = !step3Active
-  if ($("otherDebts")) $("otherDebts").disabled = !step3Active
+  // Explicitly control disabled using data conditions (pure automatic unlock as data is entered)
+  if ($("buyerAge")) $("buyerAge").disabled = !s1done
+  if ($("interestRate")) $("interestRate").disabled = !s1done
+  if ($("tenure")) $("tenure").disabled = !s1done
+  if ($("grossIncome")) $("grossIncome").disabled = !(s1done && ageEntered)
+  if ($("otherDebts")) $("otherDebts").disabled = !(s1done && ageEntered)
 
   return s3done
-}
-
-function syncSubmitButtons(){
-  const priceReady = parseNum($("propertyPrice").value) > 0
-  const ageReady = buyerAge() > 0
-  const incomeReady = parseNum($("grossIncome").value) > 0
-  const debtsReady = $("otherDebts").value.trim() !== ""
-  const s1Btn = $("step1Submit")
-  const s2Btn = $("step2Submit")
-  const s3Btn = $("step3Submit")
-  if (s1Btn) s1Btn.disabled = !priceReady
-  if (s2Btn) s2Btn.disabled = !ageReady
-  if (s3Btn) s3Btn.disabled = !(incomeReady && debtsReady)
-}
-
-function submitStep1(){
-  const price = parseNum($("propertyPrice").value)
-  // ensure commas are visible once the number reaches thousands
-  const pp = $("propertyPrice")
-  if (pp) {
-    const digits = (pp.value || "").replace(/[^\d]/g,"")
-    pp.value = digits ? Number(digits).toLocaleString("en-SG") : ""
-  }
-  if (price <= 0){
-    alert("Please enter the purchase price first.")
-    return
-  }
-  step2Unlocked = true
-  // force unlock visuals and inputs for step 2
-  const card = $("step2Card")
-  if (card) card.classList.remove("step-locked")
-  const hint = $("step2Hint")
-  if (hint) hint.classList.add("hidden")
-  if ($("buyerAge")) $("buyerAge").disabled = false
-  if ($("interestRate")) $("interestRate").disabled = false
-  if ($("tenure")) $("tenure").disabled = false
-  $("stepIcon1").classList.add("done")
-  // hide this submit button now that step is submitted
-  const btn = $("step1Submit")
-  if (btn) btn.style.display = "none"
-  update()
-  syncSubmitButtons()
-}
-
-function submitStep2(){
-  const age = buyerAge()
-  if (age <= 0){
-    alert("Please enter your age (youngest borrower) first.")
-    return
-  }
-  step2Unlocked = true
-  step3Unlocked = true
-  // force unlock step 3
-  const card = $("step3Card")
-  if (card) card.classList.remove("step-locked")
-  const hint = $("step3Hint")
-  if (hint) hint.classList.add("hidden")
-  if ($("grossIncome")) $("grossIncome").disabled = false
-  if ($("otherDebts")) $("otherDebts").disabled = false
-  $("stepIcon2").classList.add("done")
-  const btn = $("step2Submit")
-  if (btn) btn.style.display = "none"
-  update()
-  syncSubmitButtons()
-}
-
-function submitStep3(){
-  const income = parseNum($("grossIncome").value)
-  const debts = $("otherDebts").value.trim()
-  if (income <= 0 || debts === ""){
-    alert("Please enter your gross monthly income and other monthly debts (enter 0 if none) to see results.")
-    return
-  }
-  step3Unlocked = true
-  // force show everything
-  const card = $("step3Card")
-  if (card) card.classList.remove("step-locked")
-  const hint = $("step3Hint")
-  if (hint) hint.classList.add("hidden")
-  $("ratioCards").classList.remove("hidden")
-  $("resultsColumn").classList.remove("hidden")
-  $("resultsPending").classList.add("hidden")
-  $("stepIcon3").classList.add("done")
-  const btn = $("step3Submit")
-  if (btn) btn.style.display = "none"
-  update()
-  syncSubmitButtons()
 }
 
 function toggleReveal(id, show){
@@ -3616,9 +3511,20 @@ function update(){
     if (pp.value !== cleanFormatted) pp.value = cleanFormatted
   }
 
-  if (price <= 0) return
+  // Safety net commas for Step 3 fields
+  const gi = $("grossIncome")
+  if (gi && document.activeElement !== gi && income > 0) {
+    const f = income.toLocaleString("en-SG")
+    if (gi.value !== f) gi.value = f
+  }
+  const od = $("otherDebts")
+  const debtsNum = parseNum($("otherDebts").value)
+  if (od && document.activeElement !== od && debtsNum > 0) {
+    const f = debtsNum.toLocaleString("en-SG")
+    if (od.value !== f) od.value = f
+  }
 
-  syncSubmitButtons()
+  if (price <= 0) return
 
   // --- two-way downpayment sync ---
   let down, pct
@@ -3746,8 +3652,6 @@ function update(){
   drawPie(loan, totalInterest)
   if (!$("amortizationTable").classList.contains("hidden"))
     renderAmortization(loan, rate, years)
-
-  syncSubmitButtons()
 }
 
 function drawPie(principal, interest){
@@ -3791,8 +3695,8 @@ function toggleAmortization(){
 }
 
 window.onload = function(){
-  // attachComma for other money fields (downpayment, loan, cpf, gross, debts)
-  ;["downpaymentAmount","loanAmount","cpfAmount","grossIncome","otherDebts"].forEach(id => attachComma($(id)))
+  // attachComma for other money fields (downpayment, loan, cpf)
+  ;["downpaymentAmount","loanAmount","cpfAmount"].forEach(id => attachComma($(id)))
 
   // Dedicated live thousands-comma formatter for Purchase Price (fires on every keystroke)
   // This guarantees commas appear immediately as the user keys in the price.
@@ -3818,6 +3722,60 @@ window.onload = function(){
     })
     priceInput.addEventListener("blur", () => {
       const el = priceInput
+      const digits = (el.value || "").replace(/[^\d]/g, "")
+      el.value = digits ? Number(digits).toLocaleString("en-SG") : ""
+    })
+  }
+
+  // Dedicated live comma formatting for Step 3 money fields (gross income and other debts)
+  // Ensures commas appear as soon as the number is in thousands (e.g. 30,000)
+  const giInput = $("grossIncome")
+  if (giInput) {
+    giInput.addEventListener("input", () => {
+      const el = giInput
+      const digits = (el.value || "").replace(/[^\d]/g, "")
+      const formatted = digits ? Number(digits).toLocaleString("en-SG") : ""
+      if (el.value !== formatted) {
+        const oldCaret = el.selectionStart || 0
+        const digitsBefore = (el.value.slice(0, oldCaret) || "").replace(/[^\d]/g, "").length
+        el.value = formatted
+        let pos = 0, count = 0
+        while (pos < el.value.length && count < digitsBefore) {
+          if (/\d/.test(el.value[pos])) count++
+          pos++
+        }
+        try { el.setSelectionRange(pos, pos) } catch (e) {}
+      }
+      update()
+    })
+    giInput.addEventListener("blur", () => {
+      const el = giInput
+      const digits = (el.value || "").replace(/[^\d]/g, "")
+      el.value = digits ? Number(digits).toLocaleString("en-SG") : ""
+    })
+  }
+
+  const odInput = $("otherDebts")
+  if (odInput) {
+    odInput.addEventListener("input", () => {
+      const el = odInput
+      const digits = (el.value || "").replace(/[^\d]/g, "")
+      const formatted = digits ? Number(digits).toLocaleString("en-SG") : ""
+      if (el.value !== formatted) {
+        const oldCaret = el.selectionStart || 0
+        const digitsBefore = (el.value.slice(0, oldCaret) || "").replace(/[^\d]/g, "").length
+        el.value = formatted
+        let pos = 0, count = 0
+        while (pos < el.value.length && count < digitsBefore) {
+          if (/\d/.test(el.value[pos])) count++
+          pos++
+        }
+        try { el.setSelectionRange(pos, pos) } catch (e) {}
+      }
+      update()
+    })
+    odInput.addEventListener("blur", () => {
+      const el = odInput
       const digits = (el.value || "").replace(/[^\d]/g, "")
       el.value = digits ? Number(digits).toLocaleString("en-SG") : ""
     })
