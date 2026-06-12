@@ -2884,19 +2884,90 @@
       </div>
     </div>
 
-    <!-- MORTGAGE LOAN CALCULATOR SUBPAGE -->
+    <!-- MORTGAGE LOAN CALCULATOR SUBPAGE (exact copy from provided v21 standalone) -->
     <div id="page-mortgage-calculator" class="page-section bg-[#F6F4EF]">
-      <div class="max-w-6xl mx-auto px-6 py-12">
+      <style>
+
+
+:root{
+  --ink:#0C1B2A;
+  --ink-soft:#16293D;
+  --porcelain:#F6F4EF;
+  --paper:#FFFFFF;
+  --hairline:#E3DDD0;
+  --hairline-strong:#CFC2A0;
+  --brass:#B89B5E;
+  --brass-deep:#9A7F45;
+  --slate:#5C6B7A;
+  --emerald:#1E6E5C;
+  --claret:#A93B2A;
+}
+
+.serif{font-family:'Marcellus',serif;}
+.num{font-variant-numeric:tabular-nums;}
+.eyebrow{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--slate);font-weight:600;}
+.eyebrow-brass{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:600;}
+.card{background:var(--paper);border:1px solid var(--hairline);}
+.step-card{background:var(--paper);border:1.5px solid var(--hairline-strong);}
+.step-badge{width:1.7rem;height:1.7rem;flex:none;border:1px solid var(--brass);color:var(--brass-deep);font-family:'Marcellus',serif;display:flex;align-items:center;justify-content:center;font-size:.85rem;}
+.field{width:100%;background:var(--paper);border:1px solid var(--hairline);padding:.8rem 1rem;outline:none;transition:border-color .2s;}
+.field:focus{border-color:var(--brass);}
+.field-static{width:100%;background:var(--porcelain);border:1px solid var(--hairline);padding:.8rem 1rem;color:var(--ink);}
+select.field{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23B89B5E'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;}
+input[type="range"]{accent-color:var(--brass);}
+.toggle-btn{flex:1;padding:.7rem 0;font-size:.8rem;font-weight:600;letter-spacing:.05em;border:1px solid var(--hairline);color:var(--slate);transition:all .2s;background:var(--paper);}
+.toggle-btn.active{background:var(--ink);color:#EDE6D6;border-color:var(--ink);}
+.toggle-btn:disabled{opacity:.35;cursor:not-allowed;}
+.chip{cursor:pointer;border:1px solid var(--hairline);padding:.25rem .7rem;font-size:.7rem;letter-spacing:.06em;color:var(--slate);transition:all .2s;}
+.chip:hover{border-color:var(--brass);color:var(--brass-deep);}
+.bar-track{height:3px;background:var(--hairline);}
+.bar-fill{height:3px;background:var(--brass);transition:width .4s ease, background .3s;}
+.bar-fill.fail{background:var(--claret);}
+.status-pass{color:var(--emerald);}
+.status-fail{color:var(--claret);}
+.rule{border-top:1px solid var(--hairline);}
+.rule-dark{border-top:1px solid rgba(237,230,214,.18);}
+.card.fail-card{background:#FBEFEB;border-color:#E5BBAF;}
+.highlight-card{background:#FAF5E9;border:1px solid #DCCB9F;border-top:3px solid var(--brass);}
+.highlight-card .rule{border-top-color:#E6D9B8;}
+.hero-stat{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;}
+@media (min-width:640px){
+  .hero-stat{display:block;}
+  .hero-stat + .hero-stat{border-left:1px solid rgba(237,230,214,.18);padding-left:1.5rem;}
+}
+.reveal{animation:fadeUp .45s ease both;}
+.step-locked{opacity:.45;pointer-events:none;}
+/* Step progress icons (top banner) */
+.prog-icon{width:2.7rem;height:2.7rem;border:1px solid var(--hairline-strong);border-radius:9999px;display:flex;align-items:center;justify-content:center;color:var(--slate);transition:all .3s ease;background:var(--paper);}
+.prog-icon svg{width:1.15rem;height:1.15rem;}
+.prog-icon.done{background:var(--ink);border-color:var(--ink);color:#EDE6D6;}
+.prog-line{height:1px;width:2rem;background:var(--hairline-strong);}
+@media (min-width:640px){.prog-line{width:4rem;}}
+/* Progressive schedule: stacked rows on mobile, 6-column grid on sm+ */
+.prog-row{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:1rem;row-gap:.2rem;align-items:baseline;padding:.8rem 1.5rem;border-top:1px solid var(--hairline);}
+.prog-cell{display:none;}
+.prog-meta{grid-column:1/-1;font-size:.68rem;color:var(--slate);font-variant-numeric:tabular-nums;}
+.prog-head{border-top:none;}
+@media (min-width:640px){
+  .prog-row{grid-template-columns:minmax(0,2.4fr) .7fr .5fr 1.1fr 1fr 1.2fr;}
+  .prog-cell{display:block;text-align:right;}
+  .prog-meta{display:none;}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+::selection{background:var(--brass);color:#fff;}
+
+      </style>
+<div class="max-w-6xl mx-auto px-6 py-12">
 
   <!-- Masthead -->
   <header class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 pb-8 mb-10" style="border-bottom:1px solid var(--hairline)">
     <div>
       <h1 class="serif text-4xl md:text-5xl leading-tight">Singapore Mortgage Calculator</h1>
-      <p class="text-sm mt-2" style="color:var(--slate)">Three quick steps — your instalment, MSR • TDSR affordability, stamp duties, and upfront cash & CPF under current MAS rules.</p>
+      <p class="text-sm mt-2" style="color:var(--slate)">Three quick steps — your instalment, MSR · TDSR affordability, stamp duties, and upfront cash &amp; CPF under current MAS rules.</p>
     </div>
     <div class="text-right">
       <div class="eyebrow mb-1">Reference rates</div>
-      <div class="serif text-lg num">HDB 2.60% <span style="color:var(--hairline)">•</span> Bank from ~1.80%</div>
+      <div class="serif text-lg num">HDB 2.60% <span style="color:var(--hairline)">·</span> Bank from ~1.80%</div>
       <div class="text-[11px]" style="color:var(--slate)">Indicative only — verify current bank packages</div>
     </div>
   </header>
@@ -2928,7 +2999,7 @@
         <div class="text-[10px] tracking-widest uppercase font-semibold" style="color:var(--slate)">Household</div>
       </div>
     </div>
-    <p class="text-sm mt-5 max-w-md mx-auto" style="color:var(--slate)">Complete the three steps to see your monthly instalment, upfront cash & CPF, and stamp duties.</p>
+    <p class="text-sm mt-5 max-w-md mx-auto" style="color:var(--slate)">Complete the three steps to see your monthly instalment, upfront cash &amp; CPF, and stamp duties.</p>
   </div>
 
   <div class="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
@@ -2940,7 +3011,7 @@
       <section class="step-card p-8">
         <div class="flex items-center gap-3 mb-7">
           <div class="step-badge">1</div>
-          <div class="eyebrow">Step 1 • The Property</div>
+          <div class="eyebrow">Step 1 · The Property</div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -2954,8 +3025,11 @@
             </select>
           </div>
           <div>
-            <label class="block text-xs font-medium mb-2" style="color:var(--slate)">Purchase price (S$)</label>
-            <input type="text" inputmode="numeric" id="propertyPrice" placeholder="e.g. 2,500,000" class="field num text-xl serif">
+            <label class="block text-xs font-medium mb-2" style="color:var(--slate)">Purchase price</label>
+            <div class="relative">
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm" style="color:var(--brass)">S$</span>
+              <input type="text" inputmode="numeric" id="propertyPrice" placeholder="e.g. 2,500,000" class="field num pl-11 text-xl serif">
+            </div>
           </div>
         </div>
 
@@ -3004,13 +3078,13 @@
       </section>
 
       <!-- STEP 2 -->
-      <section id="step2Card" class="step-card step-locked p-8">
+      <section id="step2Card" class="step-card p-8">
         <div class="flex items-center justify-between mb-7">
           <div class="flex items-center gap-3">
             <div class="step-badge">2</div>
-            <div class="eyebrow">Step 2 • The Loan</div>
+            <div class="eyebrow">Step 2 · The Loan</div>
           </div>
-          <div id="step2Hint" class="text-[11px]" style="color:var(--brass-deep)">Enter your purchase price in Step 1 first</div>
+          <div id="step2Hint" class="hidden text-[11px]" style="color:var(--brass-deep)">Enter your purchase price in Step 1 first</div>
         </div>
 
         <div>
@@ -3049,7 +3123,7 @@
         <div class="flex items-center justify-between mb-7">
           <div class="flex items-center gap-3">
             <div class="step-badge">3</div>
-            <div class="eyebrow">Step 3 • The Household</div>
+            <div class="eyebrow">Step 3 · The Household</div>
           </div>
           <div id="step3Hint" class="text-[11px]" style="color:var(--brass-deep)">Enter your age in Step 2 first</div>
         </div>
@@ -3064,14 +3138,14 @@
             <input type="text" inputmode="numeric" id="otherDebts" placeholder="enter 0 if none" class="field num text-sm">
           </div>
         </div>
-        <p class="text-[11px] mt-3" style="color:var(--slate)">Used for the MSR (HDB & EC only) and the TDSR stress test at a 4% floor rate.</p>
+        <p class="text-[11px] mt-3" style="color:var(--slate)">Used for the MSR (HDB &amp; EC only) and the TDSR stress test at a 4% floor rate.</p>
       </section>
 
       <!-- Step 3 results: MSR / TDSR (left side, below step 3) -->
       <div id="ratioCards" class="hidden space-y-6">
         <div id="msrCard" class="card p-7">
           <div class="flex justify-between items-baseline">
-            <div class="eyebrow">MSR • HDB & EC</div>
+            <div class="eyebrow">MSR · HDB &amp; EC</div>
             <div id="msrStatus" class="text-[11px] font-semibold tracking-wide status-pass">WITHIN LIMIT</div>
           </div>
           <div id="msrPercent" class="serif num text-5xl mt-3">25%</div>
@@ -3082,7 +3156,7 @@
         </div>
         <div id="tdsrCard" class="card p-7">
           <div class="flex justify-between items-baseline">
-            <div class="eyebrow">TDSR • Stress test 4%</div>
+            <div class="eyebrow">TDSR · Stress test 4%</div>
             <div id="tdsrStatus" class="text-[11px] font-semibold tracking-wide status-pass">WITHIN LIMIT</div>
           </div>
           <div id="tdsrPercent" class="serif num text-5xl mt-3">41%</div>
@@ -3182,12 +3256,12 @@
               <div class="text-xs mb-1" style="color:var(--slate)">Additional Buyer's Stamp Duty</div>
               <div id="absdAmount" class="serif num text-3xl" style="color:var(--brass-deep)">S$0</div>
               <select id="absdRate" class="field text-xs mt-3">
-                <option value="0">Singapore Citizen • 1st property — 0%</option>
-                <option value="20">Singapore Citizen • 2nd property — 20%</option>
-                <option value="30">Singapore Citizen • 3rd+ property — 30%</option>
-                <option value="5">Singapore PR • 1st property — 5%</option>
-                <option value="30">Singapore PR • 2nd property — 30%</option>
-                <option value="35">Singapore PR • 3rd+ property — 35%</option>
+                <option value="0">Singapore Citizen · 1st property — 0%</option>
+                <option value="20">Singapore Citizen · 2nd property — 20%</option>
+                <option value="30">Singapore Citizen · 3rd+ property — 30%</option>
+                <option value="5">Singapore PR · 1st property — 5%</option>
+                <option value="30">Singapore PR · 2nd property — 30%</option>
+                <option value="35">Singapore PR · 3rd+ property — 35%</option>
                 <option value="60">Foreigner — 60%</option>
                 <option value="65">Entities / trusts — 65%</option>
               </select>
@@ -3205,7 +3279,7 @@
               <div class="eyebrow mb-1">Amortisation schedule</div>
               <div class="text-xs" style="color:var(--slate)">First twelve months of principal and interest</div>
             </div>
-            <span id="amortArrow" class="serif text-3xl transition-transform" style="color:var(--brass)">▼</span>
+            <span id="amortArrow" class="serif text-3xl transition-transform" style="color:var(--brass)">›</span>
           </button>
           <div id="amortizationTable" class="hidden rule">
             <table class="w-full text-sm num">
@@ -3252,8 +3326,7 @@
     </div>
   </div>
 </div>
-
-<script>
+      <script>
 const $ = id => document.getElementById(id)
 const LTV_CAP = 75
 let loanType = 'Bank'
@@ -3303,7 +3376,7 @@ function calcBSD(price){
     parts.push(`${(t.rate*100)}% on ${fmt(slice)}`)
     remaining -= slice
   }
-  return { total: bsd, breakdown: parts.join(" • ") }
+  return { total: bsd, breakdown: parts.join("  ·  ") }
 }
 
 function buyerAge(){ return parseFloat($("buyerAge").value) || 0 }
@@ -3382,7 +3455,7 @@ function renderProgressive(rows){
       <div class="prog-cell text-sm">${fmt(x.amt)}</div>
       <div class="prog-cell text-xs" style="color:var(--slate)">${funded}</div>
       <div class="text-right text-sm font-medium" style="color:var(--brass-deep)">${x.instalment ? fmt(x.instalment) + "/mo" : "—"}</div>
-      <div class="prog-meta">Mth ${x.month} • ${x.pct}% • ${fmt(x.amt)} • ${funded}</div>`
+      <div class="prog-meta">Mth ${x.month} · ${x.pct}% · ${fmt(x.amt)} · ${funded}</div>`
     body.appendChild(row)
   })
 }
@@ -3410,26 +3483,17 @@ function applyTenureRules(){
 function applyPropertyRules(){
   const type = $("propertyType").value
   const hdbAllowed = type === 'HDB'
-  const hdbBtn = $("btnHDB")
-  hdbBtn.disabled = !hdbAllowed
-  if (!hdbAllowed) {
-    // visually ensure HDB is not active when disallowed (New Launch / Private resale / EC)
-    hdbBtn.classList.remove("active")
-    if (loanType === 'HDB') setLoanType('Bank', true)
-  }
+  $("btnHDB").disabled = !hdbAllowed
+  if (!hdbAllowed && loanType === 'HDB') setLoanType('Bank', true)
   applyTenureRules()
 }
 
 function setLoanType(type, silent){
-  // Defensive: never allow switching to HDB loan when the property type disallows it
-  if (type === 'HDB' && $("btnHDB") && $("btnHDB").disabled) {
-    type = 'Bank'
-  }
   loanType = type
   $("btnHDB").classList.toggle("active", type === 'HDB')
   $("btnBank").classList.toggle("active", type === 'Bank')
   $("loanTypeNote").textContent = type === 'HDB'
-    ? "HDB concessionary loan — CPF OA rate + 0.1%"
+    ? "HDB concessionary loan · CPF OA rate + 0.1%"
     : "Compare fixed vs floating packages across banks"
   $("interestRate").value = type === 'HDB' ? "2.60" : "1.80"
   cpfTouched = false
@@ -3442,23 +3506,22 @@ function quickRate(r){ $("interestRate").value = r; update() }
 
 function updateSteps(price, income){
   const s1done = price > 0
-  const ageEntered = buyerAge() > 0
   const ageOk = buyerAge() >= 21
-  const s2done = s1done && ageEntered
+  const s2done = s1done && ageOk
   const debtsEntered = $("otherDebts").value.trim() !== ""
-  const s3done = s1done && ageEntered && income > 0 && debtsEntered
+  const s3done = s2done && income > 0 && debtsEntered
 
   toggleReveal("downpaymentBlock", s1done)
   $("step2Card").classList.toggle("step-locked", !s1done)
   $("step2Hint").classList.toggle("hidden", s1done)
   toggleReveal("loanDetailsBlock", ageOk)
-  $("step3Card").classList.toggle("step-locked", !(s1done && ageEntered))
-  $("step3Hint").classList.toggle("hidden", s1done && ageEntered)
+  $("step3Card").classList.toggle("step-locked", !s2done)
+  $("step3Hint").classList.toggle("hidden", s2done)
   toggleReveal("ratioCards", s3done)
   toggleReveal("resultsColumn", s3done)
   $("resultsPending").classList.toggle("hidden", s3done)
 
-  // progress icons (data driven)
+  // progress icons
   $("stepIcon1").classList.toggle("done", s1done)
   $("stepIcon2").classList.toggle("done", s2done)
   $("stepIcon3").classList.toggle("done", s3done)
@@ -3480,14 +3543,6 @@ function updateSteps(price, income){
     stepsCol.style.width = "100%"
     resWrap.style.display = "none"
   }
-
-  // Explicitly control disabled using data conditions (pure automatic unlock as data is entered)
-  if ($("buyerAge")) $("buyerAge").disabled = !s1done
-  if ($("interestRate")) $("interestRate").disabled = !s1done
-  if ($("tenure")) $("tenure").disabled = !s1done
-  if ($("grossIncome")) $("grossIncome").disabled = !(s1done && ageEntered)
-  if ($("otherDebts")) $("otherDebts").disabled = !(s1done && ageEntered)
-
   return s3done
 }
 
@@ -3502,28 +3557,6 @@ function update(){
   const price = parseNum($("propertyPrice").value)
   const income = parseNum($("grossIncome").value)
   updateSteps(price, income)
-
-  // Safety net: keep purchase price nicely comma-formatted whenever update runs
-  // (especially useful on blur from other fields or after downpayment syncs)
-  const pp = $("propertyPrice")
-  if (pp && document.activeElement !== pp && price > 0) {
-    const cleanFormatted = price.toLocaleString("en-SG")
-    if (pp.value !== cleanFormatted) pp.value = cleanFormatted
-  }
-
-  // Safety net commas for Step 3 fields
-  const gi = $("grossIncome")
-  if (gi && document.activeElement !== gi && income > 0) {
-    const f = income.toLocaleString("en-SG")
-    if (gi.value !== f) gi.value = f
-  }
-  const od = $("otherDebts")
-  const debtsNum = parseNum($("otherDebts").value)
-  if (od && document.activeElement !== od && debtsNum > 0) {
-    const f = debtsNum.toLocaleString("en-SG")
-    if (od.value !== f) od.value = f
-  }
-
   if (price <= 0) return
 
   // --- two-way downpayment sync ---
@@ -3560,8 +3593,8 @@ function update(){
   $("downpaymentRule").innerHTML = loanType === 'HDB'
     ? "<strong>HDB loan:</strong> the full 25% downpayment can be paid entirely with CPF OA, cash, or any mix."
     : ($("propertyType").value === 'NewLaunch'
-      ? "<strong>New launch (progressive payment):</strong> <strong>5% booking fee in cash</strong>, <strong>15% on exercising the S&P</strong> (CPF OA and/or cash); the bank then disburses stage by stage as construction completes."
-      : "<strong>Bank loan (incl. Pte Condo & EC):</strong> at least <strong>5% in cash</strong>; the remaining <strong>20% can be CPF OA</strong> and/or cash.")
+      ? "<strong>New launch (progressive payment):</strong> <strong>5% booking fee in cash</strong>, <strong>15% on exercising the S&amp;P</strong> (CPF OA and/or cash); the bank then disburses stage by stage as construction completes."
+      : "<strong>Bank loan (incl. Pte Condo &amp; EC):</strong> at least <strong>5% in cash</strong>; the remaining <strong>20% can be CPF OA</strong> and/or cash.")
 
   const rate = parseFloat($("interestRate").value) || 0
   const years = parseFloat($("tenure").value) || 25
@@ -3578,7 +3611,7 @@ function update(){
     totalInterest = plan.totalInterest
     totalRepay = loan + totalInterest
     $("monthlyInstalment").textContent = fmt(plan.finalInstalment)
-    $("instalmentSub").textContent = `progressive — from ${fmt(plan.firstInstalment)}/mo at first bank disbursement to this after completion — loan ${fmt(loan)} at ${rate}% over ${years} yrs`
+    $("instalmentSub").textContent = `progressive — from ${fmt(plan.firstInstalment)}/mo at first bank disbursement to this after completion · loan ${fmt(loan)} at ${rate}% over ${years} yrs`
   } else {
     totalRepay = monthly * years * 12
     totalInterest = totalRepay - loan
@@ -3683,7 +3716,7 @@ function renderAmortization(P, annualRate, years){
   }
   const tr = document.createElement("tr")
   tr.style.borderTop = "1px solid var(--hairline)"
-  tr.innerHTML = `<td colspan="4" class="px-7 py-4 text-center text-[11px]" style="color:var(--slate)">Full schedule runs ${years*12} months — totals shown above</td>`
+  tr.innerHTML = `<td colspan="4" class="px-7 py-4 text-center text-[11px]" style="color:var(--slate)">Full schedule runs ${years*12} months · totals shown above</td>`
   tbody.appendChild(tr)
 }
 
@@ -3694,92 +3727,7 @@ function toggleAmortization(){
   if (!t.classList.contains("hidden")) update()
 }
 
-window.onload = function(){
-  // attachComma for other money fields (downpayment, loan, cpf)
-  ;["downpaymentAmount","loanAmount","cpfAmount"].forEach(id => attachComma($(id)))
-
-  // Dedicated live thousands-comma formatter for Purchase Price (fires on every keystroke)
-  // This guarantees commas appear immediately as the user keys in the price.
-  const priceInput = $("propertyPrice")
-  if (priceInput) {
-    priceInput.addEventListener("input", () => {
-      const el = priceInput
-      const digits = (el.value || "").replace(/[^\d]/g, "")
-      const formatted = digits ? Number(digits).toLocaleString("en-SG") : ""
-      if (el.value !== formatted) {
-        // preserve caret by counting digits before the original position (robust during typing)
-        const oldCaret = el.selectionStart || 0
-        const digitsBefore = (el.value.slice(0, oldCaret) || "").replace(/[^\d]/g, "").length
-        el.value = formatted
-        let pos = 0, count = 0
-        while (pos < el.value.length && count < digitsBefore) {
-          if (/\d/.test(el.value[pos])) count++
-          pos++
-        }
-        try { el.setSelectionRange(pos, pos) } catch (e) {}
-      }
-      update()
-    })
-    priceInput.addEventListener("blur", () => {
-      const el = priceInput
-      const digits = (el.value || "").replace(/[^\d]/g, "")
-      el.value = digits ? Number(digits).toLocaleString("en-SG") : ""
-    })
-  }
-
-  // Dedicated live comma formatting for Step 3 money fields (gross income and other debts)
-  // Ensures commas appear as soon as the number is in thousands (e.g. 30,000)
-  const giInput = $("grossIncome")
-  if (giInput) {
-    giInput.addEventListener("input", () => {
-      const el = giInput
-      const digits = (el.value || "").replace(/[^\d]/g, "")
-      const formatted = digits ? Number(digits).toLocaleString("en-SG") : ""
-      if (el.value !== formatted) {
-        const oldCaret = el.selectionStart || 0
-        const digitsBefore = (el.value.slice(0, oldCaret) || "").replace(/[^\d]/g, "").length
-        el.value = formatted
-        let pos = 0, count = 0
-        while (pos < el.value.length && count < digitsBefore) {
-          if (/\d/.test(el.value[pos])) count++
-          pos++
-        }
-        try { el.setSelectionRange(pos, pos) } catch (e) {}
-      }
-      update()
-    })
-    giInput.addEventListener("blur", () => {
-      const el = giInput
-      const digits = (el.value || "").replace(/[^\d]/g, "")
-      el.value = digits ? Number(digits).toLocaleString("en-SG") : ""
-    })
-  }
-
-  const odInput = $("otherDebts")
-  if (odInput) {
-    odInput.addEventListener("input", () => {
-      const el = odInput
-      const digits = (el.value || "").replace(/[^\d]/g, "")
-      const formatted = digits ? Number(digits).toLocaleString("en-SG") : ""
-      if (el.value !== formatted) {
-        const oldCaret = el.selectionStart || 0
-        const digitsBefore = (el.value.slice(0, oldCaret) || "").replace(/[^\d]/g, "").length
-        el.value = formatted
-        let pos = 0, count = 0
-        while (pos < el.value.length && count < digitsBefore) {
-          if (/\d/.test(el.value[pos])) count++
-          pos++
-        }
-        try { el.setSelectionRange(pos, pos) } catch (e) {}
-      }
-      update()
-    })
-    odInput.addEventListener("blur", () => {
-      const el = odInput
-      const digits = (el.value || "").replace(/[^\d]/g, "")
-      el.value = digits ? Number(digits).toLocaleString("en-SG") : ""
-    })
-  }
+;["propertyPrice","downpaymentAmount","loanAmount","cpfAmount","grossIncome","otherDebts"].forEach(id => attachComma($(id)))
 
   $("downpaymentPercent").addEventListener("input", () => { downSource='percent'; cpfTouched=false; update() })
   $("downpaymentAmount").addEventListener("input", () => { downSource='amount'; cpfTouched=false; update() })
@@ -3787,17 +3735,15 @@ window.onload = function(){
   $("cpfAmount").addEventListener("input", () => { cpfTouched=true; update() })
   $("buyerAge").addEventListener("input", () => { tenureTouched=false; applyTenureRules(); update() })
   $("tenure").addEventListener("input", () => { tenureTouched=true; update() })
-  ;["interestRate","grossIncome","otherDebts","absdRate","dutiesPayment"].forEach(id => {
+  ;["propertyPrice","interestRate","grossIncome","otherDebts","absdRate","dutiesPayment"].forEach(id => {
     $(id).addEventListener("input", update)
     $(id).addEventListener("change", update)
   })
   $("propertyType").addEventListener("change", () => { applyPropertyRules(); cpfTouched=false; update() })
   applyPropertyRules()
   update()
-}
-</script>
+      </script>
     </div>
-
     <!-- DEEP ANALYSIS SUBPAGE FOR ARINA EAST RESIDENCES -->
     <div id="page-deep-analysis-arina" class="page-section bg-white">
       <div class="max-w-4xl mx-auto px-8 py-16">
