@@ -3617,6 +3617,14 @@ function update(){
   }
   $("progressiveCard").classList.toggle("hidden", !isBUC)
   $("amortCard").classList.toggle("hidden", isBUC)
+  if (!isBUC) {
+    // Auto-expand the 12-month amortisation table for HDB, Resale (Private) and EC
+    // (as shown in the reference image). For New Launch the progressive schedule is used instead.
+    const t = $("amortizationTable")
+    if (t) t.classList.remove("hidden")
+    const arrow = $("amortArrow")
+    if (arrow) arrow.style.transform = "rotate(90deg)"
+  }
   if (isBUC) renderProgressive(plan.rows)
 
   $("totalInterest").textContent = fmt(totalInterest)
