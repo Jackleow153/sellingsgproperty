@@ -4098,11 +4098,10 @@ function toggleAmortization(){
             
             <div class="px-8 pt-4 border-b flex overflow-x-auto">
                 <div onclick="switchProjectTab(0)" class="project-tab active px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="0">Overview</div>
-                <div onclick="hideProjectModal(); showPage('deep-analysis-arina')" class="project-tab px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="1">Deep Analysis</div>
-                <div onclick="switchProjectTab(2)" class="project-tab px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="2">Unit Mix &amp; Pricing</div>
-                <div onclick="switchProjectTab(3)" class="project-tab px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="3">Site Plan &amp; Location</div>
-                <div onclick="switchProjectTab(4)" class="project-tab px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="4">Amenities</div>
-                <div onclick="switchProjectTab(5)" class="project-tab px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="5">Developers</div>
+                <div onclick="switchProjectTab(1)" class="project-tab px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="1">Unit Mix &amp; Pricing</div>
+                <div onclick="switchProjectTab(2)" class="project-tab px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="2">Site Plan &amp; Location</div>
+                <div onclick="switchProjectTab(3)" class="project-tab px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="3">Amenities</div>
+                <div onclick="switchProjectTab(4)" class="project-tab px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="4">Developers</div>
             </div>
             
             <div id="modal-tab-content" class="flex-1 overflow-auto p-8 text-sm">
@@ -4574,37 +4573,6 @@ function toggleAmortization(){
                     break
                     
                 case 1:
-                    // Deep Analysis tab - inserted for Arina East (id=5), opens subpage
-                    if (currentProject.id === 5) {
-                        html = `
-                            <div class="prose prose-sm max-w-none">
-                                <h2 class="text-2xl font-bold mb-4">Deep Analysis: Arina East Residences 2026</h2>
-                                <p class="text-lg">Arina East Residences stands out as one of the <strong>few freehold</strong> new launch condos in recent times. Located in the <strong>Tanjong Rhu</strong> area (D15), this boutique development by <strong>ZACD Group</strong> and partners offers only <strong>107 units</strong>, making it highly exclusive.</p>
-                                
-                                <h3 class="mt-6">Key Highlights</h3>
-                                <ul>
-                                    <li><strong>Freehold</strong> tenure (rare for new launches in this price range)</li>
-                                    <li>Small scale (107 units) → low density and exclusivity</li>
-                                    <li><strong>Thomson-East Coast Line</strong> connectivity via Katong Park MRT</li>
-                                    <li>Attractive <strong>Tanjong Rhu</strong> location near Singapore Sports Hub</li>
-                                    <li>1BR to 4BR options available (including 1BR tier)</li>
-                                </ul>
-                                
-                                <div class="mt-6 p-4 bg-violet-50 rounded-2xl border border-violet-200">
-                                    <strong>Click below to open the full Deep Analysis subpage with complete investment analysis, comparison table, FAQ, and more.</strong>
-                                </div>
-                                
-                                <div class="mt-6">
-                                    <button onclick="hideProjectModal(); showPage('deep-analysis-arina');" class="px-6 py-3 bg-violet-700 hover:bg-violet-800 text-white font-semibold rounded-3xl transition">Open Full Deep Analysis Subpage →</button>
-                                </div>
-                            </div>
-                        `;
-                    } else {
-                        html = `<div class="text-slate-600">Deep Analysis is currently available for Arina East Residences (project card detail only).</div>`;
-                    }
-                    break
-                    
-                case 2:
                     html = `
                         <div>
                             <div class="flex items-end justify-between mb-4">
@@ -4640,7 +4608,7 @@ function toggleAmortization(){
                     `
                     break
                     
-                case 3:
+                case 2:
                     html = `
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                             <div>
