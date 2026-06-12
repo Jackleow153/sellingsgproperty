@@ -3410,12 +3410,21 @@ function applyTenureRules(){
 function applyPropertyRules(){
   const type = $("propertyType").value
   const hdbAllowed = type === 'HDB'
-  $("btnHDB").disabled = !hdbAllowed
-  if (!hdbAllowed && loanType === 'HDB') setLoanType('Bank', true)
+  const hdbBtn = $("btnHDB")
+  hdbBtn.disabled = !hdbAllowed
+  if (!hdbAllowed) {
+    // visually ensure HDB is not active when disallowed (New Launch / Private resale / EC)
+    hdbBtn.classList.remove("active")
+    if (loanType === 'HDB') setLoanType('Bank', true)
+  }
   applyTenureRules()
 }
 
 function setLoanType(type, silent){
+  // Defensive: never allow switching to HDB loan when the property type disallows it
+  if (type === 'HDB' && $("btnHDB") && $("btnHDB").disabled) {
+    type = 'Bank'
+  }
   loanType = type
   $("btnHDB").classList.toggle("active", type === 'HDB')
   $("btnBank").classList.toggle("active", type === 'Bank')
@@ -3433,17 +3442,18 @@ function quickRate(r){ $("interestRate").value = r; update() }
 
 function updateSteps(price, income){
   const s1done = price > 0
+  const ageEntered = buyerAge() > 0
   const ageOk = buyerAge() >= 21
-  const s2done = s1done && ageOk
+  const s2done = s1done && ageEntered
   const debtsEntered = $("otherDebts").value.trim() !== ""
-  const s3done = s2done && income > 0 && debtsEntered
+  const s3done = s1done && ageEntered && income > 0 && debtsEntered
 
   toggleReveal("downpaymentBlock", s1done)
   $("step2Card").classList.toggle("step-locked", !s1done)
   $("step2Hint").classList.toggle("hidden", s1done)
   toggleReveal("loanDetailsBlock", ageOk)
-  $("step3Card").classList.toggle("step-locked", !s2done)
-  $("step3Hint").classList.toggle("hidden", s2done)
+  $("step3Card").classList.toggle("step-locked", !(s1done && ageEntered))
+  $("step3Hint").classList.toggle("hidden", s1done && ageEntered)
   toggleReveal("ratioCards", s3done)
   toggleReveal("resultsColumn", s3done)
   $("resultsPending").classList.toggle("hidden", s3done)
@@ -3470,6 +3480,15 @@ function updateSteps(price, income){
     stepsCol.style.width = "100%"
     resWrap.style.display = "none"
   }
+
+  // Explicitly control disabled state on key inputs so locked steps truly cannot be keyed into
+  // (complements the .step-locked CSS pointer-events + opacity)
+  if ($("buyerAge")) $("buyerAge").disabled = !s1done
+  if ($("interestRate")) $("interestRate").disabled = !s1done
+  if ($("tenure")) $("tenure").disabled = !s1done
+  if ($("grossIncome")) $("grossIncome").disabled = !(s1done && ageEntered)
+  if ($("otherDebts")) $("otherDebts").disabled = !(s1done && ageEntered)
+
   return s3done
 }
 
@@ -3484,6 +3503,15 @@ function update(){
   const price = parseNum($("propertyPrice").value)
   const income = parseNum($("grossIncome").value)
   updateSteps(price, income)
+
+  // Safety net: keep purchase price nicely comma-formatted whenever update runs
+  // (especially useful on blur from other fields or after downpayment syncs)
+  const pp = $("propertyPrice")
+  if (pp && document.activeElement !== pp && price > 0) {
+    const cleanFormatted = price.toLocaleString("en-SG")
+    if (pp.value !== cleanFormatted) pp.value = cleanFormatted
+  }
+
   if (price <= 0) return
 
   // --- two-way downpayment sync ---
@@ -3655,7 +3683,37 @@ function toggleAmortization(){
 }
 
 window.onload = function(){
-  ;["propertyPrice","downpaymentAmount","loanAmount","cpfAmount","grossIncome","otherDebts"].forEach(id => attachComma($(id)))
+  // attachComma for other money fields (downpayment, loan, cpf, gross, debts)
+  ;["downpaymentAmount","loanAmount","cpfAmount","grossIncome","otherDebts"].forEach(id => attachComma($(id)))
+
+  // Dedicated live thousands-comma formatter for Purchase Price (fires on every keystroke)
+  // This guarantees commas appear immediately as the user keys in the price.
+  const priceInput = $("propertyPrice")
+  if (priceInput) {
+    priceInput.addEventListener("input", () => {
+      const el = priceInput
+      const digits = (el.value || "").replace(/[^\d]/g, "")
+      const formatted = digits ? Number(digits).toLocaleString("en-SG") : ""
+      if (el.value !== formatted) {
+        // preserve caret by counting digits before the original position (robust during typing)
+        const oldCaret = el.selectionStart || 0
+        const digitsBefore = (el.value.slice(0, oldCaret) || "").replace(/[^\d]/g, "").length
+        el.value = formatted
+        let pos = 0, count = 0
+        while (pos < el.value.length && count < digitsBefore) {
+          if (/\d/.test(el.value[pos])) count++
+          pos++
+        }
+        try { el.setSelectionRange(pos, pos) } catch (e) {}
+      }
+      update()
+    })
+    priceInput.addEventListener("blur", () => {
+      const el = priceInput
+      const digits = (el.value || "").replace(/[^\d]/g, "")
+      el.value = digits ? Number(digits).toLocaleString("en-SG") : ""
+    })
+  }
 
   $("downpaymentPercent").addEventListener("input", () => { downSource='percent'; cpfTouched=false; update() })
   $("downpaymentAmount").addEventListener("input", () => { downSource='amount'; cpfTouched=false; update() })
@@ -3663,7 +3721,7 @@ window.onload = function(){
   $("cpfAmount").addEventListener("input", () => { cpfTouched=true; update() })
   $("buyerAge").addEventListener("input", () => { tenureTouched=false; applyTenureRules(); update() })
   $("tenure").addEventListener("input", () => { tenureTouched=true; update() })
-  ;["propertyPrice","interestRate","grossIncome","otherDebts","absdRate","dutiesPayment"].forEach(id => {
+  ;["interestRate","grossIncome","otherDebts","absdRate","dutiesPayment"].forEach(id => {
     $(id).addEventListener("input", update)
     $(id).addEventListener("change", update)
   })
