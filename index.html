@@ -2956,8 +2956,8 @@
           <div>
             <label class="block text-xs font-medium mb-2" style="color:var(--slate)">Purchase price</label>
             <div class="relative">
-              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm" style="color:var(--brass)">S$</span>
-              <input type="text" inputmode="numeric" id="propertyPrice" placeholder="e.g. 2,500,000" class="field num pl-11 text-xl serif">
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm pointer-events-none" style="color:var(--brass)">S$</span>
+              <input type="text" inputmode="numeric" id="propertyPrice" placeholder="e.g. 2,500,000" class="field num pl-14 text-xl serif">
             </div>
           </div>
         </div>
@@ -3007,13 +3007,13 @@
       </section>
 
       <!-- STEP 2 -->
-      <section id="step2Card" class="step-card p-8">
+      <section id="step2Card" class="step-card step-locked p-8">
         <div class="flex items-center justify-between mb-7">
           <div class="flex items-center gap-3">
             <div class="step-badge">2</div>
             <div class="eyebrow">Step 2 • The Loan</div>
           </div>
-          <div id="step2Hint" class="hidden text-[11px]" style="color:var(--brass-deep)">Enter your purchase price in Step 1 first</div>
+          <div id="step2Hint" class="text-[11px]" style="color:var(--brass-deep)">Enter your purchase price in Step 1 first</div>
         </div>
 
         <div>
@@ -3273,12 +3273,12 @@ function parseNum(v){ return parseFloat(String(v).replace(/[^0-9.]/g,'')) || 0 }
 function attachComma(el){
   el.addEventListener("input", () => {
     const caret = el.selectionStart
-    const digitsBefore = el.value.slice(0, caret).replace(/[^\\d]/g,'').length
-    const digits = el.value.replace(/[^\\d]/g,'')
+    const digitsBefore = el.value.slice(0, caret).replace(/[^\d]/g,'').length
+    const digits = el.value.replace(/[^\d]/g,'')
     el.value = digits ? Number(digits).toLocaleString("en-SG") : ""
     let pos = 0, count = 0
     while (pos < el.value.length && count < digitsBefore){
-      if (/\\d/.test(el.value[pos])) count++
+      if (/\d/.test(el.value[pos])) count++
       pos++
     }
     el.setSelectionRange(pos, pos)
