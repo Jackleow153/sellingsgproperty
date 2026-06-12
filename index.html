@@ -97,6 +97,45 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet">
+    <!-- Calculator styles from RTF -->
+    <style>
+    :root{
+      --ink:#0C1B2A;
+      --ink-soft:#16293D;
+      --porcelain:#F6F4EF;
+      --paper:#FFFFFF;
+      --hairline:#E3DDD0;
+      --hairline-strong:#CFC2A0;
+      --brass:#B89B5E;
+      --brass-deep:#9A7F45;
+      --slate:#5C6B7A;
+      --emerald:#1E6E5C;
+      --claret:#A93B2A;
+    }
+    #page-mortgage-calculator .serif{font-family:'Marcellus',serif;}
+    #page-mortgage-calculator .num{font-variant-numeric:tabular-nums;}
+    #page-mortgage-calculator .eyebrow{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--slate);font-weight:600;}
+    #page-mortgage-calculator .eyebrow-brass{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:600;}
+    #page-mortgage-calculator .card{background:var(--paper);border:1px solid var(--hairline);}
+    #page-mortgage-calculator .step-card{background:var(--paper);border:1.5px solid var(--hairline-strong);}
+    #page-mortgage-calculator .step-badge{width:1.7rem;height:1.7rem;flex:none;border:1px solid var(--brass);color:var(--brass-deep);font-family:'Marcellus',serif;display:flex;align-items:center;justify-content:center;font-size:.85rem;}
+    #page-mortgage-calculator .field{width:100%;background:var(--paper);border:1px solid var(--hairline);padding:.8rem 1rem;outline:none;transition:border-color .2s;}
+    #page-mortgage-calculator .field:focus{border-color:var(--brass);}
+    #page-mortgage-calculator .field-static{width:100%;background:var(--porcelain);border:1px solid var(--hairline);padding:.8rem 1rem;color:var(--ink);}
+    #page-mortgage-calculator select.field{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23B89B5E'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;}
+    #page-mortgage-calculator input[type="range"]{accent-color:var(--brass);}
+    #page-mortgage-calculator .toggle-btn{flex:1;padding:.7rem 0;font-size:.8rem;font-weight:600;letter-spacing:.05em;border:1px solid var(--hairline);color:var(--slate);transition:all .2s;background:var(--paper);}
+    #page-mortgage-calculator .toggle-btn.active{background:var(--ink);color:#EDE6D6;border-color:var(--ink);}
+    #page-mortgage-calculator .chip{cursor:pointer;border:1px solid var(--hairline);padding:.25rem .7rem;font-size:.7rem;letter-spacing:.06em;color:var(--slate);transition:all .2s;}
+    #page-mortgage-calculator .chip:hover{border-color:var(--brass);color:var(--brass-deep);}
+    #page-mortgage-calculator .bar-track{height:3px;background:var(--hairline);}
+    #page-mortgage-calculator .bar-fill{height:3px;background:var(--brass);transition:width .4s ease, background .3s;}
+    #page-mortgage-calculator .bar-fill.fail{background:var(--claret);}
+    #page-mortgage-calculator .status-pass{color:var(--emerald);}
+    #page-mortgage-calculator .status-fail{color:var(--claret);}
+    #page-mortgage-calculator .rule{border-top:1px solid var(--hairline);}
+    #page-mortgage-calculator .highlight-card{background:#FAF5E9;border:1px solid #DCCB9F;border-top:3px solid var(--brass);}
+    </style>
     
     <style>
         body { font-family: 'Inter', system_ui, sans-serif; }
@@ -231,6 +270,7 @@
                     <button data-page="about" class="nav-link px-5 py-2 rounded-3xl" id="nav-about">About</button>
                     <button data-page="blog" class="nav-link px-5 py-2 rounded-3xl" id="nav-blog">Insights</button>
                     <button data-page="contact" class="nav-link px-5 py-2 rounded-3xl text-sm font-semibold" id="nav-situation">Get my free situation check.</button>
+                    <button data-page="mortgage-calculator" class="nav-link px-5 py-2 rounded-3xl text-sm font-semibold" id="nav-mortgage">Mortgage loan calculator</button>
                 </div>
 
                 <button id="mobile-menu-btn" class="md:hidden w-11 h-11 flex items-center justify-center text-slate-600 hover:text-violet-700">
@@ -2814,7 +2854,445 @@
       </div>
     </div>
 
-    <!-- PROJECT MODAL -->
+    <!-- MORTGAGE LOAN CALCULATOR SUBPAGE -->
+    <div id="page-mortgage-calculator" class="page-section bg-[#F6F4EF]">
+      <!-- Calculator content from provided RTF - integrated here -->
+      <div class="max-w-6xl mx-auto px-6 py-12">
+        <!-- Masthead -->
+        <header class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 pb-8 mb-10" style="border-bottom:1px solid #E3DDD0">
+          <div>
+            <h1 class="serif text-4xl md:text-5xl leading-tight">Singapore Mortgage Calculator</h1>
+            <p class="text-sm mt-2" style="color:#5C6B7A">Three quick steps — your instalment, MSR • TDSR affordability, stamp duties, and upfront cash & CPF under current MAS rules.</p>
+          </div>
+          <div class="text-right">
+            <div class="eyebrow mb-1">Reference rates</div>
+            <div class="serif text-lg num">HDB 2.60% <span style="color:#E3DDD0">•</span> Bank from ~1.80%</div>
+            <div class="text-[11px]" style="color:#5C6B7A">Indicative only — verify current bank packages</div>
+          </div>
+        </header>
+
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
+
+          <!-- LEFT: STEPS -->
+          <div class="xl:col-span-5 space-y-6">
+
+            <!-- STEP 1 -->
+            <section class="step-card p-8" style="background:#FFFFFF;border:1.5px solid #CFC2A0">
+              <div class="flex items-center gap-3 mb-7">
+                <div class="step-badge" style="width:1.7rem;height:1.7rem;flex:none;border:1px solid #B89B5E;color:#9A7F45;font-family:'Marcellus',serif;display:flex;align-items:center;justify-content:center;font-size:.85rem">1</div>
+                <div class="eyebrow">Step 1 • The Property</div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-xs font-medium mb-2" style="color:#5C6B7A">Property type</label>
+                  <select id="propertyType" class="field text-sm" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem;outline:none">
+                    <option value="HDB">HDB flat</option>
+                    <option value="Private">Resale Pte Condo / Apt</option>
+                    <option value="NewLaunch" selected>New Launch Condo</option>
+                    <option value="EC">EC</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium mb-2" style="color:#5C6B7A">Purchase price</label>
+                  <div class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm" style="color:#B89B5E">S$</span>
+                    <input type="text" inputmode="numeric" id="propertyPrice" value="2,500,000" class="field num pl-11 text-xl serif" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem;outline:none">
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6">
+                <label class="block text-xs font-medium mb-2" style="color:#5C6B7A">Loan type</label>
+                <div class="flex">
+                  <button onclick="setLoanType('HDB')" id="btnHDB" class="toggle-btn" style="flex:1;padding:.7rem 0;font-size:.8rem;font-weight:600;letter-spacing:.05em;border:1px solid #E3DDD0;color:#5C6B7A;transition:all .2s;background:#FFFFFF">HDB Loan</button>
+                  <button onclick="setLoanType('Bank')" id="btnBank" class="toggle-btn active" style="flex:1;padding:.7rem 0;font-size:.8rem;font-weight:600;letter-spacing:.05em;border:1px solid #E3DDD0;color:#0C1B2A;transition:all .2s;background:#0C1B2A;border-left:none">Bank Loan</button>
+                </div>
+                <div id="loanTypeNote" class="text-[11px] mt-2" style="color:#5C6B7A">Compare fixed vs floating packages across banks</div>
+              </div>
+
+              <div id="downpaymentBlock" class="rule mt-7 pt-7" style="border-top:1px solid #E3DDD0">
+                <div class="eyebrow-brass mb-5">Your Downpayment</div>
+                <div class="grid grid-cols-3 gap-4">
+                  <div>
+                    <label class="block text-[11px] mb-1" style="color:#5C6B7A">Percentage (%)</label>
+                    <input type="number" id="downpaymentPercent" value="25" min="25" max="60" step="0.5" class="field num serif text-xl" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem">
+                  </div>
+                  <div>
+                    <label class="block text-[11px] mb-1" style="color:#5C6B7A">Amount (S$)</label>
+                    <input type="text" inputmode="numeric" id="downpaymentAmount" value="625,000" class="field num text-sm" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem">
+                  </div>
+                  <div>
+                    <label class="block text-[11px] mb-1" style="color:#5C6B7A">Loan amount (S$)</label>
+                    <input type="text" inputmode="numeric" id="loanAmount" value="1,875,000" class="field num text-sm" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem">
+                  </div>
+                </div>
+                <div id="ltvWarning" class="hidden text-[11px] mt-2 status-fail" style="color:#A93B2A">Minimum downpayment is 25% — the loan exceeds the 75% LTV limit for a first housing loan.</div>
+
+                <div class="mt-6 grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-[11px] mb-1" style="color:#5C6B7A">Paid with CPF OA (S$)</label>
+                    <input type="text" inputmode="numeric" id="cpfAmount" value="500,000" class="field num text-sm" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem">
+                    <div id="cpfMaxNote" class="text-[11px] mt-1" style="color:#9A7F45"></div>
+                  </div>
+                  <div>
+                    <label class="block text-[11px] mb-1" style="color:#5C6B7A">Cash required (S$)</label>
+                    <div id="cashAmount" class="field-static num text-sm" style="width:100%;background:#F6F4EF;border:1px solid #E3DDD0;padding:.8rem 1rem;color:#0C1B2A">125,000</div>
+                    <div id="cashMinNote" class="text-[11px] mt-1" style="color:#5C6B7A"></div>
+                  </div>
+                </div>
+                <p id="downpaymentRule" class="text-[11px] mt-4 leading-relaxed" style="color:#5C6B7A"></p>
+              </div>
+            </section>
+
+            <!-- STEP 2 -->
+            <section id="step2Card" class="step-card p-8" style="background:#FFFFFF;border:1.5px solid #CFC2A0">
+              <div class="flex items-center gap-3 mb-7">
+                <div class="step-badge" style="width:1.7rem;height:1.7rem;flex:none;border:1px solid #B89B5E;color:#9A7F45;font-family:'Marcellus',serif;display:flex;align-items:center;justify-content:center;font-size:.85rem">2</div>
+                <div class="eyebrow">Step 2 • The Loan</div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-medium mb-2" style="color:#5C6B7A">Your age (youngest borrower)</label>
+                <input type="number" id="buyerAge" min="21" max="75" placeholder="e.g. 35" class="field num serif text-2xl" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem">
+                <div class="text-[11px] mt-2" style="color:#5C6B7A">Banks generally lend up to <strong>age 65</strong>, max tenure <strong>30 years</strong> — whichever is shorter. HDB loans are capped at <strong>25 years</strong>.</div>
+              </div>
+
+              <div class="mt-6">
+                <label class="block text-xs font-medium mb-2" style="color:#5C6B7A">Interest rate (% p.a.)</label>
+                <input type="number" id="interestRate" value="1.80" step="0.01" class="field num serif text-2xl" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem">
+                <div class="flex gap-2 mt-2">
+                  <span onclick="quickRate(2.60)" class="chip" style="cursor:pointer;border:1px solid #E3DDD0;padding:.25rem .7rem;font-size:.7rem;letter-spacing:.06em;color:#5C6B7A">HDB 2.60</span>
+                  <span onclick="quickRate(1.80)" class="chip" style="cursor:pointer;border:1px solid #E3DDD0;padding:.25rem .7rem;font-size:.7rem;letter-spacing:.06em;color:#5C6B7A">Bank ~1.80</span>
+                  <span onclick="quickRate(2.20)" class="chip" style="cursor:pointer;border:1px solid #E3DDD0;padding:.25rem .7rem;font-size:.7rem;letter-spacing:.06em;color:#5C6B7A">Bank ~2.20</span>
+                </div>
+                <div class="text-[11px] mt-2" style="color:#5C6B7A">Indicative rate only and may not be up to date — check the latest packages with your bank or broker.</div>
+              </div>
+
+              <div id="loanDetailsBlock" class="hidden rule mt-7 pt-7" style="border-top:1px solid #E3DDD0">
+                <div class="eyebrow-brass mb-5">Your Loan Tenure</div>
+                <div>
+                  <div class="flex justify-between items-baseline mb-2">
+                    <label class="text-xs font-medium" style="color:#5C6B7A">Loan tenure</label>
+                    <span class="serif num text-lg"><span id="tenureYears">30</span> yrs</span>
+                  </div>
+                  <input type="range" id="tenure" min="5" max="30" value="30" class="w-full mt-3">
+                  <div id="tenureNote" class="text-[11px] mt-2 leading-relaxed" style="color:#5C6B7A"></div>
+                </div>
+              </div>
+            </section>
+
+            <!-- STEP 3 -->
+            <section id="step3Card" class="step-card step-locked p-8" style="background:#FFFFFF;border:1.5px solid #CFC2A0">
+              <div class="flex items-center justify-between mb-7">
+                <div class="flex items-center gap-3">
+                  <div class="step-badge" style="width:1.7rem;height:1.7rem;flex:none;border:1px solid #B89B5E;color:#9A7F45;font-family:'Marcellus',serif;display:flex;align-items:center;justify-content:center;font-size:.85rem">3</div>
+                  <div class="eyebrow">Step 3 • The Household</div>
+                </div>
+                <div id="step3Hint" class="text-[11px]" style="color:#9A7F45">Enter your age in Step 2 first</div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-[11px] mb-1" style="color:#5C6B7A">Gross monthly income (S$)</label>
+                  <input type="text" inputmode="numeric" id="grossIncome" placeholder="e.g. 25,000" class="field num text-sm" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem">
+                </div>
+                <div>
+                  <label class="block text-[11px] mb-1" style="color:#5C6B7A">Other monthly debts (S$)</label>
+                  <input type="text" inputmode="numeric" id="otherDebts" placeholder="enter 0 if none" class="field num text-sm" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem">
+                </div>
+              </div>
+              <p class="text-[11px] mt-3" style="color:#5C6B7A">Used for the MSR (HDB & EC only) and the TDSR stress test at a 4% floor rate.</p>
+            </section>
+
+            <div id="ratioCards" class="hidden space-y-6">
+              <div id="msrCard" class="card p-7" style="background:#FFFFFF;border:1px solid #E3DDD0">
+                <div class="flex justify-between items-baseline">
+                  <div class="eyebrow">MSR • HDB & EC</div>
+                  <div id="msrStatus" class="text-[11px] font-semibold tracking-wide status-pass">WITHIN LIMIT</div>
+                </div>
+                <div id="msrPercent" class="serif num text-5xl mt-3">25%</div>
+                <div class="bar-track mt-4" style="height:3px;background:#E3DDD0"><div id="msrBar" class="bar-fill" style="height:3px;background:#B89B5E;width:83%"></div></div>
+                <div class="flex justify-between text-[11px] mt-2" style="color:#5C6B7A">
+                  <span>Mortgage vs gross income</span><span>Limit 30%</span>
+                </div>
+              </div>
+              <div id="tdsrCard" class="card p-7" style="background:#FFFFFF;border:1px solid #E3DDD0">
+                <div class="flex justify-between items-baseline">
+                  <div class="eyebrow">TDSR • Stress test 4%</div>
+                  <div id="tdsrStatus" class="text-[11px] font-semibold tracking-wide status-pass">WITHIN LIMIT</div>
+                </div>
+                <div id="tdsrPercent" class="serif num text-5xl mt-3">41%</div>
+                <div class="bar-track mt-4" style="height:3px;background:#E3DDD0"><div id="tdsrBar" class="bar-fill" style="height:3px;background:#B89B5E;width:74%"></div></div>
+                <div class="flex justify-between text-[11px] mt-2" style="color:#5C6B7A">
+                  <span>All debts at the floor rate</span><span>Limit 55%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: RESULTS -->
+          <div class="xl:col-span-7">
+
+            <div id="resultsPending" class="card p-12 text-center" style="background:#FFFFFF;border:1px solid #E3DDD0">
+              <div class="serif text-3xl mb-3" style="color:#CFC2A0">1 • 2 • 3</div>
+              <div class="eyebrow mb-2">Your Results</div>
+              <p class="text-sm" style="color:#5C6B7A">Complete the three steps on the left to see your monthly instalment, upfront cash & CPF, and stamp duties.</p>
+            </div>
+
+            <div id="resultsColumn" class="hidden space-y-6">
+
+              <div class="p-9 text-white" style="background:#0C1B2A">
+                <div class="flex flex-col sm:flex-row justify-between items-start gap-6">
+                  <div>
+                    <div class="eyebrow-brass mb-2">Monthly instalment</div>
+                    <div id="monthlyInstalment" class="serif num text-6xl md:text-7xl" style="color:#EDE6D6">S$6,745</div>
+                    <div id="instalmentSub" class="text-xs mt-3 num" style="color:#8FA0B0">on a loan of S$1,875,000 at 1.80% over 30 years</div>
+                  </div>
+                  <div class="relative shrink-0">
+                    <canvas id="pieChart" width="128" height="128"></canvas>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                      <span id="interestShare" class="serif num text-xl" style="color:#EDE6D6">23%</span>
+                      <span class="text-[9px] tracking-widest uppercase" style="color:#8FA0B0">interest</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="rule-dark mt-8 pt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6" style="border-top:1px solid rgba(237,230,214,.18)">
+                  <div class="hero-stat">
+                    <div class="text-[10px] tracking-widest uppercase whitespace-nowrap sm:mb-1" style="color:#8FA0B0">Total interest</div>
+                    <div id="totalInterest" class="serif num text-lg md:text-xl" style="color:#EDE6D6">S$553,000</div>
+                  </div>
+                  <div class="hero-stat">
+                    <div class="text-[10px] tracking-widest uppercase whitespace-nowrap sm:mb-1" style="color:#8FA0B0">Total repayment</div>
+                    <div id="totalRepayment" class="serif num text-lg md:text-xl" style="color:#EDE6D6">S$2,428,000</div>
+                  </div>
+                  <div class="hero-stat">
+                    <div class="text-[10px] tracking-widest uppercase whitespace-nowrap sm:mb-1" style="color:#8FA0B0">Loan-to-value</div>
+                    <div class="flex items-baseline gap-2">
+                      <div id="ltvRatio" class="serif num text-lg md:text-xl" style="color:#EDE6D6">75%</div>
+                      <div id="ltvStatus" class="text-[10px] whitespace-nowrap" style="color:#8FA0B0">Within 75% cap</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="highlight-card p-8" style="background:#FAF5E9;border:1px solid #DCCB9F;border-top:3px solid #B89B5E">
+                <div class="flex justify-between items-baseline mb-6">
+                  <div class="eyebrow">Upfront Payment Summary</div>
+                  <select id="dutiesPayment" class="text-[11px] border-0 bg-transparent font-semibold outline-none cursor-pointer" style="color:#9A7F45">
+                    <option value="cpf">Stamp duties via CPF</option>
+                    <option value="cash">Stamp duties via cash</option>
+                  </select>
+                </div>
+                <div class="space-y-3 text-sm num">
+                  <div class="flex justify-between"><span style="color:#5C6B7A">Downpayment — cash</span><span id="sumCashDown" class="font-medium">S$125,000</span></div>
+                  <div class="flex justify-between"><span style="color:#5C6B7A">Downpayment — CPF OA</span><span id="sumCpfDown" class="font-medium">S$500,000</span></div>
+                  <div class="flex justify-between"><span style="color:#5C6B7A">Buyer's Stamp Duty</span><span id="sumBSD" class="font-medium">S$94,600</span></div>
+                  <div class="flex justify-between"><span style="color:#5C6B7A">Additional Buyer's Stamp Duty</span><span id="sumABSD" class="font-medium">S$0</span></div>
+                </div>
+                <div class="rule mt-5 pt-5 grid grid-cols-3 gap-6 text-center" style="border-top:1px solid #E6D9B8">
+                  <div>
+                    <div class="text-[10px] tracking-widest uppercase mb-1" style="color:#5C6B7A">Total cash</div>
+                    <div id="sumTotalCash" class="serif num text-xl md:text-2xl">S$125,000</div>
+                  </div>
+                  <div style="border-left:1px solid #E6D9B8">
+                    <div class="text-[10px] tracking-widest uppercase mb-1" style="color:#5C6B7A">Total CPF</div>
+                    <div id="sumTotalCpf" class="serif num text-xl md:text-2xl" style="color:#9A7F45">S$594,600</div>
+                  </div>
+                  <div style="border-left:1px solid #E6D9B8">
+                    <div class="text-[10px] tracking-widest uppercase mb-1" style="color:#5C6B7A">Total upfront</div>
+                    <div id="sumTotal" class="serif num text-xl md:text-2xl">S$719,600</div>
+                  </div>
+                </div>
+                <p class="text-[11px] mt-5 leading-relaxed" style="color:#5C6B7A">
+                  Excludes legal/conveyancing fees, valuation, and buffer funds. For private resale purchases, stamp duties are typically paid in cash first and reimbursed from CPF OA after completion.
+                </p>
+              </div>
+
+              <div class="card p-8" style="background:#FFFFFF;border:1px solid #E3DDD0">
+                <div class="eyebrow mb-7">Stamp Duty Detail</div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                  <div>
+                    <div class="text-xs mb-1" style="color:#5C6B7A">Buyer's Stamp Duty</div>
+                    <div id="bsdAmount" class="serif num text-3xl">S$94,600</div>
+                    <div id="bsdBreakdown" class="text-[11px] mt-2 num" style="color:#5C6B7A"></div>
+                  </div>
+                  <div>
+                    <div class="text-xs mb-1" style="color:#5C6B7A">Additional Buyer's Stamp Duty</div>
+                    <div id="absdAmount" class="serif num text-3xl" style="color:#9A7F45">S$0</div>
+                    <select id="absdRate" class="field text-xs mt-3" style="width:100%;background:#FFFFFF;border:1px solid #E3DDD0;padding:.8rem 1rem">
+                      <option value="0">Singapore Citizen • 1st property — 0%</option>
+                      <option value="20">Singapore Citizen • 2nd property — 20%</option>
+                      <option value="30">Singapore Citizen • 3rd+ property — 30%</option>
+                      <option value="5">Singapore PR • 1st property — 5%</option>
+                      <option value="30">Singapore PR • 2nd property — 30%</option>
+                      <option value="35">Singapore PR • 3rd+ property — 35%</option>
+                      <option value="60">Foreigner — 60%</option>
+                      <option value="65">Entities / trusts — 65%</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="rule mt-7 pt-5 text-[11px] leading-relaxed" style="color:#5C6B7A;border-top:1px solid #E3DDD0">
+                  Verify ABSD rates against IRAS before committing — rates shown are the prevailing residential schedule.
+                </div>
+              </div>
+
+              <div id="amortCard" class="card" style="background:#FFFFFF;border:1px solid #E3DDD0">
+                <button onclick="toggleAmortization()" class="w-full p-7 flex justify-between items-center text-left">
+                  <div>
+                    <div class="eyebrow mb-1">Amortisation schedule</div>
+                    <div class="text-xs" style="color:#5C6B7A">First twelve months of principal and interest</div>
+                  </div>
+                  <span id="amortArrow" class="serif text-3xl transition-transform" style="color:#B89B5E">▼</span>
+                </button>
+                <div id="amortizationTable" class="hidden rule" style="border-top:1px solid #E3DDD0">
+                  <table class="w-full text-sm num">
+                    <thead>
+                      <tr class="text-[10px] tracking-widest uppercase" style="color:#5C6B7A">
+                        <th class="text-left px-7 py-4 font-semibold">Month</th>
+                        <th class="text-right px-7 py-4 font-semibold">Principal</th>
+                        <th class="text-right px-7 py-4 font-semibold">Interest</th>
+                        <th class="text-right px-7 py-4 font-semibold">Balance</th>
+                      </tr>
+                    </thead>
+                    <tbody id="amortBody"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div id="progressiveCard" class="hidden card" style="background:#FFFFFF;border:1px solid #E3DDD0">
+                <div class="p-7">
+                  <div class="eyebrow mb-1">Progressive Payment Schedule</div>
+                  <div class="text-xs" style="color:#5C6B7A">Standard payment scheme for new launches — construction stages with indicative months</div>
+                </div>
+                <div class="rule" style="border-top:1px solid #E3DDD0">
+                  <div class="prog-row prog-head text-[10px] tracking-widest uppercase font-semibold" style="color:#5C6B7A">
+                    <div>Construction stage</div>
+                    <div class="prog-cell">Est. mth</div>
+                    <div class="prog-cell">%</div>
+                    <div class="prog-cell">Amount</div>
+                    <div class="prog-cell">Funded by</div>
+                    <div class="text-right">Instalment after</div>
+                  </div>
+                  <div id="progBody"></div>
+                </div>
+                <div class="rule p-5 text-[11px] leading-relaxed" style="color:#5C6B7A;border-top:1px solid #E3DDD0">
+                  Months are indicative — actual milestones vary by project and are certified by the developer's architect. Your monthly instalment is recalculated each time the bank disburses, on the cumulative loan drawn over the remaining tenure, so it steps up as construction progresses.
+                </div>
+              </div>
+
+              <p class="text-[11px] text-center leading-relaxed px-8" style="color:#5C6B7A">
+                Estimates only, based on the standard amortising-loan formula and prevailing MAS rules (MSR 30%, TDSR 55%, 4% stress-test floor, 75% LTV for a first housing loan). Always verify with HDB, your bank, or a licensed adviser. This is not financial advice.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEEP ANALYSIS SUBPAGE FOR ARINA EAST RESIDENCES -->
+    <div id="page-deep-analysis-arina" class="page-section bg-white">
+      <div class="max-w-4xl mx-auto px-8 py-16">
+        <button onclick="showPage('home')" class="mb-6 text-sm text-violet-700 hover:underline flex items-center gap-1">
+          <i class="fa-solid fa-arrow-left"></i> Back to Home
+        </button>
+        
+        <h1 class="text-4xl font-black tracking-tighter">Deep Analysis: Arina East Residences 2026</h1>
+        <p class="text-sm text-slate-500 mt-1">By Jack Leow | Last Updated: June 2026</p>
+
+        <div class="mt-8 prose prose-slate max-w-none">
+          <h2>Quick Facts</h2>
+          <table class="w-full text-sm">
+            <tr><td><strong>Project Name</strong></td><td>Arina East Residences</td></tr>
+            <tr><td><strong>Developer</strong></td><td>ZACD LV Development Pte Ltd (ZACD Group, Welltech Construction, FRX Capital)</td></tr>
+            <tr><td><strong>Location</strong></td><td>Tanjong Rhu Road, Kallang / Tanjong Rhu (D15)</td></tr>
+            <tr><td><strong>Region</strong></td><td>RCR (Rest of Central Region)</td></tr>
+            <tr><td><strong>Nearest MRT</strong></td><td>Katong Park (TE24) – ~3 min walk</td></tr>
+            <tr><td><strong>Total Units</strong></td><td><strong>107</strong> (Smallest & most exclusive among the 5)</td></tr>
+            <tr><td><strong>Tenure</strong></td><td><strong>Freehold</strong></td></tr>
+            <tr><td><strong>Launch</strong></td><td>June 2025 (Preview ~Apr–Jul 2025)</td></tr>
+            <tr><td><strong>TOP</strong></td><td>Q4 2027 (VP 2028)</td></tr>
+            <tr><td><strong>Avg PSF (Jun 2026)</strong></td><td><strong>$2,811</strong> (EdgeProp)</td></tr>
+            <tr><td><strong>Starting Price</strong></td><td>From ~$1.27M (495 sqft 1BR indicative)</td></tr>
+            <tr><td><strong>Primary Schools &lt;1km</strong></td><td>Kong Hwa School, Tanjong Katong Primary</td></tr>
+          </table>
+
+          <h2>Is Arina East Residences a Good Buy in 2026?</h2>
+          <p>Arina East Residences stands out as one of the <strong>few freehold</strong> new launch condos in recent times. Located in the <strong>Tanjong Rhu</strong> area (D15), this boutique development by <strong>ZACD Group</strong> and partners offers only <strong>107 units</strong>, making it highly exclusive.</p>
+          
+          <h3>Key Highlights:</h3>
+          <ul>
+            <li><strong>Freehold</strong> tenure (rare for new launches in this price range)</li>
+            <li>Small scale (107 units) → low density and exclusivity</li>
+            <li><strong>Thomson-East Coast Line</strong> connectivity via Katong Park MRT</li>
+            <li>Attractive <strong>Tanjong Rhu</strong> location near Singapore Sports Hub and upcoming developments</li>
+            <li>1BR to 4BR options available (including 1BR tier)</li>
+          </ul>
+
+          <h3>Potential Concerns:</h3>
+          <ul>
+            <li>Smaller developer compared to CDL/Frasers (though ZACD has delivered projects before)</li>
+            <li>PSF is still in the $2,800+ range despite being RCR</li>
+            <li>Limited number of units = potentially lower liquidity on resale</li>
+          </ul>
+
+          <h2>Location & Connectivity</h2>
+          <p><strong>Address:</strong> Tanjong Rhu Road, Singapore (D15)</p>
+          <p><strong>MRT Access:</strong></p>
+          <ul>
+            <li><strong>Katong Park MRT (Thomson-East Coast Line)</strong> — ~3 minutes walk</li>
+            <li>Easy access to Marina Bay, CBD, and Changi via TEL</li>
+            <li>Close to Nicoll Highway and ECP</li>
+          </ul>
+
+          <h2>Investment Analysis & Metrics (2026)</h2>
+          <p><strong>Pros:</strong></p>
+          <ul>
+            <li><strong>Freehold</strong> tenure (major advantage vs 99 LH projects)</li>
+            <li>Boutique scale (only 107 units) → exclusivity</li>
+            <li>Good <strong>Thomson-East Coast Line</strong> connectivity</li>
+            <li>Tanjong Rhu location with <strong>Sports Hub</strong> proximity and future growth potential</li>
+            <li>1BR option available (uncommon in many new launches)</li>
+          </ul>
+
+          <p><strong>Cons:</strong></p>
+          <ul>
+            <li>Higher PSF for RCR freehold</li>
+            <li>Smaller developer track record compared to big names</li>
+            <li>Very limited units = may be harder to exit later</li>
+          </ul>
+
+          <h2>Comparison: Arina East Residences vs Other New Launches (2026)</h2>
+          <table class="w-full text-sm mt-4">
+            <thead>
+              <tr class="border-b"><th>Project</th><th>Region</th><th>Tenure</th><th>Avg PSF</th><th>Total Units</th><th>TOP</th><th>Key Differentiator</th></tr>
+            </thead>
+            <tbody>
+              <tr class="border-b"><td><strong>Arina East Residences</strong></td><td>RCR</td><td><strong>Freehold</strong></td><td>$2,811</td><td><strong>107</strong></td><td>2027</td><td>Freehold + boutique scale</td></tr>
+              <tr class="border-b"><td>Union Square Residences</td><td>RCR</td><td>99 LH</td><td>$2,966</td><td>366</td><td>2029</td><td>Singapore River + Clarke Quay</td></tr>
+              <tr class="border-b"><td>Aurea</td><td>CCR</td><td>99 LH</td><td>$2,840</td><td>188</td><td>2029</td><td>Low density CCR</td></tr>
+            </tbody>
+          </table>
+
+          <h2>Frequently Asked Questions (FAQ)</h2>
+          <p><strong>Q: Is Arina East Residences freehold?</strong><br>A: <strong>Yes</strong>, it is one of the few freehold new launch condos available.</p>
+          <p><strong>Q: What is the TOP date?</strong><br>A: Q4 2027 (vacant possession in 2028).</p>
+          <p><strong>Q: How many units are there?</strong><br>A: Only <strong>107 units</strong> — very boutique and exclusive.</p>
+          <p><strong>Q: Which MRT is closest?</strong><br>A: Katong Park MRT (Thomson-East Coast Line), about 3 minutes walk.</p>
+          <p><strong>Q: Who is the developer?</strong><br>A: ZACD LV Development Pte Ltd (ZACD Group + Welltech + FRX Capital JV).</p>
+
+          <div class="mt-8 p-6 bg-violet-50 rounded-3xl">
+            <p class="font-medium">Considering Arina East Residences?</p>
+            <p class="text-sm mt-2">I provide <strong>independent, data-backed advice</strong> to help you decide if this (or any new launch) fits your goals — with <strong>zero commission</strong> on developer-direct purchases.</p>
+            <a href="https://wa.me/6580621538" target="_blank" class="mt-4 inline-flex items-center gap-2 px-5 py-2 bg-violet-700 text-white rounded-3xl text-sm font-semibold">WhatsApp Jack for free 30-min consultation <i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+
+          <p class="text-xs text-slate-500 mt-6">All information verified from EdgeProp and public sources as of June 2026. This is not an offer to sell or solicitation to buy.</p>
+        </div>
+      </div>
+    </div>
+
     <!-- PROJECT MODAL -->
     <div id="project-modal" onclick="if (event.target.id === 'project-modal') hideProjectModal()" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
         <div onclick="event.stopImmediatePropagation()" class="bg-white w-full max-w-5xl max-h-[92vh] rounded-3xl overflow-hidden shadow-2xl flex flex-col">
@@ -2828,10 +3306,11 @@
             
             <div class="px-8 pt-4 border-b flex overflow-x-auto">
                 <div onclick="switchProjectTab(0)" class="project-tab active px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="0">Overview</div>
-                <div onclick="switchProjectTab(1)" class="project-tab px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="1">Unit Mix &amp; Pricing</div>
-                <div onclick="switchProjectTab(2)" class="project-tab px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="2">Site Plan &amp; Location</div>
-                <div onclick="switchProjectTab(3)" class="project-tab px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="3">Amenities</div>
-                <div onclick="switchProjectTab(4)" class="project-tab px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="4">Developers</div>
+                <div onclick="hideProjectModal(); showPage('deep-analysis-arina')" class="project-tab px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="1">Deep Analysis</div>
+                <div onclick="switchProjectTab(2)" class="project-tab px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="2">Unit Mix &amp; Pricing</div>
+                <div onclick="switchProjectTab(3)" class="project-tab px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="3">Site Plan &amp; Location</div>
+                <div onclick="switchProjectTab(4)" class="project-tab px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="4">Amenities</div>
+                <div onclick="switchProjectTab(5)" class="project-tab px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="5">Developers</div>
             </div>
             
             <div id="modal-tab-content" class="flex-1 overflow-auto p-8 text-sm">
@@ -3162,7 +3641,7 @@
             
             document.querySelectorAll('[id^="nav-"]').forEach(nav => {
                 nav.classList.remove('nav-active')
-                if (nav.id === `nav-${page}` || (page === 'contact' && nav.id === 'nav-situation')) nav.classList.add('nav-active')
+                if (nav.id === `nav-${page}` || (page === 'contact' && nav.id === 'nav-situation') || (page === 'mortgage-calculator' && nav.id === 'nav-mortgage')) nav.classList.add('nav-active')
             })
             
             window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -3269,6 +3748,37 @@
                     break
                     
                 case 1:
+                    // Deep Analysis tab - inserted for Arina East (id=5), opens subpage
+                    if (currentProject.id === 5) {
+                        html = `
+                            <div class="prose prose-sm max-w-none">
+                                <h2 class="text-2xl font-bold mb-4">Deep Analysis: Arina East Residences 2026</h2>
+                                <p class="text-lg">Arina East Residences stands out as one of the <strong>few freehold</strong> new launch condos in recent times. Located in the <strong>Tanjong Rhu</strong> area (D15), this boutique development by <strong>ZACD Group</strong> and partners offers only <strong>107 units</strong>, making it highly exclusive.</p>
+                                
+                                <h3 class="mt-6">Key Highlights</h3>
+                                <ul>
+                                    <li><strong>Freehold</strong> tenure (rare for new launches in this price range)</li>
+                                    <li>Small scale (107 units) → low density and exclusivity</li>
+                                    <li><strong>Thomson-East Coast Line</strong> connectivity via Katong Park MRT</li>
+                                    <li>Attractive <strong>Tanjong Rhu</strong> location near Singapore Sports Hub</li>
+                                    <li>1BR to 4BR options available (including 1BR tier)</li>
+                                </ul>
+                                
+                                <div class="mt-6 p-4 bg-violet-50 rounded-2xl border border-violet-200">
+                                    <strong>Click below to open the full Deep Analysis subpage with complete investment analysis, comparison table, FAQ, and more.</strong>
+                                </div>
+                                
+                                <div class="mt-6">
+                                    <button onclick="hideProjectModal(); showPage('deep-analysis-arina');" class="px-6 py-3 bg-violet-700 hover:bg-violet-800 text-white font-semibold rounded-3xl transition">Open Full Deep Analysis Subpage →</button>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        html = `<div class="text-slate-600">Deep Analysis is currently available for Arina East Residences (project card detail only).</div>`;
+                    }
+                    break
+                    
+                case 2:
                     html = `
                         <div>
                             <div class="flex items-end justify-between mb-4">
@@ -3304,7 +3814,7 @@
                     `
                     break
                     
-                case 2:
+                case 3:
                     html = `
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                             <div>
@@ -3781,6 +4291,7 @@
                                 <button data-page="about" class="block w-full text-left font-medium py-2 px-1 -mx-1 rounded-lg hover:bg-slate-100 active:bg-slate-200 transition-colors cursor-pointer">About Us</button>
                                 <button data-page="blog" class="block w-full text-left font-medium py-2 px-1 -mx-1 rounded-lg hover:bg-slate-100 active:bg-slate-200 transition-colors cursor-pointer">Insights</button>
                                 <button data-page="contact" class="block w-full text-left font-medium py-2 px-1 -mx-1 rounded-lg hover:bg-slate-100 active:bg-slate-200 transition-colors cursor-pointer">Get my free situation check.</button>
+                                <button data-page="mortgage-calculator" class="block w-full text-left font-medium py-2 px-1 -mx-1 rounded-lg hover:bg-slate-100 active:bg-slate-200 transition-colors cursor-pointer">Mortgage loan calculator</button>
                             </div>
                         </div>
                     `
