@@ -4186,7 +4186,7 @@ function toggleAmortization(){
         // Featured This Week promo removed per request
 
         // Page Navigation
-        function showPage(page) {
+        function showPage(page, updateHistory = true) {
             // If leaving an article page, clean up listeners + title
             const articlePage = document.getElementById('page-article');
             if (articlePage && articlePage.classList.contains('active')) {
@@ -4208,10 +4208,29 @@ function toggleAmortization(){
                 // no FAQPage schema for blog posts (or home, for consistency)
             }
 
-            // Update URL for blog list (clean path for SEO)
-            if (page === 'blog') {
-                history.replaceState({ type: 'page', page }, '', '/insights');
-                document.title = 'Singapore Property Insights 2026 | HDB Upgrading, ABSD & New Launch Guides | SellingSgProperty';
+            // Update browser URL + title so subpages reflect what the user is actually viewing
+            // Supports direct links, browser history, and SEO for mortgage calculator, deep analysis, etc.
+            if (updateHistory) {
+              let routePath = '/insights';
+              let routeTitle = 'SellingSgProperty | Singapore New Launch Condos 2026 & Property Insights by Jack Leow';
+              if (page === 'home' || page === 'blog') {
+                  routePath = '/insights';
+                  routeTitle = 'SellingSgProperty | Singapore New Launch Condos 2026 & Property Insights by Jack Leow';
+              } else if (page === 'about') {
+                  routePath = '/about';
+                  routeTitle = 'About | SellingSgProperty - Independent Data-Driven Singapore Property Insights by Jack Leow';
+              } else if (page === 'contact') {
+                  routePath = '/contact';
+                  routeTitle = 'Contact Jack Leow | Free Situation Check, Mortgage Advice & New Launch Guidance';
+              } else if (page === 'mortgage-calculator') {
+                  routePath = '/mortgage-calculator';
+                  routeTitle = 'Singapore Mortgage Loan Calculator | MSR • TDSR • ABSD • Progressive Payments 2026';
+              } else if (page === 'deep-analysis-arina') {
+                  routePath = '/deep-analysis/arina-east-residences';
+                  routeTitle = 'Deep Analysis: Arina East Residences 2026 | Freehold RCR Boutique Condo Review';
+              }
+              history.pushState({ type: 'page', page }, routeTitle, routePath);
+              document.title = routeTitle;
             }
         }
         
@@ -4225,6 +4244,13 @@ function toggleAmortization(){
             
             const modal = document.getElementById('project-modal')
             const headerContent = document.getElementById('modal-header-content')
+
+            // Update URL so project cards have shareable subpage URLs (e.g. /project/arina-east-residences)
+            // This makes the address bar reflect the focused project (modal is still an overlay on the main view)
+            try {
+              const slug = (currentProject.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+              history.pushState({ type: 'project', id: projectId }, `${currentProject.name} | SellingSgProperty`, `/project/${slug}`);
+            } catch (e) {}
             
             headerContent.innerHTML = `
                 <div>
@@ -4249,6 +4275,11 @@ function toggleAmortization(){
             const modal = document.getElementById('project-modal')
             modal.classList.remove('flex')
             modal.classList.add('hidden')
+
+            // Restore clean main insights URL after closing a project modal (keeps browser history sensible)
+            if (history.state && history.state.type === 'project') {
+              history.pushState({ type: 'page', page: 'home' }, 'SellingSgProperty | Singapore New Launch Condos 2026 & Property Insights by Jack Leow', '/insights');
+            }
         }
         
         function switchProjectTab(tabIndex) {
@@ -9310,7 +9341,7 @@ function shareCurrentArticle() {
 function handleRoute() {
   const target = getIdFromPathOrHash();
   if (target === 'blog') {
-    showPage('blog');
+    showPage('home', false); // /insights reflects the main landing (hero + project cards)
     return true;
   }
   if (target && ARTICLES[target]) {
@@ -9318,6 +9349,28 @@ function handleRoute() {
     showArticle(target, false);
     return true;
   }
+
+  // New subpages: mortgage calculator, deep analysis, about, contact, etc.
+  const page = getPageFromPathname();
+  if (page) {
+    showPage(page, false); // initial load: URL already correct, don't push duplicate history
+    return true;
+  }
+
+  // Support direct links to project cards (e.g. /project/arina-east-residences opens modal on home)
+  if (location.pathname.startsWith('/project/')) {
+    const slug = (location.pathname.split('/')[2] || '').toLowerCase();
+    const proj = projects.find(p => {
+      const pslug = (p.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      return pslug === slug;
+    });
+    if (proj) {
+      showPage('home', false);
+      setTimeout(() => showProjectModal(proj.id), 80);
+      return true;
+    }
+  }
+
   return false;
 }
 
@@ -9326,7 +9379,7 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     const articlePage = document.getElementById('page-article');
     if (articlePage && articlePage.classList.contains('active')) {
-      showPage('blog');
+      showPage('home'); // back to main /insights landing view
     }
   }
 });
@@ -9336,13 +9389,37 @@ window.addEventListener('popstate', function() {
   const state = history.state;
   if (state && state.type === 'article' && ARTICLES[state.id]) {
     showArticle(state.id, false);
+  } else if (state && state.type === 'project' && state.id) {
+    showPage('home', false);
+    setTimeout(() => showProjectModal(state.id), 50);
+  } else if (state && state.type === 'page' && state.page) {
+    showPage(state.page, false);
   } else {
-    // default back to blog list or home
+    // default back to blog list / home or other subpage
     const target = getIdFromPathOrHash();
     if (target === 'blog') {
-      showPage('blog');
+      showPage('home', false);
     } else if (target && ARTICLES[target]) {
       showArticle(target, false);
+    } else {
+      const page = getPageFromPathname();
+      if (page) {
+        showPage(page, false);
+      } else if (location.pathname.startsWith('/project/')) {
+        const slug = (location.pathname.split('/')[2] || '').toLowerCase();
+        const proj = projects.find(p => {
+          const pslug = (p.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+          return pslug === slug;
+        });
+        if (proj) {
+          showPage('home', false);
+          setTimeout(() => showProjectModal(proj.id), 50);
+        } else {
+          showPage('home', false);
+        }
+      } else {
+        showPage('home', false);
+      }
     }
   }
 });
@@ -9380,6 +9457,17 @@ function getIdFromPathOrHash() {
   if (pathname === '/insights' || pathname === '/blog') {
     return 'blog';
   }
+  return null;
+}
+
+// Map clean subpage paths to internal page ids (used for direct loads + popstate)
+function getPageFromPathname() {
+  const p = (location.pathname || '/').replace(/\/$/, '');
+  if (p === '' || p === '/insights' || p === '/blog' || p === '/home') return 'home';
+  if (p === '/about') return 'about';
+  if (p === '/contact') return 'contact';
+  if (p === '/mortgage-calculator') return 'mortgage-calculator';
+  if (p === '/deep-analysis/arina-east-residences' || p === '/deep-analysis/arina' || p.startsWith('/deep-analysis/arina')) return 'deep-analysis-arina';
   return null;
 }
 

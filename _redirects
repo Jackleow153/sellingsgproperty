@@ -38,5 +38,13 @@
 # Legacy hash support (still works)
  /#insights/*                             /index.html   200
 
-# Fallback: everything else serves the SPA (required for client-side routing)
+# Main subpages (clean URLs for mortgage calculator, deep analysis, about, contact, project modals)
+# These load the SPA (index.html) then JS router shows the matching section / modal and updates active state.
+ /mortgage-calculator                     /index.html   200
+ /about                                   /index.html   200
+ /contact                                 /index.html   200
+ /deep-analysis/arina-east-residences     /index.html   200
+ /project/*                               /index.html   200
+
+# Fallback: everything else serves the SPA (required for client-side routing of all subpages + modals)
  /*                                       /index.html   200
