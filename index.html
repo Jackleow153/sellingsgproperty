@@ -3751,104 +3751,338 @@ function toggleAmortization(){
     </div>
     <!-- DEEP ANALYSIS SUBPAGE FOR ARINA EAST RESIDENCES -->
     <div id="page-deep-analysis-arina" class="page-section bg-white">
-      <div class="max-w-4xl mx-auto px-8 py-16">
+      <style>
+        /* v3 deep analysis styles - scoped to this page */
+        #page-deep-analysis-arina .serif { font-family: 'Marcellus', serif; }
+        #page-deep-analysis-arina .num { font-variant-numeric: tabular-nums; }
+        #page-deep-analysis-arina .eyebrow { font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--slate); font-weight: 600; }
+        #page-deep-analysis-arina .eyebrow-brass { font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--brass); font-weight: 600; }
+        #page-deep-analysis-arina .eyebrow-cream { font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: #B9A878; font-weight: 600; }
+        #page-deep-analysis-arina .card { background: var(--paper); border: 1px solid var(--hairline); }
+        #page-deep-analysis-arina .rule { border-top: 1px solid var(--hairline); }
+        #page-deep-analysis-arina .rule-dark { border-top: 1px solid rgba(237,230,214,.18); }
+        #page-deep-analysis-arina .fact-row { display: flex; justify-content: space-between; gap: 1.5rem; padding: .7rem 0; border-top: 1px solid var(--hairline); font-size: .85rem; }
+        #page-deep-analysis-arina .fact-row dt { color: var(--slate); }
+        #page-deep-analysis-arina .fact-row dd { text-align: right; font-weight: 500; }
+        #page-deep-analysis-arina .tick { color: var(--emerald); font-weight: 600; }
+        #page-deep-analysis-arina .cross { color: var(--claret); font-weight: 600; }
+        #page-deep-analysis-arina .tel-stop { width: .8rem; height: .8rem; border-radius: 9999px; background: #fff; border: 3px solid #9D5B25; flex: none; }
+        #page-deep-analysis-arina details summary { cursor: pointer; list-style: none; }
+        #page-deep-analysis-arina details summary::-webkit-details-marker { display: none; }
+        #page-deep-analysis-arina details[open] .faq-arrow { transform: rotate(90deg); }
+        #page-deep-analysis-arina .btn-brass { display: inline-block; background: var(--ink); color: #EDE6D6; padding: .85rem 1.9rem; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; border: 1px solid var(--ink); transition: all .25s; }
+        #page-deep-analysis-arina .btn-brass:hover { background: var(--brass-deep); border-color: var(--brass-deep); }
+        #page-deep-analysis-arina ::selection { background: var(--brass); color: #fff; }
+      </style>
+
+      <!-- Back button to match site navigation -->
+      <div class="max-w-5xl mx-auto px-6 pt-8">
         <button onclick="showPage('home')" class="mb-6 text-sm text-violet-700 hover:underline flex items-center gap-1">
           <i class="fa-solid fa-arrow-left"></i> Back to Home
         </button>
-        
-        <h1 class="text-4xl font-black tracking-tighter">Deep Analysis: Arina East Residences 2026</h1>
-        <p class="text-sm text-slate-500 mt-1">By Jack Leow | Last Updated: June 2026</p>
+      </div>
 
-        <div class="mt-8 prose prose-slate max-w-none">
-          <h2>Quick Facts</h2>
-          <table class="w-full text-sm">
-            <tr><td><strong>Project Name</strong></td><td>Arina East Residences</td></tr>
-            <tr><td><strong>Developer</strong></td><td>ZACD LV Development Pte Ltd (ZACD Group, Welltech Construction, FRX Capital)</td></tr>
-            <tr><td><strong>Location</strong></td><td>Tanjong Rhu Road, Kallang / Tanjong Rhu (D15)</td></tr>
-            <tr><td><strong>Region</strong></td><td>RCR (Rest of Central Region)</td></tr>
-            <tr><td><strong>Nearest MRT</strong></td><td>Katong Park (TE24) – ~3 min walk</td></tr>
-            <tr><td><strong>Total Units</strong></td><td><strong>107</strong> (Smallest & most exclusive among the 5)</td></tr>
-            <tr><td><strong>Tenure</strong></td><td><strong>Freehold</strong></td></tr>
-            <tr><td><strong>Launch</strong></td><td>June 2025 (Preview ~Apr–Jul 2025)</td></tr>
-            <tr><td><strong>TOP</strong></td><td>Q4 2027 (VP 2028)</td></tr>
-            <tr><td><strong>Avg PSF (Jun 2026)</strong></td><td><strong>$2,811</strong> (EdgeProp)</td></tr>
-            <tr><td><strong>Starting Price</strong></td><td>From ~$1.27M (495 sqft 1BR indicative)</td></tr>
-            <tr><td><strong>Primary Schools &lt;1km</strong></td><td>Kong Hwa School, Tanjong Katong Primary</td></tr>
-          </table>
+      <!-- HERO -->
+      <header class="text-white" style="background:var(--ink)">
+        <div class="max-w-5xl mx-auto px-6 pt-0 pb-12">
+          <div class="eyebrow-cream mb-4">Deep Analysis</div>
+          <h1 class="serif text-4xl md:text-6xl leading-tight" style="color:#EDE6D6">Arina East Residences</h1>
+          <p class="mt-4 max-w-2xl text-sm md:text-base leading-relaxed" style="color:#8FA0B0">
+            A rare <strong style="color:#EDE6D6">freehold</strong> boutique of just <strong style="color:#EDE6D6">107 units</strong> in Tanjong Rhu (D15),
+            three minutes from Katong Park MRT on the Thomson–East Coast Line. Here's the independent, data-backed view.
+          </p>
 
-          <h2>Is Arina East Residences a Good Buy in 2026?</h2>
-          <p>Arina East Residences stands out as one of the <strong>few freehold</strong> new launch condos in recent times. Located in the <strong>Tanjong Rhu</strong> area (D15), this boutique development by <strong>ZACD Group</strong> and partners offers only <strong>107 units</strong>, making it highly exclusive.</p>
-          
-          <h3>Key Highlights:</h3>
-          <ul>
-            <li><strong>Freehold</strong> tenure (rare for new launches in this price range)</li>
-            <li>Small scale (107 units) → low density and exclusivity</li>
-            <li><strong>Thomson-East Coast Line</strong> connectivity via Katong Park MRT</li>
-            <li>Attractive <strong>Tanjong Rhu</strong> location near Singapore Sports Hub and upcoming developments</li>
-            <li>1BR to 4BR options available (including 1BR tier)</li>
-          </ul>
+          <div class="rule-dark mt-10 pt-8 grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-6">
+            <div>
+              <div class="text-[10px] tracking-widest uppercase mb-1" style="color:#8FA0B0">Tenure</div>
+              <div class="serif text-2xl md:text-3xl" style="color:#D8BE85">Freehold</div>
+            </div>
+            <div>
+              <div class="text-[10px] tracking-widest uppercase mb-1" style="color:#8FA0B0">Total units</div>
+              <div class="serif num text-2xl md:text-3xl" style="color:#EDE6D6">107</div>
+            </div>
+            <div>
+              <div class="text-[10px] tracking-widest uppercase mb-1" style="color:#8FA0B0">Avg PSF · Jun 2026</div>
+              <div class="serif num text-2xl md:text-3xl" style="color:#EDE6D6">$2,811</div>
+            </div>
+            <div>
+              <div class="text-[10px] tracking-widest uppercase mb-1" style="color:#8FA0B0">Katong Park MRT</div>
+              <div class="serif num text-2xl md:text-3xl" style="color:#EDE6D6">~3 min</div>
+            </div>
+          </div>
+        </div>
+      </header>
 
-          <h3>Potential Concerns:</h3>
-          <ul>
-            <li>Smaller developer compared to CDL/Frasers (though ZACD has delivered projects before)</li>
-            <li>PSF is still in the $2,800+ range despite being RCR</li>
-            <li>Limited number of units = potentially lower liquidity on resale</li>
-          </ul>
+      <main class="max-w-5xl mx-auto px-6 py-12 space-y-10">
 
-          <h2>Location & Connectivity</h2>
-          <p><strong>Address:</strong> Tanjong Rhu Road, Singapore (D15)</p>
-          <p><strong>MRT Access:</strong></p>
-          <ul>
-            <li><strong>Katong Park MRT (Thomson-East Coast Line)</strong> — ~3 minutes walk</li>
-            <li>Easy access to Marina Bay, CBD, and Changi via TEL</li>
-            <li>Close to Nicoll Highway and ECP</li>
-          </ul>
+        <!-- VERDICT -->
+        <section class="card p-8 md:p-10" style="border-top:3px solid var(--brass)">
+          <div class="eyebrow mb-3">The Verdict in One Paragraph</div>
+          <p class="text-base md:text-lg leading-relaxed">
+            Arina East Residences is one of the few <strong>freehold</strong> new launches of this cycle — and at 107 units,
+            among the most exclusive. The trade-offs are real: a $2,800+ PSF entry for an RCR address, a developer consortium
+            (ZACD Group, Welltech Construction, FRX Capital) without a blue-chip track record, and a unit count small enough
+            that resale liquidity deserves thought. Buy it for permanence, scarcity and the TEL doorstep — not for a quick flip.
+          </p>
+        </section>
 
-          <h2>Investment Analysis & Metrics (2026)</h2>
-          <p><strong>Pros:</strong></p>
-          <ul>
-            <li><strong>Freehold</strong> tenure (major advantage vs 99 LH projects)</li>
-            <li>Boutique scale (only 107 units) → exclusivity</li>
-            <li>Good <strong>Thomson-East Coast Line</strong> connectivity</li>
-            <li>Tanjong Rhu location with <strong>Sports Hub</strong> proximity and future growth potential</li>
-            <li>1BR option available (uncommon in many new launches)</li>
-          </ul>
+        <!-- QUICK FACTS -->
+        <section class="card p-8 md:p-10">
+          <div class="eyebrow mb-5">Quick Facts</div>
+          <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-12">
+            <dl>
+              <div class="fact-row" style="border-top:none"><dt>Project</dt><dd>Arina East Residences</dd></div>
+              <div class="fact-row"><dt>Developer</dt><dd>ZACD LV Development Pte Ltd<br><span class="text-xs font-normal" style="color:var(--slate)">ZACD Group · Welltech · FRX Capital JV</span></dd></div>
+              <div class="fact-row"><dt>Location</dt><dd>Tanjong Rhu Road, D15</dd></div>
+              <div class="fact-row"><dt>Region</dt><dd>RCR (Rest of Central Region)</dd></div>
+              <div class="fact-row"><dt>Nearest MRT</dt><dd>Katong Park (TE24) · ~3 min walk</dd></div>
+            </dl>
+            <dl>
+              <div class="fact-row md:border-t-0"><dt>Tenure</dt><dd style="color:var(--brass-deep)">Freehold</dd></div>
+              <div class="fact-row"><dt>Total units</dt><dd class="num">107 · 1BR to 4BR</dd></div>
+              <div class="fact-row"><dt>Avg PSF (Jun 2026)</dt><dd class="num">$2,811 <span class="text-xs font-normal" style="color:var(--slate)">(EdgeProp)</span></dd></div>
+              <div class="fact-row"><dt>From</dt><dd class="num">~$1.27M <span class="text-xs font-normal" style="color:var(--slate)">495 sqft 1BR, indicative</span></dd></div>
+              <div class="fact-row"><dt>Primary schools &lt;1km</dt><dd>Kong Hwa School<br>Tanjong Katong Primary</dd></div>
+            </dl>
+          </div>
+        </section>
 
-          <p><strong>Cons:</strong></p>
-          <ul>
-            <li>Higher PSF for RCR freehold</li>
-            <li>Smaller developer track record compared to big names</li>
-            <li>Very limited units = may be harder to exit later</li>
-          </ul>
-
-          <h2>Comparison: Arina East Residences vs Other New Launches (2026)</h2>
-          <table class="w-full text-sm mt-4">
-            <thead>
-              <tr class="border-b"><th>Project</th><th>Region</th><th>Tenure</th><th>Avg PSF</th><th>Total Units</th><th>TOP</th><th>Key Differentiator</th></tr>
-            </thead>
-            <tbody>
-              <tr class="border-b"><td><strong>Arina East Residences</strong></td><td>RCR</td><td><strong>Freehold</strong></td><td>$2,811</td><td><strong>107</strong></td><td>2027</td><td>Freehold + boutique scale</td></tr>
-              <tr class="border-b"><td>Union Square Residences</td><td>RCR</td><td>99 LH</td><td>$2,966</td><td>366</td><td>2029</td><td>Singapore River + Clarke Quay</td></tr>
-              <tr class="border-b"><td>Aurea</td><td>CCR</td><td>99 LH</td><td>$2,840</td><td>188</td><td>2029</td><td>Low density CCR</td></tr>
-            </tbody>
-          </table>
-
-          <h2>Frequently Asked Questions (FAQ)</h2>
-          <p><strong>Q: Is Arina East Residences freehold?</strong><br>A: <strong>Yes</strong>, it is one of the few freehold new launch condos available.</p>
-          <p><strong>Q: What is the TOP date?</strong><br>A: Q4 2027 (vacant possession in 2028).</p>
-          <p><strong>Q: How many units are there?</strong><br>A: Only <strong>107 units</strong> — very boutique and exclusive.</p>
-          <p><strong>Q: Which MRT is closest?</strong><br>A: Katong Park MRT (Thomson-East Coast Line), about 3 minutes walk.</p>
-          <p><strong>Q: Who is the developer?</strong><br>A: ZACD LV Development Pte Ltd (ZACD Group + Welltech + FRX Capital JV).</p>
-
-          <div class="mt-8 p-6 bg-violet-50 rounded-3xl">
-            <p class="font-medium">Considering Arina East Residences?</p>
-            <p class="text-sm mt-2">I provide <strong>independent, data-backed advice</strong> to help you decide if this (or any new launch) fits your goals — with <strong>zero commission</strong> on developer-direct purchases.</p>
-            <a href="https://wa.me/6580621538" target="_blank" class="mt-4 inline-flex items-center gap-2 px-5 py-2 bg-violet-700 text-white rounded-3xl text-sm font-semibold">WhatsApp Jack for free 30-min consultation <i class="fa-brands fa-whatsapp"></i></a>
+        <!-- CHARTS -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div class="card p-8">
+            <div class="eyebrow mb-1">Average PSF · June 2026</div>
+            <div class="text-xs mb-6" style="color:var(--slate)">Arina East vs comparable 2025 launches — and it's the only freehold of the three</div>
+            <canvas id="psfChart" height="230"></canvas>
+            <div class="rule mt-6 pt-4 text-[11px] leading-relaxed" style="color:var(--slate)">
+              At $2,811 psf, Arina East sits <em>below</em> 99-year Union Square ($2,966) and roughly level with CCR Aurea ($2,840) — while holding freehold tenure. That's the core of the value argument.
+            </div>
           </div>
 
-          <p class="text-xs text-slate-500 mt-6">All information verified from EdgeProp and public sources as of June 2026. This is not an offer to sell or solicitation to buy.</p>
-        </div>
-      </div>
+          <div class="card p-8">
+            <div class="eyebrow mb-1">Boutique Scale · Total Units</div>
+            <div class="text-xs mb-6" style="color:var(--slate)">Exclusivity cuts both ways: scarcity on entry, thinner liquidity on exit</div>
+            <canvas id="unitsChart" height="230"></canvas>
+            <div class="rule mt-6 pt-4 text-[11px] leading-relaxed" style="color:var(--slate)">
+              107 units is less than a third of Union Square's 366. Expect fewer comparable transactions to benchmark against — and fewer competing sellers when you list.
+            </div>
+          </div>
+        </section>
+
+        <!-- CONNECTIVITY -->
+        <section class="card p-8 md:p-10">
+          <div class="eyebrow mb-1">Connectivity · Thomson–East Coast Line</div>
+          <div class="text-xs mb-8" style="color:var(--slate)">Katong Park (TE24) is a ~3-minute walk; the TEL runs you west into town and east toward Changi</div>
+          <div class="overflow-x-auto pb-2">
+            <div class="flex items-center min-w-[560px]">
+              <div class="flex flex-col items-center gap-2 text-center flex-1">
+                <div class="tel-stop"></div>
+                <div class="text-xs font-medium leading-tight">Gardens by the Bay<br><span class="text-[10px] font-normal" style="color:var(--slate)">/ Marina Bay · CBD</span></div>
+              </div>
+              <div class="h-1 flex-1" style="background:#9D5B25"></div>
+              <div class="flex flex-col items-center gap-2 text-center flex-1">
+                <div class="tel-stop" style="width:1.1rem;height:1.1rem;border-color:var(--brass);border-width:4px"></div>
+                <div class="text-xs font-semibold leading-tight" style="color:var(--brass-deep)">Katong Park (TE24)<br><span class="text-[10px] font-normal" style="color:var(--slate)">~3 min walk · Arina East</span></div>
+              </div>
+              <div class="h-1 flex-1" style="background:#9D5B25"></div>
+              <div class="flex flex-col items-center gap-2 text-center flex-1">
+                <div class="tel-stop"></div>
+                <div class="text-xs font-medium leading-tight">East Coast<br><span class="text-[10px] font-normal" style="color:var(--slate)">→ toward Changi</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="rule mt-7 pt-5 grid grid-cols-1 sm:grid-cols-3 gap-5 text-sm">
+            <div><span class="tick">●</span>&nbsp; Singapore Sports Hub nearby</div>
+            <div><span class="tick">●</span>&nbsp; Quick access to Nicoll Highway &amp; ECP</div>
+            <div><span class="tick">●</span>&nbsp; Kong Hwa &amp; Tanjong Katong Pri within 1km</div>
+          </div>
+        </section>
+
+        <!-- PROS & CONS -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div class="card p-8" style="border-top:3px solid var(--emerald)">
+            <div class="eyebrow mb-6" style="color:var(--emerald)">What Works For It</div>
+            <ul class="space-y-4 text-sm leading-relaxed">
+              <li class="flex gap-3"><span class="tick">✓</span><span><strong>Freehold tenure</strong> — a genuine rarity among recent launches, and a structural edge over every 99-year comparable.</span></li>
+              <li class="flex gap-3"><span class="tick">✓</span><span><strong>Boutique 107-unit scale</strong> — low density, exclusivity, and scarcity value within Tanjong Rhu.</span></li>
+              <li class="flex gap-3"><span class="tick">✓</span><span><strong>TEL on the doorstep</strong> — ~3 minutes to Katong Park, direct line to Marina Bay, the CBD and Changi.</span></li>
+              <li class="flex gap-3"><span class="tick">✓</span><span><strong>Tanjong Rhu address</strong> — Sports Hub proximity and a precinct with future growth potential.</span></li>
+              <li class="flex gap-3"><span class="tick">✓</span><span><strong>1BR tier from ~$1.27M</strong> — a quantum entry point uncommon in boutique freehold launches.</span></li>
+            </ul>
+          </div>
+          <div class="card p-8" style="border-top:3px solid var(--claret)">
+            <div class="eyebrow mb-6" style="color:var(--claret)">What to Weigh Carefully</div>
+            <ul class="space-y-4 text-sm leading-relaxed">
+              <li class="flex gap-3"><span class="cross">✗</span><span><strong>$2,800+ PSF in the RCR</strong> — you're paying near-CCR money; the freehold premium must matter to you.</span></li>
+              <li class="flex gap-3"><span class="cross">✗</span><span><strong>Developer scale</strong> — the ZACD-led consortium has delivered before, but isn't a CDL or Frasers; weigh execution comfort accordingly.</span></li>
+              <li class="flex gap-3"><span class="cross">✗</span><span><strong>Exit liquidity</strong> — 107 units means a thin resale market: fewer caveats to price against, fewer buyers searching the project by name.</span></li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- COMPARISON TABLE -->
+        <section class="card overflow-hidden">
+          <div class="p-8 pb-5">
+            <div class="eyebrow mb-1">Head to Head · 2025 Launch Comparables</div>
+            <div class="text-xs" style="color:var(--slate)">Figures as published June 2026 · EdgeProp &amp; public sources</div>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm num min-w-[640px]">
+              <thead>
+                <tr class="text-[10px] tracking-widest uppercase" style="color:var(--slate)">
+                  <th class="text-left px-8 py-4 font-semibold">Project</th>
+                  <th class="text-left px-4 py-4 font-semibold">Region</th>
+                  <th class="text-left px-4 py-4 font-semibold">Tenure</th>
+                  <th class="text-right px-4 py-4 font-semibold">Avg PSF</th>
+                  <th class="text-right px-4 py-4 font-semibold">Units</th>
+                  <th class="text-right px-4 py-4 font-semibold">TOP</th>
+                  <th class="text-left px-8 py-4 font-semibold">Differentiator</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-top:1px solid var(--hairline);background:#FAF5E9">
+                  <td class="px-8 py-4 font-semibold">Arina East Residences</td>
+                  <td class="px-4 py-4">RCR</td>
+                  <td class="px-4 py-4 font-semibold" style="color:var(--brass-deep)">Freehold</td>
+                  <td class="text-right px-4 py-4">$2,811</td>
+                  <td class="text-right px-4 py-4 font-semibold">107</td>
+                  <td class="text-right px-4 py-4">2027</td>
+                  <td class="px-8 py-4 text-xs" style="color:var(--slate)">Freehold + boutique scale</td>
+                </tr>
+                <tr style="border-top:1px solid var(--hairline)">
+                  <td class="px-8 py-4">Union Square Residences</td>
+                  <td class="px-4 py-4">RCR</td>
+                  <td class="px-4 py-4">99 LH</td>
+                  <td class="text-right px-4 py-4">$2,966</td>
+                  <td class="text-right px-4 py-4">366</td>
+                  <td class="text-right px-4 py-4">2029</td>
+                  <td class="px-8 py-4 text-xs" style="color:var(--slate)">Singapore River + Clarke Quay</td>
+                </tr>
+                <tr style="border-top:1px solid var(--hairline)">
+                  <td class="px-8 py-4">Aurea</td>
+                  <td class="px-4 py-4">CCR</td>
+                  <td class="px-4 py-4">99 LH</td>
+                  <td class="text-right px-4 py-4">$2,840</td>
+                  <td class="text-right px-4 py-4">188</td>
+                  <td class="text-right px-4 py-4">2029</td>
+                  <td class="px-8 py-4 text-xs" style="color:var(--slate)">Low-density CCR</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- WHO IS THIS FOR -->
+        <section class="p-8 md:p-10 text-white" style="background:var(--ink)">
+          <div class="eyebrow-cream mb-6">Who This Suits — And Who It Doesn't</div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm leading-relaxed">
+            <div>
+              <div class="serif text-xl mb-3" style="color:#D8BE85">A fit if you are…</div>
+              <p style="color:#B9C5CF">An own-stay buyer or legacy-minded investor who values freehold permanence, wants TEL connectivity without CCR pricing, prefers a quiet low-density address near the Sports Hub, and intends to hold well past any speculative window.</p>
+            </div>
+            <div>
+              <div class="serif text-xl mb-3" style="color:#D8BE85">Think twice if you are…</div>
+              <p style="color:#B9C5CF">Chasing a short-hold flip (thin liquidity works against fast exits), need a deep pool of comparable transactions for confidence, or want the reassurance of a top-tier developer brand at this price point.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="card p-8 md:p-10">
+          <div class="eyebrow mb-7">Frequently Asked Questions</div>
+          <div class="space-y-0">
+            <details class="rule py-5" open>
+              <summary class="flex justify-between items-center gap-4 text-sm font-semibold">Is Arina East Residences freehold?<span class="faq-arrow serif text-2xl transition-transform" style="color:var(--brass)">›</span></summary>
+              <p class="text-sm mt-3 leading-relaxed" style="color:var(--slate)">Yes — it is one of the few freehold new launch condos available in this cycle, a structural advantage over the 99-year leasehold comparables in its price range.</p>
+            </details>
+            <details class="rule py-5">
+              <summary class="flex justify-between items-center gap-4 text-sm font-semibold">What is the TOP date?<span class="faq-arrow serif text-2xl transition-transform" style="color:var(--brass)">›</span></summary>
+              <p class="text-sm mt-3 leading-relaxed" style="color:var(--slate)">Q4 2027 expected TOP, with vacant possession in 2028 — earlier keys than most 2029–2030 completions among comparable launches.</p>
+            </details>
+            <details class="rule py-5">
+              <summary class="flex justify-between items-center gap-4 text-sm font-semibold">How many units are there?<span class="faq-arrow serif text-2xl transition-transform" style="color:var(--brass)">›</span></summary>
+              <p class="text-sm mt-3 leading-relaxed" style="color:var(--slate)">Only 107 units across 1- to 4-bedroom layouts — boutique and exclusive, with the liquidity trade-off that implies on resale.</p>
+            </details>
+            <details class="rule py-5">
+              <summary class="flex justify-between items-center gap-4 text-sm font-semibold">Which MRT is closest?<span class="faq-arrow serif text-2xl transition-transform" style="color:var(--brass)">›</span></summary>
+              <p class="text-sm mt-3 leading-relaxed" style="color:var(--slate)">Katong Park MRT (TE24) on the Thomson–East Coast Line, roughly a 3-minute walk — with direct access toward Marina Bay, the CBD and Changi.</p>
+            </details>
+            <details class="rule py-5">
+              <summary class="flex justify-between items-center gap-4 text-sm font-semibold">Who is the developer?<span class="faq-arrow serif text-2xl transition-transform" style="color:var(--brass)">›</span></summary>
+              <p class="text-sm mt-3 leading-relaxed" style="color:var(--slate)">ZACD LV Development Pte Ltd — a joint venture of ZACD Group, Welltech Construction and FRX Capital.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="text-center p-10 md:p-12" style="background:#FAF5E9;border:1px solid #DCCB9F;border-top:3px solid var(--brass)">
+          <div class="eyebrow mb-3">Considering Arina East Residences?</div>
+          <h2 class="serif text-3xl md:text-4xl mb-4">Get an independent read before you commit.</h2>
+          <p class="text-sm max-w-xl mx-auto mb-8" style="color:var(--slate)">Data-backed advice on whether this — or any new launch — fits your goals.</p>
+          <a href="https://www.sellingsgproperty.com/contact" class="btn-brass">Free 30-min consultation</a>
+        </section>
+
+        <p class="text-[11px] text-center leading-relaxed max-w-2xl mx-auto" style="color:var(--slate)">
+          The information is for general guidance only — please seek professional advice before committing.
+        </p>
+      </main>
+
+      <script>
+        // Charts for v3 deep analysis - only run when this page is active
+        if (typeof Chart !== 'undefined') {
+          Chart.defaults.font.family = "'Hanken Grotesk', sans-serif";
+          Chart.defaults.color = "#5C6B7A";
+          const hairline = "#E3DDD0";
+
+          // PSF comparison
+          const psfEl = document.getElementById("psfChart");
+          if (psfEl) {
+            new Chart(psfEl, {
+              type: "bar",
+              data: {
+                labels: ["Arina East (FH)", "Union Square (99)", "Aurea (99)"],
+                datasets: [{
+                  data: [2811, 2966, 2840],
+                  backgroundColor: ["#B89B5E", "#3E5C76", "#3E5C76"],
+                  borderWidth: 0,
+                  barPercentage: .55
+                }]
+              },
+              options: {
+                plugins: { legend: {display:false}, tooltip: { callbacks: { label: c => " $" + c.parsed.y.toLocaleString() + " psf" } } },
+                scales: {
+                  y: { min: 2600, max: 3050, grid: {color: hairline}, ticks: { callback: v => "$" + v.toLocaleString() } },
+                  x: { grid: {display:false} }
+                }
+              }
+            });
+          }
+
+          // Units comparison
+          const unitsEl = document.getElementById("unitsChart");
+          if (unitsEl) {
+            new Chart(unitsEl, {
+              type: "bar",
+              data: {
+                labels: ["Arina East", "Aurea", "Union Square"],
+                datasets: [{
+                  data: [107, 188, 366],
+                  backgroundColor: ["#B89B5E", "#3E5C76", "#3E5C76"],
+                  borderWidth: 0,
+                  barPercentage: .55
+                }]
+              },
+              options: {
+                indexAxis: "y",
+                plugins: { legend: {display:false}, tooltip: { callbacks: { label: c => " " + c.parsed.x + " units" } } },
+                scales: {
+                  x: { grid: {color: hairline}, ticks: { stepSize: 100 } },
+                  y: { grid: {display:false} }
+                }
+              }
+            });
+          }
+        }
+      </script>
     </div>
 
     <!-- PROJECT MODAL -->
