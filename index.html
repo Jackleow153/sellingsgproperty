@@ -3363,36 +3363,6 @@ input[type="range"]{accent-color:var(--brass);}
 
   <!-- Masthead title, lede and rates now live in .smc-hero above for single H1 + refined editorial aesthetic (porcelain/navy/violet, inline SVGs, verbatim wording) -->
 
-  <!-- Progress banner (shown until all steps complete) -->
-  <div id="resultsPending" class="card p-6 sm:p-8 mb-8 text-center">
-    <div class="flex items-center justify-center">
-      <div class="flex flex-col items-center gap-2">
-        <div class="text-[10px] tracking-widest uppercase font-semibold" style="color:var(--brass-deep)">Step 1</div>
-        <div id="stepIcon1" class="prog-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></svg>
-        </div>
-        <div class="text-[10px] tracking-widest uppercase font-semibold" style="color:var(--slate)">Property</div>
-      </div>
-      <div class="prog-line mx-2 sm:mx-4"></div>
-      <div class="flex flex-col items-center gap-2">
-        <div class="text-[10px] tracking-widest uppercase font-semibold" style="color:var(--brass-deep)">Step 2</div>
-        <div id="stepIcon2" class="prog-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.2"/><circle cx="17.5" cy="17.5" r="2.2"/></svg>
-        </div>
-        <div class="text-[10px] tracking-widest uppercase font-semibold" style="color:var(--slate)">Loan</div>
-      </div>
-      <div class="prog-line mx-2 sm:mx-4"></div>
-      <div class="flex flex-col items-center gap-2">
-        <div class="text-[10px] tracking-widest uppercase font-semibold" style="color:var(--brass-deep)">Step 3</div>
-        <div id="stepIcon3" class="prog-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <div class="text-[10px] tracking-widest uppercase font-semibold" style="color:var(--slate)">Household</div>
-      </div>
-    </div>
-    <p class="text-sm mt-5 max-w-md mx-auto" style="color:var(--slate)">Complete the three steps to see your monthly instalment, upfront cash &amp; CPF, and stamp duties.</p>
-  </div>
-
   <div class="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
 
     <!-- ============ LEFT: STEPS ============ -->
@@ -3951,30 +3921,7 @@ function updateSteps(price, income){
   $("step3Hint").classList.toggle("hidden", s2done)
   toggleReveal("ratioCards", s3done)
   toggleReveal("resultsColumn", s3done)
-  $("resultsPending").classList.toggle("hidden", s3done)
 
-  // progress icons
-  $("stepIcon1").classList.toggle("done", s1done)
-  $("stepIcon2").classList.toggle("done", s2done)
-  $("stepIcon3").classList.toggle("done", s3done)
-
-  // layout: centre the steps while pending; two columns once complete
-  const stepsCol = $("stepsCol"), resWrap = $("resWrap")
-  if (s3done){
-    stepsCol.style.gridColumn = ""
-    stepsCol.style.maxWidth = ""
-    stepsCol.style.marginLeft = ""
-    stepsCol.style.marginRight = ""
-    stepsCol.style.width = ""
-    resWrap.style.display = ""
-  } else {
-    stepsCol.style.gridColumn = "1 / -1"
-    stepsCol.style.maxWidth = "720px"
-    stepsCol.style.marginLeft = "auto"
-    stepsCol.style.marginRight = "auto"
-    stepsCol.style.width = "100%"
-    resWrap.style.display = "none"
-  }
   return s3done
 }
 
