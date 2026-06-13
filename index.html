@@ -2712,11 +2712,11 @@
           </div>
 
           <div class="mt-5 flex justify-end">
-            <a id="article-linkedin" href="#" target="_blank" rel="noopener"
+            <button onclick="shareArticleWithFamFrens()"
                class="inline-flex items-center gap-x-1.5 text-xs text-slate-500 hover:text-violet-700 transition">
-              <i class="fa-brands fa-linkedin"></i>
-              <span>Share on LinkedIn</span>
-            </a>
+              <i class="fa-brands fa-whatsapp"></i>
+              <span>Share with fam/frens</span>
+            </button>
           </div>
         </div>
       </div>
@@ -9727,11 +9727,7 @@ function showArticle(id, pushHistory = true) {
     navTitle.textContent = short;
   }
 
-  // LinkedIn link (from data)
-  const liLink = document.getElementById('article-linkedin');
-  if (liLink) {
-    liLink.href = post.linkedinUrl || 'https://www.linkedin.com/newsletters/find-your-treasure-7410244299805757440/';
-  }
+  // Old LinkedIn share replaced with WhatsApp "Share with fam/frens" (see shareArticleWithFamFrens)
 
   // Reset progress bar
   const prog = document.getElementById('article-read-progress');
@@ -9804,6 +9800,38 @@ function shareCurrentArticle() {
     // ultimate fallback
     prompt('Copy this link:', url);
   });
+}
+
+function shareArticleWithFamFrens() {
+  const id = currentArticleId;
+  const post = id && ARTICLES[id];
+  const url = location.origin + (id ? getCleanPath(id) : '/insights');
+  const title = post ? post.title : 'Singapore property insight by Jack Leow';
+
+  const text = `Check out this article: ${title} — ${url}`;
+
+  // Copy the link (as requested)
+  const copyLink = () => {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).catch(() => {});
+    } else {
+      // fallback
+      const ta = document.createElement('textarea');
+      ta.value = url;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch(e) {}
+      document.body.removeChild(ta);
+    }
+  };
+
+  copyLink();
+
+  // Open WhatsApp with prefilled message
+  const wa = `https://wa.me/?text=${encodeURIComponent(text)}`;
+  window.open(wa, '_blank');
 }
 
 // Client-side router supporting clean paths (/insights/slug) for Netlify/SEO + legacy hash paths
