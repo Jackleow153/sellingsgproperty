@@ -3470,6 +3470,14 @@
       WhatsApp Jack for Free Review →
     </a>
     
+    <div class="mt-5">
+      <button onclick="shareMortgageCalculator()" 
+              class="inline-flex items-center gap-x-1.5 text-xs text-white/70 hover:text-white transition">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span>Share with fam/frens</span>
+      </button>
+    </div>
+    
     <p class="text-xs text-white/60 mt-6">No obligation. Developer-paid consultation.</p>
   </div>
 </section>
@@ -3950,6 +3958,35 @@ function toggleAmortization(){
   $("propertyType").addEventListener("change", () => { applyPropertyRules(); cpfTouched=false; update() })
   applyPropertyRules()
   update()
+
+  // Share with fam/frens - copy link + open WhatsApp
+  window.shareMortgageCalculator = function() {
+    const url = 'https://www.sellingsgproperty.com/mortgage-calculator';
+    const text = 'Check out this free Singapore Mortgage Calculator 2026: ' + url;
+
+    // Copy the link to clipboard
+    const copyLink = () => {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).catch(() => {});
+      } else {
+        // Fallback for older browsers
+        const ta = document.createElement('textarea');
+        ta.value = url;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch(e) {}
+        document.body.removeChild(ta);
+      }
+    };
+
+    copyLink();
+
+    // Open WhatsApp with prefilled message
+    const wa = 'https://wa.me/?text=' + encodeURIComponent(text);
+    window.open(wa, '_blank');
+  };
       </script>
 
     </div>
