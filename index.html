@@ -4337,7 +4337,7 @@ function toggleAmortization(){
                 </button>
             </div>
             
-            <div class="px-8 pt-4 border-b flex overflow-x-auto">
+            <div id="project-tab-bar" class="px-8 pt-4 border-b flex overflow-x-auto">
                 <div onclick="switchProjectTab(0)" class="project-tab active px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="0">Overview</div>
                 <div onclick="switchProjectTab(1)" class="project-tab px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="1">Unit Mix &amp; Pricing</div>
                 <div onclick="switchProjectTab(2)" class="project-tab px-5 py-3 text-sm font-medium cursor-pointer whitespace-nowrap" data-tab="2">Site Plan &amp; Location</div>
@@ -4764,6 +4764,24 @@ function toggleAmortization(){
             modal.classList.add('flex')
             
             switchProjectTab(0)
+
+            // Special button ONLY for Thomson Reserve (id 28) - "Aukuwa Paper"
+            // Inserted in tab bar between Overview and Unit Mix & Pricing
+            // Styled as yellow pill button exactly as shown; no link/action yet
+            // All other projects and code untouched
+            const tabBar = document.getElementById('project-tab-bar')
+            if (tabBar) {
+                tabBar.querySelectorAll('.aukuwa-paper-btn').forEach(el => el.remove())
+                if (currentProject && currentProject.id === 28) {
+                    const overviewTab = tabBar.querySelector('[data-tab="0"]')
+                    if (overviewTab) {
+                        const specialBtn = document.createElement('div')
+                        specialBtn.className = 'aukuwa-paper-btn ml-3 px-4 py-1.5 text-xs font-semibold bg-amber-400 text-amber-900 border border-amber-500 rounded-2xl flex items-center gap-x-1.5 cursor-default whitespace-nowrap'
+                        specialBtn.innerHTML = `<i class="fa-solid fa-file-alt"></i> <span>Aukuwa Paper</span>`
+                        overviewTab.parentNode.insertBefore(specialBtn, overviewTab.nextSibling)
+                    }
+                }
+            }
         }
         
         function hideProjectModal() {
