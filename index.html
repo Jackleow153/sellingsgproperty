@@ -1776,7 +1776,7 @@
                             <div class="flex items-center justify-between mt-4 text-xs">
                                 <div class="px-2.5 py-px bg-slate-100 text-slate-500 rounded text-[10px]">~2030</div>
                                 
-                                <button onclick="showPage('thomson-reserve-aukuwa-paper', false); history.pushState({ type: 'page', page: 'thomson-reserve-aukuwa-paper' }, 'Thomson Reserve Condo 2026 | 1KM to Ai Tong School | Upper Thomson Review', '/project/thomson-reserve'); event.stopImmediatePropagation();" class="px-5 py-1.5 text-xs font-semibold border border-violet-700 text-violet-700 hover:bg-violet-700 hover:text-white rounded-2xl transition">
+                                <button onclick="showProjectModal(28); event.stopImmediatePropagation();" class="px-5 py-1.5 text-xs font-semibold border border-violet-700 text-violet-700 hover:bg-violet-700 hover:text-white rounded-2xl transition">
                                     View Details
                                 </button>
                             </div>
@@ -5736,7 +5736,7 @@ function toggleAmortization(){
                             <div class="flex items-center justify-between mt-4 text-xs">
                                 <div class="px-2.5 py-px bg-slate-100 text-slate-500 rounded text-[10px]">${project.top}</div>
                                 
-                                <button onclick="${project.id === 28 ? `showPage('thomson-reserve-aukuwa-paper', false); history.pushState({ type: 'page', page: 'thomson-reserve-aukuwa-paper' }, 'Thomson Reserve Condo 2026 | 1KM to Ai Tong School | Upper Thomson Review', '/project/thomson-reserve');` : `showProjectModal(${project.id});`} event.stopImmediatePropagation();" class="px-5 py-1.5 text-xs font-semibold border border-violet-700 text-violet-700 hover:bg-violet-700 hover:text-white rounded-2xl transition">
+                                <button onclick="showProjectModal(${project.id}); event.stopImmediatePropagation();" class="px-5 py-1.5 text-xs font-semibold border border-violet-700 text-violet-700 hover:bg-violet-700 hover:text-white rounded-2xl transition">
                                     View Details
                                 </button>
                             </div>
