@@ -5054,17 +5054,18 @@ function toggleAmortization(){
 </script>
 
 <script>
-  // Exact meta description + title for this subpage ONLY (self-contained inside the subpage div).
-  // Brute-force override so the desired meta is always applied when this subpage is visible,
-  // even if global routing code tries to set a different one.
+  // EXACT requested meta description for this subpage ONLY.
+  // All code below is inside the #page-thomson-reserve-aukuwa-paper block.
+  // It forces the precise <meta name="description"> value the user specified.
   const DESIRED_TITLE = 'Thomson Reserve Condo 2026 | 1KM Ai Tong School | Upper Thomson New Launch | Jack Leow';
-  const DESIRED_DESC = 'Thomson Reserve at Bright Hill Drive – Upper Thomson’s largest 2026 new launch by UOL, SingLand & CapitaLand. 1KM to Ai Tong Primary, steps to Upper Thomson MRT. Honest pricing analysis, buy zones & comparison with Jadescape by Jack Leow (CEA R074023I).';
+  const DESIRED_DESC = 'Thomson Reserve Condo at Bright Hill Drive, Upper Thomson. 1KM to Ai Tong Primary School & walking distance to Upper Thomson MRT. Honest 2026 analysis with pricing zones, Jadescape comparison, risks & affordability examples by Jack Leow (CEA R074023I).';
 
   let metaForceInterval = null;
 
-  function forceThomsonMetaDescription() {
+  function forceExactMeta() {
     document.title = DESIRED_TITLE;
 
+    // Get or create the description meta
     let descEl = document.querySelector('meta[name="description"]');
     if (!descEl) {
       descEl = document.createElement('meta');
@@ -5073,57 +5074,82 @@ function toggleAmortization(){
     }
     descEl.setAttribute('content', DESIRED_DESC);
 
-    // Also try to set og:description if present (for social/SEO consistency on this subpage)
-    const ogDesc = document.querySelector('meta[property="og:description"]');
-    if (ogDesc) ogDesc.setAttribute('content', DESIRED_DESC);
+    // Keep og:description in sync too
+    let og = document.querySelector('meta[property="og:description"]');
+    if (!og) {
+      og = document.createElement('meta');
+      og.setAttribute('property', 'og:description');
+      document.head.appendChild(og);
+    }
+    og.setAttribute('content', DESIRED_DESC);
   }
 
-  function startPersistentMetaForce() {
-    forceThomsonMetaDescription();
+  function startStrongForce() {
+    forceExactMeta();
 
-    // Clear any previous interval
-    if (metaForceInterval) {
-      clearInterval(metaForceInterval);
-    }
+    if (metaForceInterval) clearInterval(metaForceInterval);
 
-    // Aggressively re-apply the exact meta description every 80ms for ~4 seconds after the subpage activates.
-    // This ensures it wins against any post-showPage overwrites from elsewhere.
-    let ticks = 0;
+    // Very persistent loop: force every 60ms for 8+ seconds when subpage is shown.
+    // This beats any timing from external routing code.
+    let i = 0;
     metaForceInterval = setInterval(() => {
-      ticks++;
-      forceThomsonMetaDescription();
-      if (ticks > 50) {  // ~4 seconds
+      forceExactMeta();
+      i++;
+      if (i > 130) {
         clearInterval(metaForceInterval);
         metaForceInterval = null;
       }
-    }, 80);
+    }, 60);
   }
 
-  // Initial force on parse (covers direct load of the subpage URL)
-  forceThomsonMetaDescription();
+  // Run right away
+  forceExactMeta();
 
-  // Watch the subpage div itself for activation (the 'active' class added by showPage).
-  // This is the only place we can hook without editing routing.
-  const subpageDiv = document.getElementById('page-thomson-reserve-aukuwa-paper');
-  if (subpageDiv) {
-    const observer = new MutationObserver(() => {
-      if (subpageDiv.classList.contains('active')) {
-        startPersistentMetaForce();
+  const sp = document.getElementById('page-thomson-reserve-aukuwa-paper');
+  if (sp) {
+    // Trigger on subpage becoming active
+    const obs = new MutationObserver(() => {
+      if (sp.classList.contains('active')) {
+        startStrongForce();
       }
     });
-    observer.observe(subpageDiv, { attributes: true, attributeFilter: ['class'] });
+    obs.observe(sp, { attributes: true, attributeFilter: ['class'] });
 
-    // Also force once on initial load if it's already the active subpage
-    if (subpageDiv.classList.contains('active')) {
-      startPersistentMetaForce();
-    }
+    if (sp.classList.contains('active')) startStrongForce();
+
+    // Direct observer on the meta tag itself: if anything changes the content, snap it back immediately.
+    setTimeout(function watchMeta() {
+      const m = document.querySelector('meta[name="description"]');
+      if (m) {
+        const mObs = new MutationObserver(() => {
+          if (m.getAttribute('content') !== DESIRED_DESC) {
+            m.setAttribute('content', DESIRED_DESC);
+          }
+        });
+        mObs.observe(m, { attributes: true, attributeFilter: ['content'] });
+      }
+    }, 50);
+
+    // Extra watches in case meta is recreated
+    setTimeout(function watchMeta() {
+      const m = document.querySelector('meta[name="description"]');
+      if (m) {
+        const mObs = new MutationObserver(() => {
+          if (m.getAttribute('content') !== DESIRED_DESC) {
+            m.setAttribute('content', DESIRED_DESC);
+          }
+        });
+        mObs.observe(m, { attributes: true, attributeFilter: ['content'] });
+      }
+    }, 800);
   }
 
-  // Extra safety: re-force on visibility / focus in case of tab switches etc.
+  // Final safety nets
   document.addEventListener('visibilitychange', () => {
-    if (!document.hidden && subpageDiv && subpageDiv.classList.contains('active')) {
-      forceThomsonMetaDescription();
-    }
+    if (!document.hidden && sp && sp.classList.contains('active')) forceExactMeta();
+  });
+  window.addEventListener('pageshow', () => {
+    if (sp && sp.classList.contains('active')) forceExactMeta();
   });
 </script>
 
