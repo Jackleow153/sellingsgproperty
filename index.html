@@ -5054,43 +5054,77 @@ function toggleAmortization(){
 </script>
 
 <script>
-  // Meta Description + Title for this subpage only (self-contained + reactive override).
-  // The exact meta description requested is set here inside the subpage.
-  // Forces both even if global routing/showPage overwrites with site defaults or other values.
+  // Exact meta description + title for this subpage ONLY (self-contained inside the subpage div).
+  // Brute-force override so the desired meta is always applied when this subpage is visible,
+  // even if global routing code tries to set a different one.
   const DESIRED_TITLE = 'Thomson Reserve Condo 2026 | 1KM Ai Tong School | Upper Thomson New Launch | Jack Leow';
   const DESIRED_DESC = 'Thomson Reserve at Bright Hill Drive – Upper Thomson’s largest 2026 new launch by UOL, SingLand & CapitaLand. 1KM to Ai Tong Primary, steps to Upper Thomson MRT. Honest pricing analysis, buy zones & comparison with Jadescape by Jack Leow (CEA R074023I).';
 
-  function forceThomsonMeta() {
+  let metaForceInterval = null;
+
+  function forceThomsonMetaDescription() {
     document.title = DESIRED_TITLE;
+
     let descEl = document.querySelector('meta[name="description"]');
     if (!descEl) {
-      // Create one if missing (so the meta is effectively provided by this subpage)
       descEl = document.createElement('meta');
       descEl.setAttribute('name', 'description');
       document.head.appendChild(descEl);
     }
     descEl.setAttribute('content', DESIRED_DESC);
+
+    // Also try to set og:description if present (for social/SEO consistency on this subpage)
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute('content', DESIRED_DESC);
   }
 
-  // Set immediately (for initial parse / direct load of subpage)
-  forceThomsonMeta();
+  function startPersistentMetaForce() {
+    forceThomsonMetaDescription();
 
-  // Reactive + persistent override for the subpage:
-  // Watch for 'active' class so it applies when shown via button/URL.
-  // Re-force the meta description multiple times with increasing delays to counter external overwrites.
+    // Clear any previous interval
+    if (metaForceInterval) {
+      clearInterval(metaForceInterval);
+    }
+
+    // Aggressively re-apply the exact meta description every 80ms for ~4 seconds after the subpage activates.
+    // This ensures it wins against any post-showPage overwrites from elsewhere.
+    let ticks = 0;
+    metaForceInterval = setInterval(() => {
+      ticks++;
+      forceThomsonMetaDescription();
+      if (ticks > 50) {  // ~4 seconds
+        clearInterval(metaForceInterval);
+        metaForceInterval = null;
+      }
+    }, 80);
+  }
+
+  // Initial force on parse (covers direct load of the subpage URL)
+  forceThomsonMetaDescription();
+
+  // Watch the subpage div itself for activation (the 'active' class added by showPage).
+  // This is the only place we can hook without editing routing.
   const subpageDiv = document.getElementById('page-thomson-reserve-aukuwa-paper');
   if (subpageDiv) {
     const observer = new MutationObserver(() => {
       if (subpageDiv.classList.contains('active')) {
-        forceThomsonMeta();
-        // Extra forces to ensure the specific meta description sticks
-        setTimeout(forceThomsonMeta, 50);
-        setTimeout(forceThomsonMeta, 200);
-        setTimeout(forceThomsonMeta, 600);
+        startPersistentMetaForce();
       }
     });
     observer.observe(subpageDiv, { attributes: true, attributeFilter: ['class'] });
+
+    // Also force once on initial load if it's already the active subpage
+    if (subpageDiv.classList.contains('active')) {
+      startPersistentMetaForce();
+    }
   }
+
+  // Extra safety: re-force on visibility / focus in case of tab switches etc.
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && subpageDiv && subpageDiv.classList.contains('active')) {
+      forceThomsonMetaDescription();
+    }
+  });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
