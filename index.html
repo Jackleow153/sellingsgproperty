@@ -5939,7 +5939,7 @@ function toggleAmortization(){
                             if (typeof showPage === 'function') {
                                 showPage('thomson-reserve-aukuwa-paper', false)
                             }
-                            history.pushState({ type: 'page', page: 'thomson-reserve-aukuwa-paper' }, 'Thomson Reserve Condo 2026 | 1KM Ai Tong School | Upper Thomson New Launch | Jack Leow', '/project/thomson-reserve-new-launch');
+                            history.pushState({ type: 'page', page: 'thomson-reserve-aukuwa-paper' }, 'Thomson Reserve Condo 2026 | 1KM Ai Tong School | Upper Thomson New Launch | Jack Leow', '/project/thomson-reserve-condo');
                             document.title = 'Thomson Reserve Condo 2026 | 1KM Ai Tong School | Upper Thomson New Launch | Jack Leow';
                             const descEl = document.querySelector('meta[name="description"]');
                             if (descEl) descEl.setAttribute('content', 'Honest Thomson Reserve review. Pricing, pros & cons, Jadescape comparison, upgrader potential & who should buy this 1,240-unit Upper Thomson mega launch.');
@@ -5948,7 +5948,7 @@ function toggleAmortization(){
                             const ogDesc = document.querySelector('meta[property="og:description"]');
                             if (ogDesc) ogDesc.setAttribute('content', 'Honest Thomson Reserve review. Pricing, pros & cons, Jadescape comparison, upgrader potential & who should buy this 1,240-unit Upper Thomson mega launch.');
                             const ogUrl = document.querySelector('meta[property="og:url"]');
-                            if (ogUrl) ogUrl.setAttribute('content', 'https://www.sellingsgproperty.com/project/thomson-reserve-new-launch');
+                            if (ogUrl) ogUrl.setAttribute('content', 'https://www.sellingsgproperty.com/project/thomson-reserve-condo');
                         }
                         overviewTab.parentNode.insertBefore(specialBtn, overviewTab.nextSibling)
                     }
@@ -11052,7 +11052,7 @@ function handleRoute() {
       return pslug === slug;
     });
     if (proj) {
-      if (slug === 'thomson-reserve-new-launch') {
+      if (slug === 'thomson-reserve-condo') {
         showPage('thomson-reserve-aukuwa-paper', false);
         document.title = 'Thomson Reserve Condo 2026 | 1KM Ai Tong School | Upper Thomson New Launch | Jack Leow';
         const descEl = document.querySelector('meta[name="description"]');
@@ -11062,7 +11062,7 @@ function handleRoute() {
         const ogDesc = document.querySelector('meta[property="og:description"]');
         if (ogDesc) ogDesc.setAttribute('content', 'Honest Thomson Reserve review. Pricing, pros & cons, Jadescape comparison, upgrader potential & who should buy this 1,240-unit Upper Thomson mega launch.');
         const ogUrl = document.querySelector('meta[property="og:url"]');
-        if (ogUrl) ogUrl.setAttribute('content', 'https://www.sellingsgproperty.com/project/thomson-reserve-new-launch');
+        if (ogUrl) ogUrl.setAttribute('content', 'https://www.sellingsgproperty.com/project/thomson-reserve-condo');
         return true;
       }
       showPage('home', false);
@@ -11112,7 +11112,7 @@ window.addEventListener('popstate', function() {
           return pslug === slug;
         });
         if (proj) {
-          if (slug === 'thomson-reserve-new-launch') {
+          if (slug === 'thomson-reserve-condo') {
             showPage('thomson-reserve-aukuwa-paper', false);
             document.title = 'Thomson Reserve Condo 2026 | 1KM Ai Tong School | Upper Thomson New Launch | Jack Leow';
             const descEl = document.querySelector('meta[name="description"]');
@@ -11122,7 +11122,7 @@ window.addEventListener('popstate', function() {
             const ogDesc = document.querySelector('meta[property="og:description"]');
             if (ogDesc) ogDesc.setAttribute('content', 'Honest Thomson Reserve review. Pricing, pros & cons, Jadescape comparison, upgrader potential & who should buy this 1,240-unit Upper Thomson mega launch.');
             const ogUrl = document.querySelector('meta[property="og:url"]');
-            if (ogUrl) ogUrl.setAttribute('content', 'https://www.sellingsgproperty.com/project/thomson-reserve-new-launch');
+            if (ogUrl) ogUrl.setAttribute('content', 'https://www.sellingsgproperty.com/project/thomson-reserve-condo');
           } else {
             showPage('home', false);
             setTimeout(() => showProjectModal(proj.id), 50);
