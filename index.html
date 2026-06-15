@@ -5054,11 +5054,31 @@ function toggleAmortization(){
 </script>
 
 <script>
-  // Title + Meta Description for this subpage only (self-contained; set when this content is present)
-  document.title = 'Thomson Reserve Condo 2026 | 1KM Ai Tong School | Upper Thomson New Launch | Jack Leow';
-  const descEl = document.querySelector('meta[name="description"]');
-  if (descEl) {
-    descEl.setAttribute('content', 'Thomson Reserve at Bright Hill Drive – Upper Thomson’s largest 2026 new launch by UOL, SingLand & CapitaLand. 1KM to Ai Tong Primary, steps to Upper Thomson MRT. Honest pricing analysis, buy zones & comparison with Jadescape by Jack Leow (CEA R074023I).');
+  // Title for this subpage only (self-contained + reactive override).
+  // Forces the correct title even if global routing/showPage tries to set the default site title.
+  const DESIRED_TITLE = 'Thomson Reserve Condo 2026 | 1KM Ai Tong School | Upper Thomson New Launch | Jack Leow';
+  const DESIRED_DESC = 'Thomson Reserve at Bright Hill Drive – Upper Thomson’s largest 2026 new launch by UOL, SingLand & CapitaLand. 1KM to Ai Tong Primary, steps to Upper Thomson MRT. Honest pricing analysis, buy zones & comparison with Jadescape by Jack Leow (CEA R074023I).';
+
+  function forceThomsonTitle() {
+    document.title = DESIRED_TITLE;
+    const descEl = document.querySelector('meta[name="description"]');
+    if (descEl) descEl.setAttribute('content', DESIRED_DESC);
+  }
+
+  // Set immediately (for initial parse / direct load)
+  forceThomsonTitle();
+
+  // Reactive: watch the subpage div for 'active' class (added by showPage when this subpage is displayed).
+  // This ensures the title is forced when navigating to the subpage via button or URL.
+  const subpageDiv = document.getElementById('page-thomson-reserve-aukuwa-paper');
+  if (subpageDiv) {
+    const observer = new MutationObserver(() => {
+      if (subpageDiv.classList.contains('active')) {
+        // Tiny delay so any external title set finishes first, then we override
+        setTimeout(forceThomsonTitle, 30);
+      }
+    });
+    observer.observe(subpageDiv, { attributes: true, attributeFilter: ['class'] });
   }
 </script>
 
