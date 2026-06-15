@@ -4890,6 +4890,47 @@ function toggleAmortization(){
     .amenity-grid{grid-template-columns:1fr}
   }
 
+  /* DEDICATED THOMSON RESERVE PROJECT LAYOUT - visual + structural separation */
+  .hero-project{padding:52px 0 36px}
+  .hero-grid{display:grid;grid-template-columns:1fr 1.08fr;gap:44px;align-items:center}
+  .hero-visual img{width:100%;height:auto;border-radius:10px;box-shadow:0 28px 80px -26px rgba(12,27,42,0.55);border:1px solid rgba(184,155,94,0.28);display:block}
+  .hero-text .eyebrow{color:var(--brass-light);margin-bottom:14px;display:inline-block}
+  .hero-text h1{color:var(--white);font-size:clamp(2.15rem,5vw,3.15rem);line-height:1.1;margin-bottom:14px}
+  .hero-text .hero-sub{font-size:1.05rem;color:rgba(255,255,255,0.78);max-width:560px;margin-bottom:22px;font-weight:300;line-height:1.45}
+  .project-layout{display:grid;grid-template-columns:1fr 318px;gap:40px;align-items:start;margin-top:12px}
+  .project-main{min-width:0}
+  .project-sidebar{position:sticky;top:24px}
+  .sidebar-card{background:var(--white);border:1px solid var(--line);padding:22px 20px;margin-bottom:18px}
+  .sidebar-card h4{font-family:'Marcellus',serif;font-size:0.98rem;margin-bottom:10px;color:var(--ink);letter-spacing:-0.01em}
+  .fact-mini{font-size:0.9rem;padding:7px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:8px}
+  .fact-mini:last-child{border-bottom:none}
+  .fact-mini .k{color:var(--slate);font-size:0.68rem;text-transform:uppercase;letter-spacing:.1em;flex:0 0 92px}
+  .fact-mini .v{font-family:'Marcellus',serif;color:var(--ink);text-align:right}
+  .sidebar-cta .btn{display:block;text-align:center;margin-bottom:9px;width:100%;font-size:.78rem;padding:13px 16px;letter-spacing:.08em}
+  .sidebar-cta .btn.outline{background:transparent;color:var(--white);border-color:rgba(255,255,255,0.5)}
+  .also-useful{background:var(--porcelain-deep);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:56px 0 48px;margin-top:32px}
+  .also-useful .eyebrow{display:inline-block;margin-bottom:6px}
+  .also-useful h3{font-family:'Marcellus',serif;font-size:1.45rem;margin-bottom:8px}
+  .also-label{display:inline-block;background:var(--brass);color:var(--navy);font-size:0.62rem;letter-spacing:0.14em;padding:1px 9px;font-weight:700;margin-bottom:14px}
+  .afford-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0 26px}
+  .afford-card{background:#fff;border:1px solid var(--line);padding:16px 15px;font-size:0.88rem}
+  .afford-card .price{font-family:'Marcellus',serif;font-size:1.05rem;color:var(--brass);margin:4px 0 2px}
+  .afford-card .note{font-size:0.78rem;color:var(--slate);margin-top:4px}
+  .market-pulse{font-size:0.95rem;color:#2A3845;line-height:1.65;background:#fff;border:1px solid var(--line);padding:18px 20px}
+  .founder-note{font-size:0.93rem;color:var(--slate);background:#fff;border:1px solid var(--line);padding:16px 18px;line-height:1.6}
+  .tools-note{font-size:0.82rem;color:var(--slate);margin-top:8px}
+  .tools-note a{color:var(--brass);text-decoration:underline}
+
+  @media (max-width:980px){
+    .project-layout{grid-template-columns:1fr}
+    .project-sidebar{position:static}
+    .hero-grid{grid-template-columns:1fr;gap:28px}
+    .afford-grid{grid-template-columns:1fr}
+  }
+  @media (max-width:860px){
+    .hero-project{padding:40px 0 28px}
+  }
+
 </style>
 
 <script type="application/ld+json">
@@ -4930,20 +4971,36 @@ function toggleAmortization(){
 
 
 
-<!-- HERO -->
-<header class="hero">
+<!-- HERO - dedicated visual separation for Thomson Reserve -->
+<header class="hero hero-project">
   <div class="container hero-inner">
-    <span class="eyebrow">Deep Analysis · District 20 New Launch</span>
-    <h1>Thomson Reserve: Upper Thomson’s Biggest 2026 Launch – Honest Analysis</h1>
-    <p class="hero-sub">1,240 units on the former Thomson View site. Reservoir-adjacent. 1km to Ai Tong. Backed by UOL, SingLand & CapitaLand. The real question isn't whether it's a good project — it's whether the launch price will be worth paying.</p>
-    <div class="hero-meta">
-      <div class="hero-meta-item"><div class="label">Location</div><div class="value">11A Bright Hill Drive</div></div>
-      <div class="hero-meta-item"><div class="label">Tenure</div><div class="value">99-year leasehold</div></div>
-      <div class="hero-meta-item"><div class="label">Developer JV</div><div class="value">UOL · SingLand · CapitaLand</div></div>
-      <div class="hero-meta-item"><div class="label">Preview</div><div class="value">October 2026 (target)</div></div>
+    <div class="hero-grid">
+      <div class="hero-text">
+        <span class="eyebrow">Deep Analysis · District 20 · 2026 New Launch</span>
+        <h1>Thomson Reserve</h1>
+        <p class="hero-sub">Upper Thomson’s largest 2026 launch. 1,240 units on the former Thomson View site. Reservoir-adjacent. 1 km to Ai Tong Primary. Developed by UOL Group, Singapore Land & CapitaLand. Honest data-driven review — not marketing.</p>
+        <div class="hero-meta" style="padding-top:20px;margin-top:12px">
+          <div class="hero-meta-item"><div class="label">Location</div><div class="value">11A Bright Hill Drive, D20</div></div>
+          <div class="hero-meta-item"><div class="label">Tenure</div><div class="value">Fresh 99-year leasehold</div></div>
+          <div class="hero-meta-item"><div class="label">Developer</div><div class="value">UOL · SingLand · CapitaLand JV</div></div>
+          <div class="hero-meta-item"><div class="label">Preview / TOP</div><div class="value">Oct 2026 (est) · ~2030</div></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="https://thomsonreserve-condo.com.sg/wp-content/uploads/2026/04/Thomson-Reserve.png" alt="Thomson Reserve new condominium launch — facade view of the 1,240-unit development at the former Thomson View site, Bright Hill Drive, Upper Thomson, Singapore" loading="eager" width="720" height="420">
+      </div>
     </div>
   </div>
 </header>
+
+<!-- AUTHOR BYLINE - stronger, project-specific -->
+<div class="container">
+  <div class="author-byline" style="background:#fff;border:1px solid #E5DDD0;padding:22px 26px;margin:0 0 32px;font-size:0.93rem;">
+    <div class="eyebrow" style="margin-bottom:6px;color:#B89B5E;">Independent analysis by</div>
+    <p style="margin-bottom:6px;"><strong>Jack Leow</strong> (CEA Reg. No. R074023I) • PropNex Realty Pte Ltd</p>
+    <p style="color:#5A6B7B;margin:0;font-size:0.87rem;line-height:1.5;">Data-driven reviews for HDB upgraders and serious buyers. Sourced from URA, IRAS, developer disclosures and direct buyer conversations (June 2026). This page is the authoritative reference for Thomson Reserve — not developer sales copy.</p>
+  </div>
+</div>
 
 <!-- STAT STRIP -->
 <div class="stat-strip">
@@ -4980,68 +5037,79 @@ function toggleAmortization(){
   </div>
 </div>
 
-<!-- QUICK FACTS LEDGER -->
-<section>
-  <div class="container">
-    <div class="sec-head">
-      <span class="eyebrow">Project Ledger</span>
-      <h2>Thomson Reserve at a glance</h2>
-    </div>
-    <div class="ledger">
-      <div class="ledger-grid">
-        <div class="ledger-row"><div class="lkey">Project</div><div class="lval">Thomson Reserve</div></div>
-        <div class="ledger-row"><div class="lkey">Former Site</div><div class="lval">Thomson View</div></div>
-        <div class="ledger-row"><div class="lkey">Address</div><div class="lval">11A Bright Hill Drive</div></div>
-        <div class="ledger-row"><div class="lkey">District</div><div class="lval">District 20</div></div>
-        <div class="ledger-row"><div class="lkey">Developer</div><div class="lval">UOL · SingLand · CapitaLand JV</div></div>
-        <div class="ledger-row"><div class="lkey">Tenure</div><div class="lval">99-year leasehold (fresh)</div></div>
-        <div class="ledger-row"><div class="lkey">Site Area</div><div class="lval">~46,852 sqm (~5 ha)</div></div>
-        <div class="ledger-row"><div class="lkey">Total Units</div><div class="lval">~1,240</div></div>
-        <div class="ledger-row"><div class="lkey">Unit Mix</div><div class="lval">1 to 5 bedrooms</div></div>
-        <div class="ledger-row"><div class="lkey">Land Cost</div><div class="lval">$810m / $1,178 psf ppr</div></div>
-        <div class="ledger-row"><div class="lkey">Est. Launch PSF</div><div class="lval">$2,500 – $2,600+</div></div>
-        <div class="ledger-row"><div class="lkey">Showflat Preview</div><div class="lval">Targeted October 2026</div></div>
-        <div class="ledger-row"><div class="lkey">Expected TOP</div><div class="lval">Around 2030</div></div>
-        <div class="ledger-row"><div class="lkey">Nearest MRT</div><div class="lval">Upper Thomson (TEL)</div></div>
-        <div class="ledger-row"><div class="lkey">School (1km)</div><div class="lval">Ai Tong Primary</div></div>
-        <div class="ledger-row"><div class="lkey">Mall</div><div class="lval">Thomson Plaza</div></div>
+<!-- DEDICATED TWO-COLUMN LAYOUT: project analysis (main) + sidebar (key facts + CTAs) -->
+<div class="container" style="margin-bottom:28px">
+  <div class="project-layout">
+    <div class="project-main">
+      <div class="sec-head" style="margin-bottom:16px">
+        <span class="eyebrow">Location &amp; Lifestyle</span>
+        <h2 style="font-size:1.6rem;margin-bottom:8px">What makes this address rare</h2>
+        <p class="lead" style="font-size:1rem;margin-bottom:0">Reservoir-adjacent living with TEL connectivity and a top-tier school catchment — a combination that is structurally difficult to replicate in the RCR/OCR.</p>
+      </div>
+      <div class="highlights">
+        <div class="highlight-card">
+          <div class="num">01</div>
+          <h4>MacRitchie Reservoir Views</h4>
+          <p>Elevated terrain delivers direct sightlines across the Central Catchment Nature Reserve — a scarce feature among Singapore new launches.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="num">02</div>
+          <h4>Upper Thomson MRT (TEL)</h4>
+          <p>Walking distance to the Thomson-East Coast Line. The future Bright Hill interchange on the Cross Island Line will materially improve east-west connectivity.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="num">03</div>
+          <h4>Ai Tong Primary School (1km)</h4>
+          <p>One of Singapore's most sought-after Chinese-medium primary schools. Priority access during Phase 2C, though balloting remains likely.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="num">04</div>
+          <h4>Established Enclave</h4>
+          <p>Surrounded by low-density landed housing and Thomson Plaza for daily amenities. A quieter micro-environment than denser new launches.</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- LOCATION & LIFESTYLE -->
-<section style="padding-top:0">
-  <div class="container">
-    <div class="sec-head">
-      <span class="eyebrow">Location & Lifestyle</span>
-      <h2>What makes this address rare</h2>
-      <p class="lead">Reservoir-adjacent living with TEL connectivity and a top-tier school catchment is the kind of combination you can't easily replicate at any price point in the OCR.</p>
-    </div>
-    <div class="highlights">
-      <div class="highlight-card">
-        <div class="num">01</div>
-        <h4>MacRitchie Reservoir Views</h4>
-        <p>Elevated terrain delivers direct sightlines across the Central Catchment Nature Reserve — a scarce feature among Singapore new launches.</p>
+    <aside class="project-sidebar">
+      <!-- Sidebar: Key facts (condensed from ledger) -->
+      <div class="sidebar-card">
+        <h4>Thomson Reserve — At a Glance</h4>
+        <div class="fact-mini"><span class="k">Units</span><span class="v">~1,240</span></div>
+        <div class="fact-mini"><span class="k">Site / Land</span><span class="v">5 ha • $1,178 psf ppr</span></div>
+        <div class="fact-mini"><span class="k">Tenure</span><span class="v">Fresh 99-year LH</span></div>
+        <div class="fact-mini"><span class="k">Developer</span><span class="v">UOL / SingLand / CapitaLand</span></div>
+        <div class="fact-mini"><span class="k">Launch PSF (est)</span><span class="v">$2,500 – $2,600+</span></div>
+        <div class="fact-mini"><span class="k">3-Bed Quantum</span><span class="v">$2.4M – $2.85M</span></div>
+        <div class="fact-mini"><span class="k">MRT</span><span class="v">Upper Thomson (TEL) ~7min</span></div>
+        <div class="fact-mini"><span class="k">School</span><span class="v">Ai Tong Primary (1 km)</span></div>
+        <div class="fact-mini"><span class="k">TOP</span><span class="v">~2030</span></div>
       </div>
-      <div class="highlight-card">
-        <div class="num">02</div>
-        <h4>Upper Thomson MRT (TEL)</h4>
-        <p>Walking distance to the Thomson-East Coast Line. The future Bright Hill interchange on the Cross Island Line will materially improve east-west connectivity.</p>
+
+      <!-- Compact verdict in sidebar -->
+      <div class="sidebar-card">
+        <h4>Pricing Verdict</h4>
+        <div style="margin-bottom:8px">
+          <span style="font-size:0.72rem;color:#2D6A4F;text-transform:uppercase;letter-spacing:0.1em">Buy zone</span><br>
+          <span style="font-family:'Marcellus',serif;font-size:1.25rem;color:#2D6A4F">$2,500 – $2,650 psf</span>
+        </div>
+        <div>
+          <span style="font-size:0.72rem;color:#8B1E3F;text-transform:uppercase;letter-spacing:0.1em">Walk away</span><br>
+          <span style="font-family:'Marcellus',serif;font-size:1.25rem;color:#8B1E3F">Above $2,800 psf</span>
+        </div>
+        <div style="margin-top:10px;font-size:0.8rem;color:#5A6B7B">Premium is defensible vs Jadescape resale only if launch stays disciplined.</div>
       </div>
-      <div class="highlight-card">
-        <div class="num">03</div>
-        <h4>Ai Tong Primary School (1km)</h4>
-        <p>One of Singapore's most sought-after Chinese-medium primary schools. Priority access during Phase 2C, though balloting remains likely.</p>
+
+      <!-- CTAs -->
+      <div class="sidebar-card sidebar-cta" style="background:var(--navy);color:#fff;border-color:#0C1B2A">
+        <a href="/contact" class="btn">Book free 30-min consult</a>
+        <a href="https://wa.me/6580621538?text=Hi%20Jack%2C%20I%27m%20looking%20at%20Thomson%20Reserve%20and%20want%20a%20stack-by-stack%20review%20when%20pricing%20drops." target="_blank" rel="noopener" class="btn" style="background:#fff;color:var(--navy);border-color:#fff">WhatsApp for priority updates</a>
+        <div style="text-align:center;font-size:0.68rem;opacity:.7;margin-top:4px">Usually replies within 2 hrs • CEA R074023I</div>
       </div>
-      <div class="highlight-card">
-        <div class="num">04</div>
-        <h4>Established Enclave</h4>
-        <p>Surrounded by low-density landed housing and Thomson Plaza for daily amenities. A quieter micro-environment than denser new launches.</p>
-      </div>
-    </div>
+    </aside>
   </div>
-</section>
+</div>
+
+<!-- Continue with full project content (amenities, pricing chart, pros/cons, comparison, matrix etc.) -->
 
 <!-- AMENITIES -->
 <section style="padding-top:0">
@@ -5334,6 +5402,52 @@ function toggleAmortization(){
         <div class="faq-a"><div class="faq-a-inner">Higher-floor units with reservoir or unblocked views, and those closer to Ai Tong Primary School direction, are expected to hold value better than average-facing stacks. Stack selection matters more than usual on mega projects.</div></div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ALSO USEFUL FOR THIS PROJECT: general tools & context moved lower with clear labeling for separation -->
+<section class="also-useful">
+  <div class="container">
+    <span class="also-label">ALSO USEFUL FOR THIS PROJECT</span>
+    <h3>Affordability examples, market context &amp; next steps</h3>
+    <p style="max-width:760px;color:#2A3845;margin-bottom:16px;font-size:0.98rem">These are illustrative scenarios for Thomson Reserve using current indicative pricing and rates (as of mid-2026). Always run your personal numbers through the full calculator and speak to a broker for TDSR/MSR stress-testing before viewing.</p>
+
+    <div class="afford-grid">
+      <div class="afford-card">
+        <div style="font-size:0.78rem;color:#5A6B7B">3-Bedroom • ~1,000 sqft • Est. $2.58M</div>
+        <div class="price">$2,580 psf • 75% LTV</div>
+        <div><strong>Downpayment:</strong> ~$645k (5% cash ~$129k + CPF $516k)</div>
+        <div><strong>Loan:</strong> ~$1.935M @ 3.5% / 25 yrs</div>
+        <div><strong>Est. monthly:</strong> ~$9,680 (level; higher in stress test)</div>
+        <div class="note">Requires ~$14k+ household income to comfortably pass TDSR 4% stress. Use the full calculator for your exact income + other debts.</div>
+      </div>
+      <div class="afford-card">
+        <div style="font-size:0.78rem;color:#5A6B7B">2-Bedroom + Study • ~680 sqft • Est. $1.76M</div>
+        <div class="price">$2,590 psf • 75% LTV</div>
+        <div><strong>Downpayment:</strong> ~$440k (cash $88k + CPF $352k)</div>
+        <div><strong>Loan:</strong> ~$1.32M</div>
+        <div><strong>Est. monthly:</strong> ~$6,610</div>
+        <div class="note">Good entry for smaller households or investors. Still benefits from the same upgrader catchment and facilities at lower quantum.</div>
+      </div>
+      <div class="afford-card">
+        <div style="font-size:0.78rem;color:#5A6B7B">4-Bedroom Family • ~1,280 sqft • Est. $3.33M</div>
+        <div class="price">$2,600 psf • 75% LTV</div>
+        <div><strong>Downpayment:</strong> ~$832k (cash $166k + CPF $666k)</div>
+        <div><strong>Loan:</strong> ~$2.50M</div>
+        <div><strong>Est. monthly:</strong> ~$12,490</div>
+        <div class="note">Premium stack (reservoir or Ai Tong-facing) only in the Buy zone. Significant equity from HDB sale required. Model progressive payments carefully.</div>
+      </div>
+    </div>
+
+    <div class="market-pulse">
+      <strong style="color:#0C1B2A">Upper Thomson market pulse (2026 context).</strong> New launch momentum in the corridor remains solid. Jadescape resale has shown near-zero loss-making transactions and strong absorption on quality stacks. TEL is live; the upcoming CRL interchange at Bright Hill adds long-term optionality. Supply pressure from Thomson Reserve + Springleaf + Parcel A in the 2026–2032 window is the main variable — pricing discipline at launch will determine whether this project clears at a healthy velocity or experiences the typical mega-project digestion period post-TOP.
+    </div>
+
+    <div class="founder-note" style="margin-top:16px">
+      <strong style="color:#0C1B2A">A note from Jack Leow.</strong> I analyse these launches the same way I advise my clients: start with the land cost and developer track record, pressure-test the upgrader math and catchment demand, then overlay actual pricing against the nearest comps (Jadescape, Springleaf). Thomson Reserve is a legitimate long-term hold for the right buyer at the right price — my job is to help you know which price is “right” for your situation. If you are an HDB upgrader from the Bishan/AMK/Toa Payoh catchment or simply want an independent read, reach out before you book.
+    </div>
+
+    <p class="tools-note">For the complete mortgage calculator (HDB vs bank loan, progressive payment schedule, full TDSR/MSR stress at 4%, ABSD/BSD, cashflow over construction) open the <a href="/mortgage-calculator" onclick="showPage('mortgage-calculator', true); return false;">Mortgage Loan Calculator</a>. The examples above follow the same methodology.</p>
   </div>
 </section>
 
