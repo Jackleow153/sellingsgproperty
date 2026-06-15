@@ -13,3 +13,8 @@
 #   from = "/insights"
 #   to = "/index.html"
 #   status = 200
+
+[[redirects]]
+  from = "/project/thomson-reserve-condo"
+  to = "/project/thomson-reserve-condo/index.html"
+  status = 200
