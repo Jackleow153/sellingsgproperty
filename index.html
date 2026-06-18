@@ -5329,10 +5329,10 @@ function toggleAmortization(){
       <p class="lead">Key visuals to help you evaluate the layout, facilities and micro-location advantages of Thomson Reserve.</p>
     </div>
     <div class="visuals-grid">
-      <!-- 2. Site Plan (recommended filename: images/thomson-reserve-site-plan.webp) -->
+      <!-- 2. Site Plan (recommended filename: images/thomson-reserve-site-plan.png) -->
       <figure>
-        <img src="https://picsum.photos/id/29/800/600" alt="Thomson Reserve site plan showing resort-style facilities and location along Bright Hill Drive" loading="lazy" width="800" height="600">
-        <figcaption>Site Plan — resort-style facilities and Bright Hill Drive layout</figcaption>
+        <img src="images/thomson-reserve-site-plan.png" alt="Thomson Reserve site plan showing facilities including tennis court, multi-purpose court, clubhouse, swimming pools, kids pool, gym, playground, pavilion, pick up & drop off, and layout near Sin Ming Avenue, Upper Thomson Road, and Bright Hill Drive" loading="lazy" width="800" height="600">
+        <figcaption>Site Plan — detailed legend of facilities and Bright Hill Drive layout</figcaption>
       </figure>
 
       <!-- 3. Location Map (recommended filename: images/thomson-reserve-location-map.webp) -->
@@ -6291,20 +6291,7 @@ function toggleAmortization(){
                         specialBtn.innerHTML = `<i class="fa-solid fa-file-alt"></i> <span>Aukuwa Paper</span>`
                         specialBtn.onclick = function(e) {
                             e.stopImmediatePropagation()
-                            hideProjectModal()
-                            if (typeof showPage === 'function') {
-                                showPage('thomson-reserve-aukuwa-paper', false)
-                            }
-                            history.pushState({ type: 'page', page: 'thomson-reserve-aukuwa-paper' }, 'Thomson Reserve Condo 2026 | 1KM Ai Tong School | Upper Thomson New Launch | Jack Leow', '/project/thomson-reserve-condo');
-                            document.title = 'Thomson Reserve Condo 2026 | 1KM Ai Tong School | Upper Thomson New Launch | Jack Leow';
-                            const descEl = document.querySelector('meta[name="description"]');
-                            if (descEl) descEl.setAttribute('content', 'Honest Thomson Reserve review. Pricing, pros & cons, Jadescape comparison, upgrader potential & who should buy this 1,240-unit Upper Thomson mega launch.');
-                            const ogTitle = document.querySelector('meta[property="og:title"]');
-                            if (ogTitle) ogTitle.setAttribute('content', 'Thomson Reserve Condo 2026 | 1KM Ai Tong School | Upper Thomson New Launch | Jack Leow');
-                            const ogDesc = document.querySelector('meta[property="og:description"]');
-                            if (ogDesc) ogDesc.setAttribute('content', 'Honest Thomson Reserve review. Pricing, pros & cons, Jadescape comparison, upgrader potential & who should buy this 1,240-unit Upper Thomson mega launch.');
-                            const ogUrl = document.querySelector('meta[property="og:url"]');
-                            if (ogUrl) ogUrl.setAttribute('content', 'https://www.sellingsgproperty.com/project/thomson-reserve-condo');
+                            window.location.href = 'https://www.sellingsgproperty.com/project/thomson-reserve-condo/';
                         }
                         overviewTab.parentNode.insertBefore(specialBtn, overviewTab.nextSibling)
                     }
@@ -11409,16 +11396,7 @@ function handleRoute() {
     });
     if (proj) {
       if (slug === 'thomson-reserve-condo') {
-        showPage('thomson-reserve-aukuwa-paper', false);
-        document.title = 'Thomson Reserve Condo 2026 | 1KM Ai Tong School | Upper Thomson New Launch | Jack Leow';
-        const descEl = document.querySelector('meta[name="description"]');
-        if (descEl) descEl.setAttribute('content', 'Honest Thomson Reserve review. Pricing, pros & cons, Jadescape comparison, upgrader potential & who should buy this 1,240-unit Upper Thomson mega launch.');
-        const ogTitle = document.querySelector('meta[property="og:title"]');
-        if (ogTitle) ogTitle.setAttribute('content', 'Thomson Reserve Condo 2026 | 1KM Ai Tong School | Upper Thomson New Launch | Jack Leow');
-        const ogDesc = document.querySelector('meta[property="og:description"]');
-        if (ogDesc) ogDesc.setAttribute('content', 'Honest Thomson Reserve review. Pricing, pros & cons, Jadescape comparison, upgrader potential & who should buy this 1,240-unit Upper Thomson mega launch.');
-        const ogUrl = document.querySelector('meta[property="og:url"]');
-        if (ogUrl) ogUrl.setAttribute('content', 'https://www.sellingsgproperty.com/project/thomson-reserve-condo');
+        window.location.href = 'https://www.sellingsgproperty.com/project/thomson-reserve-condo/';
         return true;
       }
       showPage('home', false);
@@ -11469,16 +11447,7 @@ window.addEventListener('popstate', function() {
         });
         if (proj) {
           if (slug === 'thomson-reserve-condo') {
-            showPage('thomson-reserve-aukuwa-paper', false);
-            document.title = 'Thomson Reserve Condo 2026 | 1KM Ai Tong School | Upper Thomson New Launch | Jack Leow';
-            const descEl = document.querySelector('meta[name="description"]');
-            if (descEl) descEl.setAttribute('content', 'Honest Thomson Reserve review. Pricing, pros & cons, Jadescape comparison, upgrader potential & who should buy this 1,240-unit Upper Thomson mega launch.');
-            const ogTitle = document.querySelector('meta[property="og:title"]');
-            if (ogTitle) ogTitle.setAttribute('content', 'Thomson Reserve Condo 2026 | 1KM Ai Tong School | Upper Thomson New Launch | Jack Leow');
-            const ogDesc = document.querySelector('meta[property="og:description"]');
-            if (ogDesc) ogDesc.setAttribute('content', 'Honest Thomson Reserve review. Pricing, pros & cons, Jadescape comparison, upgrader potential & who should buy this 1,240-unit Upper Thomson mega launch.');
-            const ogUrl = document.querySelector('meta[property="og:url"]');
-            if (ogUrl) ogUrl.setAttribute('content', 'https://www.sellingsgproperty.com/project/thomson-reserve-condo');
+            window.location.href = 'https://www.sellingsgproperty.com/project/thomson-reserve-condo/';
           } else {
             showPage('home', false);
             setTimeout(() => showProjectModal(proj.id), 50);
