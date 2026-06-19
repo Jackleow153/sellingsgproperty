@@ -6,7 +6,7 @@
 # Google Search Console ownership verification files (serve statically, do not redirect to SPA)
  /google3a98157436f9af5a.html  /google3a98157436f9af5a.html  200
 
-# All 20 insights articles (clean slugs)
+# All 25 insights articles (clean slugs)
 # To add a new one: append another line like
 #  /insights/my-new-slug                 /index.html   200
 # Then update counts in index.html and sitemap.xml, commit & push.
@@ -34,6 +34,7 @@
  /insights/dunearn-house-buyers-guide-2026 /index.html   200
  /insights/dunearn-house-investment-analysis-2026 /index.html   200
  /insights/hdb-vs-ec-vs-private-property-2026 /index.html   200
+ /insights/thomson-reserve-price-review-2026 /index.html   200
 
 # Legacy hash support (still works)
  /#insights/*                             /index.html   200

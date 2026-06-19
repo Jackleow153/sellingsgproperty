@@ -332,7 +332,7 @@
                     
                     <div class="mb-4">
                         <button data-page="blog" class="text-sm text-violet-300 hover:text-white underline underline-offset-4 flex items-center gap-x-1.5 transition">
-                            <span>Read our in-depth Property Insights (22 articles)</span>
+                            <span>Read our in-depth Property Insights (25 articles)</span>
                             <i class="fa-solid fa-arrow-right text-xs"></i>
                         </button>
                     </div>
@@ -2423,7 +2423,7 @@
                 </a>
               </div>
               <div class="flex flex-wrap gap-x-8 gap-y-3 text-sm text-slate-400">
-                <div><span class="text-white font-semibold">22</span> in-depth articles</div>
+                <div><span class="text-white font-semibold">25</span> in-depth articles</div>
                 <div><span class="text-white font-semibold">Updated</span> 2026</div>
               </div>
             </div>
@@ -2456,7 +2456,31 @@
   </div>
 
   <div id="blog-grid" class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-    <!-- First 6 latest articles pre-rendered statically for immediate content, SEO/crawlers, and better initial LCP/FCP on mobile (avoids empty state while JS loads). "Click for more" loads the rest dynamically from the full ARTICLES data to keep overall page size reasonable for performance. All 24 articles are still fully accessible via the button, category filters, direct URLs, sitemap, and schema. -->
+    <!-- First 6 latest articles pre-rendered statically for immediate content, SEO/crawlers, and better initial LCP/FCP on mobile (avoids empty state while JS loads). "Click for more" loads the rest dynamically from the full ARTICLES data to keep overall page size reasonable for performance. All 25 articles are still fully accessible via the button, category filters, direct URLs, sitemap, and schema. -->
+
+    <!-- Latest: Thomson Reserve Price Review -->
+    <article data-category="new-launch" class="blog-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" onclick="showArticle('post-thomson-reserve-price-review-2026')">
+      <div class="relative overflow-hidden">
+        <img src="https://thomsonreserve-condo.com.sg/wp-content/uploads/2026/04/Thomson-Reserve.png" class="w-full h-48 object-cover" alt="Thomson Reserve Price Review 2026" loading="lazy">
+        <div class="absolute top-4 left-4"><span class="chip-newlaunch px-3 py-1 text-xs font-bold rounded-2xl">NEW LAUNCH</span></div>
+        <div class="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-black/40 to-transparent"></div>
+      </div>
+      <div class="p-6 flex-1 flex flex-col">
+        <div class="flex items-center justify-between text-xs mb-3">
+          <time class="text-slate-400" datetime="2026-06-19">19 Jun 2026</time>
+          <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 13 min</span>
+        </div>
+        <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">Thomson Reserve Price Review 2026: $2,500–$2,650 psf Buy Zone?</h2>
+        <p class="text-sm text-slate-600 line-clamp-3 flex-1">Thomson Reserve pricing analysis: buy at $2,500–$2,650 psf? Walk-away above $2,800. Ai Tong, reservoir views, Jadescape comparison for 1,240-unit Upper Thomson 2026 launch.</p>
+        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
+          <div class="flex items-center gap-x-2 text-xs">
+            <div class="w-6 h-6 bg-violet-100 rounded-full flex items-center justify-center"><span class="text-violet-700 text-[10px] font-black">JL</span></div>
+            <span class="font-medium text-slate-700">Jack Leow</span>
+          </div>
+          <span class="text-violet-600 text-xs font-semibold">Read article →</span>
+        </div>
+      </div>
+    </article>
 
     <!-- Latest 1: HDB vs EC vs Private -->
     <article data-category="hdb" class="blog-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" onclick="showArticle('post-hdb-vs-ec-vs-private-property-2026')">
@@ -11190,6 +11214,101 @@ const ARTICLES = {
 
       <p><em>Disclaimer: This article is for general informational purposes and does not constitute financial, tax, or investment advice. All figures, rules, and comparisons are based on publicly available information as of June 2026 and are subject to change. Always verify with HDB, CPF, IRAS, and consult a licensed CEA-registered salesperson before making any property decision.</em></p>
     `
+  },
+
+  /* ======================================================
+     NEW ARTICLE 25 — THOMSON RESERVE PRICE REVIEW 2026
+  ====================================================== */
+  'post-thomson-reserve-price-review-2026': {
+    title: 'Thomson Reserve Price Review 2026: Buy at $2,500–$2,650 psf?',
+    date: '19 Jun 2026',
+    readTime: '13 min read',
+    category: 'NEW LAUNCH',
+    chipClass: 'chip-newlaunch',
+    img: 'https://thomsonreserve-condo.com.sg/wp-content/uploads/2026/04/Thomson-Reserve.png',
+    linkedinUrl: null,
+    body: `
+      <p><strong>Quick take: Thomson Reserve looks credible at $2,500–$2,650 psf on average stacks, but anything above $2,800 psf erodes the case against established comparables in the same Upper Thomson corridor.</strong> The 1,240-unit project by UOL/SingLand/CapitaLand sits on the former Thomson View site at Bright Hill Drive with reservoir adjacency and Ai Tong Primary (1km). TOP ~2030 aligns with a wave of nearby HDB MOPs. Price discipline at launch will decide if this is a buy or a pass.</p>
+
+      <h2>Expected Pricing &amp; Buy Thresholds</h2>
+      <p>Industry estimates for launch pricing:</p>
+      <ul>
+        <li>Average stacks: ~$2,500 – $2,600+ psf</li>
+        <li>3-bedroom units: roughly $2.4M – $2.85M depending on floor, view and stack</li>
+      </ul>
+
+      <div class="key-takeaway">
+        <p class="font-bold text-violet-900 mb-1">💡 2026 Key Takeaway</p>
+        <p class="text-sm text-violet-800">Buy zone: $2,500–$2,650 psf. Walk away above $2,800 psf. The premium over Jadescape resale (~$2,293 psf) is roughly $200–300 psf. Justifiable for new product + fresh lease + reservoir + Ai Tong catchment only if launch stays disciplined.</p>
+      </div>
+
+      <h2>Location &amp; Fundamentals That Support the Premium</h2>
+      <p>Reservoir-adjacent living with TEL connectivity and a top-tier school catchment is structurally hard to replicate in RCR/OCR:</p>
+      <ul>
+        <li><strong>MacRitchie Reservoir views</strong> — elevated terrain with direct sightlines to Central Catchment.</li>
+        <li><strong>Upper Thomson MRT (TEL)</strong> — short walk; future Bright Hill CRL interchange improves connectivity.</li>
+        <li><strong>Ai Tong Primary (1km)</strong> — one of Singapore's most sought-after Chinese-medium primaries. Phase 2C balloting likely but valuable for families.</li>
+        <li><strong>Blue-chip JV</strong> — UOL, Singapore Land and CapitaLand. 5 ha site allows generous facilities at scale.</li>
+      </ul>
+
+      <h2>The Bull Case vs Bear Case</h2>
+      <div class="pc-grid" style="margin-top:12px">
+        <div class="pc-card pros" style="border-top:3px solid #2D6A4F">
+          <h3 style="color:#2D6A4F">Why it can work</h3>
+          <div class="pc-item"><div class="pc-marker" style="background:#E8EFEA;color:#2D6A4F">+</div><div><h4>Upgrader wave timed to 2030 TOP</h4><p>Nearby BTOs (Bishan/AMK/Toa Payoh 2020-25) hit MOP around TOP. Strong local demand pool.</p></div></div>
+          <div class="pc-item"><div class="pc-marker" style="background:#E8EFEA;color:#2D6A4F">+</div><div><h4>Scarce micro-attributes</h4><p>Reservoir + Ai Tong + mega scale + TEL + proven corridor (Jadescape resale performance).</p></div></div>
+          <div class="pc-item"><div class="pc-marker" style="background:#E8EFEA;color:#2D6A4F">+</div><div><h4>Land cost logic</h4><p>$1,178 psf ppr supports sensible pricing; $100 psf per TEL stop differential vs Springleaf holds.</p></div></div>
+        </div>
+        <div class="pc-card cons" style="border-top:3px solid #8B1E3F">
+          <h3 style="color:#8B1E3F">Why to be cautious</h3>
+          <div class="pc-item"><div class="pc-marker" style="background:#F2E1E5;color:#8B1E3F">—</div><div><h4>Thin buffer vs Jadescape</h4><p>Jadescape launched ~$1,371 psf. At $2,500+ the cushion is smaller if sentiment softens.</p></div></div>
+          <div class="pc-item"><div class="pc-marker" style="background:#F2E1E5;color:#8B1E3F">—</div><div><h4>Mega-project absorption risk</h4><p>1,240 units launch together; average stacks can face post-TOP listing pressure.</p></div></div>
+          <div class="pc-item"><div class="pc-marker" style="background:#F2E1E5;color:#8B1E3F">—</div><div><h4>Corridor supply overlap 2026-32</h4><p>Thomson Reserve + Springleaf + Upper Thomson Parcel A compete for same buyers.</p></div></div>
+        </div>
+      </div>
+
+      <h2>Frequently Asked Questions</h2>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          What is the expected launch price for Thomson Reserve?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">Industry estimates put average stacks around $2,500–$2,600+ psf. A typical 3-bedroom is likely $2.4M–$2.85M. Official pricing will only be confirmed when the showflat preview opens (targeted Oct 2026).</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          Is Thomson Reserve worth buying above $2,700 psf?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">Above ~$2,800 psf the premium over Jadescape resale and Springleaf becomes hard to justify on risk-adjusted basis. At $2,500–$2,650 the combination of fresh lease, reservoir adjacency and school catchment supports the case for long-term upgraders.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          How does it compare to Jadescape?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">Jadescape has proven resale (~$2,293 psf average, very few loss-making transactions). Thomson Reserve offers newer 99-year lease, larger facilities and direct reservoir outlook — but launches at a $200–300 psf premium. The value depends on whether you pay for "new" vs proven.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          When is the launch and TOP?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">Showflat preview targeted for October 2026, public launch shortly after. Expected TOP around 2030 (subject to approvals). This timing lines up with maturing BTOs in the catchment.</p>
+      </details>
+
+      <h2>Related Reads</h2>
+      <p>1. <a href="/insights/dunearn-house-review-2026" onclick="showArticle('post-dunearn-house-review-2026'); return false;" class="underline hover:text-violet-700"><strong>Dunearn House Review 2026: Is It Worth Buying?</strong></a></p>
+      <p>2. <a href="/insights/which-condo-to-buy-2026" onclick="showArticle('post-which-condo-to-buy-2026'); return false;" class="underline hover:text-violet-700"><strong>Which Condo to Buy in Singapore in 2026: A Practical Buyer’s Guide</strong></a></p>
+      <p>3. <a href="/insights/new-launch-vs-resale-cheaper-2026" onclick="showArticle('post-new-launch-vs-resale-cheaper-2026'); return false;" class="underline hover:text-violet-700"><strong>Are New Launch Condos Cheaper Than Resale? A 2026 Guide</strong></a></p>
+      <p>4. <a href="/project/thomson-reserve-condo/" class="underline hover:text-violet-700"><strong>Full Thomson Reserve Project Page (Deep Analysis)</strong></a></p>
+
+      <p><em>Disclaimer: This article is for general informational purposes and does not constitute financial, tax, or investment advice. All PSF estimates, timelines, and comparisons are based on publicly available data and analyst consensus as of June 2026. Property prices can fall as well as rise. Always verify latest pricing, plans and eligibility directly with the developer and consult a licensed property advisor before making any decision.</em></p>
+    `
   }
 
 }; // end ARTICLES
@@ -11942,7 +12061,7 @@ function filterPosts(cat) {
       <i class="fa-brands fa-whatsapp text-2xl"></i>
     </a>
 
-  <!-- ===== ARTICLE SCHEMA (all 22 articles - updated for SEO/AEO) ===== -->
+  <!-- ===== ARTICLE SCHEMA (all 25 articles - updated for SEO/AEO) ===== -->
   <!-- Moved here from <head> to reduce render-blocking/head size for better mobile performance (FCP etc) while preserving full SEO/AEO value. -->
   <script type="application/ld+json">
   {
@@ -11974,7 +12093,8 @@ function filterPosts(cat) {
       {"@type": "ListItem", "position": 21, "item": {"@type": "Article", "headline": "Dunearn House Buyer's Guide 2026: Price, Eligibility & Compare", "description": "Complete Dunearn House buyer's guide: indicative prices ($1.9M–$3.3M), unit types, eligibility, payment scheme & comparison to D11 condos. Updated 2026.", "datePublished": "2026-06-04", "dateModified": "2026-06-04", "author": {"@id": "https://www.sellingsgproperty.com/#jackleow"}, "publisher": {"@id": "https://www.sellingsgproperty.com/#organization"}, "url": "https://www.sellingsgproperty.com/insights/dunearn-house-buyers-guide-2026"}},
       {"@type": "ListItem", "position": 22, "item": {"@type": "Article", "headline": "Why Families Love Dunearn House Bukit Timah: Prime Location Near Sixth Avenue MRT, Top Schools & Green Living in Turf City", "description": "Why families love Dunearn House Bukit Timah — 7-min walk to Sixth Avenue MRT, top schools, lush greenery & Turf City living in District 11.", "datePublished": "2026-06-05", "dateModified": "2026-06-05", "author": {"@id": "https://www.sellingsgproperty.com/#jackleow"}, "publisher": {"@id": "https://www.sellingsgproperty.com/#organization"}, "url": "https://www.sellingsgproperty.com/insights/dunearn-house-family-living-guide-2026"}},
       {"@type": "ListItem", "position": 23, "item": {"@type": "Article", "headline": "Dunearn House Investment Analysis 2026: First-Mover ROI in Turf City", "description": "Dunearn House new launch 2026 investment analysis: Turf City first-mover advantage, $1,410 psf ppr land bid, ROI outlook, risks and why launch entry can win for long-horizon CCR buyers.", "datePublished": "2026-06-07", "dateModified": "2026-06-07", "author": {"@id": "https://www.sellingsgproperty.com/#jackleow"}, "publisher": {"@id": "https://www.sellingsgproperty.com/#organization"}, "url": "https://www.sellingsgproperty.com/insights/dunearn-house-investment-analysis-2026"}},
-      {"@type": "ListItem", "position": 24, "item": {"@type": "Article", "headline": "HDB vs EC vs Private Property: Which Should You Buy? (2026)", "description": "HDB vs EC vs private condo Singapore 2026: income ceilings, grants, MOP, ABSD rules compared. Clear decision framework for upgraders and first-timers.", "datePublished": "2026-06-10", "dateModified": "2026-06-10", "author": {"@id": "https://www.sellingsgproperty.com/#jackleow"}, "publisher": {"@id": "https://www.sellingsgproperty.com/#organization"}, "url": "https://www.sellingsgproperty.com/insights/hdb-vs-ec-vs-private-property-2026"}}
+      {"@type": "ListItem", "position": 24, "item": {"@type": "Article", "headline": "HDB vs EC vs Private Property: Which Should You Buy? (2026)", "description": "HDB vs EC vs private condo Singapore 2026: income ceilings, grants, MOP, ABSD rules compared. Clear decision framework for upgraders and first-timers.", "datePublished": "2026-06-10", "dateModified": "2026-06-10", "author": {"@id": "https://www.sellingsgproperty.com/#jackleow"}, "publisher": {"@id": "https://www.sellingsgproperty.com/#organization"}, "url": "https://www.sellingsgproperty.com/insights/hdb-vs-ec-vs-private-property-2026"}},
+      {"@type": "ListItem", "position": 25, "item": {"@type": "Article", "headline": "Thomson Reserve Price Review 2026: Buy at $2,500–$2,650 psf?", "description": "Thomson Reserve 2026 pricing analysis: estimated $2,500–$2,650 psf buy zone vs walk-away above $2,800. Ai Tong catchment, reservoir views, Jadescape comparison and who should buy this 1,240-unit Upper Thomson launch.", "datePublished": "2026-06-19", "dateModified": "2026-06-19", "author": {"@id": "https://www.sellingsgproperty.com/#jackleow"}, "publisher": {"@id": "https://www.sellingsgproperty.com/#organization"}, "url": "https://www.sellingsgproperty.com/insights/thomson-reserve-price-review-2026"}}
     ]
   }
   </script>
