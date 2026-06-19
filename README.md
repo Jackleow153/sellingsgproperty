@@ -4,14 +4,14 @@ Exact replica of the Singapore New Launch Condos website (single-file static sit
 
 ## Current State
 - 39 verified new launch condo projects
-- 19 in-depth Insights articles (SEO + AEO optimized with tables, FAQs as accordions, auto-generated TOC, Article+FAQPage JSON-LD, dynamic per-article meta/OG) — latest redeploy 21 Jun 2026 after Netlify credits refresh
+- 25 in-depth Insights articles (SEO + AEO optimized with tables, FAQs as accordions, auto-generated TOC, Article+FAQPage JSON-LD, dynamic per-article meta/OG) — latest: Thomson Reserve Price Review 2026 (19 Jun 2026)
 - Clean URLs via Netlify `_redirects` + client-side router (e.g. `/insights/which-condo-to-buy-2026`)
 - GitHub → Netlify continuous deployment (push to `main` auto-deploys)
 - Google Search Console verified (HTML file + meta tag)
 - Custom domain `www.sellingsgproperty.com` live with HTTPS
 
 ## Files
-- `index.html` — The complete self-contained website (Tailwind via CDN + Font Awesome via CDN + all JS/data inline). 39 projects + 19 full articles.
+- `index.html` — The complete self-contained website (Tailwind via CDN + Font Awesome via CDN + all JS/data inline). 39 projects + 25 full articles.
 - `sitemap.xml`, `robots.txt`, `_redirects`, `netlify.toml` — SEO + deployment config.
 
 Articles now open as a **dedicated full page** (under the Insights section) instead of a popup modal. Deep links like `#insights/post-hdb-phantom-fear` are supported, with proper browser back/forward and Escape-to-go-back.
