@@ -954,5 +954,45 @@
     } else { paint(); }
   })();
 </script>
+
+<!-- Floating WhatsApp button - dynamic, always visible at bottom-right end of page -->
+<style>
+  #wa-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    background: #25D366;
+    color: white;
+    border-radius: 50px;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+  }
+  #wa-float:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5);
+  }
+  #wa-float svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+  }
+</style>
+
+<a id="wa-float" href="https://wa.me/6580621538" target="_blank" rel="noopener" aria-label="Chat with Jack on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.67-.165-1.203-.165-.533 0-1.098.198-1.322.595-.225.396-.868 2.133-.868 2.133s-.1.223-.05.372c.05.149.298.446.446.595.149.149 1.174 1.174 2.59 2.59 1.416 1.416 2.59 1.653 3.06 1.802.47.15 1.174.15 1.42.075.248-.075 1.92-.768 2.267-1.42.347-.65.347-1.22.248-1.42-.1-.2-.37-.3-.62-.45zM12 2a10 10 0 00-10 10c0 1.76.46 3.42 1.27 4.88L2 22l5.3-1.24A9.96 9.96 0 0012 22a10 10 0 0010-10 10 10 0 00-10-10zm0 18.5a8.5 8.5 0 01-4.32-1.2l-.31-.19-3.14.73.74-3.05-.2-.31A8.5 8.5 0 013.5 12 8.5 8.5 0 0112 3.5 8.5 8.5 0 0120.5 12 8.5 8.5 0 0112 20.5z"/></svg>
+  <span>WhatsApp Jack</span>
+</a>
+
 </body>
 </html>
