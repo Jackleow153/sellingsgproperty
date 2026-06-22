@@ -6300,10 +6300,10 @@ function toggleAmortization(){
             
             switchProjectTab(0)
 
-            // Special button ONLY for Thomson Reserve (id 28) - "Aukuwa Paper"
+            // Special button ONLY for Thomson Reserve (id 28) and Lentor Gardens (id 26) - "Aukuwa Paper"
             // Inserted in tab bar between Overview and Unit Mix & Pricing
-            // Styled as yellow pill button exactly as shown; no link/action yet
-            // All other projects and code untouched
+            // Styled as yellow pill button exactly as shown
+            // Only for these two project cards. All other projects and code untouched.
             const tabBar = document.getElementById('project-tab-bar')
             if (tabBar) {
                 tabBar.querySelectorAll('.aukuwa-paper-btn').forEach(el => el.remove())
@@ -6316,6 +6316,21 @@ function toggleAmortization(){
                         specialBtn.onclick = function(e) {
                             e.stopImmediatePropagation()
                             window.location.href = 'https://www.sellingsgproperty.com/project/thomson-reserve-condo/';
+                        }
+                        overviewTab.parentNode.insertBefore(specialBtn, overviewTab.nextSibling)
+                    }
+                } else if (currentProject && currentProject.id === 26) {
+                    // Lentor Gardens Residences - Aukuwa button added to match Thomson style
+                    const overviewTab = tabBar.querySelector('[data-tab="0"]')
+                    if (overviewTab) {
+                        const specialBtn = document.createElement('div')
+                        specialBtn.className = 'aukuwa-paper-btn ml-3 px-4 py-1.5 text-xs font-semibold bg-amber-400 text-amber-900 border border-amber-500 rounded-2xl flex items-center gap-x-1.5 cursor-pointer whitespace-nowrap'
+                        specialBtn.innerHTML = `<i class="fa-solid fa-file-alt"></i> <span>Aukuwa Paper</span>`
+                        specialBtn.onclick = function(e) {
+                            e.stopImmediatePropagation()
+                            // Link destination for Lentor not specified; using placeholder.
+                            // Update this URL if/when a dedicated subpage is added for Lentor Gardens.
+                            window.location.href = '#';
                         }
                         overviewTab.parentNode.insertBefore(specialBtn, overviewTab.nextSibling)
                     }
