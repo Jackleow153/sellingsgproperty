@@ -45,6 +45,7 @@
  /about                                   /index.html   200
  /contact                                 /index.html   200
  /deep-analysis/arina-east-residences     /index.html   200
+ /project/lentor-gardens-residences/      /project/lentor-gardens-residences/index.html   200
  /project/*                               /index.html   200
 
 # Fallback: everything else serves the SPA (required for client-side routing of all subpages + modals)
