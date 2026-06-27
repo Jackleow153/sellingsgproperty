@@ -305,8 +305,8 @@
                     <button data-page="mortgage-calculator" class="nav-link px-5 py-2 rounded-3xl text-sm font-semibold" id="nav-mortgage">Mortgage loan calculator</button>
                 </div>
 
-                <button id="mobile-menu-btn" class="md:hidden w-11 h-11 flex items-center justify-center text-slate-600 hover:text-violet-700">
-                    <i class="fa-solid fa-bars text-xl"></i>
+                <button id="mobile-menu-btn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden w-11 h-11 flex items-center justify-center text-slate-600 hover:text-violet-700">
+                    <i class="fa-solid fa-bars text-xl" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
@@ -433,7 +433,8 @@
                 </div>
                 
                 <div class="flex flex-wrap items-center gap-3">
-                    <select id="sort-select" class="bg-white border border-slate-300 text-sm py-3 px-4 rounded-3xl outline-none cursor-pointer">
+                    <label for="sort-select" class="sr-only">Sort projects by</label>
+                    <select id="sort-select" aria-label="Sort projects by" class="bg-white border border-slate-300 text-sm py-3 px-4 rounded-3xl outline-none cursor-pointer">
                         <option value="newest">Newest Launch</option>
                         <option value="lowest-price">Lowest Starting Price</option>
                         <option value="highest-psf">Highest PSF</option>
@@ -6969,6 +6970,8 @@ function toggleAmortization(){
             const mobileBtn = document.getElementById('mobile-menu-btn')
             if (mobileBtn) {
                 mobileBtn.addEventListener('click', () => {
+                    mobileBtn.setAttribute('aria-expanded', 'true');
+                    mobileBtn.setAttribute('aria-label', 'Close navigation menu');
                     const nav = document.createElement('div')
                     nav.className = `fixed inset-0 bg-black/70 z-[200] flex md:hidden`
                     nav.innerHTML = `
@@ -6992,14 +6995,15 @@ function toggleAmortization(){
                     `
                     document.body.appendChild(nav)
 
-                    // Click on the backdrop (outside the white panel) closes the menu
-                    nav.onclick = (e) => {
-                        if (e.target === nav) nav.remove();
-                    };
-
                     // Target the close button (×) specifically, not the logo button which is also a <button>
                     const closeBtn = nav.querySelector('button.text-3xl');
-                    if (closeBtn) closeBtn.onclick = () => nav.remove();
+                    const closeNav = () => {
+                        nav.remove();
+                        mobileBtn.setAttribute('aria-expanded', 'false');
+                        mobileBtn.setAttribute('aria-label', 'Open navigation menu');
+                    };
+                    if (closeBtn) closeBtn.onclick = closeNav;
+                    nav.addEventListener('click', e => { if (e.target === nav) closeNav(); });
                 })
             }
         }
