@@ -332,7 +332,7 @@
                     
                     <div class="mb-4">
                         <button data-page="blog" class="text-sm text-violet-300 hover:text-white underline underline-offset-4 flex items-center gap-x-1.5 transition">
-                            <span>Read our in-depth Property Insights (25 articles)</span>
+                            <span>Read our in-depth Property Insights (26 articles)</span>
                             <i class="fa-solid fa-arrow-right text-xs"></i>
                         </button>
                     </div>
@@ -2423,7 +2423,7 @@
                 </a>
               </div>
               <div class="flex flex-wrap gap-x-8 gap-y-3 text-sm text-slate-400">
-                <div><span class="text-white font-semibold">25</span> in-depth articles</div>
+                <div><span class="text-white font-semibold">26</span> in-depth articles</div>
                 <div><span class="text-white font-semibold">Updated</span> 2026</div>
               </div>
             </div>
@@ -2456,9 +2456,38 @@
   </div>
 
   <div id="blog-grid" class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-    <!-- First 6 latest articles pre-rendered statically for immediate content, SEO/crawlers, and better initial LCP/FCP on mobile (avoids empty state while JS loads). "Click for more" loads the rest dynamically from the full ARTICLES data to keep overall page size reasonable for performance. All 25 articles are still fully accessible via the button, category filters, direct URLs, sitemap, and schema. -->
+    <!-- First 6 latest articles pre-rendered statically for immediate content, SEO/crawlers, and better initial LCP/FCP on mobile (avoids empty state while JS loads). "Click for more" loads the rest dynamically from the full ARTICLES data to keep overall page size reasonable for performance. All 26 articles are still fully accessible via the button, category filters, direct URLs, sitemap, and schema. -->
 
-    <!-- Latest: Thomson Reserve Price Review -->
+    <!-- Latest: Thomson Reserve Risks -->
+    <article data-category="new-launch" class="blog-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" onclick="showArticle('post-thomson-reserve-risks-2026')">
+      <div class="h-48 bg-gradient-to-br from-slate-800 to-slate-900 flex items-end p-5 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] bg-[length:3px_3px]"></div>
+        <div class="absolute top-0 right-0 w-40 h-40 bg-red-900/20 rounded-full -translate-y-16 translate-x-16"></div>
+        <span class="chip-newlaunch absolute top-4 left-4 px-3 py-1 text-xs font-bold rounded-2xl">NEW LAUNCH</span>
+        <div class="relative text-white">
+          <div class="text-[10px] font-semibold tracking-widest uppercase text-slate-400 mb-1">Risk Analysis</div>
+          <div class="font-black text-xl leading-tight tracking-tight">Thomson Reserve</div>
+          <div class="text-sm text-slate-300 mt-0.5">8 Real Risks Every Buyer Should Know</div>
+        </div>
+      </div>
+      <div class="p-6 flex-1 flex flex-col">
+        <div class="flex items-center justify-between text-xs mb-3">
+          <time class="text-slate-400" datetime="2026-06-27">27 Jun 2026</time>
+          <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 30 min</span>
+        </div>
+        <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">Thomson Reserve Risks: 8 Real Concerns Before You Buy (2026)</h2>
+        <p class="text-sm text-slate-600 line-clamp-3 flex-1">An honest look at the 8 real risks — construction delays, supply wave, SSD trap, quantum overstretch — and how serious buyers handle each one.</p>
+        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
+          <div class="flex items-center gap-x-2 text-xs">
+            <div class="w-6 h-6 bg-violet-100 rounded-full flex items-center justify-center"><span class="text-violet-700 text-[10px] font-black">JL</span></div>
+            <span class="font-medium text-slate-700">Jack Leow</span>
+          </div>
+          <span class="text-violet-600 text-xs font-semibold">Read article →</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Thomson Reserve Price Review -->
     <article data-category="new-launch" class="blog-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" onclick="showArticle('post-thomson-reserve-price-review-2026')">
       <div class="relative overflow-hidden">
         <img src="insights/thomson-reserve-price-review-2026.jpg" class="w-full h-48 object-cover" alt="Thomson Reserve Price: Is It Really Too Expensive in 2026?" loading="lazy">
@@ -11581,6 +11610,291 @@ const ARTICLES = {
 
       <p><em>Disclaimer: This article is for general informational purposes and does not constitute financial, tax, or investment advice. All figures, projections, and comparisons are based on publicly available data as of June 2026 and are subject to change. Property values can go down as well as up. Always conduct your own due diligence and consult a licensed financial advisor, solicitor, and property professional before making any decision.</em></p>
     `
+  },
+
+  /* ======================================================
+     ARTICLE 26 — THOMSON RESERVE RISKS
+  ====================================================== */
+  'post-thomson-reserve-risks-2026': {
+    title: 'Thomson Reserve Risks: The 8 Real Risks Every Buyer Should Know in 2026',
+    date: '27 Jun 2026',
+    readTime: '30 min read',
+    category: 'NEW LAUNCH',
+    chipClass: 'chip-newlaunch',
+    img: null,
+    linkedinUrl: null,
+    body: `
+      <p><strong>The eight real risks of buying Thomson Reserve are: floating-rate BUC loan exposure, a 2027–2028 supply wave from the same consortium, future cooling measures, a four-year construction window, density at 1,240 units, off-plan uncertainty, the extended 4-year SSD window (post-July 2025), and quantum overstretch.</strong> Most are manageable. The two that hurt buyers most — the SSD liquidity trap and quantum overstretch — are personal financial risks, not project risks.</p>
+
+      <p>Some buyers are quietly walking away from Thomson Reserve. They have read the headlines, looked at the launch PSF, weighed the four-year wait until 2030, and decided the risk profile does not fit their life. They are not wrong to ask the question. Buying a $2 million unit that does not exist yet, in a market where the next round of cooling measures is always one quarter away, is not a casual decision.</p>
+
+      <p>But here is the part most "avoid Thomson Reserve" articles get wrong: risk is not the same as danger. A risk is something you can identify, measure, and manage. A danger is something that ambushes you. Most of what people call "Thomson Reserve risks" are actually category-wide risks for every 2026 new launch in Singapore — they just look scarier when attached to a S$810 million flagship project.</p>
+
+      <p><em>All figures are based on publicly available URA, IRAS, EdgeProp, 99.co, and MAS data as of mid-2026. Some are estimated pending the developer\'s official launch.</em></p>
+
+      <h2>The Three Layers of Risk: A Framework Before We Begin</h2>
+      <p>Property risk is not a single thing. It is three different things stacked on top of each other, and confusing them leads to bad decisions.</p>
+
+      <div class="key-takeaway">
+        <p class="font-bold text-violet-900 mb-3">The Three-Layer Risk Framework</p>
+        <table>
+          <thead><tr><th>Layer</th><th>Type</th><th>Examples (Thomson Reserve)</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Layer 1</strong></td><td>Market &amp; Policy Risks</td><td>Interest rates, supply wave, cooling measures — you cannot control these, only prepare for them</td></tr>
+            <tr><td><strong>Layer 2</strong></td><td>Project-Specific Risks</td><td>Construction delays, density, off-plan uncertainty — partially screened by developer pedigree and unit choice</td></tr>
+            <tr><td><strong>Layer 3</strong></td><td>Personal &amp; Financial Risks</td><td>SSD liquidity trap, quantum overstretch — entirely yours, and usually the ones that hurt most</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Layer 1: Market &amp; Policy Risks (The Things You Cannot Control)</h2>
+      <p>These are the risks people fixate on because they are visible and dramatic. They are also, paradoxically, the easiest risks to manage — because the answer to every one of them is the same: hold longer.</p>
+
+      <h2>Risk #1: Interest Rates Have Bottomed Out — And BUC Loans Are Floating-Only</h2>
+      <p>Singapore mortgage rates have fallen sharply. As of mid-2026, 3-month SORA sits around 1.0–1.2%, fixed packages start from about 1.40%, and floating from about 1.27%. This looks like a great time to lock in. But for a new launch like Thomson Reserve, you cannot.</p>
+
+      <p>Building-under-construction (BUC) loans are floating-only in Singapore. You only get to lock in a fixed rate after TOP — which for Thomson Reserve means around 2030. Between now and then, you pay floating, and floating rates move with SORA.</p>
+
+      <h3>How real is this risk?</h3>
+      <p>Real, but bounded. Consensus forecasts cluster SORA around 1.0–1.2% through 2026, absent a major economic shock. The 2023 peak (SORA at 3.6%+) was the result of one of the most aggressive Fed tightening cycles in decades — repeating that scenario requires a comparable inflation shock. Under the Progressive Payment Scheme, you only pay interest on the disbursed portion of the loan, which scales up with construction milestones. The full mortgage burden does not hit until TOP — when you can refinance to a fixed package.</p>
+
+      <h3>How serious buyers handle it</h3>
+      <ul>
+        <li><strong>Stress-test at 4.5%.</strong> If your monthly repayment is comfortable at a 4.5% rate, you are insured against most realistic scenarios.</li>
+        <li><strong>Plan to refinance at TOP.</strong> Pencil in a refinancing review around 2030. The cost of switching banks at TOP is typically S$3,000–S$5,000 — trivial against a 25-year loan.</li>
+        <li><strong>Build a 6-month mortgage buffer.</strong> Cash reserves equal to half a year of repayments covers job loss, illness, or rate spikes without forcing a panic sale.</li>
+      </ul>
+
+      <h2>Risk #2: The 2027–2028 Supply Wave From Your Own Developers</h2>
+      <p>UOL, SingLand, and CapitaLand — the same three developers behind Thomson Reserve — also won the Hougang Central GLS site in December 2025 with a S$1.5 billion bid. That development will likely launch in 2027–2028 and TOP around 2030–2031, almost the same window as Thomson Reserve. The broader 2026–2028 supply pipeline carries 9,000+ new homes, including Chuan Grove Residences (D19) and Lentor Gardens Residences (D26).</p>
+
+      <h3>How real is this risk?</h3>
+      <p>Less severe than it looks on paper, because supply is not the same as competition. Hougang Central is in District 19, not District 20. Different MRT corridor, different school catchment, different buyer profile. None of the competing projects sit inside the Ai Tong 1km zone or have three-line MRT access from the same address.</p>
+
+      <p>What supply does do is compress the rate of appreciation in the first 2–3 years post-TOP. It does not collapse prices. Jadescape — the most direct comparable to Thomson Reserve — TOP\'d in 2022/2023 with 1,206 units against significant Bishan-Toa Payoh resale supply, and still delivered ~9.5% PSF appreciation between 2023 and 2026.</p>
+
+      <h3>How serious buyers handle it</h3>
+      <ul>
+        <li><strong>Plan a 7+ year hold.</strong> That takes you past the initial post-TOP supply wave and into the natural resale rhythm where mega projects price-discover upward.</li>
+        <li><strong>Pick a stack with structural differentiation.</strong> A unit with unblocked MacRitchie views cannot be replicated by Hougang Central or Lentor at any price.</li>
+        <li><strong>Track the actual launch calendar.</strong> When competing projects price, you get a real-time read on whether the corridor is repricing up or down.</li>
+      </ul>
+
+      <h2>Risk #3: Future Cooling Measures Could Compress Your Exit Window</h2>
+      <p>Singapore has raised ABSD five times since 2011. The April 2023 round caught the market off guard — new launch transaction volumes halved overnight. If MAS or MOF tightens again before you exit Thomson Reserve, your buyer pool could shrink and your resale price soften.</p>
+
+      <h3>How real is this risk?</h3>
+      <p>Possible but not imminent. As of May 2026, there has been no signal from the Ministry of Finance or MAS of imminent stamp duty changes. Private residential prices rose 0.9% in Q1 2026 — a moderate pace that does not, on its own, suggest further tightening. Notably, every ABSD revision in 15 years has been an increase, never a decrease. The risk is asymmetric: it only adds friction to your exit, never removes it.</p>
+
+      <h3>How serious buyers handle it</h3>
+      <ul>
+        <li><strong>Buy as if cooling measures will tighten, not loosen.</strong> If your numbers only work in a stable-policy world, the risk margin is too thin.</li>
+        <li><strong>Avoid second-property purchases at the top of your affordability.</strong> ABSD compounds the impact of any cooling round.</li>
+        <li><strong>Do not rely on foreign buyer demand for exit.</strong> Foreigners pay 60% ABSD already. Build your exit thesis around Singaporean upgraders and PRs.</li>
+      </ul>
+
+      <h2>Layer 2: Project-Specific Risks (What Can Go Wrong With the Project Itself)</h2>
+      <p>These are the risks that vary from project to project. Most of them can be screened for before you sign — which means they are entirely manageable if you do the work.</p>
+
+      <h2>Risk #4: The Four-Year Construction Window — Anything Can Happen</h2>
+      <p>Thomson Reserve is expected to TOP around 2030. That is roughly four years from a 2026 launch. In four years, interest rates can swing, construction costs can rise, a global event can disrupt the supply chain, and the developer can hit unforeseen issues. Singapore has seen TOP delays of 6 to 18 months on several major projects in recent years.</p>
+
+      <h3>How real is this risk?</h3>
+      <p>The probability of some delay is high. The probability of a catastrophic delay or non-completion is very low — especially with this specific consortium. Three structural protections reduce this risk:</p>
+      <ul>
+        <li><strong>Three SGX-listed developers sharing the project.</strong> Each has its own board, balance sheet, and public reputation. The combined balance sheet capacity is several orders of magnitude larger than the project cost. Construction failure or financial default is functionally a non-issue.</li>
+        <li><strong>The Land Sales Disqualification Framework (effective 22 May 2026)</strong> now imposes bans of up to five years on developers who deliver defect-ridden or unsafe projects. This regulatory backstop changes developer incentives materially.</li>
+        <li><strong>The Progressive Payment Scheme structurally hedges your cashflow.</strong> You pay in stages aligned with construction milestones. If construction stalls, your payment obligations stall with it.</li>
+      </ul>
+
+      <h3>How serious buyers handle it</h3>
+      <ul>
+        <li><strong>Sequence your HDB sale carefully.</strong> Do not sell your current home in 2026 and rent for four years. Sell after Thomson Reserve TOP, when your unit is move-in ready.</li>
+        <li><strong>Check the developer\'s build-quality track records.</strong> UOL, SingLand and CapitaLand all have strong CONQUAS scores. Visit a recently completed project by the consortium and inspect the finishes yourself.</li>
+        <li><strong>Read the SPA carefully on liquidated damages.</strong> Standard Singapore SPAs include a liquidated damages clause if TOP is delayed beyond the contractual date. This is real money, not just a moral assurance.</li>
+      </ul>
+
+      <h2>Risk #5: Density Risk — 1,240 Units Sharing Facilities</h2>
+      <p>Thomson Reserve will house roughly 1,240 units on a 5-hectare site — a density of about 248 units per hectare. At 3 people per household on average, you are looking at ~3,700 residents sharing the same pools, gym, BBQ pits, and lobbies. Crowded weekends. Queue for the swimming lane. Lift lobbies congested at 8am.</p>
+
+      <h3>How real is this risk?</h3>
+      <p>It depends on the project\'s amenity-to-resident ratio. Mega projects can deliver poor liveability if facilities are under-provisioned — or better liveability than boutique projects, because the larger budget supports more facilities (multiple pools, larger gyms, segregated zones) than a 200-unit boutique can afford.</p>
+
+      <p>A real comparable: Jadescape, with 1,206 units, has resident reviews running broadly positive on facilities — with one consistent complaint: facilities get crowded on weekends. That is the honest reality of mega-project living. If you want resort-like exclusivity, a boutique freehold in a quieter district will serve you better.</p>
+
+      <h3>How serious buyers handle it</h3>
+      <ul>
+        <li><strong>Inspect the site plan carefully at preview.</strong> Count the pool areas, gym square footage, lift-to-unit ratio, parking provision. Compare against the unit count.</li>
+        <li><strong>Visit the developer\'s existing mega projects on a Sunday morning.</strong> Walk the facilities. Talk to actual residents. Five minutes of conversation tells you more than five hours of brochure reading.</li>
+        <li><strong>Pick a tower position not directly above the noisiest facilities.</strong> Avoid the stack directly above the pool deck, function hall, or bin centre. These are usually subtly priced lower for a reason.</li>
+      </ul>
+
+      <h2>Risk #6: Off-Plan Buying Risk — What Looks Great in the Showflat May Not Deliver</h2>
+      <p>You are buying a unit that does not exist. The showflat is a sales tool, not a contractual commitment. Finishes can be substituted with "equivalent" alternatives. Views from your specific floor and stack are not what the showflat shows. Until TOP, you are buying a promise.</p>
+
+      <h3>How real is this risk?</h3>
+      <p>Real, but well-regulated. The Housing Developers (Control and Licensing) Act governs new launch sales tightly. The SPA spells out specifications, substitution clauses, and rectification obligations. Developers have a one-year defects liability period after TOP during which they must fix legitimate construction defects at no cost.</p>
+
+      <p>What does go wrong: floor plans can have inefficiencies not obvious until you stand in the unit. Views can be obstructed by future GLS developments on adjacent plots — check the URA Master Plan for unbuilt sites within line-of-sight. Finish quality can vary between the showflat and the actual unit.</p>
+
+      <h3>How serious buyers handle it</h3>
+      <ul>
+        <li><strong>Bring a measuring tape to the showflat.</strong> Verify advertised dimensions against your own measurements. Look at ceiling heights, bedroom widths, and balcony depths.</li>
+        <li><strong>Cross-reference your stack against the URA Master Plan.</strong> Look for unbuilt plots in your view direction. A reservoir view in 2026 might become an obstructed view in 2030.</li>
+        <li><strong>Engage a property lawyer before signing the OTP.</strong> Review the SPA substitution clauses and defects liability provisions. A lawyer\'s fee of S$2,500–S$4,000 is cheap insurance on a S$2M+ purchase.</li>
+        <li><strong>Take photos and videos at the showflat.</strong> If post-TOP delivery diverges from what was shown, you have evidence for any rectification claim.</li>
+      </ul>
+
+      <h2>Layer 3: Personal &amp; Financial Risks (The Risks That Land on Your Lap)</h2>
+      <p>These are the risks that property influencers rarely discuss — because they are the buyer\'s responsibility, not the developer\'s. They are also the risks that most often blow up a property purchase in Singapore.</p>
+
+      <h2>Risk #7: The 4-Year SSD Liquidity Trap (Post-July 2025 Rules)</h2>
+      <p>Singapore\'s Seller\'s Stamp Duty was extended in July 2025. Properties acquired on or after 4 July 2025 now face SSD if sold within four years. Previously the holding window was three years.</p>
+
+      <table>
+        <thead><tr><th>Sale timing (from purchase date)</th><th>SSD rate</th><th>On a S$2.5M unit</th></tr></thead>
+        <tbody>
+          <tr><td>Within Year 1</td><td>16%</td><td>S$400,000</td></tr>
+          <tr><td>Year 2</td><td>12%</td><td>S$300,000</td></tr>
+          <tr><td>Year 3</td><td>8%</td><td>S$200,000</td></tr>
+          <tr><td>Year 4</td><td>4%</td><td>S$100,000</td></tr>
+          <tr><td>After Year 4</td><td>0%</td><td>—</td></tr>
+        </tbody>
+      </table>
+
+      <p>Critically, the SSD clock starts ticking from the day you exercise the OTP in 2026, not from when you move in around 2030. If you buy Thomson Reserve in late 2026, your SSD-free date is late 2030. If you then need to sell in 2031–2032 (within 1–2 years of moving in), you are already SSD-clear — but still in the early post-TOP window where price discovery may not have fully occurred. The comfortable hold window is <strong>7+ years from purchase date</strong>.</p>
+
+      <div class="key-takeaway">
+        <p class="font-bold text-violet-900 mb-1">SSD Timing for Thomson Reserve Buyers</p>
+        <p class="text-sm text-violet-800">Buy in late 2026 → SSD-free from late 2030 → TOP ~2030 → effectively zero SSD exposure if you hold through to resale. The real risk is life forcing a sale between 2026 and 2030, when you are both in the construction period and inside the SSD window simultaneously.</p>
+      </div>
+
+      <h3>How serious buyers handle it</h3>
+      <ul>
+        <li><strong>Be brutally honest about your hold horizon.</strong> "I think I will stay 10 years" is not a plan. Write down specific reasons you are unlikely to need to exit early — job stability, school anchor, family proximity.</li>
+        <li><strong>Build a real emergency fund.</strong> Six months of all-in housing costs (mortgage + maintenance + property tax + utilities) is the floor. Twelve months is safer for first-time condo buyers.</li>
+        <li><strong>Consider whether a slightly smaller unit gives you more breathing room.</strong> A 700 sq ft 2-bedder you can comfortably hold for 10 years beats a 1,000 sq ft 3-bedder you are forced to sell in Year 3.</li>
+      </ul>
+
+      <h2>Risk #8: Quantum Overstretch — When the Price Is the Silent Killer</h2>
+      <p>This is the most common Singapore property mistake and almost nobody talks about it openly. A buyer can technically qualify for a Thomson Reserve unit at S$2.5M under TDSR and MSR rules — but qualifying is not the same as being comfortable. The mortgage absorbs cash that should have gone to retirement savings, education funds, emergency reserves, or simply living a non-stressed life.</p>
+
+      <table>
+        <thead><tr><th>Unit type</th><th>Indicative price</th><th>Monthly mortgage (3.5%, 25yr)</th><th>True all-in monthly*</th></tr></thead>
+        <tbody>
+          <tr><td>2-Bedroom (700 sqft)</td><td>S$1.75M–S$2.17M</td><td>S$3,900–S$4,800</td><td>S$5,100–S$6,200</td></tr>
+          <tr><td>3-Bedroom (950 sqft)</td><td>S$2.4M–S$2.95M</td><td>S$5,300–S$6,500</td><td>S$6,900–S$8,500</td></tr>
+          <tr><td>4-Bedroom (1,200 sqft)</td><td>S$3.0M–S$3.7M</td><td>S$6,600–S$8,200</td><td>S$8,600–S$10,700</td></tr>
+        </tbody>
+      </table>
+      <p><em>*All-in includes maintenance fees (~S$600–S$800/mo), property tax, utilities, insurance, and 0.5% annual repair provisioning. The honest monthly figure is usually 30–40% higher than the mortgage alone.</em></p>
+
+      <h3>How serious buyers handle it</h3>
+      <ul>
+        <li><strong>Aim for housing costs at 28–32% of gross monthly income,</strong> not the 55% TDSR ceiling. The lower number is the actual comfort threshold for sustainable Singapore living.</li>
+        <li><strong>Buy one tier below your maximum.</strong> The marginal lifestyle gain from "the biggest unit you can afford" is small; the marginal life-flexibility loss is large.</li>
+        <li><strong>Never buy at the absolute top of your budget without a fallback plan.</strong> If your fallback plan is "sell quickly," reread Risk #7.</li>
+      </ul>
+
+      <h2>How Serious Buyers Actually Manage These Risks</h2>
+      <p>The pattern across all eight risks is the same. The buyer who gets hurt treats the purchase as a single decision. The buyer who does well treats it as a sequence of decisions managed over years.</p>
+
+      <ol>
+        <li><strong>Stress-test before the showflat visit.</strong> Run your numbers at a 4.5% mortgage rate, a 6-month income gap, and a 10-year hold. If your plan only works on optimistic assumptions, it is not a plan.</li>
+        <li><strong>Pick the unit, not the project.</strong> The right floor, stack, and layout in a mega project can outperform the project average by 15–25% over time. The wrong unit underperforms by the same margin.</li>
+        <li><strong>Engage a property lawyer before OTP signing.</strong> Not after. Before. S$3,000 of legal review saves six-figure mistakes.</li>
+        <li><strong>Have an explicit hold horizon.</strong> Write it down. Share it with your spouse or financial advisor. If the horizon is less than 7 years from purchase date, reconsider.</li>
+        <li><strong>Build the buffer.</strong> Six months of housing costs in cash. Refinance review at TOP. Annual review of your overall financial position post-purchase.</li>
+        <li><strong>Plan your exit before you enter.</strong> Who is your most likely resale buyer? What price would they pay in a base case, a bull case, a bear case? If you cannot answer these three questions, you have not done the work.</li>
+      </ol>
+
+      <h2>Frequently Asked Questions</h2>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          What are the biggest risks of buying Thomson Reserve?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">The three most material risks are personal-financial, not project-specific: quantum overstretch (buying at the top of your affordability), the 4-year SSD liquidity trap if life forces an early exit, and interest rate exposure during the BUC floating-rate period until TOP. Project-specific risks — construction delay, density, off-plan uncertainty — exist but are well-managed by the three-developer consortium and Singapore\'s regulatory framework. Market-policy risks dissolve on a 7+ year hold.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          Should I avoid Thomson Reserve?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">Avoid it if you are: a 5-year flipper expecting 30%+ gains, a buyer stretching to the absolute top of your TDSR ceiling, a second-property buyer paying 20% ABSD without a clear 10-year hold plan, or a foreigner paying 60% ABSD without multi-generational intent. For Singaporean first-property buyers, family upgraders with a 7–15 year horizon, and HDB upgraders with strong equity — Thomson Reserve is among the better-positioned launches of 2026 on a risk-adjusted basis.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          Is Thomson Reserve safe to invest in?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">"Safe" is the wrong question. "Suitable" is the right one. No Singapore property is risk-free. What Thomson Reserve offers is a well-mitigated risk profile: three SGX-listed developers, a fresh 99-year lease, three MRT lines, an SAP primary school catchment, and a 5-hectare site in one of Singapore\'s most established residential corridors. The risks are knowable, measurable, and largely manageable for a disciplined buyer.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          What is the worst-case scenario for Thomson Reserve?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">The realistic worst case is a 2030–2032 market downturn coinciding with personal financial stress, forcing a sale within the 4-year SSD window. In that scenario, a S$2.5M buyer might face 15–20% capital loss plus 8–12% SSD — a combined hit of S$500,000–S$800,000. The probability is low but not zero, and it is fully mitigable by buying within your real (not maximum) budget and holding past the SSD window. A catastrophic developer-level event is functionally a non-issue given the consortium and Singapore\'s Land Sales Disqualification Framework effective May 2026.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          How can I reduce Thomson Reserve risks?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">The four highest-leverage mitigations are: stress-testing your mortgage at 4.5% before purchase, building a 6-month all-in housing cost buffer, engaging a property lawyer before signing the OTP, and committing to a minimum 7-year hold to clear the SSD window. These four steps neutralise an estimated 80% of the buyer-side risk in a Singapore new launch purchase.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          Are construction delays common for Singapore new launches?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">Minor delays (3–6 months) are common; major delays (12+ months) are rare. The Singapore regulatory framework requires developers to deliver against contracted TOP dates with liquidated damages applicable for delays beyond contractual buffers. The new Land Sales Disqualification Framework effective 22 May 2026 imposes 5-year GLS and launch bans on developers who deliver defect-ridden or unsafe projects, which materially sharpens developer incentives. The Thomson Reserve consortium has no recent history of significant delays.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          Is Thomson Reserve too risky for first-time buyers?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">Not necessarily — Singapore Citizen first-property buyers actually face the lowest risk profile. Zero ABSD, full CPF eligibility, and the most relaxed stamp duty position structurally insulate first-time buyers from most macro risks. The honest question is whether the quantum (S$1.75M+ for the smallest 2-bedder) fits your real budget. If it does, first-property buyers are in the best position. If it stretches you, look at smaller projects, ECs, or resale alternatives in nearby D20 or D26.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          What if I cannot exit Thomson Reserve when I need to?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">The SSD framework makes early exit costly but not impossible. Selling within 4 years of purchase triggers 4–16% SSD on the higher of selling price or market value. The realistic mitigation is to buy with an honest 7+ year hold horizon and maintain enough cash reserves to avoid forced sale. If your circumstances genuinely change, rental income (3% gross yield typical in District 20) can carry the holding cost while you wait out the SSD window.</p>
+      </details>
+
+      <h2>The Honest Bottom Line</h2>
+      <p>Thomson Reserve carries real risks. We have named eight of them and looked each one in the face. The buyers walking away from this launch are not foolish — they are weighing their personal risk tolerance against an honestly uncertain four-year horizon and a market that has become structurally less forgiving of speculation.</p>
+
+      <p>But honest risk assessment cuts both ways. The risks of buying Thomson Reserve are largely manageable: stress-test the mortgage, buy below your maximum, build the buffer, engage the lawyer, commit to a 7+ year hold. Do these things, and seven of the eight risks above shrink from "danger" to "exposure you have planned for."</p>
+
+      <p>The risks of not buying — of waiting in cash, of paying a 20–30% premium on the next launch in the same corridor, of missing the entry point on a fresh-99 development at three MRT lines with an SAP school in the 1km zone — those risks rarely get listed. But they are real too. The Singaporean who avoided every new launch from 2018 to 2022 is now paying significantly more for a smaller, older unit than the buyer who went in carefully at Jadescape or Lentor Modern.</p>
+
+      <div class="key-takeaway">
+        <p class="font-bold text-violet-900 mb-1">The Bottom Line</p>
+        <p class="text-sm text-violet-800">If you are one of the prepared — hold horizon locked in, buffer built, numbers stress-tested — the eight risks above are not reasons to avoid Thomson Reserve. They are the work you do before you say yes. If you are not yet one of the prepared, the eight risks above are the work to do before the showflat visits, regardless of which project you eventually buy.</p>
+      </div>
+
+      <p><em>Last updated: June 2026. All figures indicative based on publicly available market data. Verify all stamp duty rates with <a href="https://www.iras.gov.sg" target="_blank" rel="noopener">IRAS</a> and consult licensed mortgage and legal professionals before transacting.</em></p>
+
+      <h2>Related Reads</h2>
+      <p>1. <a href="/insights/thomson-reserve-price-review-2026" onclick="showArticle(\'post-thomson-reserve-price-review-2026\'); return false;" class="underline hover:text-violet-700"><strong>Thomson Reserve Price Review 2026: Is It Really Too Expensive?</strong></a></p>
+      <p>2. <a href="/insights/new-launch-vs-resale" onclick="showArticle(\'post-new-launch-vs-resale\'); return false;" class="underline hover:text-violet-700"><strong>New Launch vs Resale Condo in 2026: Which Should You Buy?</strong></a></p>
+      <p>3. <a href="/insights/how-to-buy-new-launch-2026" onclick="showArticle(\'post-how-to-buy-new-launch-2026\'); return false;" class="underline hover:text-violet-700"><strong>How to Buy a New Launch Condo in Singapore: Step-by-Step 2026 Guide</strong></a></p>
+      <p>4. <a href="/insights/hdb-vs-ec-vs-private-property-2026" onclick="showArticle(\'post-hdb-vs-ec-vs-private-property-2026\'); return false;" class="underline hover:text-violet-700"><strong>HDB vs EC vs Private Property: 2026 Comparison</strong></a></p>
+      <p>5. <a href="/project/thomson-reserve-condo/" class="underline hover:text-violet-700"><strong>Full Thomson Reserve Project Page (Deep Analysis)</strong></a></p>
+    `
   }
 
 }; // end ARTICLES
@@ -12333,7 +12647,7 @@ function filterPosts(cat) {
       <i class="fa-brands fa-whatsapp text-2xl"></i>
     </a>
 
-  <!-- ===== ARTICLE SCHEMA (all 25 articles - updated for SEO/AEO) ===== -->
+  <!-- ===== ARTICLE SCHEMA (all 26 articles - updated for SEO/AEO) ===== -->
   <!-- Moved here from <head> to reduce render-blocking/head size for better mobile performance (FCP etc) while preserving full SEO/AEO value. -->
   <script type="application/ld+json">
   {
@@ -12366,7 +12680,8 @@ function filterPosts(cat) {
       {"@type": "ListItem", "position": 22, "item": {"@type": "Article", "headline": "Why Families Love Dunearn House Bukit Timah: Prime Location Near Sixth Avenue MRT, Top Schools & Green Living in Turf City", "description": "Why families love Dunearn House Bukit Timah — 7-min walk to Sixth Avenue MRT, top schools, lush greenery & Turf City living in District 11.", "datePublished": "2026-06-05", "dateModified": "2026-06-05", "author": {"@id": "https://www.sellingsgproperty.com/#jackleow"}, "publisher": {"@id": "https://www.sellingsgproperty.com/#organization"}, "url": "https://www.sellingsgproperty.com/insights/dunearn-house-family-living-guide-2026"}},
       {"@type": "ListItem", "position": 23, "item": {"@type": "Article", "headline": "Dunearn House Investment Analysis 2026: First-Mover ROI in Turf City", "description": "Dunearn House new launch 2026 investment analysis: Turf City first-mover advantage, $1,410 psf ppr land bid, ROI outlook, risks and why launch entry can win for long-horizon CCR buyers.", "datePublished": "2026-06-07", "dateModified": "2026-06-07", "author": {"@id": "https://www.sellingsgproperty.com/#jackleow"}, "publisher": {"@id": "https://www.sellingsgproperty.com/#organization"}, "url": "https://www.sellingsgproperty.com/insights/dunearn-house-investment-analysis-2026"}},
       {"@type": "ListItem", "position": 24, "item": {"@type": "Article", "headline": "HDB vs EC vs Private Property: Which Should You Buy? (2026)", "description": "HDB vs EC vs private condo Singapore 2026: income ceilings, grants, MOP, ABSD rules compared. Clear decision framework for upgraders and first-timers.", "datePublished": "2026-06-10", "dateModified": "2026-06-10", "author": {"@id": "https://www.sellingsgproperty.com/#jackleow"}, "publisher": {"@id": "https://www.sellingsgproperty.com/#organization"}, "url": "https://www.sellingsgproperty.com/insights/hdb-vs-ec-vs-private-property-2026"}},
-      {"@type": "ListItem", "position": 25, "item": {"@type": "Article", "headline": "Thomson Reserve Price: Is It Really Too Expensive in 2026?", "description": "Worried Thomson Reserve is overpriced at $2,500–$3,100 psf? A fair, data-driven look at what the price really buys — and who quietly benefits.", "datePublished": "2026-06-19", "dateModified": "2026-06-19", "author": {"@id": "https://www.sellingsgproperty.com/#jackleow"}, "publisher": {"@id": "https://www.sellingsgproperty.com/#organization"}, "url": "https://www.sellingsgproperty.com/insights/thomson-reserve-price-review-2026"}}
+      {"@type": "ListItem", "position": 25, "item": {"@type": "Article", "headline": "Thomson Reserve Price: Is It Really Too Expensive in 2026?", "description": "Worried Thomson Reserve is overpriced at $2,500–$3,100 psf? A fair, data-driven look at what the price really buys — and who quietly benefits.", "datePublished": "2026-06-19", "dateModified": "2026-06-19", "author": {"@id": "https://www.sellingsgproperty.com/#jackleow"}, "publisher": {"@id": "https://www.sellingsgproperty.com/#organization"}, "url": "https://www.sellingsgproperty.com/insights/thomson-reserve-price-review-2026"}},
+      {"@type": "ListItem", "position": 26, "item": {"@type": "Article", "headline": "Thomson Reserve Risks: The 8 Real Risks Every Buyer Should Know in 2026", "description": "Worried about Thomson Reserve risks in 2026? An honest look at the 8 real concerns — construction delays, supply, SSD, quantum overstretch — and how serious buyers handle them.", "datePublished": "2026-06-27", "dateModified": "2026-06-27", "author": {"@id": "https://www.sellingsgproperty.com/#jackleow"}, "publisher": {"@id": "https://www.sellingsgproperty.com/#organization"}, "url": "https://www.sellingsgproperty.com/insights/thomson-reserve-risks-2026"}}
     ]
   }
   </script>
