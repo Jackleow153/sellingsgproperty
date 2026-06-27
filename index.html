@@ -95,8 +95,12 @@
   <!-- (Article schema moved to end of body for better initial render performance while keeping SEO value) -->
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet">
+    <!-- Font Awesome: non-blocking load (preload + onload swap) -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+    <!-- Google Fonts: non-blocking load (preload + onload swap) -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet"></noscript>
     <!-- Calculator styles from RTF -->
     <style>
     :root{
@@ -185,8 +189,6 @@
         .page-section.active { display: block; }
 
         /* ── Blog / Insights styles ── */
-
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap');
 
     body { font-family: 'Inter', system-ui, sans-serif; }
     .heading-display { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; line-height: 1.05; }
@@ -4321,8 +4323,8 @@ function toggleAmortization(){
       </main>
 
       <script>
-        // Charts for v3 deep analysis - only run when this page is active
-        if (typeof Chart !== 'undefined') {
+        // Charts for v3 deep analysis - deferred until Chart.js loads
+        window.addEventListener('load', function() { if (typeof Chart !== 'undefined') {
           Chart.defaults.font.family = "'Hanken Grotesk', sans-serif";
           Chart.defaults.color = "#5C6B7A";
           const hairline = "#E3DDD0";
@@ -4375,7 +4377,7 @@ function toggleAmortization(){
               }
             });
           }
-        }
+        } }); // end window load
       </script>
     </div>
 
@@ -5247,7 +5249,7 @@ function toggleAmortization(){
   });
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
 
 
 
