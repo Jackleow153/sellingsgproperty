@@ -8,12 +8,9 @@ Thumbs.db
 *.swp
 *.swo
 
-# Dependencies
+# Dependencies (if any node stuff appears later)
 node_modules/
 npm-debug.log
-
-# Tailwind build source (output tailwind.css is committed)
-input.css
 
 # Build artifacts (none for this project, but for future)
 dist/

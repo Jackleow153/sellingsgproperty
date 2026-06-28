@@ -16,6 +16,7 @@
     <link rel="canonical" href="https://www.sellingsgproperty.com/">
 
     <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -93,7 +94,7 @@
 
   <!-- (Article schema moved to end of body for better initial render performance while keeping SEO value) -->
 
-    <link rel="stylesheet" href="tailwind.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome: non-blocking load (preload + onload swap) -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
@@ -465,7 +466,7 @@
                      On client load, initializeWebsite() -> renderProjects(projects) will still execute grid.innerHTML="" and rebuild (initially 12 cards), and all subsequent filter/sort will work identically. -->
 <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="1" data-district="rcr" data-price="1380000" data-year="2025" data-bedrooms="1,2,3,4,5"> 
                         <div class="relative">
-                            <img src="https://www.union-square-residences.sg/wp-content/uploads/2024/11/Union-Square-Residences-Hero-Shot.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Union Square Residences" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://www.union-square-residences.sg/wp-content/uploads/2024/11/Union-Square-Residences-Hero-Shot.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Union Square Residences" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -511,7 +512,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="2" data-district="ccr" data-price="1920000" data-year="2025" data-bedrooms="2,3,4,5,6"> 
                         <div class="relative">
-                            <img src="https://theaureacondo.com.sg/wp-content/uploads/2025/02/Aurea-Perspective5.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Aurea" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://theaureacondo.com.sg/wp-content/uploads/2025/02/Aurea-Perspective5.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Aurea" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -557,7 +558,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="3" data-district="ccr" data-price="1140000" data-year="2025" data-bedrooms="0,1,2,3"> 
                         <div class="relative">
-                            <img src="https://thecollective-atonesophia.com.sg/wp-content/uploads/2024/10/TheCollectiveatOneSophia-Perspective-3.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="The Collective at One Sophia" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://thecollective-atonesophia.com.sg/wp-content/uploads/2024/10/TheCollectiveatOneSophia-Perspective-3.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="The Collective at One Sophia" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -603,7 +604,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="4" data-district="rcr" data-price="1280000" data-year="2025" data-bedrooms="1,2,3,4,5"> 
                         <div class="relative">
-                            <img src="https://www.theorie.sg/wp-content/uploads/2024/12/The-Orie-Facade-view-MacRitchie.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="The Orie" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://www.theorie.sg/wp-content/uploads/2024/12/The-Orie-Facade-view-MacRitchie.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="The Orie" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -649,7 +650,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="5" data-district="rcr" data-price="1270000" data-year="2025" data-bedrooms="1,2,3,4"> 
                         <div class="relative">
-                            <img src="https://arina-east.com.sg/wp-content/uploads/2025/04/Arina-East-Residences-Facade-View-from-Street-and-from-Aerial.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Arina East Residences" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://arina-east.com.sg/wp-content/uploads/2025/04/Arina-East-Residences-Facade-View-from-Street-and-from-Aerial.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Arina East Residences" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -695,7 +696,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="6" data-district="rcr" data-price="1750000" data-year="2025" data-bedrooms="2,3,4,5"> 
                         <div class="relative">
-                            <img src="https://meyerblue-official.sg/wp-content/uploads/2024/08/MeyerBlue-Perspective-1.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Meyer Blue" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://meyerblue-official.sg/wp-content/uploads/2024/08/MeyerBlue-Perspective-1.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Meyer Blue" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -741,7 +742,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="7" data-district="rcr" data-price="1280000" data-year="2025" data-bedrooms="1,2,3,4,5"> 
                         <div class="relative">
-                            <img src="https://emerald-katong.sg/wp-content/uploads/2024/11/Emerald-of-Katong-Aerial-View.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Emerald of Katong" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://emerald-katong.sg/wp-content/uploads/2024/11/Emerald-of-Katong-Aerial-View.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Emerald of Katong" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -787,7 +788,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="8" data-district="ocr" data-price="1380000" data-year="2025" data-bedrooms="1,2,3,4,5"> 
                         <div class="relative">
-                            <img src="https://bagnallhauscondo.com.sg/wp-content/uploads/2025/01/Bagnall-Haus-Condo-Facade-View-from-Street-Level.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Bagnall Haus" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://bagnallhauscondo.com.sg/wp-content/uploads/2025/01/Bagnall-Haus-Condo-Facade-View-from-Street-Level.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Bagnall Haus" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -833,7 +834,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="9" data-district="ocr" data-price="980000" data-year="2025" data-bedrooms="1,2,3,4"> 
                         <div class="relative">
-                            <img src="https://kassiacondo.com.sg/wp-content/uploads/2024/06/Kassia-Condo-Facade-Aerial-View.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Kassia" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://kassiacondo.com.sg/wp-content/uploads/2024/06/Kassia-Condo-Facade-Aerial-View.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Kassia" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -879,7 +880,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="10" data-district="ocr" data-price="920000" data-year="2025" data-bedrooms="1,2,3,4,5"> 
                         <div class="relative">
-                            <img src="https://www.theparktownresidences.sg/wp-content/uploads/2025/01/parktown-residence-Green-Boulevard-by-UOL-capitaland-.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Parktown Residence" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://www.theparktownresidences.sg/wp-content/uploads/2025/01/parktown-residence-Green-Boulevard-by-UOL-capitaland-.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Parktown Residence" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -982,7 +983,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="12" data-district="ccr" data-price="1310000" data-year="2025" data-bedrooms="1,2,3,4"> 
                         <div class="relative">
-                            <img src="https://www.8atbt-condo.com/wp-content/uploads/2024/07/8-AT-BT-Singapore.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="8@BT" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://www.8atbt-condo.com/wp-content/uploads/2024/07/8-AT-BT-Singapore.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="8@BT" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -1028,7 +1029,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="13" data-district="ccr" data-price="1390000" data-year="2025" data-bedrooms="2,3,4,5"> 
                         <div class="relative">
-                            <img src="https://www.nava-grove.sg/wp-content/uploads/2024/10/Nava-Grove-Aerial-View-Pine-Grove.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Nava Grove" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://www.nava-grove.sg/wp-content/uploads/2024/10/Nava-Grove-Aerial-View-Pine-Grove.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Nava Grove" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -1074,7 +1075,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="14" data-district="ocr" data-price="996000" data-year="2025" data-bedrooms="1,2,3,4,5"> 
                         <div class="relative">
-                            <img src="https://thesoracondo.sg/wp-content/uploads/2024/01/Sora-Condo-Facade-View-from-Lake.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Sora" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://thesoracondo.sg/wp-content/uploads/2024/01/Sora-Condo-Facade-View-from-Lake.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Sora" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -1120,7 +1121,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="15" data-district="ocr" data-price="1050000" data-year="2025" data-bedrooms="1,2,3,4"> 
                         <div class="relative">
-                            <img src="https://norwoodgrand-condo.sg/wp-content/uploads/2024/10/Norwood-Grand-Condo-Facade.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Norwood Grand" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://norwoodgrand-condo.sg/wp-content/uploads/2024/10/Norwood-Grand-Condo-Facade.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Norwood Grand" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -1166,7 +1167,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="16" data-district="ocr" data-price="860000" data-year="2025" data-bedrooms="1,2,3,4,5"> 
                         <div class="relative">
-                            <img src="https://springsleafresidence.com.sg/wp-content/uploads/2025/07/SpringleafResidence-Perspective12.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Springleaf Residence" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://springsleafresidence.com.sg/wp-content/uploads/2025/07/SpringleafResidence-Perspective12.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Springleaf Residence" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -1212,7 +1213,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="17" data-district="ocr" data-price="1430000" data-year="2025" data-bedrooms="3,4,5"> 
                         <div class="relative">
-                            <img src="https://coastalcabanaec.com.sg/wp-content/uploads/2025/11/Coastal-Cabana-ec-day-view-jalan-loyang-besar-by-Qingjian-Realty-China-Communications-Construction-ZACD-Group-1024x614.webp" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Coastal Cabana (EC)" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://coastalcabanaec.com.sg/wp-content/uploads/2025/11/Coastal-Cabana-ec-day-view-jalan-loyang-besar-by-Qingjian-Realty-China-Communications-Construction-ZACD-Group-1024x614.webp" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Coastal Cabana (EC)" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Executive Condominium</span>
@@ -1258,7 +1259,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="18" data-district="ocr" data-price="998000" data-year="2026" data-bedrooms="1,2,3,4,5"> 
                         <div class="relative">
-                            <img src="https://narraresidence.com.sg/wp-content/uploads/2025/11/Narra-Residences.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Narra Residences" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://narraresidence.com.sg/wp-content/uploads/2025/11/Narra-Residences.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Narra Residences" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -1304,7 +1305,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="19" data-district="ccr" data-price="1600000" data-year="2026" data-bedrooms="1,2,3,4"> 
                         <div class="relative">
-                            <img src="https://newport-residences-condo.sg/wp-content/uploads/2024/02/NewportResidences-Perspective-1-1024x612.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Newport Residences" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://newport-residences-condo.sg/wp-content/uploads/2024/02/NewportResidences-Perspective-1-1024x612.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Newport Residences" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -1350,7 +1351,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="20" data-district="ccr" data-price="2000000" data-year="2026" data-bedrooms="2,3,4"> 
                         <div class="relative">
-                            <img src="https://rivermoderncondo.sg/wp-content/uploads/2026/02/River-Modern-Condo-Facade-View-from-Singapore-River.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="River Modern" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://rivermoderncondo.sg/wp-content/uploads/2026/02/River-Modern-Condo-Facade-View-from-Singapore-River.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="River Modern" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -1396,7 +1397,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="21" data-district="ocr" data-price="1588000" data-year="2026" data-bedrooms="3,4,5"> 
                         <div class="relative">
-                            <img src="https://www.rivelletampines-official.com/wp-content/uploads/2026/02/rivelle-tampines-ec-hero-shot-singapore-1024x576.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Rivelle Tampines (EC)" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://www.rivelletampines-official.com/wp-content/uploads/2026/02/rivelle-tampines-ec-hero-shot-singapore-1024x576.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Rivelle Tampines (EC)" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Executive Condominium</span>
@@ -1442,7 +1443,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="22" data-district="ocr" data-price="1486000" data-year="2026" data-bedrooms="2,3,4,5"> 
                         <div class="relative">
-                            <img src="https://www.pineryresidences-official.com.sg/wp-content/uploads/2026/03/PineryResidences-Perspective1.jpeg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Pinery Residences" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://www.pineryresidences-official.com.sg/wp-content/uploads/2026/03/PineryResidences-Perspective1.jpeg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Pinery Residences" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -1488,7 +1489,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="23" data-district="ocr" data-price="980000" data-year="2026" data-bedrooms="2,3,4"> 
                         <div class="relative">
-                            <img src="https://www.tengahgardensresidences.com.sg/wp-content/uploads/2025/05/tengah-gardens-residences-draft-landscape-deck-singapore.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Tengah Garden Residences" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://www.tengahgardensresidences.com.sg/wp-content/uploads/2025/05/tengah-gardens-residences-draft-landscape-deck-singapore.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Tengah Garden Residences" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -1534,7 +1535,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="24" data-district="ocr" data-price="1300000" data-year="2026" data-bedrooms="1,2,3,4,5"> 
                         <div class="relative">
-                            <img src="https://velabayshore.com/wp-content/uploads/2026/03/Velabay-at-Bayshore-Tower-View.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Vela Bay" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://velabayshore.com/wp-content/uploads/2026/03/Velabay-at-Bayshore-Tower-View.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Vela Bay" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -1580,7 +1581,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="25" data-district="rcr" data-price="1400000" data-year="2026" data-bedrooms="2,3,4"> 
                         <div class="relative">
-                            <img src="https://hudson-placeresidences.com.sg/wp-content/uploads/2026/04/hudson-place-residences-condo-by-qingjian-realty-forsea-holdings-singapore.webp" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Hudson Place Residences" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://hudson-placeresidences.com.sg/wp-content/uploads/2026/04/hudson-place-residences-condo-by-qingjian-realty-forsea-holdings-singapore.webp" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Hudson Place Residences" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -1740,7 +1741,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="28" data-district="rcr" data-price="1200000" data-year="upcoming" data-bedrooms="1,2,3,4,5"> 
                         <div class="relative">
-                            <img src="https://thomsonreserve-condo.com.sg/wp-content/uploads/2026/04/Thomson-Reserve.png" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Thomson Reserve" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://thomsonreserve-condo.com.sg/wp-content/uploads/2026/04/Thomson-Reserve.png" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Thomson Reserve" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -1786,7 +1787,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="29" data-district="ccr" data-price="2000000" data-year="upcoming" data-bedrooms="2,3,4"> 
                         <div class="relative">
-                            <img src="https://dunearnhousecondo.com.sg/wp-content/uploads/2026/01/Dunearn-House.png" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Dunearn House" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://dunearnhousecondo.com.sg/wp-content/uploads/2026/01/Dunearn-House.png" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Dunearn House" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -1832,7 +1833,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="30" data-district="ccr" data-price="2450000" data-year="upcoming" data-bedrooms="1,2"> 
                         <div class="relative">
-                            <img src="https://dunearnhousecondo.com.sg/wp-content/uploads/2026/01/Dunearn-House.png" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Duet @ Emily" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://dunearnhousecondo.com.sg/wp-content/uploads/2026/01/Dunearn-House.png" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Duet @ Emily" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -1878,7 +1879,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="31" data-district="ocr" data-price="1500000" data-year="upcoming" data-bedrooms="1,2,3,4,5"> 
                         <div class="relative">
-                            <img src="https://www.chuangrove-residences.com/wp-content/uploads/2025/03/chuan-grove-residences-lorong-chuan-mrt-singapore.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Chuan Grove" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://www.chuangrove-residences.com/wp-content/uploads/2025/03/chuan-grove-residences-lorong-chuan-mrt-singapore.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Chuan Grove" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -1981,7 +1982,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="33" data-district="ccr" data-price="2000000" data-year="upcoming" data-bedrooms="2,3,4"> 
                         <div class="relative">
-                            <img src="https://www.nava-grove.sg/wp-content/uploads/2024/10/Nava-Grove-Aerial-View-Pine-Grove.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Holland Link GLS" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://www.nava-grove.sg/wp-content/uploads/2024/10/Nava-Grove-Aerial-View-Pine-Grove.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Holland Link GLS" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -2027,7 +2028,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="34" data-district="ocr" data-price="900000" data-year="upcoming" data-bedrooms="3,4,5"> 
                         <div class="relative">
-                            <img src="https://norwoodgrand-condo.sg/wp-content/uploads/2024/10/Norwood-Grand-Condo-Facade.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Woodlands Drive 17 (EC)" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://norwoodgrand-condo.sg/wp-content/uploads/2024/10/Norwood-Grand-Condo-Facade.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Woodlands Drive 17 (EC)" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Executive Condominium</span>
@@ -2073,7 +2074,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="35" data-district="ocr" data-price="850000" data-year="upcoming" data-bedrooms="2,3,4,5"> 
                         <div class="relative">
-                            <img src="https://norwoodgrand-condo.sg/wp-content/uploads/2024/10/Norwood-Grand-Condo-Facade.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Sembawang Road (EC)" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://norwoodgrand-condo.sg/wp-content/uploads/2024/10/Norwood-Grand-Condo-Facade.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Sembawang Road (EC)" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Executive Condominium</span>
@@ -2119,7 +2120,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="36" data-district="ocr" data-price="900000" data-year="upcoming" data-bedrooms="2,3,4,5"> 
                         <div class="relative">
-                            <img src="https://coastalcabanaec.com.sg/wp-content/uploads/2025/11/Coastal-Cabana-ec-day-view-jalan-loyang-besar-by-Qingjian-Realty-China-Communications-Construction-ZACD-Group-1024x614.webp" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Senja Close (EC)" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://coastalcabanaec.com.sg/wp-content/uploads/2025/11/Coastal-Cabana-ec-day-view-jalan-loyang-besar-by-Qingjian-Realty-China-Communications-Construction-ZACD-Group-1024x614.webp" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Senja Close (EC)" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Executive Condominium</span>
@@ -2165,7 +2166,7 @@
                     </div>
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="37" data-district="ocr" data-price="1100000" data-year="upcoming" data-bedrooms="2,3,4,5"> 
                         <div class="relative">
-                            <img src="https://norwoodgrand-condo.sg/wp-content/uploads/2024/10/Norwood-Grand-Condo-Facade.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Chencharu Close" loading="lazy" decoding="async" width="400" height="224">
+                            <img src="https://norwoodgrand-condo.sg/wp-content/uploads/2024/10/Norwood-Grand-Condo-Facade.jpg" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Chencharu Close" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -5970,7 +5971,7 @@ function toggleAmortization(){
 
         <script>
         function initializeTailwind() {
-            // Tailwind now served as pre-built CSS; no runtime config needed
+            tailwind.config = {};
         }
         
         // Dynamic AI-based review score (different for each project) - v5 drastic range 3.0 to 4.9
@@ -6110,7 +6111,7 @@ function toggleAmortization(){
             const hasUniqueImage = project.image && project.image.startsWith('http') && !project.image.includes('chuanpark.sg');
 
             if (hasUniqueImage) {
-                return `<img src="${project.image}" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="${project.name}" loading="lazy" decoding="async" width="400" height="224">`;
+                return `<img src="${project.image}" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="${project.name}" loading="lazy" width="400" height="224">`;
             }
 
             // Clean typographic card — project name + district + PSF on solid colour block
