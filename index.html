@@ -6373,7 +6373,7 @@ function toggleAmortization(){
             
             switchProjectTab(0)
 
-            // Special button ONLY for Thomson Reserve (id 28) and Lentor Gardens (id 26) - "Aukuwa Paper"
+            // Special button ONLY for Thomson Reserve (id 28), Lentor Gardens (id 26) and Dunearn House (id 29) - "Aukuwa Paper"
             // Inserted in tab bar between Overview and Unit Mix & Pricing
             // Styled as yellow pill button exactly as shown
             // Only for these two project cards. All other projects and code untouched.
@@ -6402,6 +6402,19 @@ function toggleAmortization(){
                         specialBtn.onclick = function(e) {
                             e.stopImmediatePropagation()
                             window.location.href = 'https://www.sellingsgproperty.com/project/lentor-gardens-residences/';
+                        }
+                        overviewTab.parentNode.insertBefore(specialBtn, overviewTab.nextSibling)
+                    }
+                } else if (currentProject && currentProject.id === 29) {
+                    // Dunearn House - Aukuwa button matching Thomson Reserve style
+                    const overviewTab = tabBar.querySelector('[data-tab="0"]')
+                    if (overviewTab) {
+                        const specialBtn = document.createElement('div')
+                        specialBtn.className = 'aukuwa-paper-btn ml-3 px-4 py-1.5 text-xs font-semibold bg-amber-400 text-amber-900 border border-amber-500 rounded-2xl flex items-center gap-x-1.5 cursor-pointer whitespace-nowrap'
+                        specialBtn.innerHTML = `<i class="fa-solid fa-file-alt"></i> <span>Aukuwa Paper</span>`
+                        specialBtn.onclick = function(e) {
+                            e.stopImmediatePropagation()
+                            window.location.href = 'https://www.sellingsgproperty.com/project/dunearn-house/';
                         }
                         overviewTab.parentNode.insertBefore(specialBtn, overviewTab.nextSibling)
                     }
