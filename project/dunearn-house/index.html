@@ -545,6 +545,40 @@
   .key-takeaway p { font-size: .95rem; color: var(--navy-soft); margin: 0; line-height: 1.75; }
   .key-takeaway strong { color: var(--navy); }
 
+  /* ── SHARE BUTTON ── */
+  .faq-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: .75rem;
+    margin-bottom: .1rem;
+  }
+  .faq-header-row h2 { margin: 0; }
+  .wa-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    background: #25D366;
+    color: #fff;
+    font-size: .82rem;
+    font-weight: 700;
+    padding: .65rem 1.25rem;
+    border-radius: 2.5rem;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 2px 12px rgba(37,211,102,.35);
+    transition: background .2s, transform .15s, box-shadow .2s;
+    letter-spacing: .01em;
+  }
+  .wa-share-btn:hover {
+    background: #1ebe5d;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 18px rgba(37,211,102,.45);
+  }
+  .wa-share-btn:active { transform: translateY(0); }
+  .wa-share-btn i { font-size: 1.05rem; }
+
   /* ── FAQ ── */
   .faq-list { margin: 1.25rem 0 1.75rem; }
   details.faq-item {
@@ -1005,7 +1039,15 @@
     <div class="divider"></div>
 
     <!-- FAQ -->
-    <h2 id="faq">Frequently Asked Questions</h2>
+    <div class="faq-header-row">
+      <h2 id="faq">Frequently Asked Questions</h2>
+      <a href="https://wa.me/?text=Check%20out%20Dunearn%20House%20%E2%80%94%20First%20Turf%20City%20launch%20in%20D11%20Bukit%20Timah%20(July%202026)%3A%20https%3A%2F%2Fwww.sellingsgproperty.com%2Fproject%2Fdunearn-house%2F"
+         target="_blank" rel="noopener noreferrer"
+         class="wa-share-btn"
+         aria-label="Share this page via WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i> Share with fam/frens
+      </a>
+    </div>
 
     <div class="faq-list">
 
