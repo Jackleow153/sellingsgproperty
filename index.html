@@ -127,8 +127,16 @@
     #page-mortgage-calculator .field{width:100%;background:var(--paper);border:1px solid var(--hairline);padding:.8rem 1rem;outline:none;transition:border-color .2s;}
     #page-mortgage-calculator .field:focus{border-color:var(--brass);}
     #page-mortgage-calculator .field-static{width:100%;background:var(--porcelain);border:1px solid var(--hairline);padding:.8rem 1rem;color:var(--ink);}
-    #page-mortgage-calculator select.field{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23B89B5E'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;}
-    #page-mortgage-calculator input[type="range"]{accent-color:var(--brass);}
+    #page-mortgage-calculator select.field{-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23B89B5E'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;}
+    /* Prevent iOS Safari auto-zoom on focus (requires font-size ≥ 16px) */
+    #page-mortgage-calculator .field,
+    #page-mortgage-calculator select,
+    #page-mortgage-calculator input{font-size:16px;}
+    #page-mortgage-calculator input[type="range"]{-webkit-appearance:none;appearance:none;accent-color:var(--brass);width:100%;height:4px;border-radius:2px;background:var(--hairline);outline:none;cursor:pointer;}
+    #page-mortgage-calculator input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;background:var(--brass);cursor:pointer;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.2);}
+    #page-mortgage-calculator input[type="range"]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--brass);cursor:pointer;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.2);}
+    #page-mortgage-calculator input[type="range"]::-webkit-slider-runnable-track{background:var(--hairline);border-radius:2px;height:4px;}
+    #page-mortgage-calculator input[type="range"]::-moz-range-track{background:var(--hairline);border-radius:2px;height:4px;}
     #page-mortgage-calculator .toggle-btn{flex:1;padding:.7rem 0;font-size:.8rem;font-weight:600;letter-spacing:.05em;border:1px solid var(--hairline);color:var(--slate);transition:all .2s;background:var(--paper);}
     #page-mortgage-calculator .toggle-btn.active{background:var(--ink);color:#EDE6D6;border-color:var(--ink);}
     #page-mortgage-calculator .toggle-btn:disabled{opacity:.35;cursor:not-allowed;}
@@ -3035,10 +3043,10 @@
       <p class="text-gray-600">Complete the three steps below to see your monthly instalment, upfront costs, and affordability checks.</p>
     </div>
 
-  <div class="w-full grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
+  <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
     <!-- ============ LEFT: STEPS ============ -->
-    <div id="stepsCol" class="xl:col-span-5 space-y-6">
+    <div id="stepsCol" class="lg:col-span-5 space-y-6">
 
       <!-- STEP 1 -->
       <section class="step-card p-8">
@@ -3199,7 +3207,7 @@
     </div>
 
     <!-- ============ RIGHT: RESULTS ============ -->
-    <div id="resWrap" class="xl:col-span-7">
+    <div id="resWrap" class="lg:col-span-7 lg:sticky lg:top-4 lg:self-start">
 
       <div id="resultsColumn" class="hidden space-y-6">
 
@@ -3243,7 +3251,7 @@
         <div class="highlight-card p-8">
           <div class="flex justify-between items-baseline mb-6">
             <div class="eyebrow">Upfront Payment Summary</div>
-            <select id="dutiesPayment" class="text-[11px] border-0 bg-transparent font-semibold outline-none cursor-pointer" style="color:var(--brass-deep)">
+            <select id="dutiesPayment" class="border-0 bg-transparent font-semibold outline-none cursor-pointer" style="color:var(--brass-deep);font-size:16px">
               <option value="cpf">Stamp duties via CPF</option>
               <option value="cash">Stamp duties via cash</option>
             </select>
