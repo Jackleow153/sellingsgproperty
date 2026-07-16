@@ -216,6 +216,7 @@
     .chip-decouple { background:#DBEAFE; color:#1E40AF; }
     .chip-wealth   { background:#EDE9FE; color:#5B21B6; }
     .chip-newlaunch{ background:#FCE7F3; color:#9D174D; }
+    .chip-finance  { background:#CCFBF1; color:#0F766E; }
     .chip-cpf      { background:#D1FAE5; color:#065F46; }
     .chip-district { background:#FEF9C3; color:#78350F; }
     .chip-sell     { background:#F0FDF4; color:#166534; }
@@ -2469,7 +2470,36 @@
   <div id="blog-grid" class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
     <!-- First 6 latest articles pre-rendered statically for immediate content, SEO/crawlers, and better initial LCP/FCP on mobile (avoids empty state while JS loads). "Click for more" loads the rest dynamically from the full ARTICLES data to keep overall page size reasonable for performance. All 26 articles are still fully accessible via the button, category filters, direct URLs, sitemap, and schema. -->
 
-    <!-- Latest: Thomson Reserve Risks -->
+    <!-- Latest: IPA New Launch Guide -->
+    <article data-category="new-launch" class="blog-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" onclick="showArticle('post-ipa-new-launch-2026')">
+      <div class="h-48 bg-gradient-to-br from-slate-700 to-teal-900 flex items-end p-5 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] bg-[length:3px_3px]"></div>
+        <div class="absolute top-0 right-0 w-40 h-40 bg-teal-500/20 rounded-full -translate-y-16 translate-x-16"></div>
+        <span class="chip-finance absolute top-4 left-4 px-3 py-1 text-xs font-bold rounded-2xl">FINANCING</span>
+        <div class="relative text-white">
+          <div class="text-[10px] font-semibold tracking-widest uppercase text-slate-300 mb-1">Buyer Guide</div>
+          <div class="font-black text-xl leading-tight tracking-tight">Skip the IPA,</div>
+          <div class="text-sm text-slate-300 mt-0.5">Lose 1.25% of Your Purchase Price</div>
+        </div>
+      </div>
+      <div class="p-6 flex-1 flex flex-col">
+        <div class="flex items-center justify-between text-xs mb-3">
+          <time class="text-slate-400" datetime="2026-07-16">16 Jul 2026</time>
+          <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 18 min</span>
+        </div>
+        <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">The Dumbest Mistake Before a New Launch Condo: Skipping the IPA</h2>
+        <p class="text-sm text-slate-600 line-clamp-3 flex-1">Booking without an IPA can cost you 1.25% of the purchase price — sometimes far more. Real math, six real scenarios, and the exact Singapore rules.</p>
+        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
+          <div class="flex items-center gap-x-2 text-xs">
+            <div class="w-6 h-6 bg-violet-100 rounded-full flex items-center justify-center"><span class="text-violet-700 text-[10px] font-black">JL</span></div>
+            <span class="font-medium text-slate-700">Jack Leow</span>
+          </div>
+          <span class="text-violet-600 text-xs font-semibold">Read article →</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Thomson Reserve Risks -->
     <article data-category="new-launch" class="blog-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" onclick="showArticle('post-thomson-reserve-risks-2026')">
       <div class="h-48 bg-gradient-to-br from-slate-800 to-slate-900 flex items-end p-5 relative overflow-hidden">
         <div class="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] bg-[length:3px_3px]"></div>
@@ -11921,6 +11951,246 @@ const ARTICLES = {
       <p>3. <a href="/insights/how-to-buy-new-launch-2026" onclick="showArticle(\'post-how-to-buy-new-launch-2026\'); return false;" class="underline hover:text-violet-700"><strong>How to Buy a New Launch Condo in Singapore: Step-by-Step 2026 Guide</strong></a></p>
       <p>4. <a href="/insights/hdb-vs-ec-vs-private-property-2026" onclick="showArticle(\'post-hdb-vs-ec-vs-private-property-2026\'); return false;" class="underline hover:text-violet-700"><strong>HDB vs EC vs Private Property: 2026 Comparison</strong></a></p>
       <p>5. <a href="/project/thomson-reserve-condo/" class="underline hover:text-violet-700"><strong>Full Thomson Reserve Project Page (Deep Analysis)</strong></a></p>
+    `
+  }
+
+  /* ======================================================
+     ARTICLE — IPA NEW LAUNCH GUIDE
+  ====================================================== */
+  'post-ipa-new-launch-2026': {
+    title: 'The Dumbest Mistake Before a New Launch Condo: Skipping the IPA',
+    date: '16 Jul 2026',
+    readTime: '18 min read',
+    category: 'FINANCING',
+    chipClass: 'chip-finance',
+    img: null,
+    linkedinUrl: null,
+    body: `
+      <p><strong>The single most expensive mistake I see Singapore buyers make at a new launch is not the unit they pick, the stack they queue for, or the psf they pay.</strong> It is walking into a showflat, getting swept up in the energy, writing a cheque for 5% of the price, and only <em>then</em> asking a banker how much they can borrow.</p>
+
+      <p>That single decision — booking first, borrowing second — is why some buyers end up losing <strong>1.25% of the purchase price</strong> without owning anything. On a $2 million unit, that is <strong>$25,000 gone</strong>. On a $2.5 million unit, <strong>$31,250</strong>. No keys, no unit, no refund of that portion. Just a lesson.</p>
+
+      <p>In this guide, I want to walk you through what an In-Principle Approval (IPA) actually is, why so many otherwise smart Singaporeans skip it, the real numbers behind the 1.25% forfeit rule, and the six situations where "I thought I could borrow that much" quietly becomes "the bank says no."</p>
+
+      <h2>Quick Answer: What Is an IPA and Why Does It Matter Before Booking?</h2>
+
+      <p>An <strong>In-Principle Approval (IPA)</strong> — sometimes still called an <strong>Approval-in-Principle (AIP)</strong> — is a written statement from a bank telling you how much they are willing to lend you for a property purchase, based on your income, credit record, existing debts, age, and the maximum loan tenure they allow. It is not the final loan approval, but it is very close to it. Most IPAs are valid for <strong>30 days</strong>, sometimes extendable to 60.</p>
+
+      <p>Here is why it matters at a new launch. When you book a unit from the developer, you sign an <strong>Option to Purchase (OTP)</strong> and hand over <strong>5% of the purchase price</strong> in cash. You then have <strong>three weeks (21 days)</strong> to exercise that Option by signing the Sale &amp; Purchase Agreement.</p>
+
+      <p>If you fail to exercise within that window — including because your bank refuses to lend you what you assumed — the developer keeps <strong>25% of your 5% booking fee</strong>. That works out to <strong>1.25% of the purchase price</strong> forfeited, with the remaining 3.75% refunded. That rule is standard across all new launches under the Housing Developers Rules, confirmed by both URA and industry sources.</p>
+
+      <div class="key-takeaway">
+        <p class="font-bold text-violet-900 mb-1">The bottom line</p>
+        <p class="text-sm text-violet-800">An IPA closes the forfeit risk <em>before</em> you sign anything. Skipping it is not a small oversight. It is the most preventable, most expensive misstep in the entire new-launch journey.</p>
+      </div>
+
+      <h2>The 1.25% Math: What "Losing Your Booking Fee" Actually Looks Like</h2>
+
+      <table>
+        <thead><tr><th>Purchase Price</th><th>5% Booking Fee (Cash)</th><th>25% Forfeited if OTP Lapses</th><th>You Get Back</th></tr></thead>
+        <tbody>
+          <tr><td>$1,200,000</td><td>$60,000</td><td><strong>$15,000</strong></td><td>$45,000</td></tr>
+          <tr><td>$1,600,000</td><td>$80,000</td><td><strong>$20,000</strong></td><td>$60,000</td></tr>
+          <tr><td>$1,800,000</td><td>$90,000</td><td><strong>$22,500</strong></td><td>$67,500</td></tr>
+          <tr><td>$2,200,000</td><td>$110,000</td><td><strong>$27,500</strong></td><td>$82,500</td></tr>
+          <tr><td>$2,800,000</td><td>$140,000</td><td><strong>$35,000</strong></td><td>$105,000</td></tr>
+          <tr><td>$3,500,000</td><td>$175,000</td><td><strong>$43,750</strong></td><td>$131,250</td></tr>
+        </tbody>
+      </table>
+
+      <p>That loss is not the end of the story either. If you had already paid legal fees to your conveyancing lawyer (typically $2,500–$3,500), that is gone too. Renovation quotes, time off work, childcare deposits — sunk costs on top. And there is an emotional cost: you now walk past that showflat every time you drive down the road and remember what almost was.</p>
+
+      <h2>The Dumbest Reasons Singaporeans Skip IPA (And Why Each One Bites Back)</h2>
+
+      <h3>Reason 1: "I earn enough. The bank will definitely lend me 75%."</h3>
+      <p>This is by far the most common misread. Singaporeans see the headline: <strong>maximum LTV is 75% of purchase price for a first bank loan</strong>. So on a $1.8M condo, that is a $1.35M loan. Easy.</p>
+      <p>Except the bank does not lend against price. The bank lends against <strong>the lower of purchase price or valuation</strong>, subject to your <strong>Total Debt Servicing Ratio (TDSR) of 55%</strong>, calculated at the MAS <strong>stress-test interest rate of 4%</strong>.</p>
+      <p>Two things quietly kill your loan quantum:</p>
+      <ul>
+        <li><strong>Existing debts.</strong> Car loan, student loan, credit card minimums (banks assume 3% of outstanding balance monthly), personal loans, co-signed loans — all come off the top of your 55% ceiling.</li>
+        <li><strong>How the bank recognises your income.</strong> If a chunk of your income is commission, bonus, or self-employed revenue, the bank applies a <strong>30% haircut</strong>. That $10,000/month becomes $7,000 recognised. Freelancers may face a 2-year NOA average.</li>
+      </ul>
+      <p>I have seen a household grossing $16,000/month get an IPA of only $980,000 — not because they were poor, but because they had a car loan plus a joint personal loan from renovating their HDB. They assumed they could stretch to a $1.6M new launch. The gap: nearly $500,000 they didn't know existed. Without an IPA, they would have found out on the day the bank said no.</p>
+
+      <h3>Reason 2: "The IPA is only valid for 30 days, so why bother early?"</h3>
+      <p>A technically true statement used to justify a wildly untrue conclusion. Yes, IPAs typically expire in 30 days. But that is a reason to <em>time</em> it, not skip it.</p>
+      <p>The practical sequence for a launch you are serious about:</p>
+      <ol>
+        <li>Two to three weeks before Booking Day: submit your documents to two or three banks in parallel.</li>
+        <li>Get your IPAs back within 3–7 working days.</li>
+        <li>Use them to confirm your maximum loan quantum, monthly instalment at the 4% stress rate, and the true cash-plus-CPF outlay.</li>
+        <li>Attend Booking Day knowing exactly what you can commit to.</li>
+        <li>Once the OTP is signed, firm up the Letter of Offer with your chosen bank — comfortably within the IPA validity.</li>
+      </ol>
+      <p>The IPA is not a document you file and forget. It is a <strong>decision-making tool for Booking Day</strong>.</p>
+
+      <h3>Reason 3: "My agent told me I qualify."</h3>
+      <p>I need to say this plainly, even though I am a licensed agent myself: no property agent can approve your loan. We can run affordability estimates. We can help you cross-check TDSR headroom. We can flag obvious red lights. But we cannot see your credit bureau report. We do not know if you were 45 days late on a credit card bill last November. We cannot tell you which bank will apply a 30% or 40% haircut on your rental income.</p>
+      <p>Only a banker or mortgage broker running the actual submission can tell you what a <em>specific</em> bank will actually approve. Anyone who tells you otherwise — including someone whose commission depends on you booking — is telling you what they hope is true, not what a bank will underwrite.</p>
+
+      <h3>Reason 4: "I don't want to keep pulling my credit report."</h3>
+      <p>In Singapore's Credit Bureau (CBS) system, property loan-related inquiries within a short window are generally treated as rate-shopping and do not penalise you the way six credit card applications in three months would. More importantly, the alternative is far worse. Losing $22,500 on a forfeited booking fee is a bank-balance hit of exactly $22,500. Take the small, mostly-imaginary reputational cost over the very real cash cost.</p>
+
+      <h3>Reason 5: "There's a queue. If I hesitate, I lose the unit."</h3>
+      <p>This is the psychological trap, and it is by far the most Singaporean of them all. On Booking Day, developers deliberately engineer scarcity: e-App submissions, staggered queue numbers, real-time unit boards where you can see stacks turning red. Everyone around you is in suits, holding cheques, whispering into phones.</p>
+      <p>Here is the reframe: <strong>the market will always launch another project.</strong> Between 2020 and 2026, Singapore has averaged 8,000 to 12,000 new launch units a year. In H2 2026 alone, up to 11 new condo projects totalling around 3,550 units are lined up to launch. Missing this one unit will feel like the end of the world for about six weeks. Losing $22,500 on a forfeit will follow you for years.</p>
+
+      <h3>Reason 6: "I'll just cancel the OTP if the loan doesn't come through."</h3>
+      <p>The word "just" is doing an enormous amount of work in that sentence. You can walk away from the OTP within three weeks — but 25% of your booking fee (1.25% of purchase price) is gone. There is no "just" about it.</p>
+      <p>Worse: if you <em>do</em> exercise the OTP but then cannot complete because the loan collapses later, you lose the full 5% deposit, potentially face legal action from the developer, and could be sued for damages if they resell at a lower price. There is no clean escape hatch after Booking Day. Only degrees of loss.</p>
+
+      <h2>What Actually Goes Wrong When You Skip IPA: Six Real Scenarios</h2>
+
+      <p><strong>1. The commission earner surprise.</strong> A sales manager grossing $14,000/month (basic $6,000 + commission $8,000) assumed a $1.6M loan was safe. Bank recognised income: $6,000 + ($8,000 × 70%) = $11,600/month. His TDSR limit dropped his maximum loan by about $350,000. He had booked a $2.2M unit.</p>
+
+      <p><strong>2. The car loan blind spot.</strong> A young doctor and his lawyer wife, combined income $22,000/month. They had a $1,900/month car loan and $850/month combined credit card minimums. Their TDSR headroom for the mortgage instalment was $9,350/month. At the 4% stress rate over 30 years, that services about $1.96M. They booked a $2.6M unit. Gap: roughly $200,000. They had to pledge fixed deposits for four years to bridge it — an option only known to those who had asked a banker in advance.</p>
+
+      <p><strong>3. The age-tenure cap.</strong> A 52-year-old executive booked a $1.9M unit assuming a 30-year loan. For full LTV, borrower age + loan tenure must not exceed 65 for private property. He was capped at a 13-year tenure for full 75% LTV, or he could stretch to 25 years but with LTV falling to 55%. Either way, his cash outlay ballooned by $340,000 he did not have.</p>
+
+      <p><strong>4. The existing HDB loan trap.</strong> A couple booked a $2M new launch as their "upgrader" with an outstanding HDB loan still running. Because this counted as a <strong>second housing loan</strong>, their LTV was capped at <strong>45%</strong>, not 75%. Their cash-plus-CPF requirement jumped from $500,000 to $1.1M — plus $400,000 in ABSD upfront that they hadn't budgeted for.</p>
+
+      <p><strong>5. The variable-rate reality shock.</strong> A self-employed shop owner declared $15,000/month gross. Bank looked at two years of Notice of Assessment: $9,200 average. His actual recognisable income: $9,200 × 70% = $6,440. His loan approval came in at less than half of what he expected.</p>
+
+      <p><strong>6. The credit bureau ghost.</strong> A perfectly-earning IT director had a $147 outstanding balance on a credit card from 2023 that he thought he had cancelled. Late fee interest had compounded. His CBS score had dropped from A to C. Two banks declined. The third would only offer a smaller quantum at a higher spread. He almost lost his booking fee before a mortgage broker cleaned up the record.</p>
+
+      <p>Every one of these was fixable <em>before</em> Booking Day. None was fixable after.</p>
+
+      <h2>What an IPA Actually Checks</h2>
+      <ul>
+        <li><strong>TDSR calculation</strong> — total monthly debt (new mortgage + all existing debts) against 55% of recognised gross monthly income, at the 4% stress rate.</li>
+        <li><strong>MSR check</strong> — only for HDB flats and ECs; 30% cap on housing loan instalment. Not applicable to private new launch condos.</li>
+        <li><strong>LTV determination</strong> — 75% first housing loan, 45% second, 35% third and beyond. Subject to loan tenure and age caps.</li>
+        <li><strong>Income recognition</strong> — how much of basic, variable, rental, and bonus income they will count, and at what haircut.</li>
+        <li><strong>Credit bureau review</strong> — CBS score, payment history, outstanding facilities, any late-payment flags.</li>
+        <li><strong>Age and tenure sizing</strong> — maximum 30 years for private property, 25 years for HDB. Full LTV requires age + tenure ≤ 65.</li>
+        <li><strong>Pledged asset boost (optional)</strong> — pledge liquid assets for 48 months to lift recognised monthly income. Underused but genuinely powerful when TDSR is tight.</li>
+      </ul>
+
+      <h2>Practical IPA Timeline for Serious Buyers</h2>
+
+      <p><strong>Four to six weeks before Booking Day:</strong> Gather documents. Salaried: NRIC, 3 latest payslips, 15-month CPF contribution history, latest NOA. Variable-income: add 2 years of NOAs, 6 months of bank statements showing salary credits. If you have existing property loans, prepare the latest loan statements.</p>
+
+      <p><strong>Three to four weeks before Booking Day:</strong> Approach at least <strong>two or three banks</strong> in parallel — either directly or through an independent mortgage broker. Banks vary meaningfully in how they treat variable income, credit bureau flags, and package pricing. Getting only one IPA is like getting a second opinion from only one doctor.</p>
+
+      <p><strong>Two weeks before Booking Day:</strong> Review your IPAs. Understand your maximum loan quantum, monthly instalment at the 4% stress rate, and your true cash-plus-CPF outlay. Know the gap between what you can afford and what the launch is asking.</p>
+
+      <p><strong>Booking Day:</strong> Attend with a clear price ceiling. If the unit falls within your IPA quantum, book with confidence. If it doesn't, walk away without regret. The IPA turns Booking Day from a gamble into a decision.</p>
+
+      <p><strong>Within three weeks after booking:</strong> Firm up the Letter of Offer with your chosen bank before you exercise the OTP.</p>
+
+      <h2>Damage Control: What to Do If You Already Booked Without an IPA</h2>
+
+      <p>If you are reading this after the cheque has already been written, don't panic — but move fast. You have three weeks.</p>
+      <ul>
+        <li><strong>Get your documents to two or three bankers today.</strong> Not tomorrow. Every day burned is a day off your 21-day exercise window.</li>
+        <li><strong>Be brutally honest about every debt.</strong> Undisclosed debts are the number one reason IPAs are rejected at the eleventh hour. Include car loans, personal loans, credit lines you have as guarantor — everything.</li>
+        <li><strong>Ask about pledging assets.</strong> Pledging $200,000 in fixed deposits for 48 months adds about $4,167/month to your recognised income and can save the deal.</li>
+        <li><strong>Consider a shorter tenure.</strong> Sometimes a 25-year tenure passes TDSR when 30 years does not.</li>
+        <li><strong>Have your lawyer request a short extension if needed.</strong> The developer is not obligated to grant it, but for buyers who show good-faith bank progress, it happens. Speak through your lawyer, not directly.</li>
+      </ul>
+      <p>If, after all of this, the loan will not come through — walk away from the OTP. Lose the 1.25%. Do <strong>not</strong> exercise the SPA hoping the loan will magically arrive. That is how 1.25% turns into 5% and beyond.</p>
+
+      <h2>Common IPA Myths, Politely Dismantled</h2>
+
+      <p><strong>"IPA means the loan is guaranteed."</strong> It doesn't. The IPA is subject to final property valuation, document verification at drawdown, and no material change in your financial situation. If you resign between IPA and drawdown, the offer can be withdrawn. Sit tight in your job until the loan is fully drawn.</p>
+
+      <p><strong>"One IPA is enough."</strong> It shouldn't be. Two to three lets you compare quantum, rate, and package flexibility. A 0.2% p.a. rate difference on a $1.5M loan over 30 years is roughly $60,000 in interest.</p>
+
+      <p><strong>"Getting IPA commits me to that bank."</strong> It does not. IPA is non-binding on you. You can convert any IPA into a loan by accepting the Letter of Offer, or let it lapse.</p>
+
+      <p><strong>"I already got IPA for my last property, so I'm covered."</strong> An IPA is a snapshot of your finances on the day of assessment. If it is more than 30 days old, or if your income, debts, or credit have changed, it is not usable. Get a fresh one for each transaction.</p>
+
+      <p><strong>"Cash buyers don't need IPA."</strong> True — but genuine cash buyers are rare. If you plan to use CPF, still confirm your CPF OA balance against withdrawal limits, and check whether the property's remaining lease meets CPF usage rules.</p>
+
+      <h2>The Bigger Picture: Why This Discipline Compounds</h2>
+
+      <p>The buyers who consistently do well in Singapore property are not the ones who spot the hottest launch. They are the ones who know their number, hold to it, and never let showflat pressure move it.</p>
+
+      <p>An IPA is not just a form. It is the moment you convert vague affordability into a specific ceiling. From that ceiling, everything else falls into place: which projects are realistic, which stacks and unit sizes to shortlist, which financing package fits, how much you set aside for renovation and reserves. Without it, you're gambling with your 5% cheque.</p>
+
+      <p>The 2026 pipeline is generous. There is no scarcity crisis that justifies booking without an IPA. There is only the pressure of the room, which is designed to feel urgent because urgency is what makes new launches sell out on Booking Day. Slow down by two weeks. Get your IPAs. Walk in knowing what you can commit to.</p>
+
+      <h2>FAQ: IPA and New Launch Condos in Singapore</h2>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          How long does it take to get an IPA in Singapore?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">Typically 3 to 7 working days from the point you submit complete documents. Variable-income cases and second-property applications can take up to 2 weeks. Start at least 3 weeks before Booking Day.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          Does getting IPA cost money?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">No. Banks do not charge for IPAs. Mortgage brokers in Singapore are paid by the bank on successful drawdown, not by you.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          Is IPA the same as pre-approval or AIP?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">Yes. In Singapore, IPA (In-Principle Approval) and AIP (Approval in Principle) refer to the same document. Banks use both terms interchangeably.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          Can I get IPA from more than one bank?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">Yes, and you should. Two to three IPAs let you compare quantum and package pricing. Property loan inquiries within a short window are treated as rate-shopping by the Credit Bureau and do not meaningfully damage your score.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          What documents do I need for an IPA?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">NRIC, 3 latest payslips, latest CPF contribution statement (12–15 months), latest income tax Notice of Assessment, and — for variable-income earners or self-employed — 2 years of NOAs plus 6 months of bank statements. Add existing loan statements if applicable.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          Is IPA required for HDB or EC purchases too?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">For HDB flats, HDB issues an HDB Loan Eligibility (HLE) letter, which serves the equivalent purpose for HDB loans. For bank loans on HDB or EC, get a bank IPA. For ECs, MSR (30%) applies on top of TDSR (55%).</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          Can I still lose my booking fee if I have an IPA?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">Yes, but the risk is dramatically lower. IPA is not final approval — the loan is still subject to property valuation and unchanged financial circumstances. Do not resign, take on new debt, or change your employment structure between IPA and drawdown.</p>
+      </details>
+
+      <details class="faq-item border border-slate-200 rounded-2xl mb-3 overflow-hidden">
+        <summary class="flex items-center justify-between p-4 font-semibold text-slate-800 hover:bg-slate-50 transition">
+          What if my valuation comes in below the purchase price?
+          <i class="fa-solid fa-plus faq-icon text-violet-600 text-sm"></i>
+        </summary>
+        <p class="px-4 pb-4 text-sm text-slate-600">The bank lends against the lower of price or valuation. Any shortfall must be topped up in cash. For new launches, valuations are usually aligned with the developer's price at launch — but not always. Another reason to have IPA headroom, not just the exact number.</p>
+      </details>
+
+      <h2>Related Reads</h2>
+      <p>1. <a href="/insights/new-launch-vs-resale" onclick="showArticle(\'post-new-launch-vs-resale\'); return false;" class="underline hover:text-violet-700"><strong>New Launch vs Resale Condo 2026: Which Should You Buy?</strong></a></p>
+      <p>2. <a href="/insights/progressive-payment-psychology" onclick="showArticle(\'post-progressive-payment-psychology\'); return false;" class="underline hover:text-violet-700"><strong>How the Progressive Payment Scheme Works for New Launch Condos</strong></a></p>
+      <p>3. <a href="/insights/hdb-phantom-fear" onclick="showArticle(\'post-hdb-phantom-fear\'); return false;" class="underline hover:text-violet-700"><strong>HDB Upgraders: Are You Trapped by Your Own "Phantom Fear"? (2026 Edition)</strong></a></p>
+      <p>4. <a href="/insights/how-to-buy-new-launch-2026" onclick="showArticle(\'post-how-to-buy-new-launch-2026\'); return false;" class="underline hover:text-violet-700"><strong>How to Buy a New Launch Condo in Singapore: Step-by-Step 2026 Guide</strong></a></p>
+      <p>5. <a href="/mortgage-calculator" onclick="showPage(\'mortgage-calculator\'); return false;" class="underline hover:text-violet-700"><strong>Check your affordability with our Singapore Mortgage Calculator</strong></a></p>
+
+      <div class="key-takeaway" style="margin-top:2rem">
+        <p class="font-bold text-violet-900 mb-2">A Final Note</p>
+        <p class="text-sm text-violet-800">If you are serious about a 2026 launch — Lentor Gardens Residences, Thomson Reserve, Dunearn House, or any resale — the single most valuable two weeks you can spend is the ones <em>before</em> Booking Day, sitting with two or three bankers and getting your IPAs in writing. If you would like an unbiased second opinion on your loan headroom, your project shortlist, or your financing structure, I run free 30-minute consultations — no obligation, no hard sell.</p>
+        <p class="text-sm text-violet-800 mt-2"><a href="/contact" onclick="showPage(\'contact\'); return false;" class="underline font-semibold">Contact Jack →</a></p>
+      </div>
+
+      <p><em>Last updated: July 2026. TDSR, LTV, ABSD rates, and OTP forfeiture rules cited are current as of July 2026 per MAS and URA guidelines. Verify all figures before transacting. CEA Licence L3008022J (PropNex Realty Pte Ltd).</em></p>
     `
   }
 
