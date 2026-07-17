@@ -217,6 +217,7 @@
     .chip-wealth   { background:#EDE9FE; color:#5B21B6; }
     .chip-newlaunch{ background:#FCE7F3; color:#9D174D; }
     .chip-finance  { background:#CCFBF1; color:#0F766E; }
+    .chip-buyer    { background:#DBEAFE; color:#1E40AF; }
     .chip-cpf      { background:#D1FAE5; color:#065F46; }
     .chip-district { background:#FEF9C3; color:#78350F; }
     .chip-sell     { background:#F0FDF4; color:#166534; }
@@ -286,7 +287,70 @@
     #article-nav-title { font-weight: 500; }
 
     /* (old article modal removed — articles now use dedicated full page under Insights) */
-  
+
+    /* ── HDB vs Condo article: custom styled components ── */
+    .article-body .tldr{background:#fff;border:1px solid #B89B5E;border-left:5px solid #B89B5E;padding:24px 28px;margin:32px 0;border-radius:2px}
+    .article-body .tldr .tag{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#B89B5E;font-weight:700;margin-bottom:10px}
+    .article-body .tldr h2{font-size:1.2rem;font-weight:700;color:#0C1B2A;margin:0 0 10px}
+    .article-body .tldr p{font-size:15px;color:#333;line-height:1.65;margin:0}
+    .article-body .qa-box{background:#EEEAE0;border-left:3px solid #0C1B2A;padding:16px 20px;margin:20px 0;border-radius:2px}
+    .article-body .qa-box .lbl{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#0C1B2A;font-weight:700;margin-bottom:8px}
+    .article-body .qa-box p{font-size:15px;margin:0;color:#222;line-height:1.65}
+    .article-body .data-tbl{margin:22px 0;background:#fff;border:1px solid #d9d5cc;border-radius:2px;overflow-x:auto}
+    .article-body .data-tbl table{width:100%;border-collapse:collapse;font-size:14px}
+    .article-body .data-tbl th,.article-body .data-tbl td{padding:12px 16px;text-align:left;border-bottom:1px solid #d9d5cc;vertical-align:top}
+    .article-body .data-tbl thead th{background:#0C1B2A;color:#fff;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+    .article-body .data-tbl thead th.condo-col{background:#B89B5E;color:#0C1B2A}
+    .article-body .data-tbl tbody tr:nth-child(even){background:#faf8f3}
+    .article-body .data-tbl tbody tr:last-child td{border-bottom:none}
+    .article-body .data-tbl td.metric{font-weight:600;color:#0C1B2A;width:38%}
+    .article-body .data-tbl tr.hl td{border-top:2px solid #B89B5E;border-bottom:2px solid #B89B5E;font-weight:600;color:#7A2E2E;background:#f4ede0!important}
+    .article-body .data-tbl caption{padding:10px 16px;font-size:12px;color:#6b6b6b;text-align:left;background:#EEEAE0;border-bottom:1px solid #d9d5cc;caption-side:top}
+    .article-body .barviz{margin:22px 0;background:#fff;padding:22px 26px;border:1px solid #d9d5cc;border-radius:2px}
+    .article-body .barviz .bv-row{display:grid;grid-template-columns:130px 1fr 90px;align-items:center;gap:12px;margin-bottom:12px}
+    .article-body .barviz .bv-row:last-of-type{margin-bottom:0}
+    .article-body .barviz .bv-lbl{font-size:13px;font-weight:600;color:#0C1B2A}
+    .article-body .barviz .bv-lbl small{display:block;font-weight:400;color:#6b6b6b;font-size:11px;margin-top:2px;line-height:1.4}
+    .article-body .barviz .bv-track{height:26px;background:#EEEAE0;border-radius:2px;overflow:hidden}
+    .article-body .barviz .bv-fill{height:100%;display:flex;align-items:center;padding:0 12px;font-size:14px;font-weight:700}
+    .article-body .barviz .bv-fill.f-navy{background:#183049;color:#fff}
+    .article-body .barviz .bv-fill.f-brass{background:#B89B5E;color:#0C1B2A}
+    .article-body .barviz .bv-amt{font-size:14px;color:#0C1B2A;text-align:right;font-weight:600}
+    .article-body .barviz .bv-cap{font-size:12px;color:#6b6b6b;margin-top:12px;padding-top:12px;border-top:1px solid #d9d5cc;text-align:center;line-height:1.5}
+    .article-body .dark-call{background:#0C1B2A;color:#fff;padding:26px 30px;margin:28px 0;border-radius:2px;position:relative;overflow:hidden}
+    .article-body .dark-call::before{content:"";position:absolute;top:0;left:0;bottom:0;width:4px;background:#B89B5E}
+    .article-body .dark-call h3{color:#fff;font-size:1.1rem;margin:0 0 10px!important}
+    .article-body .dark-call p{color:#d5dce4;font-size:15px;margin-bottom:10px;line-height:1.7}
+    .article-body .dark-call p:last-child{margin-bottom:0}
+    .article-body .dark-call em{color:#D4BC85;font-style:normal;font-weight:500}
+    .article-body .info-note{background:#E6EEE9;border-left:4px solid #2E5D4B;padding:16px 20px;margin:20px 0;border-radius:2px;font-size:14px;color:#2E5D4B;line-height:1.65}
+    .article-body .info-note strong{color:#2E5D4B}
+    .article-body .info-note.warn{background:#F1E3E3;border-left-color:#7A2E2E;color:#7A2E2E}
+    .article-body .info-note.warn strong{color:#7A2E2E}
+    .article-body .art-faq details{background:#fff;border:1px solid #d9d5cc;border-radius:2px;margin-bottom:8px}
+    .article-body .art-faq summary{padding:16px 20px;cursor:pointer;font-size:1rem;font-weight:600;color:#0C1B2A;list-style:none;position:relative;line-height:1.4}
+    .article-body .art-faq summary::-webkit-details-marker{display:none}
+    .article-body .art-faq summary::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);color:#B89B5E;font-size:20px;font-weight:400}
+    .article-body .art-faq details[open] summary::after{content:"−"}
+    .article-body .art-faq details[open] summary{border-bottom:1px solid #d9d5cc}
+    .article-body .art-faq details p{padding:14px 20px 18px;font-size:14.5px;color:#333;margin:0;line-height:1.7}
+    .article-body .art-src{margin:32px 0;padding:22px 26px;background:#fff;border:1px solid #d9d5cc;border-radius:2px}
+    .article-body .art-src h3{font-size:13px;margin:0 0 10px!important;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#0C1B2A}
+    .article-body .art-src ol{margin:0;padding-left:18px}
+    .article-body .art-src li{font-size:13px;margin-bottom:5px;line-height:1.55;color:#444}
+    .article-body .art-src a{color:#B89B5E;text-decoration:none;word-break:break-word}
+    .article-body .art-src a:hover{text-decoration:underline}
+    .article-body .art-cta{margin:36px 0;padding:32px 36px;background:#0C1B2A;color:#fff;border-radius:2px;text-align:center}
+    .article-body .art-cta h3{color:#fff;margin-bottom:10px!important}
+    .article-body .art-cta p{color:#c9d1da;font-size:15px;margin-bottom:20px}
+    .article-body .art-cta a.cta-btn{display:inline-block;padding:12px 28px;background:#B89B5E;color:#0C1B2A;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;border-radius:2px}
+    .article-body .art-cta a.cta-btn:hover{background:#D4BC85}
+    .article-body .art-disc{margin-top:36px;padding:16px 0 0;border-top:1px solid #d9d5cc;font-size:12px;color:#6b6b6b;line-height:1.6}
+    @media(max-width:640px){
+      .article-body .barviz .bv-row{grid-template-columns:90px 1fr 70px;gap:8px}
+      .article-body .data-tbl th,.article-body .data-tbl td{padding:8px 10px;font-size:12.5px}
+    }
+
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -2470,7 +2534,36 @@
   <div id="blog-grid" class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
     <!-- First 6 latest articles pre-rendered statically for immediate content, SEO/crawlers, and better initial LCP/FCP on mobile (avoids empty state while JS loads). "Click for more" loads the rest dynamically from the full ARTICLES data to keep overall page size reasonable for performance. All 26 articles are still fully accessible via the button, category filters, direct URLs, sitemap, and schema. -->
 
-    <!-- Latest: IPA New Launch Guide -->
+    <!-- Latest: HDB vs Condo Affordability -->
+    <article data-category="hdb" class="blog-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" onclick="showArticle('post-hdb-vs-condo-affordability-2026')">
+      <div class="h-48 bg-gradient-to-br from-indigo-900 to-slate-700 flex items-end p-5 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] bg-[length:3px_3px]"></div>
+        <div class="absolute top-0 right-0 w-40 h-40 bg-indigo-400/20 rounded-full -translate-y-16 translate-x-16"></div>
+        <span class="chip-buyer absolute top-4 left-4 px-3 py-1 text-xs font-bold rounded-2xl">BUYER GUIDE</span>
+        <div class="relative text-white">
+          <div class="text-[10px] font-semibold tracking-widest uppercase text-slate-300 mb-1">Affordability</div>
+          <div class="font-black text-xl leading-tight tracking-tight">$970k HDB → $1.7M Condo?</div>
+          <div class="text-sm text-slate-300 mt-0.5">The condo needs less income. Here's why.</div>
+        </div>
+      </div>
+      <div class="p-6 flex-1 flex flex-col">
+        <div class="flex items-center justify-between text-xs mb-3">
+          <time class="text-slate-400" datetime="2026-07-17">17 Jul 2026</time>
+          <span class="text-emerald-600 font-medium flex items-center gap-x-1"><i class="fa-regular fa-clock"></i> 8 min</span>
+        </div>
+        <h2 class="font-semibold text-base leading-tight mb-2 line-clamp-2 text-slate-900">Can I Afford a $1.7M Condo If I Can Afford a $970k HDB?</h2>
+        <p class="text-sm text-slate-600 line-clamp-3 flex-1">MAS stress-test math: the $1.7M condo requires $1,733 LESS in qualifying income than the $970k HDB. Verified 2026 breakdown of MSR vs TDSR, stamp duties, and CPF outlay.</p>
+        <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
+          <div class="flex items-center gap-x-2 text-xs">
+            <div class="w-6 h-6 bg-violet-100 rounded-full flex items-center justify-center"><span class="text-violet-700 text-[10px] font-black">JL</span></div>
+            <span class="font-medium text-slate-700">Jack Leow</span>
+          </div>
+          <span class="text-violet-600 text-xs font-semibold">Read article →</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- IPA New Launch Guide -->
     <article data-category="new-launch" class="blog-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm flex flex-col" onclick="showArticle('post-ipa-new-launch-2026')">
       <div class="h-48 bg-gradient-to-br from-slate-700 to-teal-900 flex items-end p-5 relative overflow-hidden">
         <div class="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] bg-[length:3px_3px]"></div>
@@ -12191,6 +12284,276 @@ const ARTICLES = {
       </div>
 
       <p><em>Last updated: July 2026. TDSR, LTV, ABSD rates, and OTP forfeiture rules cited are current as of July 2026 per MAS and URA guidelines. Verify all figures before transacting. CEA Licence L3008022J (PropNex Realty Pte Ltd).</em></p>
+    `
+  },
+
+  /* ======================================================
+     ARTICLE — HDB VS CONDO AFFORDABILITY 2026
+  ====================================================== */
+  'post-hdb-vs-condo-affordability-2026': {
+    title: 'Can I Afford a $1.7M Condo If I Can Afford a $970k HDB? A Singapore Affordability Reality Check',
+    date: '17 Jul 2026',
+    readTime: '8 min read',
+    category: 'HDB UPGRADERS',
+    chipClass: 'chip-buyer',
+    img: null,
+    linkedinUrl: null,
+    body: `
+      <div class="tldr">
+        <div class="tag">The Short Answer</div>
+        <h2>Yes &mdash; in most cases, if you can afford the HDB, you can afford the condo too.</h2>
+        <p>Under the Monetary Authority of Singapore's stress-test rules (4.0% floor rate), a <strong>$1,700,000 private condo</strong> requires a minimum gross household income of <strong>$11,067 per month</strong> to qualify. A <strong>$970,000 HDB resale flat</strong> requires <strong>$12,800 per month</strong>. The condo needs <strong>$1,733 LESS</strong> in monthly income because it falls under TDSR (55% cap) instead of MSR (30% cap), and permits a 30-year loan tenure versus 25 years for HDB resale bank loans at maximum LTV. Whether you <em>should</em> stretch to the condo is a separate question &mdash; this article walks through both sides.</p>
+      </div>
+
+      <p>It's the most common misconception I hear at first buyer consultations: "I can only afford the HDB, so the condo is off the table." When we run the numbers using the Monetary Authority of Singapore's actual affordability rules, the picture almost always looks different. This isn't a spin or a sales trick &mdash; it's a direct consequence of how MAS structures debt-servicing limits and loan tenures differently for public and private housing.</p>
+
+      <p>This article walks through the full comparison between a $970,000 HDB resale flat and a $1,700,000 private resale condominium in Singapore, using 2026 rates and rules. I'll show you the affordability math, the upfront cash and CPF requirements, why the counter-intuitive result happens, and &mdash; importantly &mdash; the trade-offs you must accept if you decide to stretch. Every regulatory figure in this piece is cited against MAS, IRAS, HDB, or CPF sources at the end.</p>
+
+      <h2>How affordability is actually assessed in Singapore</h2>
+
+      <p>Before comparing the two properties, it helps to understand what a bank actually checks when deciding how much you can borrow. There are three levers that determine your maximum loan quantum in Singapore:</p>
+
+      <ol>
+        <li><strong>Loan-to-Value (LTV) ratio</strong> &mdash; how much of the property price the bank will finance. For a first housing loan with a tenure of 30 years or less (and where the loan ends before you turn 65), the cap is 75%. You put down the remaining 25%.</li>
+        <li><strong>Debt-servicing ratio</strong> &mdash; how much of your gross income can go toward loan repayment. For HDB flats and Executive Condominiums, this is the Mortgage Servicing Ratio (MSR) at 30%. For private property, it's the Total Debt Servicing Ratio (TDSR) at 55%.</li>
+        <li><strong>Stress-test interest rate</strong> &mdash; the "medium-term interest rate floor" MAS requires banks to use when sizing your loan. Since 30 September 2022, this has been <strong>4.0% per annum for bank loans</strong> and 3.0% for HDB concessionary loans, regardless of the actual promo rate offered.</li>
+      </ol>
+
+      <div class="qa-box">
+        <div class="lbl">Quick Answer</div>
+        <p><strong>Why does MAS stress-test at 4%?</strong> Property loans are long-term commitments and typically households' largest liability. MAS requires banks to size your maximum loan as if you were paying 4% p.a., even if your actual rate is currently 1.4%. This ensures you can still service the loan if rates rise significantly over the next 25 to 30 years.</p>
+      </div>
+
+      <p>Both frameworks apply the same 4% stress floor. So on the surface, you might expect the more expensive property to require more income. Let's see what actually happens.</p>
+
+      <h2>Head-to-head: $970k HDB vs $1.7M condo affordability</h2>
+
+      <p>Assumptions used throughout: buyer age 35, Singapore Permanent Resident buying first residential property, 75% LTV bank loan, no other outstanding debt, and July 2026 promotional bank rates.</p>
+
+      <div class="data-tbl">
+        <table>
+          <caption>Table 1: Affordability framework side-by-side (MAS stress-test basis)</caption>
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>$970k HDB Flat (Bank Loan)</th>
+              <th class="condo-col">$1.7M Private Condo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="metric">Purchase Price</td><td>$970,000</td><td>$1,700,000</td></tr>
+            <tr><td class="metric">Maximum Loan (75% LTV)</td><td>$727,500</td><td>$1,275,000</td></tr>
+            <tr><td class="metric">Maximum Loan Tenure at 75% LTV</td><td>25 years</td><td>30 years</td></tr>
+            <tr><td class="metric">Debt-Servicing Cap</td><td>30% MSR</td><td>55% TDSR</td></tr>
+            <tr><td class="metric">MAS Stress-Test Rate</td><td>4.0% p.a.</td><td>4.0% p.a.</td></tr>
+            <tr><td class="metric">Stress-Tested Monthly Instalment</td><td>$3,840</td><td>$6,087</td></tr>
+            <tr class="hl"><td class="metric">Minimum Gross Monthly Income</td><td>$12,800</td><td>$11,067</td></tr>
+            <tr><td class="metric">Actual Bank Rate (Jul 2026)</td><td>~1.45% p.a.</td><td>~1.35% p.a.</td></tr>
+            <tr><td class="metric">Actual Monthly Bank Instalment</td><td>$2,892</td><td>$4,309</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="barviz">
+        <div class="bv-row">
+          <div class="bv-lbl">$970k HDB<small>MSR 30% &middot; 25-year</small></div>
+          <div class="bv-track"><div class="bv-fill f-navy" style="width:100%">$12,800</div></div>
+          <div class="bv-amt">/ month</div>
+        </div>
+        <div class="bv-row">
+          <div class="bv-lbl">$1.7M Condo<small>TDSR 55% &middot; 30-year</small></div>
+          <div class="bv-track"><div class="bv-fill f-brass" style="width:86.5%">$11,067</div></div>
+          <div class="bv-amt">/ month</div>
+        </div>
+        <div class="bv-cap">Minimum gross household income required under MAS stress-test rules. The condo requires <strong>$1,733 LESS per month</strong> despite costing $730,000 more.</div>
+      </div>
+
+      <h2>Why does the condo need less qualifying income than the HDB?</h2>
+
+      <p>The result surprises most first-time buyers because it inverts the intuition that "more expensive equals harder to afford." Two regulatory levers produce the crossover:</p>
+
+      <h3>Lever 1: TDSR 55% is more permissive than MSR 30%</h3>
+      <p>Mortgage Servicing Ratio (MSR) restricts your monthly housing loan repayment to 30% of gross monthly income and applies only to HDB flats and Executive Condominiums. Total Debt Servicing Ratio (TDSR) caps total monthly debt at 55% and applies to all property loans, public and private.</p>
+
+      <p>Even though TDSR counts all your debt obligations (car loan, credit card minimums, personal loan repayments), if a buyer has no other significant debt, they effectively get to use up to 55% of gross income for the mortgage. That's 25 percentage points more headroom than MSR gives.</p>
+
+      <div class="qa-box">
+        <div class="lbl">Quick Answer</div>
+        <p><strong>Does the same buyer qualify under both frameworks?</strong> Yes, but the maximum loan sizes differ dramatically. On $12,800/month gross income, MSR allows $3,840/month of mortgage servicing while TDSR would allow up to $7,040/month (assuming no other debt). That's why private property affordability scales up much faster with income.</p>
+      </div>
+
+      <h3>Lever 2: 30-year tenure vs 25-year tenure</h3>
+      <p>Under MAS rules, HDB resale bank loans are capped at <strong>25 years</strong> at full 75% LTV, while private property bank loans allow up to <strong>30 years</strong>. Longer tenures are technically possible (up to 30 years for HDB and 35 years for private property) but LTV drops from 75% to 55% &mdash; requiring a much larger downpayment.</p>
+
+      <p>Those five extra years matter. Spreading the same principal amount over 60 more monthly instalments materially reduces the stress-tested monthly payment used in the income test. Combined with the more generous debt cap, the effect more than compensates for the larger loan quantum.</p>
+
+      <h2>What about the upfront cash? A full breakdown</h2>
+
+      <p>Loan qualification is one hurdle. Funding the downpayment and stamp duties is another. Here's what each option actually costs on Day One, calculated using IRAS's current 2026 stamp duty tables and standard conveyancing costs.</p>
+
+      <div class="data-tbl">
+        <table>
+          <caption>Table 2: Total upfront outlay comparison (Singapore PR, 1st property)</caption>
+          <thead>
+            <tr>
+              <th>Cost Item</th>
+              <th>$970k HDB (bank loan)</th>
+              <th class="condo-col">$1.7M Private Condo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="metric">Downpayment (25%)</td><td>$225,000<br><small style="color:#6b6b6b">based on $900k valuation</small></td><td>$425,000</td></tr>
+            <tr><td class="metric">&nbsp;&nbsp;of which minimum cash</td><td>$45,000 (5%)</td><td>$85,000 (5%)</td></tr>
+            <tr><td class="metric">&nbsp;&nbsp;of which CPF-OA eligible</td><td>Up to balance of 25%</td><td>Up to $340,000 (20%)</td></tr>
+            <tr><td class="metric">Cash Above Valuation</td><td>$70,000 (cash only)</td><td>Not applicable in this scenario</td></tr>
+            <tr><td class="metric">Buyer's Stamp Duty (BSD)</td><td>$23,700</td><td>$54,600</td></tr>
+            <tr><td class="metric">Additional Buyer's Stamp Duty (ABSD)</td><td>$0 (1st property)</td><td>$85,000 (5% PR 1st property)</td></tr>
+            <tr><td class="metric">Legal, valuation, agent fees</td><td>~$13,300</td><td>~$2,500</td></tr>
+            <tr class="hl"><td class="metric">Total Purchase Outlay</td><td>$331,973</td><td>$567,100</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>The condo requires roughly <strong>$235,000 more in total outlay</strong>. But the composition of that outlay matters more than the headline number:</p>
+
+      <ul>
+        <li><strong>$340,000 of the condo downpayment is CPF-eligible.</strong> For most working buyers who've contributed to CPF for a decade or more, this is money that's already earmarked for housing under CPF rules &mdash; parked in the Ordinary Account earning 2.5% p.a. Redeploying it into a private asset in your name is not "more cash out" so much as "more CPF put to work."</li>
+        <li><strong>The HDB scenario shown includes $70,000 in Cash Above Valuation.</strong> When the transacted price exceeds HDB's valuation (here, $970k vs $900k), the shortfall must be paid in cash &mdash; it cannot use CPF or loan. This is a common feature of the current resale HDB market and eats into the perceived cash advantage of HDB.</li>
+        <li><strong>ABSD 5% for a PR 1st property is $85,000</strong> on the $1.7M condo &mdash; a real cost. If the buyer were a Singapore Citizen (0% ABSD on first property), that difference disappears entirely.</li>
+      </ul>
+
+      <div class="info-note">
+        <strong>Bank loan verified numbers.</strong> On a $1,275,000 loan over 30 years at 1.33% (Maybank SORA package, July 2026), the actual monthly instalment is $4,297. On a $675,000 HDB bank loan over 25 years at 1.41%, monthly instalment is $2,671. These figures are drawn directly from live PropNex Business Suite calculations run in July 2026.
+      </div>
+
+      <h2>The long view: why the higher monthly payment is not just an expense</h2>
+
+      <p>At today's rates, the condo commits you to roughly <strong>$1,400 more per month</strong> in mortgage repayment than the HDB. That number needs unpacking, because a meaningful portion of every repayment is <em>principal</em> &mdash; equity built in a hard asset in your own name, not interest expense paid to the bank.</p>
+
+      <div class="dark-call">
+        <h3>The forced-savings argument, honestly framed</h3>
+        <p>Think of the extra monthly commitment as a <em>disciplined savings vehicle</em> parked in Singapore real estate. It is non-negotiable (unlike voluntary savings), hedged against long-term inflation, and secured by an asset that has historically appreciated over full market cycles.</p>
+        <p>The trade-off is real: higher monthly commitment demands financial discipline and a healthy cash buffer. But over a 20- to 30-year horizon, the outcome is a materially larger net-asset position &mdash; provided the buyer stays employed and the property performs in line with the private market's long-run trend.</p>
+      </div>
+
+      <h3>What the long-term data actually shows</h3>
+
+      <p>Both the URA Private Residential Property Price Index and the HDB Resale Price Index are rebased to 1Q 2009 = 100. As at 4Q 2025 (the latest full quarter data from SingStat):</p>
+
+      <ul>
+        <li><strong>URA Private Residential Price Index: 216.4</strong> &mdash; up 116% from 2009</li>
+        <li><strong>HDB Resale Price Index: 203.6</strong> &mdash; up 104% from 2009</li>
+      </ul>
+
+      <p>Over 17 years, private residential has outperformed HDB resale by roughly <strong>13 index points</strong>, or around 12 percentage points cumulative outperformance. In Q1 2026, HDB resale prices posted their first quarterly decline in nearly seven years while private prices continued to rise. Structural factors matter: HDB flats face MOP restrictions, ethnic quotas at resale, 99-year lease decay, and policy interventions when prices climb too fast. Private residential has none of these caps.</p>
+
+      <p>None of this is a guarantee of future returns. But it does inform a straightforward analytical view: <strong>if wealth accumulation is a real objective alongside own-stay, the private market gives you a vehicle designed to appreciate. Public housing is designed to remain affordable, which is a fundamentally different mandate.</strong></p>
+
+      <h2>The trade-offs you must accept if you stretch to the condo</h2>
+
+      <p>The math above is real. It is also incomplete. Here are the concrete downsides of moving from a $970k HDB to a $1.7M private condo:</p>
+
+      <h3>Cash flow and liquidity</h3>
+      <ul>
+        <li>Actual monthly repayment is <strong>~$1,400 higher</strong> at today's rates &mdash; and rates can move up. If SORA rises 100 basis points, that gap widens by roughly $600/month.</li>
+        <li>Condo maintenance fees typically run $300 to $600 per month depending on the estate &mdash; the HDB service and conservancy charge is a fraction of this.</li>
+        <li>Property tax scales with annual value; on a $1.7M condo occupied by owner, property tax is materially higher than on a $970k HDB.</li>
+      </ul>
+
+      <h3>Upfront capital</h3>
+      <ul>
+        <li>Mandatory 5% cash of $85,000 vs $45,000 for HDB.</li>
+        <li>ABSD 5% adds $85,000 for a PR &mdash; this money is a pure sunk cost.</li>
+        <li>Higher BSD adds $30,900 relative to the HDB.</li>
+      </ul>
+
+      <h3>Market risk</h3>
+      <ul>
+        <li>Private property prices have <strong>historically appreciated more but with higher volatility</strong>. The 2018 cooling measures and 2023 ABSD hike both produced short-term market softness.</li>
+        <li>Historical outperformance is not a guarantee. If you must sell during a soft cycle, the equity gain evaporates.</li>
+      </ul>
+
+      <div class="info-note warn">
+        <strong>Important caveat for PR-only households.</strong> The HDB concessionary loan at 2.6% p.a. is <em>not available</em> to households without at least one Singapore Citizen. A Singapore PR-only couple buying an HDB resale flat must take a bank loan &mdash; which means both scenarios in this article are being compared like-for-like on a bank loan basis. If at least one buyer is a Singapore Citizen, the HDB concessionary loan option would apply to the HDB (not the condo), which offers rate stability at 2.6% but is currently more expensive than bank rates.
+      </div>
+
+      <h2>Who should seriously consider the condo instead of the HDB?</h2>
+
+      <p>Based on the numbers, the stretch to a private condo is worth serious consideration if the following apply to your household:</p>
+
+      <ol>
+        <li><strong>Gross household income comfortably above $11,000/month</strong> &mdash; ideally $13,000 to $15,000 or higher, so the actual repayment sits below 30% of income and there's cash-flow headroom.</li>
+        <li><strong>Sufficient CPF-OA balances</strong> to fund most or all of the 20% downpayment portion &mdash; ideally at least $250,000 to $340,000 in combined household CPF-OA.</li>
+        <li><strong>At least $170,000 to $200,000 in cash reserves</strong> to cover the 5% cash downpayment, stamp duties, and a 12-month emergency buffer.</li>
+        <li><strong>A minimum 7- to 10-year holding horizon</strong>. Private property rewards long holds; short flips are punished by SSD and ABSD structures.</li>
+        <li><strong>Job stability or dual-income households</strong> that can absorb the higher monthly commitment without stress.</li>
+        <li><strong>Own-stay plus wealth accumulation is a real goal</strong> &mdash; not just shelter.</li>
+      </ol>
+
+      <p>Conversely, the HDB remains the right answer if you value flat monthly costs, want to maximise cash liquidity, or prefer the concessionary loan's 2.6% rate stability (if eligible). There is no wrong answer &mdash; only a fit answer for your household's circumstances.</p>
+
+      <div class="art-cta">
+        <h3>Want your exact numbers modelled?</h3>
+        <p>Every household's CPF balance, income mix, and existing commitments are different. A 30-minute session gives you a personalised affordability projection for both HDB and condo scenarios &mdash; using your real numbers.</p>
+        <a href="/contact" onclick="showPage('contact'); return false;" class="cta-btn">Book a Free Consultation</a>
+      </div>
+
+      <h2>Frequently asked questions</h2>
+
+      <div class="art-faq">
+        <details>
+          <summary>Can I afford a $1.7M condo if I can afford a $970k HDB in Singapore?</summary>
+          <p>Yes, in most cases. Under MAS stress-test rules (4.0% floor rate), a $1.7M private condo requires a minimum gross household income of $11,067 per month to qualify, while a $970k HDB requires $12,800 per month. The condo needs $1,733 less because it uses TDSR (55% cap) instead of MSR (30% cap), and allows a 30-year loan tenure versus 25 years for HDB resale bank loans at 75% LTV. However, actual cash outlay is higher for the condo, so affordability must be assessed on both dimensions.</p>
+        </details>
+        <details>
+          <summary>What is the difference between MSR and TDSR in Singapore?</summary>
+          <p>Mortgage Servicing Ratio (MSR) caps your monthly housing loan repayment at 30% of gross monthly income and applies only to HDB flats and Executive Condominiums. Total Debt Servicing Ratio (TDSR) caps total monthly debt at 55% of gross monthly income and applies to all property loans, including private residential. TDSR includes all debts (car, credit card, personal loan) while MSR looks only at the housing mortgage. Both are enforced by MAS.</p>
+        </details>
+        <details>
+          <summary>What is the maximum loan tenure for HDB and private property in Singapore?</summary>
+          <p>For 75% loan-to-value, HDB resale bank loans are capped at 25 years and private residential bank loans at 30 years. HDB concessionary loans are also capped at 25 years. Longer tenures are possible (up to 30 years for HDB and 35 years for private) but LTV drops to 55%, requiring a much larger downpayment. In all cases, the loan must end before the borrower turns 65 to qualify for the maximum LTV.</p>
+        </details>
+        <details>
+          <summary>How much ABSD does a Singapore PR pay on a first property in 2026?</summary>
+          <p>A Singapore Permanent Resident pays 5% Additional Buyer's Stamp Duty (ABSD) on their first residential property, calculated on the higher of purchase price or market value. Singapore Citizens pay 0% on their first property, and foreigners pay 60%. Rates are set by IRAS and have been unchanged since 27 April 2023. On a $1.7M condo, PR ABSD is $85,000.</p>
+        </details>
+        <details>
+          <summary>What is the Buyer's Stamp Duty on a $1.7 million property in Singapore?</summary>
+          <p>The Buyer's Stamp Duty (BSD) on a $1,700,000 residential property is $54,600. This uses IRAS's progressive tiers: 1% on the first $180,000 ($1,800), 2% on the next $180,000 ($3,600), 3% on the next $640,000 ($19,200), 4% on the next $500,000 ($20,000), and 5% on the remaining $200,000 ($10,000). BSD is payable within 14 days of signing the Sale and Purchase Agreement.</p>
+        </details>
+        <details>
+          <summary>Can I use CPF to pay for a private condo downpayment in Singapore?</summary>
+          <p>Yes. For a private residential purchase with a 25% downpayment, the mandatory 5% must be paid in cash, but the remaining 20% can be paid using CPF Ordinary Account (OA) savings, cash, or a combination of both. On a $1.7 million condo, that means up to $340,000 of the downpayment can be funded from CPF-OA. CPF can also be used to pay BSD, ABSD, monthly instalments and legal fees.</p>
+        </details>
+        <details>
+          <summary>Does the HDB concessionary loan at 2.6% apply to Singapore PRs?</summary>
+          <p>No. The HDB concessionary loan requires at least one Singapore Citizen in the household. A Singapore PR-only couple purchasing an HDB resale flat must take a bank loan, which currently offers rates from approximately 1.4% to 1.7% p.a. as of mid-2026. The concessionary rate is pegged at 0.1% above the CPF Ordinary Account rate (currently 2.5%), giving 2.6% p.a.</p>
+        </details>
+        <details>
+          <summary>Is a condo really a better investment than an HDB in Singapore?</summary>
+          <p>Historically, yes &mdash; but modestly. From 1Q 2009 to 4Q 2025, the URA Private Residential Property Price Index rose 116% while the HDB Resale Price Index rose 104%. Private property also offers no MOP, no ethnic quota, no income ceiling, and a larger resale buyer pool (including foreigners and PRs), giving it more upside optionality. However, private is more volatile, has higher carrying costs, and historical returns do not guarantee future returns.</p>
+        </details>
+      </div>
+
+      <div class="art-src">
+        <h3>Sources &amp; References</h3>
+        <ol>
+          <li>Monetary Authority of Singapore &mdash; TDSR framework and stress-test methodology. <a href="https://www.mas.gov.sg/regulation/explainers/tdsr-for-property-loans/calculating-tdsr" target="_blank" rel="noopener">mas.gov.sg/regulation/explainers/tdsr-for-property-loans</a></li>
+          <li>Monetary Authority of Singapore &mdash; Loan Tenure and LTV Limits. <a href="https://www.mas.gov.sg/regulation/explainers/new-housing-loans/loan-tenure-and-loan-to-value-limits" target="_blank" rel="noopener">mas.gov.sg/regulation/explainers/new-housing-loans</a></li>
+          <li>Monetary Authority of Singapore &mdash; September 2022 measures raising the medium-term interest rate floor to 4.0%. <a href="https://www.mas.gov.sg/news/media-releases/2022/measures-to-promote-sustainable-conditions-in-the-property-market-by-ensuring-prudent-borrowing-and-moderating-demand" target="_blank" rel="noopener">mas.gov.sg/news/media-releases/2022</a></li>
+          <li>Inland Revenue Authority of Singapore &mdash; Buyer's Stamp Duty and Additional Buyer's Stamp Duty rates. <a href="https://www.iras.gov.sg/quick-links/tax-rates/stamp-duty" target="_blank" rel="noopener">iras.gov.sg/quick-links/tax-rates/stamp-duty</a></li>
+          <li>Housing and Development Board &mdash; HDB Concessionary Loan Interest Rate (2.6% p.a., Q1 2026). <a href="https://www.hdb.gov.sg/residential/servicing-your-hdb-housing-loan/loan-matters/interest-rate" target="_blank" rel="noopener">hdb.gov.sg/residential/servicing-your-hdb-housing-loan</a></li>
+          <li>Central Provident Fund Board &mdash; CPF Ordinary Account interest rate and housing usage rules. <a href="https://www.cpf.gov.sg/member/infohub/educational-resources/3-differences-between-hdb-loan-and-bank-loan" target="_blank" rel="noopener">cpf.gov.sg</a></li>
+          <li>MoneySense (MAS) &mdash; Buying a Property: How Much Can You Afford? <a href="https://www.moneysense.gov.sg/buying-a-property-how-much-can-you-afford/" target="_blank" rel="noopener">moneysense.gov.sg</a></li>
+          <li>Singapore Department of Statistics &mdash; Property Price Indices, 4Q 2025 data release. <a href="https://www.singstat.gov.sg/find-data/explore-data-themes/economy-prices/property-price-indices/latest-news-data" target="_blank" rel="noopener">singstat.gov.sg/find-data</a></li>
+          <li>Urban Redevelopment Authority &mdash; Private Residential Property Price Index methodology and quarterly releases. <a href="https://data.gov.sg/dataset/private-residential-property-price-index-by-type-of-property" target="_blank" rel="noopener">data.gov.sg</a></li>
+          <li>PropNex Business Suite &mdash; Resale HDB and Resale Private Purchase calculators used for the illustrative outlay figures shown in Tables 1 and 2.</li>
+        </ol>
+      </div>
+
+      <div class="art-disc">
+        <strong>Disclaimer.</strong> This article is for general information and educational purposes only and does not constitute financial, legal, or tax advice. All figures are illustrative and reflect MAS stress-test rules, IRAS BSD/ABSD schedules, HDB/CPF rates, and market bank rates as at July 2026, which are subject to change. Loan approval remains at the discretion of the lender. Property values may rise or fall. Historical property price indices are not indicative of future returns. Buyers should assess their own financial position, seek independent advice where appropriate, and refer to their conveyancing lawyer and mortgage banker for binding figures. PropNex Realty Pte Ltd and its salespersons will not be responsible for any errors or omissions, or for the results obtained from the use of this information.
+      </div>
     `
   }
 
