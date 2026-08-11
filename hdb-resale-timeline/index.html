@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HDB Resale Transaction Timeline · Projector</title>
+<meta name="description" content="Enter your OTP grant and exercise dates to project the seven key milestones of your HDB resale transaction, through to key handover.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1d24;
+    --paper: #ffffff;
+    --panel: #f6f4ed;
+    --panel-soft: #faf9f4;
+    --rule: #e2ded1;
+    --rule-strong: #c8c4b5;
+    --accent: #0f4c81;
+    --accent-soft: #eaf0f7;
+    --stamp: #8b3a2f;
+    --stamp-soft: #fdf0eb;
+    --mute: #6f6d65;
+    --mute-2: #8f8d84;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: var(--sans);
+    font-size: 16px;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 28px 96px;
+  }
+
+  /* ============ Header ============ */
+  .brand {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mute);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--mute-2);
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 52px;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+  h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .intro {
+    font-size: 17px;
+    color: var(--mute);
+    max-width: 560px;
+    margin-bottom: 44px;
+    line-height: 1.55;
+  }
+
+  /* ============ Inputs ============ */
+  .inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 20px;
+    padding: 24px;
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    margin-bottom: 36px;
+  }
+
+  .field label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mute);
+    margin-bottom: 10px;
+  }
+
+  .field input[type="date"] {
+    width: 100%;
+    padding: 14px 16px;
+    font-family: var(--mono);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--rule-strong);
+    border-radius: 4px;
+    transition: border-color 0.15s ease;
+    font-feature-settings: 'tnum';
+  }
+  .field input[type="date"]:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(15, 76, 129, 0.12);
+  }
+  .field input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.5;
+  }
+  .field input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+  }
+
+  .label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 8px;
+  }
+  .label-row label {
+    margin-bottom: 0;
+  }
+  .tag-auto {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    background: var(--accent-soft);
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .field-note {
+    margin-top: 12px;
+    padding-left: 12px;
+    border-left: 2px solid var(--rule-strong);
+    font-size: 12px;
+    color: var(--mute);
+    line-height: 1.55;
+  }
+  .field-note strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .input-row {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+  }
+  .input-row > input[type="date"] {
+    flex: 1;
+    min-width: 0;
+    width: auto;
+  }
+  .days-input {
+    display: flex;
+    align-items: center;
+    background: var(--paper);
+    border: 1px solid var(--rule-strong);
+    border-radius: 4px;
+    padding: 0 12px 0 10px;
+    gap: 6px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    flex-shrink: 0;
+  }
+  .days-input:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(15, 76, 129, 0.12);
+  }
+  .days-input input[type="number"] {
+    width: 32px;
+    border: 0;
+    outline: 0;
+    padding: 14px 0;
+    font-family: var(--mono);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ink);
+    background: transparent;
+    text-align: center;
+    font-feature-settings: 'tnum';
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+  .days-input input[type="number"]::-webkit-outer-spin-button,
+  .days-input input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .days-suffix {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--mute);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    user-select: none;
+  }
+
+  /* ============ Warning ============ */
+  .warn {
+    display: none;
+    padding: 14px 18px;
+    background: var(--stamp-soft);
+    color: var(--stamp);
+    border-left: 3px solid var(--stamp);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 32px;
+    border-radius: 0 4px 4px 0;
+  }
+  .warn.show { display: block; }
+
+  /* ============ Hero — projected handover ============ */
+  .hero {
+    padding: 32px 32px 30px;
+    background: var(--paper);
+    border: 1px solid var(--rule-strong);
+    border-radius: 6px;
+    margin-bottom: 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 4px;
+    background: var(--accent);
+  }
+
+  .hero-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mute);
+    margin-bottom: 12px;
+  }
+
+  .hero-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .hero-date {
+    font-family: var(--mono);
+    font-size: 56px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-feature-settings: 'tnum';
+    line-height: 1;
+  }
+
+  .hero-sub {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--mute);
+    line-height: 1.3;
+    text-align: right;
+  }
+  .hero-sub strong {
+    font-weight: 500;
+    color: var(--ink);
+    font-style: normal;
+    font-family: var(--sans);
+    font-size: 15px;
+    display: block;
+    letter-spacing: 0.02em;
+    margin-top: 4px;
+  }
+
+  /* ============ Timeline ============ */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mute);
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .section-label span { color: var(--mute-2); font-size: 10px; }
+
+  .timeline {
+    position: relative;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 32px 1fr auto;
+    gap: 20px;
+    padding: 22px 0;
+    position: relative;
+  }
+  .row + .row {
+    border-top: 1px solid var(--rule);
+  }
+
+  .spine {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+  }
+  .spine::before {
+    content: '';
+    position: absolute;
+    top: -1px; bottom: -1px;
+    left: 50%;
+    width: 1px;
+    background: var(--rule-strong);
+    transform: translateX(-0.5px);
+  }
+  .row:first-child .spine::before { top: 8px; }
+  .row:last-child .spine::before { bottom: auto; height: 8px; }
+
+  .marker {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 1.5px solid var(--accent);
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+  }
+  .row.optional .marker {
+    border-color: var(--mute-2);
+    border-style: dashed;
+  }
+
+  .content {
+    min-width: 0;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mute);
+    margin-bottom: 4px;
+  }
+
+  .title {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 6px;
+    letter-spacing: -0.005em;
+  }
+
+  .desc {
+    font-size: 14px;
+    color: var(--mute);
+    line-height: 1.55;
+    max-width: 42ch;
+  }
+
+  .row.optional .title { color: var(--mute); }
+  .row.optional .desc { color: var(--mute-2); }
+
+  .date-col {
+    text-align: right;
+    min-width: 150px;
+    padding-top: 4px;
+  }
+
+  .date-big {
+    font-family: var(--mono);
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--ink);
+    font-feature-settings: 'tnum';
+    letter-spacing: 0;
+    line-height: 1.1;
+  }
+  .row.optional .date-big { color: var(--mute); font-weight: 400; }
+
+  .date-sub {
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--mute-2);
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+  }
+
+  .day-count {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 2px 7px;
+    border-radius: 3px;
+    margin-top: 8px;
+  }
+  .row.optional .day-count {
+    color: var(--mute);
+    background: var(--panel);
+  }
+
+  /* ============ Assumptions ============ */
+  .notes {
+    margin-top: 56px;
+    padding: 28px 32px;
+    background: var(--panel-soft);
+    border-radius: 6px;
+    border: 1px solid var(--rule);
+  }
+  .notes h3 {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mute);
+    margin-bottom: 18px;
+  }
+  .notes ul {
+    list-style: none;
+    padding: 0;
+  }
+  .notes li {
+    font-size: 14px;
+    color: var(--mute);
+    line-height: 1.65;
+    padding-left: 22px;
+    position: relative;
+    margin-bottom: 10px;
+  }
+  .notes li:last-child { margin-bottom: 0; }
+  .notes li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 11px;
+    width: 12px;
+    height: 1px;
+    background: var(--mute-2);
+  }
+  .notes li strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ============ Footer ============ */
+  footer {
+    margin-top: 64px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--mute);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+  footer a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule-strong);
+    transition: border-color 0.15s ease;
+  }
+  footer a:hover { border-color: var(--accent); }
+
+  /* ============ Mobile ============ */
+  @media (max-width: 640px) {
+    .page { padding: 32px 20px 72px; }
+    h1 { font-size: 34px; }
+    .intro { font-size: 15px; margin-bottom: 32px; }
+    .inputs { grid-template-columns: 1fr; gap: 16px; padding: 20px; }
+    .hero { padding: 24px 22px; margin-bottom: 40px; }
+    .hero-date { font-size: 40px; }
+    .hero-sub { font-size: 16px; text-align: left; }
+    .hero-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .row { grid-template-columns: 28px 1fr; gap: 14px; padding: 18px 0; }
+    .date-col { grid-column: 2; text-align: left; margin-top: 10px; min-width: 0; padding-top: 0; }
+    .date-big { font-size: 20px; }
+    .title { font-size: 19px; }
+    .notes { padding: 22px 20px; }
+  }
+
+  /* ============ Print ============ */
+  @media print {
+    .inputs, .warn { display: none; }
+    .page { padding: 20px; max-width: 100%; }
+    .hero { break-inside: avoid; }
+    .row { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+    <h1>Project your HDB<br>resale <em>timeline</em>.</h1>
+    <p class="intro">Enter the OTP grant date. The exercise date and portal submission auto-fill to their defaults (both adjustable). Remaining milestones project through to key handover using conservative HDB processing estimates.</p>
+
+    <section class="inputs" aria-label="Timeline inputs">
+      <div class="field">
+        <label for="otp-date">OTP granted on</label>
+        <input type="date" id="otp-date">
+      </div>
+      <div class="field">
+        <label for="exercise-date">OTP exercised on</label>
+        <input type="date" id="exercise-date">
+        <p class="field-note">Defaults to Day 21 (max window). Cut-off: <strong>4pm on the 21st calendar day</strong> after OTP grant.</p>
+      </div>
+      <div class="field">
+        <label for="upload-date">Portal submitted on</label>
+        <div class="input-row">
+          <input type="date" id="upload-date">
+          <div class="days-input" title="Days after exercise">
+            <input type="number" id="upload-days" min="0" max="60" value="7" aria-label="Days after exercise">
+            <span class="days-suffix">days</span>
+          </div>
+        </div>
+        <p class="field-note">Default: <strong>7 days after exercise</strong>. Adjust the days box or the date directly. Must complete within 60 days of exercise.</p>
+      </div>
+    </section>
+
+    <div class="warn" id="warn" role="alert"></div>
+
+    <section class="hero" aria-label="Projected handover date">
+      <div class="hero-label">Projected key handover</div>
+      <div class="hero-row">
+        <div class="hero-date" id="hero-date">—</div>
+        <div class="hero-sub" id="hero-sub">Enter dates to project<strong id="hero-strong">&nbsp;</strong></div>
+      </div>
+    </section>
+
+    <div class="section-label">
+      <span style="color:var(--mute);letter-spacing:0.14em;">Full milestone breakdown</span>
+      <span>All dates in dd/mm/yy</span>
+    </div>
+    <section class="timeline" id="timeline" aria-label="Timeline milestones"></section>
+
+    <section class="notes" aria-label="Assumptions used">
+      <h3>Assumptions used</h3>
+      <ul>
+        <li><strong>OTP exercise:</strong> defaults to Day 21 (the maximum window under HDB rules). Adjustable to model earlier exercise.</li>
+        <li><strong>Portal submission:</strong> defaults to 7 days after OTP exercise. Adjustable — HDB allows submission up to 60 days after exercise.</li>
+        <li><strong>HDB acceptance:</strong> 5 weeks after portal submission (35 days) — upper bound of the typical 4–5 week HDB range, used to give a conservative estimate.</li>
+        <li><strong>Approval letter:</strong> about 2 weeks after HDB acceptance (14 days used).</li>
+        <li><strong>Completion &amp; handover:</strong> about 4 weeks after approval letter (28 days used).</li>
+        <li><strong>Extension of stay:</strong> optional — the date shown is the latest allowable (up to 3 months post-completion).</li>
+        <li>The timeline uses conservative (later) estimates where a range exists, so actual completion may arrive sooner. Weekends and public holidays are not adjusted for.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Jack Leow · <a href="tel:+6580621538">8062-1538</a><br>
+      <a href="https://sellingsgproperty.com" target="_blank" rel="noopener">sellingsgproperty.com</a>
+    </footer>
+  </main>
+
+  <script>
+    const stages = [
+      { key: 'otp',        eyebrow: 'Day 0',                    title: 'OTP granted',                            desc: '$1,000 option fee paid to seller. Buyer obtains an HDB valuation report.' },
+      { key: 'exercise',   eyebrow: 'Day 21 · maximum window',  title: 'OTP exercised',                          desc: 'Up to $4,000 exercise fee paid. Sale becomes contractually binding.' },
+      { key: 'upload',     eyebrow: 'About 1 week after exercise', title: 'Submitted on HDB Resale Portal',      desc: 'Buyer and seller upload separately, within 7 days of each other.' },
+      { key: 'accepted',   eyebrow: 'About 5 weeks later',      title: 'HDB accepts the application',            desc: 'Final appointment date issued. Both parties log in to acknowledge documents.' },
+      { key: 'approval',   eyebrow: 'About 2 weeks later',      title: 'Approval letter issued',                 desc: 'HDB confirms the resale to buyer and seller.' },
+      { key: 'completion', eyebrow: 'About 4 weeks later',      title: 'Completion appointment & handover',      desc: 'Keys handed over at HDB Hub. Seller receives cash proceeds; CPF refund follows within 15 working days.' },
+      { key: 'extension',  eyebrow: 'Optional · latest by',     title: 'Extension of stay ends',                 desc: 'If arranged, seller may remain in the flat for up to 3 months post-completion.', optional: true }
+    ];
+
+    function parseDate(str) {
+      if (!str) return null;
+      const d = new Date(str + 'T00:00:00');
+      return isNaN(d) ? null : d;
+    }
+
+    function addDays(date, days) {
+      const d = new Date(date);
+      d.setDate(d.getDate() + days);
+      return d;
+    }
+
+    function diffDays(a, b) {
+      const ms = 24 * 60 * 60 * 1000;
+      return Math.round((a - b) / ms);
+    }
+
+    function fmtDDMMYY(d) {
+      if (!d) return '—';
+      const dd = String(d.getDate()).padStart(2, '0');
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const yy = String(d.getFullYear()).slice(-2);
+      return `${dd}/${mm}/${yy}`;
+    }
+
+    function fmtWeekMonth(d) {
+      if (!d) return 'Awaiting input';
+      const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return `${days[d.getDay()]} · ${months[d.getMonth()]} ${d.getFullYear()}`;
+    }
+
+    function fmtDayLong(d) {
+      if (!d) return '';
+      const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      return days[d.getDay()];
+    }
+
+    function compute(otp, exercise, upload) {
+      if (!otp) return null;
+      const dates = { otp };
+      if (exercise) {
+        dates.exercise = exercise;
+        if (upload) {
+          dates.upload     = upload;
+          dates.accepted   = addDays(upload, 35);
+          dates.approval   = addDays(dates.accepted, 14);
+          dates.completion = addDays(dates.approval, 28);
+          dates.extension  = addDays(dates.completion, 91);
+        }
+      }
+      return dates;
+    }
+
+    function render() {
+      const otpEl = document.getElementById('otp-date');
+      const exEl = document.getElementById('exercise-date');
+      const upEl = document.getElementById('upload-date');
+      const warnEl = document.getElementById('warn');
+
+      const otp = parseDate(otpEl.value);
+      const exercise = parseDate(exEl.value);
+      const upload = parseDate(upEl.value);
+
+      // Validation on manual override
+      warnEl.classList.remove('show');
+      warnEl.textContent = '';
+      if (otp && exercise) {
+        if (exercise < otp) {
+          warnEl.textContent = 'Exercise date is before OTP date — please check.';
+          warnEl.classList.add('show');
+        } else if (diffDays(exercise, otp) > 21) {
+          warnEl.textContent = `Exercise is ${diffDays(exercise, otp)} days after OTP — beyond the 21-day cut-off. The OTP would have lapsed.`;
+          warnEl.classList.add('show');
+        }
+      }
+      if (!warnEl.classList.contains('show') && otp && exercise && upload) {
+        if (upload < exercise) {
+          warnEl.textContent = 'Portal submission is before OTP exercise — please check.';
+          warnEl.classList.add('show');
+        } else if (diffDays(upload, exercise) > 60) {
+          warnEl.textContent = `Portal submission is ${diffDays(upload, exercise)} days after exercise — beyond the 60-day HDB submission window.`;
+          warnEl.classList.add('show');
+        }
+      }
+
+      const dates = compute(otp, exercise, upload);
+      const timeline = document.getElementById('timeline');
+      const heroDate = document.getElementById('hero-date');
+      const heroSub  = document.getElementById('hero-sub');
+      const heroStrong = document.getElementById('hero-strong');
+
+      // Hero
+      if (dates && dates.completion) {
+        heroDate.textContent = fmtDDMMYY(dates.completion);
+        const totalDays = diffDays(dates.completion, dates.otp);
+        const weeks = Math.round(totalDays / 7);
+        heroSub.childNodes[0].textContent = `${fmtDayLong(dates.completion)}`;
+        heroStrong.textContent = `About ${weeks} weeks · ${totalDays} days from OTP`;
+      } else {
+        heroDate.textContent = '—';
+        heroSub.childNodes[0].textContent = 'Enter dates to project';
+        heroStrong.textContent = ' ';
+      }
+
+      // Timeline
+      if (!dates) {
+        timeline.innerHTML = '<p style="color:var(--mute);font-size:14px;padding:20px 0;">Enter both dates to see the projected timeline.</p>';
+        return;
+      }
+
+      timeline.innerHTML = stages.map(stage => {
+        const d = dates[stage.key];
+        const dateStr = fmtDDMMYY(d);
+        const subStr  = fmtWeekMonth(d);
+        const optClass = stage.optional ? ' optional' : '';
+        let dayCount = '';
+        if (d && dates.otp && stage.key !== 'otp') {
+          const dd = diffDays(d, dates.otp);
+          dayCount = `<div class="day-count">Day ${dd}</div>`;
+        }
+        // Dynamic eyebrows reflect actual overrides
+        let eyebrow = stage.eyebrow;
+        if (stage.key === 'exercise' && d && dates.otp) {
+          const delta = diffDays(d, dates.otp);
+          eyebrow = `Day ${delta} of OTP`;
+        } else if (stage.key === 'upload' && d && dates.exercise) {
+          const delta = diffDays(d, dates.exercise);
+          eyebrow = `${delta} days after exercise`;
+        }
+        return `
+          <article class="row${optClass}">
+            <div class="spine" aria-hidden="true"><div class="marker"></div></div>
+            <div class="content">
+              <div class="eyebrow">${eyebrow}</div>
+              <div class="title">${stage.title}</div>
+              <div class="desc">${stage.desc}</div>
+            </div>
+            <div class="date-col">
+              <div class="date-big">${dateStr}</div>
+              <div class="date-sub">${subStr}</div>
+              ${dayCount}
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function init() {
+      const today = new Date();
+      const iso = d => d.toISOString().split('T')[0];
+
+      const otpEl = document.getElementById('otp-date');
+      const exEl = document.getElementById('exercise-date');
+      const upEl = document.getElementById('upload-date');
+      const daysEl = document.getElementById('upload-days');
+
+      otpEl.value = iso(today);
+      exEl.value = iso(addDays(today, 21));
+      daysEl.value = 7;
+      upEl.value = iso(addDays(today, 28));  // 21 + 7
+
+      // Current days value (default 7 if empty/invalid)
+      const currentDays = () => {
+        const n = parseInt(daysEl.value, 10);
+        return isNaN(n) ? 7 : n;
+      };
+
+      // OTP change: cascade to exercise (Day 21) and portal (+currentDays)
+      const handleOtpChange = () => {
+        const otp = parseDate(otpEl.value);
+        if (otp) {
+          exEl.value = iso(addDays(otp, 21));
+          upEl.value = iso(addDays(otp, 21 + currentDays()));
+        }
+        render();
+      };
+      otpEl.addEventListener('input', handleOtpChange);
+      otpEl.addEventListener('change', handleOtpChange);
+
+      // Exercise change: cascade to portal (+currentDays)
+      const handleExerciseChange = () => {
+        const exercise = parseDate(exEl.value);
+        if (exercise) upEl.value = iso(addDays(exercise, currentDays()));
+        render();
+      };
+      exEl.addEventListener('input', handleExerciseChange);
+      exEl.addEventListener('change', handleExerciseChange);
+
+      // Days change: recompute portal date from exercise + days
+      const handleDaysChange = () => {
+        const exercise = parseDate(exEl.value);
+        const n = parseInt(daysEl.value, 10);
+        if (exercise && !isNaN(n)) {
+          upEl.value = iso(addDays(exercise, n));
+        }
+        render();
+      };
+      daysEl.addEventListener('input', handleDaysChange);
+      daysEl.addEventListener('change', handleDaysChange);
+
+      // Portal date change: sync days input to the actual delta from exercise
+      const handleUploadChange = () => {
+        const exercise = parseDate(exEl.value);
+        const upload = parseDate(upEl.value);
+        if (exercise && upload) {
+          daysEl.value = diffDays(upload, exercise);
+        }
+        render();
+      };
+      upEl.addEventListener('input', handleUploadChange);
+      upEl.addEventListener('change', handleUploadChange);
+
+      render();
+    }
+
+    init();
+  </script>
+</body>
+</html>
