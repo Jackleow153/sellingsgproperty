@@ -311,8 +311,7 @@
   .pdf-bar {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 56px;
-    margin-top: -32px;
+    margin-top: 28px;
   }
   .pdf-btn {
     display: inline-flex;
@@ -323,18 +322,18 @@
     font-weight: 500;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--ink);
-    background: var(--paper);
-    border: 1px solid var(--rule-strong);
+    color: #fff;
+    background: #d9611b;
+    border: 1px solid #d9611b;
     border-radius: 4px;
     padding: 10px 16px;
     cursor: pointer;
     transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
   }
   .pdf-btn:hover {
-    border-color: var(--accent);
-    background: var(--accent-soft);
-    color: var(--accent);
+    border-color: #b84e12;
+    background: #b84e12;
+    color: #fff;
   }
   .pdf-btn svg { flex-shrink: 0; }
 
@@ -550,7 +549,7 @@
     .hero-date { font-size: 40px; }
     .hero-sub { font-size: 16px; text-align: left; }
     .hero-row { flex-direction: column; align-items: flex-start; gap: 12px; }
-    .pdf-bar { justify-content: stretch; margin-top: 0; margin-bottom: 40px; }
+    .pdf-bar { justify-content: stretch; }
     .pdf-btn { width: 100%; justify-content: center; }
     .row { grid-template-columns: 28px 1fr; gap: 14px; padding: 18px 0; }
     .date-col { grid-column: 2; text-align: left; margin-top: 10px; min-width: 0; padding-top: 0; }
@@ -606,13 +605,6 @@
       </div>
     </section>
 
-    <div class="pdf-bar">
-      <button type="button" class="pdf-btn" id="pdf-btn" onclick="downloadPDF()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download as PDF
-      </button>
-    </div>
-
     <div class="section-label">
       <span style="color:var(--mute);letter-spacing:0.14em;">Full milestone breakdown</span>
       <span>All dates in dd/mm/yy</span>
@@ -631,6 +623,13 @@
         <li>The timeline uses conservative (later) estimates where a range exists, so actual completion may arrive sooner. Weekends and public holidays are not adjusted for.</li>
       </ul>
     </section>
+
+    <div class="pdf-bar">
+      <button type="button" class="pdf-btn" id="pdf-btn" onclick="downloadPDF()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download as PDF
+      </button>
+    </div>
 
     <footer>
       Jack Leow · <a href="tel:+6580621538">8062-1538</a><br>
