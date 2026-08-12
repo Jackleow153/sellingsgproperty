@@ -307,6 +307,37 @@
     margin-top: 4px;
   }
 
+  /* ============ PDF download ============ */
+  .pdf-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 56px;
+    margin-top: -32px;
+  }
+  .pdf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--rule-strong);
+    border-radius: 4px;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+  }
+  .pdf-btn:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+  .pdf-btn svg { flex-shrink: 0; }
+
   /* ============ Timeline ============ */
   .section-label {
     font-family: var(--mono);
@@ -519,6 +550,8 @@
     .hero-date { font-size: 40px; }
     .hero-sub { font-size: 16px; text-align: left; }
     .hero-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .pdf-bar { justify-content: stretch; margin-top: 0; margin-bottom: 40px; }
+    .pdf-btn { width: 100%; justify-content: center; }
     .row { grid-template-columns: 28px 1fr; gap: 14px; padding: 18px 0; }
     .date-col { grid-column: 2; text-align: left; margin-top: 10px; min-width: 0; padding-top: 0; }
     .date-big { font-size: 20px; }
@@ -528,7 +561,7 @@
 
   /* ============ Print ============ */
   @media print {
-    .inputs, .warn { display: none; }
+    .inputs, .warn, .pdf-bar { display: none; }
     .page { padding: 20px; max-width: 100%; }
     .hero { break-inside: avoid; }
     .row { break-inside: avoid; }
@@ -572,6 +605,13 @@
         <div class="hero-sub" id="hero-sub">Enter dates to project<strong id="hero-strong">&nbsp;</strong></div>
       </div>
     </section>
+
+    <div class="pdf-bar">
+      <button type="button" class="pdf-btn" id="pdf-btn" onclick="downloadPDF()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download as PDF
+      </button>
+    </div>
 
     <div class="section-label">
       <span style="color:var(--mute);letter-spacing:0.14em;">Full milestone breakdown</span>
@@ -645,6 +685,19 @@
       if (!d) return '';
       const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
       return days[d.getDay()];
+    }
+
+    function downloadPDF() {
+      const heroDateText = document.getElementById('hero-date').textContent;
+      const originalTitle = document.title;
+      if (heroDateText && heroDateText !== '—') {
+        document.title = `HDB Resale Timeline - Handover ${heroDateText.replace(/\//g, '-')}`;
+      }
+      const restoreTitle = () => { document.title = originalTitle; };
+      window.addEventListener('afterprint', restoreTitle, { once: true });
+      window.print();
+      // Fallback in case the browser doesn't fire afterprint (e.g. cancelled dialog on some setups)
+      setTimeout(restoreTitle, 2000);
     }
 
     function compute(otp, exercise, upload) {
