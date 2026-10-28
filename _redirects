@@ -49,8 +49,10 @@
  /project/lentor-gardens-residences/      /project/lentor-gardens-residences/index.html   200
  /project/*                               /index.html   200
 
-# Fallback: everything else serves the SPA (required for client-side routing of all subpages + modals)
- /*                                       /index.html   200
 # Proxy /news to the property news site
 /news/*  https://sg-property-news.netlify.app/:splat  200
 /news    https://sg-property-news.netlify.app/  200
+
+# Fallback: everything else serves the SPA (required for client-side routing of all subpages + modals)
+ /*                                       /index.html   200
+/news/*  https://sg-property-news.netlify.app/:splat  200
