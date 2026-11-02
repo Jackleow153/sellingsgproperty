@@ -8,7 +8,8 @@
       "date": "2026/11/02",
       "image": "/news/images/9806.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9806",
-      "category": "Real estate"
+      "category": "Real estate",
+      "path": "/news/9806/"
     },
     {
       "id": "9805",
@@ -16,7 +17,8 @@
       "date": "2026/11/02",
       "image": "/news/images/9805.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9805",
-      "category": "Real estate"
+      "category": "Real estate",
+      "path": "/news/9805/"
     },
     {
       "id": "9803",
@@ -24,7 +26,8 @@
       "date": "2026/11/02",
       "image": "/news/images/9803.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9803",
-      "category": "Real estate"
+      "category": "Real estate",
+      "path": "/news/9803/"
     },
     {
       "id": "9802",
@@ -32,7 +35,8 @@
       "date": "2026/11/02",
       "image": "/news/images/9802.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9802",
-      "category": "Real estate"
+      "category": "Real estate",
+      "path": "/news/9802/"
     },
     {
       "id": "9799",
@@ -40,7 +44,8 @@
       "date": "2026/11/01",
       "image": "/news/images/9799.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9799",
-      "category": "Real estate"
+      "category": "Real estate",
+      "path": "/news/9799/"
     },
     {
       "id": "9798",
@@ -48,7 +53,8 @@
       "date": "2026/10/31",
       "image": "/news/images/9798.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9798",
-      "category": "Real estate"
+      "category": "Real estate",
+      "path": "/news/9798/"
     },
     {
       "id": "9794",
@@ -56,7 +62,8 @@
       "date": "2026/10/31",
       "image": "/news/images/9794.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9794",
-      "category": "Real estate"
+      "category": "Real estate",
+      "path": "/news/9794/"
     },
     {
       "id": "9792",
@@ -64,7 +71,8 @@
       "date": "2026/10/30",
       "image": "/news/images/9792.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9792",
-      "category": "Real estate"
+      "category": "Real estate",
+      "path": "/news/9792/"
     },
     {
       "id": "9790",
@@ -72,7 +80,8 @@
       "date": "2026/10/30",
       "image": "/news/images/9790.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9790",
-      "category": "Real estate"
+      "category": "Real estate",
+      "path": "/news/9790/"
     },
     {
       "id": "9789",
@@ -80,7 +89,8 @@
       "date": "2026/10/29",
       "image": "/news/images/9789.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9789",
-      "category": "Real estate"
+      "category": "Real estate",
+      "path": "/news/9789/"
     },
     {
       "id": "9788",
@@ -88,7 +98,8 @@
       "date": "2026/10/29",
       "image": "/news/images/9788.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9788",
-      "category": "Real estate"
+      "category": "Real estate",
+      "path": "/news/9788/"
     },
     {
       "id": "9787",
@@ -96,7 +107,8 @@
       "date": "2026/10/29",
       "image": "/news/images/9787.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9787",
-      "category": "Real estate"
+      "category": "Real estate",
+      "path": "/news/9787/"
     }
   ]
 }

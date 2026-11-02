@@ -251,7 +251,7 @@
     <h1 class="news-heading">News</h1>
     <p class="news-status" id="news-status">Loading the latest headlines…</p>
     <ul class="news-list" id="news-list"></ul>
-    <p class="news-note">Headlines from the public <a href="https://t.me/s/PropNexPropertyNewsUpdate" target="_blank" rel="noopener noreferrer">PropNex Property News</a> channel. Each row opens the original post.</p>
+    <p class="news-note">Headlines from the public PropNex Property News channel. Each row opens a short brief on this site.</p>
   </main>
 
   <script>
@@ -285,9 +285,9 @@
         const image = item.image || PLACEHOLDER;
         const title = escapeHtml(item.title || "Property update");
         const date = escapeHtml(item.date || "");
-        const link = escapeHtml(item.link || "https://t.me/s/PropNexPropertyNewsUpdate");
+        const href = "/news/" + encodeURIComponent(item.id) + "/";
         return (
-          '<li><a class="news-row" href="' + link + '" target="_blank" rel="noopener noreferrer">' +
+          '<li><a class="news-row" href="' + href + '">' +
             '<img class="news-thumb" src="' + escapeHtml(image) + '" alt="" width="190" height="118" loading="lazy" ' +
               'onerror="this.onerror=null;this.src=\'' + PLACEHOLDER + '\'">' +
             '<div class="news-copy">' +

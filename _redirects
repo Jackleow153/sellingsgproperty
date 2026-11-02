@@ -52,6 +52,8 @@
 # Local News page (news/index.html + /news.json). Do not proxy this elsewhere.
  /news                                    /news/index.html   200
  /news/                                   /news/index.html   200
+ /news/:id                                /news/:id/index.html   200
+ /news/:id/                               /news/:id/index.html   200
 
 # Fallback: everything else serves the SPA (required for client-side routing of all subpages + modals)
  /*                                       /index.html   200

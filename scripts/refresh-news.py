@@ -11,7 +11,15 @@ or:
 
 Reads https://t.me/s/PropNexPropertyNewsUpdate (no login), keeps the latest
 property posts, skips seminars and other promo posts, downloads each photo
-into news/images/, and writes news.json. The News page loads that file.
+into news/images/, and writes news.json. It also rebuilds a static page at
+news/<id>/index.html for each story.
+
+Plain-English summaries and the three takeaways live in news/copy.json, keyed
+by the Telegram post id. Re-running this script keeps that copy. A new post
+with no entry yet still gets a page, with a short note instead of a finished
+brief. To write the real brief, add the id to news/copy.json and run:
+
+    python3 scripts/refresh-news.py --pages-only
 """
 
 from __future__ import annotations
@@ -20,6 +28,7 @@ import html
 import json
 import re
 import ssl
+import sys
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -30,8 +39,13 @@ MAX_ITEMS = 12
 MAX_PAGES = 3
 ROOT = Path(__file__).resolve().parent.parent
 JSON_PATH = ROOT / "news.json"
-IMAGE_DIR = ROOT / "news" / "images"
+COPY_PATH = ROOT / "news" / "copy.json"
+NEWS_DIR = ROOT / "news"
+IMAGE_DIR = NEWS_DIR / "images"
+SITEMAP_PATH = ROOT / "sitemap.xml"
 PLACEHOLDER = "/news/images/placeholder.svg"
+SITEMAP_START = "<!-- news-details:start -->"
+SITEMAP_END = "<!-- news-details:end -->"
 SGT = timezone(timedelta(hours=8))
 
 USER_AGENT = (
@@ -272,6 +286,346 @@ def collect_posts() -> list[dict]:
     return unique
 
 
+def load_copy() -> dict:
+    if not COPY_PATH.exists():
+        return {}
+    data = json.loads(COPY_PATH.read_text(encoding="utf-8"))
+    return data if isinstance(data, dict) else {}
+
+
+def story_copy(post_id: str, title: str, copy_book: dict) -> tuple[list[str], list[str], bool]:
+    entry = copy_book.get(post_id) or {}
+    summary = [str(part).strip() for part in entry.get("summary", []) if str(part).strip()]
+    takeaways = [str(part).strip() for part in entry.get("takeaways", []) if str(part).strip()]
+    if 2 <= len(summary) <= 4 and len(takeaways) == 3:
+        return summary, takeaways, True
+    summary = [
+        title,
+        "A fuller plain-English brief for this story has not been added yet. The headline is listed so you can see what was reported. It is not, by itself, a reason to buy or sell.",
+        "When a write-up is added, it will explain what the news means for someone buying or selling a home in Singapore.",
+    ]
+    takeaways = [
+        "Do not change a buying or selling decision on a headline alone. Read the details and check them against your own budget.",
+        "If you are buying, compare this news with the actual home, the location, and the monthly cost you can live with.",
+        "If you are selling, be ready to answer questions about the area in plain language. Buyers remember what they can verify.",
+    ]
+    return summary, takeaways, False
+
+
+def esc(value: str) -> str:
+    return html.escape(value, quote=True)
+
+
+NAV_HTML = """
+  <nav class="site-nav" aria-label="Primary">
+    <div class="site-nav-inner">
+      <a class="brand" href="/">
+        <strong>SellingSgProperty.</strong>
+        <span>SG</span>
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/insights">Insights</a>
+        <a href="/news/" class="active" aria-current="page">News</a>
+        <a href="/contact">Get my free situation check.</a>
+        <a href="/mortgage-calculator">Mortgage loan calculator</a>
+      </div>
+      <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-panel" aria-label="Open navigation menu">☰</button>
+    </div>
+    <div class="mobile-panel" id="mobile-panel">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/insights">Insights</a>
+      <a href="/news/" class="active" aria-current="page">News</a>
+      <a href="/contact">Get my free situation check.</a>
+      <a href="/mortgage-calculator">Mortgage loan calculator</a>
+    </div>
+  </nav>
+"""
+
+DETAIL_CSS = """
+    :root {
+      --bg: #0d0d0d;
+      --red: #e85d4c;
+      --muted: #8d8d8d;
+      --line: rgba(255, 255, 255, 0.08);
+      --violet: #6d28d9;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+      background: var(--bg);
+      color: #fff;
+      min-height: 100vh;
+    }
+    a { color: inherit; }
+    .site-nav {
+      background: #fff;
+      color: #0f172a;
+      border-bottom: 1px solid #e2e8f0;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+    .site-nav-inner {
+      max-width: 1536px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand { text-decoration: none; color: #0f172a; line-height: 1; }
+    .brand strong { display: block; font-size: 1.7rem; font-weight: 900; letter-spacing: -0.04em; }
+    .brand span { display: block; margin-top: 2px; color: var(--violet); font-size: 9px; font-weight: 600; letter-spacing: 0.18em; }
+    .nav-links { display: flex; align-items: center; gap: 4px; }
+    .nav-links a {
+      text-decoration: none;
+      color: #334155;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 8px 18px;
+      border-bottom: 3px solid transparent;
+    }
+    .nav-links a:hover { color: #0f172a; }
+    .nav-links a.active { color: var(--violet); font-weight: 700; border-bottom-color: var(--violet); border-radius: 0; }
+    .menu-btn {
+      display: none; width: 44px; height: 44px; border: 0; background: transparent;
+      font-size: 1.4rem; cursor: pointer; color: #475569;
+    }
+    .mobile-panel { display: none; background: #fff; color: #0f172a; border-top: 1px solid #e2e8f0; padding: 8px 24px 20px; }
+    .mobile-panel.open { display: block; }
+    .mobile-panel a { display: block; text-decoration: none; padding: 12px 4px; font-weight: 500; border-bottom: 1px solid #f1f5f9; }
+    .mobile-panel a.active { color: var(--violet); font-weight: 700; }
+    .story {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 28px 28px 72px;
+    }
+    .back {
+      display: inline-block;
+      margin: 4px 0 18px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+    }
+    .back:hover { color: #fff; }
+    .kicker {
+      margin: 0 0 10px;
+      color: var(--red);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+      line-height: 1.25;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+    }
+    .story-date {
+      display: block;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-variant-numeric: tabular-nums;
+    }
+    .hero {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin: 22px 0 8px;
+      background: #1a1a1a;
+      display: block;
+    }
+    .summary p {
+      color: #ececec;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      margin: 1.15rem 0;
+    }
+    .takeaways {
+      margin-top: 36px;
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+    }
+    .takeaways h2 {
+      margin: 22px 0 8px;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+    .takeaways ul { margin: 0; padding: 0; list-style: none; }
+    .takeaways li {
+      position: relative;
+      margin: 0;
+      padding: 14px 0 14px 18px;
+      border-bottom: 1px solid var(--line);
+      color: #f2f2f2;
+      line-height: 1.6;
+      font-size: 1.02rem;
+    }
+    .takeaways li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 22px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
+    }
+    .source-note {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .source-note a { color: #bdbdbd; }
+    @media (max-width: 1200px) {
+      .nav-links { display: none; }
+      .menu-btn { display: inline-flex; align-items: center; justify-content: center; }
+      .site-nav-inner { padding: 0 16px; }
+    }
+    @media (max-width: 640px) {
+      .story { padding: 18px 16px 56px; }
+      h1 { font-size: 1.45rem; }
+      .hero { height: 190px; }
+      .summary p, .takeaways li { font-size: 1rem; }
+    }
+"""
+
+MENU_JS = """
+    document.getElementById("menu-btn").addEventListener("click", function () {
+      const panel = document.getElementById("mobile-panel");
+      const open = panel.classList.toggle("open");
+      this.setAttribute("aria-expanded", open ? "true" : "false");
+      this.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+      this.textContent = open ? "×" : "☰";
+    });
+"""
+
+
+def render_detail_page(item: dict, summary: list[str], takeaways: list[str]) -> str:
+    title = item["title"]
+    date = item["date"]
+    image = item.get("image") or PLACEHOLDER
+    iso_date = date.replace("/", "-")
+    path = f"/news/{item['id']}/"
+    paragraphs = "\n".join(f"      <p>{esc(part)}</p>" for part in summary)
+    bullets = "\n".join(f"        <li>{esc(point)}</li>" for point in takeaways)
+    description = summary[0]
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{esc(title)} | SellingSgProperty News</title>
+  <meta name="description" content="{esc(description)}">
+  <link rel="canonical" href="https://www.sellingsgproperty.com{path}">
+  <meta property="og:title" content="{esc(title)}">
+  <meta property="og:description" content="{esc(description)}">
+  <meta property="og:url" content="https://www.sellingsgproperty.com{path}">
+  <meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>{DETAIL_CSS}</style>
+</head>
+<body>
+{NAV_HTML}
+  <article class="story">
+    <a class="back" href="/news/">← All news</a>
+    <p class="kicker">Real estate</p>
+    <h1>{esc(title)}</h1>
+    <time class="story-date" datetime="{esc(iso_date)}">{esc(date)}</time>
+    <img class="hero" src="{esc(image)}" alt="" width="760" height="280" onerror="this.onerror=null;this.src='{PLACEHOLDER}'">
+    <div class="summary">
+{paragraphs}
+    </div>
+    <section class="takeaways" aria-labelledby="takeaways-heading">
+      <h2 id="takeaways-heading">3 Takeaways for Buyers &amp; Sellers</h2>
+      <ul>
+{bullets}
+      </ul>
+    </section>
+    <p class="source-note">Summary written for buyers and sellers. Headline from the public PropNex Property News channel.</p>
+  </article>
+  <script>{MENU_JS}</script>
+</body>
+</html>
+"""
+
+
+def update_sitemap(items: list[dict]) -> None:
+    if not SITEMAP_PATH.exists():
+        return
+    text = SITEMAP_PATH.read_text(encoding="utf-8")
+    if SITEMAP_START not in text or SITEMAP_END not in text:
+        print("sitemap markers missing; left sitemap.xml unchanged")
+        return
+    blocks = []
+    for item in items:
+        lastmod = item["date"].replace("/", "-")
+        blocks.append(
+            "  <url>\n"
+            f"    <loc>https://www.sellingsgproperty.com/news/{item['id']}/</loc>\n"
+            f"    <lastmod>{lastmod}</lastmod>\n"
+            "    <changefreq>monthly</changefreq>\n"
+            "    <priority>0.6</priority>\n"
+            "  </url>"
+        )
+    replacement = SITEMAP_START + "\n" + "\n".join(blocks) + "\n  " + SITEMAP_END
+    pattern = re.compile(re.escape(SITEMAP_START) + r".*?" + re.escape(SITEMAP_END), re.S)
+    SITEMAP_PATH.write_text(pattern.sub(replacement, text, count=1), encoding="utf-8")
+
+
+def write_detail_pages(items: list[dict]) -> None:
+    copy_book = load_copy()
+    keep_ids = set()
+    missing = []
+    for item in items:
+        summary, takeaways, written = story_copy(item["id"], item["title"], copy_book)
+        if not written:
+            missing.append(item["id"])
+        folder = NEWS_DIR / item["id"]
+        folder.mkdir(parents=True, exist_ok=True)
+        (folder / "index.html").write_text(
+            render_detail_page(item, summary, takeaways),
+            encoding="utf-8",
+        )
+        keep_ids.add(item["id"])
+        item["path"] = f"/news/{item['id']}/"
+
+    for child in NEWS_DIR.iterdir():
+        if child.is_dir() and child.name.isdigit() and child.name not in keep_ids:
+            for file in child.iterdir():
+                if file.is_file():
+                    file.unlink()
+            child.rmdir()
+
+    update_sitemap(items)
+    print(f"Wrote {len(items)} detail pages under news/<id>/")
+    if missing:
+        print("No brief in news/copy.json yet for: " + ", ".join(missing))
+
+
+def pages_only() -> None:
+    if not JSON_PATH.exists():
+        raise SystemExit("news.json is missing. Run python3 scripts/refresh-news.py first.")
+    payload = json.loads(JSON_PATH.read_text(encoding="utf-8"))
+    items = payload.get("items") or []
+    if not items:
+        raise SystemExit("news.json has no items.")
+    write_detail_pages(items)
+    payload["items"] = items
+    JSON_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
 def main() -> None:
     posts = collect_posts()
     if not posts:
@@ -293,7 +647,7 @@ def main() -> None:
                 "title": post["title"],
                 "date": format_date(post["datetime"]),
                 "image": image,
-                "link": f"https://t.me/{CHANNEL}/{post['id']}",
+                "source": f"https://t.me/{CHANNEL}/{post['id']}",
                 "category": "Real estate",
             }
         )
@@ -314,6 +668,8 @@ def main() -> None:
         "updated": datetime.now(SGT).isoformat(timespec="seconds"),
         "items": items,
     }
+    write_detail_pages(items)
+    payload["items"] = items
     JSON_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Wrote {len(items)} items to {JSON_PATH.relative_to(ROOT)}")
     for item in items:
@@ -321,4 +677,7 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    if "--pages-only" in sys.argv:
+        pages_only()
+    else:
+        main()
