@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Refresh news.json from the public Telegram channel preview.
+"""Refresh the on-site Singapore property news from four public sources.
 
 From the site root:
 
@@ -9,30 +9,45 @@ or:
 
     npm run refresh-news
 
-Reads https://t.me/s/PropNexPropertyNewsUpdate (no login), keeps the latest
-property posts, skips seminars and other promo posts, downloads each photo
-into news/images/, and writes news.json. It also rebuilds a static page at
-news/<id>/index.html for each story.
+Sources, in priority order when the same story appears more than once:
 
-Plain-English summaries, three takeaways and three buyer/seller questions
-live in news/copy.json, keyed by the Telegram post id. The same entry can
-include a "zh" object (title, summary, facts, takeaways, questions) in
-Simplified Chinese. Re-running this script keeps that copy and rebuilds the
-list page, detail pages, sitemap entries and NewsArticle / FAQ schema. A new
-post with no entry yet still gets a page. The EN / 中文 choice is stored in
-the browser under localStorage key ssp-news-lang.
+    1. PropNex public preview https://t.me/s/PropNexPropertyNewsUpdate
+    2. Business Times property and residential listing pages
+    3. Stomp, dated from Google News site search
+    4. Google News search for Singapore property headlines
 
-Refresh, then deploy:
+The run keeps property stories, drops seminars, foreign property, commercial
+REIT notes and viral clips, and collapses the same story to one page by
+title and distinctive figures. Existing news/copy.json briefs are kept.
+A headline with no brief yet gets an original buyer/seller draft. Detail
+pages name the publisher in text and do not link out. news.json stores the
+publisher name, not the article URL.
+
+Preview what would be published, without writing files:
+
+    python3 scripts/refresh-news.py --dry-run
+
+Rewrite pages from the saved list without fetching:
+
+    python3 scripts/refresh-news.py --pages-only
+
+Refresh, then deploy when you want the live site updated:
 
     python3 scripts/refresh-news.py
-    git add news.json news sitemap.xml scripts/refresh-news.py
+    git add news.json news sitemap.xml scripts/refresh-news.py scripts/news_sources.py
     git commit -m "Refresh Singapore property news"
     git push origin main
 
-Netlify publishes https://www.sellingsgproperty.com. To rewrite pages from
-existing news.json without calling Telegram:
+Netlify publishes https://www.sellingsgproperty.com. To run this every
+morning, call the same command from cron or launchd, then commit and push
+when the new pages look right. This script does not install a scheduler
+and it does not push git.
 
-    python3 scripts/refresh-news.py --pages-only
+Plain-English summaries, three takeaways and three buyer/seller questions
+live in news/copy.json, keyed by story id. The same entry can include a
+"zh" object (title, summary, facts, takeaways, questions) in Simplified
+Chinese. The EN / 中文 choice is stored in the browser under localStorage
+key ssp-news-lang.
 """
 
 from __future__ import annotations
@@ -45,6 +60,15 @@ import sys
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+
+from news_sources import (
+    collect_business_times,
+    collect_google_news,
+    collect_stomp,
+    draft_copy,
+    merge_posts,
+    self_check,
+)
 
 CHANNEL = "PropNexPropertyNewsUpdate"
 PREVIEW = f"https://t.me/s/{CHANNEL}"
@@ -70,7 +94,12 @@ USER_AGENT = (
 # Promo / event posts are dropped even if they mention districts or landed homes.
 PROMO_RE = re.compile(
     r"\b(seminar|webinar|zoom\s*ces|zoom|event-details|register now|sign\s*up|"
-    r"rsvp|open house|training session)\b",
+    r"rsvp|open house|training session|blog post|calling all|quick pointers|"
+    r"shockingly)\b",
+    re.I,
+)
+CRIME_TITLE_RE = re.compile(
+    r"\b(jail|jailed|launder|forfeit|scam|snatch|tussle|shell firms|convicted)\b",
     re.I,
 )
 
@@ -208,9 +237,15 @@ def keep_post(post: dict) -> bool:
     if len(title) < 8:
         return False
     blob = f"{title}\n{post['body']}"
-    if PROMO_RE.search(blob):
+    if PROMO_RE.search(blob) or CRIME_TITLE_RE.search(title):
         return False
-    if not PROPERTY_RE.search(blob):
+    if re.search(r"\bbuilding\b", title, re.I) and not re.search(
+        r"\b(hdb|bto|condo|flat|flats|home|homes)\b", title, re.I
+    ):
+        return False
+    # The headline itself has to be about property. A promo caption that only
+    # mentions a home in the body is not a news story.
+    if not PROPERTY_RE.search(title):
         return False
     return True
 
@@ -240,12 +275,17 @@ def extension_for(content_type: str, url: str) -> str:
     return ".jpg"
 
 
-def download_image(url: str, post_id: str) -> str:
-    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "image/*,*/*"})
+def download_image(url: str, post_id: str, referer: str | None = None) -> str:
+    headers = {"User-Agent": USER_AGENT, "Accept": "image/*,*/*"}
+    if referer:
+        headers["Referer"] = referer
+    req = urllib.request.Request(url, headers=headers)
     ctx = ssl.create_default_context()
     with urllib.request.urlopen(req, timeout=30, context=ctx) as res:
         data = res.read()
         ext = extension_for(res.headers.get("Content-Type", ""), url)
+    if len(data) < 2500:
+        raise OSError(f"image too small ({len(data)} bytes)")
     IMAGE_DIR.mkdir(parents=True, exist_ok=True)
     filename = f"{post_id}{ext}"
     dest = IMAGE_DIR / filename
@@ -534,13 +574,23 @@ DETAIL_CSS = """
       letter-spacing: -0.03em;
       font-weight: 700;
     }
-    .story-date {
-      display: block;
+    .story-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 16px;
+      align-items: baseline;
       margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .story-date {
+      display: inline;
+      margin: 0;
       color: var(--muted);
       font-size: 0.92rem;
       font-variant-numeric: tabular-nums;
     }
+    .source-name { color: var(--muted); }
     .hero {
       width: 100%;
       height: 280px;
@@ -784,6 +834,8 @@ def detail_schema(item: dict, copy: dict) -> str:
 def render_detail_page(item: dict, copy: dict) -> str:
     title = item["title"]
     date = item["date"]
+    source_name = item.get("sourceName") or "PropNex Property News"
+    source_name_zh = item.get("sourceNameZh") or "博纳房产新闻"
     image = item.get("image") or PLACEHOLDER
     iso_date = date.replace("/", "-")
     path = f"/news/{item['id']}/"
@@ -850,7 +902,7 @@ def render_detail_page(item: dict, copy: dict) -> str:
       <h1>{bi(title, zh["title"])}</h1>
       {LANG_SWITCH}
     </div>
-    <time class="story-date" datetime="{esc(iso_date)}">{bi(date, chinese_date(date))}</time>
+    <p class="story-meta"><time class="story-date" datetime="{esc(iso_date)}">{bi(date, chinese_date(date))}</time><span class="source-name">{bi("Source: " + source_name, "来源：" + source_name_zh)}</span></p>
     <img class="hero" src="{esc(image)}" alt="" width="760" height="280" onerror="this.onerror=null;this.src='{PLACEHOLDER}'">
 {facts_html}    <div class="summary">
       <h2>{bi("What this means", "这对你意味着什么")}</h2>
@@ -990,8 +1042,12 @@ def write_news_index(items: list[dict]) -> None:
     text = INDEX_PATH.read_text(encoding="utf-8")
     text = replace_marked(text, LIST_START, LIST_END, render_list_html(items, load_copy()))
     text = replace_marked(text, SCHEMA_START, SCHEMA_END, render_list_schema(items))
-    if "t.me/" in text or "telegram.org" in text.lower():
+    lowered = text.lower()
+    if "t.me/" in lowered or "telegram.org" in lowered:
         raise SystemExit("News list tried to link off-site. Aborting.")
+    for host in ("news.google.com", "businesstimes.com", "stomp.sg"):
+        if host in lowered:
+            raise SystemExit(f"News list contains {host}. Aborting.")
     INDEX_PATH.write_text(text, encoding="utf-8")
 
 
@@ -1022,11 +1078,14 @@ def write_detail_pages(items: list[dict]) -> None:
         item["description"] = copy["description"]
 
     for child in NEWS_DIR.iterdir():
-        if child.is_dir() and child.name.isdigit() and child.name not in keep_ids:
-            for file in child.iterdir():
-                if file.is_file():
-                    file.unlink()
-            child.rmdir()
+        if not child.is_dir() or child.name == "images" or child.name in keep_ids:
+            continue
+        if not (child / "index.html").exists():
+            continue
+        for file in child.iterdir():
+            if file.is_file():
+                file.unlink()
+        child.rmdir()
 
     update_sitemap(items)
     write_news_index(items)
@@ -1040,47 +1099,134 @@ def write_detail_pages(items: list[dict]) -> None:
     print("To deploy: commit the news files and push main. Netlify publishes https://www.sellingsgproperty.com")
 
 
-def pages_only() -> None:
+def load_saved_posts() -> list[dict]:
     if not JSON_PATH.exists():
-        raise SystemExit("news.json is missing. Run python3 scripts/refresh-news.py first.")
+        return []
     payload = json.loads(JSON_PATH.read_text(encoding="utf-8"))
-    items = payload.get("items") or []
-    if not items:
-        raise SystemExit("news.json has no items.")
-    write_detail_pages(items)
-    payload["items"] = items
-    JSON_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
-
-def main() -> None:
-    posts = collect_posts()
-    if not posts:
-        raise SystemExit("No property posts found. The channel preview may have changed.")
-
-    items = []
-    used_images = {"placeholder.svg"}
-    for post in posts:
-        image = PLACEHOLDER
-        if post["image_url"]:
-            try:
-                image = download_image(post["image_url"], post["id"])
-                used_images.add(Path(image).name)
-            except Exception as exc:  # keep the row even if Telegram blocks the file
-                print(f"image skip {post['id']}: {exc}")
-        items.append(
+    posts = []
+    for raw in payload.get("items") or []:
+        date = str(raw.get("date") or "")
+        try:
+            when = datetime.strptime(date, "%Y/%m/%d").replace(tzinfo=SGT)
+            stamp = when.isoformat(timespec="seconds")
+        except ValueError:
+            stamp = ""
+        posts.append(
             {
-                "id": post["id"],
-                "title": post["title"],
-                "date": format_date(post["datetime"]),
-                "image": image,
-                "source": f"https://t.me/{CHANNEL}/{post['id']}",
-                "category": "Real estate",
+                "id": str(raw.get("id")),
+                "title": raw.get("title") or "",
+                "date": date,
+                "datetime": stamp,
+                "image": raw.get("image") or PLACEHOLDER,
+                "image_url": "",
+                "image_referer": "",
+                "sourceName": raw.get("sourceName") or "PropNex Property News",
+                "sourceNameZh": raw.get("sourceNameZh") or "博纳房产新闻",
+                "sourceFeed": raw.get("sourceFeed") or "propnex",
+                "category": raw.get("category") or "Real estate",
+                "saved": True,
             }
         )
+    return posts
 
+
+def tag_propnex(posts: list[dict]) -> list[dict]:
+    tagged = []
+    for post in posts:
+        tagged.append(
+            {
+                "id": str(post["id"]),
+                "title": post["title"],
+                "datetime": post["datetime"],
+                "date": format_date(post["datetime"]),
+                "image": "",
+                "image_url": post.get("image_url") or "",
+                "image_referer": "",
+                "sourceName": "PropNex Property News",
+                "sourceNameZh": "博纳房产新闻",
+                "sourceFeed": "propnex",
+                "category": "Real estate",
+                "saved": False,
+            }
+        )
+    return tagged
+
+
+def entry_is_written(entry: dict | None) -> bool:
+    if not isinstance(entry, dict):
+        return False
+    summary = text_list(entry, "summary")
+    takeaways = text_list(entry, "takeaways")
+    return 2 <= len(summary) <= 4 and len(takeaways) == 3
+
+
+def ensure_copy(items: list[dict]) -> None:
+    """Fill missing briefs. Never replace a summary that is already written."""
+    book = load_copy()
+    changed = False
+    for item in items:
+        if entry_is_written(book.get(item["id"])):
+            continue
+        book[item["id"]] = draft_copy(item["title"], item.get("sourceName") or "Property news")
+        changed = True
+        print(f"draft brief for {item['id']}: {item['title'][:80]}")
+    if changed:
+        COPY_PATH.parent.mkdir(parents=True, exist_ok=True)
+        COPY_PATH.write_text(json.dumps(book, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def dump_news(items: list[dict]) -> None:
+    public = []
+    for item in items:
+        public.append(
+            {
+                "id": item["id"],
+                "title": item["title"],
+                "date": item["date"],
+                "image": item.get("image") or PLACEHOLDER,
+                "sourceName": item.get("sourceName") or "PropNex Property News",
+                "sourceNameZh": item.get("sourceNameZh") or "博纳房产新闻",
+                "sourceFeed": item.get("sourceFeed") or "propnex",
+                "category": "Real estate",
+                "path": item.get("path") or f"/news/{item['id']}/",
+                "description": item.get("description") or "",
+            }
+        )
+    payload = {
+        "updated": datetime.now(SGT).isoformat(timespec="seconds"),
+        "sources": [
+            "PropNex Property News",
+            "Business Times",
+            "Stomp",
+            "Google News",
+        ],
+        "items": public,
+    }
+    raw = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
+    if re.search(r"https?://|t\.me/", raw):
+        raise SystemExit("news.json would contain an external URL. Aborting.")
+    JSON_PATH.write_text(raw, encoding="utf-8")
+
+
+def attach_images(items: list[dict]) -> None:
+    used = {"placeholder.svg"}
+    for item in items:
+        image = item.get("image") or PLACEHOLDER
+        if item.get("image_url"):
+            try:
+                image = download_image(
+                    item["image_url"],
+                    item["id"],
+                    item.get("image_referer") or None,
+                )
+            except Exception as exc:
+                print(f"image skip {item['id']}: {exc}")
+                image = item.get("image") or PLACEHOLDER
+        item["image"] = image or PLACEHOLDER
+        used.add(Path(item["image"]).name)
     if IMAGE_DIR.exists():
         for path in IMAGE_DIR.iterdir():
-            if path.name not in used_images and path.suffix.lower() in {
+            if path.name not in used and path.suffix.lower() in {
                 ".jpg",
                 ".jpeg",
                 ".png",
@@ -1089,17 +1235,61 @@ def main() -> None:
             }:
                 path.unlink()
 
-    payload = {
-        "source": PREVIEW,
-        "updated": datetime.now(SGT).isoformat(timespec="seconds"),
-        "items": items,
-    }
+
+def fetch_fresh_posts() -> list[dict]:
+    fresh: list[dict] = []
+    collectors = [
+        ("PropNex", lambda: tag_propnex(collect_posts())),
+        ("Business Times", collect_business_times),
+        ("Stomp", collect_stomp),
+        ("Google News", collect_google_news),
+    ]
+    for name, collector in collectors:
+        try:
+            batch = collector()
+            print(f"{name}: {len(batch)} headlines")
+            fresh.extend(batch)
+        except Exception as exc:
+            print(f"{name} skipped: {exc}")
+    return fresh
+
+
+def pages_only() -> None:
+    self_check()
+    items = load_saved_posts()
+    if len(items) < 8:
+        raise SystemExit("news.json has too few stories. Run a full refresh first.")
+    ensure_copy(items)
     write_detail_pages(items)
-    payload["items"] = items
-    JSON_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    dump_news(items)
+    print(f"Rebuilt {len(items)} stories from news.json")
+
+
+def main() -> None:
+    self_check()
+    saved = load_saved_posts()
+    fresh = fetch_fresh_posts()
+    items = merge_posts(saved, fresh)
+    if len(items) < 8:
+        raise SystemExit(
+            f"Only {len(items)} stories after merging. The news list was left unchanged."
+        )
+    if "--dry-run" in sys.argv:
+        print(f"\n{len(items)} stories")
+        for item in items:
+            flag = "keep" if item.get("saved") else "NEW"
+            print(
+                f"{flag}\t{item['id']}\t{item['date']}\t{item['sourceFeed']}\t"
+                f"{item['sourceName']}\t{item['title']}"
+            )
+        return
+    ensure_copy(items)
+    attach_images(items)
+    write_detail_pages(items)
+    dump_news(items)
     print(f"Wrote {len(items)} items to {JSON_PATH.relative_to(ROOT)}")
     for item in items:
-        print(f"  {item['date']}  {item['title']}")
+        print(f"  {item['date']}  [{item['sourceFeed']}]  {item['title']}")
 
 
 if __name__ == "__main__":
