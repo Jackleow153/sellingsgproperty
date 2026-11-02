@@ -616,11 +616,7 @@ DETAIL_CSS = """
       font-weight: 700;
     }
     .story-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px 16px;
-      align-items: baseline;
-      margin-top: 12px;
+      margin: 12px 0 0;
       color: var(--muted);
       font-size: 0.92rem;
     }
@@ -631,7 +627,15 @@ DETAIL_CSS = """
       font-size: 0.92rem;
       font-variant-numeric: tabular-nums;
     }
-    .source-name { color: var(--muted); }
+    .source-name {
+      margin: 6px 0 0;
+      color: #e6e6e6;
+      font-size: 0.95rem;
+      font-weight: 600;
+      line-height: 1.4;
+      text-decoration: none;
+      cursor: default;
+    }
     .hero {
       width: 100%;
       height: 280px;
@@ -958,7 +962,8 @@ def render_detail_page(item: dict, copy: dict) -> str:
       <h1>{bi(title, zh["title"])}</h1>
       {LANG_SWITCH}
     </div>
-    <p class="story-meta"><time class="story-date" datetime="{esc(iso_date)}">{bi(date, chinese_date(date))}</time><span class="source-name">{bi("Source: " + source_name, "来源：" + source_name_zh)}</span></p>
+    <p class="story-meta"><time class="story-date" datetime="{esc(iso_date)}">{bi(date, chinese_date(date))}</time></p>
+    <p class="source-name">{bi("Source: " + source_name, "来源：" + source_name_zh)}</p>
     {media_markup(image, hero=True)}
 {facts_html}    <div class="summary">
       <h2>{bi("What this means", "这对你意味着什么")}</h2>
@@ -1125,6 +1130,9 @@ def write_detail_pages(items: list[dict]) -> None:
         ]
         if offsite:
             raise SystemExit(f"Detail page {item['id']} contains an off-site link: {offsite[0]}")
+        source = re.search(r'<p class="source-name">(.*?)</p>', page, re.S)
+        if not source or "Source:" not in source.group(1) or "<a" in source.group(1).lower():
+            raise SystemExit(f"Detail page {item['id']} is missing a plain-text source line.")
         folder = NEWS_DIR / item["id"]
         folder.mkdir(parents=True, exist_ok=True)
         (folder / "index.html").write_text(page, encoding="utf-8")
