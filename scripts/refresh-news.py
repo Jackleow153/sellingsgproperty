@@ -45,7 +45,8 @@ from pathlib import Path
 
 CHANNEL = "PropNexPropertyNewsUpdate"
 PREVIEW = f"https://t.me/s/{CHANNEL}"
-MAX_ITEMS = 12
+MAX_ITEMS = 51
+PAGE_SIZE = 17
 MAX_PAGES = 3
 ROOT = Path(__file__).resolve().parent.parent
 JSON_PATH = ROOT / "news.json"
@@ -709,15 +710,31 @@ def replace_marked(text: str, start: str, end: str, inner: str) -> str:
     return pattern.sub(_repl, text, count=1)
 
 
+def render_pager(count: int) -> str:
+    pages = max(1, (count + PAGE_SIZE - 1) // PAGE_SIZE)
+    parts = ['<span class="pager-btn is-disabled">Previous Page</span>']
+    for number in range(1, pages + 1):
+        href = "/news/" if number == 1 else f"/news/?page={number}"
+        current = ' is-current" aria-current="page' if number == 1 else ""
+        parts.append(f'<a class="pager-num{current}" href="{href}">{number}</a>')
+    if pages > 1:
+        parts.append('<a class="pager-btn" href="/news/?page=2">Next page</a>')
+    else:
+        parts.append('<span class="pager-btn is-disabled">Next page</span>')
+    return '<nav class="pager" id="news-pager" aria-label="News pages">' + "".join(parts) + "</nav>"
+
+
 def render_list_html(items: list[dict]) -> str:
     rows = []
-    for item in items:
+    for index, item in enumerate(items):
         href = f"/news/{item['id']}/"
         date = item["date"]
         iso_date = date.replace("/", "-")
         image = item.get("image") or PLACEHOLDER
+        hidden = " hidden" if index >= PAGE_SIZE else ""
+        start = ' class="is-page-start"' if index == 0 else ""
         rows.append(
-            "    <li><a class=\"news-row\" href=\"" + esc(href) + "\">"
+            f"    <li{start}{hidden}><a class=\"news-row\" href=\"" + esc(href) + "\">"
             + "<img class=\"news-thumb\" src=\"" + esc(image) + "\" alt=\"\" width=\"190\" height=\"118\" loading=\"lazy\" "
             + "onerror=\"this.onerror=null;this.src='" + PLACEHOLDER + "'\">"
             + "<div class=\"news-copy\">"
@@ -726,7 +743,12 @@ def render_list_html(items: list[dict]) -> str:
             + "<time class=\"news-date\" datetime=\"" + esc(iso_date) + "\">" + esc(date) + "</time>"
             + "</div></a></li>"
         )
-    return "<ul class=\"news-list\" id=\"news-list\">\n" + "\n".join(rows) + "\n  </ul>"
+    return (
+        "<ul class=\"news-list\" id=\"news-list\">\n"
+        + "\n".join(rows)
+        + "\n  </ul>\n  "
+        + render_pager(len(items))
+    )
 
 
 def render_list_schema(items: list[dict]) -> str:
