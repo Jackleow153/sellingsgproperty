@@ -340,10 +340,12 @@ def story_copy(post_id: str, title: str, copy_book: dict) -> dict:
         entry.get("keywords")
         or "Singapore property, HDB, condo, new launch, resale, buyers, sellers, market update"
     ).strip()
+    facts = [str(part).strip() for part in entry.get("facts", []) if str(part).strip()]
     return {
         "summary": summary,
         "takeaways": takeaways,
         "questions": questions,
+        "facts": facts,
         "description": clip_text(description),
         "keywords": keywords,
         "written": written,
@@ -481,11 +483,26 @@ DETAIL_CSS = """
       background: #1a1a1a;
       display: block;
     }
+    .summary h2,
+    .facts h2 {
+      margin: 28px 0 8px;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
     .summary p {
       color: #ececec;
       font-size: 1.05rem;
       line-height: 1.75;
       margin: 1.15rem 0;
+    }
+    .facts ul { margin: 0; padding: 0; list-style: none; }
+    .facts li {
+      margin: 0;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      color: #f2f2f2;
+      line-height: 1.5;
+      font-size: 1rem;
     }
     .takeaways {
       margin-top: 36px;
@@ -560,7 +577,7 @@ def detail_schema(item: dict, copy: dict) -> str:
     page_url = f"https://www.sellingsgproperty.com{path}"
     image = item.get("image") or PLACEHOLDER
     image_url = "https://www.sellingsgproperty.com" + image
-    article_body = "\n\n".join(copy["summary"] + copy["takeaways"])
+    article_body = "\n\n".join(copy["facts"] + copy["summary"] + copy["takeaways"])
     news = {
         "@context": "https://schema.org",
         "@type": "NewsArticle",
@@ -580,7 +597,7 @@ def detail_schema(item: dict, copy: dict) -> str:
         "isAccessibleForFree": True,
         "speakable": {
             "@type": "SpeakableSpecification",
-            "cssSelector": [".summary p", ".takeaways li"],
+            "cssSelector": [".facts li", ".summary p", ".takeaways li"],
         },
     }
     faq = {
@@ -617,6 +634,17 @@ def render_detail_page(item: dict, copy: dict) -> str:
     image_url = "https://www.sellingsgproperty.com" + image
     description = copy["description"]
     paragraphs = "\n".join(f"      <p>{esc(part)}</p>" for part in copy["summary"])
+    fact_items = "\n".join(f"        <li>{esc(fact)}</li>" for fact in copy["facts"])
+    facts_html = ""
+    if fact_items:
+        facts_html = (
+            '    <section class="facts" aria-labelledby="facts-heading">\n'
+            '      <h2 id="facts-heading">Key facts</h2>\n'
+            "      <ul>\n"
+            f"{fact_items}\n"
+            "      </ul>\n"
+            "    </section>\n"
+        )
     bullets = "\n".join(
         f"        <li><strong>{esc(question)}</strong> {esc(answer)}</li>"
         for question, answer in zip(copy["questions"], copy["takeaways"])
@@ -652,7 +680,8 @@ def render_detail_page(item: dict, copy: dict) -> str:
     <h1>{esc(title)}</h1>
     <time class="story-date" datetime="{esc(iso_date)}">{esc(date)}</time>
     <img class="hero" src="{esc(image)}" alt="" width="760" height="280" onerror="this.onerror=null;this.src='{PLACEHOLDER}'">
-    <div class="summary">
+{facts_html}    <div class="summary">
+      <h2>What this means</h2>
 {paragraphs}
     </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">

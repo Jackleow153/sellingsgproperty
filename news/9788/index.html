@@ -23,7 +23,7 @@
   "@type": "NewsArticle",
   "headline": "Tampines is S’pore’s most populous planning area, but not its fastest-growing",
   "description": "Tampines has the most people of any planning area, but Punggol and Sengkang grew faster. How to choose a mature town or a growing one.",
-  "articleBody": "Tampines has more people than any other planning area in Singapore. It is not the area that has been growing the fastest. Over the past decade, Punggol and Sengkang added people at a quicker pace.\n\nA large, established population usually means the shops, schools, and transport are already there. A fast-growing town usually means newer homes, more construction, and amenities that are still catching up.\n\nBuyers often mix the two up. Bigger is not the same as newer, and faster growth is not the same as more convenient today.\n\nDecide what you want: a town that is already built up, or a town that is still adding homes and people. They feel different, and the price often reflects that.\n\nDo not choose Tampines only because it is the biggest. Check the specific street, the walk to the MRT, and the home in front of you.\n\nSellers in a mature town can point to what is already there. Sellers in a fast-growing town should be honest about what is finished and what is still a construction site.",
+  "articleBody": "Tampines: the planning area with the most people in Singapore\n\nNot the fastest growing: Punggol and Sengkang added people faster over the past decade\n\nWhat a mature town usually offers: shops, schools and transport that are already there\n\nWhat a fast-growing town usually offers: newer homes, and amenities that are still catching up\n\nTampines has more people than any other planning area in Singapore. It is not the area that has been growing the fastest. Over the past decade, Punggol and Sengkang added people at a quicker pace.\n\nA large, established population usually means the shops, schools and transport are already there. A fast-growing town usually means newer HDB flats, more construction, and amenities that are still catching up.\n\nBuyers often mix the two up. Bigger is not the same as newer, and faster growth is not the same as more convenient today. The right choice is the one that fits the home in front of you, not the size of the town on a map.\n\nDecide what you want before you compare prices: a town that is already built up, such as Tampines, or a town that is still adding homes, such as Punggol or Sengkang.\n\nDo not choose Tampines only because it is the biggest. Check the specific street, the walk to the MRT, and the HDB flat or condo in front of you.\n\nSellers in a mature town can point to what is already there. Sellers in a fast-growing town should be honest about what is finished and what is still a construction site.",
   "datePublished": "2026-10-29T08:00:00+08:00",
   "dateModified": "2026-10-29T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -47,6 +47,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
+      ".facts li",
       ".summary p",
       ".takeaways li"
     ]
@@ -63,7 +64,7 @@
       "name": "Should you pick Tampines because it has the most people?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Decide what you want: a town that is already built up, or a town that is still adding homes and people. They feel different, and the price often reflects that."
+        "text": "Decide what you want before you compare prices: a town that is already built up, such as Tampines, or a town that is still adding homes, such as Punggol or Sengkang."
       }
     },
     {
@@ -71,7 +72,7 @@
       "name": "How is a mature town different from a fast-growing one?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Do not choose Tampines only because it is the biggest. Check the specific street, the walk to the MRT, and the home in front of you."
+        "text": "Do not choose Tampines only because it is the biggest. Check the specific street, the walk to the MRT, and the HDB flat or condo in front of you."
       }
     },
     {
@@ -210,11 +211,26 @@
       background: #1a1a1a;
       display: block;
     }
+    .summary h2,
+    .facts h2 {
+      margin: 28px 0 8px;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
     .summary p {
       color: #ececec;
       font-size: 1.05rem;
       line-height: 1.75;
       margin: 1.15rem 0;
+    }
+    .facts ul { margin: 0; padding: 0; list-style: none; }
+    .facts li {
+      margin: 0;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      color: #f2f2f2;
+      line-height: 1.5;
+      font-size: 1rem;
     }
     .takeaways {
       margin-top: 36px;
@@ -299,16 +315,26 @@
     <h1>Tampines is S’pore’s most populous planning area, but not its fastest-growing</h1>
     <time class="story-date" datetime="2026-10-29">2026/10/29</time>
     <img class="hero" src="/news/images/9788.jpg" alt="" width="760" height="280" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'">
+    <section class="facts" aria-labelledby="facts-heading">
+      <h2 id="facts-heading">Key facts</h2>
+      <ul>
+        <li>Tampines: the planning area with the most people in Singapore</li>
+        <li>Not the fastest growing: Punggol and Sengkang added people faster over the past decade</li>
+        <li>What a mature town usually offers: shops, schools and transport that are already there</li>
+        <li>What a fast-growing town usually offers: newer homes, and amenities that are still catching up</li>
+      </ul>
+    </section>
     <div class="summary">
+      <h2>What this means</h2>
       <p>Tampines has more people than any other planning area in Singapore. It is not the area that has been growing the fastest. Over the past decade, Punggol and Sengkang added people at a quicker pace.</p>
-      <p>A large, established population usually means the shops, schools, and transport are already there. A fast-growing town usually means newer homes, more construction, and amenities that are still catching up.</p>
-      <p>Buyers often mix the two up. Bigger is not the same as newer, and faster growth is not the same as more convenient today.</p>
+      <p>A large, established population usually means the shops, schools and transport are already there. A fast-growing town usually means newer HDB flats, more construction, and amenities that are still catching up.</p>
+      <p>Buyers often mix the two up. Bigger is not the same as newer, and faster growth is not the same as more convenient today. The right choice is the one that fits the home in front of you, not the size of the town on a map.</p>
     </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading">3 Takeaways for Buyers &amp; Sellers</h2>
       <ul>
-        <li><strong>Should you pick Tampines because it has the most people?</strong> Decide what you want: a town that is already built up, or a town that is still adding homes and people. They feel different, and the price often reflects that.</li>
-        <li><strong>How is a mature town different from a fast-growing one?</strong> Do not choose Tampines only because it is the biggest. Check the specific street, the walk to the MRT, and the home in front of you.</li>
+        <li><strong>Should you pick Tampines because it has the most people?</strong> Decide what you want before you compare prices: a town that is already built up, such as Tampines, or a town that is still adding homes, such as Punggol or Sengkang.</li>
+        <li><strong>How is a mature town different from a fast-growing one?</strong> Do not choose Tampines only because it is the biggest. Check the specific street, the walk to the MRT, and the HDB flat or condo in front of you.</li>
         <li><strong>How should sellers describe their town?</strong> Sellers in a mature town can point to what is already there. Sellers in a fast-growing town should be honest about what is finished and what is still a construction site.</li>
       </ul>
     </section>
