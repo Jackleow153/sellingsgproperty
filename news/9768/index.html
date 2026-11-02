@@ -229,6 +229,20 @@
       background: #1a1a1a;
       display: block;
     }
+    .hero-fallback {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 16px;
+      background: #1a1a1a;
+      color: #f4f4f5;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-align: center;
+      line-height: 1.2;
+    }
     .summary h2,
     .facts h2 {
       margin: 28px 0 8px;
@@ -339,6 +353,7 @@
       .story { padding: 18px 16px 56px; }
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
+      .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
       .summary p, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
@@ -383,7 +398,7 @@
     </div>
     </div>
     <p class="story-meta"><time class="story-date" datetime="2026-10-19"><span class="en">2026/10/19</span><span class="zh" lang="zh-Hans">2026年10月19日</span></time><span class="source-name"><span class="en">Source: PropNex Property News</span><span class="zh" lang="zh-Hans">来源：博纳房产新闻</span></span></p>
-    <img class="hero" src="/news/images/9768.jpg" alt="" width="760" height="280" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'">
+    <img class="hero" src="/news/images/9768.jpg" alt="" width="760" height="280" onerror="this.onerror=null;var n=document.createElement('div');n.className='hero hero-fallback';n.setAttribute('role','img');n.setAttribute('aria-label','Real Estate SG');n.textContent='Real Estate SG';this.replaceWith(n)">
     <section class="facts" aria-labelledby="facts-heading">
       <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
       <ul>

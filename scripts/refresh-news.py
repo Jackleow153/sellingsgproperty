@@ -463,6 +463,47 @@ def esc(value: str) -> str:
     return html.escape(value, quote=True)
 
 
+def has_photo(image: str | None) -> bool:
+    return bool(image) and not str(image).endswith("placeholder.svg")
+
+
+def _fallback_box(tag: str, class_name: str) -> str:
+    return (
+        f'<{tag} class="{class_name}" role="img" aria-label="Real Estate SG">'
+        "Real Estate SG"
+        f"</{tag}>"
+    )
+
+
+def _broken_image_script(tag: str, class_name: str) -> str:
+    return (
+        "this.onerror=null;"
+        f"var n=document.createElement('{tag}');"
+        f"n.className='{class_name}';"
+        "n.setAttribute('role','img');"
+        "n.setAttribute('aria-label','Real Estate SG');"
+        "n.textContent='Real Estate SG';"
+        "this.replaceWith(n)"
+    )
+
+
+def media_markup(image: str | None, *, hero: bool) -> str:
+    """Use a saved source image. Otherwise show a text box, never a broken image."""
+    if hero:
+        if not has_photo(image):
+            return _fallback_box("div", "hero hero-fallback")
+        return (
+            f'<img class="hero" src="{esc(image)}" alt="" width="760" height="280" '
+            f'onerror="{_broken_image_script("div", "hero hero-fallback")}">'
+        )
+    if not has_photo(image):
+        return _fallback_box("span", "news-thumb news-fallback")
+    return (
+        f'<img class="news-thumb" src="{esc(image)}" alt="" width="190" height="118" loading="lazy" '
+        f'onerror="{_broken_image_script("span", "news-thumb news-fallback")}">'
+    )
+
+
 NAV_HTML = """
   <nav class="site-nav" aria-label="Primary">
     <div class="site-nav-inner">
@@ -600,6 +641,20 @@ DETAIL_CSS = """
       background: #1a1a1a;
       display: block;
     }
+    .hero-fallback {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 16px;
+      background: #1a1a1a;
+      color: #f4f4f5;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-align: center;
+      line-height: 1.2;
+    }
     .summary h2,
     .facts h2 {
       margin: 28px 0 8px;
@@ -710,6 +765,7 @@ DETAIL_CSS = """
       .story { padding: 18px 16px 56px; }
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
+      .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
       .summary p, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
@@ -903,7 +959,7 @@ def render_detail_page(item: dict, copy: dict) -> str:
       {LANG_SWITCH}
     </div>
     <p class="story-meta"><time class="story-date" datetime="{esc(iso_date)}">{bi(date, chinese_date(date))}</time><span class="source-name">{bi("Source: " + source_name, "来源：" + source_name_zh)}</span></p>
-    <img class="hero" src="{esc(image)}" alt="" width="760" height="280" onerror="this.onerror=null;this.src='{PLACEHOLDER}'">
+    {media_markup(image, hero=True)}
 {facts_html}    <div class="summary">
       <h2>{bi("What this means", "这对你意味着什么")}</h2>
 {paragraphs}
@@ -988,7 +1044,7 @@ def render_list_html(items: list[dict], copy_book: dict) -> str:
         href = f"/news/{item['id']}/"
         date = item["date"]
         iso_date = date.replace("/", "-")
-        image = item.get("image") or PLACEHOLDER
+        image = item.get("image") or ""
         hidden = " hidden" if index >= PAGE_SIZE else ""
         start = ' class="is-page-start"' if index == 0 else ""
         entry = copy_book.get(item["id"]) or {}
@@ -996,8 +1052,7 @@ def render_list_html(items: list[dict], copy_book: dict) -> str:
         title_zh = str(zh_entry.get("title") or "").strip() or item["title"]
         rows.append(
             f"    <li{start}{hidden}><a class=\"news-row\" href=\"" + esc(href) + "\">"
-            + "<img class=\"news-thumb\" src=\"" + esc(image) + "\" alt=\"\" width=\"190\" height=\"118\" loading=\"lazy\" "
-            + "onerror=\"this.onerror=null;this.src='" + PLACEHOLDER + "'\">"
+            + media_markup(image, hero=False)
             + "<div class=\"news-copy\">"
             + "<span class=\"news-cat\">" + bi("Real estate", "房地产") + "</span>"
             + "<h2 class=\"news-title\">" + bi(item["title"], title_zh) + "</h2>"
