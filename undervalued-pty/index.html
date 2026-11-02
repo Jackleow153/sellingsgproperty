@@ -160,7 +160,7 @@ header { display: grid; gap: 14px; }
 .bench-col b { font-family: var(--font-data); font-weight: 500; }
 
 /* Filters */
-.filters { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); display: grid; gap: 10px; }
+.filters { position: sticky; top: 80px; z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); display: grid; gap: 10px; }
 .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .chip { font: inherit; font-size: 13.5px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 5px 12px; cursor: pointer; }
 .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
@@ -300,6 +300,54 @@ th.n { text-align: right; }
   <header>
     <span class="eyebrow">Private condos · URA caveats Nov 2025 – Oct 2026 · screen run 24 Oct 2026</span>
     <h1>Singapore condo price gaps between older resale and newer or post-launch homes</h1>
+  <section aria-label="Matches" style="display:grid; gap:12px;">
+    <div class="filters">
+      <div class="row" role="group" aria-label="Compare against">
+        <span class="flabel">Compare with</span>
+        <button class="chip" data-view="R" id="vR">Newer resale condos<span class="c" id="cvR"></span></button>
+        <button class="chip" data-view="PL" id="vPL">Post-launch condos<span class="c" id="cvPL"></span></button>
+      </div>
+      <div class="row" role="group" aria-label="Bedroom type">
+        <span class="flabel">Bedrooms</span>
+        <button class="chip" data-cat="2BR">2-bedder<span class="c" id="c2BR"></span></button>
+        <button class="chip" data-cat="3BR">3-bedder<span class="c" id="c3BR"></span></button>
+        <button class="chip" data-cat="4BR">4-bedder<span class="c" id="c4BR"></span></button>
+      </div>
+      <div class="row" role="group" aria-label="Tenure">
+        <span class="flabel">Tenure</span>
+        <button class="chip" data-mode="all">All<span class="c" id="mall"></span></button>
+        <button class="chip" data-mode="LH">Leasehold vs leasehold<span class="c" id="mLH"></span></button>
+        <button class="chip" data-mode="FH">Freehold vs freehold<span class="c" id="mFH"></span></button>
+        <button class="chip" data-mode="FHvLH">Freehold cheaper than newer leasehold<span class="c" id="mFHvLH"></span></button>
+      </div>
+      <div class="row" role="group" aria-label="Segment and match quality">
+        <span class="flabel">Show</span>
+        <button class="chip" data-tier="A">Clean matches<span class="c" id="tA"></span></button>
+        <button class="chip" data-tier="all">All that pass your rule<span class="c" id="tAll"></span></button>
+        <span class="sep" aria-hidden="true"></span>
+        <select id="seg" aria-label="Market segment">
+          <option value="All">All segments</option>
+          <option value="OCR">OCR · outside central</option>
+          <option value="RCR">RCR · city fringe</option>
+          <option value="CCR">CCR · core central</option>
+        </select>
+      </div>
+      <div class="row">
+        <input type="search" id="q" placeholder="Search condo, street or district (e.g. D19, Lentor)" aria-label="Search condo, street or district">
+        <select id="sort" aria-label="Sort by">
+          <option value="adj">Biggest gap at equal size</option>
+          <option value="raw">Biggest raw price gap</option>
+          <option value="age">Smallest age gap</option>
+          <option value="near">Closest pair</option>
+          <option value="price">Cheapest buy-low price</option>
+          <option value="district">District order</option>
+        </select>
+        <span class="count" id="count"></span>
+      </div>
+    </div>
+    <div class="list" id="list"></div>
+  </section>
+
     <section class="guide" id="how-this-screen-works">
       <p>The Condo Buy-Low Screen lists older private condos and apartments in Singapore whose median resale price sits more than $100,000 below a newer project in the same postal district. The age gap is 10 years or less, and both sides are the same bedroom type. The figures are medians of URA private residential caveats from November 2025 to October 2026. October 2026 is a part month.</p>
       <h2>What a buy-low gap means</h2>
@@ -389,54 +437,6 @@ th.n { text-align: right; }
         </tbody>
       </table>
     </div>
-  </section>
-
-  <section aria-label="Matches" style="display:grid; gap:12px;">
-    <div class="filters">
-      <div class="row" role="group" aria-label="Compare against">
-        <span class="flabel">Compare with</span>
-        <button class="chip" data-view="R" id="vR">Newer resale condos<span class="c" id="cvR"></span></button>
-        <button class="chip" data-view="PL" id="vPL">Post-launch condos<span class="c" id="cvPL"></span></button>
-      </div>
-      <div class="row" role="group" aria-label="Bedroom type">
-        <span class="flabel">Bedrooms</span>
-        <button class="chip" data-cat="2BR">2-bedder<span class="c" id="c2BR"></span></button>
-        <button class="chip" data-cat="3BR">3-bedder<span class="c" id="c3BR"></span></button>
-        <button class="chip" data-cat="4BR">4-bedder<span class="c" id="c4BR"></span></button>
-      </div>
-      <div class="row" role="group" aria-label="Tenure">
-        <span class="flabel">Tenure</span>
-        <button class="chip" data-mode="all">All<span class="c" id="mall"></span></button>
-        <button class="chip" data-mode="LH">Leasehold vs leasehold<span class="c" id="mLH"></span></button>
-        <button class="chip" data-mode="FH">Freehold vs freehold<span class="c" id="mFH"></span></button>
-        <button class="chip" data-mode="FHvLH">Freehold cheaper than newer leasehold<span class="c" id="mFHvLH"></span></button>
-      </div>
-      <div class="row" role="group" aria-label="Segment and match quality">
-        <span class="flabel">Show</span>
-        <button class="chip" data-tier="A">Clean matches<span class="c" id="tA"></span></button>
-        <button class="chip" data-tier="all">All that pass your rule<span class="c" id="tAll"></span></button>
-        <span class="sep" aria-hidden="true"></span>
-        <select id="seg" aria-label="Market segment">
-          <option value="All">All segments</option>
-          <option value="OCR">OCR · outside central</option>
-          <option value="RCR">RCR · city fringe</option>
-          <option value="CCR">CCR · core central</option>
-        </select>
-      </div>
-      <div class="row">
-        <input type="search" id="q" placeholder="Search condo, street or district (e.g. D19, Lentor)" aria-label="Search condo, street or district">
-        <select id="sort" aria-label="Sort by">
-          <option value="adj">Biggest gap at equal size</option>
-          <option value="raw">Biggest raw price gap</option>
-          <option value="age">Smallest age gap</option>
-          <option value="near">Closest pair</option>
-          <option value="price">Cheapest buy-low price</option>
-          <option value="district">District order</option>
-        </select>
-        <span class="count" id="count"></span>
-      </div>
-    </div>
-    <div class="list" id="list"></div>
   </section>
 
   <section class="method" aria-labelledby="m-h">
