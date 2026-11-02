@@ -548,7 +548,7 @@ def render_detail_page(item: dict, summary: list[str], takeaways: list[str]) -> 
 {paragraphs}
     </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
-      <h2 id="takeaways-heading">3 Takeaways for Buyers &amp; Sellers</h2>
+      <h2 id="takeaways-heading">3 takeaways for you</h2>
       <ul>
 {bullets}
       </ul>
