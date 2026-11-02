@@ -522,13 +522,6 @@ DETAIL_CSS = """
       border-radius: 50%;
       background: var(--red);
     }
-    .source-note {
-      margin-top: 28px;
-      color: var(--muted);
-      font-size: 0.85rem;
-      line-height: 1.5;
-    }
-    .source-note a { color: #bdbdbd; }
     @media (max-width: 1200px) {
       .nav-links { display: none; }
       .menu-btn { display: inline-flex; align-items: center; justify-content: center; }
@@ -667,7 +660,6 @@ def render_detail_page(item: dict, copy: dict) -> str:
 {bullets}
       </ul>
     </section>
-    <p class="source-note">Plain-English brief for Singapore home buyers and sellers. The headline is from a public property news broadcast. This page does not send you off the site.</p>
   </article>
   <script>{MENU_JS}</script>
 </body>
