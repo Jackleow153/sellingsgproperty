@@ -1,0 +1,53 @@
+{
+  "sample": true,
+  "note": "Worked example for the weekly refresh. These HDB resale rows are sample figures so the screen can be tested. They are not a live download from the HDB open dataset and they are not URA condo caveats.",
+  "rows": [
+    {"month": "2026-09", "town": "TAMPINES", "flat_type": "4 ROOM", "block": "201", "street_name": "TAMPINES ST 21", "storey_range": "10 TO 12", "floor_area_sqm": 93, "lease_commence_date": "2010", "remaining_lease": "83 years 01 months", "resale_price": 600000},
+    {"month": "2026-09", "town": "TAMPINES", "flat_type": "4 ROOM", "block": "202", "street_name": "TAMPINES ST 21", "storey_range": "07 TO 09", "floor_area_sqm": 93, "lease_commence_date": "2010", "remaining_lease": "83 years 02 months", "resale_price": 620000},
+    {"month": "2026-09", "town": "TAMPINES", "flat_type": "4 ROOM", "block": "203", "street_name": "TAMPINES ST 21", "storey_range": "04 TO 06", "floor_area_sqm": 93, "lease_commence_date": "2010", "remaining_lease": "82 years 11 months", "resale_price": 630000},
+    {"month": "2026-10", "town": "TAMPINES", "flat_type": "4 ROOM", "block": "204", "street_name": "TAMPINES ST 22", "storey_range": "01 TO 03", "floor_area_sqm": 93, "lease_commence_date": "2010", "remaining_lease": "83 years", "resale_price": 640000},
+    {"month": "2026-09", "town": "TAMPINES", "flat_type": "4 ROOM", "block": "201", "street_name": "TAMPINES ST 21", "storey_range": "10 TO 12", "floor_area_sqm": 93, "lease_commence_date": "2010", "remaining_lease": "83 years 01 months", "resale_price": 600000},
+
+    {"month": "2026-09", "town": "TAMPINES", "flat_type": "4 ROOM", "block": "801", "street_name": "TAMPINES ST 61", "storey_range": "10 TO 12", "floor_area_sqm": 90, "lease_commence_date": "2016", "remaining_lease": "89 years 01 months", "resale_price": 800000},
+    {"month": "2026-09", "town": "TAMPINES", "flat_type": "4 ROOM", "block": "802", "street_name": "TAMPINES ST 61", "storey_range": "07 TO 09", "floor_area_sqm": 90, "lease_commence_date": "2016", "remaining_lease": "89 years 02 months", "resale_price": 820000},
+    {"month": "2026-10", "town": "TAMPINES", "flat_type": "4 ROOM", "block": "803", "street_name": "TAMPINES ST 61", "storey_range": "04 TO 06", "floor_area_sqm": 90, "lease_commence_date": "2016", "remaining_lease": "88 years 11 months", "resale_price": 840000},
+    {"month": "2026-10", "town": "TAMPINES", "flat_type": "4 ROOM", "block": "804", "street_name": "TAMPINES ST 62", "storey_range": "01 TO 03", "floor_area_sqm": 90, "lease_commence_date": "2016", "remaining_lease": "89 years", "resale_price": 860000},
+
+    {"month": "2026-08", "town": "ANG MO KIO", "flat_type": "3 ROOM", "block": "401", "street_name": "ANG MO KIO AVE 10", "storey_range": "10 TO 12", "floor_area_sqm": 67, "lease_commence_date": "1980", "remaining_lease": "55 years 00 months", "resale_price": 350000},
+    {"month": "2026-08", "town": "ANG MO KIO", "flat_type": "3 ROOM", "block": "402", "street_name": "ANG MO KIO AVE 10", "storey_range": "07 TO 09", "floor_area_sqm": 67, "lease_commence_date": "1980", "remaining_lease": "55 years 01 months", "resale_price": 360000},
+    {"month": "2026-09", "town": "ANG MO KIO", "flat_type": "3 ROOM", "block": "403", "street_name": "ANG MO KIO AVE 10", "storey_range": "04 TO 06", "floor_area_sqm": 67, "lease_commence_date": "1980", "remaining_lease": "54 years 11 months", "resale_price": 370000},
+    {"month": "2026-09", "town": "ANG MO KIO", "flat_type": "3 ROOM", "block": "404", "street_name": "ANG MO KIO AVE 3", "storey_range": "01 TO 03", "floor_area_sqm": 67, "lease_commence_date": "1980", "remaining_lease": "55 years", "resale_price": 380000},
+
+    {"month": "2026-08", "town": "ANG MO KIO", "flat_type": "3 ROOM", "block": "501", "street_name": "ANG MO KIO AVE 5", "storey_range": "10 TO 12", "floor_area_sqm": 65, "lease_commence_date": "1986", "remaining_lease": "61 years 00 months", "resale_price": 500000},
+    {"month": "2026-08", "town": "ANG MO KIO", "flat_type": "3 ROOM", "block": "502", "street_name": "ANG MO KIO AVE 5", "storey_range": "07 TO 09", "floor_area_sqm": 65, "lease_commence_date": "1986", "remaining_lease": "61 years 01 months", "resale_price": 510000},
+    {"month": "2026-09", "town": "ANG MO KIO", "flat_type": "3 ROOM", "block": "503", "street_name": "ANG MO KIO AVE 5", "storey_range": "04 TO 06", "floor_area_sqm": 65, "lease_commence_date": "1986", "remaining_lease": "60 years 11 months", "resale_price": 520000},
+    {"month": "2026-09", "town": "ANG MO KIO", "flat_type": "3 ROOM", "block": "504", "street_name": "ANG MO KIO AVE 4", "storey_range": "01 TO 03", "floor_area_sqm": 65, "lease_commence_date": "1986", "remaining_lease": "61 years", "resale_price": 530000},
+
+    {"month": "2026-09", "town": "BEDOK", "flat_type": "5 ROOM", "block": "101", "street_name": "BEDOK NTH ST 2", "storey_range": "10 TO 12", "floor_area_sqm": 112, "lease_commence_date": "2012", "remaining_lease": "85 years 01 months", "resale_price": 700000},
+    {"month": "2026-09", "town": "BEDOK", "flat_type": "5 ROOM", "block": "102", "street_name": "BEDOK NTH ST 2", "storey_range": "07 TO 09", "floor_area_sqm": 112, "lease_commence_date": "2012", "remaining_lease": "85 years", "resale_price": 720000},
+    {"month": "2026-10", "town": "BEDOK", "flat_type": "5 ROOM", "block": "103", "street_name": "BEDOK NTH ST 2", "storey_range": "04 TO 06", "floor_area_sqm": 112, "lease_commence_date": "2012", "remaining_lease": "84 years 11 months", "resale_price": 740000},
+
+    {"month": "2026-09", "town": "BEDOK", "flat_type": "5 ROOM", "block": "701", "street_name": "BEDOK NTH RD", "storey_range": "10 TO 12", "floor_area_sqm": 110, "lease_commence_date": "2018", "remaining_lease": "90 years 02 months", "resale_price": 900000},
+    {"month": "2026-09", "town": "BEDOK", "flat_type": "5 ROOM", "block": "702", "street_name": "BEDOK NTH RD", "storey_range": "07 TO 09", "floor_area_sqm": 110, "lease_commence_date": "2018", "remaining_lease": "90 years", "resale_price": 900000},
+    {"month": "2026-10", "town": "BEDOK", "flat_type": "5 ROOM", "block": "703", "street_name": "BEDOK NTH RD", "storey_range": "04 TO 06", "floor_area_sqm": 110, "lease_commence_date": "2018", "remaining_lease": "89 years 10 months", "resale_price": 900000},
+    {"month": "2026-10", "town": "BEDOK", "flat_type": "5 ROOM", "block": "704", "street_name": "BEDOK NTH AVE 1", "storey_range": "01 TO 03", "floor_area_sqm": 110, "lease_commence_date": "2018", "remaining_lease": "90 years", "resale_price": 900000},
+
+    {"month": "2026-08", "town": "JURONG WEST", "flat_type": "4 ROOM", "block": "301", "street_name": "JURONG WEST ST 42", "storey_range": "10 TO 12", "floor_area_sqm": 93, "lease_commence_date": "2008", "remaining_lease": "80 years 04 months", "resale_price": 400000},
+    {"month": "2026-08", "town": "JURONG WEST", "flat_type": "4 ROOM", "block": "302", "street_name": "JURONG WEST ST 42", "storey_range": "07 TO 09", "floor_area_sqm": 93, "lease_commence_date": "2008", "remaining_lease": "80 years", "resale_price": 400000},
+    {"month": "2026-09", "town": "JURONG WEST", "flat_type": "4 ROOM", "block": "303", "street_name": "JURONG WEST ST 42", "storey_range": "04 TO 06", "floor_area_sqm": 93, "lease_commence_date": "2008", "remaining_lease": "79 years 11 months", "resale_price": 400000},
+    {"month": "2026-09", "town": "JURONG WEST", "flat_type": "4 ROOM", "block": "304", "street_name": "JURONG WEST ST 41", "storey_range": "01 TO 03", "floor_area_sqm": 93, "lease_commence_date": "2008", "remaining_lease": "80 years", "resale_price": 400000},
+
+    {"month": "2026-08", "town": "JURONG WEST", "flat_type": "4 ROOM", "block": "901", "street_name": "JURONG WEST ST 91", "storey_range": "10 TO 12", "floor_area_sqm": 110, "lease_commence_date": "2014", "remaining_lease": "86 years 01 months", "resale_price": 520000},
+    {"month": "2026-08", "town": "JURONG WEST", "flat_type": "4 ROOM", "block": "902", "street_name": "JURONG WEST ST 91", "storey_range": "07 TO 09", "floor_area_sqm": 110, "lease_commence_date": "2014", "remaining_lease": "86 years", "resale_price": 520000},
+    {"month": "2026-09", "town": "JURONG WEST", "flat_type": "4 ROOM", "block": "903", "street_name": "JURONG WEST ST 91", "storey_range": "04 TO 06", "floor_area_sqm": 110, "lease_commence_date": "2014", "remaining_lease": "85 years 10 months", "resale_price": 520000},
+    {"month": "2026-09", "town": "JURONG WEST", "flat_type": "4 ROOM", "block": "904", "street_name": "JURONG WEST AVE 5", "storey_range": "01 TO 03", "floor_area_sqm": 110, "lease_commence_date": "2014", "remaining_lease": "86 years", "resale_price": 520000},
+
+    {"month": "2026-09", "town": "HOUGANG", "flat_type": "2 ROOM", "block": "10", "street_name": "HOUGANG AVE 3", "storey_range": "04 TO 06", "floor_area_sqm": 47, "lease_commence_date": "2015", "remaining_lease": "88 years", "resale_price": 280000},
+    {"month": "2026-09", "town": "HOUGANG", "flat_type": "1 ROOM", "block": "11", "street_name": "HOUGANG AVE 3", "storey_range": "01 TO 03", "floor_area_sqm": 31, "lease_commence_date": "1984", "remaining_lease": "57 years", "resale_price": 220000},
+    {"month": "2026-09", "town": "HOUGANG", "flat_type": "MULTI-GENERATION", "block": "12", "street_name": "HOUGANG AVE 8", "storey_range": "07 TO 09", "floor_area_sqm": 150, "lease_commence_date": "1988", "remaining_lease": "61 years", "resale_price": 900000},
+    {"month": "2026-09", "town": "TAMPINES", "flat_type": "4 ROOM", "block": "19", "street_name": "TAMPINES ST 21", "storey_range": "01 TO 03", "floor_area_sqm": 93, "lease_commence_date": "2010", "remaining_lease": "83 years", "resale_price": 0},
+    {"month": "2026-09", "town": "TAMPINES", "flat_type": "4 ROOM", "block": "18", "street_name": "TAMPINES ST 21", "storey_range": "01 TO 03", "floor_area_sqm": 0, "lease_commence_date": "2010", "remaining_lease": "83 years", "resale_price": 610000},
+    {"month": "2026-09", "town": "TAMPINES", "flat_type": "4 ROOM", "block": "17", "street_name": "TAMPINES ST 21", "storey_range": "01 TO 03", "floor_area_sqm": 93, "lease_commence_date": "", "remaining_lease": "83 years", "resale_price": 610000},
+    {"month": "2024-06", "town": "TAMPINES", "flat_type": "4 ROOM", "block": "16", "street_name": "TAMPINES ST 21", "storey_range": "01 TO 03", "floor_area_sqm": 93, "lease_commence_date": "2010", "remaining_lease": "83 years", "resale_price": 500000}
+  ]
+}

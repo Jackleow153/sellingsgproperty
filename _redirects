@@ -49,6 +49,11 @@
  /project/lentor-gardens-residences/      /project/lentor-gardens-residences/index.html   200
  /project/*                               /index.html   200
 
+# Condo Buy-Low Screen. A real HTML file, not the SPA.
+ /undervalued-pty                         /undervalued-pty/index.html   200
+ /undervalued-pty/                        /undervalued-pty/index.html   200
+ /undervalued-pty/listings.json           /undervalued-pty/listings.json  200
+
 # Local News page (news/index.html + /news.json). Do not proxy this elsewhere.
  /news                                    /news/index.html   200
  /news/                                   /news/index.html   200

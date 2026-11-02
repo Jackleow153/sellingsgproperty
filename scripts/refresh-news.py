@@ -516,6 +516,7 @@ NAV_HTML = """
         <a href="/about">About</a>
         <a href="/insights">Insights</a>
         <a href="/news/" class="active" aria-current="page">News</a>
+        <a href="/undervalued-pty/">Undervalued Pty</a>
         <a href="/contact">Get my free situation check.</a>
         <a href="/mortgage-calculator">Mortgage loan calculator</a>
       </div>
@@ -526,6 +527,7 @@ NAV_HTML = """
       <a href="/about">About</a>
       <a href="/insights">Insights</a>
       <a href="/news/" class="active" aria-current="page">News</a>
+      <a href="/undervalued-pty/">Undervalued Pty</a>
       <a href="/contact">Get my free situation check.</a>
       <a href="/mortgage-calculator">Mortgage loan calculator</a>
     </div>

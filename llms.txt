@@ -8,6 +8,10 @@ SellingSgProperty is an educational and property advisory platform operated by C
 - Contact: +65 8062 1538 (WhatsApp)
 - Website: https://www.sellingsgproperty.com/
 
+## Tools
+
+- Undervalued Pty — Condo Buy-Low Screen. Compares older Singapore private condo resale medians with newer resale condos and post-launch projects in the same postal district, using URA private residential caveats. Shows the price gap and the size-adjusted gap. A separate section shows registered HDB resale gaps for the same town and flat type, using the HDB open dataset. Those HDB prices are not mixed into the URA condo medians: https://www.sellingsgproperty.com/undervalued-pty/
+
 ## New Launch Projects (2025–2026)
 
 Current and upcoming new launch condominiums covered on this site:
