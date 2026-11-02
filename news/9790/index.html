@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    try {
+      if (localStorage.getItem("ssp-news-lang") === "zh") {
+        document.documentElement.setAttribute("data-lang", "zh");
+        document.documentElement.lang = "zh-Hans";
+      }
+    } catch (e) {}
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hong Leong, TID place top bid of S$181.86m or S$1,755 psf ppr for Orchard plot | Singapore Property News | SellingSgProperty</title>
@@ -273,11 +281,56 @@
       .menu-btn { display: inline-flex; align-items: center; justify-content: center; }
       .site-nav-inner { padding: 0 16px; }
     }
+    .story-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .story-title-row h1 { flex: 1 1 auto; min-width: 0; }
+    html:not([data-lang="zh"]) .zh { display: none; }
+    html[data-lang="zh"] .en { display: none; }
+    html[data-lang="zh"] body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", Inter, sans-serif;
+    }
+    .zh { letter-spacing: 0; }
+    .lang-switch {
+      display: inline-flex;
+      flex: 0 0 auto;
+      margin-top: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .lang-switch button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: #d0d0d0;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 7px 13px;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+    .lang-switch button + button { border-left: 1px solid rgba(255, 255, 255, 0.18); }
+    html:not([data-lang="zh"]) .lang-switch [data-lang-set="en"],
+    html[data-lang="zh"] .lang-switch [data-lang-set="zh"] {
+      background: var(--red);
+      color: #fff;
+    }
+    .lang-switch button:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: -3px;
+    }
     @media (max-width: 640px) {
       .story { padding: 18px 16px 56px; }
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .summary p, .takeaways li { font-size: 1rem; }
+      .lang-switch button { padding: 8px 12px; }
     }
 </style>
 </head>
@@ -310,33 +363,39 @@
   </nav>
 
   <article class="story">
-    <a class="back" href="/news/">← All news</a>
-    <p class="kicker">Real estate</p>
-    <h1>Hong Leong, TID place top bid of S$181.86m or S$1,755 psf ppr for Orchard plot</h1>
-    <time class="story-date" datetime="2026-10-30">2026/10/30</time>
+    <a class="back" href="/news/"><span class="en">← All news</span><span class="zh" lang="zh-Hans">← 全部新闻</span></a>
+    <p class="kicker"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></p>
+    <div class="story-title-row">
+      <h1><span class="en">Hong Leong, TID place top bid of S$181.86m or S$1,755 psf ppr for Orchard plot</span><span class="zh" lang="zh-Hans">丰隆与TID以1亿8186万新元标得乌节地段，折合每平方英尺楼面地价1755新元</span></h1>
+      <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang-set="en">EN</button>
+      <button type="button" data-lang-set="zh" lang="zh-Hans">中文</button>
+    </div>
+    </div>
+    <time class="story-date" datetime="2026-10-30"><span class="en">2026/10/30</span><span class="zh" lang="zh-Hans">2026年10月30日</span></time>
     <img class="hero" src="/news/images/9790.jpg" alt="" width="760" height="280" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'">
     <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading">Key facts</h2>
+      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
       <ul>
-        <li>Bidders: Hong Leong and TID, the top bid</li>
-        <li>Land price: $181.86 million</li>
-        <li>Land rate: about $1,755 per square foot of allowed floor area</li>
-        <li>Location: an Orchard plot</li>
-        <li>Not for sale yet: this is a land bid, not a condo price list</li>
+        <li><span class="en">Bidders: Hong Leong and TID, the top bid</span><span class="zh" lang="zh-Hans">投标方：丰隆（Hong Leong）与TID，最高标价</span></li>
+        <li><span class="en">Land price: $181.86 million</span><span class="zh" lang="zh-Hans">地价：1亿8186万新元</span></li>
+        <li><span class="en">Land rate: about $1,755 per square foot of allowed floor area</span><span class="zh" lang="zh-Hans">地价率：约每平方英尺1755新元的可建楼面面积（psf ppr）</span></li>
+        <li><span class="en">Location: an Orchard plot</span><span class="zh" lang="zh-Hans">地点：乌节一块地段</span></li>
+        <li><span class="en">Not for sale yet: this is a land bid, not a condo price list</span><span class="zh" lang="zh-Hans">尚未发售：这是土地标价，不是公寓价目表</span></li>
       </ul>
     </section>
     <div class="summary">
-      <h2>What this means</h2>
-      <p>Hong Leong and TID placed the top bid for an Orchard plot: $181.86 million. Spread over the floor area the site is allowed to build, that is about $1,755 per square foot. That second figure is a land price. It is not the price of a finished condo.</p>
-      <p>No units from this site are for sale yet. By the time a project is launched, the price of an actual apartment also has to cover construction, interest and the developer’s margin. Launch prices per square foot of a unit are usually much higher than the land bid.</p>
-      <p>If you own or are selling nearby, buyers may mention $1,755 psf. It is context for a future new launch. It is not a valuation of your home today.</p>
+      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
+      <p><span class="en">Hong Leong and TID placed the top bid for an Orchard plot: $181.86 million. Spread over the floor area the site is allowed to build, that is about $1,755 per square foot. That second figure is a land price. It is not the price of a finished condo.</span><span class="zh" lang="zh-Hans">丰隆（Hong Leong）与TID以最高标价投得一块乌节地段：1亿8186万新元。把这个价钱分摊到地段允许建造的楼面面积，大约是每平方英尺1755新元。第二个数字是地价（psf ppr），不是一套建成公寓的价格。</span></p>
+      <p><span class="en">No units from this site are for sale yet. By the time a project is launched, the price of an actual apartment also has to cover construction, interest and the developer’s margin. Launch prices per square foot of a unit are usually much higher than the land bid.</span><span class="zh" lang="zh-Hans">这块地目前没有单位在卖。等到项目开盘，一套公寓（condo）的价格还要加上建筑成本、利息和发展商的利润。单位的开盘尺价，通常会比土地标价高得多。</span></p>
+      <p><span class="en">If you own or are selling nearby, buyers may mention $1,755 psf. It is context for a future new launch. It is not a valuation of your home today.</span><span class="zh" lang="zh-Hans">如果你在附近拥有或出售房子，买家可能会提到每平方英尺1755新元。那是未来某个新盘的背景，不是你的房子今天的估价。</span></p>
     </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
-      <h2 id="takeaways-heading">3 Takeaways for Buyers &amp; Sellers</h2>
+      <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>
-        <li><strong>Does this Orchard land bid tell you what a condo will cost?</strong> A high land bid shows developers wanted that Orchard site. It does not tell you what a finished condo will cost, or what your own home is worth today.</li>
-        <li><strong>Should buyers pay more now because of this site?</strong> If you are buying nearby now, price the home in front of you. Do not pay extra today for a project that has not been launched.</li>
-        <li><strong>How should nearby sellers use the $1,755 psf figure?</strong> Resale sellers should lean on recent sales of similar homes. A land bid is background, not your asking price.</li>
+        <li><strong><span class="en">Does this Orchard land bid tell you what a condo will cost?</span><span class="zh" lang="zh-Hans">这块乌节地的标价，能告诉你公寓要卖多少吗？</span></strong> <span class="en">A high land bid shows developers wanted that Orchard site. It does not tell you what a finished condo will cost, or what your own home is worth today.</span><span class="zh" lang="zh-Hans">高地价说明发展商想要这块乌节地。它没有告诉你建成后的公寓要卖多少，也没有告诉你自己的房子今天值多少。</span></li>
+        <li><strong><span class="en">Should buyers pay more now because of this site?</span><span class="zh" lang="zh-Hans">买家要不要因为这块地，现在就付更高的价钱？</span></strong> <span class="en">If you are buying nearby now, price the home in front of you. Do not pay extra today for a project that has not been launched.</span><span class="zh" lang="zh-Hans">如果你现在就在附近买房，给眼前这套房子定价。不要为了一个还没开盘的项目，今天就多付钱。</span></li>
+        <li><strong><span class="en">How should nearby sellers use the $1,755 psf figure?</span><span class="zh" lang="zh-Hans">附近的卖家该如何使用每平方英尺1755新元这个数字？</span></strong> <span class="en">Resale sellers should lean on recent sales of similar homes. A land bid is background, not your asking price.</span><span class="zh" lang="zh-Hans">转售卖家应该依靠类似房子最近的成交。土地标价是背景，不是你的要价。</span></li>
       </ul>
     </section>
   </article>
@@ -348,6 +407,35 @@
       this.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
       this.textContent = open ? "×" : "☰";
     });
+
+    (function () {
+      var KEY = "ssp-news-lang";
+      function apply(lang) {
+        var zh = lang === "zh";
+        if (zh) {
+          document.documentElement.setAttribute("data-lang", "zh");
+          document.documentElement.lang = "zh-Hans";
+        } else {
+          document.documentElement.removeAttribute("data-lang");
+          document.documentElement.lang = "en";
+        }
+        document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+          var on = btn.getAttribute("data-lang-set") === (zh ? "zh" : "en");
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        var pager = document.getElementById("news-pager");
+        if (pager) pager.setAttribute("aria-label", zh ? "新闻分页" : "News pages");
+        try { localStorage.setItem(KEY, zh ? "zh" : "en"); } catch (e) {}
+      }
+      document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          apply(btn.getAttribute("data-lang-set"));
+        });
+      });
+      var saved = "en";
+      try { if (localStorage.getItem(KEY) === "zh") saved = "zh"; } catch (e) {}
+      apply(saved);
+    })();
 </script>
 </body>
 </html>

@@ -15,9 +15,12 @@ into news/images/, and writes news.json. It also rebuilds a static page at
 news/<id>/index.html for each story.
 
 Plain-English summaries, three takeaways and three buyer/seller questions
-live in news/copy.json, keyed by the Telegram post id. Re-running this script
-keeps that copy and rebuilds the list page, detail pages, sitemap entries and
-NewsArticle / FAQ schema. A new post with no entry yet still gets a page.
+live in news/copy.json, keyed by the Telegram post id. The same entry can
+include a "zh" object (title, summary, facts, takeaways, questions) in
+Simplified Chinese. Re-running this script keeps that copy and rebuilds the
+list page, detail pages, sitemap entries and NewsArticle / FAQ schema. A new
+post with no entry yet still gets a page. The EN / 中文 choice is stored in
+the browser under localStorage key ssp-news-lang.
 
 Refresh, then deploy:
 
@@ -312,11 +315,27 @@ def clip_text(text: str, limit: int = 158) -> str:
     return cut + "."
 
 
+def text_list(entry: dict, key: str) -> list[str]:
+    return [str(part).strip() for part in entry.get(key, []) if str(part).strip()]
+
+
+def align_text(primary: list[str], alternate: list[str]) -> list[str]:
+    aligned = []
+    for index, item in enumerate(primary):
+        if index < len(alternate) and alternate[index]:
+            aligned.append(alternate[index])
+        else:
+            aligned.append(item)
+    return aligned
+
+
 def story_copy(post_id: str, title: str, copy_book: dict) -> dict:
     entry = copy_book.get(post_id) or {}
-    summary = [str(part).strip() for part in entry.get("summary", []) if str(part).strip()]
-    takeaways = [str(part).strip() for part in entry.get("takeaways", []) if str(part).strip()]
+    summary = text_list(entry, "summary")
+    takeaways = text_list(entry, "takeaways")
     written = 2 <= len(summary) <= 4 and len(takeaways) == 3
+    zh_entry = entry.get("zh") if isinstance(entry.get("zh"), dict) else {}
+    title_zh = str(zh_entry.get("title") or "").strip()
     if not written:
         summary = [
             title,
@@ -328,7 +347,23 @@ def story_copy(post_id: str, title: str, copy_book: dict) -> dict:
             "If you are buying, compare this news with the actual home, the location, and the monthly cost you can live with.",
             "If you are selling, be ready to answer questions about the area in plain language. Buyers remember what they can verify.",
         ]
-    questions = [str(part).strip() for part in entry.get("questions", []) if str(part).strip()]
+        zh_summary = [
+            title_zh or title,
+            "这篇新加坡房地产消息还没有更完整的白话说明。标题列出来，是为了让买家和卖家看到报道了什么。标题本身不是买卖的理由。",
+            "补上说明之后，会解释这则消息对在新加坡买房或卖房的人意味着什么，包括HDB组屋、公寓（condo）、新盘和转售。",
+        ]
+        zh_takeaways = [
+            "不要只凭标题改变买卖决定。读完细节，再对照自己的预算。",
+            "如果你在买房，把这则消息和实际的房子、地点，以及你负担得来的每月开销比较。",
+            "如果你在卖房，准备用白话回答关于这个地区的问题。买家记得住他们核实得了的事情。",
+        ]
+        zh_questions = [
+            "这对在新加坡买房的人意味着什么？",
+            "卖家该从这则市场消息里拿走什么？",
+            "根据这则消息行动之前，该检查什么？",
+        ]
+        zh_facts: list[str] = []
+    questions = text_list(entry, "questions")
     if len(questions) != 3:
         questions = [
             "What does this mean for someone buying property in Singapore?",
@@ -340,7 +375,12 @@ def story_copy(post_id: str, title: str, copy_book: dict) -> dict:
         entry.get("keywords")
         or "Singapore property, HDB, condo, new launch, resale, buyers, sellers, market update"
     ).strip()
-    facts = [str(part).strip() for part in entry.get("facts", []) if str(part).strip()]
+    facts = text_list(entry, "facts")
+    if written:
+        zh_summary = align_text(summary, text_list(zh_entry, "summary"))
+        zh_takeaways = align_text(takeaways, text_list(zh_entry, "takeaways"))
+        zh_questions = align_text(questions, text_list(zh_entry, "questions"))
+        zh_facts = align_text(facts, text_list(zh_entry, "facts"))
     return {
         "summary": summary,
         "takeaways": takeaways,
@@ -349,7 +389,34 @@ def story_copy(post_id: str, title: str, copy_book: dict) -> dict:
         "description": clip_text(description),
         "keywords": keywords,
         "written": written,
+        "zh": {
+            "title": title_zh or title,
+            "summary": zh_summary,
+            "takeaways": zh_takeaways,
+            "questions": zh_questions,
+            "facts": zh_facts,
+            "ready": bool(title_zh) and len(text_list(zh_entry, "summary")) >= 2 and len(text_list(zh_entry, "takeaways")) == 3,
+        },
     }
+
+
+def chinese_date(date: str) -> str:
+    parts = date.split("/")
+    if len(parts) != 3:
+        return date
+    try:
+        year, month, day = (int(part) for part in parts)
+    except ValueError:
+        return date
+    return f"{year}年{month}月{day}日"
+
+
+def bi(en: str, zh: str) -> str:
+    chinese = zh.strip() or en
+    return (
+        f'<span class="en">{esc(en)}</span>'
+        f'<span class="zh" lang="zh-Hans">{esc(chinese)}</span>'
+    )
 
 
 def esc(value: str) -> str:
@@ -545,11 +612,56 @@ DETAIL_CSS = """
       .menu-btn { display: inline-flex; align-items: center; justify-content: center; }
       .site-nav-inner { padding: 0 16px; }
     }
+    .story-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .story-title-row h1 { flex: 1 1 auto; min-width: 0; }
+    html:not([data-lang="zh"]) .zh { display: none; }
+    html[data-lang="zh"] .en { display: none; }
+    html[data-lang="zh"] body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", Inter, sans-serif;
+    }
+    .zh { letter-spacing: 0; }
+    .lang-switch {
+      display: inline-flex;
+      flex: 0 0 auto;
+      margin-top: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .lang-switch button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: #d0d0d0;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 7px 13px;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+    .lang-switch button + button { border-left: 1px solid rgba(255, 255, 255, 0.18); }
+    html:not([data-lang="zh"]) .lang-switch [data-lang-set="en"],
+    html[data-lang="zh"] .lang-switch [data-lang-set="zh"] {
+      background: var(--red);
+      color: #fff;
+    }
+    .lang-switch button:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: -3px;
+    }
     @media (max-width: 640px) {
       .story { padding: 18px 16px 56px; }
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .summary p, .takeaways li { font-size: 1rem; }
+      .lang-switch button { padding: 8px 12px; }
     }
 """
 
@@ -561,6 +673,51 @@ MENU_JS = """
       this.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
       this.textContent = open ? "×" : "☰";
     });
+"""
+
+LANG_BOOT = """  <script>
+    try {
+      if (localStorage.getItem("ssp-news-lang") === "zh") {
+        document.documentElement.setAttribute("data-lang", "zh");
+        document.documentElement.lang = "zh-Hans";
+      }
+    } catch (e) {}
+  </script>"""
+
+LANG_SWITCH = """<div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang-set="en">EN</button>
+      <button type="button" data-lang-set="zh" lang="zh-Hans">中文</button>
+    </div>"""
+
+LANG_JS = """
+    (function () {
+      var KEY = "ssp-news-lang";
+      function apply(lang) {
+        var zh = lang === "zh";
+        if (zh) {
+          document.documentElement.setAttribute("data-lang", "zh");
+          document.documentElement.lang = "zh-Hans";
+        } else {
+          document.documentElement.removeAttribute("data-lang");
+          document.documentElement.lang = "en";
+        }
+        document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+          var on = btn.getAttribute("data-lang-set") === (zh ? "zh" : "en");
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        var pager = document.getElementById("news-pager");
+        if (pager) pager.setAttribute("aria-label", zh ? "新闻分页" : "News pages");
+        try { localStorage.setItem(KEY, zh ? "zh" : "en"); } catch (e) {}
+      }
+      document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          apply(btn.getAttribute("data-lang-set"));
+        });
+      });
+      var saved = "en";
+      try { if (localStorage.getItem(KEY) === "zh") saved = "zh"; } catch (e) {}
+      apply(saved);
+    })();
 """
 
 
@@ -633,26 +790,38 @@ def render_detail_page(item: dict, copy: dict) -> str:
     page_url = f"https://www.sellingsgproperty.com{path}"
     image_url = "https://www.sellingsgproperty.com" + image
     description = copy["description"]
-    paragraphs = "\n".join(f"      <p>{esc(part)}</p>" for part in copy["summary"])
-    fact_items = "\n".join(f"        <li>{esc(fact)}</li>" for fact in copy["facts"])
+    zh = copy["zh"]
+    paragraphs = "\n".join(
+        "      <p>" + bi(part, zh["summary"][index]) + "</p>"
+        for index, part in enumerate(copy["summary"])
+    )
+    fact_items = "\n".join(
+        "        <li>" + bi(fact, zh["facts"][index] if index < len(zh["facts"]) else fact) + "</li>"
+        for index, fact in enumerate(copy["facts"])
+    )
     facts_html = ""
     if fact_items:
         facts_html = (
             '    <section class="facts" aria-labelledby="facts-heading">\n'
-            '      <h2 id="facts-heading">Key facts</h2>\n'
+            "      <h2 id=\"facts-heading\">" + bi("Key facts", "重点") + "</h2>\n"
             "      <ul>\n"
             f"{fact_items}\n"
             "      </ul>\n"
             "    </section>\n"
         )
     bullets = "\n".join(
-        f"        <li><strong>{esc(question)}</strong> {esc(answer)}</li>"
-        for question, answer in zip(copy["questions"], copy["takeaways"])
+        "        <li><strong>"
+        + bi(question, zh["questions"][index])
+        + "</strong> "
+        + bi(answer, zh["takeaways"][index])
+        + "</li>"
+        for index, (question, answer) in enumerate(zip(copy["questions"], copy["takeaways"]))
     )
     schema = detail_schema(item, copy)
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
+{LANG_BOOT}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{esc(title)} | Singapore Property News | SellingSgProperty</title>
@@ -675,23 +844,26 @@ def render_detail_page(item: dict, copy: dict) -> str:
 <body>
 {NAV_HTML}
   <article class="story">
-    <a class="back" href="/news/">← All news</a>
-    <p class="kicker">Real estate</p>
-    <h1>{esc(title)}</h1>
-    <time class="story-date" datetime="{esc(iso_date)}">{esc(date)}</time>
+    <a class="back" href="/news/">{bi("← All news", "← 全部新闻")}</a>
+    <p class="kicker">{bi("Real estate", "房地产")}</p>
+    <div class="story-title-row">
+      <h1>{bi(title, zh["title"])}</h1>
+      {LANG_SWITCH}
+    </div>
+    <time class="story-date" datetime="{esc(iso_date)}">{bi(date, chinese_date(date))}</time>
     <img class="hero" src="{esc(image)}" alt="" width="760" height="280" onerror="this.onerror=null;this.src='{PLACEHOLDER}'">
 {facts_html}    <div class="summary">
-      <h2>What this means</h2>
+      <h2>{bi("What this means", "这对你意味着什么")}</h2>
 {paragraphs}
     </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
-      <h2 id="takeaways-heading">3 Takeaways for Buyers &amp; Sellers</h2>
+      <h2 id="takeaways-heading">{bi("3 Takeaways for Buyers & Sellers", "给买家与卖家的3个要点")}</h2>
       <ul>
 {bullets}
       </ul>
     </section>
   </article>
-  <script>{MENU_JS}</script>
+  <script>{MENU_JS}{LANG_JS}</script>
 </body>
 </html>
 """
@@ -739,21 +911,26 @@ def replace_marked(text: str, start: str, end: str, inner: str) -> str:
     return pattern.sub(_repl, text, count=1)
 
 
+def pager_button(en: str, zh: str, href: str | None) -> str:
+    label = bi(en, zh)
+    if href:
+        return f'<a class="pager-btn" href="{href}">{label}</a>'
+    return f'<span class="pager-btn is-disabled">{label}</span>'
+
+
 def render_pager(count: int) -> str:
     pages = max(1, (count + PAGE_SIZE - 1) // PAGE_SIZE)
-    parts = ['<span class="pager-btn is-disabled">Previous Page</span>']
+    parts = [pager_button("Previous Page", "上一页", None)]
     for number in range(1, pages + 1):
         href = "/news/" if number == 1 else f"/news/?page={number}"
         current = ' is-current" aria-current="page' if number == 1 else ""
         parts.append(f'<a class="pager-num{current}" href="{href}">{number}</a>')
-    if pages > 1:
-        parts.append('<a class="pager-btn" href="/news/?page=2">Next page</a>')
-    else:
-        parts.append('<span class="pager-btn is-disabled">Next page</span>')
+    next_href = "/news/?page=2" if pages > 1 else None
+    parts.append(pager_button("Next page", "下一页", next_href))
     return '<nav class="pager" id="news-pager" aria-label="News pages">' + "".join(parts) + "</nav>"
 
 
-def render_list_html(items: list[dict]) -> str:
+def render_list_html(items: list[dict], copy_book: dict) -> str:
     rows = []
     for index, item in enumerate(items):
         href = f"/news/{item['id']}/"
@@ -762,14 +939,17 @@ def render_list_html(items: list[dict]) -> str:
         image = item.get("image") or PLACEHOLDER
         hidden = " hidden" if index >= PAGE_SIZE else ""
         start = ' class="is-page-start"' if index == 0 else ""
+        entry = copy_book.get(item["id"]) or {}
+        zh_entry = entry.get("zh") if isinstance(entry.get("zh"), dict) else {}
+        title_zh = str(zh_entry.get("title") or "").strip() or item["title"]
         rows.append(
             f"    <li{start}{hidden}><a class=\"news-row\" href=\"" + esc(href) + "\">"
             + "<img class=\"news-thumb\" src=\"" + esc(image) + "\" alt=\"\" width=\"190\" height=\"118\" loading=\"lazy\" "
             + "onerror=\"this.onerror=null;this.src='" + PLACEHOLDER + "'\">"
             + "<div class=\"news-copy\">"
-            + "<span class=\"news-cat\">Real estate</span>"
-            + "<h2 class=\"news-title\">" + esc(item["title"]) + "</h2>"
-            + "<time class=\"news-date\" datetime=\"" + esc(iso_date) + "\">" + esc(date) + "</time>"
+            + "<span class=\"news-cat\">" + bi("Real estate", "房地产") + "</span>"
+            + "<h2 class=\"news-title\">" + bi(item["title"], title_zh) + "</h2>"
+            + "<time class=\"news-date\" datetime=\"" + esc(iso_date) + "\">" + bi(date, chinese_date(date)) + "</time>"
             + "</div></a></li>"
         )
     return (
@@ -808,7 +988,7 @@ def write_news_index(items: list[dict]) -> None:
         print("news/index.html missing; list page not updated")
         return
     text = INDEX_PATH.read_text(encoding="utf-8")
-    text = replace_marked(text, LIST_START, LIST_END, render_list_html(items))
+    text = replace_marked(text, LIST_START, LIST_END, render_list_html(items, load_copy()))
     text = replace_marked(text, SCHEMA_START, SCHEMA_END, render_list_schema(items))
     if "t.me/" in text or "telegram.org" in text.lower():
         raise SystemExit("News list tried to link off-site. Aborting.")
@@ -819,10 +999,13 @@ def write_detail_pages(items: list[dict]) -> None:
     copy_book = load_copy()
     keep_ids = set()
     missing = []
+    missing_zh = []
     for item in items:
         copy = story_copy(item["id"], item["title"], copy_book)
         if not copy["written"]:
             missing.append(item["id"])
+        elif not copy["zh"]["ready"]:
+            missing_zh.append(item["id"])
         page = render_detail_page(item, copy)
         offsite = [
             url
@@ -851,6 +1034,9 @@ def write_detail_pages(items: list[dict]) -> None:
     if missing:
         print("No brief in news/copy.json yet for: " + ", ".join(missing))
         print("Add summary, takeaways and questions for those ids, then run: python3 scripts/refresh-news.py --pages-only")
+    if missing_zh:
+        print("No Chinese brief yet for: " + ", ".join(missing_zh))
+        print('Add a "zh" object (title, summary, facts, takeaways, questions) in news/copy.json, then run: python3 scripts/refresh-news.py --pages-only')
     print("To deploy: commit the news files and push main. Netlify publishes https://www.sellingsgproperty.com")
 
 

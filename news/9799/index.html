@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    try {
+      if (localStorage.getItem("ssp-news-lang") === "zh") {
+        document.documentElement.setAttribute("data-lang", "zh");
+        document.documentElement.lang = "zh-Hans";
+      }
+    } catch (e) {}
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>New mall, parks and plans for a school under Toa Payoh West masterplan | Singapore Property News | SellingSgProperty</title>
@@ -273,11 +281,56 @@
       .menu-btn { display: inline-flex; align-items: center; justify-content: center; }
       .site-nav-inner { padding: 0 16px; }
     }
+    .story-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .story-title-row h1 { flex: 1 1 auto; min-width: 0; }
+    html:not([data-lang="zh"]) .zh { display: none; }
+    html[data-lang="zh"] .en { display: none; }
+    html[data-lang="zh"] body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", Inter, sans-serif;
+    }
+    .zh { letter-spacing: 0; }
+    .lang-switch {
+      display: inline-flex;
+      flex: 0 0 auto;
+      margin-top: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .lang-switch button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: #d0d0d0;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 7px 13px;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+    .lang-switch button + button { border-left: 1px solid rgba(255, 255, 255, 0.18); }
+    html:not([data-lang="zh"]) .lang-switch [data-lang-set="en"],
+    html[data-lang="zh"] .lang-switch [data-lang-set="zh"] {
+      background: var(--red);
+      color: #fff;
+    }
+    .lang-switch button:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: -3px;
+    }
     @media (max-width: 640px) {
       .story { padding: 18px 16px 56px; }
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .summary p, .takeaways li { font-size: 1rem; }
+      .lang-switch button { padding: 8px 12px; }
     }
 </style>
 </head>
@@ -310,34 +363,40 @@
   </nav>
 
   <article class="story">
-    <a class="back" href="/news/">← All news</a>
-    <p class="kicker">Real estate</p>
-    <h1>New mall, parks and plans for a school under Toa Payoh West masterplan</h1>
-    <time class="story-date" datetime="2026-11-01">2026/11/01</time>
+    <a class="back" href="/news/"><span class="en">← All news</span><span class="zh" lang="zh-Hans">← 全部新闻</span></a>
+    <p class="kicker"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></p>
+    <div class="story-title-row">
+      <h1><span class="en">New mall, parks and plans for a school under Toa Payoh West masterplan</span><span class="zh" lang="zh-Hans">大巴窑西总蓝图：新商场、公园，以及建校计划</span></h1>
+      <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang-set="en">EN</button>
+      <button type="button" data-lang-set="zh" lang="zh-Hans">中文</button>
+    </div>
+    </div>
+    <time class="story-date" datetime="2026-11-01"><span class="en">2026/11/01</span><span class="zh" lang="zh-Hans">2026年11月1日</span></time>
     <img class="hero" src="/news/images/9799.jpg" alt="" width="760" height="280" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'">
     <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading">Key facts</h2>
+      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
       <ul>
-        <li>Plan: more than 6,000 homes in Toa Payoh West over about 10 years, mostly HDB</li>
-        <li>First BTO: Toa Payoh Hillside, about 1,600 flats, next to Caldecott MRT, November 2026</li>
-        <li>Mix: 590 two-room Flexi, 580 four-room, 260 Community Care Apartments, about 230 rental flats</li>
-        <li>Blocks: five, from 31 to 43 storeys</li>
-        <li>Also planned: Toa Payoh’s first mall and a 1.2-hectare wellness park. A school is being studied, not confirmed</li>
-        <li>Community Care Apartments: first in Toa Payoh; application age falls from 65 to 55 from this exercise</li>
+        <li><span class="en">Plan: more than 6,000 homes in Toa Payoh West over about 10 years, mostly HDB</span><span class="zh" lang="zh-Hans">规划：大巴窑西约十年超过6000个住家，以组屋为主</span></li>
+        <li><span class="en">First BTO: Toa Payoh Hillside, about 1,600 flats, next to Caldecott MRT, November 2026</span><span class="zh" lang="zh-Hans">第一批预购组屋：Toa Payoh Hillside，约1600个单位，加利谷地铁站旁，2026年11月</span></li>
+        <li><span class="en">Mix: 590 two-room Flexi, 580 four-room, 260 Community Care Apartments, about 230 rental flats</span><span class="zh" lang="zh-Hans">组合：590个二房式灵活单位、580个四房式、260个社区关怀公寓、约230个租赁单位</span></li>
+        <li><span class="en">Blocks: five, from 31 to 43 storeys</span><span class="zh" lang="zh-Hans">楼宇：五座，31至43层</span></li>
+        <li><span class="en">Also planned: Toa Payoh’s first mall and a 1.2-hectare wellness park. A school is being studied, not confirmed</span><span class="zh" lang="zh-Hans">也在计划中：大巴窑第一个商场，以及1.2公顷保健公园。学校仍在研究，尚未确定</span></li>
+        <li><span class="en">Community Care Apartments: first in Toa Payoh; application age falls from 65 to 55 from this exercise</span><span class="zh" lang="zh-Hans">社区关怀公寓：大巴窑首批；从这次销售活动起，申请年龄从65岁降到55岁</span></li>
       </ul>
     </section>
     <div class="summary">
-      <h2>What this means</h2>
-      <p>HDB’s plan for Toa Payoh West adds more than 6,000 homes over about ten years, mostly public housing, with some private homes. The idea is a second centre for the town, around Caldecott MRT, alongside Toa Payoh Central. The plans include Toa Payoh’s first mall and a 1.2-hectare wellness park. A school is being studied. It has not been confirmed.</p>
-      <p>The first project you can actually apply for is Toa Payoh Hillside, in the November 2026 BTO exercise. It sits next to Caldecott MRT and has about 1,600 flats in five blocks of 31 to 43 storeys. The reported mix is 590 two-room Flexi flats, 580 four-room flats, 260 Community Care Apartments and about 230 public rental flats. These are the first Community Care Apartments in Toa Payoh. From this exercise, the age to apply for them drops from 65 to 55.</p>
-      <p>Shops, the park and a possible school can make the area easier to live in. They also take years. If you are buying nearby now, separate what is already built from what is still a plan. If you are selling, you can mention the masterplan. Buyers will still discount anything that is not open.</p>
+      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
+      <p><span class="en">HDB’s plan for Toa Payoh West adds more than 6,000 homes over about ten years, mostly public housing, with some private homes. The idea is a second centre for the town, around Caldecott MRT, alongside Toa Payoh Central. The plans include Toa Payoh’s first mall and a 1.2-hectare wellness park. A school is being studied. It has not been confirmed.</span><span class="zh" lang="zh-Hans">建屋发展局（HDB）为大巴窑西规划的住家超过6000个，时间大约十年，以公共住房为主，也有一些私人住宅。构想是在加利谷地铁站一带，形成市镇的第二个中心，与大巴窑中心并存。计划包括大巴窑的第一个商场，以及一个1.2公顷的保健公园。学校仍在研究，尚未确定。</span></p>
+      <p><span class="en">The first project you can actually apply for is Toa Payoh Hillside, in the November 2026 BTO exercise. It sits next to Caldecott MRT and has about 1,600 flats in five blocks of 31 to 43 storeys. The reported mix is 590 two-room Flexi flats, 580 four-room flats, 260 Community Care Apartments and about 230 public rental flats. These are the first Community Care Apartments in Toa Payoh. From this exercise, the age to apply for them drops from 65 to 55.</span><span class="zh" lang="zh-Hans">你真正可以申请的第一个项目，是2026年11月预购组屋（BTO）销售活动中的Toa Payoh Hillside。它就在加利谷地铁站旁边，约1600个单位，五座组屋，楼高31至43层。报道中的组合是590个二房式灵活单位、580个四房式、260个社区关怀公寓，以及约230个公共租赁单位。这是大巴窑第一批社区关怀公寓。从这次销售活动起，申请年龄从65岁降到55岁。</span></p>
+      <p><span class="en">Shops, the park and a possible school can make the area easier to live in. They also take years. If you are buying nearby now, separate what is already built from what is still a plan. If you are selling, you can mention the masterplan. Buyers will still discount anything that is not open.</span><span class="zh" lang="zh-Hans">商店、公园和可能兴建的学校，会让这个地区更好住，但都需要好几年。如果你现在就在附近买房，要把已经建成的和仍在计划中的分开。如果你在卖房，可以提到总蓝图，但买家仍会对还没开业的设施打折。</span></p>
     </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
-      <h2 id="takeaways-heading">3 Takeaways for Buyers &amp; Sellers</h2>
+      <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>
-        <li><strong>Does being next to Caldecott MRT make a Toa Payoh home worth more today?</strong> Look at the walk. “Near Caldecott” only helps an HDB buyer if the station and the future mall are a trip you would make on a normal day.</li>
-        <li><strong>What can you actually apply for in November, and what is still a plan?</strong> If you need a school or the mall soon, ask when they are due. The November flats are real. The school is still a study, and the mall is not open.</li>
-        <li><strong>How should sellers talk about the Toa Payoh West masterplan?</strong> Resale sellers in Toa Payoh should describe the masterplan plainly. Overstating what is already built is an easy way to lose a buyer at the viewing.</li>
+        <li><strong><span class="en">Does being next to Caldecott MRT make a Toa Payoh home worth more today?</span><span class="zh" lang="zh-Hans">靠近加利谷地铁站，会不会让大巴窑的房子现在就更值钱？</span></strong> <span class="en">Look at the walk. “Near Caldecott” only helps an HDB buyer if the station and the future mall are a trip you would make on a normal day.</span><span class="zh" lang="zh-Hans">先看走路的距离。“靠近加利谷”对组屋买家有用，是因为地铁站和未来的商场是你平常会走的路。</span></li>
+        <li><strong><span class="en">What can you actually apply for in November, and what is still a plan?</span><span class="zh" lang="zh-Hans">11月实际可以申请什么，哪些仍只是计划？</span></strong> <span class="en">If you need a school or the mall soon, ask when they are due. The November flats are real. The school is still a study, and the mall is not open.</span><span class="zh" lang="zh-Hans">如果你很快需要学校或商场，问清楚它们什么时候会有。11月的组屋是真的。学校仍是一项研究，商场也还没开。</span></li>
+        <li><strong><span class="en">How should sellers talk about the Toa Payoh West masterplan?</span><span class="zh" lang="zh-Hans">卖家该如何谈论大巴窑西总蓝图？</span></strong> <span class="en">Resale sellers in Toa Payoh should describe the masterplan plainly. Overstating what is already built is an easy way to lose a buyer at the viewing.</span><span class="zh" lang="zh-Hans">大巴窑的转售卖家应该用白话说明总蓝图。把还没建成的说成已经有了，很容易在看房时失去买家。</span></li>
       </ul>
     </section>
   </article>
@@ -349,6 +408,35 @@
       this.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
       this.textContent = open ? "×" : "☰";
     });
+
+    (function () {
+      var KEY = "ssp-news-lang";
+      function apply(lang) {
+        var zh = lang === "zh";
+        if (zh) {
+          document.documentElement.setAttribute("data-lang", "zh");
+          document.documentElement.lang = "zh-Hans";
+        } else {
+          document.documentElement.removeAttribute("data-lang");
+          document.documentElement.lang = "en";
+        }
+        document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+          var on = btn.getAttribute("data-lang-set") === (zh ? "zh" : "en");
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        var pager = document.getElementById("news-pager");
+        if (pager) pager.setAttribute("aria-label", zh ? "新闻分页" : "News pages");
+        try { localStorage.setItem(KEY, zh ? "zh" : "en"); } catch (e) {}
+      }
+      document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          apply(btn.getAttribute("data-lang-set"));
+        });
+      });
+      var saved = "en";
+      try { if (localStorage.getItem(KEY) === "zh") saved = "zh"; } catch (e) {}
+      apply(saved);
+    })();
 </script>
 </body>
 </html>

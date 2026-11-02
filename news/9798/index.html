@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    try {
+      if (localStorage.getItem("ssp-news-lang") === "zh") {
+        document.documentElement.setAttribute("data-lang", "zh");
+        document.documentElement.lang = "zh-Hans";
+      }
+    } catch (e) {}
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ex-condo chairman loses defamation suit over undisclosed links | Singapore Property News | SellingSgProperty</title>
@@ -273,11 +281,56 @@
       .menu-btn { display: inline-flex; align-items: center; justify-content: center; }
       .site-nav-inner { padding: 0 16px; }
     }
+    .story-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .story-title-row h1 { flex: 1 1 auto; min-width: 0; }
+    html:not([data-lang="zh"]) .zh { display: none; }
+    html[data-lang="zh"] .en { display: none; }
+    html[data-lang="zh"] body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", Inter, sans-serif;
+    }
+    .zh { letter-spacing: 0; }
+    .lang-switch {
+      display: inline-flex;
+      flex: 0 0 auto;
+      margin-top: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .lang-switch button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: #d0d0d0;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 7px 13px;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+    .lang-switch button + button { border-left: 1px solid rgba(255, 255, 255, 0.18); }
+    html:not([data-lang="zh"]) .lang-switch [data-lang-set="en"],
+    html[data-lang="zh"] .lang-switch [data-lang-set="zh"] {
+      background: var(--red);
+      color: #fff;
+    }
+    .lang-switch button:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: -3px;
+    }
     @media (max-width: 640px) {
       .story { padding: 18px 16px 56px; }
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .summary p, .takeaways li { font-size: 1rem; }
+      .lang-switch button { padding: 8px 12px; }
     }
 </style>
 </head>
@@ -310,31 +363,37 @@
   </nav>
 
   <article class="story">
-    <a class="back" href="/news/">← All news</a>
-    <p class="kicker">Real estate</p>
-    <h1>Ex-condo chairman loses defamation suit over undisclosed links</h1>
-    <time class="story-date" datetime="2026-10-31">2026/10/31</time>
+    <a class="back" href="/news/"><span class="en">← All news</span><span class="zh" lang="zh-Hans">← 全部新闻</span></a>
+    <p class="kicker"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></p>
+    <div class="story-title-row">
+      <h1><span class="en">Ex-condo chairman loses defamation suit over undisclosed links</span><span class="zh" lang="zh-Hans">前公寓主席因未披露利益关系，诽谤案败诉</span></h1>
+      <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang-set="en">EN</button>
+      <button type="button" data-lang-set="zh" lang="zh-Hans">中文</button>
+    </div>
+    </div>
+    <time class="story-date" datetime="2026-10-31"><span class="en">2026/10/31</span><span class="zh" lang="zh-Hans">2026年10月31日</span></time>
     <img class="hero" src="/news/images/9798.jpg" alt="" width="760" height="280" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'">
     <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading">Key facts</h2>
+      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
       <ul>
-        <li>What happened: a former condo chairman lost a defamation case tied to links that were not disclosed</li>
-        <li>The practical issue: people who run a condo should say when they have a personal or business link to a decision</li>
-        <li>Why a buyer cares: fees, upcoming works and disputes can change the real cost of a condo</li>
+        <li><span class="en">What happened: a former condo chairman lost a defamation case tied to links that were not disclosed</span><span class="zh" lang="zh-Hans">发生了什么：一名前公寓主席因未披露的利益关系，诽谤案败诉</span></li>
+        <li><span class="en">The practical issue: people who run a condo should say when they have a personal or business link to a decision</span><span class="zh" lang="zh-Hans">实际问题：管理公寓的人，若与某项决定有私人或商业关系，应该说明</span></li>
+        <li><span class="en">Why a buyer cares: fees, upcoming works and disputes can change the real cost of a condo</span><span class="zh" lang="zh-Hans">买家为什么在意：月费、即将进行的工程和纠纷，会改变公寓的真实成本</span></li>
       </ul>
     </section>
     <div class="summary">
-      <h2>What this means</h2>
-      <p>A former condominium chairman has lost a defamation case connected to links that were not disclosed. The court details belong to that case. The plain lesson for anyone buying or selling a condo in Singapore is about openness.</p>
-      <p>People who help run a condo are expected to say so when they have a personal or business link that could affect a decision, such as who the estate hires. Hiding that link can become a legal fight, not just an argument in the chat group.</p>
-      <p>For a buyer, how the estate is run can matter as much as the renovation inside the unit. Disputes show up later as monthly fees, delayed repairs, or a tense sale. For a seller, those are the questions a careful buyer will ask.</p>
+      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
+      <p><span class="en">A former condominium chairman has lost a defamation case connected to links that were not disclosed. The court details belong to that case. The plain lesson for anyone buying or selling a condo in Singapore is about openness.</span><span class="zh" lang="zh-Hans">一名前共管公寓主席，在一宗与未披露利益关系有关的诽谤案中败诉。案件细节属于那宗诉讼。对在新加坡买卖公寓（condo）的人来说，白话的教训是：事情要说在明处。</span></p>
+      <p><span class="en">People who help run a condo are expected to say so when they have a personal or business link that could affect a decision, such as who the estate hires. Hiding that link can become a legal fight, not just an argument in the chat group.</span><span class="zh" lang="zh-Hans">参与管理公寓的人，如果有可能影响决定的私人或商业关系，例如由谁承包，就应该说出来。把关系藏起来，可能变成法律纠纷，而不只是聊天群里的争执。</span></p>
+      <p><span class="en">For a buyer, how the estate is run can matter as much as the renovation inside the unit. Disputes show up later as monthly fees, delayed repairs, or a tense sale. For a seller, those are the questions a careful buyer will ask.</span><span class="zh" lang="zh-Hans">对买家来说，公寓怎么管理，可能和单位里的装修一样重要。纠纷日后会变成月费、拖延的维修，或一宗紧张的交易。对卖家来说，这些正是谨慎的买家会问的问题。</span></p>
     </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
-      <h2 id="takeaways-heading">3 Takeaways for Buyers &amp; Sellers</h2>
+      <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>
-        <li><strong>What should you ask before buying a condo?</strong> Before you buy a condo, ask about monthly fees, upcoming works and any dispute you should know about. A nice unit in a poorly run estate can become expensive.</li>
-        <li><strong>What must a condo council member disclose?</strong> If you sit on your estate’s council, say so when you have a link to a contractor or a decision. Keeping it quiet can become a legal problem.</li>
-        <li><strong>What should sellers be ready to explain?</strong> Sellers should be ready for questions about unpaid fees and big repair bills. A clear answer is better than a surprise after the option is signed.</li>
+        <li><strong><span class="en">What should you ask before buying a condo?</span><span class="zh" lang="zh-Hans">买公寓之前该问什么？</span></strong> <span class="en">Before you buy a condo, ask about monthly fees, upcoming works and any dispute you should know about. A nice unit in a poorly run estate can become expensive.</span><span class="zh" lang="zh-Hans">买公寓之前，问清月费、即将进行的工程，以及任何你应该知道的纠纷。单位好看，但管理差的公寓，日后可能变得昂贵。</span></li>
+        <li><strong><span class="en">What must a condo council member disclose?</span><span class="zh" lang="zh-Hans">公寓理事会成员必须披露什么？</span></strong> <span class="en">If you sit on your estate’s council, say so when you have a link to a contractor or a decision. Keeping it quiet can become a legal problem.</span><span class="zh" lang="zh-Hans">如果你担任管理理事会成员，和承包商或某项决定有关系时要说出来。瞒着不说，可能变成法律问题。</span></li>
+        <li><strong><span class="en">What should sellers be ready to explain?</span><span class="zh" lang="zh-Hans">卖家该准备解释什么？</span></strong> <span class="en">Sellers should be ready for questions about unpaid fees and big repair bills. A clear answer is better than a surprise after the option is signed.</span><span class="zh" lang="zh-Hans">卖家应该准备好回答关于未付费用和大笔维修账单的问题。清楚的回答，好过购屋权发出后才出现意外。</span></li>
       </ul>
     </section>
   </article>
@@ -346,6 +405,35 @@
       this.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
       this.textContent = open ? "×" : "☰";
     });
+
+    (function () {
+      var KEY = "ssp-news-lang";
+      function apply(lang) {
+        var zh = lang === "zh";
+        if (zh) {
+          document.documentElement.setAttribute("data-lang", "zh");
+          document.documentElement.lang = "zh-Hans";
+        } else {
+          document.documentElement.removeAttribute("data-lang");
+          document.documentElement.lang = "en";
+        }
+        document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+          var on = btn.getAttribute("data-lang-set") === (zh ? "zh" : "en");
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        var pager = document.getElementById("news-pager");
+        if (pager) pager.setAttribute("aria-label", zh ? "新闻分页" : "News pages");
+        try { localStorage.setItem(KEY, zh ? "zh" : "en"); } catch (e) {}
+      }
+      document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          apply(btn.getAttribute("data-lang-set"));
+        });
+      });
+      var saved = "en";
+      try { if (localStorage.getItem(KEY) === "zh") saved = "zh"; } catch (e) {}
+      apply(saved);
+    })();
 </script>
 </body>
 </html>

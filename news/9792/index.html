@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    try {
+      if (localStorage.getItem("ssp-news-lang") === "zh") {
+        document.documentElement.setAttribute("data-lang", "zh");
+        document.documentElement.lang = "zh-Hans";
+      }
+    } catch (e) {}
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hao Mart founder halts foreclosure of his Jervois Hill bungalow by OG | Singapore Property News | SellingSgProperty</title>
@@ -273,11 +281,56 @@
       .menu-btn { display: inline-flex; align-items: center; justify-content: center; }
       .site-nav-inner { padding: 0 16px; }
     }
+    .story-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .story-title-row h1 { flex: 1 1 auto; min-width: 0; }
+    html:not([data-lang="zh"]) .zh { display: none; }
+    html[data-lang="zh"] .en { display: none; }
+    html[data-lang="zh"] body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", Inter, sans-serif;
+    }
+    .zh { letter-spacing: 0; }
+    .lang-switch {
+      display: inline-flex;
+      flex: 0 0 auto;
+      margin-top: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .lang-switch button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: #d0d0d0;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 7px 13px;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+    .lang-switch button + button { border-left: 1px solid rgba(255, 255, 255, 0.18); }
+    html:not([data-lang="zh"]) .lang-switch [data-lang-set="en"],
+    html[data-lang="zh"] .lang-switch [data-lang-set="zh"] {
+      background: var(--red);
+      color: #fff;
+    }
+    .lang-switch button:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: -3px;
+    }
     @media (max-width: 640px) {
       .story { padding: 18px 16px 56px; }
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .summary p, .takeaways li { font-size: 1rem; }
+      .lang-switch button { padding: 8px 12px; }
     }
 </style>
 </head>
@@ -310,32 +363,38 @@
   </nav>
 
   <article class="story">
-    <a class="back" href="/news/">← All news</a>
-    <p class="kicker">Real estate</p>
-    <h1>Hao Mart founder halts foreclosure of his Jervois Hill bungalow by OG</h1>
-    <time class="story-date" datetime="2026-10-30">2026/10/30</time>
+    <a class="back" href="/news/"><span class="en">← All news</span><span class="zh" lang="zh-Hans">← 全部新闻</span></a>
+    <p class="kicker"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></p>
+    <div class="story-title-row">
+      <h1><span class="en">Hao Mart founder halts foreclosure of his Jervois Hill bungalow by OG</span><span class="zh" lang="zh-Hans">Hao Mart创办人暂缓OG对其佐沃士山洋房的法拍</span></h1>
+      <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang-set="en">EN</button>
+      <button type="button" data-lang-set="zh" lang="zh-Hans">中文</button>
+    </div>
+    </div>
+    <time class="story-date" datetime="2026-10-30"><span class="en">2026/10/30</span><span class="zh" lang="zh-Hans">2026年10月30日</span></time>
     <img class="hero" src="/news/images/9792.jpg" alt="" width="760" height="280" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'">
     <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading">Key facts</h2>
+      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
       <ul>
-        <li>Property: a bungalow on Jervois Hill</li>
-        <li>What was halted: a foreclosure by OG</li>
-        <li>What a foreclosure is: a lender moving to sell because the loan is not being paid as agreed</li>
-        <li>What it is not: a completed sale, or a signal that landed prices nearby have reset</li>
+        <li><span class="en">Property: a bungalow on Jervois Hill</span><span class="zh" lang="zh-Hans">房产：佐沃士山（Jervois Hill）的一栋洋房</span></li>
+        <li><span class="en">What was halted: a foreclosure by OG</span><span class="zh" lang="zh-Hans">被暂缓的事：OG进行的法拍</span></li>
+        <li><span class="en">What a foreclosure is: a lender moving to sell because the loan is not being paid as agreed</span><span class="zh" lang="zh-Hans">法拍是什么：贷款人因为贷款没有按约定偿还，而着手出售</span></li>
+        <li><span class="en">What it is not: a completed sale, or a signal that landed prices nearby have reset</span><span class="zh" lang="zh-Hans">它不是什么：不是一宗已完成的交易，也不代表附近有地住宅的价格已经重订</span></li>
       </ul>
     </section>
     <div class="summary">
-      <h2>What this means</h2>
-      <p>The founder of Hao Mart has halted a foreclosure of his bungalow on Jervois Hill by OG. A foreclosure is when a lender moves to sell a home because the loan is not being paid as agreed. Halting it means that forced sale is paused.</p>
-      <p>The debt has not vanished, and the house has not changed hands. This is one owner’s loan on one landed house. It is not a wave of bungalows being dumped on the market, and it is not a new price for Jervois Hill.</p>
-      <p>It is still a useful reminder. A valuable home can be pushed toward a sale if the repayments stop. When a home is sold under pressure, the price is not always a fair reading of the street.</p>
+      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
+      <p><span class="en">The founder of Hao Mart has halted a foreclosure of his bungalow on Jervois Hill by OG. A foreclosure is when a lender moves to sell a home because the loan is not being paid as agreed. Halting it means that forced sale is paused.</span><span class="zh" lang="zh-Hans">Hao Mart创办人暂缓了OG对其佐沃士山（Jervois Hill）洋房的法拍。法拍是指贷款人因为贷款没有按约定偿还，而着手出售房子。暂缓意味着这场被迫出售先停下来。</span></p>
+      <p><span class="en">The debt has not vanished, and the house has not changed hands. This is one owner’s loan on one landed house. It is not a wave of bungalows being dumped on the market, and it is not a new price for Jervois Hill.</span><span class="zh" lang="zh-Hans">债务没有消失，房子也没有转手。这是一个业主、一栋有地住宅上的一笔贷款。这不是一整片洋房被抛售，也不是佐沃士山的新价格。</span></p>
+      <p><span class="en">It is still a useful reminder. A valuable home can be pushed toward a sale if the repayments stop. When a home is sold under pressure, the price is not always a fair reading of the street.</span><span class="zh" lang="zh-Hans">它仍然是一个有用的提醒。还款一停，一套值钱的房子也可能被推向出售。在压力下卖出的房子，价格不一定能公平反映那条街的行情。</span></p>
     </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
-      <h2 id="takeaways-heading">3 Takeaways for Buyers &amp; Sellers</h2>
+      <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>
-        <li><strong>Does one halted foreclosure mean landed prices are falling?</strong> Do not read one paused foreclosure as a sign that landed prices in the area are falling. It is one loan, not the whole market.</li>
-        <li><strong>What should you check in a lender sale?</strong> If you are offered a home from a lender sale, check the condition, what is still owed, and what similar houses nearby actually sold for before you call it a bargain.</li>
-        <li><strong>What does this mean for your own home loan?</strong> Keep your own loan at a level you can pay in a bad year. A valuable home does not protect you if the repayments stop.</li>
+        <li><strong><span class="en">Does one halted foreclosure mean landed prices are falling?</span><span class="zh" lang="zh-Hans">一宗法拍被暂缓，是否代表有地住宅价格在跌？</span></strong> <span class="en">Do not read one paused foreclosure as a sign that landed prices in the area are falling. It is one loan, not the whole market.</span><span class="zh" lang="zh-Hans">不要把一宗被暂缓的法拍，读成这个地区有地住宅价格正在下跌。这是一笔贷款，不是整个市场。</span></li>
+        <li><strong><span class="en">What should you check in a lender sale?</span><span class="zh" lang="zh-Hans">贷款人出售的房子该检查什么？</span></strong> <span class="en">If you are offered a home from a lender sale, check the condition, what is still owed, and what similar houses nearby actually sold for before you call it a bargain.</span><span class="zh" lang="zh-Hans">如果有人向你推介一套由贷款人出售的房子，先看屋况、还欠多少，以及附近类似房子的实际成交价，再决定它是不是便宜货。</span></li>
+        <li><strong><span class="en">What does this mean for your own home loan?</span><span class="zh" lang="zh-Hans">这对你自己的房贷意味着什么？</span></strong> <span class="en">Keep your own loan at a level you can pay in a bad year. A valuable home does not protect you if the repayments stop.</span><span class="zh" lang="zh-Hans">把自己的贷款留在倒霉的一年也还得起的水平。房子值钱，挡不住还款停了。</span></li>
       </ul>
     </section>
   </article>
@@ -347,6 +406,35 @@
       this.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
       this.textContent = open ? "×" : "☰";
     });
+
+    (function () {
+      var KEY = "ssp-news-lang";
+      function apply(lang) {
+        var zh = lang === "zh";
+        if (zh) {
+          document.documentElement.setAttribute("data-lang", "zh");
+          document.documentElement.lang = "zh-Hans";
+        } else {
+          document.documentElement.removeAttribute("data-lang");
+          document.documentElement.lang = "en";
+        }
+        document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+          var on = btn.getAttribute("data-lang-set") === (zh ? "zh" : "en");
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        var pager = document.getElementById("news-pager");
+        if (pager) pager.setAttribute("aria-label", zh ? "新闻分页" : "News pages");
+        try { localStorage.setItem(KEY, zh ? "zh" : "en"); } catch (e) {}
+      }
+      document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          apply(btn.getAttribute("data-lang-set"));
+        });
+      });
+      var saved = "en";
+      try { if (localStorage.getItem(KEY) === "zh") saved = "zh"; } catch (e) {}
+      apply(saved);
+    })();
 </script>
 </body>
 </html>

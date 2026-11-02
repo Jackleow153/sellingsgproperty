@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    try {
+      if (localStorage.getItem("ssp-news-lang") === "zh") {
+        document.documentElement.setAttribute("data-lang", "zh");
+        document.documentElement.lang = "zh-Hans";
+      }
+    } catch (e) {}
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>1,310 flats in Sembawang with under 3 years’ wait to go on sale in Nov | Singapore Property News | SellingSgProperty</title>
@@ -273,11 +281,56 @@
       .menu-btn { display: inline-flex; align-items: center; justify-content: center; }
       .site-nav-inner { padding: 0 16px; }
     }
+    .story-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .story-title-row h1 { flex: 1 1 auto; min-width: 0; }
+    html:not([data-lang="zh"]) .zh { display: none; }
+    html[data-lang="zh"] .en { display: none; }
+    html[data-lang="zh"] body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", Inter, sans-serif;
+    }
+    .zh { letter-spacing: 0; }
+    .lang-switch {
+      display: inline-flex;
+      flex: 0 0 auto;
+      margin-top: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .lang-switch button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: #d0d0d0;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 7px 13px;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+    .lang-switch button + button { border-left: 1px solid rgba(255, 255, 255, 0.18); }
+    html:not([data-lang="zh"]) .lang-switch [data-lang-set="en"],
+    html[data-lang="zh"] .lang-switch [data-lang-set="zh"] {
+      background: var(--red);
+      color: #fff;
+    }
+    .lang-switch button:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: -3px;
+    }
     @media (max-width: 640px) {
       .story { padding: 18px 16px 56px; }
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .summary p, .takeaways li { font-size: 1rem; }
+      .lang-switch button { padding: 8px 12px; }
     }
 </style>
 </head>
@@ -310,33 +363,39 @@
   </nav>
 
   <article class="story">
-    <a class="back" href="/news/">← All news</a>
-    <p class="kicker">Real estate</p>
-    <h1>1,310 flats in Sembawang with under 3 years’ wait to go on sale in Nov</h1>
-    <time class="story-date" datetime="2026-11-02">2026/11/02</time>
+    <a class="back" href="/news/"><span class="en">← All news</span><span class="zh" lang="zh-Hans">← 全部新闻</span></a>
+    <p class="kicker"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></p>
+    <div class="story-title-row">
+      <h1><span class="en">1,310 flats in Sembawang with under 3 years’ wait to go on sale in Nov</span><span class="zh" lang="zh-Hans">三巴旺1310个组屋单位将于11月发售，等候时间不到3年</span></h1>
+      <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang-set="en">EN</button>
+      <button type="button" data-lang-set="zh" lang="zh-Hans">中文</button>
+    </div>
+    </div>
+    <time class="story-date" datetime="2026-11-02"><span class="en">2026/11/02</span><span class="zh" lang="zh-Hans">2026年11月2日</span></time>
     <img class="hero" src="/news/images/9803.jpg" alt="" width="760" height="280" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'">
     <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading">Key facts</h2>
+      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
       <ul>
-        <li>Project: Sembawang Anchor, in Sembawang North</li>
-        <li>Supply: about 1,310 flats in the November 2026 BTO exercise</li>
-        <li>Reported wait: about 2 years and 10 months</li>
-        <li>Flat types: 2-room Flexi, 3-room, 4-room and 5-room</li>
-        <li>Also in the same exercise: Bayshore Oasis in Bedok and Plantation Dew in Tengah, with waits of about 3 years and 2 months</li>
+        <li><span class="en">Project: Sembawang Anchor, in Sembawang North</span><span class="zh" lang="zh-Hans">项目：Sembawang Anchor，位于三巴旺北</span></li>
+        <li><span class="en">Supply: about 1,310 flats in the November 2026 BTO exercise</span><span class="zh" lang="zh-Hans">供应：2026年11月预购组屋（BTO）销售活动约1310个单位</span></li>
+        <li><span class="en">Reported wait: about 2 years and 10 months</span><span class="zh" lang="zh-Hans">报道中的等候时间：约两年10个月</span></li>
+        <li><span class="en">Flat types: 2-room Flexi, 3-room, 4-room and 5-room</span><span class="zh" lang="zh-Hans">房型：二房式灵活单位、三房、四房和五房式</span></li>
+        <li><span class="en">Also in the same exercise: Bayshore Oasis in Bedok and Plantation Dew in Tengah, with waits of about 3 years and 2 months</span><span class="zh" lang="zh-Hans">同一次销售活动：勿洛的Bayshore Oasis和登加的Plantation Dew，等候时间约三年两个月</span></li>
       </ul>
     </section>
     <div class="summary">
-      <h2>What this means</h2>
-      <p>The November 2026 Build-to-Order exercise includes about 1,310 flats at Sembawang Anchor, in the new Sembawang North estate. Reports put the wait at about 2 years and 10 months, which is under the three years in the headline. The mix runs from 2-room Flexi flats to 3-room, 4-room and 5-room flats.</p>
-      <p>Two other projects in the same exercise are also relatively short waits. Bayshore Oasis in Bedok and Plantation Dew in Tengah are reported at about 3 years and 2 months. A shorter wait helps if you are timing a wedding, a move out of your parents’ home, or the sale of the flat you live in now.</p>
-      <p>It does not mean you will get a queue number, and it does not mean the flat will be cheap. Sembawang still has to fit your work and your daily travel. A shorter wait in the wrong town is not a win.</p>
+      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
+      <p><span class="en">The November 2026 Build-to-Order exercise includes about 1,310 flats at Sembawang Anchor, in the new Sembawang North estate. Reports put the wait at about 2 years and 10 months, which is under the three years in the headline. The mix runs from 2-room Flexi flats to 3-room, 4-room and 5-room flats.</span><span class="zh" lang="zh-Hans">2026年11月的预购组屋（BTO）销售活动，包括位于新三巴旺北住宅区的Sembawang Anchor，约1310个单位。报道中的等候时间约两年10个月，短于标题里的三年。房型从二房式灵活单位（2-room Flexi），到三房、四房和五房式。</span></p>
+      <p><span class="en">Two other projects in the same exercise are also relatively short waits. Bayshore Oasis in Bedok and Plantation Dew in Tengah are reported at about 3 years and 2 months. A shorter wait helps if you are timing a wedding, a move out of your parents’ home, or the sale of the flat you live in now.</span><span class="zh" lang="zh-Hans">同一次销售活动里，还有两个等候时间也比较短的项目。勿洛的Bayshore Oasis和登加的Plantation Dew，报道中的等候时间约三年两个月。如果你在安排婚礼、搬离父母家，或出售现在住的组屋，较短的等候时间会有帮助。</span></p>
+      <p><span class="en">It does not mean you will get a queue number, and it does not mean the flat will be cheap. Sembawang still has to fit your work and your daily travel. A shorter wait in the wrong town is not a win.</span><span class="zh" lang="zh-Hans">这不代表你一定抽得到号码，也不代表单位会便宜。三巴旺仍必须配合你的工作和每天的通勤。等候时间短，但市镇不合适，并不划算。</span></p>
     </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
-      <h2 id="takeaways-heading">3 Takeaways for Buyers &amp; Sellers</h2>
+      <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>
-        <li><strong>Does a shorter HDB wait mean you should apply for Sembawang Anchor?</strong> If you need keys sooner, put Sembawang Anchor on your November list and check the flat types before you apply. The shorter wait only helps if you would live there.</li>
-        <li><strong>How should couples time a resale and a new BTO flat?</strong> Couples who are also selling a home should map the gap between collecting the sale money and collecting the keys. A wait under three years shrinks that gap. It does not remove the need for somewhere to stay in between.</li>
-        <li><strong>Should the short wait change your budget?</strong> Do not stretch your budget because the wait looks attractive. Compare Sembawang with Bayshore and Tengah on the same exercise, then check that the monthly mortgage still feels comfortable.</li>
+        <li><strong><span class="en">Does a shorter HDB wait mean you should apply for Sembawang Anchor?</span><span class="zh" lang="zh-Hans">组屋等候时间较短，就该申请Sembawang Anchor吗？</span></strong> <span class="en">If you need keys sooner, put Sembawang Anchor on your November list and check the flat types before you apply. The shorter wait only helps if you would live there.</span><span class="zh" lang="zh-Hans">如果你需要更早拿到钥匙，把Sembawang Anchor放进11月的名单，申请前先看房型。较短的等候时间，只有在你愿意住在那里时才有帮助。</span></li>
+        <li><strong><span class="en">How should couples time a resale and a new BTO flat?</span><span class="zh" lang="zh-Hans">夫妻该如何安排转售和新的预购组屋？</span></strong> <span class="en">Couples who are also selling a home should map the gap between collecting the sale money and collecting the keys. A wait under three years shrinks that gap. It does not remove the need for somewhere to stay in between.</span><span class="zh" lang="zh-Hans">同时也在卖房的夫妻，应该算清收到卖房钱和拿到钥匙之间的空档。不到三年的等候会缩短这个空档，但中间仍需要地方住。</span></li>
+        <li><strong><span class="en">Should the short wait change your budget?</span><span class="zh" lang="zh-Hans">较短的等候时间该不该改变你的预算？</span></strong> <span class="en">Do not stretch your budget because the wait looks attractive. Compare Sembawang with Bayshore and Tengah on the same exercise, then check that the monthly mortgage still feels comfortable.</span><span class="zh" lang="zh-Hans">不要因为等候时间好看就拉高预算。在同一次销售活动里比较三巴旺、碧湾和登加，再确认每月房贷仍然负担得来。</span></li>
       </ul>
     </section>
   </article>
@@ -348,6 +407,35 @@
       this.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
       this.textContent = open ? "×" : "☰";
     });
+
+    (function () {
+      var KEY = "ssp-news-lang";
+      function apply(lang) {
+        var zh = lang === "zh";
+        if (zh) {
+          document.documentElement.setAttribute("data-lang", "zh");
+          document.documentElement.lang = "zh-Hans";
+        } else {
+          document.documentElement.removeAttribute("data-lang");
+          document.documentElement.lang = "en";
+        }
+        document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+          var on = btn.getAttribute("data-lang-set") === (zh ? "zh" : "en");
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        var pager = document.getElementById("news-pager");
+        if (pager) pager.setAttribute("aria-label", zh ? "新闻分页" : "News pages");
+        try { localStorage.setItem(KEY, zh ? "zh" : "en"); } catch (e) {}
+      }
+      document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          apply(btn.getAttribute("data-lang-set"));
+        });
+      });
+      var saved = "en";
+      try { if (localStorage.getItem(KEY) === "zh") saved = "zh"; } catch (e) {}
+      apply(saved);
+    })();
 </script>
 </body>
 </html>

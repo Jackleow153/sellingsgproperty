@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    try {
+      if (localStorage.getItem("ssp-news-lang") === "zh") {
+        document.documentElement.setAttribute("data-lang", "zh");
+        document.documentElement.lang = "zh-Hans";
+      }
+    } catch (e) {}
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Private home launch pipeline set to climb to 14-year high in 2027 | Singapore Property News | SellingSgProperty</title>
@@ -273,11 +281,56 @@
       .menu-btn { display: inline-flex; align-items: center; justify-content: center; }
       .site-nav-inner { padding: 0 16px; }
     }
+    .story-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .story-title-row h1 { flex: 1 1 auto; min-width: 0; }
+    html:not([data-lang="zh"]) .zh { display: none; }
+    html[data-lang="zh"] .en { display: none; }
+    html[data-lang="zh"] body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", Inter, sans-serif;
+    }
+    .zh { letter-spacing: 0; }
+    .lang-switch {
+      display: inline-flex;
+      flex: 0 0 auto;
+      margin-top: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .lang-switch button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: #d0d0d0;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 7px 13px;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+    .lang-switch button + button { border-left: 1px solid rgba(255, 255, 255, 0.18); }
+    html:not([data-lang="zh"]) .lang-switch [data-lang-set="en"],
+    html[data-lang="zh"] .lang-switch [data-lang-set="zh"] {
+      background: var(--red);
+      color: #fff;
+    }
+    .lang-switch button:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: -3px;
+    }
     @media (max-width: 640px) {
       .story { padding: 18px 16px 56px; }
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .summary p, .takeaways li { font-size: 1rem; }
+      .lang-switch button { padding: 8px 12px; }
     }
 </style>
 </head>
@@ -310,33 +363,39 @@
   </nav>
 
   <article class="story">
-    <a class="back" href="/news/">← All news</a>
-    <p class="kicker">Real estate</p>
-    <h1>Private home launch pipeline set to climb to 14-year high in 2027</h1>
-    <time class="story-date" datetime="2026-10-31">2026/10/31</time>
+    <a class="back" href="/news/"><span class="en">← All news</span><span class="zh" lang="zh-Hans">← 全部新闻</span></a>
+    <p class="kicker"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></p>
+    <div class="story-title-row">
+      <h1><span class="en">Private home launch pipeline set to climb to 14-year high in 2027</span><span class="zh" lang="zh-Hans">2027年私人住宅推盘量料创14年新高</span></h1>
+      <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang-set="en">EN</button>
+      <button type="button" data-lang-set="zh" lang="zh-Hans">中文</button>
+    </div>
+    </div>
+    <time class="story-date" datetime="2026-10-31"><span class="en">2026/10/31</span><span class="zh" lang="zh-Hans">2026年10月31日</span></time>
     <img class="hero" src="/news/images/9794.jpg" alt="" width="760" height="280" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'">
     <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading">Key facts</h2>
+      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
       <ul>
-        <li>Source of the forecast: Realion (OrangeTee) 2027 market outlook</li>
-        <li>About 16,800 new homes in more than 30 projects, including five ECs</li>
-        <li>About 14,800 private units excluding ECs, the most since 15,885 units in 2013</li>
-        <li>Where they sit: about 8,424 in the suburbs, 3,434 on the city fringe, 2,943 in the core central region</li>
-        <li>Projects named: Bayshore Drive (about 1,280 units), Lentor Signature, Hougang Central Residences</li>
+        <li><span class="en">Source of the forecast: Realion (OrangeTee) 2027 market outlook</span><span class="zh" lang="zh-Hans">预测来源：Realion（OrangeTee）2027年市场展望</span></li>
+        <li><span class="en">About 16,800 new homes in more than 30 projects, including five ECs</span><span class="zh" lang="zh-Hans">超过30个项目、约1万6800个新住家，包括五个执行共管公寓（EC）</span></li>
+        <li><span class="en">About 14,800 private units excluding ECs, the most since 15,885 units in 2013</span><span class="zh" lang="zh-Hans">剔除执行共管公寓后约1万4800个私人单位，是2013年1万5885个单位以来最多</span></li>
+        <li><span class="en">Where they sit: about 8,424 in the suburbs, 3,434 on the city fringe, 2,943 in the core central region</span><span class="zh" lang="zh-Hans">分布：郊区约8424个，城市边缘约3434个，核心中央区约2943个</span></li>
+        <li><span class="en">Projects named: Bayshore Drive (about 1,280 units), Lentor Signature, Hougang Central Residences</span><span class="zh" lang="zh-Hans">被点名的项目：碧湾通道（约1280个单位）、Lentor Signature、Hougang Central Residences</span></li>
       </ul>
     </section>
     <div class="summary">
-      <h2>What this means</h2>
-      <p>Home buyers are likely to have more new private projects to compare in 2027. Realion, the research arm of OrangeTee, expects more than 30 projects to be ready for launch, including five executive condominiums, yielding about 16,800 homes. Leave out the ECs and the estimate is about 14,800 private units, the most since 2013, when 15,885 units were launched.</p>
-      <p>More than half of those private units, about 8,424, are expected in the suburbs, outside the central region. About 3,434 are expected on the city fringe and about 2,943 in the core central region. Projects named as ones to watch include a 1,280-unit site at Bayshore Drive, Lentor Signature in Lentor Central, and Hougang Central Residences. Suburban prices are usually the ones HDB upgraders can reach.</p>
-      <p>More choice is not the same thing as lower prices. Land and construction still have to be paid for. If you need a home before 2027, waiting is a guess. If you are selling a resale flat or condo in the next year or two, some buyers may look at a new launch instead.</p>
+      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
+      <p><span class="en">Home buyers are likely to have more new private projects to compare in 2027. Realion, the research arm of OrangeTee, expects more than 30 projects to be ready for launch, including five executive condominiums, yielding about 16,800 homes. Leave out the ECs and the estimate is about 14,800 private units, the most since 2013, when 15,885 units were launched.</span><span class="zh" lang="zh-Hans">2027年，购房者可能会有更多新的私人项目可以比较。OrangeTee旗下研究机构Realion预计，超过30个项目会准备好推出，包括五个执行共管公寓（EC），合计约1万6800个住家。剔除执行共管公寓后，私人单位约1万4800个，是2013年推出1万5885个单位以来最多的一年。</span></p>
+      <p><span class="en">More than half of those private units, about 8,424, are expected in the suburbs, outside the central region. About 3,434 are expected on the city fringe and about 2,943 in the core central region. Projects named as ones to watch include a 1,280-unit site at Bayshore Drive, Lentor Signature in Lentor Central, and Hougang Central Residences. Suburban prices are usually the ones HDB upgraders can reach.</span><span class="zh" lang="zh-Hans">这些私人单位超过一半、约8424个，预计位于中央区以外的郊区。约3434个在城市边缘，约2943个在核心中央区。被点名值得留意的项目，包括碧湾通道一块约1280个单位的地段、伦多的Lentor Signature，以及后港的Hougang Central Residences。郊区的价格，通常才是组屋升级者够得着的。</span></p>
+      <p><span class="en">More choice is not the same thing as lower prices. Land and construction still have to be paid for. If you need a home before 2027, waiting is a guess. If you are selling a resale flat or condo in the next year or two, some buyers may look at a new launch instead.</span><span class="zh" lang="zh-Hans">选择多，不等于价格更低。地价和建筑成本仍然要付。如果你在2027年之前就需要房子，等待只是一个猜测。如果你在未来一两年出售转售组屋或公寓，有些买家可能会转去看新盘。</span></p>
     </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
-      <h2 id="takeaways-heading">3 Takeaways for Buyers &amp; Sellers</h2>
+      <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>
-        <li><strong>Will more new launches in 2027 make Singapore homes cheaper?</strong> More launches in 2027 do not guarantee cheaper homes. Compare a home you can buy now with what it costs you to keep waiting.</li>
-        <li><strong>What does the 2027 supply mean for an HDB upgrader?</strong> HDB upgraders who can wait should use the extra suburban supply to be picky about the MRT walk, the layout and the total price, not only a brochure discount.</li>
-        <li><strong>What does a bigger launch pipeline mean for resale sellers?</strong> Resale sellers should not assume a busy new launch nearby will lift their price. Some buyers will simply pick a 2027 project instead.</li>
+        <li><strong><span class="en">Will more new launches in 2027 make Singapore homes cheaper?</span><span class="zh" lang="zh-Hans">2027年新盘更多，会让新加坡的房子更便宜吗？</span></strong> <span class="en">More launches in 2027 do not guarantee cheaper homes. Compare a home you can buy now with what it costs you to keep waiting.</span><span class="zh" lang="zh-Hans">2027年新盘更多，不保证房子更便宜。把你现在买得起的房子，和继续等待的成本比较。</span></li>
+        <li><strong><span class="en">What does the 2027 supply mean for an HDB upgrader?</span><span class="zh" lang="zh-Hans">2027年的供应对组屋升级者意味着什么？</span></strong> <span class="en">HDB upgraders who can wait should use the extra suburban supply to be picky about the MRT walk, the layout and the total price, not only a brochure discount.</span><span class="zh" lang="zh-Hans">负担得起等待的组屋升级者，应该用多出来的郊区供应，去挑剔地铁步行距离、格局和总价，而不是只看宣传册上的折扣。</span></li>
+        <li><strong><span class="en">What does a bigger launch pipeline mean for resale sellers?</span><span class="zh" lang="zh-Hans">更大的推盘量对转售卖家意味着什么？</span></strong> <span class="en">Resale sellers should not assume a busy new launch nearby will lift their price. Some buyers will simply pick a 2027 project instead.</span><span class="zh" lang="zh-Hans">转售卖家不要假设附近热闹的新盘会抬高自己的价格。有些买家会直接选2027年的项目。</span></li>
       </ul>
     </section>
   </article>
@@ -348,6 +407,35 @@
       this.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
       this.textContent = open ? "×" : "☰";
     });
+
+    (function () {
+      var KEY = "ssp-news-lang";
+      function apply(lang) {
+        var zh = lang === "zh";
+        if (zh) {
+          document.documentElement.setAttribute("data-lang", "zh");
+          document.documentElement.lang = "zh-Hans";
+        } else {
+          document.documentElement.removeAttribute("data-lang");
+          document.documentElement.lang = "en";
+        }
+        document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+          var on = btn.getAttribute("data-lang-set") === (zh ? "zh" : "en");
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        var pager = document.getElementById("news-pager");
+        if (pager) pager.setAttribute("aria-label", zh ? "新闻分页" : "News pages");
+        try { localStorage.setItem(KEY, zh ? "zh" : "en"); } catch (e) {}
+      }
+      document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          apply(btn.getAttribute("data-lang-set"));
+        });
+      });
+      var saved = "en";
+      try { if (localStorage.getItem(KEY) === "zh") saved = "zh"; } catch (e) {}
+      apply(saved);
+    })();
 </script>
 </body>
 </html>

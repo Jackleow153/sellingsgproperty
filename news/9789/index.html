@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    try {
+      if (localStorage.getItem("ssp-news-lang") === "zh") {
+        document.documentElement.setAttribute("data-lang", "zh");
+        document.documentElement.lang = "zh-Hans";
+      }
+    } catch (e) {}
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Two Tiong Bahru HDB blocks to get HIP upgrade after re-poll | Singapore Property News | SellingSgProperty</title>
@@ -273,11 +281,56 @@
       .menu-btn { display: inline-flex; align-items: center; justify-content: center; }
       .site-nav-inner { padding: 0 16px; }
     }
+    .story-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .story-title-row h1 { flex: 1 1 auto; min-width: 0; }
+    html:not([data-lang="zh"]) .zh { display: none; }
+    html[data-lang="zh"] .en { display: none; }
+    html[data-lang="zh"] body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", Inter, sans-serif;
+    }
+    .zh { letter-spacing: 0; }
+    .lang-switch {
+      display: inline-flex;
+      flex: 0 0 auto;
+      margin-top: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .lang-switch button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: #d0d0d0;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 7px 13px;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+    .lang-switch button + button { border-left: 1px solid rgba(255, 255, 255, 0.18); }
+    html:not([data-lang="zh"]) .lang-switch [data-lang-set="en"],
+    html[data-lang="zh"] .lang-switch [data-lang-set="zh"] {
+      background: var(--red);
+      color: #fff;
+    }
+    .lang-switch button:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: -3px;
+    }
     @media (max-width: 640px) {
       .story { padding: 18px 16px 56px; }
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .summary p, .takeaways li { font-size: 1rem; }
+      .lang-switch button { padding: 8px 12px; }
     }
 </style>
 </head>
@@ -310,32 +363,38 @@
   </nav>
 
   <article class="story">
-    <a class="back" href="/news/">← All news</a>
-    <p class="kicker">Real estate</p>
-    <h1>Two Tiong Bahru HDB blocks to get HIP upgrade after re-poll</h1>
-    <time class="story-date" datetime="2026-10-29">2026/10/29</time>
+    <a class="back" href="/news/"><span class="en">← All news</span><span class="zh" lang="zh-Hans">← 全部新闻</span></a>
+    <p class="kicker"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></p>
+    <div class="story-title-row">
+      <h1><span class="en">Two Tiong Bahru HDB blocks to get HIP upgrade after re-poll</span><span class="zh" lang="zh-Hans">中峇鲁两个组屋座重投后将进行家居改进计划（HIP）</span></h1>
+      <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang-set="en">EN</button>
+      <button type="button" data-lang-set="zh" lang="zh-Hans">中文</button>
+    </div>
+    </div>
+    <time class="story-date" datetime="2026-10-29"><span class="en">2026/10/29</span><span class="zh" lang="zh-Hans">2026年10月29日</span></time>
     <img class="hero" src="/news/images/9789.jpg" alt="" width="760" height="280" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'">
     <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading">Key facts</h2>
+      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
       <ul>
-        <li>Where: two HDB blocks in Tiong Bahru</li>
-        <li>What was decided: the Home Improvement Programme will go ahead after a fresh poll</li>
-        <li>What HIP usually covers: block repairs such as spalling concrete, plus some optional works inside the flat</li>
-        <li>Who pays: standard works are supported; optional items are paid by the owner</li>
+        <li><span class="en">Where: two HDB blocks in Tiong Bahru</span><span class="zh" lang="zh-Hans">地点：中峇鲁两个组屋座</span></li>
+        <li><span class="en">What was decided: the Home Improvement Programme will go ahead after a fresh poll</span><span class="zh" lang="zh-Hans">决定：重新投票后，家居改进计划（HIP）将进行</span></li>
+        <li><span class="en">What HIP usually covers: block repairs such as spalling concrete, plus some optional works inside the flat</span><span class="zh" lang="zh-Hans">家居改进计划通常包括：组屋维修，例如混凝土剥落，以及屋内一些可选择的工程</span></li>
+        <li><span class="en">Who pays: standard works are supported; optional items are paid by the owner</span><span class="zh" lang="zh-Hans">谁付钱：标准工程有支持；可选择的项目由业主付费</span></li>
       </ul>
     </section>
     <div class="summary">
-      <h2>What this means</h2>
-      <p>Two HDB blocks in Tiong Bahru will get the Home Improvement Programme after residents were polled again and the upgrade went ahead. HIP refreshes older blocks. Typical works include repairs such as spalling concrete, plus some optional items inside the flat.</p>
-      <p>Some of the work is covered. Optional items are paid for by the owner. The works also mean noise, workmen, and a period when the block is a less comfortable place to live in or to view.</p>
-      <p>An upgrade can help an older block. It does not add years back onto the lease, and it does not turn an old Tiong Bahru flat into a new BTO flat.</p>
+      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
+      <p><span class="en">Two HDB blocks in Tiong Bahru will get the Home Improvement Programme after residents were polled again and the upgrade went ahead. HIP refreshes older blocks. Typical works include repairs such as spalling concrete, plus some optional items inside the flat.</span><span class="zh" lang="zh-Hans">中峇鲁两个组屋座在居民重新投票后，将进行家居改进计划（HIP）。家居改进计划是为较旧的HDB组屋翻新。常见工程包括混凝土剥落等维修，以及屋内一些可选择的项目。</span></p>
+      <p><span class="en">Some of the work is covered. Optional items are paid for by the owner. The works also mean noise, workmen, and a period when the block is a less comfortable place to live in or to view.</span><span class="zh" lang="zh-Hans">部分工程有津贴。可选择的项目由业主自己付费。工程也意味着噪音、工人，以及一段不那么适合居住或看房的时间。</span></p>
+      <p><span class="en">An upgrade can help an older block. It does not add years back onto the lease, and it does not turn an old Tiong Bahru flat into a new BTO flat.</span><span class="zh" lang="zh-Hans">翻新对较旧的组屋有帮助。它不会把地契年限加回去，也不会把中峇鲁的旧组屋变成新的预购组屋（BTO）。</span></p>
     </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
-      <h2 id="takeaways-heading">3 Takeaways for Buyers &amp; Sellers</h2>
+      <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>
-        <li><strong>Which HIP works do HDB owners pay for?</strong> If you own one of these flats, separate the standard works from the optional ones before you say yes. Optional items come out of your own pocket.</li>
-        <li><strong>What should buyers of older Tiong Bahru flats ask?</strong> Buyers of older HDB flats should ask whether HIP has been done, is coming, or was voted down. It changes both the condition you are taking on and the disruption during the works.</li>
-        <li><strong>Does an upgrade justify a new-flat price?</strong> Do not pay a new-flat price because an upgrade is coming. Look at the remaining lease, the floor, and recent resale prices in the same blocks.</li>
+        <li><strong><span class="en">Which HIP works do HDB owners pay for?</span><span class="zh" lang="zh-Hans">组屋业主要为哪些家居改进计划工程付钱？</span></strong> <span class="en">If you own one of these flats, separate the standard works from the optional ones before you say yes. Optional items come out of your own pocket.</span><span class="zh" lang="zh-Hans">如果你拥有其中一套组屋，答应之前先把标准工程和可选择的项目分开。可选择的项目由你自己出钱。</span></li>
+        <li><strong><span class="en">What should buyers of older Tiong Bahru flats ask?</span><span class="zh" lang="zh-Hans">购买较旧的中峇鲁组屋，该问什么？</span></strong> <span class="en">Buyers of older HDB flats should ask whether HIP has been done, is coming, or was voted down. It changes both the condition you are taking on and the disruption during the works.</span><span class="zh" lang="zh-Hans">购买较旧组屋的人，应该问家居改进计划是已经做完、即将进行，还是被投掉了。这会改变你接手的屋况，以及工程期间的打扰。</span></li>
+        <li><strong><span class="en">Does an upgrade justify a new-flat price?</span><span class="zh" lang="zh-Hans">翻新能不能支撑新组屋的价格？</span></strong> <span class="en">Do not pay a new-flat price because an upgrade is coming. Look at the remaining lease, the floor, and recent resale prices in the same blocks.</span><span class="zh" lang="zh-Hans">不要因为即将翻新，就付新组屋的价钱。看剩余地契、楼层，以及同一座组屋最近的转售价。</span></li>
       </ul>
     </section>
   </article>
@@ -347,6 +406,35 @@
       this.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
       this.textContent = open ? "×" : "☰";
     });
+
+    (function () {
+      var KEY = "ssp-news-lang";
+      function apply(lang) {
+        var zh = lang === "zh";
+        if (zh) {
+          document.documentElement.setAttribute("data-lang", "zh");
+          document.documentElement.lang = "zh-Hans";
+        } else {
+          document.documentElement.removeAttribute("data-lang");
+          document.documentElement.lang = "en";
+        }
+        document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+          var on = btn.getAttribute("data-lang-set") === (zh ? "zh" : "en");
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        var pager = document.getElementById("news-pager");
+        if (pager) pager.setAttribute("aria-label", zh ? "新闻分页" : "News pages");
+        try { localStorage.setItem(KEY, zh ? "zh" : "en"); } catch (e) {}
+      }
+      document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          apply(btn.getAttribute("data-lang-set"));
+        });
+      });
+      var saved = "en";
+      try { if (localStorage.getItem(KEY) === "zh") saved = "zh"; } catch (e) {}
+      apply(saved);
+    })();
 </script>
 </body>
 </html>

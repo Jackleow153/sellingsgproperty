@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    try {
+      if (localStorage.getItem("ssp-news-lang") === "zh") {
+        document.documentElement.setAttribute("data-lang", "zh");
+        document.documentElement.lang = "zh-Hans";
+      }
+    } catch (e) {}
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About 11,000 homes planned on Maju Forest, Gillman Barracks sites with more greenery to be retained | Singapore Property News | SellingSgProperty</title>
@@ -273,11 +281,56 @@
       .menu-btn { display: inline-flex; align-items: center; justify-content: center; }
       .site-nav-inner { padding: 0 16px; }
     }
+    .story-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .story-title-row h1 { flex: 1 1 auto; min-width: 0; }
+    html:not([data-lang="zh"]) .zh { display: none; }
+    html[data-lang="zh"] .en { display: none; }
+    html[data-lang="zh"] body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", Inter, sans-serif;
+    }
+    .zh { letter-spacing: 0; }
+    .lang-switch {
+      display: inline-flex;
+      flex: 0 0 auto;
+      margin-top: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .lang-switch button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: #d0d0d0;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 7px 13px;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+    .lang-switch button + button { border-left: 1px solid rgba(255, 255, 255, 0.18); }
+    html:not([data-lang="zh"]) .lang-switch [data-lang-set="en"],
+    html[data-lang="zh"] .lang-switch [data-lang-set="zh"] {
+      background: var(--red);
+      color: #fff;
+    }
+    .lang-switch button:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: -3px;
+    }
     @media (max-width: 640px) {
       .story { padding: 18px 16px 56px; }
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .summary p, .takeaways li { font-size: 1rem; }
+      .lang-switch button { padding: 8px 12px; }
     }
 </style>
 </head>
@@ -310,33 +363,39 @@
   </nav>
 
   <article class="story">
-    <a class="back" href="/news/">← All news</a>
-    <p class="kicker">Real estate</p>
-    <h1>About 11,000 homes planned on Maju Forest, Gillman Barracks sites with more greenery to be retained</h1>
-    <time class="story-date" datetime="2026-10-29">2026/10/29</time>
+    <a class="back" href="/news/"><span class="en">← All news</span><span class="zh" lang="zh-Hans">← 全部新闻</span></a>
+    <p class="kicker"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></p>
+    <div class="story-title-row">
+      <h1><span class="en">About 11,000 homes planned on Maju Forest, Gillman Barracks sites with more greenery to be retained</span><span class="zh" lang="zh-Hans">Maju森林与吉门军营地段计划约1万1000个住家，并保留更多绿化</span></h1>
+      <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang-set="en">EN</button>
+      <button type="button" data-lang-set="zh" lang="zh-Hans">中文</button>
+    </div>
+    </div>
+    <time class="story-date" datetime="2026-10-29"><span class="en">2026/10/29</span><span class="zh" lang="zh-Hans">2026年10月29日</span></time>
     <img class="hero" src="/news/images/9787.jpg" alt="" width="760" height="280" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'">
     <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading">Key facts</h2>
+      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
       <ul>
-        <li>Sites: Maju Forest and Gillman Barracks</li>
-        <li>Homes planned: about 11,000</li>
-        <li>Split: about 9,500 public homes and about 1,500 private units</li>
-        <li>Design change: more greenery kept, with some taller blocks</li>
-        <li>Timing: a long-term plan, not a project on sale now</li>
+        <li><span class="en">Sites: Maju Forest and Gillman Barracks</span><span class="zh" lang="zh-Hans">地段：Maju森林与吉门军营（Gillman Barracks）</span></li>
+        <li><span class="en">Homes planned: about 11,000</span><span class="zh" lang="zh-Hans">计划中的住家：约1万1000个</span></li>
+        <li><span class="en">Split: about 9,500 public homes and about 1,500 private units</span><span class="zh" lang="zh-Hans">分配：约9500个公共住房，约1500个私人单位</span></li>
+        <li><span class="en">Design change: more greenery kept, with some taller blocks</span><span class="zh" lang="zh-Hans">设计改动：保留更多绿化，部分楼宇建得更高</span></li>
+        <li><span class="en">Timing: a long-term plan, not a project on sale now</span><span class="zh" lang="zh-Hans">时间：长期计划，不是现在发售的项目</span></li>
       </ul>
     </section>
     <div class="summary">
-      <h2>What this means</h2>
-      <p>Revised plans for the Maju Forest and Gillman Barracks sites set aside about 11,000 homes. About 9,500 would be public housing and about 1,500 private. The revision also keeps more greenery, with some blocks built taller so more land can stay open.</p>
-      <p>These homes are not for sale this month. A plan on this scale is carried out over many years. The first question for anyone nearby is what has actually been confirmed, and how close future blocks would sit to the home they care about.</p>
-      <p>More homes nearby can mean more people to support shops and transport. It can also mean more future competition, and a change to the view or the quiet edge that made the area attractive.</p>
+      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
+      <p><span class="en">Revised plans for the Maju Forest and Gillman Barracks sites set aside about 11,000 homes. About 9,500 would be public housing and about 1,500 private. The revision also keeps more greenery, with some blocks built taller so more land can stay open.</span><span class="zh" lang="zh-Hans">Maju森林与吉门军营（Gillman Barracks）地段的修订计划，预留约1万1000个住家。其中约9500个是公共住房，约1500个是私人住宅。修订也保留更多绿化，部分组屋建得更高，好让更多土地保持开阔。</span></p>
+      <p><span class="en">These homes are not for sale this month. A plan on this scale is carried out over many years. The first question for anyone nearby is what has actually been confirmed, and how close future blocks would sit to the home they care about.</span><span class="zh" lang="zh-Hans">这些住家不是这个月发售。这个规模的计划要很多年才落实。附近的人首先该问的是：哪些已经确定，以及未来的楼宇会离自己在意的房子有多近。</span></p>
+      <p><span class="en">More homes nearby can mean more people to support shops and transport. It can also mean more future competition, and a change to the view or the quiet edge that made the area attractive.</span><span class="zh" lang="zh-Hans">附近多了住家，可以有更多人支撑商店和交通。它也可能带来更多未来的竞争，并改变当初让这个地区吸引人的景观或安静边缘。</span></p>
     </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
-      <h2 id="takeaways-heading">3 Takeaways for Buyers &amp; Sellers</h2>
+      <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>
-        <li><strong>Can you buy one of these Maju Forest or Gillman Barracks homes now?</strong> Treat this as a long-term plan, not a BTO or a new launch you can book now. Ask what has been approved, and whether any date has been given for the first homes.</li>
-        <li><strong>How could taller blocks and greenery change a nearby home?</strong> If trees, a view or a quiet edge are why you like a home nearby, look at the revised layout. Taller blocks and retained greenery change a view in different ways.</li>
-        <li><strong>Should sellers add a premium because 11,000 new homes are planned?</strong> Sellers should not add a premium just because 11,000 homes are planned. Buyers pay for what they can use today, and they discount what is still uncertain.</li>
+        <li><strong><span class="en">Can you buy one of these Maju Forest or Gillman Barracks homes now?</span><span class="zh" lang="zh-Hans">现在能买到Maju森林或吉门军营的这些住家吗？</span></strong> <span class="en">Treat this as a long-term plan, not a BTO or a new launch you can book now. Ask what has been approved, and whether any date has been given for the first homes.</span><span class="zh" lang="zh-Hans">把它当成长期计划，而不是你现在可以预订的预购组屋（BTO）或新盘。问清楚哪些已经批准，以及第一批住家有没有日期。</span></li>
+        <li><strong><span class="en">How could taller blocks and greenery change a nearby home?</span><span class="zh" lang="zh-Hans">更高的楼和绿化，会如何改变附近的房子？</span></strong> <span class="en">If trees, a view or a quiet edge are why you like a home nearby, look at the revised layout. Taller blocks and retained greenery change a view in different ways.</span><span class="zh" lang="zh-Hans">如果树木、景观或安静的边缘是你喜欢附近一套房子的原因，去看修订后的布局。更高的楼和保留下来的绿化，会以不同的方式改变景观。</span></li>
+        <li><strong><span class="en">Should sellers add a premium because 11,000 new homes are planned?</span><span class="zh" lang="zh-Hans">因为计划了1万1000个新住家，卖家就该加价吗？</span></strong> <span class="en">Sellers should not add a premium just because 11,000 homes are planned. Buyers pay for what they can use today, and they discount what is still uncertain.</span><span class="zh" lang="zh-Hans">卖家不要只因为计划了1万1000个住家就加价。买家为今天用得上的东西付钱，对还不确定的事情会打折。</span></li>
       </ul>
     </section>
   </article>
@@ -348,6 +407,35 @@
       this.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
       this.textContent = open ? "×" : "☰";
     });
+
+    (function () {
+      var KEY = "ssp-news-lang";
+      function apply(lang) {
+        var zh = lang === "zh";
+        if (zh) {
+          document.documentElement.setAttribute("data-lang", "zh");
+          document.documentElement.lang = "zh-Hans";
+        } else {
+          document.documentElement.removeAttribute("data-lang");
+          document.documentElement.lang = "en";
+        }
+        document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+          var on = btn.getAttribute("data-lang-set") === (zh ? "zh" : "en");
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        var pager = document.getElementById("news-pager");
+        if (pager) pager.setAttribute("aria-label", zh ? "新闻分页" : "News pages");
+        try { localStorage.setItem(KEY, zh ? "zh" : "en"); } catch (e) {}
+      }
+      document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          apply(btn.getAttribute("data-lang-set"));
+        });
+      });
+      var saved = "en";
+      try { if (localStorage.getItem(KEY) === "zh") saved = "zh"; } catch (e) {}
+      apply(saved);
+    })();
 </script>
 </body>
 </html>

@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    try {
+      if (localStorage.getItem("ssp-news-lang") === "zh") {
+        document.documentElement.setAttribute("data-lang", "zh");
+        document.documentElement.lang = "zh-Hans";
+      }
+    } catch (e) {}
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Singapore Property News for Buyers and Sellers | SellingSgProperty</title>
@@ -220,12 +228,56 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
     }
-    .news-heading {
+    .news-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
       margin: 0 0 8px;
+    }
+    .news-heading {
+      margin: 0;
       color: #fff;
       font-size: 1.7rem;
       font-weight: 700;
       letter-spacing: -0.03em;
+    }
+    html:not([data-lang="zh"]) .zh { display: none; }
+    html[data-lang="zh"] .en { display: none; }
+    html[data-lang="zh"] body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", Inter, sans-serif;
+    }
+    .zh { letter-spacing: 0; }
+    .news-kicker .zh { letter-spacing: 0.08em; }
+    .lang-switch {
+      display: inline-flex;
+      flex: 0 0 auto;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .lang-switch button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: #d0d0d0;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 7px 13px;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+    .lang-switch button + button { border-left: 1px solid rgba(255, 255, 255, 0.18); }
+    html:not([data-lang="zh"]) .lang-switch [data-lang-set="en"],
+    html[data-lang="zh"] .lang-switch [data-lang-set="zh"] {
+      background: var(--red);
+      color: #fff;
+    }
+    .lang-switch button:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: -3px;
     }
     .news-intro {
       margin: 0 0 18px;
@@ -364,6 +416,7 @@
       .pager-btn, .pager-num { min-height: 44px; font-size: 0.92rem; }
       .pager-num { width: 44px; }
       .pager-btn { padding: 0 12px; }
+      .lang-switch button { padding: 8px 12px; }
     }
   </style>
 </head>
@@ -395,29 +448,64 @@
   </nav>
 
   <main class="news-wrap">
-    <p class="news-kicker">Singapore property</p>
-    <h1 class="news-heading">News</h1>
-    <p class="news-intro">Singapore property updates for HDB upgraders, new launch buyers and resale sellers. Each story keeps the original headline, then explains the numbers and what they mean for a purchase or a sale.</p>
+    <p class="news-kicker"><span class="en">Singapore property</span><span class="zh" lang="zh-Hans">新加坡房地产</span></p>
+    <div class="news-title-row">
+      <h1 class="news-heading"><span class="en">News</span><span class="zh" lang="zh-Hans">新闻</span></h1>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang-set="en">EN</button>
+        <button type="button" data-lang-set="zh" lang="zh-Hans">中文</button>
+      </div>
+    </div>
+    <p class="news-intro"><span class="en">Singapore property updates for HDB upgraders, new launch buyers and resale sellers. Each story keeps the original headline, then explains the numbers and what they mean for a purchase or a sale.</span><span class="zh" lang="zh-Hans">为组屋升级者、新盘买家和转售卖家整理的新加坡房地产消息。每则新闻保留原来的标题，再用白话说明数字，以及这对买房或卖房意味着什么。</span></p>
     <!-- news-list:start -->
 <ul class="news-list" id="news-list">
-    <li class="is-page-start"><a class="news-row" href="/news/9806/"><img class="news-thumb" src="/news/images/9806.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat">Real estate</span><h2 class="news-title">Build-to-rent homes could appeal to young S’poreans, but can rent be kept under $2,000?</h2><time class="news-date" datetime="2026-11-02">2026/11/02</time></div></a></li>
-    <li><a class="news-row" href="/news/9805/"><img class="news-thumb" src="/news/images/9805.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat">Real estate</span><h2 class="news-title">Why Singapore is exploring build-to-rent</h2><time class="news-date" datetime="2026-11-02">2026/11/02</time></div></a></li>
-    <li><a class="news-row" href="/news/9803/"><img class="news-thumb" src="/news/images/9803.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat">Real estate</span><h2 class="news-title">1,310 flats in Sembawang with under 3 years’ wait to go on sale in Nov</h2><time class="news-date" datetime="2026-11-02">2026/11/02</time></div></a></li>
-    <li><a class="news-row" href="/news/9802/"><img class="news-thumb" src="/news/images/9802.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat">Real estate</span><h2 class="news-title">Thomson Reserve sells 90% of units at average of S$2,900 psf over launch weekend</h2><time class="news-date" datetime="2026-11-02">2026/11/02</time></div></a></li>
-    <li><a class="news-row" href="/news/9799/"><img class="news-thumb" src="/news/images/9799.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat">Real estate</span><h2 class="news-title">New mall, parks and plans for a school under Toa Payoh West masterplan</h2><time class="news-date" datetime="2026-11-01">2026/11/01</time></div></a></li>
-    <li><a class="news-row" href="/news/9798/"><img class="news-thumb" src="/news/images/9798.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat">Real estate</span><h2 class="news-title">Ex-condo chairman loses defamation suit over undisclosed links</h2><time class="news-date" datetime="2026-10-31">2026/10/31</time></div></a></li>
-    <li><a class="news-row" href="/news/9794/"><img class="news-thumb" src="/news/images/9794.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat">Real estate</span><h2 class="news-title">Private home launch pipeline set to climb to 14-year high in 2027</h2><time class="news-date" datetime="2026-10-31">2026/10/31</time></div></a></li>
-    <li><a class="news-row" href="/news/9792/"><img class="news-thumb" src="/news/images/9792.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat">Real estate</span><h2 class="news-title">Hao Mart founder halts foreclosure of his Jervois Hill bungalow by OG</h2><time class="news-date" datetime="2026-10-30">2026/10/30</time></div></a></li>
-    <li><a class="news-row" href="/news/9790/"><img class="news-thumb" src="/news/images/9790.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat">Real estate</span><h2 class="news-title">Hong Leong, TID place top bid of S$181.86m or S$1,755 psf ppr for Orchard plot</h2><time class="news-date" datetime="2026-10-30">2026/10/30</time></div></a></li>
-    <li><a class="news-row" href="/news/9789/"><img class="news-thumb" src="/news/images/9789.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat">Real estate</span><h2 class="news-title">Two Tiong Bahru HDB blocks to get HIP upgrade after re-poll</h2><time class="news-date" datetime="2026-10-29">2026/10/29</time></div></a></li>
-    <li><a class="news-row" href="/news/9788/"><img class="news-thumb" src="/news/images/9788.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat">Real estate</span><h2 class="news-title">Tampines is S’pore’s most populous planning area, but not its fastest-growing</h2><time class="news-date" datetime="2026-10-29">2026/10/29</time></div></a></li>
-    <li><a class="news-row" href="/news/9787/"><img class="news-thumb" src="/news/images/9787.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat">Real estate</span><h2 class="news-title">About 11,000 homes planned on Maju Forest, Gillman Barracks sites with more greenery to be retained</h2><time class="news-date" datetime="2026-10-29">2026/10/29</time></div></a></li>
+    <li class="is-page-start"><a class="news-row" href="/news/9806/"><img class="news-thumb" src="/news/images/9806.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></span><h2 class="news-title"><span class="en">Build-to-rent homes could appeal to young S’poreans, but can rent be kept under $2,000?</span><span class="zh" lang="zh-Hans">建造供出租的住房或能吸引年轻新加坡人，但租金能压在2000新元以下吗？</span></h2><time class="news-date" datetime="2026-11-02"><span class="en">2026/11/02</span><span class="zh" lang="zh-Hans">2026年11月2日</span></time></div></a></li>
+    <li><a class="news-row" href="/news/9805/"><img class="news-thumb" src="/news/images/9805.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></span><h2 class="news-title"><span class="en">Why Singapore is exploring build-to-rent</span><span class="zh" lang="zh-Hans">新加坡为何在研究建造供出租住房</span></h2><time class="news-date" datetime="2026-11-02"><span class="en">2026/11/02</span><span class="zh" lang="zh-Hans">2026年11月2日</span></time></div></a></li>
+    <li><a class="news-row" href="/news/9803/"><img class="news-thumb" src="/news/images/9803.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></span><h2 class="news-title"><span class="en">1,310 flats in Sembawang with under 3 years’ wait to go on sale in Nov</span><span class="zh" lang="zh-Hans">三巴旺1310个组屋单位将于11月发售，等候时间不到3年</span></h2><time class="news-date" datetime="2026-11-02"><span class="en">2026/11/02</span><span class="zh" lang="zh-Hans">2026年11月2日</span></time></div></a></li>
+    <li><a class="news-row" href="/news/9802/"><img class="news-thumb" src="/news/images/9802.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></span><h2 class="news-title"><span class="en">Thomson Reserve sells 90% of units at average of S$2,900 psf over launch weekend</span><span class="zh" lang="zh-Hans">Thomson Reserve开盘周末售出九成单位，平均每平方英尺2900新元（psf）</span></h2><time class="news-date" datetime="2026-11-02"><span class="en">2026/11/02</span><span class="zh" lang="zh-Hans">2026年11月2日</span></time></div></a></li>
+    <li><a class="news-row" href="/news/9799/"><img class="news-thumb" src="/news/images/9799.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></span><h2 class="news-title"><span class="en">New mall, parks and plans for a school under Toa Payoh West masterplan</span><span class="zh" lang="zh-Hans">大巴窑西总蓝图：新商场、公园，以及建校计划</span></h2><time class="news-date" datetime="2026-11-01"><span class="en">2026/11/01</span><span class="zh" lang="zh-Hans">2026年11月1日</span></time></div></a></li>
+    <li><a class="news-row" href="/news/9798/"><img class="news-thumb" src="/news/images/9798.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></span><h2 class="news-title"><span class="en">Ex-condo chairman loses defamation suit over undisclosed links</span><span class="zh" lang="zh-Hans">前公寓主席因未披露利益关系，诽谤案败诉</span></h2><time class="news-date" datetime="2026-10-31"><span class="en">2026/10/31</span><span class="zh" lang="zh-Hans">2026年10月31日</span></time></div></a></li>
+    <li><a class="news-row" href="/news/9794/"><img class="news-thumb" src="/news/images/9794.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></span><h2 class="news-title"><span class="en">Private home launch pipeline set to climb to 14-year high in 2027</span><span class="zh" lang="zh-Hans">2027年私人住宅推盘量料创14年新高</span></h2><time class="news-date" datetime="2026-10-31"><span class="en">2026/10/31</span><span class="zh" lang="zh-Hans">2026年10月31日</span></time></div></a></li>
+    <li><a class="news-row" href="/news/9792/"><img class="news-thumb" src="/news/images/9792.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></span><h2 class="news-title"><span class="en">Hao Mart founder halts foreclosure of his Jervois Hill bungalow by OG</span><span class="zh" lang="zh-Hans">Hao Mart创办人暂缓OG对其佐沃士山洋房的法拍</span></h2><time class="news-date" datetime="2026-10-30"><span class="en">2026/10/30</span><span class="zh" lang="zh-Hans">2026年10月30日</span></time></div></a></li>
+    <li><a class="news-row" href="/news/9790/"><img class="news-thumb" src="/news/images/9790.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></span><h2 class="news-title"><span class="en">Hong Leong, TID place top bid of S$181.86m or S$1,755 psf ppr for Orchard plot</span><span class="zh" lang="zh-Hans">丰隆与TID以1亿8186万新元标得乌节地段，折合每平方英尺楼面地价1755新元</span></h2><time class="news-date" datetime="2026-10-30"><span class="en">2026/10/30</span><span class="zh" lang="zh-Hans">2026年10月30日</span></time></div></a></li>
+    <li><a class="news-row" href="/news/9789/"><img class="news-thumb" src="/news/images/9789.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></span><h2 class="news-title"><span class="en">Two Tiong Bahru HDB blocks to get HIP upgrade after re-poll</span><span class="zh" lang="zh-Hans">中峇鲁两个组屋座重投后将进行家居改进计划（HIP）</span></h2><time class="news-date" datetime="2026-10-29"><span class="en">2026/10/29</span><span class="zh" lang="zh-Hans">2026年10月29日</span></time></div></a></li>
+    <li><a class="news-row" href="/news/9788/"><img class="news-thumb" src="/news/images/9788.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></span><h2 class="news-title"><span class="en">Tampines is S’pore’s most populous planning area, but not its fastest-growing</span><span class="zh" lang="zh-Hans">淡滨尼是新加坡人口最多的规划区，但不是增长最快的</span></h2><time class="news-date" datetime="2026-10-29"><span class="en">2026/10/29</span><span class="zh" lang="zh-Hans">2026年10月29日</span></time></div></a></li>
+    <li><a class="news-row" href="/news/9787/"><img class="news-thumb" src="/news/images/9787.jpg" alt="" width="190" height="118" loading="lazy" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'"><div class="news-copy"><span class="news-cat"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></span><h2 class="news-title"><span class="en">About 11,000 homes planned on Maju Forest, Gillman Barracks sites with more greenery to be retained</span><span class="zh" lang="zh-Hans">Maju森林与吉门军营地段计划约1万1000个住家，并保留更多绿化</span></h2><time class="news-date" datetime="2026-10-29"><span class="en">2026/10/29</span><span class="zh" lang="zh-Hans">2026年10月29日</span></time></div></a></li>
   </ul>
-  <nav class="pager" id="news-pager" aria-label="News pages"><span class="pager-btn is-disabled">Previous Page</span><a class="pager-num is-current" aria-current="page" href="/news/">1</a><span class="pager-btn is-disabled">Next page</span></nav>
+  <nav class="pager" id="news-pager" aria-label="News pages"><span class="pager-btn is-disabled"><span class="en">Previous Page</span><span class="zh" lang="zh-Hans">上一页</span></span><a class="pager-num is-current" aria-current="page" href="/news/">1</a><span class="pager-btn is-disabled"><span class="en">Next page</span><span class="zh" lang="zh-Hans">下一页</span></span></nav>
   <!-- news-list:end -->
   </main>
 
   <script>
+    (function () {
+      var KEY = "ssp-news-lang";
+      function apply(lang) {
+        var zh = lang === "zh";
+        if (zh) {
+          document.documentElement.setAttribute("data-lang", "zh");
+          document.documentElement.lang = "zh-Hans";
+        } else {
+          document.documentElement.removeAttribute("data-lang");
+          document.documentElement.lang = "en";
+        }
+        document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+          var on = btn.getAttribute("data-lang-set") === (zh ? "zh" : "en");
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        var pager = document.getElementById("news-pager");
+        if (pager) pager.setAttribute("aria-label", zh ? "新闻分页" : "News pages");
+        try { localStorage.setItem(KEY, zh ? "zh" : "en"); } catch (e) {}
+      }
+      document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          apply(btn.getAttribute("data-lang-set"));
+        });
+      });
+      var saved = "en";
+      try { if (localStorage.getItem(KEY) === "zh") saved = "zh"; } catch (e) {}
+      apply(saved);
+    })();
+
     document.getElementById("menu-btn").addEventListener("click", function () {
       const panel = document.getElementById("mobile-panel");
       const open = panel.classList.toggle("open");
@@ -452,9 +540,12 @@
           else item.setAttribute("hidden", "");
           item.classList.toggle("is-page-start", index === start);
         });
+        function bi(en, zh) {
+          return '<span class="en">' + en + '</span><span class="zh" lang="zh-Hans">' + zh + '</span>';
+        }
         var html = "";
-        if (page <= 1) html += '<span class="pager-btn is-disabled">Previous Page</span>';
-        else html += '<a class="pager-btn" href="' + hrefFor(page - 1) + '">Previous Page</a>';
+        if (page <= 1) html += '<span class="pager-btn is-disabled">' + bi("Previous Page", "上一页") + '</span>';
+        else html += '<a class="pager-btn" href="' + hrefFor(page - 1) + '">' + bi("Previous Page", "上一页") + '</a>';
         var from = 1;
         var to = pages;
         if (pages > 7) {
@@ -471,8 +562,8 @@
           }
         }
         if (to < pages) html += '<a class="pager-num" href="' + hrefFor(pages) + '">' + pages + '</a>';
-        if (page >= pages) html += '<span class="pager-btn is-disabled">Next page</span>';
-        else html += '<a class="pager-btn" href="' + hrefFor(page + 1) + '">Next page</a>';
+        if (page >= pages) html += '<span class="pager-btn is-disabled">' + bi("Next page", "下一页") + '</span>';
+        else html += '<a class="pager-btn" href="' + hrefFor(page + 1) + '">' + bi("Next page", "下一页") + '</a>';
         pager.innerHTML = html;
       }
 

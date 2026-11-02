@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    try {
+      if (localStorage.getItem("ssp-news-lang") === "zh") {
+        document.documentElement.setAttribute("data-lang", "zh");
+        document.documentElement.lang = "zh-Hans";
+      }
+    } catch (e) {}
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Why Singapore is exploring build-to-rent | Singapore Property News | SellingSgProperty</title>
@@ -273,11 +281,56 @@
       .menu-btn { display: inline-flex; align-items: center; justify-content: center; }
       .site-nav-inner { padding: 0 16px; }
     }
+    .story-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .story-title-row h1 { flex: 1 1 auto; min-width: 0; }
+    html:not([data-lang="zh"]) .zh { display: none; }
+    html[data-lang="zh"] .en { display: none; }
+    html[data-lang="zh"] body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", Inter, sans-serif;
+    }
+    .zh { letter-spacing: 0; }
+    .lang-switch {
+      display: inline-flex;
+      flex: 0 0 auto;
+      margin-top: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .lang-switch button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: #d0d0d0;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 7px 13px;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+    .lang-switch button + button { border-left: 1px solid rgba(255, 255, 255, 0.18); }
+    html:not([data-lang="zh"]) .lang-switch [data-lang-set="en"],
+    html[data-lang="zh"] .lang-switch [data-lang-set="zh"] {
+      background: var(--red);
+      color: #fff;
+    }
+    .lang-switch button:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: -3px;
+    }
     @media (max-width: 640px) {
       .story { padding: 18px 16px 56px; }
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .summary p, .takeaways li { font-size: 1rem; }
+      .lang-switch button { padding: 8px 12px; }
     }
 </style>
 </head>
@@ -310,32 +363,38 @@
   </nav>
 
   <article class="story">
-    <a class="back" href="/news/">← All news</a>
-    <p class="kicker">Real estate</p>
-    <h1>Why Singapore is exploring build-to-rent</h1>
-    <time class="story-date" datetime="2026-11-02">2026/11/02</time>
+    <a class="back" href="/news/"><span class="en">← All news</span><span class="zh" lang="zh-Hans">← 全部新闻</span></a>
+    <p class="kicker"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></p>
+    <div class="story-title-row">
+      <h1><span class="en">Why Singapore is exploring build-to-rent</span><span class="zh" lang="zh-Hans">新加坡为何在研究建造供出租住房</span></h1>
+      <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang-set="en">EN</button>
+      <button type="button" data-lang-set="zh" lang="zh-Hans">中文</button>
+    </div>
+    </div>
+    <time class="story-date" datetime="2026-11-02"><span class="en">2026/11/02</span><span class="zh" lang="zh-Hans">2026年11月2日</span></time>
     <img class="hero" src="/news/images/9805.jpg" alt="" width="760" height="280" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'">
     <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading">Key facts</h2>
+      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
       <ul>
-        <li>Build-to-rent: homes built to be rented, not sold off at launch</li>
-        <li>Why it is being discussed: demand for a private place before a mortgage</li>
-        <li>Who is driving interest: younger Singaporeans who want to live on their own</li>
-        <li>Status: being explored, not a project you can book</li>
+        <li><span class="en">Build-to-rent: homes built to be rented, not sold off at launch</span><span class="zh" lang="zh-Hans">建造供出租：住房建来出租，而不是在开盘时卖出</span></li>
+        <li><span class="en">Why it is being discussed: demand for a private place before a mortgage</span><span class="zh" lang="zh-Hans">讨论原因：人们希望在承担房贷前先有私人住所</span></li>
+        <li><span class="en">Who is driving interest: younger Singaporeans who want to live on their own</span><span class="zh" lang="zh-Hans">推动兴趣的人：想独立居住的年轻新加坡人</span></li>
+        <li><span class="en">Status: being explored, not a project you can book</span><span class="zh" lang="zh-Hans">现状：仍在探讨，不是可以预订的项目</span></li>
       </ul>
     </section>
     <div class="summary">
-      <h2>What this means</h2>
-      <p>Build-to-rent means a block is built and then rented out over many years, instead of being carved up and sold to individual buyers at a new launch. Singapore is looking at it because more people want a private home before they take on a mortgage.</p>
-      <p>The demand described in the reports is practical: younger Singaporeans want their own front door, not a room in someone else’s flat. Privacy and a stable place to live come first. Buying an HDB flat or a condo is a much larger step, and many are not there yet.</p>
-      <p>This is still an idea. It is not a showflat, and it does not change today’s resale prices. The only useful test is whether the rent would leave enough money to keep saving.</p>
+      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
+      <p><span class="en">Build-to-rent means a block is built and then rented out over many years, instead of being carved up and sold to individual buyers at a new launch. Singapore is looking at it because more people want a private home before they take on a mortgage.</span><span class="zh" lang="zh-Hans">建造供出租（build-to-rent）是指一整栋房子建好后，多年来用来出租，而不是在新盘时分割卖给个别买家。新加坡在研究这个做法，是因为更多人希望在承担房贷之前，先有一个属于自己的住处。</span></p>
+      <p><span class="en">The demand described in the reports is practical: younger Singaporeans want their own front door, not a room in someone else’s flat. Privacy and a stable place to live come first. Buying an HDB flat or a condo is a much larger step, and many are not there yet.</span><span class="zh" lang="zh-Hans">报道里的需求很实际：年轻新加坡人想要自己的家门，而不是住在别人家里的一个房间。隐私和稳定的住处排在前面。购买HDB组屋或公寓是大得多的一步，很多人还没到那一步。</span></p>
+      <p><span class="en">This is still an idea. It is not a showflat, and it does not change today’s resale prices. The only useful test is whether the rent would leave enough money to keep saving.</span><span class="zh" lang="zh-Hans">这仍是一个构想。它不是示范单位，也不会改变今天的转售价格。唯一有用的检验是：这样的租金是否仍让你存得下钱。</span></p>
     </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
-      <h2 id="takeaways-heading">3 Takeaways for Buyers &amp; Sellers</h2>
+      <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>
-        <li><strong>What is build-to-rent in Singapore?</strong> Renting can be a sensible bridge if the monthly cost still lets you save for an HDB or condo down payment. Add the rent, your other bills, and what is left.</li>
-        <li><strong>Should you rush a purchase because of this housing idea?</strong> A headline about a new way to rent is not a reason to rush a new launch or a resale purchase. Buy when the monthly loan is comfortable.</li>
-        <li><strong>What should owners of investment units watch?</strong> If you are selling or renting out an investment unit, watch whether tenants later prefer purpose-built rental homes. An older condo may need a sharper rent or better condition to compete.</li>
+        <li><strong><span class="en">What is build-to-rent in Singapore?</span><span class="zh" lang="zh-Hans">新加坡的建造供出租是什么？</span></strong> <span class="en">Renting can be a sensible bridge if the monthly cost still lets you save for an HDB or condo down payment. Add the rent, your other bills, and what is left.</span><span class="zh" lang="zh-Hans">如果每月租金仍让你存得下HDB组屋或公寓的首期，租房可以是合理的过渡。把租金、其他账单，以及剩下的钱加总看看。</span></li>
+        <li><strong><span class="en">Should you rush a purchase because of this housing idea?</span><span class="zh" lang="zh-Hans">要不要因为这个住房构想而急着买房？</span></strong> <span class="en">A headline about a new way to rent is not a reason to rush a new launch or a resale purchase. Buy when the monthly loan is comfortable.</span><span class="zh" lang="zh-Hans">一则关于新租赁方式的标题，不是急着买新盘或转售单位的理由。每月贷款还得轻松时，再买。</span></li>
+        <li><strong><span class="en">What should owners of investment units watch?</span><span class="zh" lang="zh-Hans">投资单位的业主该留意什么？</span></strong> <span class="en">If you are selling or renting out an investment unit, watch whether tenants later prefer purpose-built rental homes. An older condo may need a sharper rent or better condition to compete.</span><span class="zh" lang="zh-Hans">如果你在出售或出租投资单位，要留意租户日后会不会更想住专门建造的租赁住房。较旧的公寓可能要用更合适的租金，或更好的屋况，才有竞争力。</span></li>
       </ul>
     </section>
   </article>
@@ -347,6 +406,35 @@
       this.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
       this.textContent = open ? "×" : "☰";
     });
+
+    (function () {
+      var KEY = "ssp-news-lang";
+      function apply(lang) {
+        var zh = lang === "zh";
+        if (zh) {
+          document.documentElement.setAttribute("data-lang", "zh");
+          document.documentElement.lang = "zh-Hans";
+        } else {
+          document.documentElement.removeAttribute("data-lang");
+          document.documentElement.lang = "en";
+        }
+        document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+          var on = btn.getAttribute("data-lang-set") === (zh ? "zh" : "en");
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        var pager = document.getElementById("news-pager");
+        if (pager) pager.setAttribute("aria-label", zh ? "新闻分页" : "News pages");
+        try { localStorage.setItem(KEY, zh ? "zh" : "en"); } catch (e) {}
+      }
+      document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          apply(btn.getAttribute("data-lang-set"));
+        });
+      });
+      var saved = "en";
+      try { if (localStorage.getItem(KEY) === "zh") saved = "zh"; } catch (e) {}
+      apply(saved);
+    })();
 </script>
 </body>
 </html>

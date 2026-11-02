@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    try {
+      if (localStorage.getItem("ssp-news-lang") === "zh") {
+        document.documentElement.setAttribute("data-lang", "zh");
+        document.documentElement.lang = "zh-Hans";
+      }
+    } catch (e) {}
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thomson Reserve sells 90% of units at average of S$2,900 psf over launch weekend | Singapore Property News | SellingSgProperty</title>
@@ -273,11 +281,56 @@
       .menu-btn { display: inline-flex; align-items: center; justify-content: center; }
       .site-nav-inner { padding: 0 16px; }
     }
+    .story-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .story-title-row h1 { flex: 1 1 auto; min-width: 0; }
+    html:not([data-lang="zh"]) .zh { display: none; }
+    html[data-lang="zh"] .en { display: none; }
+    html[data-lang="zh"] body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", Inter, sans-serif;
+    }
+    .zh { letter-spacing: 0; }
+    .lang-switch {
+      display: inline-flex;
+      flex: 0 0 auto;
+      margin-top: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .lang-switch button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: #d0d0d0;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 7px 13px;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+    .lang-switch button + button { border-left: 1px solid rgba(255, 255, 255, 0.18); }
+    html:not([data-lang="zh"]) .lang-switch [data-lang-set="en"],
+    html[data-lang="zh"] .lang-switch [data-lang-set="zh"] {
+      background: var(--red);
+      color: #fff;
+    }
+    .lang-switch button:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: -3px;
+    }
     @media (max-width: 640px) {
       .story { padding: 18px 16px 56px; }
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .summary p, .takeaways li { font-size: 1rem; }
+      .lang-switch button { padding: 8px 12px; }
     }
 </style>
 </head>
@@ -310,35 +363,41 @@
   </nav>
 
   <article class="story">
-    <a class="back" href="/news/">← All news</a>
-    <p class="kicker">Real estate</p>
-    <h1>Thomson Reserve sells 90% of units at average of S$2,900 psf over launch weekend</h1>
-    <time class="story-date" datetime="2026-11-02">2026/11/02</time>
+    <a class="back" href="/news/"><span class="en">← All news</span><span class="zh" lang="zh-Hans">← 全部新闻</span></a>
+    <p class="kicker"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></p>
+    <div class="story-title-row">
+      <h1><span class="en">Thomson Reserve sells 90% of units at average of S$2,900 psf over launch weekend</span><span class="zh" lang="zh-Hans">Thomson Reserve开盘周末售出九成单位，平均每平方英尺2900新元（psf）</span></h1>
+      <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang-set="en">EN</button>
+      <button type="button" data-lang-set="zh" lang="zh-Hans">中文</button>
+    </div>
+    </div>
+    <time class="story-date" datetime="2026-11-02"><span class="en">2026/11/02</span><span class="zh" lang="zh-Hans">2026年11月2日</span></time>
     <img class="hero" src="/news/images/9802.jpg" alt="" width="760" height="280" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'">
     <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading">Key facts</h2>
+      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
       <ul>
-        <li>Project: Thomson Reserve, Bright Hill Drive, Upper Thomson</li>
-        <li>Developers: UOL and CapitaLand Development</li>
-        <li>Sold: 1,143 of 1,268 units, about 90%, on 30–31 October 2026</li>
-        <li>Average price: about $2,900 per square foot</li>
-        <li>What sold out: 3-bedroom and 4-bedroom types; most 5-bedroom homes</li>
-        <li>What is left: 125 units, of which 123 were smaller 2-bedroom homes and 2 were 5-bedroom suites</li>
-        <li>Reported starting prices: about $1.5 million for a 2-bedroom and about $2.5 million for a 3-bedroom</li>
+        <li><span class="en">Project: Thomson Reserve, Bright Hill Drive, Upper Thomson</span><span class="zh" lang="zh-Hans">项目：Thomson Reserve，光明山通道，汤申路上段</span></li>
+        <li><span class="en">Developers: UOL and CapitaLand Development</span><span class="zh" lang="zh-Hans">发展商：华业集团（UOL）与凯德发展（CapitaLand Development）</span></li>
+        <li><span class="en">Sold: 1,143 of 1,268 units, about 90%, on 30–31 October 2026</span><span class="zh" lang="zh-Hans">售出：1268个单位中的1143个，约九成，2026年10月30日至31日</span></li>
+        <li><span class="en">Average price: about $2,900 per square foot</span><span class="zh" lang="zh-Hans">平均价格：约每平方英尺2900新元（psf）</span></li>
+        <li><span class="en">What sold out: 3-bedroom and 4-bedroom types; most 5-bedroom homes</span><span class="zh" lang="zh-Hans">售罄：三房和四房；五房也大部分售出</span></li>
+        <li><span class="en">What is left: 125 units, of which 123 were smaller 2-bedroom homes and 2 were 5-bedroom suites</span><span class="zh" lang="zh-Hans">剩下：125个单位，其中123个是较小的两房，2个是五房套间</span></li>
+        <li><span class="en">Reported starting prices: about $1.5 million for a 2-bedroom and about $2.5 million for a 3-bedroom</span><span class="zh" lang="zh-Hans">报道中的起价：两房约150万新元，三房约250万新元</span></li>
       </ul>
     </section>
     <div class="summary">
-      <h2>What this means</h2>
-      <p>Thomson Reserve, the new condo by UOL and CapitaLand Development at Bright Hill Drive in Upper Thomson, sold 1,143 of its 1,268 units over the launch on 30 and 31 October 2026. That is about 90%. The average price of the units sold was about $2,900 per square foot. Most buyers were Singaporeans, buying both to live in and as an investment.</p>
-      <p>The preview drew about 32,000 visitors over two weekends. Three-bedroom and four-bedroom types sold out. Of the 125 homes left, 123 were smaller two-bedroom units and two were five-bedroom suites. Reported starting prices were about $1.5 million for a two-bedroom and about $2.5 million for a three-bedroom. PropNex chief executive Kelvin Fong said it was the highest launch-weekend sale of 2026 by number of units, ahead of the 853 units sold at Tengah Garden Residences in April.</p>
-      <p>A fast weekend tells you there was demand at that price, on those two days. It does not mean every remaining stack is worth the average. If you are still looking, the useful comparison is what is left. If you are selling a resale condo nearby, buyers may use $2,900 psf as a reference, so be ready to explain how your home is different.</p>
+      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
+      <p><span class="en">Thomson Reserve, the new condo by UOL and CapitaLand Development at Bright Hill Drive in Upper Thomson, sold 1,143 of its 1,268 units over the launch on 30 and 31 October 2026. That is about 90%. The average price of the units sold was about $2,900 per square foot. Most buyers were Singaporeans, buying both to live in and as an investment.</span><span class="zh" lang="zh-Hans">华业集团（UOL）与凯德发展（CapitaLand Development）在汤申路上段光明山通道的新私宅（condo）Thomson Reserve，于2026年10月30日和31日售出1268个单位中的1143个，约九成。售出单位的平均价格约每平方英尺2900新元（psf）。大部分买家是新加坡人，既有自住，也有投资。</span></p>
+      <p><span class="en">The preview drew about 32,000 visitors over two weekends. Three-bedroom and four-bedroom types sold out. Of the 125 homes left, 123 were smaller two-bedroom units and two were five-bedroom suites. Reported starting prices were about $1.5 million for a two-bedroom and about $2.5 million for a three-bedroom. PropNex chief executive Kelvin Fong said it was the highest launch-weekend sale of 2026 by number of units, ahead of the 853 units sold at Tengah Garden Residences in April.</span><span class="zh" lang="zh-Hans">两个周末的预览吸引了约3万2000人次。三房和四房单位售罄。剩下的125个单位里，123个是较小的两房单位，两个是五房套间。报道中的起价，两房约150万新元，三房约250万新元。博纳（PropNex）首席执行官Kelvin Fong说，以单位数量计算，这是2026年开盘周末售出最多的项目，超过今年4月登加Tengah Garden Residences售出的853个单位。</span></p>
+      <p><span class="en">A fast weekend tells you there was demand at that price, on those two days. It does not mean every remaining stack is worth the average. If you are still looking, the useful comparison is what is left. If you are selling a resale condo nearby, buyers may use $2,900 psf as a reference, so be ready to explain how your home is different.</span><span class="zh" lang="zh-Hans">一个周末卖得快，只说明那两天、在那个价格上有需求。这不代表剩下的每一叠单位都值那个平均价。如果你还在看，真正该比较的是还剩下什么。如果你在转售附近的私宅，买家可能会拿每平方英尺2900新元当参照，所以要准备好说明你的房子有什么不同。</span></p>
     </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
-      <h2 id="takeaways-heading">3 Takeaways for Buyers &amp; Sellers</h2>
+      <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>
-        <li><strong>Does Thomson Reserve’s launch weekend mean you should buy?</strong> A 90% launch is a sign of interest, not proof you should buy. Work out the full price, the stamp duty and the monthly loan before you treat the weekend result as a reason to proceed.</li>
-        <li><strong>Which Thomson Reserve units are actually left?</strong> If you are still choosing a unit, judge what is left. The $2,900 psf average hides both the dearer homes and the cheaper ones. Of the 125 unsold homes, 123 were two-bedroom and two were five-bedroom suites.</li>
-        <li><strong>How should resale sellers near Upper Thomson price their home?</strong> Resale sellers near Upper Thomson should price against recent sales of similar homes, not only against this new-launch average. Buyers will ask why your condo costs more or less than $2,900 psf.</li>
+        <li><strong><span class="en">Does Thomson Reserve’s launch weekend mean you should buy?</span><span class="zh" lang="zh-Hans">Thomson Reserve的开盘周末，是否代表你应该买？</span></strong> <span class="en">A 90% launch is a sign of interest, not proof you should buy. Work out the full price, the stamp duty and the monthly loan before you treat the weekend result as a reason to proceed.</span><span class="zh" lang="zh-Hans">开盘售出九成，说明有兴趣，不是你应该买的证明。先算清总价、印花税和每月贷款，再决定要不要把这个周末的成绩当成入市理由。</span></li>
+        <li><strong><span class="en">Which Thomson Reserve units are actually left?</span><span class="zh" lang="zh-Hans">Thomson Reserve实际上还剩哪些单位？</span></strong> <span class="en">If you are still choosing a unit, judge what is left. The $2,900 psf average hides both the dearer homes and the cheaper ones. Of the 125 unsold homes, 123 were two-bedroom and two were five-bedroom suites.</span><span class="zh" lang="zh-Hans">如果还在选单位，看剩下的是什么。每平方英尺2900新元的平均价，同时掩盖了较贵和较便宜的单位。125个未售出单位里，123个是两房，两个是五房套间。</span></li>
+        <li><strong><span class="en">How should resale sellers near Upper Thomson price their home?</span><span class="zh" lang="zh-Hans">汤申路上段附近的转售卖家该如何定价？</span></strong> <span class="en">Resale sellers near Upper Thomson should price against recent sales of similar homes, not only against this new-launch average. Buyers will ask why your condo costs more or less than $2,900 psf.</span><span class="zh" lang="zh-Hans">汤申路上段附近的转售卖家，应该对照类似房子最近的成交价来定价，而不是只对照这个新盘的平均价。买家会问，为什么你的私宅比每平方英尺2900新元贵或便宜。</span></li>
       </ul>
     </section>
   </article>
@@ -350,6 +409,35 @@
       this.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
       this.textContent = open ? "×" : "☰";
     });
+
+    (function () {
+      var KEY = "ssp-news-lang";
+      function apply(lang) {
+        var zh = lang === "zh";
+        if (zh) {
+          document.documentElement.setAttribute("data-lang", "zh");
+          document.documentElement.lang = "zh-Hans";
+        } else {
+          document.documentElement.removeAttribute("data-lang");
+          document.documentElement.lang = "en";
+        }
+        document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+          var on = btn.getAttribute("data-lang-set") === (zh ? "zh" : "en");
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        var pager = document.getElementById("news-pager");
+        if (pager) pager.setAttribute("aria-label", zh ? "新闻分页" : "News pages");
+        try { localStorage.setItem(KEY, zh ? "zh" : "en"); } catch (e) {}
+      }
+      document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          apply(btn.getAttribute("data-lang-set"));
+        });
+      });
+      var saved = "en";
+      try { if (localStorage.getItem(KEY) === "zh") saved = "zh"; } catch (e) {}
+      apply(saved);
+    })();
 </script>
 </body>
 </html>

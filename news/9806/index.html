@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    try {
+      if (localStorage.getItem("ssp-news-lang") === "zh") {
+        document.documentElement.setAttribute("data-lang", "zh");
+        document.documentElement.lang = "zh-Hans";
+      }
+    } catch (e) {}
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Build-to-rent homes could appeal to young S’poreans, but can rent be kept under $2,000? | Singapore Property News | SellingSgProperty</title>
@@ -273,11 +281,56 @@
       .menu-btn { display: inline-flex; align-items: center; justify-content: center; }
       .site-nav-inner { padding: 0 16px; }
     }
+    .story-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .story-title-row h1 { flex: 1 1 auto; min-width: 0; }
+    html:not([data-lang="zh"]) .zh { display: none; }
+    html[data-lang="zh"] .en { display: none; }
+    html[data-lang="zh"] body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", Inter, sans-serif;
+    }
+    .zh { letter-spacing: 0; }
+    .lang-switch {
+      display: inline-flex;
+      flex: 0 0 auto;
+      margin-top: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .lang-switch button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: #d0d0d0;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 7px 13px;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+    .lang-switch button + button { border-left: 1px solid rgba(255, 255, 255, 0.18); }
+    html:not([data-lang="zh"]) .lang-switch [data-lang-set="en"],
+    html[data-lang="zh"] .lang-switch [data-lang-set="zh"] {
+      background: var(--red);
+      color: #fff;
+    }
+    .lang-switch button:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: -3px;
+    }
     @media (max-width: 640px) {
       .story { padding: 18px 16px 56px; }
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .summary p, .takeaways li { font-size: 1rem; }
+      .lang-switch button { padding: 8px 12px; }
     }
 </style>
 </head>
@@ -310,32 +363,38 @@
   </nav>
 
   <article class="story">
-    <a class="back" href="/news/">← All news</a>
-    <p class="kicker">Real estate</p>
-    <h1>Build-to-rent homes could appeal to young S’poreans, but can rent be kept under $2,000?</h1>
-    <time class="story-date" datetime="2026-11-02">2026/11/02</time>
+    <a class="back" href="/news/"><span class="en">← All news</span><span class="zh" lang="zh-Hans">← 全部新闻</span></a>
+    <p class="kicker"><span class="en">Real estate</span><span class="zh" lang="zh-Hans">房地产</span></p>
+    <div class="story-title-row">
+      <h1><span class="en">Build-to-rent homes could appeal to young S’poreans, but can rent be kept under $2,000?</span><span class="zh" lang="zh-Hans">建造供出租的住房或能吸引年轻新加坡人，但租金能压在2000新元以下吗？</span></h1>
+      <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang-set="en">EN</button>
+      <button type="button" data-lang-set="zh" lang="zh-Hans">中文</button>
+    </div>
+    </div>
+    <time class="story-date" datetime="2026-11-02"><span class="en">2026/11/02</span><span class="zh" lang="zh-Hans">2026年11月2日</span></time>
     <img class="hero" src="/news/images/9806.jpg" alt="" width="760" height="280" onerror="this.onerror=null;this.src='/news/images/placeholder.svg'">
     <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading">Key facts</h2>
+      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
       <ul>
-        <li>Idea being explored: build-to-rent homes, kept as rentals rather than sold at launch</li>
-        <li>Rent level under discussion: about $2,000 a month</li>
-        <li>Who it is aimed at: younger Singaporeans who want a place of their own before they buy</li>
-        <li>Not for sale yet: no project, price list or application date has been set</li>
+        <li><span class="en">Idea being explored: build-to-rent homes, kept as rentals rather than sold at launch</span><span class="zh" lang="zh-Hans">正在探讨的想法：建造供出租的住房，长期出租，而不是开盘出售</span></li>
+        <li><span class="en">Rent level under discussion: about $2,000 a month</span><span class="zh" lang="zh-Hans">讨论中的租金：每月约2000新元</span></li>
+        <li><span class="en">Who it is aimed at: younger Singaporeans who want a place of their own before they buy</span><span class="zh" lang="zh-Hans">对象：想在买房前先有自己住所的年轻新加坡人</span></li>
+        <li><span class="en">Not for sale yet: no project, price list or application date has been set</span><span class="zh" lang="zh-Hans">尚未发售：还没有项目、价目表或申请日期</span></li>
       </ul>
     </section>
     <div class="summary">
-      <h2>What this means</h2>
-      <p>Singapore is studying homes that are built to be rented for the long run, instead of being sold at a launch. The people most likely to use them are younger renters who want their own front door before they are ready to buy an HDB flat or a condo.</p>
-      <p>The number that matters is the rent. The public discussion is whether it can stay under about $2,000 a month. At that level, a household can still put money aside for a future down payment. If the rent is much higher, the home mostly serves people who can already pay a private-market rent.</p>
-      <p>Nothing in this update is a flat you can apply for this week. There is no project name, price list or booking date. Treat it as a budget test, not as a new launch.</p>
+      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
+      <p><span class="en">Singapore is studying homes that are built to be rented for the long run, instead of being sold at a launch. The people most likely to use them are younger renters who want their own front door before they are ready to buy an HDB flat or a condo.</span><span class="zh" lang="zh-Hans">新加坡正在研究一批长期用来出租、而不是开盘出售的住房。最可能住进去的，是还没准备好购买HDB组屋或私人公寓（condo）的年轻租户。他们希望先有一个自己的家。</span></p>
+      <p><span class="en">The number that matters is the rent. The public discussion is whether it can stay under about $2,000 a month. At that level, a household can still put money aside for a future down payment. If the rent is much higher, the home mostly serves people who can already pay a private-market rent.</span><span class="zh" lang="zh-Hans">真正要紧的是租金。公开讨论的问题是，租金能否维持在每月约2000新元以下。在这个水平，一个家庭仍能把钱存下来，应付日后的首期。如果租金高得多，这类住房主要就只服务已经付得起私人市场租金的人。</span></p>
+      <p><span class="en">Nothing in this update is a flat you can apply for this week. There is no project name, price list or booking date. Treat it as a budget test, not as a new launch.</span><span class="zh" lang="zh-Hans">这则消息里没有任何一套本周可以申请的单位。没有项目名称、价目表或预订日期。把它当成一次预算测试，而不是一个新盘。</span></p>
     </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
-      <h2 id="takeaways-heading">3 Takeaways for Buyers &amp; Sellers</h2>
+      <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>
-        <li><strong>Can a renter still save to buy if the rent is about $2,000?</strong> If you are renting while you save for an HDB flat or a condo, write the rent next to what you can still save each month. A figure near $2,000 only helps if your own budget still leaves a down payment.</li>
-        <li><strong>What should a landlord do if more rental homes are built?</strong> Owners who let out a condo or an HDB flat should compare their asking rent with what tenants can actually pay. A new rental product later on will not fill every older unit at last year’s rent.</li>
-        <li><strong>Does this rental idea replace buying an HDB flat or a condo?</strong> Do not treat a rental idea as a reason to buy now. The loan, cash down payment and monthly repayment of a real purchase still have to fit your income.</li>
+        <li><strong><span class="en">Can a renter still save to buy if the rent is about $2,000?</span><span class="zh" lang="zh-Hans">租金大约2000新元，租户还能存钱买房吗？</span></strong> <span class="en">If you are renting while you save for an HDB flat or a condo, write the rent next to what you can still save each month. A figure near $2,000 only helps if your own budget still leaves a down payment.</span><span class="zh" lang="zh-Hans">如果你一边租房、一边为HDB组屋或公寓存首期，把租金写在你每月还能存下的金额旁边。接近2000新元的租金，只有在你自己的预算仍留得出首期时才有帮助。</span></li>
+        <li><strong><span class="en">What should a landlord do if more rental homes are built?</span><span class="zh" lang="zh-Hans">如果日后建造更多租赁住房，房东该怎么做？</span></strong> <span class="en">Owners who let out a condo or an HDB flat should compare their asking rent with what tenants can actually pay. A new rental product later on will not fill every older unit at last year’s rent.</span><span class="zh" lang="zh-Hans">出租公寓或组屋的屋主，应该把自己的要价和租户实际付得起的金额比较。日后即使出现新的租赁住房，也不会让每一套较旧的单位都继续租到去年的价钱。</span></li>
+        <li><strong><span class="en">Does this rental idea replace buying an HDB flat or a condo?</span><span class="zh" lang="zh-Hans">这个租赁构想能否取代购买HDB组屋或公寓？</span></strong> <span class="en">Do not treat a rental idea as a reason to buy now. The loan, cash down payment and monthly repayment of a real purchase still have to fit your income.</span><span class="zh" lang="zh-Hans">不要把一个租赁构想当成现在就买房的理由。真正买房时，贷款、首期现金和每月供款仍然必须配得上你的收入。</span></li>
       </ul>
     </section>
   </article>
@@ -347,6 +406,35 @@
       this.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
       this.textContent = open ? "×" : "☰";
     });
+
+    (function () {
+      var KEY = "ssp-news-lang";
+      function apply(lang) {
+        var zh = lang === "zh";
+        if (zh) {
+          document.documentElement.setAttribute("data-lang", "zh");
+          document.documentElement.lang = "zh-Hans";
+        } else {
+          document.documentElement.removeAttribute("data-lang");
+          document.documentElement.lang = "en";
+        }
+        document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+          var on = btn.getAttribute("data-lang-set") === (zh ? "zh" : "en");
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        var pager = document.getElementById("news-pager");
+        if (pager) pager.setAttribute("aria-label", zh ? "新闻分页" : "News pages");
+        try { localStorage.setItem(KEY, zh ? "zh" : "en"); } catch (e) {}
+      }
+      document.querySelectorAll("[data-lang-set]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          apply(btn.getAttribute("data-lang-set"));
+        });
+      });
+      var saved = "en";
+      try { if (localStorage.getItem(KEY) === "zh") saved = "zh"; } catch (e) {}
+      apply(saved);
+    })();
 </script>
 </body>
 </html>
