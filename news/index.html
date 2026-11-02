@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News | SellingSgProperty</title>
+  <meta name="description" content="Latest Singapore real estate news, from new launches and HDB to land sales and rents. Updated from the PropNex property news channel.">
+  <link rel="canonical" href="https://www.sellingsgproperty.com/news">
+  <meta property="og:title" content="News | SellingSgProperty">
+  <meta property="og:description" content="Latest Singapore real estate headlines for buyers and sellers.">
+  <meta property="og:url" content="https://www.sellingsgproperty.com/news">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --red: #e85d4c;
+      --muted: #8d8d8d;
+      --line: rgba(255, 255, 255, 0.08);
+      --violet: #6d28d9;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+      background: var(--bg);
+      color: #fff;
+      min-height: 100vh;
+    }
+    a { color: inherit; }
+
+    .site-nav {
+      background: #fff;
+      color: #0f172a;
+      border-bottom: 1px solid #e2e8f0;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    }
+    .site-nav-inner {
+      max-width: 1536px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      text-decoration: none;
+      color: #0f172a;
+      line-height: 1;
+    }
+    .brand strong {
+      display: block;
+      font-size: 1.7rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+    .brand span {
+      display: block;
+      margin-top: 2px;
+      color: var(--violet);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #334155;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 8px 18px;
+      border-radius: 999px;
+      border-bottom: 3px solid transparent;
+    }
+    .nav-links a:hover { color: #0f172a; }
+    .nav-links a.active {
+      color: var(--violet);
+      font-weight: 700;
+      border-bottom-color: var(--violet);
+      border-radius: 0;
+    }
+    .menu-btn {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      background: transparent;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #475569;
+    }
+    .mobile-panel {
+      display: none;
+      background: #fff;
+      color: #0f172a;
+      border-top: 1px solid #e2e8f0;
+      padding: 8px 24px 20px;
+    }
+    .mobile-panel.open { display: block; }
+    .mobile-panel a {
+      display: block;
+      text-decoration: none;
+      padding: 12px 4px;
+      font-weight: 500;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .mobile-panel a.active { color: var(--violet); font-weight: 700; }
+
+    .news-wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 28px 28px 64px;
+    }
+    .news-kicker {
+      margin: 8px 0 4px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .news-heading {
+      margin: 0 0 8px;
+      color: #fff;
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+    .news-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .news-row {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      padding: 18px 0;
+      text-decoration: none;
+      color: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+    .news-list li:first-child .news-row {
+      border-top: 1px solid var(--line);
+    }
+    .news-row:hover { background: rgba(255, 255, 255, 0.03); }
+    .news-row:focus-visible {
+      outline: 2px solid var(--red);
+      outline-offset: 4px;
+    }
+    .news-thumb {
+      width: 190px;
+      height: 118px;
+      flex: 0 0 190px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #1a1a1a;
+      display: block;
+    }
+    .news-copy { min-width: 0; }
+    .news-cat {
+      display: block;
+      color: var(--red);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      margin-bottom: 6px;
+    }
+    .news-title {
+      margin: 0;
+      color: #fff;
+      font-size: 1.08rem;
+      font-weight: 700;
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+    }
+    .news-date {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-variant-numeric: tabular-nums;
+    }
+    .news-status, .news-note {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .news-note { margin-top: 28px; }
+    .news-note a { color: #bdbdbd; }
+
+    @media (max-width: 1200px) {
+      .nav-links { display: none; }
+      .menu-btn { display: inline-flex; align-items: center; justify-content: center; }
+      .site-nav-inner { padding: 0 16px; }
+      .news-wrap { padding: 18px 16px 48px; }
+    }
+    @media (max-width: 640px) {
+      .news-row { gap: 14px; padding: 14px 0; align-items: flex-start; }
+      .news-thumb {
+        width: 112px;
+        height: 84px;
+        flex-basis: 112px;
+        border-radius: 8px;
+        margin-top: 2px;
+      }
+      .news-title { font-size: 0.98rem; }
+      .news-cat { font-size: 0.72rem; margin-bottom: 4px; }
+      .news-date { font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" aria-label="Primary">
+    <div class="site-nav-inner">
+      <a class="brand" href="/">
+        <strong>SellingSgProperty.</strong>
+        <span>SG</span>
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/insights">Insights</a>
+        <a href="/news" class="active" aria-current="page">News</a>
+        <a href="/contact">Get my free situation check.</a>
+        <a href="/mortgage-calculator">Mortgage loan calculator</a>
+      </div>
+      <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-panel" aria-label="Open navigation menu">☰</button>
+    </div>
+    <div class="mobile-panel" id="mobile-panel">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/insights">Insights</a>
+      <a href="/news" class="active" aria-current="page">News</a>
+      <a href="/contact">Get my free situation check.</a>
+      <a href="/mortgage-calculator">Mortgage loan calculator</a>
+    </div>
+  </nav>
+
+  <main class="news-wrap">
+    <p class="news-kicker">Singapore property</p>
+    <h1 class="news-heading">News</h1>
+    <p class="news-status" id="news-status">Loading the latest headlines…</p>
+    <ul class="news-list" id="news-list"></ul>
+    <p class="news-note">Headlines from the public <a href="https://t.me/s/PropNexPropertyNewsUpdate" target="_blank" rel="noopener noreferrer">PropNex Property News</a> channel. Each row opens the original post.</p>
+  </main>
+
+  <script>
+    const PLACEHOLDER = "/news/images/placeholder.svg";
+
+    document.getElementById("menu-btn").addEventListener("click", function () {
+      const panel = document.getElementById("mobile-panel");
+      const open = panel.classList.toggle("open");
+      this.setAttribute("aria-expanded", open ? "true" : "false");
+      this.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+      this.textContent = open ? "×" : "☰";
+    });
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function render(items) {
+      const list = document.getElementById("news-list");
+      const status = document.getElementById("news-status");
+      if (!items.length) {
+        status.textContent = "No property headlines yet. Run scripts/refresh-news.py to pull the latest posts.";
+        return;
+      }
+      status.hidden = true;
+      list.innerHTML = items.map(function (item) {
+        const image = item.image || PLACEHOLDER;
+        const title = escapeHtml(item.title || "Property update");
+        const date = escapeHtml(item.date || "");
+        const link = escapeHtml(item.link || "https://t.me/s/PropNexPropertyNewsUpdate");
+        return (
+          '<li><a class="news-row" href="' + link + '" target="_blank" rel="noopener noreferrer">' +
+            '<img class="news-thumb" src="' + escapeHtml(image) + '" alt="" width="190" height="118" loading="lazy" ' +
+              'onerror="this.onerror=null;this.src=\'' + PLACEHOLDER + '\'">' +
+            '<div class="news-copy">' +
+              '<span class="news-cat">Real estate</span>' +
+              '<h2 class="news-title">' + title + '</h2>' +
+              '<time class="news-date" datetime="' + date.replace(/\//g, "-") + '">' + date + '</time>' +
+            '</div>' +
+          '</a></li>'
+        );
+      }).join("");
+    }
+
+    async function loadNews() {
+      const candidates = [
+        new URL("../news.json", window.location.href).href,
+        "/news.json"
+      ];
+      let lastError = null;
+      for (const href of candidates) {
+        try {
+          const response = await fetch(href, { cache: "no-cache" });
+          if (!response.ok) continue;
+          const data = await response.json();
+          const items = Array.isArray(data) ? data : (data.items || []);
+          render(items.slice(0, 12));
+          return;
+        } catch (err) {
+          lastError = err;
+        }
+      }
+      throw lastError || new Error("news.json");
+    }
+
+    loadNews().catch(function () {
+      document.getElementById("news-status").textContent =
+        "Could not load news.json. From the site folder run: python3 scripts/refresh-news.py";
+    });
+  </script>
+</body>
+</html>
