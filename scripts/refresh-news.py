@@ -14,10 +14,20 @@ property posts, skips seminars and other promo posts, downloads each photo
 into news/images/, and writes news.json. It also rebuilds a static page at
 news/<id>/index.html for each story.
 
-Plain-English summaries and the three takeaways live in news/copy.json, keyed
-by the Telegram post id. Re-running this script keeps that copy. A new post
-with no entry yet still gets a page, with a short note instead of a finished
-brief. To write the real brief, add the id to news/copy.json and run:
+Plain-English summaries, three takeaways and three buyer/seller questions
+live in news/copy.json, keyed by the Telegram post id. Re-running this script
+keeps that copy and rebuilds the list page, detail pages, sitemap entries and
+NewsArticle / FAQ schema. A new post with no entry yet still gets a page.
+
+Refresh, then deploy:
+
+    python3 scripts/refresh-news.py
+    git add news.json news sitemap.xml scripts/refresh-news.py
+    git commit -m "Refresh Singapore property news"
+    git push origin main
+
+Netlify publishes https://www.sellingsgproperty.com. To rewrite pages from
+existing news.json without calling Telegram:
 
     python3 scripts/refresh-news.py --pages-only
 """
@@ -293,23 +303,50 @@ def load_copy() -> dict:
     return data if isinstance(data, dict) else {}
 
 
-def story_copy(post_id: str, title: str, copy_book: dict) -> tuple[list[str], list[str], bool]:
+def clip_text(text: str, limit: int = 158) -> str:
+    text = re.sub(r"\s+", " ", text).strip()
+    if len(text) <= limit:
+        return text
+    cut = text[:limit].rsplit(" ", 1)[0].rstrip(".,;:")
+    return cut + "."
+
+
+def story_copy(post_id: str, title: str, copy_book: dict) -> dict:
     entry = copy_book.get(post_id) or {}
     summary = [str(part).strip() for part in entry.get("summary", []) if str(part).strip()]
     takeaways = [str(part).strip() for part in entry.get("takeaways", []) if str(part).strip()]
-    if 2 <= len(summary) <= 4 and len(takeaways) == 3:
-        return summary, takeaways, True
-    summary = [
-        title,
-        "A fuller plain-English brief for this story has not been added yet. The headline is listed so you can see what was reported. It is not, by itself, a reason to buy or sell.",
-        "When a write-up is added, it will explain what the news means for someone buying or selling a home in Singapore.",
-    ]
-    takeaways = [
-        "Do not change a buying or selling decision on a headline alone. Read the details and check them against your own budget.",
-        "If you are buying, compare this news with the actual home, the location, and the monthly cost you can live with.",
-        "If you are selling, be ready to answer questions about the area in plain language. Buyers remember what they can verify.",
-    ]
-    return summary, takeaways, False
+    written = 2 <= len(summary) <= 4 and len(takeaways) == 3
+    if not written:
+        summary = [
+            title,
+            "A fuller plain-English brief for this Singapore property story has not been added yet. The headline is listed so buyers and sellers can see what was reported. It is not, by itself, a reason to buy or sell.",
+            "When a write-up is added, it will explain what the news means for someone buying or selling a home in Singapore, including HDB, condo, new launch and resale decisions.",
+        ]
+        takeaways = [
+            "Do not change a buying or selling decision on a headline alone. Read the details and check them against your own budget.",
+            "If you are buying, compare this news with the actual home, the location, and the monthly cost you can live with.",
+            "If you are selling, be ready to answer questions about the area in plain language. Buyers remember what they can verify.",
+        ]
+    questions = [str(part).strip() for part in entry.get("questions", []) if str(part).strip()]
+    if len(questions) != 3:
+        questions = [
+            "What does this mean for someone buying property in Singapore?",
+            "What should a seller take from this market update?",
+            "What should you check before you act on this news?",
+        ]
+    description = str(entry.get("description") or summary[0]).strip()
+    keywords = str(
+        entry.get("keywords")
+        or "Singapore property, HDB, condo, new launch, resale, buyers, sellers, market update"
+    ).strip()
+    return {
+        "summary": summary,
+        "takeaways": takeaways,
+        "questions": questions,
+        "description": clip_text(description),
+        "keywords": keywords,
+        "written": written,
+    }
 
 
 def esc(value: str) -> str:
@@ -459,6 +496,12 @@ DETAIL_CSS = """
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
+    .takeaways li strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #fff;
+      font-weight: 700;
+    }
     .takeaways ul { margin: 0; padding: 0; list-style: none; }
     .takeaways li {
       position: relative;
@@ -510,30 +553,101 @@ MENU_JS = """
 """
 
 
-def render_detail_page(item: dict, summary: list[str], takeaways: list[str]) -> str:
+def json_ld(data: dict) -> str:
+    raw = json.dumps(data, ensure_ascii=False, indent=2)
+    raw = raw.replace("<", "\\u003c")
+    return f'<script type="application/ld+json">\n{raw}\n  </script>'
+
+
+def detail_schema(item: dict, copy: dict) -> str:
+    title = item["title"]
+    date = item["date"].replace("/", "-")
+    path = f"/news/{item['id']}/"
+    page_url = f"https://www.sellingsgproperty.com{path}"
+    image = item.get("image") or PLACEHOLDER
+    image_url = "https://www.sellingsgproperty.com" + image
+    article_body = "\n\n".join(copy["summary"] + copy["takeaways"])
+    news = {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "headline": title,
+        "description": copy["description"],
+        "articleBody": article_body,
+        "datePublished": f"{date}T08:00:00+08:00",
+        "dateModified": f"{date}T08:00:00+08:00",
+        "inLanguage": "en-SG",
+        "articleSection": "Real estate",
+        "keywords": copy["keywords"],
+        "image": [image_url],
+        "url": page_url,
+        "mainEntityOfPage": {"@type": "WebPage", "@id": page_url},
+        "author": {"@id": "https://www.sellingsgproperty.com/#jackleow"},
+        "publisher": {"@id": "https://www.sellingsgproperty.com/#organization"},
+        "isAccessibleForFree": True,
+        "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": [".summary p", ".takeaways li"],
+        },
+    }
+    faq = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": question,
+                "acceptedAnswer": {"@type": "Answer", "text": answer},
+            }
+            for question, answer in zip(copy["questions"], copy["takeaways"])
+        ],
+    }
+    crumbs = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.sellingsgproperty.com/"},
+            {"@type": "ListItem", "position": 2, "name": "News", "item": "https://www.sellingsgproperty.com/news/"},
+            {"@type": "ListItem", "position": 3, "name": title, "item": page_url},
+        ],
+    }
+    return "\n  ".join(json_ld(block) for block in (news, faq, crumbs))
+
+
+def render_detail_page(item: dict, copy: dict) -> str:
     title = item["title"]
     date = item["date"]
     image = item.get("image") or PLACEHOLDER
     iso_date = date.replace("/", "-")
     path = f"/news/{item['id']}/"
-    paragraphs = "\n".join(f"      <p>{esc(part)}</p>" for part in summary)
-    bullets = "\n".join(f"        <li>{esc(point)}</li>" for point in takeaways)
-    description = summary[0]
+    page_url = f"https://www.sellingsgproperty.com{path}"
+    image_url = "https://www.sellingsgproperty.com" + image
+    description = copy["description"]
+    paragraphs = "\n".join(f"      <p>{esc(part)}</p>" for part in copy["summary"])
+    bullets = "\n".join(
+        f"        <li><strong>{esc(question)}</strong> {esc(answer)}</li>"
+        for question, answer in zip(copy["questions"], copy["takeaways"])
+    )
+    schema = detail_schema(item, copy)
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{esc(title)} | SellingSgProperty News</title>
+  <title>{esc(title)} | Singapore Property News | SellingSgProperty</title>
   <meta name="description" content="{esc(description)}">
-  <link rel="canonical" href="https://www.sellingsgproperty.com{path}">
+  <link rel="canonical" href="{page_url}">
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(description)}">
-  <meta property="og:url" content="https://www.sellingsgproperty.com{path}">
+  <meta property="og:url" content="{page_url}">
   <meta property="og:type" content="article">
+  <meta property="og:image" content="{esc(image_url)}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{esc(title)}">
+  <meta name="twitter:description" content="{esc(description)}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  {schema}
   <style>{DETAIL_CSS}</style>
 </head>
 <body>
@@ -548,12 +662,12 @@ def render_detail_page(item: dict, summary: list[str], takeaways: list[str]) -> 
 {paragraphs}
     </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
-      <h2 id="takeaways-heading">3 takeaways for you</h2>
+      <h2 id="takeaways-heading">3 Takeaways for Buyers &amp; Sellers</h2>
       <ul>
 {bullets}
       </ul>
     </section>
-    <p class="source-note">Summary written for buyers and sellers. Headline from the public PropNex Property News channel.</p>
+    <p class="source-note">Plain-English brief for Singapore home buyers and sellers. The headline is from a public property news broadcast. This page does not send you off the site.</p>
   </article>
   <script>{MENU_JS}</script>
 </body>
@@ -584,22 +698,102 @@ def update_sitemap(items: list[dict]) -> None:
     SITEMAP_PATH.write_text(pattern.sub(replacement, text, count=1), encoding="utf-8")
 
 
+LIST_START = "<!-- news-list:start -->"
+LIST_END = "<!-- news-list:end -->"
+SCHEMA_START = "<!-- news-schema:start -->"
+SCHEMA_END = "<!-- news-schema:end -->"
+INDEX_PATH = NEWS_DIR / "index.html"
+
+
+def replace_marked(text: str, start: str, end: str, inner: str) -> str:
+    pattern = re.compile(re.escape(start) + r".*?" + re.escape(end), re.S)
+    if not pattern.search(text):
+        raise SystemExit(f"Missing markers {start} ... {end}")
+    block = start + "\n" + inner.rstrip() + "\n  " + end
+
+    def _repl(_match: re.Match) -> str:
+        return block
+
+    return pattern.sub(_repl, text, count=1)
+
+
+def render_list_html(items: list[dict]) -> str:
+    rows = []
+    for item in items:
+        href = f"/news/{item['id']}/"
+        date = item["date"]
+        iso_date = date.replace("/", "-")
+        image = item.get("image") or PLACEHOLDER
+        rows.append(
+            "    <li><a class=\"news-row\" href=\"" + esc(href) + "\">"
+            + "<img class=\"news-thumb\" src=\"" + esc(image) + "\" alt=\"\" width=\"190\" height=\"118\" loading=\"lazy\" "
+            + "onerror=\"this.onerror=null;this.src='" + PLACEHOLDER + "'\">"
+            + "<div class=\"news-copy\">"
+            + "<span class=\"news-cat\">Real estate</span>"
+            + "<h2 class=\"news-title\">" + esc(item["title"]) + "</h2>"
+            + "<time class=\"news-date\" datetime=\"" + esc(iso_date) + "\">" + esc(date) + "</time>"
+            + "</div></a></li>"
+        )
+    return "<ul class=\"news-list\" id=\"news-list\">\n" + "\n".join(rows) + "\n  </ul>"
+
+
+def render_list_schema(items: list[dict]) -> str:
+    elements = []
+    for index, item in enumerate(items, start=1):
+        elements.append(
+            {
+                "@type": "ListItem",
+                "position": index,
+                "url": f"https://www.sellingsgproperty.com/news/{item['id']}/",
+                "name": item["title"],
+            }
+        )
+    data = {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Singapore Property News for Buyers and Sellers",
+        "url": "https://www.sellingsgproperty.com/news/",
+        "description": "Latest Singapore property market updates for HDB upgraders, condo buyers and sellers, written in plain English.",
+        "isPartOf": {"@id": "https://www.sellingsgproperty.com/#website"},
+        "mainEntity": {"@type": "ItemList", "itemListElement": elements},
+    }
+    return json_ld(data)
+
+
+def write_news_index(items: list[dict]) -> None:
+    if not INDEX_PATH.exists():
+        print("news/index.html missing; list page not updated")
+        return
+    text = INDEX_PATH.read_text(encoding="utf-8")
+    text = replace_marked(text, LIST_START, LIST_END, render_list_html(items))
+    text = replace_marked(text, SCHEMA_START, SCHEMA_END, render_list_schema(items))
+    if "t.me/" in text or "telegram.org" in text.lower():
+        raise SystemExit("News list tried to link off-site. Aborting.")
+    INDEX_PATH.write_text(text, encoding="utf-8")
+
+
 def write_detail_pages(items: list[dict]) -> None:
     copy_book = load_copy()
     keep_ids = set()
     missing = []
     for item in items:
-        summary, takeaways, written = story_copy(item["id"], item["title"], copy_book)
-        if not written:
+        copy = story_copy(item["id"], item["title"], copy_book)
+        if not copy["written"]:
             missing.append(item["id"])
+        page = render_detail_page(item, copy)
+        offsite = [
+            url
+            for url in re.findall(r"<a\b[^>]*\bhref=[\"'](https?://[^\"']+)", page)
+            if "sellingsgproperty.com" not in url
+        ]
+        if offsite:
+            raise SystemExit(f"Detail page {item['id']} contains an off-site link: {offsite[0]}")
         folder = NEWS_DIR / item["id"]
         folder.mkdir(parents=True, exist_ok=True)
-        (folder / "index.html").write_text(
-            render_detail_page(item, summary, takeaways),
-            encoding="utf-8",
-        )
+        (folder / "index.html").write_text(page, encoding="utf-8")
         keep_ids.add(item["id"])
         item["path"] = f"/news/{item['id']}/"
+        item["description"] = copy["description"]
 
     for child in NEWS_DIR.iterdir():
         if child.is_dir() and child.name.isdigit() and child.name not in keep_ids:
@@ -609,9 +803,12 @@ def write_detail_pages(items: list[dict]) -> None:
             child.rmdir()
 
     update_sitemap(items)
+    write_news_index(items)
     print(f"Wrote {len(items)} detail pages under news/<id>/")
     if missing:
         print("No brief in news/copy.json yet for: " + ", ".join(missing))
+        print("Add summary, takeaways and questions for those ids, then run: python3 scripts/refresh-news.py --pages-only")
+    print("To deploy: commit the news files and push main. Netlify publishes https://www.sellingsgproperty.com")
 
 
 def pages_only() -> None:

@@ -9,7 +9,8 @@
       "image": "/news/images/9806.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9806",
       "category": "Real estate",
-      "path": "/news/9806/"
+      "path": "/news/9806/",
+      "description": "Can build-to-rent homes in Singapore stay under $2,000 a month? What young renters, future buyers and landlords should check."
     },
     {
       "id": "9805",
@@ -18,7 +19,8 @@
       "image": "/news/images/9805.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9805",
       "category": "Real estate",
-      "path": "/news/9805/"
+      "path": "/news/9805/",
+      "description": "Why Singapore is looking at build-to-rent homes, and what that means for people who rent now and hope to buy later."
     },
     {
       "id": "9803",
@@ -27,7 +29,8 @@
       "image": "/news/images/9803.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9803",
       "category": "Real estate",
-      "path": "/news/9803/"
+      "path": "/news/9803/",
+      "description": "About 1,310 Sembawang HDB flats with a wait under three years go on sale in November. What buyers and sellers should check."
     },
     {
       "id": "9802",
@@ -36,7 +39,8 @@
       "image": "/news/images/9802.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9802",
       "category": "Real estate",
-      "path": "/news/9802/"
+      "path": "/news/9802/",
+      "description": "Thomson Reserve sold about 90% at roughly $2,900 psf on launch weekend. What Singapore condo buyers and nearby sellers should compare."
     },
     {
       "id": "9799",
@@ -45,7 +49,8 @@
       "image": "/news/images/9799.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9799",
       "category": "Real estate",
-      "path": "/news/9799/"
+      "path": "/news/9799/",
+      "description": "Toa Payoh West plans include a mall, parks, a school and about 1,600 BTO flats near Caldecott MRT. What is real today versus still a plan."
     },
     {
       "id": "9798",
@@ -54,7 +59,8 @@
       "image": "/news/images/9798.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9798",
       "category": "Real estate",
-      "path": "/news/9798/"
+      "path": "/news/9798/",
+      "description": "A former condo chairman lost a defamation case over undisclosed links. What Singapore condo buyers and council members should ask."
     },
     {
       "id": "9794",
@@ -63,7 +69,8 @@
       "image": "/news/images/9794.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9794",
       "category": "Real estate",
-      "path": "/news/9794/"
+      "path": "/news/9794/",
+      "description": "Singapore’s private home launch pipeline may hit a 14-year high in 2027. More choice is not the same as lower prices."
     },
     {
       "id": "9792",
@@ -72,7 +79,8 @@
       "image": "/news/images/9792.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9792",
       "category": "Real estate",
-      "path": "/news/9792/"
+      "path": "/news/9792/",
+      "description": "A Jervois Hill bungalow foreclosure was halted. What one landed loan story does, and does not, say about Singapore property prices."
     },
     {
       "id": "9790",
@@ -81,7 +89,8 @@
       "image": "/news/images/9790.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9790",
       "category": "Real estate",
-      "path": "/news/9790/"
+      "path": "/news/9790/",
+      "description": "Hong Leong and TID bid $181.86 million for an Orchard plot, about $1,755 psf ppr. Why that land price is not a condo price."
     },
     {
       "id": "9789",
@@ -90,7 +99,8 @@
       "image": "/news/images/9789.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9789",
       "category": "Real estate",
-      "path": "/news/9789/"
+      "path": "/news/9789/",
+      "description": "Two Tiong Bahru HDB blocks will get HIP after a fresh poll. What the upgrade covers, what owners pay, and what buyers should still check."
     },
     {
       "id": "9788",
@@ -99,7 +109,8 @@
       "image": "/news/images/9788.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9788",
       "category": "Real estate",
-      "path": "/news/9788/"
+      "path": "/news/9788/",
+      "description": "Tampines has the most people of any planning area, but Punggol and Sengkang grew faster. How to choose a mature town or a growing one."
     },
     {
       "id": "9787",
@@ -108,7 +119,8 @@
       "image": "/news/images/9787.jpg",
       "link": "https://t.me/PropNexPropertyNewsUpdate/9787",
       "category": "Real estate",
-      "path": "/news/9787/"
+      "path": "/news/9787/",
+      "description": "About 11,000 homes are planned at Maju Forest and Gillman Barracks, mostly public housing. What nearby buyers and sellers should treat as a long-term plan."
     }
   ]
 }
