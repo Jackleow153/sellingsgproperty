@@ -34,17 +34,18 @@ Rewrite pages from the saved list without fetching:
 
     python3 scripts/refresh-news.py --pages-only
 
-Refresh, then deploy when you want the live site updated:
+Publish the refreshed pages to the live site:
 
-    python3 scripts/refresh-news.py
-    git add news.json news sitemap.xml scripts/refresh-news.py scripts/news_sources.py
-    git commit -m "Refresh Singapore property news"
-    git push origin main
+    python3 scripts/refresh-news.py --deploy
 
-Netlify publishes https://www.sellingsgproperty.com. To run this every
-morning, call the same command from cron or launchd, then commit and push
-when the new pages look right. This script does not install a scheduler
-and it does not push git.
+--deploy commits news.json, news/, and sitemap.xml, then pushes main.
+Netlify publishes https://www.sellingsgproperty.com. A run with no new
+story leaves those files uncommitted.
+
+GitHub Actions runs that command every day at 07:00 and 19:00 Singapore
+time (.github/workflows/refresh-news.yml). This script does not install
+cron or launchd. A plain run without --deploy still writes the local
+files and does not push.
 
 Plain-English summaries, three takeaways and three buyer/seller questions
 live in news/copy.json, keyed by story id. The same entry can include a
@@ -57,6 +58,7 @@ from __future__ import annotations
 
 import html
 import json
+import os
 import re
 import shutil
 import ssl
@@ -1202,7 +1204,7 @@ def write_detail_pages(items: list[dict]) -> None:
     if missing_zh:
         print("No Chinese brief yet for: " + ", ".join(missing_zh))
         print('Add a "zh" object (title, summary, facts, takeaways, questions) in news/copy.json, then run: python3 scripts/refresh-news.py --pages-only')
-    print("To deploy: commit the news files and push main. Netlify publishes https://www.sellingsgproperty.com")
+    print("To publish: python3 scripts/refresh-news.py --deploy")
 
 
 def load_saved_posts() -> list[dict]:
@@ -1320,6 +1322,95 @@ def apply_article_sources(items: list[dict]) -> None:
             item["sourceNameZh"] = ""
 
 
+def story_has_publisher(item: dict) -> bool:
+    name = (item.get("sourceName") or "").strip()
+    return bool(name) and not is_relay_label(name)
+
+
+def drop_unsourced(items: list[dict]) -> list[dict]:
+    """Leave out a new clipping when its masthead cannot be read.
+
+    Saved stories stay. One unreadable clipping does not block the rest.
+    """
+    kept = []
+    kept_images = set()
+    dropped = []
+    for item in items:
+        if story_has_publisher(item) or item.get("saved"):
+            kept.append(item)
+            kept_images.add(Path(item.get("image") or "").name)
+        else:
+            dropped.append(item)
+            print(f"skip unsourced {item.get('id')}: {(item.get('title') or '')[:90]}")
+    if len(kept) < 8:
+        raise SystemExit(
+            f"Only {len(kept)} stories have a publisher. The news list was left unchanged."
+        )
+    for item in dropped:
+        name = Path(item.get("image") or "").name
+        if not name or name in kept_images or name == "placeholder.svg":
+            continue
+        path = IMAGE_DIR / name
+        if path.is_file():
+            path.unlink()
+    return kept
+
+
+def git_at(*args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        ["git", *args],
+        cwd=ROOT,
+        check=check,
+        capture_output=True,
+        text=True,
+    )
+
+
+def deploy_news() -> None:
+    """Commit the news files and push main. Other local edits stay uncommitted."""
+    branch = git_at("rev-parse", "--abbrev-ref", "HEAD").stdout.strip()
+    if branch == "HEAD":
+        git_at("checkout", "-B", "main")
+        branch = "main"
+    if branch != "main":
+        raise SystemExit(f"Refusing to deploy from branch {branch}. Push happens from main.")
+    paths = ["news.json", "news", "sitemap.xml"]
+    git_at("add", "-A", "--", *paths)
+    staged = git_at("diff", "--cached", "--quiet", "--", *paths, check=False)
+    if staged.returncode == 0:
+        print("No news changes to publish.")
+        return
+    if staged.returncode != 1:
+        raise SystemExit((staged.stderr or staged.stdout).strip() or "git diff failed")
+    message = (
+        "Refresh Singapore property news\n\n"
+        "Publish new on-site briefs from the public property headlines.\n"
+    )
+    commit_args = ["commit", "--only", "-m", message, "--", *paths]
+    if os.environ.get("GITHUB_ACTIONS"):
+        commit_args = [
+            "-c", "user.name=github-actions[bot]",
+            "-c", "user.email=41898282+github-actions[bot]@users.noreply.github.com",
+            *commit_args,
+        ]
+    commit = git_at(*commit_args, check=False)
+    if commit.returncode != 0:
+        detail = (commit.stdout + commit.stderr).strip()
+        if "nothing to commit" in detail.lower() or "no changes added" in detail.lower():
+            print("No news changes to publish.")
+            return
+        raise SystemExit(detail or "git commit failed")
+    print(commit.stdout.strip())
+    push = git_at("push", "origin", "main", check=False)
+    if push.returncode != 0:
+        git_at("pull", "--rebase", "--autostash", "origin", "main")
+        push = git_at("push", "origin", "main", check=False)
+    if push.returncode != 0:
+        raise SystemExit((push.stdout + push.stderr).strip() or "git push failed")
+    print((push.stdout or push.stderr).strip())
+    print("Pushed main. Netlify publishes https://www.sellingsgproperty.com")
+
+
 def entry_is_written(entry: dict | None) -> bool:
     if not isinstance(entry, dict):
         return False
@@ -1369,8 +1460,16 @@ def dump_news(items: list[dict]) -> None:
     for row in public:
         if row["sourceName"] not in names:
             names.append(row["sourceName"])
+    updated = datetime.now(SGT).isoformat(timespec="seconds")
+    if JSON_PATH.exists():
+        try:
+            previous = json.loads(JSON_PATH.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            previous = {}
+        if previous.get("items") == public and previous.get("updated"):
+            updated = previous["updated"]
     payload = {
-        "updated": datetime.now(SGT).isoformat(timespec="seconds"),
+        "updated": updated,
         "sources": names,
         "items": public,
     }
@@ -1457,14 +1556,17 @@ def main() -> None:
                 f"{item['sourceName']}\t{item['title']}"
             )
         return
-    ensure_copy(items)
     attach_images(items)
     apply_article_sources(items)
+    items = drop_unsourced(items)
+    ensure_copy(items)
     write_detail_pages(items)
     dump_news(items)
     print(f"Wrote {len(items)} items to {JSON_PATH.relative_to(ROOT)}")
     for item in items:
         print(f"  {item['date']}  [{item['sourceFeed']}]  {item['title']}")
+    if "--deploy" in sys.argv:
+        deploy_news()
 
 
 if __name__ == "__main__":

@@ -1,0 +1,29 @@
+name: Publish property news
+
+on:
+  schedule:
+    # 07:00 and 19:00 Asia/Singapore (UTC+8)
+    - cron: "0 23 * * *"
+    - cron: "0 11 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-property-news
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Pull new stories and publish
+        run: python3 scripts/refresh-news.py --deploy
