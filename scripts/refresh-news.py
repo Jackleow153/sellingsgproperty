@@ -72,7 +72,9 @@ from news_sources import (
     collect_business_times,
     collect_google_news,
     collect_stomp,
+    chinese_headline,
     draft_copy,
+    has_cjk,
     is_relay_label,
     merge_posts,
     outlet_from_text,
@@ -414,6 +416,8 @@ def story_copy(post_id: str, title: str, copy_book: dict) -> dict:
     written = 2 <= len(summary) <= 4 and len(takeaways) == 3
     zh_entry = entry.get("zh") if isinstance(entry.get("zh"), dict) else {}
     title_zh = str(zh_entry.get("title") or "").strip()
+    if not has_cjk(title_zh):
+        title_zh = chinese_headline(title)
     if not written:
         summary = [
             title,
@@ -1099,7 +1103,9 @@ def render_list_html(items: list[dict], copy_book: dict) -> str:
         start = ' class="is-page-start"' if index == 0 else ""
         entry = copy_book.get(item["id"]) or {}
         zh_entry = entry.get("zh") if isinstance(entry.get("zh"), dict) else {}
-        title_zh = str(zh_entry.get("title") or "").strip() or item["title"]
+        title_zh = str(zh_entry.get("title") or "").strip()
+        if not has_cjk(title_zh):
+            title_zh = chinese_headline(item["title"])
         rows.append(
             f"    <li{start}{hidden}><a class=\"news-row\" href=\"" + esc(href) + "\">"
             + media_markup(image, hero=False)

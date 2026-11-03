@@ -251,6 +251,227 @@ def propnex_own_piece(text: str) -> bool:
     return "consumer seminar" in folded or "propnex consumer" in folded
 
 
+def has_cjk(text: str) -> bool:
+    return bool(re.search(r"[\u4e00-\u9fff]", text or ""))
+
+
+def _fold_headline(title: str) -> str:
+    text = (
+        (title or "")
+        .replace("’", "'")
+        .replace("‘", "'")
+        .replace("“", '"')
+        .replace("”", '"')
+        .replace("\xa0", " ")
+    )
+    return re.sub(r"\s+", " ", text).strip().lower()
+
+
+# Headlines the auto-draft used to store in English, so the 中文 switch did nothing.
+EXACT_ZH_HEADLINES = {
+    "luxury homes seized in $3b money laundering case prove a hard sell": "涉30亿元洗钱案被扣押的豪宅难以出售",
+    "singapore hdb resale prices forecast to grow up to 1% in 2026": "预测2026年新加坡组屋转售价最多上涨1%",
+    "sell hdb before or after hip 2026: works take about 18 months, 10 working days in your flat": "2026年家居改进计划（HIP）前卖还是后卖：工程约18个月，住户家中约10个工作日",
+    "first s$1.8m hdb resale flat in singapore recorded in queenstown": "女皇镇录得新加坡首宗180万新元组屋转售",
+    "another duplex penthouse at mon jervois heads to auction, this time at $4.38 mil": "Mon Jervois另一套复式顶层公寓将拍卖，这次叫价438万新元",
+    "reits vs physical property: why buying a singapore condo in 2026 might be a bad financial move": "房地产投资信托对比实体房产：2026年买新加坡公寓为何可能不划算",
+    "a five-room flat in bedok was just sold for $1.54 million, setting a new record high for hdb flats in the town": "勿洛一套五房组屋刚以154万新元成交，创下该市镇组屋转售新高",
+    "resale flat transactions with 'greater complexity' should be handled by private lawyers: hdb": "建屋局：较复杂的组屋转售交易应交由私人律师处理",
+    "hdb resale prices dip for third straight quarter, even after lifting of 15-month wait-out period": "即使15个月等待期已取消，组屋转售价仍连续第三季下跌",
+    "hdb resale market may stabilise after 3 quarters of decline": "组屋转售市场在连跌3个季度后或趋稳",
+    "hdb resale deal volume jumps 17.7% q-o-q in 3q2026 flash data; market 'may bottom in 4q2026'": "2026年第三季快报：组屋转售成交量按季增17.7%，市场或在第四季见底",
+    "private home prices accelerate with 1.4% rise while hdb resale values dip further in q3: flash data": "快报：第三季私人住宅价格加速上涨1.4%，组屋转售价继续下跌",
+    "hdb resale prices fall for third consecutive quarter: flash estimate": "快报：组屋转售价连续第三季下跌",
+}
+
+_HEADLINE_GLOSSARY = (
+    ("good class bungalow", "优质洋房"),
+    ("private home prices", "私人住宅价格"),
+    ("private homes", "私人住宅"),
+    ("hdb resale prices", "组屋转售价"),
+    ("hdb resale", "组屋转售"),
+    ("resale prices", "转售价"),
+    ("resale flat", "转售组屋"),
+    ("resale flats", "转售组屋"),
+    ("five-room", "五房"),
+    ("5-room", "五房"),
+    ("four-room", "四房"),
+    ("4-room", "四房"),
+    ("three-room", "三房"),
+    ("3-room", "三房"),
+    ("one-bedroom", "一房式"),
+    ("duplex penthouse", "复式顶层公寓"),
+    ("money laundering", "洗钱"),
+    ("luxury homes", "豪宅"),
+    ("hard sell", "难以出售"),
+    ("flash estimate", "快报"),
+    ("flash data", "快报"),
+    ("wait-out period", "等待期"),
+    ("working days", "个工作日"),
+    ("greater complexity", "较复杂"),
+    ("private lawyers", "私人律师"),
+    ("physical property", "实体房产"),
+    ("record high", "新高"),
+    ("queenstown", "女皇镇"),
+    ("toa payoh", "大巴窑"),
+    ("tiong bahru", "中峇鲁"),
+    ("ang mo kio", "宏茂桥"),
+    ("bukit merah", "红山"),
+    ("bukit timah", "武吉知马"),
+    ("bukit batok", "武吉巴督"),
+    ("bukit panjang", "武吉班让"),
+    ("choa chu kang", "蔡厝港"),
+    ("marine parade", "马林百列"),
+    ("pasir panjang", "巴西班让"),
+    ("paya lebar", "巴耶利峇"),
+    ("sembawang", "三巴旺"),
+    ("tampines", "淡滨尼"),
+    ("woodlands", "兀兰"),
+    ("serangoon", "实龙岗"),
+    ("clementi", "金文泰"),
+    ("hougang", "后港"),
+    ("sengkang", "盛港"),
+    ("punggol", "榜鹅"),
+    ("yishun", "义顺"),
+    ("bishan", "碧山"),
+    ("jurong", "裕廊"),
+    ("tengah", "登加"),
+    ("lentor", "伦多"),
+    ("dawson", "道森"),
+    ("bedok", "勿洛"),
+    ("kallang", "加冷"),
+    ("geylang", "芽笼"),
+    ("novena", "诺维娜"),
+    ("sentosa", "圣淘沙"),
+    ("orchard", "乌节"),
+    ("reits", "房地产投资信托"),
+    ("singapore", "新加坡"),
+    ("penthouse", "顶层公寓"),
+    ("bungalow", "洋房"),
+    ("auction", "拍卖"),
+    ("forecast", "预测"),
+    ("stabilise", "趋稳"),
+    ("stabilize", "趋稳"),
+    ("developers", "发展商"),
+    ("developer", "发展商"),
+    ("buyers", "买家"),
+    ("buyer", "买家"),
+    ("sellers", "卖家"),
+    ("seller", "卖家"),
+    ("launched", "开盘"),
+    ("launch", "开盘"),
+    ("quarter", "季度"),
+    ("prices", "价格"),
+    ("price", "价格"),
+    ("flats", "组屋"),
+    ("flat", "组屋"),
+    ("condo", "公寓"),
+    ("hdb", "组屋"),
+    ("bto", "预购组屋"),
+    ("resale", "转售"),
+    ("rental", "租金"),
+    ("rent", "租金"),
+    ("sold", "成交"),
+    ("sales", "销量"),
+    ("sale", "出售"),
+    ("market", "市场"),
+    ("record", "纪录"),
+    ("units", "个单位"),
+    ("homes", "住家"),
+    ("home", "住宅"),
+    ("seized", "被扣押"),
+    ("rose", "上涨"),
+    ("rise", "上涨"),
+    ("dip", "下跌"),
+    ("fall", "下跌"),
+    ("fell", "下跌"),
+    ("psf", "每平方英尺"),
+)
+
+_HEADLINE_STOP = {
+    "a", "an", "the", "of", "in", "on", "for", "to", "and", "or", "with", "after",
+    "before", "while", "this", "that", "was", "were", "just", "even", "up", "by",
+    "at", "from", "into", "over", "its", "their", "be", "is", "are", "may", "might",
+    "should", "could", "about", "than", "as", "vs", "your", "our", "per", "new",
+}
+
+
+def _convert_headline_money(text: str) -> str:
+    def billion(match: re.Match) -> str:
+        amount = float(match.group(1))
+        unit = "新元" if match.group(0).lower().startswith("s$") else "元"
+        return f"{int(round(amount * 10))}亿{unit}"
+
+    def million(match: re.Match) -> str:
+        amount = float(match.group(1).replace(",", ""))
+        wan = int(round(amount * 100)) if amount < 1000 else int(round(amount / 10000))
+        local = bool(re.search(r"\b(hdb|flat|condo|psf|bto|ec)\b", text, re.I))
+        unit = "新元" if match.group(0).lower().startswith("s$") or local else "元"
+        return f"{wan}万{unit}"
+
+    text = re.sub(
+        r"S?\$\s?(\d+(?:\.\d+)?)\s?(?:billion|bn|\bb\b)",
+        billion,
+        text,
+        flags=re.I,
+    )
+    text = re.sub(
+        r"S?\$\s?(\d[\d,]*(?:\.\d+)?)\s?(?:million|mil|\bm\b)",
+        million,
+        text,
+        flags=re.I,
+    )
+    return text
+
+
+def _glossary_headline(title: str) -> str:
+    text = _convert_headline_money(title)
+    for source, target in _HEADLINE_GLOSSARY:
+        text = re.sub(rf"(?i)(?<![a-z0-9]){re.escape(source)}(?![a-z0-9])", target, text)
+    kept = []
+    for token in text.split():
+        bare = token.strip(".,;:!?\"'“”‘’()[]")
+        if bare.lower() in _HEADLINE_STOP:
+            continue
+        kept.append(token.strip())
+    text = " ".join(part for part in kept if part)
+    text = re.sub(r"(?<=[\u4e00-\u9fff%％])\s+(?=[\u4e00-\u9fff\d])", "", text)
+    text = re.sub(r"(?<=\d)\s+(?=[\u4e00-\u9fff])", "", text)
+    return re.sub(r"\s+", " ", text).strip(" ,;:-")
+
+
+def chinese_headline(title: str) -> str:
+    """Simplified Chinese headline for the 中文 switch.
+
+    A headline that is already Chinese is kept. Known English headlines get a
+    full translation. Anything else is translated from property terms so the
+    switch does not leave the English sentence in place.
+    """
+    raw = re.sub(r"\s+", " ", (title or "")).strip()
+    if not raw or has_cjk(raw):
+        return raw
+    exact = EXACT_ZH_HEADLINES.get(_fold_headline(raw))
+    if exact:
+        return exact
+    folded = _fold_headline(raw)
+    if re.search(r"hdb resale prices (?:dip|fall|fell|drop).*third (?:straight|consecutive) quarter", folded):
+        if "wait" in folded:
+            return "即使15个月等待期已取消，组屋转售价仍连续第三季下跌"
+        if "flash" in folded:
+            return "快报：组屋转售价连续第三季下跌"
+        return "组屋转售价连续第三季下跌"
+    forecast = re.search(
+        r"hdb resale prices forecast to (?:grow|rise) up to ([0-9.]+%) in (\d{4})",
+        folded,
+    )
+    if forecast:
+        return f"预测{forecast.group(2)}年新加坡组屋转售价最多上涨{forecast.group(1)}"
+    translated = _glossary_headline(raw)
+    if has_cjk(translated):
+        return translated
+    return raw
+
+
 def publisher_labels(name: str) -> tuple[str, str]:
     key = re.sub(r"\s+", " ", (name or "").strip().lower())
     key = re.sub(r"\s*[-–—|].*$", "", key).strip()
@@ -788,9 +1009,9 @@ def draft_copy(title: str, source_name: str) -> dict:
     ]
     facts = [f"Source named on this page: {source}", f"Headline: {title}"]
     facts.extend(f"Figure in the headline: {figure}" for figure in figures)
-    zh_title = title
+    zh_title = chinese_headline(title)
     zh_summary = [
-        f"{source}报道了这则新加坡房地产标题：{title}。下面的说明是写给买家和卖家的，不是原文照搬。",
+        f"{source}报道了这则新加坡房地产标题：{zh_title}。下面的说明是写给买家和卖家的，不是原文照搬。",
         "买房的人要把标题里的数字，拿来和实际的房子、地段、剩余屋契和每月供款比较。先问清楚数字指的是地价、成交价、开价，还是整个市场的变动。",
         "卖房的人不要把一条标题直接套到自己的单位上。准备出售或从组屋升级时，把数字当成要去核实的问题，再对照官方数据或真实挂牌。",
     ]
@@ -804,7 +1025,7 @@ def draft_copy(title: str, source_name: str) -> dict:
         "卖家要用屋契、面积和附近的成交来回答问题，而不是只拿出新闻截图。",
         "只复述标题里出现的数字。标题没有写的补助、时间表或项目名称，不要自己补。",
     ]
-    zh_facts = [f"本页来源：{source}", f"标题：{title}"]
+    zh_facts = [f"本页来源：{source}", f"标题：{zh_title}"]
     zh_facts.extend(f"标题中的数字：{figure}" for figure in figures)
     description = summary[0]
     if len(description) > 158:
@@ -994,6 +1215,17 @@ def self_check() -> None:
         failed.append("a real publisher is not the channel name")
     if not propnex_own_piece("PropNex Consumer Seminar"):
         failed.append("seminar poster should stay PropNex's own piece")
+    luxury = chinese_headline("Luxury homes seized in $3b money laundering case prove a hard sell")
+    if luxury != "涉30亿元洗钱案被扣押的豪宅难以出售":
+        failed.append("luxury headline should be Chinese: " + luxury)
+    if not has_cjk(chinese_headline("Condo rent in Tampines rose")):
+        failed.append("glossary headline should contain Chinese")
+    kept = "Thomson Reserve开盘周末售出九成"
+    if chinese_headline(kept) != kept:
+        failed.append("an existing Chinese headline should stay")
+    for english, chinese in EXACT_ZH_HEADLINES.items():
+        if chinese_headline(english) != chinese or not has_cjk(chinese):
+            failed.append("headline map failed: " + english[:50])
     if propnex_own_piece("THE BUSINESS TIMES"):
         failed.append("a newspaper masthead is not a seminar")
     if failed:
