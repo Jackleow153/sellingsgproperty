@@ -1,20 +1,49 @@
 {
-  "updated": "2026-11-03T10:12:43+08:00",
+  "updated": "2026-11-03T10:35:19+08:00",
   "sources": [
     "The Straits Times",
+    "Real Estate Asia",
     "Business Times",
+    "PropertyNet.SG",
     "CNA",
     "Vulcan Post",
+    "99.co",
     "EdgeProp Singapore",
+    "EdgeProp.sg",
     "Mingtiandi",
-    "Real Estate Asia",
     "Stacked Homes",
     "Stomp",
     "PropNex",
     "VnExpress International",
-    "PropertyNet.SG"
+    "The Smart Investor",
+    "Singapore Business Review",
+    "The Edge Singapore"
   ],
   "items": [
+    {
+      "id": "9811",
+      "title": "Luxury homes seized in $3b money laundering case prove a hard sell",
+      "date": "2026/11/03",
+      "image": "/news/images/9811.jpg",
+      "sourceName": "The Straits Times",
+      "sourceNameZh": "海峡时报",
+      "sourceFeed": "propnex",
+      "category": "Real estate",
+      "path": "/news/9811/",
+      "description": "The Straits Times carried this Singapore property headline: Luxury homes seized in $3b money laundering case prove a hard sell. The headline gives these."
+    },
+    {
+      "id": "nc61398b4",
+      "title": "Singapore HDB resale prices forecast to grow up to 1% in 2026",
+      "date": "2026/11/03",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Real Estate Asia",
+      "sourceNameZh": "Real Estate Asia",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/nc61398b4/",
+      "description": "Real Estate Asia carried this Singapore property headline: Singapore HDB resale prices forecast to grow up to 1% in 2026. The headline gives these figures."
+    },
     {
       "id": "9806",
       "title": "Build-to-rent homes could appeal to young S’poreans, but can rent be kept under $2,000?",
@@ -64,16 +93,16 @@
       "description": "Thomson Reserve sold 1,143 of 1,268 units at about $2,900 psf. What new launch buyers and nearby resale sellers should compare."
     },
     {
-      "id": "nd75f398a",
-      "title": "One in five prime-region private home resale deals sold at a loss in Q3",
-      "date": "2026/11/01",
-      "image": "/news/images/nd75f398a.webp",
-      "sourceName": "Business Times",
-      "sourceNameZh": "商业时报",
-      "sourceFeed": "business-times",
+      "id": "n76aa293e",
+      "title": "Sell HDB Before or After HIP 2026: Works Take About 18 Months, 10 Working Days in Your Flat",
+      "date": "2026/11/02",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "PropertyNet.SG",
+      "sourceNameZh": "PropertyNet.SG",
+      "sourceFeed": "google-news",
       "category": "Real estate",
-      "path": "/news/nd75f398a/",
-      "description": "One in five prime-region private resales sold at a loss in Q3 2026, Business Times reported. What buyers and sellers should check."
+      "path": "/news/n76aa293e/",
+      "description": "PropertyNet.SG carried this Singapore property headline: Sell HDB Before or After HIP 2026: Works Take About 18 Months, 10 Working Days in Your Flat. The."
     },
     {
       "id": "9799",
@@ -88,6 +117,18 @@
       "description": "Toa Payoh Hillside offers about 1,600 BTO flats beside Caldecott MRT in November 2026, inside a plan for 6,000 homes. What is real today."
     },
     {
+      "id": "nd75f398a",
+      "title": "One in five prime-region private home resale deals sold at a loss in Q3",
+      "date": "2026/11/01",
+      "image": "/news/images/nd75f398a.webp",
+      "sourceName": "Business Times",
+      "sourceNameZh": "商业时报",
+      "sourceFeed": "business-times",
+      "category": "Real estate",
+      "path": "/news/nd75f398a/",
+      "description": "One in five prime-region private resales sold at a loss in Q3 2026, Business Times reported. What buyers and sellers should check."
+    },
+    {
       "id": "n3199077c",
       "title": "Rare, roomy and pricey? Inside Singapore's niche jumbo HDB flat market",
       "date": "2026/11/01",
@@ -98,18 +139,6 @@
       "category": "Real estate",
       "path": "/news/n3199077c/",
       "description": "CNA calls jumbo HDB flats rare, roomy and pricey. What buyers should check before paying extra for the space."
-    },
-    {
-      "id": "n1e61a153",
-      "title": "HDB publishes Q3 resale flat prices by town, listing the cheapest & most expensive areas",
-      "date": "2026/10/31",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Vulcan Post",
-      "sourceNameZh": "Vulcan Post",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n1e61a153/",
-      "description": "HDB published Q3 2026 resale prices by town. Buyers and sellers should read their own town, not one national number."
     },
     {
       "id": "9798",
@@ -136,16 +165,28 @@
       "description": "About 14,800 private homes could launch in 2027, the most since 2013. What that means for HDB upgraders and resale sellers."
     },
     {
-      "id": "n49d504b4",
-      "title": "Whopping $1.818 mil transacted price for a Dawson five-room flat — all-time high in Singapore per HDB data",
-      "date": "2026/10/30",
+      "id": "n1e61a153",
+      "title": "HDB publishes Q3 resale flat prices by town, listing the cheapest & most expensive areas",
+      "date": "2026/10/31",
       "image": "/news/images/placeholder.svg",
-      "sourceName": "EdgeProp Singapore",
-      "sourceNameZh": "EdgeProp",
+      "sourceName": "Vulcan Post",
+      "sourceNameZh": "Vulcan Post",
       "sourceFeed": "google-news",
       "category": "Real estate",
-      "path": "/news/n49d504b4/",
-      "description": "A Dawson five-room HDB flat sold for S$1.818 million, EdgeProp reported from HDB data. What that record does and does not mean."
+      "path": "/news/n1e61a153/",
+      "description": "HDB published Q3 2026 resale prices by town. Buyers and sellers should read their own town, not one national number."
+    },
+    {
+      "id": "n17060ea2",
+      "title": "First S$1.8M HDB resale flat in Singapore recorded in Queenstown",
+      "date": "2026/10/30",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "99.co",
+      "sourceNameZh": "99.co",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n17060ea2/",
+      "description": "99.co carried this Singapore property headline: First S$1.8M HDB resale flat in Singapore recorded in Queenstown. The headline gives these figures: S$1.8M."
     },
     {
       "id": "9792",
@@ -170,6 +211,30 @@
       "category": "Real estate",
       "path": "/news/9790/",
       "description": "Hong Leong and TID bid $181.86 million for an Orchard plot, about $1,755 psf of floor area. Why that is not a condo price."
+    },
+    {
+      "id": "n49d504b4",
+      "title": "Whopping $1.818 mil transacted price for a Dawson five-room flat — all-time high in Singapore per HDB data",
+      "date": "2026/10/30",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "EdgeProp Singapore",
+      "sourceNameZh": "EdgeProp",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n49d504b4/",
+      "description": "A Dawson five-room HDB flat sold for S$1.818 million, EdgeProp reported from HDB data. What that record does and does not mean."
+    },
+    {
+      "id": "n6e7db465",
+      "title": "Another duplex penthouse at Mon Jervois heads to auction, this time at $4.38 mil",
+      "date": "2026/10/29",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "EdgeProp.sg",
+      "sourceNameZh": "EdgeProp.sg",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n6e7db465/",
+      "description": "EdgeProp.sg carried this Singapore property headline: Another duplex penthouse at Mon Jervois heads to auction, this time at $4.38 mil. The headline gives."
     },
     {
       "id": "9789",
@@ -328,18 +393,6 @@
       "description": "A commentary says en bloc owners should get ABSD relief on a replacement home. That is an argument, not a new rule."
     },
     {
-      "id": "n01edeaa5",
-      "title": "Reno content creator lambasts ‘most pathetic’ 4-room Tengah BTO kitchen, HDB responds",
-      "date": "2026/10/19",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Stomp",
-      "sourceNameZh": "Stomp",
-      "sourceFeed": "stomp",
-      "category": "Real estate",
-      "path": "/news/n01edeaa5/",
-      "description": "A creator criticised a 4-room Tengah BTO kitchen and HDB responded. Buyers should measure the plan, not the clip."
-    },
-    {
       "id": "9769",
       "title": "Home buyers using more cash and CPF savings to fund down payments",
       "date": "2026/10/19",
@@ -362,6 +415,18 @@
       "category": "Real estate",
       "path": "/news/9768/",
       "description": "The Serra Residences sold under a quarter of released units at about S$3,460 psf. Ask what was released before you judge the project."
+    },
+    {
+      "id": "n01edeaa5",
+      "title": "Reno content creator lambasts ‘most pathetic’ 4-room Tengah BTO kitchen, HDB responds",
+      "date": "2026/10/19",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Stomp",
+      "sourceNameZh": "Stomp",
+      "sourceFeed": "stomp",
+      "category": "Real estate",
+      "path": "/news/n01edeaa5/",
+      "description": "A creator criticised a 4-room Tengah BTO kitchen and HDB responded. Buyers should measure the plan, not the clip."
     },
     {
       "id": "9762",
@@ -446,6 +511,102 @@
       "category": "Real estate",
       "path": "/news/n0175d85e/",
       "description": "In Pasir Panjang, a headline puts resale condos near S$1,913 psf and a new launch near S$2,379 psf. Compare size and dollars, not only psf."
+    },
+    {
+      "id": "n20ccfb3b",
+      "title": "REITs vs Physical Property: Why Buying a Singapore Condo in 2026 Might Be a Bad Financial Move",
+      "date": "2026/10/08",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "The Smart Investor",
+      "sourceNameZh": "The Smart Investor",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n20ccfb3b/",
+      "description": "The Smart Investor carried this Singapore property headline: REITs vs Physical Property: Why Buying a Singapore Condo in 2026 Might Be a Bad Financial Move."
+    },
+    {
+      "id": "n53be47e3",
+      "title": "A five-room flat in Bedok was just sold for $1.54 million, setting a new record high for HDB flats in the town",
+      "date": "2026/10/08",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "EdgeProp.sg",
+      "sourceNameZh": "EdgeProp.sg",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n53be47e3/",
+      "description": "EdgeProp.sg carried this Singapore property headline: A five-room flat in Bedok was just sold for $1.54 million, setting a new record high for HDB flats in."
+    },
+    {
+      "id": "n2209a711",
+      "title": "Resale flat transactions with ‘greater complexity’ should be handled by private lawyers: HDB",
+      "date": "2026/10/06",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "The Straits Times",
+      "sourceNameZh": "海峡时报",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n2209a711/",
+      "description": "The Straits Times carried this Singapore property headline: Resale flat transactions with ‘greater complexity’ should be handled by private lawyers: HDB. The."
+    },
+    {
+      "id": "n5b7c1aed",
+      "title": "HDB resale prices dip for third straight quarter, even after lifting of 15-month wait-out period",
+      "date": "2026/10/02",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "The Straits Times",
+      "sourceNameZh": "海峡时报",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n5b7c1aed/",
+      "description": "The Straits Times carried this Singapore property headline: HDB resale prices dip for third straight quarter, even after lifting of 15-month wait-out period."
+    },
+    {
+      "id": "n98a49326",
+      "title": "HDB resale market may stabilise after 3 quarters of decline",
+      "date": "2026/10/02",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Singapore Business Review",
+      "sourceNameZh": "新加坡商业评论",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n98a49326/",
+      "description": "Singapore Business Review carried this Singapore property headline: HDB resale market may stabilise after 3 quarters of decline. The notes below are for."
+    },
+    {
+      "id": "nc253d0dd",
+      "title": "HDB resale deal volume jumps 17.7% q-o-q in 3Q2026 flash data; market ‘may bottom in 4Q2026’",
+      "date": "2026/10/01",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "The Edge Singapore",
+      "sourceNameZh": "The Edge Singapore",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/nc253d0dd/",
+      "description": "The Edge Singapore carried this Singapore property headline: HDB resale deal volume jumps 17.7% q-o-q in 3Q2026 flash data; market ‘may bottom in 4Q2026’."
+    },
+    {
+      "id": "n60d21196",
+      "title": "Private home prices accelerate with 1.4% rise while HDB resale values dip further in Q3: flash data",
+      "date": "2026/10/01",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Business Times",
+      "sourceNameZh": "商业时报",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n60d21196/",
+      "description": "Business Times carried this Singapore property headline: Private home prices accelerate with 1.4% rise while HDB resale values dip further in Q3: flash data."
+    },
+    {
+      "id": "n46aefb5d",
+      "title": "HDB resale prices fall for third consecutive quarter: Flash estimate",
+      "date": "2026/10/01",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "CNA",
+      "sourceNameZh": "CNA",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n46aefb5d/",
+      "description": "CNA carried this Singapore property headline: HDB resale prices fall for third consecutive quarter: Flash estimate. The notes below are for buyers and."
     },
     {
       "id": "nb0e42788",
