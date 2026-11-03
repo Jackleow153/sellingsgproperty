@@ -20,8 +20,11 @@ The run keeps property stories, drops seminars, foreign property, commercial
 REIT notes and viral clips, and collapses the same story to one page by
 title and distinctive figures. Existing news/copy.json briefs are kept.
 A headline with no brief yet gets an original buyer/seller draft. Detail
-pages name the publisher in text and do not link out. news.json stores the
-publisher name, not the article URL.
+pages name the publisher printed on the article and do not link out.
+A clipping collected from the PropNex channel is credited to the masthead
+on that clipping, such as The Straits Times or Business Times, not to
+"PropNex Property News". news.json stores that publisher name, not the
+article URL.
 
 Preview what would be published, without writing files:
 
@@ -55,7 +58,9 @@ from __future__ import annotations
 import html
 import json
 import re
+import shutil
 import ssl
+import subprocess
 import sys
 import urllib.request
 from datetime import datetime, timedelta, timezone
@@ -66,7 +71,10 @@ from news_sources import (
     collect_google_news,
     collect_stomp,
     draft_copy,
+    is_relay_label,
     merge_posts,
+    outlet_from_text,
+    propnex_own_piece,
     self_check,
 )
 
@@ -85,6 +93,34 @@ PLACEHOLDER = "/news/images/placeholder.svg"
 SITEMAP_START = "<!-- news-details:start -->"
 SITEMAP_END = "<!-- news-details:end -->"
 SGT = timezone(timedelta(hours=8))
+
+# Publisher read from the saved clipping at news/images/<id>.jpg.
+# The Telegram caption is the headline only. 9752 is a PropNex seminar
+# poster, not a newspaper, so it stays PropNex.
+CLIPPING_OUTLETS = {
+    "9806": ("The Straits Times", "海峡时报"),
+    "9805": ("The Straits Times", "海峡时报"),
+    "9803": ("The Straits Times", "海峡时报"),
+    "9802": ("Business Times", "商业时报"),
+    "9799": ("The Straits Times", "海峡时报"),
+    "9798": ("The Straits Times", "海峡时报"),
+    "9794": ("The Straits Times", "海峡时报"),
+    "9792": ("The Straits Times", "海峡时报"),
+    "9790": ("Business Times", "商业时报"),
+    "9789": ("The Straits Times", "海峡时报"),
+    "9788": ("The Straits Times", "海峡时报"),
+    "9787": ("Business Times", "商业时报"),
+    "9781": ("The Straits Times", "海峡时报"),
+    "9778": ("Business Times", "商业时报"),
+    "9774": ("Business Times", "商业时报"),
+    "9770": ("Business Times", "商业时报"),
+    "9769": ("The Straits Times", "海峡时报"),
+    "9768": ("Business Times", "商业时报"),
+    "9762": ("Business Times", "商业时报"),
+    "9758": ("Business Times", "商业时报"),
+    "9757": ("Business Times", "商业时报"),
+    "9752": ("PropNex", "博纳"),
+}
 
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
@@ -896,8 +932,13 @@ def detail_schema(item: dict, copy: dict) -> str:
 def render_detail_page(item: dict, copy: dict) -> str:
     title = item["title"]
     date = item["date"]
-    source_name = item.get("sourceName") or "PropNex Property News"
-    source_name_zh = item.get("sourceNameZh") or "博纳房产新闻"
+    source_name = (item.get("sourceName") or "").strip()
+    source_name_zh = (item.get("sourceNameZh") or source_name).strip()
+    if is_relay_label(source_name) or not source_name:
+        raise SystemExit(
+            f"Detail page {item['id']} has no article source. "
+            "The Telegram channel name is not the publisher."
+        )
     image = item.get("image") or PLACEHOLDER
     iso_date = date.replace("/", "-")
     path = f"/news/{item['id']}/"
@@ -1185,8 +1226,8 @@ def load_saved_posts() -> list[dict]:
                 "image": raw.get("image") or PLACEHOLDER,
                 "image_url": "",
                 "image_referer": "",
-                "sourceName": raw.get("sourceName") or "PropNex Property News",
-                "sourceNameZh": raw.get("sourceNameZh") or "博纳房产新闻",
+                "sourceName": raw.get("sourceName") or "",
+                "sourceNameZh": raw.get("sourceNameZh") or "",
                 "sourceFeed": raw.get("sourceFeed") or "propnex",
                 "category": raw.get("category") or "Real estate",
                 "saved": True,
@@ -1198,6 +1239,10 @@ def load_saved_posts() -> list[dict]:
 def tag_propnex(posts: list[dict]) -> list[dict]:
     tagged = []
     for post in posts:
+        found = CLIPPING_OUTLETS.get(str(post["id"]))
+        if not found:
+            found = outlet_from_text(f"{post.get('title') or ''}\n{post.get('body') or ''}")
+        name, zh = found or ("", "")
         tagged.append(
             {
                 "id": str(post["id"]),
@@ -1207,14 +1252,72 @@ def tag_propnex(posts: list[dict]) -> list[dict]:
                 "image": "",
                 "image_url": post.get("image_url") or "",
                 "image_referer": "",
-                "sourceName": "PropNex Property News",
-                "sourceNameZh": "博纳房产新闻",
+                "sourceName": name,
+                "sourceNameZh": zh,
                 "sourceFeed": "propnex",
                 "category": "Real estate",
+                "body": post.get("body") or "",
                 "saved": False,
             }
         )
     return tagged
+
+
+def masthead_text(image: Path) -> str:
+    """Read the top of a saved clipping. Empty when the reader is unavailable."""
+    compiler = shutil.which("swiftc")
+    source = Path(__file__).resolve().parent / "masthead.swift"
+    if not compiler or not source.exists() or not image.exists():
+        return ""
+    binary = Path("/tmp/ssp-masthead-ocr")
+    if not binary.exists() or binary.stat().st_mtime < source.stat().st_mtime:
+        built = subprocess.run(
+            [compiler, "-O", "-o", str(binary), str(source)],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if built.returncode != 0 or not binary.exists():
+            print("masthead reader unavailable")
+            return ""
+    try:
+        out = subprocess.run(
+            [str(binary), str(image)],
+            capture_output=True,
+            text=True,
+            timeout=40,
+            check=False,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        return ""
+    return out.stdout or ""
+
+
+def apply_article_sources(items: list[dict]) -> None:
+    """Credit each PropNex clipping to the paper named on the article."""
+    for item in items:
+        item_id = str(item.get("id") or "")
+        if item.get("sourceFeed") == "propnex" and item_id in CLIPPING_OUTLETS:
+            item["sourceName"], item["sourceNameZh"] = CLIPPING_OUTLETS[item_id]
+            continue
+        if item.get("sourceName") and not is_relay_label(item.get("sourceName") or ""):
+            continue
+        blob = f"{item.get('title') or ''}\n{item.get('body') or ''}"
+        found = outlet_from_text(blob)
+        image = item.get("image") or ""
+        clipping = ""
+        if not found and image.startswith("/news/images/") and not image.endswith("placeholder.svg"):
+            path = ROOT / image.lstrip("/")
+            if path.exists():
+                clipping = masthead_text(path)
+                found = outlet_from_text(clipping)
+        if not found and propnex_own_piece(blob + "\n" + clipping):
+            found = ("PropNex", "博纳")
+        if found:
+            item["sourceName"], item["sourceNameZh"] = found
+        elif is_relay_label(item.get("sourceName") or ""):
+            item["sourceName"] = ""
+            item["sourceNameZh"] = ""
 
 
 def entry_is_written(entry: dict | None) -> bool:
@@ -1249,22 +1352,26 @@ def dump_news(items: list[dict]) -> None:
                 "title": item["title"],
                 "date": item["date"],
                 "image": item.get("image") or PLACEHOLDER,
-                "sourceName": item.get("sourceName") or "PropNex Property News",
-                "sourceNameZh": item.get("sourceNameZh") or "博纳房产新闻",
+                "sourceName": (item.get("sourceName") or "").strip(),
+                "sourceNameZh": (item.get("sourceNameZh") or item.get("sourceName") or "").strip(),
                 "sourceFeed": item.get("sourceFeed") or "propnex",
                 "category": "Real estate",
                 "path": item.get("path") or f"/news/{item['id']}/",
                 "description": item.get("description") or "",
             }
         )
+        if is_relay_label(public[-1]["sourceName"]) or not public[-1]["sourceName"]:
+            raise SystemExit(
+                f"{item['id']} has no article source. "
+                "Refusing to write the Telegram channel name."
+            )
+    names = []
+    for row in public:
+        if row["sourceName"] not in names:
+            names.append(row["sourceName"])
     payload = {
         "updated": datetime.now(SGT).isoformat(timespec="seconds"),
-        "sources": [
-            "PropNex Property News",
-            "Business Times",
-            "Stomp",
-            "Google News",
-        ],
+        "sources": names,
         "items": public,
     }
     raw = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
@@ -1324,6 +1431,7 @@ def pages_only() -> None:
     items = load_saved_posts()
     if len(items) < 8:
         raise SystemExit("news.json has too few stories. Run a full refresh first.")
+    apply_article_sources(items)
     ensure_copy(items)
     write_detail_pages(items)
     dump_news(items)
@@ -1339,6 +1447,7 @@ def main() -> None:
         raise SystemExit(
             f"Only {len(items)} stories after merging. The news list was left unchanged."
         )
+    apply_article_sources(items)
     if "--dry-run" in sys.argv:
         print(f"\n{len(items)} stories")
         for item in items:
@@ -1350,6 +1459,7 @@ def main() -> None:
         return
     ensure_copy(items)
     attach_images(items)
+    apply_article_sources(items)
     write_detail_pages(items)
     dump_news(items)
     print(f"Wrote {len(items)} items to {JSON_PATH.relative_to(ROOT)}")

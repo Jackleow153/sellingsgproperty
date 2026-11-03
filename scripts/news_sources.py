@@ -175,8 +175,31 @@ PUBLISHERS = {
     "the independent singapore": ("The Independent Singapore", "The Independent Singapore"),
     "real estate asia": ("Real Estate Asia", "Real Estate Asia"),
     "beansprout": ("Beansprout", "Beansprout"),
-    "propnex property news": ("PropNex Property News", "博纳房产新闻"),
 }
+
+# Masthead phrases, checked against caption or clipping text. The Telegram
+# channel name is not an article publisher.
+OUTLET_PHRASES = (
+    ("the straits times", PUBLISHERS["the straits times"]),
+    ("straits times", PUBLISHERS["straits times"]),
+    ("the business times", PUBLISHERS["the business times"]),
+    ("business times", PUBLISHERS["business times"]),
+    ("channel newsasia", PUBLISHERS["channel newsasia"]),
+    ("edgeprop", PUBLISHERS["edgeprop"]),
+    ("the edge singapore", PUBLISHERS["the edge singapore"]),
+    ("stacked homes", PUBLISHERS["stacked homes"]),
+    ("asiaone", PUBLISHERS["asiaone"]),
+    ("yahoo news singapore", PUBLISHERS["yahoo news singapore"]),
+    ("mothership", PUBLISHERS["mothership"]),
+    ("vulcan post", PUBLISHERS["vulcan post"]),
+    ("singapore business review", PUBLISHERS["singapore business review"]),
+    ("mingtiandi", PUBLISHERS["mingtiandi"]),
+    ("real estate asia", PUBLISHERS["real estate asia"]),
+    ("stomp", PUBLISHERS["stomp"]),
+    ("cna", PUBLISHERS["cna"]),
+)
+
+RELAY_LABELS = {"propnex property news", "博纳房产新闻"}
 
 
 def fetch(url: str, timeout: int = 35) -> str:
@@ -191,6 +214,41 @@ def fetch(url: str, timeout: int = 35) -> str:
     ctx = ssl.create_default_context()
     with urllib.request.urlopen(req, timeout=timeout, context=ctx) as res:
         return res.read().decode("utf-8", "replace")
+
+
+def is_relay_label(name: str) -> bool:
+    """True for the Telegram channel name, which is not the article publisher."""
+    key = re.sub(r"\s+", " ", (name or "").strip().lower())
+    return key in RELAY_LABELS
+
+
+def outlet_from_text(text: str) -> tuple[str, str] | None:
+    """Return the publisher named in a caption or masthead, if one is there.
+
+    The earliest phrase wins, so a masthead beats a later mention of another
+    paper. The channel name PropNex Property News is ignored.
+    """
+    folded = " " + re.sub(r"[^a-z0-9]+", " ", (text or "").lower()).strip() + " "
+    best = None
+    best_at = None
+    for phrase, labels in OUTLET_PHRASES:
+        needle = f" {phrase} "
+        start = 0
+        while True:
+            at = folded.find(needle, start)
+            if at == -1:
+                break
+            if best_at is None or at < best_at:
+                best = labels
+                best_at = at
+            break
+    return best
+
+
+def propnex_own_piece(text: str) -> bool:
+    """True when the clipping is PropNex's own seminar, not a newspaper page."""
+    folded = re.sub(r"[^a-z0-9]+", " ", (text or "").lower())
+    return "consumer seminar" in folded or "propnex consumer" in folded
 
 
 def publisher_labels(name: str) -> tuple[str, str]:
@@ -618,10 +676,19 @@ def merge_posts(saved: list[dict], fresh: list[dict], now: datetime | None = Non
                     match["image_referer"] = post.get("image_referer") or ""
             current = FEED_PRIORITY.get(match.get("sourceFeed", ""), 0)
             incoming = FEED_PRIORITY.get(post.get("sourceFeed", ""), 0)
-            if match.get("sourceFeed") == "google-news" and incoming > current:
-                match["sourceName"] = post["sourceName"]
-                match["sourceNameZh"] = post["sourceNameZh"]
-                match["sourceFeed"] = post["sourceFeed"]
+            incoming_name = post.get("sourceName") or ""
+            if (
+                incoming_name
+                and not is_relay_label(incoming_name)
+                and (
+                    is_relay_label(match.get("sourceName") or "")
+                    or (match.get("sourceFeed") == "google-news" and incoming > current)
+                )
+            ):
+                match["sourceName"] = incoming_name
+                match["sourceNameZh"] = post.get("sourceNameZh") or incoming_name
+                if match.get("sourceFeed") == "google-news" and incoming > current:
+                    match["sourceFeed"] = post["sourceFeed"]
             if match.get("id") == post.get("id") and post.get("sourceFeed") == "propnex":
                 match["title"] = post["title"]
                 match["datetime"] = post["datetime"]
@@ -907,6 +974,28 @@ def self_check() -> None:
         failed.append("should keep Canberra Drive EC")
     if not singapore_property("One in five prime-region private home resale deals sold at a loss in Q3"):
         failed.append("should keep prime-region loss story")
+    if outlet_from_text("THE STRAITS TIMES\nBuild-to-rent homes") != (
+        "The Straits Times",
+        "海峡时报",
+    ):
+        failed.append("masthead should be The Straits Times")
+    if outlet_from_text("THE BUSINESS TIMES") != ("Business Times", "商业时报"):
+        failed.append("masthead should be Business Times")
+    if outlet_from_text("THE STRAITS TIMES\nAnalysts told the Business Times") != (
+        "The Straits Times",
+        "海峡时报",
+    ):
+        failed.append("earliest masthead should win")
+    if outlet_from_text("PropNex Property News") is not None:
+        failed.append("channel name is not an article publisher")
+    if not is_relay_label("PropNex Property News") or not is_relay_label("博纳房产新闻"):
+        failed.append("relay label should match the channel name")
+    if is_relay_label("The Straits Times") or is_relay_label("PropNex"):
+        failed.append("a real publisher is not the channel name")
+    if not propnex_own_piece("PropNex Consumer Seminar"):
+        failed.append("seminar poster should stay PropNex's own piece")
+    if propnex_own_piece("THE BUSINESS TIMES"):
+        failed.append("a newspaper masthead is not a seminar")
     if failed:
         raise SystemExit("news source self-check failed:\n" + "\n".join(failed))
 
