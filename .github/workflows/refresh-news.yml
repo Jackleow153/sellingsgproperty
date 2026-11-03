@@ -2,9 +2,9 @@ name: Publish property news
 
 on:
   schedule:
-    # 07:00 and 19:00 Asia/Singapore (UTC+8)
-    - cron: "0 23 * * *"
-    - cron: "0 11 * * *"
+    # Every 30 minutes from 06:00 to 23:30 Asia/Singapore (UTC+8, no daylight saving).
+    # 06:00 SGT is 22:00 UTC. 23:30 SGT is 15:30 UTC.
+    - cron: "*/30 0-15,22-23 * * *"
   workflow_dispatch:
 
 permissions:

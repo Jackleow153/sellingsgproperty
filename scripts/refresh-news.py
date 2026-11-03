@@ -42,8 +42,8 @@ Publish the refreshed pages to the live site:
 Netlify publishes https://www.sellingsgproperty.com. A run with no new
 story leaves those files uncommitted.
 
-GitHub Actions runs that command every day at 07:00 and 19:00 Singapore
-time (.github/workflows/refresh-news.yml). This script does not install
+GitHub Actions runs that command every 30 minutes from 06:00 to 23:30
+Singapore time (.github/workflows/refresh-news.yml). This script does not install
 cron or launchd. A plain run without --deploy still writes the local
 files and does not push.
 
