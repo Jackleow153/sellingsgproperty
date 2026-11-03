@@ -1,26 +1,76 @@
 {
-  "updated": "2026-11-03T18:28:12+08:00",
+  "updated": "2026-11-04T02:00:11+08:00",
   "sources": [
+    "99.co",
+    "Tatler Asia",
+    "Borneo Bulletin",
+    "SavePoint Gaming",
     "The Straits Times",
+    "DollarsAndSense.sg",
     "Real Estate Asia",
     "Business Times",
     "PropertyNet.SG",
     "CNA",
     "Vulcan Post",
+    "FZINE Singapore",
     "8days.sg",
-    "99.co",
     "EdgeProp Singapore",
     "EdgeProp.sg",
     "Mingtiandi",
     "Stacked Homes",
     "Stomp",
     "PropNex",
-    "VnExpress International",
-    "Singapore Business Review",
-    "The Smart Investor",
-    "AsiaOne"
+    "VnExpress International"
   ],
   "items": [
+    {
+      "id": "nd682cbef",
+      "title": "Tampines executive flat sells for record S$1.275M, becoming the town’s second priciest HDB resale",
+      "date": "2026/11/03",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "99.co",
+      "sourceNameZh": "99.co",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/nd682cbef/",
+      "description": "99.co carried this Singapore property headline: Tampines executive flat sells for record S$1.275M, becoming the town’s second priciest HDB resale. The."
+    },
+    {
+      "id": "n8337ed06",
+      "title": "Home tour: how Peter Tay breathes new soul into a Good Class Bungalow once owned by a Singapore president",
+      "date": "2026/11/03",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Tatler Asia",
+      "sourceNameZh": "Tatler Asia",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n8337ed06/",
+      "description": "Tatler Asia carried this Singapore property headline: Home tour: how Peter Tay breathes new soul into a Good Class Bungalow once owned by a Singapore."
+    },
+    {
+      "id": "n3abc175b",
+      "title": "Singapore explores build-to-rent model as demand for independent living grows",
+      "date": "2026/11/03",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Borneo Bulletin",
+      "sourceNameZh": "Borneo Bulletin",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n3abc175b/",
+      "description": "Borneo Bulletin carried this Singapore property headline: Singapore explores build-to-rent model as demand for independent living grows. The notes below are."
+    },
+    {
+      "id": "na2f0567e",
+      "title": "IKEA Singapore and City Energy Partner on Smarter Home Design for BTO and HDB Owners",
+      "date": "2026/11/03",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "SavePoint Gaming",
+      "sourceNameZh": "SavePoint Gaming",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/na2f0567e/",
+      "description": "SavePoint Gaming carried this Singapore property headline: IKEA Singapore and City Energy Partner on Smarter Home Design for BTO and HDB Owners. The notes."
+    },
     {
       "id": "9811",
       "title": "Luxury homes seized in $3b money laundering case prove a hard sell",
@@ -32,6 +82,18 @@
       "category": "Real estate",
       "path": "/news/9811/",
       "description": "The Straits Times carried this Singapore property headline: Luxury homes seized in $3b money laundering case prove a hard sell. The headline gives these."
+    },
+    {
+      "id": "n261828b6",
+      "title": "At What Point Does Lease Decay Start Affecting The Value Of Your HDB Flat?",
+      "date": "2026/11/03",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "DollarsAndSense.sg",
+      "sourceNameZh": "DollarsAndSense.sg",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n261828b6/",
+      "description": "DollarsAndSense.sg carried this Singapore property headline: At What Point Does Lease Decay Start Affecting The Value Of Your HDB Flat?. The notes below are."
     },
     {
       "id": "nc61398b4",
@@ -178,16 +240,16 @@
       "description": "HDB published Q3 2026 resale prices by town. Buyers and sellers should read their own town, not one national number."
     },
     {
-      "id": "n5a7c5eac",
-      "title": "Man Trespasses S'pore Couple's BTO Flat Twice, Brings Wife On Second Visit",
+      "id": "ne142ee1d",
+      "title": "Get Your S*** Together: When Is The Right Time To Apply For A BTO With My Partner?",
       "date": "2026/10/30",
       "image": "/news/images/placeholder.svg",
-      "sourceName": "8days.sg",
-      "sourceNameZh": "8days.sg",
+      "sourceName": "FZINE Singapore",
+      "sourceNameZh": "FZINE Singapore",
       "sourceFeed": "google-news",
       "category": "Real estate",
-      "path": "/news/n5a7c5eac/",
-      "description": "8days.sg carried this Singapore property headline: Man Trespasses S'pore Couple's BTO Flat Twice, Brings Wife On Second Visit. The notes below are for buyers."
+      "path": "/news/ne142ee1d/",
+      "description": "FZINE Singapore carried this Singapore property headline: Get Your S*** Together: When Is The Right Time To Apply For A BTO With My Partner?. The notes below."
     },
     {
       "id": "9792",
@@ -212,6 +274,18 @@
       "category": "Real estate",
       "path": "/news/9790/",
       "description": "Hong Leong and TID bid $181.86 million for an Orchard plot, about $1,755 psf of floor area. Why that is not a condo price."
+    },
+    {
+      "id": "n5a7c5eac",
+      "title": "Man Trespasses S'pore Couple's BTO Flat Twice, Brings Wife On Second Visit",
+      "date": "2026/10/30",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "8days.sg",
+      "sourceNameZh": "8days.sg",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n5a7c5eac/",
+      "description": "8days.sg carried this Singapore property headline: Man Trespasses S'pore Couple's BTO Flat Twice, Brings Wife On Second Visit. The notes below are for buyers."
     },
     {
       "id": "n17060ea2",
@@ -272,6 +346,18 @@
       "category": "Real estate",
       "path": "/news/9787/",
       "description": "About 11,000 homes are planned at Maju Forest and Gillman Barracks, including 9,500 public homes. What nearby buyers and sellers should treat as a long-term."
+    },
+    {
+      "id": "n333c4ed0",
+      "title": "UOB prices 38 Marina Collection units from $1,269 psf, below recent Sentosa Cove resales",
+      "date": "2026/10/29",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "EdgeProp.sg",
+      "sourceNameZh": "EdgeProp.sg",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n333c4ed0/",
+      "description": "EdgeProp.sg carried this Singapore property headline: UOB prices 38 Marina Collection units from $1,269 psf, below recent Sentosa Cove resales. The headline."
     },
     {
       "id": "n6e7db465",
@@ -548,90 +634,6 @@
       "category": "Real estate",
       "path": "/news/ndf45ada8/",
       "description": "Stacked Homes carried this Singapore property headline: We Can Afford A Condo But Prefer A S$1.2M HDB — Should We Pay S$280K More For A 5-Room?. The headline."
-    },
-    {
-      "id": "na7343184",
-      "title": "Top-floor Bedok 5-room HDB flat with ‘unblocked views’ gets full $1.588m asking price within 5 hours",
-      "date": "2026/10/09",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Stomp",
-      "sourceNameZh": "Stomp",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/na7343184/",
-      "description": "Stomp carried this Singapore property headline: Top-floor Bedok 5-room HDB flat with ‘unblocked views’ gets full $1.588m asking price within 5 hours. The."
-    },
-    {
-      "id": "ncf9f532f",
-      "title": "HDB issues $1.2b in green notes at 2.586% due 2030",
-      "date": "2026/10/08",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Singapore Business Review",
-      "sourceNameZh": "新加坡商业评论",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/ncf9f532f/",
-      "description": "Singapore Business Review carried this Singapore property headline: HDB issues $1.2b in green notes at 2.586% due 2030. The headline gives these figures."
-    },
-    {
-      "id": "n645d58d2",
-      "title": "What $1.5M Buys in a Condo Singapore 2026: A 3-Bedder in Only 3 Districts",
-      "date": "2026/10/08",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "PropertyNet.SG",
-      "sourceNameZh": "PropertyNet.SG",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n645d58d2/",
-      "description": "PropertyNet.SG carried this Singapore property headline: What $1.5M Buys in a Condo Singapore 2026: A 3-Bedder in Only 3 Districts. The headline gives these."
-    },
-    {
-      "id": "n404ae056",
-      "title": "New record high of $3,617 psf set at luxury condo Ardmore II",
-      "date": "2026/10/08",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "EdgeProp.sg",
-      "sourceNameZh": "EdgeProp.sg",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n404ae056/",
-      "description": "EdgeProp.sg carried this Singapore property headline: New record high of $3,617 psf set at luxury condo Ardmore II. The headline gives these figures: $3,617."
-    },
-    {
-      "id": "n20ccfb3b",
-      "title": "REITs vs Physical Property: Why Buying a Singapore Condo in 2026 Might Be a Bad Financial Move",
-      "date": "2026/10/08",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "The Smart Investor",
-      "sourceNameZh": "The Smart Investor",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n20ccfb3b/",
-      "description": "The Smart Investor carried this Singapore property headline: REITs vs Physical Property: Why Buying a Singapore Condo in 2026 Might Be a Bad Financial Move."
-    },
-    {
-      "id": "n53be47e3",
-      "title": "A five-room flat in Bedok was just sold for $1.54 million, setting a new record high for HDB flats in the town",
-      "date": "2026/10/08",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "EdgeProp.sg",
-      "sourceNameZh": "EdgeProp.sg",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n53be47e3/",
-      "description": "EdgeProp.sg carried this Singapore property headline: A five-room flat in Bedok was just sold for $1.54 million, setting a new record high for HDB flats in."
-    },
-    {
-      "id": "n228e7f39",
-      "title": "408 jumbo flats sold in past 10 years, median price $910,000 in 2025: Chee Hong Tat",
-      "date": "2026/10/07",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "AsiaOne",
-      "sourceNameZh": "亚洲新闻网",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n228e7f39/",
-      "description": "AsiaOne carried this Singapore property headline: 408 jumbo flats sold in past 10 years, median price $910,000 in 2025: Chee Hong Tat. The headline gives."
     }
   ]
 }
