@@ -1,8 +1,10 @@
 {
-  "updated": "2026-11-04T09:53:01+08:00",
+  "updated": "2026-11-04T16:34:56+08:00",
   "sources": [
-    "The Independent Singapore",
+    "EdgeProp.sg",
+    "AsiaOne",
     "The Straits Times",
+    "The Independent Singapore",
     "99.co",
     "Tatler Asia",
     "Borneo Bulletin",
@@ -16,25 +18,34 @@
     "FZINE Singapore",
     "8days.sg",
     "EdgeProp Singapore",
-    "EdgeProp.sg",
     "Mingtiandi",
     "Stacked Homes",
-    "Stomp",
-    "PropNex",
-    "VnExpress International"
+    "Stomp"
   ],
   "items": [
     {
-      "id": "nf63c9c83",
-      "title": "5-room HDB flat with 94 years left on lease sold for S$1.8 billion; highest resale price ever in Singapore",
-      "date": "2026/11/03",
+      "id": "n179f206b",
+      "title": "November BTO exercise launches nearly 8,000 flats, including Toa Payoh and Bayshore units",
+      "date": "2026/11/04",
       "image": "/news/images/placeholder.svg",
-      "sourceName": "The Independent Singapore",
-      "sourceNameZh": "The Independent Singapore",
+      "sourceName": "EdgeProp.sg",
+      "sourceNameZh": "EdgeProp.sg",
       "sourceFeed": "google-news",
       "category": "Real estate",
-      "path": "/news/nf63c9c83/",
-      "description": "The Independent Singapore carried this Singapore property headline: 5-room HDB flat with 94 years left on lease sold for S$1.8 billion; highest resale price."
+      "path": "/news/n179f206b/",
+      "description": "EdgeProp.sg carried this Singapore property headline: November BTO exercise launches nearly 8,000 flats, including Toa Payoh and Bayshore units. The headline."
+    },
+    {
+      "id": "nb873e1da",
+      "title": "HDB launches 7,964 BTO flats across 6 towns in first exercise under higher income ceilings",
+      "date": "2026/11/04",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "AsiaOne",
+      "sourceNameZh": "亚洲新闻网",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/nb873e1da/",
+      "description": "AsiaOne carried this Singapore property headline: HDB launches 7,964 BTO flats across 6 towns in first exercise under higher income ceilings. The notes below."
     },
     {
       "id": "9811",
@@ -47,6 +58,18 @@
       "category": "Real estate",
       "path": "/news/9811/",
       "description": "The Straits Times carried this Singapore property headline: Luxury homes seized in $3b money laundering case prove a hard sell. The headline gives these."
+    },
+    {
+      "id": "nf63c9c83",
+      "title": "5-room HDB flat with 94 years left on lease sold for S$1.8 billion; highest resale price ever in Singapore",
+      "date": "2026/11/03",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "The Independent Singapore",
+      "sourceNameZh": "The Independent Singapore",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/nf63c9c83/",
+      "description": "The Independent Singapore carried this Singapore property headline: 5-room HDB flat with 94 years left on lease sold for S$1.8 billion; highest resale price."
     },
     {
       "id": "nd682cbef",
@@ -433,6 +456,18 @@
       "description": "Million-dollar HDB resales hit a record 597 in Q3 2026. That count is the top end, not the price of a typical flat."
     },
     {
+      "id": "ne18b8d4b",
+      "title": "Woman, 61, found dead at foot of Jurong East HDB block",
+      "date": "2026/10/24",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "AsiaOne",
+      "sourceNameZh": "亚洲新闻网",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/ne18b8d4b/",
+      "description": "AsiaOne carried this Singapore property headline: Woman, 61, found dead at foot of Jurong East HDB block. The notes below are for buyers and sellers. They."
+    },
+    {
       "id": "9781",
       "title": "HDB Q3 resale prices dip 0.1% even as more flats sold",
       "date": "2026/10/24",
@@ -599,42 +634,6 @@
       "category": "Real estate",
       "path": "/news/nd6c085c3/",
       "description": "Amber Park in District 15 set a project record at S$3,170 psf. Ask the unit size before you treat it as the east’s price."
-    },
-    {
-      "id": "9752",
-      "title": "HDB resale prices have fallen for three straight quarters. So should you make your move now, or wait?",
-      "date": "2026/10/14",
-      "image": "/news/images/9752.jpg",
-      "sourceName": "PropNex",
-      "sourceNameZh": "博纳",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9752/",
-      "description": "HDB resale prices have fallen for three straight quarters. Buy or wait based on the flat and the loan, not on timing the bottom."
-    },
-    {
-      "id": "nd96a2169",
-      "title": "Late Singapore property tycoon's freehold bungalow put on sale at nearly $65M",
-      "date": "2026/10/13",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "VnExpress International",
-      "sourceNameZh": "VnExpress International",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/nd96a2169/",
-      "description": "A late tycoon’s freehold bungalow is listed at nearly $65 million. That is an asking price for one house, not a sale."
-    },
-    {
-      "id": "n0175d85e",
-      "title": "District 5 Condo Prices 2026: $1,913 psf Resale vs $2,379 psf New Launch in Pasir Panjang",
-      "date": "2026/10/12",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "PropertyNet.SG",
-      "sourceNameZh": "PropertyNet.SG",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n0175d85e/",
-      "description": "In Pasir Panjang, a headline puts resale condos near S$1,913 psf and a new launch near S$2,379 psf. Compare size and dollars, not only psf."
     }
   ]
 }
