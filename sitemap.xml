@@ -34,6 +34,18 @@
   </url>
   <!-- news-details:start -->
   <url>
+    <loc>https://www.sellingsgproperty.com/news/n5e9c8190/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sellingsgproperty.com/news/n95c9965c/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.sellingsgproperty.com/news/n179f206b/</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -250,12 +262,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sellingsgproperty.com/news/ne18b8d4b/</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.sellingsgproperty.com/news/9781/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>monthly</changefreq>
@@ -263,6 +269,12 @@
   </url>
   <url>
     <loc>https://www.sellingsgproperty.com/news/9778/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sellingsgproperty.com/news/ne18b8d4b/</loc>
     <lastmod>2026-10-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -288,6 +300,12 @@
   <url>
     <loc>https://www.sellingsgproperty.com/news/nea3ce065/</loc>
     <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sellingsgproperty.com/news/n00054fe5/</loc>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -318,24 +336,6 @@
   <url>
     <loc>https://www.sellingsgproperty.com/news/9762/</loc>
     <lastmod>2026-10-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sellingsgproperty.com/news/9758/</loc>
-    <lastmod>2026-10-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sellingsgproperty.com/news/9757/</loc>
-    <lastmod>2026-10-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sellingsgproperty.com/news/nd6c085c3/</loc>
-    <lastmod>2026-10-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

@@ -1,11 +1,11 @@
 {
-  "updated": "2026-11-04T16:34:56+08:00",
+  "updated": "2026-11-05T00:55:28+08:00",
   "sources": [
+    "99.co",
     "EdgeProp.sg",
     "AsiaOne",
     "The Straits Times",
     "The Independent Singapore",
-    "99.co",
     "Tatler Asia",
     "Borneo Bulletin",
     "SavePoint Gaming",
@@ -20,9 +20,34 @@
     "EdgeProp Singapore",
     "Mingtiandi",
     "Stacked Homes",
+    "PropertyGuru",
     "Stomp"
   ],
   "items": [
+    {
+      "id": "n5e9c8190",
+      "title": "Million-dollar HDB resales hit third straight monthly record in October 2026",
+      "date": "2026/11/04",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "99.co",
+      "sourceNameZh": "99.co",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n5e9c8190/",
+      "description": "99.co carried this Singapore property headline: Million-dollar HDB resales hit third straight monthly record in October 2026. The notes below are for buyers."
+    },
+    {
+      "id": "n95c9965c",
+      "title": "Five-room flat in Bedok sold for $1.588 million, breaking the town’s HDB resale record for third time in under four weeks",
+      "date": "2026/11/04",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "EdgeProp.sg",
+      "sourceNameZh": "EdgeProp.sg",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n95c9965c/",
+      "description": "EdgeProp.sg carried this Singapore property headline: Five-room flat in Bedok sold for $1.588 million, breaking the town’s HDB resale record for third time."
+    },
     {
       "id": "n179f206b",
       "title": "November BTO exercise launches nearly 8,000 flats, including Toa Payoh and Bayshore units",
@@ -456,18 +481,6 @@
       "description": "Million-dollar HDB resales hit a record 597 in Q3 2026. That count is the top end, not the price of a typical flat."
     },
     {
-      "id": "ne18b8d4b",
-      "title": "Woman, 61, found dead at foot of Jurong East HDB block",
-      "date": "2026/10/24",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "AsiaOne",
-      "sourceNameZh": "亚洲新闻网",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/ne18b8d4b/",
-      "description": "AsiaOne carried this Singapore property headline: Woman, 61, found dead at foot of Jurong East HDB block. The notes below are for buyers and sellers. They."
-    },
-    {
       "id": "9781",
       "title": "HDB Q3 resale prices dip 0.1% even as more flats sold",
       "date": "2026/10/24",
@@ -490,6 +503,18 @@
       "category": "Real estate",
       "path": "/news/9778/",
       "description": "Home sales are expected to recover in Q4 on new-launch momentum. That is a forecast, not a reason to skip the numbers on one home."
+    },
+    {
+      "id": "ne18b8d4b",
+      "title": "Woman, 61, found dead at foot of Jurong East HDB block",
+      "date": "2026/10/24",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "AsiaOne",
+      "sourceNameZh": "亚洲新闻网",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/ne18b8d4b/",
+      "description": "AsiaOne carried this Singapore property headline: Woman, 61, found dead at foot of Jurong East HDB block. The notes below are for buyers and sellers. They."
     },
     {
       "id": "9774",
@@ -538,6 +563,18 @@
       "category": "Real estate",
       "path": "/news/nea3ce065/",
       "description": "S$500,000 4-room HDB flats are described as rare. Check the town and the lease before you treat that number as the market."
+    },
+    {
+      "id": "n00054fe5",
+      "title": "Cat Licensing in Singapore: What HDB Residents Need to Know",
+      "date": "2026/10/20",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "PropertyGuru",
+      "sourceNameZh": "PropertyGuru",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n00054fe5/",
+      "description": "PropertyGuru carried this Singapore property headline: Cat Licensing in Singapore: What HDB Residents Need to Know. The notes below are for buyers and."
     },
     {
       "id": "9770",
@@ -598,42 +635,6 @@
       "category": "Real estate",
       "path": "/news/9762/",
       "description": "Good Class Bungalow deals picked up when pricing was more realistic. There is no new price in the headline."
-    },
-    {
-      "id": "9758",
-      "title": "New private home sales nearly double in September to 296 units",
-      "date": "2026/10/16",
-      "image": "/news/images/9758.jpg",
-      "sourceName": "Business Times",
-      "sourceNameZh": "商业时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9758/",
-      "description": "Developers sold 296 new private homes in September, nearly double the month before. That is a sales count, not a price jump."
-    },
-    {
-      "id": "9757",
-      "title": "EL Development puts in sole bid for Marina Gardens Lane site at S$450m or S$1,243 psf ppr",
-      "date": "2026/10/16",
-      "image": "/news/images/9757.jpg",
-      "sourceName": "Business Times",
-      "sourceNameZh": "商业时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9757/",
-      "description": "EL Development’s sole bid for Marina Gardens Lane was S$450 million, or S$1,243 psf of floor area. That is land cost, not a unit price."
-    },
-    {
-      "id": "nd6c085c3",
-      "title": "Freehold condo Amber Park in District 15 notches fresh record high of $3,170 psf",
-      "date": "2026/10/15",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "EdgeProp Singapore",
-      "sourceNameZh": "EdgeProp",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/nd6c085c3/",
-      "description": "Amber Park in District 15 set a project record at S$3,170 psf. Ask the unit size before you treat it as the east’s price."
     }
   ]
 }
