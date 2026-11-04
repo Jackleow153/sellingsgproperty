@@ -1,11 +1,12 @@
 {
-  "updated": "2026-11-04T02:00:11+08:00",
+  "updated": "2026-11-04T09:53:01+08:00",
   "sources": [
+    "The Independent Singapore",
+    "The Straits Times",
     "99.co",
     "Tatler Asia",
     "Borneo Bulletin",
     "SavePoint Gaming",
-    "The Straits Times",
     "DollarsAndSense.sg",
     "Real Estate Asia",
     "Business Times",
@@ -23,6 +24,30 @@
     "VnExpress International"
   ],
   "items": [
+    {
+      "id": "nf63c9c83",
+      "title": "5-room HDB flat with 94 years left on lease sold for S$1.8 billion; highest resale price ever in Singapore",
+      "date": "2026/11/03",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "The Independent Singapore",
+      "sourceNameZh": "The Independent Singapore",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/nf63c9c83/",
+      "description": "The Independent Singapore carried this Singapore property headline: 5-room HDB flat with 94 years left on lease sold for S$1.8 billion; highest resale price."
+    },
+    {
+      "id": "9811",
+      "title": "Luxury homes seized in $3b money laundering case prove a hard sell",
+      "date": "2026/11/03",
+      "image": "/news/images/9811.jpg",
+      "sourceName": "The Straits Times",
+      "sourceNameZh": "海峡时报",
+      "sourceFeed": "propnex",
+      "category": "Real estate",
+      "path": "/news/9811/",
+      "description": "The Straits Times carried this Singapore property headline: Luxury homes seized in $3b money laundering case prove a hard sell. The headline gives these."
+    },
     {
       "id": "nd682cbef",
       "title": "Tampines executive flat sells for record S$1.275M, becoming the town’s second priciest HDB resale",
@@ -70,18 +95,6 @@
       "category": "Real estate",
       "path": "/news/na2f0567e/",
       "description": "SavePoint Gaming carried this Singapore property headline: IKEA Singapore and City Energy Partner on Smarter Home Design for BTO and HDB Owners. The notes."
-    },
-    {
-      "id": "9811",
-      "title": "Luxury homes seized in $3b money laundering case prove a hard sell",
-      "date": "2026/11/03",
-      "image": "/news/images/9811.jpg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9811/",
-      "description": "The Straits Times carried this Singapore property headline: Luxury homes seized in $3b money laundering case prove a hard sell. The headline gives these."
     },
     {
       "id": "n261828b6",
@@ -240,18 +253,6 @@
       "description": "HDB published Q3 2026 resale prices by town. Buyers and sellers should read their own town, not one national number."
     },
     {
-      "id": "ne142ee1d",
-      "title": "Get Your S*** Together: When Is The Right Time To Apply For A BTO With My Partner?",
-      "date": "2026/10/30",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "FZINE Singapore",
-      "sourceNameZh": "FZINE Singapore",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/ne142ee1d/",
-      "description": "FZINE Singapore carried this Singapore property headline: Get Your S*** Together: When Is The Right Time To Apply For A BTO With My Partner?. The notes below."
-    },
-    {
       "id": "9792",
       "title": "Hao Mart founder halts foreclosure of his Jervois Hill bungalow by OG",
       "date": "2026/10/30",
@@ -274,6 +275,18 @@
       "category": "Real estate",
       "path": "/news/9790/",
       "description": "Hong Leong and TID bid $181.86 million for an Orchard plot, about $1,755 psf of floor area. Why that is not a condo price."
+    },
+    {
+      "id": "ne142ee1d",
+      "title": "Get Your S*** Together: When Is The Right Time To Apply For A BTO With My Partner?",
+      "date": "2026/10/30",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "FZINE Singapore",
+      "sourceNameZh": "FZINE Singapore",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/ne142ee1d/",
+      "description": "FZINE Singapore carried this Singapore property headline: Get Your S*** Together: When Is The Right Time To Apply For A BTO With My Partner?. The notes below."
     },
     {
       "id": "n5a7c5eac",
@@ -456,6 +469,18 @@
       "description": "One-bedroom condos can be easy to rent and hard to sell. Investors should check resale demand, not only the rent."
     },
     {
+      "id": "nd155cf8f",
+      "title": "Singapore's higher income ceiling may intensify November BTO competition",
+      "date": "2026/10/22",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Real Estate Asia",
+      "sourceNameZh": "Real Estate Asia",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/nd155cf8f/",
+      "description": "Real Estate Asia carried this Singapore property headline: Singapore's higher income ceiling may intensify November BTO competition. The notes below are for."
+    },
+    {
       "id": "n782ad530",
       "title": "HDB resale transactions jump 19.5% q-o-q in 3Q2026 amid policy changes",
       "date": "2026/10/22",
@@ -610,30 +635,6 @@
       "category": "Real estate",
       "path": "/news/n0175d85e/",
       "description": "In Pasir Panjang, a headline puts resale condos near S$1,913 psf and a new launch near S$2,379 psf. Compare size and dollars, not only psf."
-    },
-    {
-      "id": "nf4803b20",
-      "title": "Selling HDB Flat During Divorce 2026: How a $720,000 Woodlands 5-Room Was Split After CPF Refunds",
-      "date": "2026/10/11",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "PropertyNet.SG",
-      "sourceNameZh": "PropertyNet.SG",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/nf4803b20/",
-      "description": "PropertyNet.SG carried this Singapore property headline: Selling HDB Flat During Divorce 2026: How a $720,000 Woodlands 5-Room Was Split After CPF Refunds."
-    },
-    {
-      "id": "ndf45ada8",
-      "title": "We Can Afford A Condo But Prefer A S$1.2M HDB — Should We Pay S$280K More For A 5-Room?",
-      "date": "2026/10/09",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Stacked Homes",
-      "sourceNameZh": "Stacked Homes",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/ndf45ada8/",
-      "description": "Stacked Homes carried this Singapore property headline: We Can Afford A Condo But Prefer A S$1.2M HDB — Should We Pay S$280K More For A 5-Room?. The headline."
     }
   ]
 }
