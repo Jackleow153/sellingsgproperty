@@ -1,6 +1,7 @@
 {
-  "updated": "2026-11-05T09:59:33+08:00",
+  "updated": "2026-11-05T17:17:52+08:00",
   "sources": [
+    "Singapore Business Review",
     "The Straits Times",
     "Business Times",
     "99.co",
@@ -23,6 +24,18 @@
     "PropertyGuru"
   ],
   "items": [
+    {
+      "id": "ncce3da5c",
+      "title": "HDB to offer 4,300 BTO flats in February",
+      "date": "2026/11/05",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Singapore Business Review",
+      "sourceNameZh": "新加坡商业评论",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/ncce3da5c/",
+      "description": "Singapore Business Review carried this Singapore property headline: HDB to offer 4,300 BTO flats in February. The notes below are for buyers and sellers."
+    },
     {
       "id": "9819",
       "title": "Three new MRT stations in the east to open on Dec 26",
@@ -552,6 +565,18 @@
       "description": "One-bedroom condos can be easy to rent and hard to sell. Investors should check resale demand, not only the rent."
     },
     {
+      "id": "n5b099b77",
+      "title": "Good Class Bungalow market activity picks up pace on ‘realistic’ pricing",
+      "date": "2026/10/22",
+      "image": "/news/images/n5b099b77.webp",
+      "sourceName": "Business Times",
+      "sourceNameZh": "商业时报",
+      "sourceFeed": "business-times",
+      "category": "Real estate",
+      "path": "/news/n5b099b77/",
+      "description": "Business Times carried this Singapore property headline: Good Class Bungalow market activity picks up pace on ‘realistic’ pricing. The notes below are for."
+    },
+    {
       "id": "nd155cf8f",
       "title": "Singapore's higher income ceiling may intensify November BTO competition",
       "date": "2026/10/22",
@@ -610,30 +635,6 @@
       "category": "Real estate",
       "path": "/news/n00054fe5/",
       "description": "PropertyGuru carried this Singapore property headline: Cat Licensing in Singapore: What HDB Residents Need to Know. The notes below are for buyers and."
-    },
-    {
-      "id": "9769",
-      "title": "Home buyers using more cash and CPF savings to fund down payments",
-      "date": "2026/10/19",
-      "image": "/news/images/9769.jpg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9769/",
-      "description": "Buyers are putting more cash and CPF into down payments. A bigger upfront sum lowers the loan and also empties savings."
-    },
-    {
-      "id": "9768",
-      "title": "The Serra Residences sells less than a quarter of units released at average S$3,460 psf",
-      "date": "2026/10/19",
-      "image": "/news/images/9768.jpg",
-      "sourceName": "Business Times",
-      "sourceNameZh": "商业时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9768/",
-      "description": "The Serra Residences sold under a quarter of released units at about S$3,460 psf. Ask what was released before you judge the project."
     }
   ]
 }
