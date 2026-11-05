@@ -1,17 +1,17 @@
 {
-  "updated": "2026-11-05T00:55:28+08:00",
+  "updated": "2026-11-05T09:59:33+08:00",
   "sources": [
+    "The Straits Times",
+    "Business Times",
     "99.co",
     "EdgeProp.sg",
     "AsiaOne",
-    "The Straits Times",
     "The Independent Singapore",
     "Tatler Asia",
     "Borneo Bulletin",
     "SavePoint Gaming",
     "DollarsAndSense.sg",
     "Real Estate Asia",
-    "Business Times",
     "PropertyNet.SG",
     "CNA",
     "Vulcan Post",
@@ -20,10 +20,33 @@
     "EdgeProp Singapore",
     "Mingtiandi",
     "Stacked Homes",
-    "PropertyGuru",
-    "Stomp"
+    "PropertyGuru"
   ],
   "items": [
+    {
+      "id": "9819",
+      "title": "Three new MRT stations in the east to open on Dec 26",
+      "date": "2026/11/05",
+      "image": "/news/images/9819.jpg",
+      "sourceName": "The Straits Times",
+      "sourceNameZh": "海峡时报",
+      "sourceFeed": "propnex",
+      "category": "Real estate",
+      "path": "/news/9819/",
+      "description": "The Straits Times carried this Singapore property headline: Three new MRT stations in the east to open on Dec 26. The notes below are for buyers and sellers."
+    },
+    {
+      "id": "9817",
+      "title": "Small fraction of residential rent disputes involve corporate tenants; current laws protect landlords: Murali",
+      "date": "2026/11/05",
+      "image": "/news/images/9817.jpg",
+      "sourceName": "Business Times",
+      "sourceNameZh": "商业时报",
+      "sourceFeed": "propnex",
+      "category": "Real estate",
+      "path": "/news/9817/",
+      "description": "Business Times carried this Singapore property headline: Small fraction of residential rent disputes involve corporate tenants; current laws protect."
+    },
     {
       "id": "n5e9c8190",
       "title": "Million-dollar HDB resales hit third straight monthly record in October 2026",
@@ -64,7 +87,7 @@
       "id": "nb873e1da",
       "title": "HDB launches 7,964 BTO flats across 6 towns in first exercise under higher income ceilings",
       "date": "2026/11/04",
-      "image": "/news/images/placeholder.svg",
+      "image": "/news/images/nb873e1da.jpg",
       "sourceName": "AsiaOne",
       "sourceNameZh": "亚洲新闻网",
       "sourceFeed": "google-news",
@@ -565,18 +588,6 @@
       "description": "S$500,000 4-room HDB flats are described as rare. Check the town and the lease before you treat that number as the market."
     },
     {
-      "id": "n00054fe5",
-      "title": "Cat Licensing in Singapore: What HDB Residents Need to Know",
-      "date": "2026/10/20",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "PropertyGuru",
-      "sourceNameZh": "PropertyGuru",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n00054fe5/",
-      "description": "PropertyGuru carried this Singapore property headline: Cat Licensing in Singapore: What HDB Residents Need to Know. The notes below are for buyers and."
-    },
-    {
       "id": "9770",
       "title": "En bloc sales of old condos: Offer affected owners ABSD concessions for replacement homes",
       "date": "2026/10/20",
@@ -587,6 +598,18 @@
       "category": "Real estate",
       "path": "/news/9770/",
       "description": "A commentary says en bloc owners should get ABSD relief on a replacement home. That is an argument, not a new rule."
+    },
+    {
+      "id": "n00054fe5",
+      "title": "Cat Licensing in Singapore: What HDB Residents Need to Know",
+      "date": "2026/10/20",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "PropertyGuru",
+      "sourceNameZh": "PropertyGuru",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n00054fe5/",
+      "description": "PropertyGuru carried this Singapore property headline: Cat Licensing in Singapore: What HDB Residents Need to Know. The notes below are for buyers and."
     },
     {
       "id": "9769",
@@ -611,30 +634,6 @@
       "category": "Real estate",
       "path": "/news/9768/",
       "description": "The Serra Residences sold under a quarter of released units at about S$3,460 psf. Ask what was released before you judge the project."
-    },
-    {
-      "id": "n01edeaa5",
-      "title": "Reno content creator lambasts ‘most pathetic’ 4-room Tengah BTO kitchen, HDB responds",
-      "date": "2026/10/19",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Stomp",
-      "sourceNameZh": "Stomp",
-      "sourceFeed": "stomp",
-      "category": "Real estate",
-      "path": "/news/n01edeaa5/",
-      "description": "A creator criticised a 4-room Tengah BTO kitchen and HDB responded. Buyers should measure the plan, not the clip."
-    },
-    {
-      "id": "9762",
-      "title": "GCB Market Activities picks up pace on “realistic pricing”",
-      "date": "2026/10/17",
-      "image": "/news/images/9762.jpg",
-      "sourceName": "Business Times",
-      "sourceNameZh": "商业时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9762/",
-      "description": "Good Class Bungalow deals picked up when pricing was more realistic. There is no new price in the headline."
     }
   ]
 }

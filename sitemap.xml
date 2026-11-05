@@ -34,6 +34,18 @@
   </url>
   <!-- news-details:start -->
   <url>
+    <loc>https://www.sellingsgproperty.com/news/9819/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sellingsgproperty.com/news/9817/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.sellingsgproperty.com/news/n5e9c8190/</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -304,13 +316,13 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sellingsgproperty.com/news/n00054fe5/</loc>
+    <loc>https://www.sellingsgproperty.com/news/9770/</loc>
     <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sellingsgproperty.com/news/9770/</loc>
+    <loc>https://www.sellingsgproperty.com/news/n00054fe5/</loc>
     <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -324,18 +336,6 @@
   <url>
     <loc>https://www.sellingsgproperty.com/news/9768/</loc>
     <lastmod>2026-10-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sellingsgproperty.com/news/n01edeaa5/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sellingsgproperty.com/news/9762/</loc>
-    <lastmod>2026-10-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
