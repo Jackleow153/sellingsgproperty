@@ -3,18 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Find Undervalued Singapore Condos | SellingSgProperty</title>
-  <meta name="description" content="Find older Singapore condo resales priced more than $100,000 below a newer home in the same district. Free URA caveat screen with the size-adjusted gap.">
+  <title>Find Undervalued Singapore Property | SellingSgProperty</title>
+  <meta name="description" content="Find older Singapore condos and HDB flats priced below a newer home nearby. Condo gaps use URA caveat medians. HDB gaps use registered resales. Free screen.">
   <link rel="canonical" href="https://www.sellingsgproperty.com/undervalued-pty/">
-  <meta property="og:title" content="Find Undervalued Singapore Condos | SellingSgProperty">
-  <meta property="og:description" content="Find older Singapore condo resales priced more than $100,000 below a newer home in the same district. Free URA caveat screen with the size-adjusted gap.">
+  <meta property="og:title" content="Find Undervalued Singapore Property | SellingSgProperty">
+  <meta property="og:description" content="Find older Singapore condos and HDB flats priced below a newer home nearby. Condo gaps use URA caveat medians. HDB gaps use registered resales. Free screen.">
   <meta property="og:url" content="https://www.sellingsgproperty.com/undervalued-pty/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_SG">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Find Undervalued Singapore Condos | SellingSgProperty">
-  <meta name="twitter:description" content="Find older Singapore condo resales priced more than $100,000 below a newer home in the same district. Free URA caveat screen with the size-adjusted gap.">
+  <meta name="twitter:title" content="Find Undervalued Singapore Property | SellingSgProperty">
+  <meta name="twitter:description" content="Find older Singapore condos and HDB flats priced below a newer home nearby. Condo gaps use URA caveat medians. HDB gaps use registered resales. Free screen.">
   <meta name="theme-color" content="#f6f4f0">
+  <script>
+    try {
+      var savedKind = localStorage.getItem("ssp-prop-kind");
+      document.documentElement.setAttribute("data-kind", savedKind === "hdb" ? "hdb" : "condo");
+    } catch (e) {
+      document.documentElement.setAttribute("data-kind", "condo");
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&amp;family=Inter:wght@500;600;700;900&amp;display=swap">
@@ -23,13 +31,13 @@
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "@id": "https://www.sellingsgproperty.com/undervalued-pty/#app",
-  "name": "Find undervalued Singapore condos",
+  "name": "Find Undervalued Singapore Property",
   "alternateName": "Condo Buy-Low Screen",
   "applicationCategory": "BusinessApplication",
   "applicationSubCategory": "Property comparison",
   "operatingSystem": "Web",
   "url": "https://www.sellingsgproperty.com/undervalued-pty/",
-  "description": "Free screen for a first-time buyer or HDB upgrader. It lists older Singapore condo resales whose median price is more than $100,000 below a newer resale or post-launch project in the same district, and shows the size-adjusted gap from URA private residential caveats.",
+  "description": "Free screen for a first-time buyer. It lists older Singapore condo resales priced more than $100,000 below a newer project in the same district, and separate HDB resale gaps in the same town and flat type. Condo figures are URA caveat medians. HDB figures are registered resales and are not mixed into the condo medians.",
   "isAccessibleForFree": true,
   "offers": {
     "@type": "Offer",
@@ -41,6 +49,7 @@
     "Compare resale condos with post-launch projects",
     "Filter by bedroom type, tenure, market segment, and match quality",
     "Show the price gap and the size-adjusted gap",
+    "Switch between private condos and HDB resale gaps",
     "Separate HDB resale transaction gaps that are not mixed into the condo medians"
   ],
   "audience": {
@@ -86,10 +95,10 @@
     },
     {
       "@type": "Question",
-      "name": "How do I find undervalued Singapore condos?",
+      "name": "How do I find undervalued Singapore property?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Use this free screen. Leave Clean matches on, choose a bedroom type, and read each card. Undervalued here means an older resale condo or apartment whose median price is more than $100,000 below a newer resale or post-launch project in the same postal district, with an age gap of 10 years or less. Then read the size-adjusted gap before treating the lower price as a bargain."
+        "text": "Choose Condos or HDB in the filter. For condos, leave Clean matches on, choose a bedroom type, and read each card. Undervalued for a condo means an older resale whose median price is more than $100,000 below a newer resale or post-launch project in the same district, with the same bedroom type and an age gap of 10 years or less. For HDB, choose a flat type or search a town. A card compares the same town and flat type, with a median gap above $100,000. Then read the size-adjusted gap before treating the lower price as a bargain."
       }
     },
     {
@@ -115,8 +124,8 @@
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Find undervalued Singapore condos",
-  "description": "Find older Singapore condo resales priced more than $100,000 below a newer home in the same district. Free URA caveat screen with the size-adjusted gap.",
+  "headline": "Find Undervalued Singapore Property",
+  "description": "Find older Singapore condos and HDB flats priced below a newer home nearby. Condo gaps use URA caveat medians. HDB gaps use registered resales. Free screen.",
   "url": "https://www.sellingsgproperty.com/undervalued-pty/",
   "mainEntityOfPage": "https://www.sellingsgproperty.com/undervalued-pty/",
   "inLanguage": "en",
@@ -246,6 +255,16 @@ p { margin: 0; }
   display: grid;
   gap: 12px;
 }
+#condo-controls { display: contents; }
+#hdb-controls { display: none; }
+html[data-kind="hdb"] #condo-controls,
+html[data-kind="hdb"] #list { display: none; }
+html[data-kind="hdb"] #hdb-controls { display: contents; }
+html[data-kind="condo"] #listed-now { display: none; }
+html[data-kind="hdb"] #propHdb,
+html[data-kind="condo"] #propCondo { background: var(--ink); color: var(--bg); }
+html[data-kind="hdb"] #propCondo { background: transparent; color: var(--ink); }
+.tool #listed-now { padding-top: 0.25rem; }
 @supports (backdrop-filter: blur(12px)) {
   .filters { background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(14px); }
 }
@@ -579,7 +598,7 @@ td.n, th.n { font-variant-numeric: tabular-nums; text-align: right; }
 </style>
 </head>
 <body>
-  <a class="skip" href="#list">Skip to condo matches</a>
+  <a class="skip" href="#list">Skip to matches</a>
   <nav class="site-nav" aria-label="Primary">
     <div class="site-nav-inner">
       <a class="brand" href="/">
@@ -610,15 +629,21 @@ td.n, th.n { font-variant-numeric: tabular-nums; text-align: right; }
 
 <main class="wrap">
   <header class="hero">
-    <p class="eyebrow">Private condos · Nov 2025 – Oct 2026</p>
-    <h1>Find undervalued Singapore condos</h1>
-    <p class="lede">Older resale homes priced below a newer project in the same district.</p>
-    <p class="intro">This free screen is for a first-time buyer or an HDB upgrader. Undervalued, on this page, means an older resale condo whose median price is more than $100,000 below a newer resale or post-launch project in the same district, with the same bedroom type and an age gap of 10 years or less. Figures are URA caveat medians from November 2025 to October 2026, not asking prices, and each card shows the size-adjusted gap.</p>
+    <p class="eyebrow">Condos and HDB · Nov 2025 – Oct 2026</p>
+    <h1>Find Undervalued Singapore Property</h1>
+    <p class="lede">Older homes priced below a newer home nearby.</p>
+    <p class="intro">This free screen is for a first-time buyer. Choose Condos or HDB in the filter. For a condo, undervalued means an older resale whose median price is more than $100,000 below a newer resale or post-launch project in the same district, with the same bedroom type and an age gap of 10 years or less. Those figures are URA caveat medians from November 2025 to October 2026. For HDB, each card compares an older lease with a newer lease in the same town and flat type, and the median gap is above $100,000. HDB prices are registered resales, and they are not mixed into the condo medians.</p>
   </header>
 
   <section class="tool" aria-label="Matches">
-    <p class="hint">Start with 3 bedroom and clean matches.</p>
+    <p class="hint">Choose Condos or HDB. For condos, start with 3 bedroom and clean matches.</p>
     <div class="filters">
+      <div class="row" role="group" aria-label="Property type">
+        <span class="flabel">Property</span>
+        <button class="chip" type="button" id="propCondo" data-prop="condo" aria-pressed="true">Condos</button>
+        <button class="chip" type="button" id="propHdb" data-prop="hdb">HDB</button>
+      </div>
+      <div id="condo-controls">
       <div class="row" role="group" aria-label="Compare against">
         <span class="flabel">Compare with</span>
         <button class="chip" type="button" data-view="R" id="vR">Newer resale condos<span class="c" id="cvR"></span></button>
@@ -661,23 +686,27 @@ td.n, th.n { font-variant-numeric: tabular-nums; text-align: right; }
         </select>
         <span class="count" id="count"></span>
       </div>
+      </div>
+      <div id="hdb-controls">
+        <div class="row" role="group" aria-label="HDB flat type">
+          <span class="flabel">Flat type</span>
+          <button class="chip" type="button" data-flat="all" aria-pressed="true">All</button>
+          <button class="chip" type="button" data-flat="3-room">3-room</button>
+          <button class="chip" type="button" data-flat="4-room">4-room</button>
+          <button class="chip" type="button" data-flat="5-room">5-room</button>
+          <button class="chip" type="button" data-flat="Executive">Executive</button>
+        </div>
+        <div class="row search-row">
+          <input type="search" id="hq" placeholder="Search town or street (e.g. Tampines, Depot)" aria-label="Search HDB town or street">
+          <span class="count" id="hcount"></span>
+        </div>
+      </div>
     </div>
     <div class="list" id="list"></div>
-    <noscript><p class="hint">The condo list needs JavaScript. The introduction, the three checks, and the HDB cards are on this page without it.</p></noscript>
-  </section>
-
-  <section class="takeaways" id="buyer-checks" aria-labelledby="checks-h">
-    <h2 id="checks-h">3 Things Buyers Should Check</h2>
-    <ol>
-      <li><strong>How many years are left on the lease?</strong> A leasehold condo can show a large price gap because the lease is shorter. On this screen, a clean match asks for 70 years or more on a leasehold buy-low unit. Read the lease on the specific unit before you treat the gap as a reason to offer.</li>
-      <li><strong>How close are the two projects, and how many sales support the median?</strong> A clean match keeps the pair within 1.5 km and uses at least 4 sales on each side. A wide gap from a few transactions, or from a project at the other end of the district, is a weaker comparison for a resale or new-launch decision.</li>
-      <li><strong>Does the gap survive when the homes are compared at the same size?</strong> Sort by “Biggest gap at equal size”. If the raw dollar gap shrinks once the psf difference is applied to the older unit’s size, the lower price is mostly a smaller home. Buyers comparing resale with a post-launch project should read that size-adjusted gap beside the headline dollar gap.</li>
-    </ol>
-  </section>
 
   <section id="listed-now" aria-labelledby="listed-h">
     <h2 id="listed-h">Recent HDB resale transaction gaps</h2>
-    <p id="listed-intro">These cards are separate from the condo screen. Each one compares registered HDB resale prices for an older lease year and a newer lease year in the same town and flat type. The street is the most common street in that group, not one block. The prices are past transactions, not asking prices, and they are not mixed into the condo medians.</p>
+    <p id="listed-intro">Each card compares registered HDB resale prices for an older lease and a newer lease in the same town and flat type. The street is the most common street in that group, not one block. The prices are past transactions, not asking prices, and they are not mixed into the condo medians.</p>
     <input class="fold-check" type="checkbox" id="hdb-notes">
     <label class="note-toggle" for="hdb-notes"><span class="when-closed">Show data notes</span><span class="when-open">Hide data notes</span></label>
 <!-- listed-now:start -->
@@ -709,6 +738,19 @@ td.n, th.n { font-variant-numeric: tabular-nums; text-align: right; }
 <article class="card listed-card tierA"><div class="listed-top"><div class="thumb" role="img" aria-label="Real Estate SG">Real Estate SG</div><div class="listed-main"><div class="town">Kallang/Whampoa<small>4-room · older lease vs newer lease</small></div><div class="headgap"><strong class="num">+$171k</strong><small>transaction gap · $287k at equal size · same town</small></div></div></div><div class="side"><span class="tag buy">BUY</span><span class="name">4-room · lease from 1997<span class="blk">Cambridge Rd</span></span><span class="price">$789k</span><span class="meta">Lease from 1997 · 70 yrs left · 1,098 sqft · $719 psf · 8 resales</span></div><div class="side"><span class="tag">VS</span><span class="name">4-room · lease from 2003<span class="blk">Jellicoe Rd</span></span><span class="price">$960k</span><span class="meta">Lease from 2003 · 75 yrs left · 980 sqft · $980 psf · 9 resales</span></div><div class="ask-pills"><span class="pill ok">✓ 4+ resales each side</span><span class="pill ok">✓ gap holds at equal size</span><span class="pill ok">✓ same town</span><span class="pill ok">✓ same flat type</span><span class="pill ok">✓ 70+ yrs lease left</span><span class="pill ok">✓ lease year gap 6 years</span></div></article>
 </div>
 <!-- listed-now:end -->
+    <p class="empty" id="hdb-empty" hidden>No HDB gaps match these filters.</p>
+  </section>
+
+    <noscript><p class="hint">The filters need JavaScript. The introduction, the three checks, and the HDB cards are on this page without it.</p></noscript>
+  </section>
+
+  <section class="takeaways" id="buyer-checks" aria-labelledby="checks-h">
+    <h2 id="checks-h">3 Things Buyers Should Check</h2>
+    <ol>
+      <li><strong>How many years are left on the lease?</strong> A leasehold condo can show a large price gap because the lease is shorter. On this screen, a clean match asks for 70 years or more on a leasehold buy-low unit. Read the lease on the specific unit before you treat the gap as a reason to offer.</li>
+      <li><strong>How close are the two projects, and how many sales support the median?</strong> A clean match keeps the pair within 1.5 km and uses at least 4 sales on each side. A wide gap from a few transactions, or from a project at the other end of the district, is a weaker comparison for a resale or new-launch decision.</li>
+      <li><strong>Does the gap survive when the homes are compared at the same size?</strong> Sort by “Biggest gap at equal size”. If the raw dollar gap shrinks once the psf difference is applied to the older unit’s size, the lower price is mostly a smaller home. Buyers comparing resale with a post-launch project should read that size-adjusted gap beside the headline dollar gap.</li>
+    </ol>
   </section>
 
   <details class="fold" id="how-this-screen-works">
@@ -794,8 +836,8 @@ td.n, th.n { font-variant-numeric: tabular-nums; text-align: right; }
           <p>Check the remaining lease, the distance between the two projects, and how many sales support each median. A clean match on this screen asks for 70 or more years on a leasehold buy-low unit, a distance within 1.5 km, and at least 4 sales on each side. Also read the size-adjusted gap, so a lower price that comes only from a smaller home is not treated as a bargain.</p>
         </article>
         <article>
-          <h3>How do I find undervalued Singapore condos?</h3>
-          <p>Use this free screen. Leave Clean matches on, choose a bedroom type, and read each card. Undervalued here means an older resale condo or apartment whose median price is more than $100,000 below a newer resale or post-launch project in the same postal district, with an age gap of 10 years or less. Then read the size-adjusted gap before treating the lower price as a bargain.</p>
+          <h3>How do I find undervalued Singapore property?</h3>
+          <p>Choose Condos or HDB in the filter. For condos, leave Clean matches on, choose a bedroom type, and read each card. Undervalued for a condo means an older resale whose median price is more than $100,000 below a newer resale or post-launch project in the same district, with the same bedroom type and an age gap of 10 years or less. For HDB, choose a flat type or search a town. A card compares the same town and flat type, with a median gap above $100,000. Then read the size-adjusted gap before treating the lower price as a bargain.</p>
         </article>
         <article>
           <h3>Are the prices on this page asking prices?</h3>
@@ -1050,6 +1092,75 @@ render();
     note.textContent = data.note;
     cards.innerHTML = data.pairs.length ? data.pairs.map(card).join("") : '<div class="empty">No HDB resale gaps passed the weekly screen.</div>';
   }).catch(function () {});
+})();
+</script>
+<script>
+(function () {
+  var kind = document.documentElement.getAttribute("data-kind") === "hdb" ? "hdb" : "condo";
+  var flat = "all";
+  var q = "";
+  var condoBtn = document.getElementById("propCondo");
+  var hdbBtn = document.getElementById("propHdb");
+
+  function flatOf(card) {
+    var small = card.querySelector(".town small");
+    if (!small) return "";
+    return small.textContent.split("·")[0].trim();
+  }
+
+  function applyHdb() {
+    var cards = document.querySelectorAll("#listed-cards article");
+    var shown = 0;
+    var needle = q.trim().toLowerCase();
+    cards.forEach(function (card) {
+      var typeOk = flat === "all" || flatOf(card).toLowerCase() === flat.toLowerCase();
+      var textOk = !needle || card.textContent.toLowerCase().indexOf(needle) !== -1;
+      var show = typeOk && textOk;
+      card.hidden = !show;
+      if (show) shown += 1;
+    });
+    var empty = document.getElementById("hdb-empty");
+    if (empty) empty.hidden = shown !== 0 || cards.length === 0;
+    var count = document.getElementById("hcount");
+    if (count) count.textContent = shown + (shown === 1 ? " HDB gap" : " HDB gaps");
+    document.querySelectorAll("[data-flat]").forEach(function (button) {
+      button.setAttribute("aria-pressed", String(button.getAttribute("data-flat") === flat));
+    });
+  }
+
+  function setKind(next) {
+    kind = next === "hdb" ? "hdb" : "condo";
+    document.documentElement.setAttribute("data-kind", kind);
+    if (condoBtn) condoBtn.setAttribute("aria-pressed", String(kind === "condo"));
+    if (hdbBtn) hdbBtn.setAttribute("aria-pressed", String(kind === "hdb"));
+    try { localStorage.setItem("ssp-prop-kind", kind); } catch (e) {}
+    if (kind === "hdb") applyHdb();
+  }
+
+  document.addEventListener("click", function (e) {
+    var button = e.target.closest("button");
+    if (!button) return;
+    if (button.getAttribute("data-prop")) setKind(button.getAttribute("data-prop"));
+    else if (button.getAttribute("data-flat")) {
+      flat = button.getAttribute("data-flat");
+      applyHdb();
+    }
+  });
+
+  var input = document.getElementById("hq");
+  if (input) {
+    input.addEventListener("input", function () {
+      q = input.value;
+      applyHdb();
+    });
+  }
+
+  var board = document.getElementById("listed-cards");
+  if (board && window.MutationObserver) {
+    new MutationObserver(function () { applyHdb(); }).observe(board, { childList: true });
+  }
+  setKind(kind);
+  applyHdb();
 })();
 </script>
 
