@@ -42,10 +42,14 @@ Publish the refreshed pages to the live site:
 Netlify publishes https://www.sellingsgproperty.com. A run with no new
 story leaves those files uncommitted.
 
-GitHub Actions runs that command every 30 minutes from 06:00 to 23:30
-Singapore time (.github/workflows/refresh-news.yml). This script does not install
-cron or launchd. A plain run without --deploy still writes the local
-files and does not push.
+GitHub Actions runs that command once a day at 09:30 Singapore time
+(.github/workflows/refresh-news.yml). 09:30 Asia/Singapore is 01:30 UTC.
+The job does not call a language model. Chinese headlines come from the
+local glossary. A new clipping's publisher is read on the Mac runner only
+when the caption does not already name one. A run that finds no new story
+skips image downloads, masthead reading, and the page rebuild, and does
+not commit. This script does not install cron or launchd. A plain run
+without --deploy still writes the local files and does not push.
 
 Plain-English summaries, three takeaways and three buyer/seller questions
 live in news/copy.json, keyed by story id. The same entry can include a
@@ -344,9 +348,15 @@ def download_image(url: str, post_id: str, referer: str | None = None) -> str:
     return f"/news/images/{filename}"
 
 
-def collect_posts() -> list[dict]:
+def collect_posts(known_ids: set[str] | None = None) -> list[dict]:
+    """Read the public channel preview, newest page first.
+
+    Stop after a page that already contains a saved message and no new
+    property story. Older pages are not fetched.
+    """
     seen: dict[str, dict] = {}
     before = None
+    known_ids = known_ids or set()
     for _ in range(MAX_PAGES):
         url = PREVIEW if not before else f"{PREVIEW}?before={before}"
         page = fetch(url).decode("utf-8", "replace")
@@ -356,6 +366,12 @@ def collect_posts() -> list[dict]:
         oldest = batch[0]["id"]
         for post in batch:
             seen[post["id"]] = post
+        # Older pages are already saved once this page's new property posts
+        # are none and at least one message is already on the site. Seminars
+        # that were never saved do not force another fetch.
+        if known_ids and any(post["id"] in known_ids for post in batch):
+            if not any(keep_post(post) and post["id"] not in known_ids for post in batch):
+                break
         if before == oldest:
             break
         before = oldest
@@ -1485,20 +1501,33 @@ def dump_news(items: list[dict]) -> None:
     JSON_PATH.write_text(raw, encoding="utf-8")
 
 
+def local_image(post_id: str) -> str:
+    """Reuse a photo already saved for this story. Empty when none is on disk."""
+    for ext in (".jpg", ".jpeg", ".png", ".webp", ".gif"):
+        path = IMAGE_DIR / f"{post_id}{ext}"
+        if path.is_file() and path.stat().st_size >= 2500:
+            return f"/news/images/{path.name}"
+    return ""
+
+
 def attach_images(items: list[dict]) -> None:
     used = {"placeholder.svg"}
     for item in items:
         image = item.get("image") or PLACEHOLDER
         if item.get("image_url"):
-            try:
-                image = download_image(
-                    item["image_url"],
-                    item["id"],
-                    item.get("image_referer") or None,
-                )
-            except Exception as exc:
-                print(f"image skip {item['id']}: {exc}")
-                image = item.get("image") or PLACEHOLDER
+            already = local_image(str(item["id"]))
+            if already:
+                image = already
+            else:
+                try:
+                    image = download_image(
+                        item["image_url"],
+                        item["id"],
+                        item.get("image_referer") or None,
+                    )
+                except Exception as exc:
+                    print(f"image skip {item['id']}: {exc}")
+                    image = item.get("image") or PLACEHOLDER
         item["image"] = image or PLACEHOLDER
         used.add(Path(item["image"]).name)
     if IMAGE_DIR.exists():
@@ -1513,10 +1542,44 @@ def attach_images(items: list[dict]) -> None:
                 path.unlink()
 
 
-def fetch_fresh_posts() -> list[dict]:
+def story_key(item: dict) -> tuple[str, str, str, str, str, str]:
+    return (
+        str(item.get("id") or ""),
+        item.get("title") or "",
+        item.get("date") or "",
+        (item.get("sourceName") or "").strip(),
+        (item.get("sourceNameZh") or "").strip(),
+        item.get("sourceFeed") or "",
+    )
+
+
+def list_unchanged(saved: list[dict], items: list[dict]) -> bool:
+    """True when this run would publish the same stories already on the site.
+
+    Same-day order can shuffle after a timestamp refresh. That is not a new
+    story, so the pages, photos, and masthead reader stay untouched.
+    """
+    if sorted(story_key(item) for item in saved) != sorted(story_key(item) for item in items):
+        return False
+    saved_by_id = {str(item.get("id")): item for item in saved}
+    for item in items:
+        old = saved_by_id.get(str(item.get("id")))
+        if not old:
+            return False
+        image = old.get("image") or ""
+        if image and not image.endswith("placeholder.svg"):
+            if not (ROOT / image.lstrip("/")).is_file():
+                return False
+        elif item.get("image_url"):
+            return False
+    return True
+
+
+def fetch_fresh_posts(saved: list[dict] | None = None) -> list[dict]:
+    known = {str(item.get("id")) for item in (saved or [])}
     fresh: list[dict] = []
     collectors = [
-        ("PropNex", lambda: tag_propnex(collect_posts())),
+        ("PropNex", lambda: tag_propnex(collect_posts(known))),
         ("Business Times", collect_business_times),
         ("Stomp", collect_stomp),
         ("Google News", collect_google_news),
@@ -1546,12 +1609,20 @@ def pages_only() -> None:
 def main() -> None:
     self_check()
     saved = load_saved_posts()
-    fresh = fetch_fresh_posts()
+    fresh = fetch_fresh_posts(saved)
     items = merge_posts(saved, fresh)
     if len(items) < 8:
         raise SystemExit(
             f"Only {len(items)} stories after merging. The news list was left unchanged."
         )
+    if "--dry-run" not in sys.argv and list_unchanged(saved, items):
+        print(
+            f"No new stories among {len(items)}. "
+            "Skipped image download, masthead reading, and page rebuild."
+        )
+        if "--deploy" in sys.argv:
+            deploy_news()
+        return
     apply_article_sources(items)
     if "--dry-run" in sys.argv:
         print(f"\n{len(items)} stories")

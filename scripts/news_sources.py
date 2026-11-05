@@ -914,7 +914,8 @@ def merge_posts(saved: list[dict], fresh: list[dict], now: datetime | None = Non
                 match["title"] = post["title"]
                 match["datetime"] = post["datetime"]
                 match["date"] = post["date"]
-                if post.get("image_url"):
+                image = match.get("image") or ""
+                if post.get("image_url") and (not image or image.endswith("placeholder.svg")):
                     match["image_url"] = post["image_url"]
             print(f"deduped [{post.get('sourceFeed')}] {post['title'][:90]}")
             continue
