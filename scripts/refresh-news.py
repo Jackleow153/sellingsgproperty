@@ -1173,7 +1173,7 @@ def render_detail_page(item: dict, copy: dict) -> str:
     <p class="source-name">{bi("Source: " + source_name, "来源：" + source_name_zh)}</p>
     {media_markup(image, hero=True)}
 {keypoints_html}    <section class="questions" aria-labelledby="questions-heading">
-      <h2 id="questions-heading">{bi("3 Questions for Buyers & Sellers", "给买家与卖家的3个问题")}</h2>
+      <h2 id="questions-heading">{bi("Milo chat for thoughts", "Milo chat for thoughts")}</h2>
       <ul>
 {bullets}
       </ul>
