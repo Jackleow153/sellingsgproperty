@@ -995,9 +995,9 @@ def draft_copy(title: str, source_name: str) -> dict:
         seller + " If you are timing a sale or an HDB upgrade, use the figure as a question to research, then confirm it on the official data or the listing itself.",
     ]
     questions = [
-        "Should a buyer act on this now, or is waiting the stronger side of the headline?",
-        "Who feels this on the selling side, and who is the likely buyer?",
-        "What direction does this set for that part of the market?",
+        "If this is the home you wanted, what are you still waiting to find out?",
+        "Who else is looking at the same kind of home while you hold off?",
+        "What does another month change, if a home like this is already for sale?",
     ]
     takeaways = [
         buyer
@@ -1023,9 +1023,9 @@ def draft_copy(title: str, source_name: str) -> dict:
         "卖房的人不要把一条标题直接套到自己的单位上。准备出售或从组屋升级时，把数字当成要去核实的问题，再对照官方数据或真实挂牌。",
     ]
     zh_questions = [
-        "买家该现在行动，还是等一等更有利？",
-        "卖家这边谁会受影响，未来的买家是谁？",
-        "这对这一块市场的方向说明什么？",
+        "如果这就是你想要的房子，你还在等什么才行动？",
+        "你按兵不动的时候，还有谁在看同一类房子？",
+        "如果这样的房子已经在卖，再等一个月会改变什么？",
     ]
     zh_takeaways = [
         "只有标题里已经写明稍后会有供应，或者价钱上真有差距，等待才有意义。一条标题本身不是抢买或暂停的理由。",

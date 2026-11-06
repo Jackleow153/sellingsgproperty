@@ -51,11 +51,12 @@ skips image downloads, masthead reading, and the page rebuild, and does
 not commit. This script does not install cron or launchd. A plain run
 without --deploy still writes the local files and does not push.
 
-Plain-English summaries, three takeaways and three buyer/seller questions
-live in news/copy.json, keyed by story id. The same entry can include a
-"zh" object (title, summary, facts, takeaways, questions) in Simplified
-Chinese. The EN / 中文 choice is stored in the browser under localStorage
-key ssp-news-lang.
+Plain-English summaries and three buyer/seller questions live in
+news/copy.json, keyed by story id. The page shows the article's key
+points, then the three questions, and does not show an answer. The same
+entry can include a "zh" object (title, summary, facts, questions) in
+Simplified Chinese. The EN / 中文 choice is stored in the browser under
+localStorage key ssp-news-lang.
 """
 
 from __future__ import annotations
@@ -608,6 +609,18 @@ def story_copy(post_id: str, title: str, copy_book: dict) -> dict:
         zh_keypoints.append(zh_point or point)
         if len(keypoints) >= KEYPOINT_CAP:
             break
+    # A stored point can contain a phrase such as "buyers should" and still be
+    # what the article is about. If the advice filter removes every point, keep
+    # the stored points so the Key points section is not dropped.
+    if not keypoints and raw_points:
+        for index, point in enumerate(raw_points[:KEYPOINT_CAP]):
+            if _hard_meta(point, title):
+                continue
+            zh_point = raw_zh_points[index] if index < len(raw_zh_points) else ""
+            if not zh_point or _hard_meta(zh_point, title_zh):
+                zh_point = point
+            keypoints.append(point)
+            zh_keypoints.append(zh_point)
     if not keypoints:
         raw_zh_facts = text_list(zh_entry, "facts") if written else []
         for index, fact in enumerate(facts):
@@ -892,33 +905,28 @@ DETAIL_CSS = """
       border-radius: 50%;
       background: var(--red);
     }
-    .takeaways {
+    .questions {
       margin-top: 36px;
       padding-top: 8px;
       border-top: 1px solid var(--line);
     }
-    .takeaways h2 {
+    .questions h2 {
       margin: 22px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .takeaways li strong {
-      display: block;
-      margin-bottom: 4px;
-      color: #fff;
-      font-weight: 700;
-    }
-    .takeaways ul { margin: 0; padding: 0; list-style: none; }
-    .takeaways li {
+    .questions ul { margin: 0; padding: 0; list-style: none; }
+    .questions li {
       position: relative;
       margin: 0;
       padding: 14px 0 14px 18px;
       border-bottom: 1px solid var(--line);
-      color: #f2f2f2;
+      color: #fff;
+      font-weight: 700;
       line-height: 1.6;
-      font-size: 1.02rem;
+      font-size: 1.05rem;
     }
-    .takeaways li::before {
+    .questions li::before {
       content: "";
       position: absolute;
       left: 0;
@@ -982,7 +990,7 @@ DETAIL_CSS = """
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .keypoints li, .takeaways li { font-size: 1rem; }
+      .keypoints li, .questions li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 """
@@ -1061,7 +1069,7 @@ def detail_schema(item: dict, copy: dict) -> str:
         "@type": "NewsArticle",
         "headline": title,
         "description": copy["description"],
-        "articleBody": "\n\n".join(copy["keypoints"] + copy["takeaways"]),
+        "articleBody": "\n\n".join(copy["keypoints"] + copy["questions"]),
         "datePublished": f"{date}T08:00:00+08:00",
         "dateModified": f"{date}T08:00:00+08:00",
         "inLanguage": "en-SG",
@@ -1075,20 +1083,8 @@ def detail_schema(item: dict, copy: dict) -> str:
         "isAccessibleForFree": True,
         "speakable": {
             "@type": "SpeakableSpecification",
-            "cssSelector": [".keypoints li", ".takeaways li"],
+            "cssSelector": [".keypoints li", ".questions li"],
         },
-    }
-    faq = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": question,
-                "acceptedAnswer": {"@type": "Answer", "text": answer},
-            }
-            for question, answer in zip(copy["questions"], copy["takeaways"])
-        ],
     }
     crumbs = {
         "@context": "https://schema.org",
@@ -1099,7 +1095,7 @@ def detail_schema(item: dict, copy: dict) -> str:
             {"@type": "ListItem", "position": 3, "name": title, "item": page_url},
         ],
     }
-    return "\n  ".join(json_ld(block) for block in (news, faq, crumbs))
+    return "\n  ".join(json_ld(block) for block in (news, crumbs))
 
 
 def render_detail_page(item: dict, copy: dict) -> str:
@@ -1135,12 +1131,10 @@ def render_detail_page(item: dict, copy: dict) -> str:
             "    </section>\n"
         )
     bullets = "\n".join(
-        "        <li><strong>"
-        + bi(question, zh["questions"][index])
-        + "</strong> "
-        + bi(answer, zh["takeaways"][index])
+        "        <li>"
+        + bi(question, zh["questions"][index] if index < len(zh.get("questions") or []) else question)
         + "</li>"
-        for index, (question, answer) in enumerate(zip(copy["questions"], copy["takeaways"]))
+        for index, question in enumerate(copy["questions"])
     )
     schema = detail_schema(item, copy)
     return f"""<!DOCTYPE html>
@@ -1178,8 +1172,8 @@ def render_detail_page(item: dict, copy: dict) -> str:
     <p class="story-meta"><time class="story-date" datetime="{esc(iso_date)}">{bi(date, chinese_date(date))}</time></p>
     <p class="source-name">{bi("Source: " + source_name, "来源：" + source_name_zh)}</p>
     {media_markup(image, hero=True)}
-{keypoints_html}    <section class="takeaways" aria-labelledby="takeaways-heading">
-      <h2 id="takeaways-heading">{bi("3 Takeaways for Buyers & Sellers", "给买家与卖家的3个要点")}</h2>
+{keypoints_html}    <section class="questions" aria-labelledby="questions-heading">
+      <h2 id="questions-heading">{bi("3 Questions for Buyers & Sellers", "给买家与卖家的3个问题")}</h2>
       <ul>
 {bullets}
       </ul>
@@ -1341,6 +1335,10 @@ def write_detail_pages(items: list[dict]) -> None:
         ]
         if offsite:
             raise SystemExit(f"Detail page {item['id']} contains an off-site link: {offsite[0]}")
+        if "takeaways-heading" in page or "What this means" in page:
+            raise SystemExit(f"Detail page {item['id']} still shows a takeaway answer.")
+        if 'id="questions-heading"' not in page or 'id="keypoints-heading"' not in page:
+            raise SystemExit(f"Detail page {item['id']} is missing key points or questions.")
         source = re.search(r'<p class="source-name">(.*?)</p>', page, re.S)
         if not source or "Source:" not in source.group(1) or "<a" in source.group(1).lower():
             raise SystemExit(f"Detail page {item['id']} is missing a plain-text source line.")
