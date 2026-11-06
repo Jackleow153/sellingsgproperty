@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "Tampines is S’pore’s most populous planning area, but not its fastest-growing",
   "description": "Tampines has the most people of any planning area, but Punggol and Sengkang grew faster. How to choose a mature town or a growing one.",
-  "articleBody": "Tampines: the planning area with the most people in Singapore\n\nNot the fastest growing: Punggol and Sengkang added people faster over the past decade\n\nWhat a mature town usually offers: shops, schools and transport that are already there\n\nWhat a fast-growing town usually offers: newer homes, and amenities that are still catching up\n\nTampines has more people than any other planning area in Singapore. It is not the area that has been growing the fastest. Over the past decade, Punggol and Sengkang added people at a quicker pace.\n\nA large, established population usually means the shops, schools and transport are already there. A fast-growing town usually means newer HDB flats, more construction, and amenities that are still catching up.\n\nBuyers often mix the two up. Bigger is not the same as newer, and faster growth is not the same as more convenient today. The right choice is the one that fits the home in front of you, not the size of the town on a map.\n\nDecide what you want before you compare prices: a town that is already built up, such as Tampines, or a town that is still adding homes, such as Punggol or Sengkang.\n\nDo not choose Tampines only because it is the biggest. Check the specific street, the walk to the MRT, and the HDB flat or condo in front of you.\n\nSellers in a mature town can point to what is already there. Sellers in a fast-growing town should be honest about what is finished and what is still a construction site.",
+  "articleBody": "Tampines: the planning area with the most people in Singapore\n\nNot the fastest growing: Punggol and Sengkang added people faster over the past decade\n\nWhat a mature town usually offers: shops, schools and transport that are already there\n\nWhat a fast-growing town usually offers: newer homes, and amenities that are still catching up\n\nDecide what you want before you compare prices: a town that is already built up, such as Tampines, or a town that is still adding homes, such as Punggol or Sengkang.\n\nDo not choose Tampines only because it is the biggest. Check the specific street, the walk to the MRT, and the HDB flat or condo in front of you.\n\nSellers in a mature town can point to what is already there. Sellers in a fast-growing town should be honest about what is finished and what is still a construction site.",
   "datePublished": "2026-10-29T08:00:00+08:00",
   "dateModified": "2026-10-29T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,8 +409,8 @@
     <p class="story-meta"><time class="story-date" datetime="2026-10-29"><span class="en">2026/10/29</span><span class="zh" lang="zh-Hans">2026年10月29日</span></time></p>
     <p class="source-name"><span class="en">Source: The Straits Times</span><span class="zh" lang="zh-Hans">来源：海峡时报</span></p>
     <img class="hero" src="/news/images/9788.jpg" alt="" width="760" height="280" onerror="this.onerror=null;var n=document.createElement('div');n.className='hero hero-fallback';n.setAttribute('role','img');n.setAttribute('aria-label','Real Estate SG');n.textContent='Real Estate SG';this.replaceWith(n)">
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">Tampines: the planning area with the most people in Singapore</span><span class="zh" lang="zh-Hans">淡滨尼：新加坡人口最多的规划区</span></li>
         <li><span class="en">Not the fastest growing: Punggol and Sengkang added people faster over the past decade</span><span class="zh" lang="zh-Hans">不是增长最快：过去十年，榜鹅和盛港的人口增加得更快</span></li>
@@ -415,12 +418,6 @@
         <li><span class="en">What a fast-growing town usually offers: newer homes, and amenities that are still catching up</span><span class="zh" lang="zh-Hans">增长快的市镇通常有什么：较新的住家，以及还在赶上的设施</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">Tampines has more people than any other planning area in Singapore. It is not the area that has been growing the fastest. Over the past decade, Punggol and Sengkang added people at a quicker pace.</span><span class="zh" lang="zh-Hans">淡滨尼的人口比新加坡任何一个规划区都多。它不是增长最快的地区。过去十年，榜鹅和盛港的人口增加得更快。</span></p>
-      <p><span class="en">A large, established population usually means the shops, schools and transport are already there. A fast-growing town usually means newer HDB flats, more construction, and amenities that are still catching up.</span><span class="zh" lang="zh-Hans">人口多、又已经成熟的市镇，通常商店、学校和交通都已经在。增长快的市镇，通常有较新的HDB组屋、更多工地，以及还在赶上的设施。</span></p>
-      <p><span class="en">Buyers often mix the two up. Bigger is not the same as newer, and faster growth is not the same as more convenient today. The right choice is the one that fits the home in front of you, not the size of the town on a map.</span><span class="zh" lang="zh-Hans">买家常常把这两件事混在一起。最大不等于最新，增长快也不等于今天就更方便。合适的选择，是眼前那套房子，而不是地图上市镇的大小。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>

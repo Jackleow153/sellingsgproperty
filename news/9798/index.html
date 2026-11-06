@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "Ex-condo chairman loses defamation suit over undisclosed links",
   "description": "A former condo chairman lost a defamation case over undisclosed links. What Singapore condo buyers and sellers should ask about the estate.",
-  "articleBody": "What happened: a former condo chairman lost a defamation case tied to links that were not disclosed\n\nThe practical issue: people who run a condo should say when they have a personal or business link to a decision\n\nWhy a buyer cares: fees, upcoming works and disputes can change the real cost of a condo\n\nA former condominium chairman has lost a defamation case connected to links that were not disclosed. The court details belong to that case. The plain lesson for anyone buying or selling a condo in Singapore is about openness.\n\nPeople who help run a condo are expected to say so when they have a personal or business link that could affect a decision, such as who the estate hires. Hiding that link can become a legal fight, not just an argument in the chat group.\n\nFor a buyer, how the estate is run can matter as much as the renovation inside the unit. Disputes show up later as monthly fees, delayed repairs, or a tense sale. For a seller, those are the questions a careful buyer will ask.\n\nBefore you buy a condo, ask about monthly fees, upcoming works and any dispute you should know about. A nice unit in a poorly run estate can become expensive.\n\nIf you sit on your estate’s council, say so when you have a link to a contractor or a decision. Keeping it quiet can become a legal problem.\n\nSellers should be ready for questions about unpaid fees and big repair bills. A clear answer is better than a surprise after the option is signed.",
+  "articleBody": "What happened: a former condo chairman lost a defamation case tied to links that were not disclosed\n\nThe practical issue: people who run a condo should say when they have a personal or business link to a decision\n\nWhy a buyer cares: fees, upcoming works and disputes can change the real cost of a condo\n\nBefore you buy a condo, ask about monthly fees, upcoming works and any dispute you should know about. A nice unit in a poorly run estate can become expensive.\n\nIf you sit on your estate’s council, say so when you have a link to a contractor or a decision. Keeping it quiet can become a legal problem.\n\nSellers should be ready for questions about unpaid fees and big repair bills. A clear answer is better than a surprise after the option is signed.",
   "datePublished": "2026-10-31T08:00:00+08:00",
   "dateModified": "2026-10-31T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,20 +409,14 @@
     <p class="story-meta"><time class="story-date" datetime="2026-10-31"><span class="en">2026/10/31</span><span class="zh" lang="zh-Hans">2026年10月31日</span></time></p>
     <p class="source-name"><span class="en">Source: The Straits Times</span><span class="zh" lang="zh-Hans">来源：海峡时报</span></p>
     <img class="hero" src="/news/images/9798.jpg" alt="" width="760" height="280" onerror="this.onerror=null;var n=document.createElement('div');n.className='hero hero-fallback';n.setAttribute('role','img');n.setAttribute('aria-label','Real Estate SG');n.textContent='Real Estate SG';this.replaceWith(n)">
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">What happened: a former condo chairman lost a defamation case tied to links that were not disclosed</span><span class="zh" lang="zh-Hans">发生了什么：一名前公寓主席因未披露的利益关系，诽谤案败诉</span></li>
         <li><span class="en">The practical issue: people who run a condo should say when they have a personal or business link to a decision</span><span class="zh" lang="zh-Hans">实际问题：管理公寓的人，若与某项决定有私人或商业关系，应该说明</span></li>
         <li><span class="en">Why a buyer cares: fees, upcoming works and disputes can change the real cost of a condo</span><span class="zh" lang="zh-Hans">买家为什么在意：月费、即将进行的工程和纠纷，会改变公寓的真实成本</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">A former condominium chairman has lost a defamation case connected to links that were not disclosed. The court details belong to that case. The plain lesson for anyone buying or selling a condo in Singapore is about openness.</span><span class="zh" lang="zh-Hans">一名前共管公寓主席，在一宗与未披露利益关系有关的诽谤案中败诉。案件细节属于那宗诉讼。对在新加坡买卖公寓（condo）的人来说，白话的教训是：事情要说在明处。</span></p>
-      <p><span class="en">People who help run a condo are expected to say so when they have a personal or business link that could affect a decision, such as who the estate hires. Hiding that link can become a legal fight, not just an argument in the chat group.</span><span class="zh" lang="zh-Hans">参与管理公寓的人，如果有可能影响决定的私人或商业关系，例如由谁承包，就应该说出来。把关系藏起来，可能变成法律纠纷，而不只是聊天群里的争执。</span></p>
-      <p><span class="en">For a buyer, how the estate is run can matter as much as the renovation inside the unit. Disputes show up later as monthly fees, delayed repairs, or a tense sale. For a seller, those are the questions a careful buyer will ask.</span><span class="zh" lang="zh-Hans">对买家来说，公寓怎么管理，可能和单位里的装修一样重要。纠纷日后会变成月费、拖延的维修，或一宗紧张的交易。对卖家来说，这些正是谨慎的买家会问的问题。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>

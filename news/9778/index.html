@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "Home sales set to recover in Q4 with prices seen rising further on new launch momentum",
   "description": "Home sales are expected to recover in Q4 on new-launch momentum. That is a forecast, not a reason to skip the numbers on one home.",
-  "articleBody": "Outlook, not a result: fourth-quarter home sales seen recovering\n\nPrices are described as rising on new-launch momentum\n\nNo project name or percentage is in the headline\n\nA forecast can be wrong, and it does not price one unit\n\nA PropNex headline says home sales are set to recover in the fourth quarter, with prices seen rising further on new-launch momentum. That is an outlook. It is not a count of homes already sold in the quarter, and it does not name a project.\n\nNew launches can pull buyers who want a fresh lease and a showflat. They can also make resale sellers wait longer if buyers compare the two. Momentum is not a promise that every project, or every resale flat, will cost more by December.\n\nBuyers should not rush a booking because a headline expects prices to rise. Sellers should not lift an asking price on a forecast. Use the homes on the market now, and treat the fourth-quarter line as something to check when the quarter’s numbers are actually out.\n\nBuy the home whose monthly cost you can live with. An expected rise is not a reason to skip the loan sums.\n\nResale sellers should ask if their buyers are also touring showflats. If they are, be ready to explain lease, space and what is already built.\n\nWait for the quarter’s actual sales before you treat this sentence as the market. Forecasts are revised.",
+  "articleBody": "Outlook, not a result: fourth-quarter home sales seen recovering\n\nPrices are described as rising on new-launch momentum\n\nNo project name or percentage is in the headline\n\nA forecast can be wrong, and it does not price one unit\n\nBuy the home whose monthly cost you can live with. An expected rise is not a reason to skip the loan sums.\n\nResale sellers should ask if their buyers are also touring showflats. If they are, be ready to explain lease, space and what is already built.\n\nWait for the quarter’s actual sales before you treat this sentence as the market. Forecasts are revised.",
   "datePublished": "2026-10-24T08:00:00+08:00",
   "dateModified": "2026-10-24T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,8 +409,8 @@
     <p class="story-meta"><time class="story-date" datetime="2026-10-24"><span class="en">2026/10/24</span><span class="zh" lang="zh-Hans">2026年10月24日</span></time></p>
     <p class="source-name"><span class="en">Source: Business Times</span><span class="zh" lang="zh-Hans">来源：商业时报</span></p>
     <img class="hero" src="/news/images/9778.jpg" alt="" width="760" height="280" onerror="this.onerror=null;var n=document.createElement('div');n.className='hero hero-fallback';n.setAttribute('role','img');n.setAttribute('aria-label','Real Estate SG');n.textContent='Real Estate SG';this.replaceWith(n)">
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">Outlook, not a result: fourth-quarter home sales seen recovering</span><span class="zh" lang="zh-Hans">这是展望，不是结果：第四季房屋成交料回升</span></li>
         <li><span class="en">Prices are described as rising on new-launch momentum</span><span class="zh" lang="zh-Hans">价格被描述为受新盘势头推动而上涨</span></li>
@@ -415,12 +418,6 @@
         <li><span class="en">A forecast can be wrong, and it does not price one unit</span><span class="zh" lang="zh-Hans">预测可能不准，也不能给一套具体的房子定价</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">A PropNex headline says home sales are set to recover in the fourth quarter, with prices seen rising further on new-launch momentum. That is an outlook. It is not a count of homes already sold in the quarter, and it does not name a project.</span><span class="zh" lang="zh-Hans">博纳的标题说，房屋成交料在第四季回升，价格也可能因为新盘的势头再往上。这是展望，不是这个季度已经卖出多少套的统计，标题里也没有项目名称。</span></p>
-      <p><span class="en">New launches can pull buyers who want a fresh lease and a showflat. They can also make resale sellers wait longer if buyers compare the two. Momentum is not a promise that every project, or every resale flat, will cost more by December.</span><span class="zh" lang="zh-Hans">新盘会吸引想要全新屋契和示范单位的买家。买家如果两边都在比，转售卖家也可能要等更久。势头不是承诺：不是每个项目、每套转售，到了12月都会更贵。</span></p>
-      <p><span class="en">Buyers should not rush a booking because a headline expects prices to rise. Sellers should not lift an asking price on a forecast. Use the homes on the market now, and treat the fourth-quarter line as something to check when the quarter’s numbers are actually out.</span><span class="zh" lang="zh-Hans">买家不该因为标题预期价格上涨就赶着下订。卖家也不该因为一份预测就提高开价。看现在市场上的房子。第四季那句话，等这个季度的数字真正出来再核对。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>

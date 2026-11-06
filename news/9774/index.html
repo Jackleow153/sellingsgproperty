@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "Easy to rent out, hard to sell: Buyers could be losing interest in one-bedroom condos",
   "description": "One-bedroom condos can be easy to rent and hard to sell. Investors should check resale demand, not only the rent.",
-  "articleBody": "Headline: one-bedroom condos may be easier to rent than to sell\n\nNo rent, psf or project is named\n\nTenant demand and buyer demand are different\n\nAn easy rental does not guarantee an easy resale\n\nThe headline says one-bedroom condos in Singapore can be easy to rent and hard to sell, and that buyers may be losing interest. There is no vacancy rate, no psf figure and no project name. The point is the gap between a tenant and a buyer.\n\nA tenant can pay the rent if the location suits a single person or a couple. A buyer of that same unit has to believe someone else will take it later, at a price that covers the loan. When that second buyer is scarce, the owner feels it at the point of sale, not at the point of the tenancy.\n\nInvestors who only checked the rent should also check recent sales of one-bedders in that project. Own-stay buyers who want a bigger home later should ask how easy the exit is. A unit that rents in a week can still sit unsold for months.\n\nPut the rent next to recent sale prices of one-bedders in the same project. The rent can look fine while buyers have moved on.\n\nIf you may need to sell within a few years, ask agents what actually sold, not only what is listed. Time on the market matters as much as the yield.\n\nOwn-stay buyers who want a second bedroom later should budget for a harder exit, or choose a size they can live in for longer.",
+  "articleBody": "Headline: one-bedroom condos may be easier to rent than to sell\n\nNo rent, psf or project is named\n\nTenant demand and buyer demand are different\n\nAn easy rental does not guarantee an easy resale\n\nPut the rent next to recent sale prices of one-bedders in the same project. The rent can look fine while buyers have moved on.\n\nIf you may need to sell within a few years, ask agents what actually sold, not only what is listed. Time on the market matters as much as the yield.\n\nOwn-stay buyers who want a second bedroom later should budget for a harder exit, or choose a size they can live in for longer.",
   "datePublished": "2026-10-23T08:00:00+08:00",
   "dateModified": "2026-10-23T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,8 +409,8 @@
     <p class="story-meta"><time class="story-date" datetime="2026-10-23"><span class="en">2026/10/23</span><span class="zh" lang="zh-Hans">2026年10月23日</span></time></p>
     <p class="source-name"><span class="en">Source: Business Times</span><span class="zh" lang="zh-Hans">来源：商业时报</span></p>
     <img class="hero" src="/news/images/9774.jpg" alt="" width="760" height="280" onerror="this.onerror=null;var n=document.createElement('div');n.className='hero hero-fallback';n.setAttribute('role','img');n.setAttribute('aria-label','Real Estate SG');n.textContent='Real Estate SG';this.replaceWith(n)">
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">Headline: one-bedroom condos may be easier to rent than to sell</span><span class="zh" lang="zh-Hans">标题：一房式公寓可能好租、难卖</span></li>
         <li><span class="en">No rent, psf or project is named</span><span class="zh" lang="zh-Hans">没有租金、每平方英尺价钱或项目名称</span></li>
@@ -415,12 +418,6 @@
         <li><span class="en">An easy rental does not guarantee an easy resale</span><span class="zh" lang="zh-Hans">好租并不保证好卖</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">The headline says one-bedroom condos in Singapore can be easy to rent and hard to sell, and that buyers may be losing interest. There is no vacancy rate, no psf figure and no project name. The point is the gap between a tenant and a buyer.</span><span class="zh" lang="zh-Hans">标题说，新加坡的一房式私人公寓可能好租、难卖，买家的兴趣也许在减退。标题里没有空置率、没有每平方英尺的价钱，也没有项目名称。重点是租客和买家不是同一群人。</span></p>
-      <p><span class="en">A tenant can pay the rent if the location suits a single person or a couple. A buyer of that same unit has to believe someone else will take it later, at a price that covers the loan. When that second buyer is scarce, the owner feels it at the point of sale, not at the point of the tenancy.</span><span class="zh" lang="zh-Hans">租客只要地点适合一个人或一对夫妻，就可以付租金。买下同一套单位的人，必须相信以后还有人接手，而且价钱盖得住贷款。当后面那个买家变少，屋主是在卖出的时候才感觉到，不是在出租的时候。</span></p>
-      <p><span class="en">Investors who only checked the rent should also check recent sales of one-bedders in that project. Own-stay buyers who want a bigger home later should ask how easy the exit is. A unit that rents in a week can still sit unsold for months.</span><span class="zh" lang="zh-Hans">只查过租金的投资者，还应该看这个项目一房单位的近期成交。以后想换大房子自住的人，要问退出容不容易。一套一个星期就租掉的单位，仍可能挂几个月卖不掉。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>

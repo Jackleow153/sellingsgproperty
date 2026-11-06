@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "‘Supply onslaught’ to weigh on HDB resale market in 2027, but cash-rich buyers to support prices",
   "description": "An EdgeProp headline says 2027 HDB supply may weigh on resale prices, while cash-rich buyers could still support them.",
-  "articleBody": "EdgeProp headline: more supply may weigh on HDB resale in 2027\n\nThe same headline says cash-rich buyers may still support prices\n\nNo unit count or percentage is given in the headline\n\nThis is an outlook for 2027, not a completed price move\n\nEdgeProp carried a warning that a “supply onslaught” could weigh on the HDB resale market in 2027, while cash-rich buyers may still support prices. No flat count and no price change is in the headline. It is an outlook, not a result.\n\nMore future supply can mean more choice later. It does not mean every town gets cheaper on the same day in 2027, and it does not mean a flat you need this year should be skipped. Cash buyers and buyers who need a big loan do not compete in the same way.\n\nSellers who hope to sell in 2026 are not yet in that 2027 market. Buyers who can wait should watch the actual BTO and resale numbers as they are released, instead of treating one phrase as a forecast they must obey.\n\nTreat 2027 supply as a reason to watch later launches, not as a promise that your town will fall.\n\nIf you need a home now, price the flat in front of you. A headline about a later year does not pay this year’s rent.\n\nSellers should expect some buyers to have more cash than others. One record or one cautious outlook does not describe every offer you will get.",
+  "articleBody": "EdgeProp headline: more supply may weigh on HDB resale in 2027\n\nThe same headline says cash-rich buyers may still support prices\n\nNo unit count or percentage is given in the headline\n\nThis is an outlook for 2027, not a completed price move\n\nTreat 2027 supply as a reason to watch later launches, not as a promise that your town will fall.\n\nIf you need a home now, price the flat in front of you. A headline about a later year does not pay this year’s rent.\n\nSellers should expect some buyers to have more cash than others. One record or one cautious outlook does not describe every offer you will get.",
   "datePublished": "2026-10-27T08:00:00+08:00",
   "dateModified": "2026-10-27T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,8 +409,8 @@
     <p class="story-meta"><time class="story-date" datetime="2026-10-27"><span class="en">2026/10/27</span><span class="zh" lang="zh-Hans">2026年10月27日</span></time></p>
     <p class="source-name"><span class="en">Source: EdgeProp Singapore</span><span class="zh" lang="zh-Hans">来源：EdgeProp</span></p>
     <div class="hero hero-fallback" role="img" aria-label="Real Estate SG">Real Estate SG</div>
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">EdgeProp headline: more supply may weigh on HDB resale in 2027</span><span class="zh" lang="zh-Hans">EdgeProp标题：更多供应可能在2027年压住组屋转售</span></li>
         <li><span class="en">The same headline says cash-rich buyers may still support prices</span><span class="zh" lang="zh-Hans">同一标题说，有现金的买家仍可能撑住价钱</span></li>
@@ -415,12 +418,6 @@
         <li><span class="en">This is an outlook for 2027, not a completed price move</span><span class="zh" lang="zh-Hans">这是对2027年的展望，不是已经完成的价格变动</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">EdgeProp carried a warning that a “supply onslaught” could weigh on the HDB resale market in 2027, while cash-rich buyers may still support prices. No flat count and no price change is in the headline. It is an outlook, not a result.</span><span class="zh" lang="zh-Hans">EdgeProp的标题警告，2027年一轮“供应冲击”可能压住HDB转售市场，但手头有现金的买家仍可能撑住价钱。标题里没有单位数量，也没有价格变动。这是展望，不是已经发生的结果。</span></p>
-      <p><span class="en">More future supply can mean more choice later. It does not mean every town gets cheaper on the same day in 2027, and it does not mean a flat you need this year should be skipped. Cash buyers and buyers who need a big loan do not compete in the same way.</span><span class="zh" lang="zh-Hans">日后供应变多，可能代表以后选择变多。这不代表2027年的某一天每个市镇一起变便宜，也不代表你今年需要的那套房子就该放弃。付现金的买家，和需要大额贷款的买家，不是同一场竞争。</span></p>
-      <p><span class="en">Sellers who hope to sell in 2026 are not yet in that 2027 market. Buyers who can wait should watch the actual BTO and resale numbers as they are released, instead of treating one phrase as a forecast they must obey.</span><span class="zh" lang="zh-Hans">希望在2026年卖掉的人，还没有进入那个2027年的市场。可以等的买家，应该看日后真正公布的预购组屋和转售数字，而不是把一个说法当成必须服从的预测。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>

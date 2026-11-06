@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "Bukit Sembawang Plans Central Singapore Condo Project After $153M Site Buy",
   "description": "Bukit Sembawang plans a central Singapore condo after a $153 million site buy. That number is land cost, not a unit price.",
-  "articleBody": "Mingtiandi: Bukit Sembawang plans a central Singapore condo after a $153 million site purchase\n\n$153 million is a land price, not a unit price\n\nThe homes are not on sale from this report\n\nThe headline does not name the street or a psf figure\n\nMingtiandi reported that Bukit Sembawang plans a condo in central Singapore after buying a site for $153 million. That figure is what was paid for the land. It is not the price of a finished unit, and the homes are not for sale yet.\n\nA land bid is a cost for the developer. The launch price later has to cover construction, interest and a margin on top of that land. Buyers cannot book a unit from this headline, and sellers nearby should not mark their resale up by $153 million.\n\nThe headline says central Singapore and does not name the street or a price per square foot. If you own or want a home in that part of town, wait for the project name, the unit mix and the actual launch price before you decide this site has changed your number.\n\nRead $153 million as the land cost reported for the site. Divide nothing in your head and call it a unit price.\n\nThere is no showflat in this headline. Keep looking at homes you can actually buy this month.\n\nNearby sellers should wait for a launch price and a project name. A land purchase alone does not tell a buyer what your flat is worth.",
+  "articleBody": "Mingtiandi: Bukit Sembawang plans a central Singapore condo after a $153 million site purchase\n\n$153 million is a land price, not a unit price\n\nThe homes are not on sale from this report\n\nRead $153 million as the land cost reported for the site. Divide nothing in your head and call it a unit price.\n\nThere is no showflat in this headline. Keep looking at homes you can actually buy this month.\n\nNearby sellers should wait for a launch price and a project name. A land purchase alone does not tell a buyer what your flat is worth.",
   "datePublished": "2026-10-27T08:00:00+08:00",
   "dateModified": "2026-10-27T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,21 +409,14 @@
     <p class="story-meta"><time class="story-date" datetime="2026-10-27"><span class="en">2026/10/27</span><span class="zh" lang="zh-Hans">2026年10月27日</span></time></p>
     <p class="source-name"><span class="en">Source: Mingtiandi</span><span class="zh" lang="zh-Hans">来源：Mingtiandi</span></p>
     <div class="hero hero-fallback" role="img" aria-label="Real Estate SG">Real Estate SG</div>
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">Mingtiandi: Bukit Sembawang plans a central Singapore condo after a $153 million site purchase</span><span class="zh" lang="zh-Hans">Mingtiandi：武吉三巴旺以1.53亿美元购入市中心地段后计划建公寓</span></li>
         <li><span class="en">$153 million is a land price, not a unit price</span><span class="zh" lang="zh-Hans">1.53亿美元是地价，不是单位售价</span></li>
         <li><span class="en">The homes are not on sale from this report</span><span class="zh" lang="zh-Hans">这则报道并不代表房子已经开卖</span></li>
-        <li><span class="en">The headline does not name the street or a psf figure</span><span class="zh" lang="zh-Hans">标题没有路名，也没有每平方英尺的数字</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">Mingtiandi reported that Bukit Sembawang plans a condo in central Singapore after buying a site for $153 million. That figure is what was paid for the land. It is not the price of a finished unit, and the homes are not for sale yet.</span><span class="zh" lang="zh-Hans">Mingtiandi报道，武吉三巴旺（Bukit Sembawang）在以1.53亿美元买下新加坡市中心一块地之后，计划建一栋私人公寓。这个数字是地价，不是完工单位的价钱，房子现在也还不能买。</span></p>
-      <p><span class="en">A land bid is a cost for the developer. The launch price later has to cover construction, interest and a margin on top of that land. Buyers cannot book a unit from this headline, and sellers nearby should not mark their resale up by $153 million.</span><span class="zh" lang="zh-Hans">土地出价是发展商的成本。日后的开盘价还要盖上建筑、利息和利润。买家不能凭这则标题预订单位。附近的卖家也不该把转售价加上1.53亿美元。</span></p>
-      <p><span class="en">The headline says central Singapore and does not name the street or a price per square foot. If you own or want a home in that part of town, wait for the project name, the unit mix and the actual launch price before you decide this site has changed your number.</span><span class="zh" lang="zh-Hans">标题只说市中心，没有路名，也没有每平方英尺的价钱。如果你在那一带有房或想买房，等项目名称、户型和真正的开盘价出来，再判断这块地对你的数字有没有影响。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>

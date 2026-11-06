@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "HDB publishes Q3 resale flat prices by town, listing the cheapest & most expensive areas",
   "description": "HDB published Q3 2026 resale prices by town. Buyers and sellers should read their own town, not one national number.",
-  "articleBody": "HDB published Q3 2026 resale prices broken down by town, Vulcan Post reported\n\nThe release covers cheaper and more expensive areas\n\nThe headline does not name those towns\n\nTown and flat type matter more than one national average\n\nVulcan Post reported that HDB has published third-quarter resale flat prices by town, including which areas were the cheapest and which were the most expensive. The headline does not name the towns. The table does.\n\nA national movement, such as a small quarterly dip, can hide a town that is still firm and another town that has already softened. Buyers who shop across Singapore should read the row for the town they would actually live in, and for the flat type they want.\n\nSellers should do the same before they copy a price from a different estate. A Queenstown price is not a Woodlands price. If your town is missing from a news summary, open HDB’s own table rather than guessing from the headline.\n\nOpen HDB’s town table and find your flat type. A news headline that does not name the town cannot answer that for you.\n\nDo not price a flat from another town’s number. Buyers will compare you with sales on your estate.\n\nIf you are choosing between two towns, compare the same flat type and the same quarter. A cheaper town is only cheaper if the commute and the lease still work for you.",
+  "articleBody": "HDB published Q3 2026 resale prices broken down by town, Vulcan Post reported\n\nThe release covers cheaper and more expensive areas\n\nTown and flat type matter more than one national average\n\nOpen HDB’s town table and find your flat type. A news headline that does not name the town cannot answer that for you.\n\nDo not price a flat from another town’s number. Buyers will compare you with sales on your estate.\n\nIf you are choosing between two towns, compare the same flat type and the same quarter. A cheaper town is only cheaper if the commute and the lease still work for you.",
   "datePublished": "2026-10-31T08:00:00+08:00",
   "dateModified": "2026-10-31T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,21 +409,14 @@
     <p class="story-meta"><time class="story-date" datetime="2026-10-31"><span class="en">2026/10/31</span><span class="zh" lang="zh-Hans">2026年10月31日</span></time></p>
     <p class="source-name"><span class="en">Source: Vulcan Post</span><span class="zh" lang="zh-Hans">来源：Vulcan Post</span></p>
     <div class="hero hero-fallback" role="img" aria-label="Real Estate SG">Real Estate SG</div>
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">HDB published Q3 2026 resale prices broken down by town, Vulcan Post reported</span><span class="zh" lang="zh-Hans">Vulcan Post报道，建屋局公布了2026年第三季按市镇划分的转售价</span></li>
         <li><span class="en">The release covers cheaper and more expensive areas</span><span class="zh" lang="zh-Hans">这份资料包括较便宜和较贵的地区</span></li>
-        <li><span class="en">The headline does not name those towns</span><span class="zh" lang="zh-Hans">标题没有点名这些市镇</span></li>
         <li><span class="en">Town and flat type matter more than one national average</span><span class="zh" lang="zh-Hans">市镇和房型，比一个全岛平均数更重要</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">Vulcan Post reported that HDB has published third-quarter resale flat prices by town, including which areas were the cheapest and which were the most expensive. The headline does not name the towns. The table does.</span><span class="zh" lang="zh-Hans">Vulcan Post报道，建屋发展局公布了2026年第三季按市镇划分的转售组屋价格，包括较便宜和较贵的地区。标题没有写出是哪些市镇。表格里才有。</span></p>
-      <p><span class="en">A national movement, such as a small quarterly dip, can hide a town that is still firm and another town that has already softened. Buyers who shop across Singapore should read the row for the town they would actually live in, and for the flat type they want.</span><span class="zh" lang="zh-Hans">全岛一个很小的季度变动，可能盖住一个仍然坚挺的市镇，和另一个已经转软的市镇。在全岛找房的买家，应该看自己真正会住的市镇，以及自己要的房型那一行。</span></p>
-      <p><span class="en">Sellers should do the same before they copy a price from a different estate. A Queenstown price is not a Woodlands price. If your town is missing from a news summary, open HDB’s own table rather than guessing from the headline.</span><span class="zh" lang="zh-Hans">卖家在抄另一个邻里的价钱之前，也应该先看自己的市镇。女皇镇的价钱不是兀兰的价钱。如果新闻摘要里没有你的市镇，就打开建屋局自己的表，不要凭标题猜。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>

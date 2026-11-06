@@ -415,6 +415,118 @@ def text_list(entry: dict, key: str) -> list[str]:
     return [str(part).strip() for part in entry.get(key, []) if str(part).strip()]
 
 
+KEYPOINT_CAP = 12
+_BOILER_BITS = (
+    "carried this singapore property headline",
+    "notes below are for buyers",
+    "not a copy of the original article",
+    "ask what the number refers to",
+    "one market headline is not a valuation",
+    "buyers should",
+    "sellers should",
+    "不是原文照搬",
+    "下面的说明是写给买家",
+    "报道了这则新加坡房地产标题",
+    "买房的人要把标题",
+    "卖房的人不要把一条标题",
+)
+_ADVICE_STARTS = (
+    "if you are",
+    "if you own",
+    "if you need",
+    "do not ",
+    "don't ",
+    "buyers ",
+    "sellers ",
+    "owners who",
+    "renting can",
+    "a buyer",
+    "investors who",
+    "use 597",
+    "use the homes",
+    "如果你",
+    "不要",
+    "买家应",
+    "买家不",
+    "卖家应",
+    "卖家不",
+    "屋主应",
+    "屋主不",
+    "房东应",
+    "房东不",
+)
+
+
+def _point_sentences(text: str) -> list[str]:
+    parts = re.split(r"(?<=[.?!。！？])\s+", text.strip())
+    return [part.strip() for part in parts if part.strip()]
+
+
+def _title_echo(line: str, title: str) -> bool:
+    """True when a fact only repeats the story title, not a point from the article."""
+    title = title.strip().rstrip(".。")
+    if not title:
+        return False
+    text = line.strip()
+    if text.lower().startswith("headline:"):
+        rest = text.split(":", 1)[1].strip().rstrip(".。")
+        return rest.lower() == title.lower()
+    if text.startswith("标题："):
+        rest = text.split("：", 1)[1].strip().rstrip(".。")
+        return rest == title
+    return False
+
+
+def _hard_meta(line: str, title: str = "") -> bool:
+    low = line.lower().strip()
+    if low.startswith("source named") or low.startswith("figure in the headline"):
+        return True
+    if line.startswith("本页来源") or line.startswith("标题中的数字"):
+        return True
+    return _title_echo(line, title)
+
+
+def _keep_point(line: str, title: str = "") -> bool:
+    low = line.lower().strip()
+    if _hard_meta(line, title):
+        return False
+    if any(bit in low for bit in _BOILER_BITS):
+        return False
+    if any(low.startswith(prefix) for prefix in _ADVICE_STARTS):
+        return False
+    if "headline does not" in low or "标题没有" in line or "标题并未" in line:
+        return False
+    return True
+
+
+def boilerplate_description(text: str) -> bool:
+    low = text.lower()
+    return (
+        "carried this singapore property headline" in low
+        or "notes below are for buyers" in low
+        or "报道了这则新加坡房地产标题" in text
+    )
+
+
+def content_keypoints(*groups: list[str], limit: int = KEYPOINT_CAP) -> list[str]:
+    """Up to 12 points about the article. Advice and headline-only filler are left out."""
+    found: list[str] = []
+    seen: set[str] = set()
+    for group in groups:
+        for line in group:
+            for sentence in _point_sentences(line):
+                if not _keep_point(sentence):
+                    continue
+                key = re.sub(r"\s+", " ", sentence).strip()
+                if not key or key in seen:
+                    continue
+                seen.add(key)
+                found.append(key)
+                if len(found) >= limit:
+                    return found
+    return found
+
+
 def align_text(primary: list[str], alternate: list[str]) -> list[str]:
     aligned = []
     for index, item in enumerate(primary):
@@ -479,8 +591,43 @@ def story_copy(post_id: str, title: str, copy_book: dict) -> dict:
         zh_takeaways = align_text(takeaways, text_list(zh_entry, "takeaways"))
         zh_questions = align_text(questions, text_list(zh_entry, "questions"))
         zh_facts = align_text(facts, text_list(zh_entry, "facts"))
+    raw_points = text_list(entry, "keypoints")
+    raw_zh_points = text_list(zh_entry, "keypoints")
+    keypoints = []
+    zh_keypoints = []
+    for index, point in enumerate(raw_points):
+        if not _keep_point(point, title):
+            continue
+        zh_point = raw_zh_points[index] if index < len(raw_zh_points) else ""
+        if not (zh_point and _keep_point(zh_point, title_zh)):
+            if zh_point and not _hard_meta(zh_point, title_zh) and not any(bit in zh_point for bit in _BOILER_BITS):
+                pass
+            else:
+                zh_point = point
+        keypoints.append(point)
+        zh_keypoints.append(zh_point or point)
+        if len(keypoints) >= KEYPOINT_CAP:
+            break
+    if not keypoints:
+        raw_zh_facts = text_list(zh_entry, "facts") if written else []
+        for index, fact in enumerate(facts):
+            if not _keep_point(fact, title):
+                continue
+            keypoints.append(fact)
+            zh_fact = raw_zh_facts[index] if index < len(raw_zh_facts) else ""
+            # The English line already passed the filter. Keep its Chinese twin
+            # even when a prefix such as 买家 would have dropped it on its own.
+            if zh_fact and not _hard_meta(zh_fact, title_zh) and not any(bit in zh_fact for bit in _BOILER_BITS):
+                zh_keypoints.append(zh_fact)
+            else:
+                zh_keypoints.append(fact)
+            if len(keypoints) >= KEYPOINT_CAP:
+                break
+    if boilerplate_description(description):
+        description = " ".join(keypoints[:2]) or title
     return {
         "summary": summary,
+        "keypoints": keypoints,
         "takeaways": takeaways,
         "questions": questions,
         "facts": facts,
@@ -490,6 +637,7 @@ def story_copy(post_id: str, title: str, copy_book: dict) -> dict:
         "zh": {
             "title": title_zh or title,
             "summary": zh_summary,
+            "keypoints": zh_keypoints,
             "takeaways": zh_takeaways,
             "questions": zh_questions,
             "facts": zh_facts,
@@ -719,26 +867,30 @@ DETAIL_CSS = """
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -830,7 +982,7 @@ DETAIL_CSS = """
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 """
@@ -904,13 +1056,12 @@ def detail_schema(item: dict, copy: dict) -> str:
     page_url = f"https://www.sellingsgproperty.com{path}"
     image = item.get("image") or PLACEHOLDER
     image_url = "https://www.sellingsgproperty.com" + image
-    article_body = "\n\n".join(copy["facts"] + copy["summary"] + copy["takeaways"])
     news = {
         "@context": "https://schema.org",
         "@type": "NewsArticle",
         "headline": title,
         "description": copy["description"],
-        "articleBody": article_body,
+        "articleBody": "\n\n".join(copy["keypoints"] + copy["takeaways"]),
         "datePublished": f"{date}T08:00:00+08:00",
         "dateModified": f"{date}T08:00:00+08:00",
         "inLanguage": "en-SG",
@@ -924,7 +1075,7 @@ def detail_schema(item: dict, copy: dict) -> str:
         "isAccessibleForFree": True,
         "speakable": {
             "@type": "SpeakableSpecification",
-            "cssSelector": [".facts li", ".summary p", ".takeaways li"],
+            "cssSelector": [".keypoints li", ".takeaways li"],
         },
     }
     faq = {
@@ -968,21 +1119,18 @@ def render_detail_page(item: dict, copy: dict) -> str:
     image_url = "https://www.sellingsgproperty.com" + image
     description = copy["description"]
     zh = copy["zh"]
-    paragraphs = "\n".join(
-        "      <p>" + bi(part, zh["summary"][index]) + "</p>"
-        for index, part in enumerate(copy["summary"])
+    zh_points = zh.get("keypoints") or []
+    point_items = "\n".join(
+        "        <li>" + bi(point, zh_points[index] if index < len(zh_points) else point) + "</li>"
+        for index, point in enumerate(copy["keypoints"][:KEYPOINT_CAP])
     )
-    fact_items = "\n".join(
-        "        <li>" + bi(fact, zh["facts"][index] if index < len(zh["facts"]) else fact) + "</li>"
-        for index, fact in enumerate(copy["facts"])
-    )
-    facts_html = ""
-    if fact_items:
-        facts_html = (
-            '    <section class="facts" aria-labelledby="facts-heading">\n'
-            "      <h2 id=\"facts-heading\">" + bi("Key facts", "重点") + "</h2>\n"
+    keypoints_html = ""
+    if point_items:
+        keypoints_html = (
+            '    <section class="keypoints" aria-labelledby="keypoints-heading">\n'
+            '      <h2 id="keypoints-heading">' + bi("Key points", "要点") + "</h2>\n"
             "      <ul>\n"
-            f"{fact_items}\n"
+            f"{point_items}\n"
             "      </ul>\n"
             "    </section>\n"
         )
@@ -1030,11 +1178,7 @@ def render_detail_page(item: dict, copy: dict) -> str:
     <p class="story-meta"><time class="story-date" datetime="{esc(iso_date)}">{bi(date, chinese_date(date))}</time></p>
     <p class="source-name">{bi("Source: " + source_name, "来源：" + source_name_zh)}</p>
     {media_markup(image, hero=True)}
-{facts_html}    <div class="summary">
-      <h2>{bi("What this means", "这对你意味着什么")}</h2>
-{paragraphs}
-    </div>
-    <section class="takeaways" aria-labelledby="takeaways-heading">
+{keypoints_html}    <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading">{bi("3 Takeaways for Buyers & Sellers", "给买家与卖家的3个要点")}</h2>
       <ul>
 {bullets}

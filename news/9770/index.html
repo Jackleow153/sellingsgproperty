@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "En bloc sales of old condos: Offer affected owners ABSD concessions for replacement homes",
   "description": "A commentary says en bloc owners should get ABSD relief on a replacement home. That is an argument, not a new rule.",
-  "articleBody": "The headline argues for ABSD concessions for owners replacing a home after an en bloc\n\nIt does not announce a change in the law or in IRAS rules\n\nABSD is the extra stamp duty some buyers pay on top of basic duty\n\nThe cost of the next home can decide whether an en bloc sum is enough\n\nThe headline is a commentary: offer owners affected by an en bloc sale some ABSD relief when they buy a replacement home. It is an argument, not a new rule. Nothing in the headline says IRAS has changed additional buyer’s stamp duty.\n\nEn bloc sellers are often buying and selling in the same season. Stamp duty on the next home can be large enough to change whether the collective sale still looks attractive. Owners should ask their lawyer what they would pay today, under the rules that exist now.\n\nBuyers who are not in an en bloc should not expect a concession. Sellers voting on a collective sale should put the replacement-home tax in the spreadsheet before they vote. A headline that says “offer” is a suggestion that someone else would still have to pass.\n\nDo not budget for a concession that has not been announced. Ask a lawyer or check IRAS for the duty that applies to you today.\n\nIf you are voting on an en bloc, price the replacement home after stamp duty, not before. The sale proceeds have to buy the next place.\n\nOrdinary buyers and sellers are still on the current rules. A commentary about what should change is not what you will be charged.",
+  "articleBody": "The headline argues for ABSD concessions for owners replacing a home after an en bloc\n\nIt does not announce a change in the law or in IRAS rules\n\nABSD is the extra stamp duty some buyers pay on top of basic duty\n\nThe cost of the next home can decide whether an en bloc sum is enough\n\nDo not budget for a concession that has not been announced. Ask a lawyer or check IRAS for the duty that applies to you today.\n\nIf you are voting on an en bloc, price the replacement home after stamp duty, not before. The sale proceeds have to buy the next place.\n\nOrdinary buyers and sellers are still on the current rules. A commentary about what should change is not what you will be charged.",
   "datePublished": "2026-10-20T08:00:00+08:00",
   "dateModified": "2026-10-20T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,8 +409,8 @@
     <p class="story-meta"><time class="story-date" datetime="2026-10-20"><span class="en">2026/10/20</span><span class="zh" lang="zh-Hans">2026年10月20日</span></time></p>
     <p class="source-name"><span class="en">Source: Business Times</span><span class="zh" lang="zh-Hans">来源：商业时报</span></p>
     <img class="hero" src="/news/images/9770.jpg" alt="" width="760" height="280" onerror="this.onerror=null;var n=document.createElement('div');n.className='hero hero-fallback';n.setAttribute('role','img');n.setAttribute('aria-label','Real Estate SG');n.textContent='Real Estate SG';this.replaceWith(n)">
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">The headline argues for ABSD concessions for owners replacing a home after an en bloc</span><span class="zh" lang="zh-Hans">标题主张，集体出售后换房的屋主应获得额外买方印花税宽减</span></li>
         <li><span class="en">It does not announce a change in the law or in IRAS rules</span><span class="zh" lang="zh-Hans">它没有宣布法律或税务局规则已经改变</span></li>
@@ -415,12 +418,6 @@
         <li><span class="en">The cost of the next home can decide whether an en bloc sum is enough</span><span class="zh" lang="zh-Hans">下一套房子的成本，可以决定集体出售的钱够不够</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">The headline is a commentary: offer owners affected by an en bloc sale some ABSD relief when they buy a replacement home. It is an argument, not a new rule. Nothing in the headline says IRAS has changed additional buyer’s stamp duty.</span><span class="zh" lang="zh-Hans">这则标题是一篇评论：集体出售（en bloc）之后要再买房子的屋主，应该在额外买方印花税（ABSD）上得到一些宽减。这是主张，不是新规定。标题并没有说税务局已经修改了额外买方印花税。</span></p>
-      <p><span class="en">En bloc sellers are often buying and selling in the same season. Stamp duty on the next home can be large enough to change whether the collective sale still looks attractive. Owners should ask their lawyer what they would pay today, under the rules that exist now.</span><span class="zh" lang="zh-Hans">集体出售的卖家，常常在同一段时间里又卖又买。下一套房子的印花税，可以大到改变这笔集体出售还算不算划算。屋主应该问律师，按现在已经存在的规则，自己今天要付多少。</span></p>
-      <p><span class="en">Buyers who are not in an en bloc should not expect a concession. Sellers voting on a collective sale should put the replacement-home tax in the spreadsheet before they vote. A headline that says “offer” is a suggestion that someone else would still have to pass.</span><span class="zh" lang="zh-Hans">不在集体出售里的买家，不要期待有宽减。准备投票的卖家，应该在投票前把下一套房子的税放进表格。标题里的“应该提供”，是一个还要别人通过的建议。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>

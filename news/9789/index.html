@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "Two Tiong Bahru HDB blocks to get HIP upgrade after re-poll",
   "description": "Two Tiong Bahru HDB blocks will get HIP after a fresh poll. What owners pay for, and what resale buyers should still check.",
-  "articleBody": "Where: two HDB blocks in Tiong Bahru\n\nWhat was decided: the Home Improvement Programme will go ahead after a fresh poll\n\nWhat HIP usually covers: block repairs such as spalling concrete, plus some optional works inside the flat\n\nWho pays: standard works are supported; optional items are paid by the owner\n\nTwo HDB blocks in Tiong Bahru will get the Home Improvement Programme after residents were polled again and the upgrade went ahead. HIP refreshes older blocks. Typical works include repairs such as spalling concrete, plus some optional items inside the flat.\n\nSome of the work is covered. Optional items are paid for by the owner. The works also mean noise, workmen, and a period when the block is a less comfortable place to live in or to view.\n\nAn upgrade can help an older block. It does not add years back onto the lease, and it does not turn an old Tiong Bahru flat into a new BTO flat.\n\nIf you own one of these flats, separate the standard works from the optional ones before you say yes. Optional items come out of your own pocket.\n\nBuyers of older HDB flats should ask whether HIP has been done, is coming, or was voted down. It changes both the condition you are taking on and the disruption during the works.\n\nDo not pay a new-flat price because an upgrade is coming. Look at the remaining lease, the floor, and recent resale prices in the same blocks.",
+  "articleBody": "Where: two HDB blocks in Tiong Bahru\n\nWhat was decided: the Home Improvement Programme will go ahead after a fresh poll\n\nWhat HIP usually covers: block repairs such as spalling concrete, plus some optional works inside the flat\n\nWho pays: standard works are supported; optional items are paid by the owner\n\nIf you own one of these flats, separate the standard works from the optional ones before you say yes. Optional items come out of your own pocket.\n\nBuyers of older HDB flats should ask whether HIP has been done, is coming, or was voted down. It changes both the condition you are taking on and the disruption during the works.\n\nDo not pay a new-flat price because an upgrade is coming. Look at the remaining lease, the floor, and recent resale prices in the same blocks.",
   "datePublished": "2026-10-29T08:00:00+08:00",
   "dateModified": "2026-10-29T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,8 +409,8 @@
     <p class="story-meta"><time class="story-date" datetime="2026-10-29"><span class="en">2026/10/29</span><span class="zh" lang="zh-Hans">2026年10月29日</span></time></p>
     <p class="source-name"><span class="en">Source: The Straits Times</span><span class="zh" lang="zh-Hans">来源：海峡时报</span></p>
     <img class="hero" src="/news/images/9789.jpg" alt="" width="760" height="280" onerror="this.onerror=null;var n=document.createElement('div');n.className='hero hero-fallback';n.setAttribute('role','img');n.setAttribute('aria-label','Real Estate SG');n.textContent='Real Estate SG';this.replaceWith(n)">
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">Where: two HDB blocks in Tiong Bahru</span><span class="zh" lang="zh-Hans">地点：中峇鲁两个组屋座</span></li>
         <li><span class="en">What was decided: the Home Improvement Programme will go ahead after a fresh poll</span><span class="zh" lang="zh-Hans">决定：重新投票后，家居改进计划（HIP）将进行</span></li>
@@ -415,12 +418,6 @@
         <li><span class="en">Who pays: standard works are supported; optional items are paid by the owner</span><span class="zh" lang="zh-Hans">谁付钱：标准工程有支持；可选择的项目由业主付费</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">Two HDB blocks in Tiong Bahru will get the Home Improvement Programme after residents were polled again and the upgrade went ahead. HIP refreshes older blocks. Typical works include repairs such as spalling concrete, plus some optional items inside the flat.</span><span class="zh" lang="zh-Hans">中峇鲁两个组屋座在居民重新投票后，将进行家居改进计划（HIP）。家居改进计划是为较旧的HDB组屋翻新。常见工程包括混凝土剥落等维修，以及屋内一些可选择的项目。</span></p>
-      <p><span class="en">Some of the work is covered. Optional items are paid for by the owner. The works also mean noise, workmen, and a period when the block is a less comfortable place to live in or to view.</span><span class="zh" lang="zh-Hans">部分工程有津贴。可选择的项目由业主自己付费。工程也意味着噪音、工人，以及一段不那么适合居住或看房的时间。</span></p>
-      <p><span class="en">An upgrade can help an older block. It does not add years back onto the lease, and it does not turn an old Tiong Bahru flat into a new BTO flat.</span><span class="zh" lang="zh-Hans">翻新对较旧的组屋有帮助。它不会把地契年限加回去，也不会把中峇鲁的旧组屋变成新的预购组屋（BTO）。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>

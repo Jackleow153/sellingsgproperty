@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "Build-to-rent homes could appeal to young S’poreans, but can rent be kept under $2,000?",
   "description": "Can Singapore build-to-rent homes stay under $2,000 a month? What that means for renters saving to buy, and for landlords.",
-  "articleBody": "Idea being explored: build-to-rent homes, kept as rentals rather than sold at launch\n\nRent level under discussion: about $2,000 a month\n\nWho it is aimed at: younger Singaporeans who want a place of their own before they buy\n\nNot for sale yet: no project, price list or application date has been set\n\nSingapore is studying homes that are built to be rented for the long run, instead of being sold at a launch. The people most likely to use them are younger renters who want their own front door before they are ready to buy an HDB flat or a condo.\n\nThe number that matters is the rent. The public discussion is whether it can stay under about $2,000 a month. At that level, a household can still put money aside for a future down payment. If the rent is much higher, the home mostly serves people who can already pay a private-market rent.\n\nNothing in this update is a flat you can apply for this week. There is no project name, price list or booking date. Treat it as a budget test, not as a new launch.\n\nIf you are renting while you save for an HDB flat or a condo, write the rent next to what you can still save each month. A figure near $2,000 only helps if your own budget still leaves a down payment.\n\nOwners who let out a condo or an HDB flat should compare their asking rent with what tenants can actually pay. A new rental product later on will not fill every older unit at last year’s rent.\n\nDo not treat a rental idea as a reason to buy now. The loan, cash down payment and monthly repayment of a real purchase still have to fit your income.",
+  "articleBody": "Idea being explored: build-to-rent homes, kept as rentals rather than sold at launch\n\nRent level under discussion: about $2,000 a month\n\nWho it is aimed at: younger Singaporeans who want a place of their own before they buy\n\nNot for sale yet: no project, price list or application date has been set\n\nIf you are renting while you save for an HDB flat or a condo, write the rent next to what you can still save each month. A figure near $2,000 only helps if your own budget still leaves a down payment.\n\nOwners who let out a condo or an HDB flat should compare their asking rent with what tenants can actually pay. A new rental product later on will not fill every older unit at last year’s rent.\n\nDo not treat a rental idea as a reason to buy now. The loan, cash down payment and monthly repayment of a real purchase still have to fit your income.",
   "datePublished": "2026-11-02T08:00:00+08:00",
   "dateModified": "2026-11-02T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,8 +409,8 @@
     <p class="story-meta"><time class="story-date" datetime="2026-11-02"><span class="en">2026/11/02</span><span class="zh" lang="zh-Hans">2026年11月2日</span></time></p>
     <p class="source-name"><span class="en">Source: The Straits Times</span><span class="zh" lang="zh-Hans">来源：海峡时报</span></p>
     <img class="hero" src="/news/images/9806.jpg" alt="" width="760" height="280" onerror="this.onerror=null;var n=document.createElement('div');n.className='hero hero-fallback';n.setAttribute('role','img');n.setAttribute('aria-label','Real Estate SG');n.textContent='Real Estate SG';this.replaceWith(n)">
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">Idea being explored: build-to-rent homes, kept as rentals rather than sold at launch</span><span class="zh" lang="zh-Hans">正在探讨的想法：建造供出租的住房，长期出租，而不是开盘出售</span></li>
         <li><span class="en">Rent level under discussion: about $2,000 a month</span><span class="zh" lang="zh-Hans">讨论中的租金：每月约2000新元</span></li>
@@ -415,12 +418,6 @@
         <li><span class="en">Not for sale yet: no project, price list or application date has been set</span><span class="zh" lang="zh-Hans">尚未发售：还没有项目、价目表或申请日期</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">Singapore is studying homes that are built to be rented for the long run, instead of being sold at a launch. The people most likely to use them are younger renters who want their own front door before they are ready to buy an HDB flat or a condo.</span><span class="zh" lang="zh-Hans">新加坡正在研究一批长期用来出租、而不是开盘出售的住房。最可能住进去的，是还没准备好购买HDB组屋或私人公寓（condo）的年轻租户。他们希望先有一个自己的家。</span></p>
-      <p><span class="en">The number that matters is the rent. The public discussion is whether it can stay under about $2,000 a month. At that level, a household can still put money aside for a future down payment. If the rent is much higher, the home mostly serves people who can already pay a private-market rent.</span><span class="zh" lang="zh-Hans">真正要紧的是租金。公开讨论的问题是，租金能否维持在每月约2000新元以下。在这个水平，一个家庭仍能把钱存下来，应付日后的首期。如果租金高得多，这类住房主要就只服务已经付得起私人市场租金的人。</span></p>
-      <p><span class="en">Nothing in this update is a flat you can apply for this week. There is no project name, price list or booking date. Treat it as a budget test, not as a new launch.</span><span class="zh" lang="zh-Hans">这则消息里没有任何一套本周可以申请的单位。没有项目名称、价目表或预订日期。把它当成一次预算测试，而不是一个新盘。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>

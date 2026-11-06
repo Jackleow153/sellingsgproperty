@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "One in five prime-region private home resale deals sold at a loss in Q3",
   "description": "One in five prime-region private resales sold at a loss in Q3 2026, Business Times reported. What buyers and sellers should check.",
-  "articleBody": "Business Times, third quarter of 2026: one in five prime-region private resale deals sold at a loss\n\nShare of loss-making deals reported at 4.6%, the highest in four years\n\nExecutive condos were reported as the segment with the biggest percentage gains\n\nA loss is measured against what that owner paid, not against the market index\n\nBusiness Times reported that one in five private-home resale deals in the prime region sold at a loss in the third quarter of 2026. The same report put the share of loss-making deals at 4.6%, the highest in four years, and said executive condos posted the biggest percentage gains.\n\nA loss here means that owner sold for less than they paid. It is not the same thing as the official price index falling. One central condo can lose money while a suburban executive condo still shows a gain. Prime region usually means the central districts buyers treat as the top of the private market.\n\nIf you are buying in those districts, do not read “one in five” as a discount on the unit you like. Ask what that owner paid, and when. If you are selling at a paper loss, the headline is not a reason to cut the price before you know what similar homes on your street actually achieved.\n\nCheck the owner’s purchase price and the year they bought. A loss on one stack does not reset the asking price of the flat next door.\n\nGet two or three recent sales of a similar size before you drop your price. A headline about other people’s losses is not a valuation of your home.\n\nExecutive condos and prime-region condos are different products, with different buyers and different rules. Do not use one segment’s gain to price the other.",
+  "articleBody": "Business Times, third quarter of 2026: one in five prime-region private resale deals sold at a loss\n\nShare of loss-making deals reported at 4.6%, the highest in four years\n\nExecutive condos were reported as the segment with the biggest percentage gains\n\nA loss is measured against what that owner paid, not against the market index\n\nCheck the owner’s purchase price and the year they bought. A loss on one stack does not reset the asking price of the flat next door.\n\nGet two or three recent sales of a similar size before you drop your price. A headline about other people’s losses is not a valuation of your home.\n\nExecutive condos and prime-region condos are different products, with different buyers and different rules. Do not use one segment’s gain to price the other.",
   "datePublished": "2026-11-01T08:00:00+08:00",
   "dateModified": "2026-11-01T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,8 +409,8 @@
     <p class="story-meta"><time class="story-date" datetime="2026-11-01"><span class="en">2026/11/01</span><span class="zh" lang="zh-Hans">2026年11月1日</span></time></p>
     <p class="source-name"><span class="en">Source: Business Times</span><span class="zh" lang="zh-Hans">来源：商业时报</span></p>
     <img class="hero" src="/news/images/nd75f398a.webp" alt="" width="760" height="280" onerror="this.onerror=null;var n=document.createElement('div');n.className='hero hero-fallback';n.setAttribute('role','img');n.setAttribute('aria-label','Real Estate SG');n.textContent='Real Estate SG';this.replaceWith(n)">
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">Business Times, third quarter of 2026: one in five prime-region private resale deals sold at a loss</span><span class="zh" lang="zh-Hans">《商业时报》，2026年第三季：黄金地段私人转售每五宗有一宗亏本</span></li>
         <li><span class="en">Share of loss-making deals reported at 4.6%, the highest in four years</span><span class="zh" lang="zh-Hans">亏本交易比例报道为4.6%，是四年来最高</span></li>
@@ -415,12 +418,6 @@
         <li><span class="en">A loss is measured against what that owner paid, not against the market index</span><span class="zh" lang="zh-Hans">亏本是对照那位屋主的买入价，不是对照市场指数</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">Business Times reported that one in five private-home resale deals in the prime region sold at a loss in the third quarter of 2026. The same report put the share of loss-making deals at 4.6%, the highest in four years, and said executive condos posted the biggest percentage gains.</span><span class="zh" lang="zh-Hans">《商业时报》报道，2026年第三季，黄金地段的私人住宅转售里，每五宗就有一宗是亏本卖出。同一则报道把亏本交易的比例写在4.6%，是四年来最高，并指执行共管公寓（EC）的涨幅百分比最大。</span></p>
-      <p><span class="en">A loss here means that owner sold for less than they paid. It is not the same thing as the official price index falling. One central condo can lose money while a suburban executive condo still shows a gain. Prime region usually means the central districts buyers treat as the top of the private market.</span><span class="zh" lang="zh-Hans">这里的亏本，是指屋主卖出价低于当初买入价。这和官方房价指数下跌不是同一件事。一套市中心公寓可以亏本，郊区的执行共管公寓仍可能上涨。黄金地段通常指买家心目中私人市场最高的那一片中央区。</span></p>
-      <p><span class="en">If you are buying in those districts, do not read “one in five” as a discount on the unit you like. Ask what that owner paid, and when. If you are selling at a paper loss, the headline is not a reason to cut the price before you know what similar homes on your street actually achieved.</span><span class="zh" lang="zh-Hans">如果你在这些区买房，不要把“五宗里有一宗”当成你看中的那套已经打折。先问清那位屋主当年用什么价钱、在哪一年买入。如果你账面是亏的，也不要因为这则标题就先降价，先看你那条街上类似房子的真实成交。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>

@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "HDB Q3 resale prices dip 0.1% even as more flats sold",
   "description": "HDB resale prices dipped 0.1% in Q3 2026 while more flats sold. What that small move means for one purchase or sale.",
-  "articleBody": "Headline figure: HDB resale prices dipped 0.1% in Q3 2026\n\nMore flats were sold in the same quarter\n\n0.1% is the broad index, not one block’s price\n\nHigher volume and a slight price dip can happen together\n\nThe PropNex headline says HDB resale prices dipped 0.1% in the third quarter of 2026, even as more flats were sold. A tenth of one percent is a small move. More sales means buyers and sellers were still meeting. The market did not stop.\n\nA 0.1% change on the index is not a 0.1% change on your flat. Floor, lease, renovation and town can matter more than the quarter. Buyers who were waiting for a fall should ask whether 0.1% changes the monthly loan. On most flats, it does not.\n\nSellers who fear a slide should look at how many buyers are actually viewing. More transactions can mean a sale takes less time, even when the index is slightly down. Price the flat from nearby sales, then decide if you can wait.\n\nRun the loan on the flat you want. A 0.1% index move rarely changes whether that monthly payment fits.\n\nSellers should use recent sales in the same block or nearby blocks. The index will not negotiate with the buyer in your flat.\n\nMore deals can mean buyers are active. It does not mean every asking price will be met.",
+  "articleBody": "Headline figure: HDB resale prices dipped 0.1% in Q3 2026\n\nMore flats were sold in the same quarter\n\n0.1% is the broad index, not one block’s price\n\nHigher volume and a slight price dip can happen together\n\nRun the loan on the flat you want. A 0.1% index move rarely changes whether that monthly payment fits.\n\nSellers should use recent sales in the same block or nearby blocks. The index will not negotiate with the buyer in your flat.\n\nMore deals can mean buyers are active. It does not mean every asking price will be met.",
   "datePublished": "2026-10-24T08:00:00+08:00",
   "dateModified": "2026-10-24T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,8 +409,8 @@
     <p class="story-meta"><time class="story-date" datetime="2026-10-24"><span class="en">2026/10/24</span><span class="zh" lang="zh-Hans">2026年10月24日</span></time></p>
     <p class="source-name"><span class="en">Source: The Straits Times</span><span class="zh" lang="zh-Hans">来源：海峡时报</span></p>
     <img class="hero" src="/news/images/9781.jpg" alt="" width="760" height="280" onerror="this.onerror=null;var n=document.createElement('div');n.className='hero hero-fallback';n.setAttribute('role','img');n.setAttribute('aria-label','Real Estate SG');n.textContent='Real Estate SG';this.replaceWith(n)">
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">Headline figure: HDB resale prices dipped 0.1% in Q3 2026</span><span class="zh" lang="zh-Hans">标题数字：2026年第三季组屋转售价下跌0.1%</span></li>
         <li><span class="en">More flats were sold in the same quarter</span><span class="zh" lang="zh-Hans">同一季卖出的组屋变多</span></li>
@@ -415,12 +418,6 @@
         <li><span class="en">Higher volume and a slight price dip can happen together</span><span class="zh" lang="zh-Hans">成交增加和价格微跌可以同时发生</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">The PropNex headline says HDB resale prices dipped 0.1% in the third quarter of 2026, even as more flats were sold. A tenth of one percent is a small move. More sales means buyers and sellers were still meeting. The market did not stop.</span><span class="zh" lang="zh-Hans">博纳的标题说，2026年第三季HDB转售价下跌0.1%，但卖出的组屋变多了。0.1%是很小的变动。成交变多，代表买家和卖家仍在成交。市场没有停。</span></p>
-      <p><span class="en">A 0.1% change on the index is not a 0.1% change on your flat. Floor, lease, renovation and town can matter more than the quarter. Buyers who were waiting for a fall should ask whether 0.1% changes the monthly loan. On most flats, it does not.</span><span class="zh" lang="zh-Hans">指数上的0.1%，不是你这套房子的0.1%。楼层、屋契、装修和市镇，往往比这个季度更要紧。一直在等下跌的买家，应该问这0.1%会不会改变每月供款。对大多数房子，不会。</span></p>
-      <p><span class="en">Sellers who fear a slide should look at how many buyers are actually viewing. More transactions can mean a sale takes less time, even when the index is slightly down. Price the flat from nearby sales, then decide if you can wait.</span><span class="zh" lang="zh-Hans">担心价格滑落的卖家，应该看真正来看房的人有多少。指数略跌时，成交变多仍可能代表房子卖得更快。用附近的成交定价，再决定你等不等得起。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>

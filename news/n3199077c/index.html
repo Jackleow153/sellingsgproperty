@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "Rare, roomy and pricey? Inside Singapore's niche jumbo HDB flat market",
   "description": "CNA calls jumbo HDB flats rare, roomy and pricey. What buyers should check before paying extra for the space.",
-  "articleBody": "CNA, 1 November 2026: a feature on the niche market for jumbo HDB flats\n\nJumbo flats are usually two HDB flats combined, so stock is small\n\nThe headline does not state a price, a floor area or a town\n\nEligibility and the remaining lease still decide whether you can buy one\n\nCNA looked at Singapore’s jumbo HDB flats and described the market as rare, roomy and pricey. A jumbo flat is usually two HDB flats combined. There are not many of them, so one listing can look louder than the rest of the resale market.\n\nThe headline does not give a new price, a size, or a town. That is the useful warning. A buyer who wants the extra space still has to check whether they are allowed to buy that flat, how many years are left on the lease, and what a normal 5-room in the same town costs.\n\nSellers of jumbo flats should not treat “pricey” as a number they can write on the listing. Buyers comparing a jumbo with a private condo should put the monthly loan, the conservancy or maintenance, and the lease next to each other before they decide the jumbo is the bigger home.\n\nAsk HDB whether your household can buy that jumbo flat, and read the remaining lease. Extra rooms do not remove those rules.\n\nPut the jumbo’s price next to a 5-room in the same town and, if you are also looking at condos, next to the condo’s monthly cost. Space is only a bargain if the loan still fits.\n\nPrice the flat from recent sales of a similar size and lease. A feature calling the market pricey is not a valuation.",
+  "articleBody": "CNA, 1 November 2026: a feature on the niche market for jumbo HDB flats\n\nJumbo flats are usually two HDB flats combined, so stock is small\n\nEligibility and the remaining lease still decide whether you can buy one\n\nAsk HDB whether your household can buy that jumbo flat, and read the remaining lease. Extra rooms do not remove those rules.\n\nPut the jumbo’s price next to a 5-room in the same town and, if you are also looking at condos, next to the condo’s monthly cost. Space is only a bargain if the loan still fits.\n\nPrice the flat from recent sales of a similar size and lease. A feature calling the market pricey is not a valuation.",
   "datePublished": "2026-11-01T08:00:00+08:00",
   "dateModified": "2026-11-01T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,21 +409,14 @@
     <p class="story-meta"><time class="story-date" datetime="2026-11-01"><span class="en">2026/11/01</span><span class="zh" lang="zh-Hans">2026年11月1日</span></time></p>
     <p class="source-name"><span class="en">Source: CNA</span><span class="zh" lang="zh-Hans">来源：CNA</span></p>
     <div class="hero hero-fallback" role="img" aria-label="Real Estate SG">Real Estate SG</div>
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">CNA, 1 November 2026: a feature on the niche market for jumbo HDB flats</span><span class="zh" lang="zh-Hans">CNA，2026年11月1日：关于巨型组屋小众市场的报道</span></li>
         <li><span class="en">Jumbo flats are usually two HDB flats combined, so stock is small</span><span class="zh" lang="zh-Hans">巨型组屋通常是两套HDB组屋打通，数量少</span></li>
-        <li><span class="en">The headline does not state a price, a floor area or a town</span><span class="zh" lang="zh-Hans">标题没有给出价钱、面积或市镇</span></li>
         <li><span class="en">Eligibility and the remaining lease still decide whether you can buy one</span><span class="zh" lang="zh-Hans">能不能买，仍要看购买资格和剩余屋契</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">CNA looked at Singapore’s jumbo HDB flats and described the market as rare, roomy and pricey. A jumbo flat is usually two HDB flats combined. There are not many of them, so one listing can look louder than the rest of the resale market.</span><span class="zh" lang="zh-Hans">CNA看了新加坡的巨型组屋（jumbo flat），用罕见、宽敞、昂贵来形容这个市场。巨型组屋通常是两套HDB组屋打通。数量不多，所以一套挂牌会比普通转售市场更显眼。</span></p>
-      <p><span class="en">The headline does not give a new price, a size, or a town. That is the useful warning. A buyer who wants the extra space still has to check whether they are allowed to buy that flat, how many years are left on the lease, and what a normal 5-room in the same town costs.</span><span class="zh" lang="zh-Hans">标题里没有新的价钱、面积或市镇。这本身就是提醒。想要更大空间的买家，仍然要核对自己能不能买、屋契还剩多少年，以及同一个市镇一套普通五房组屋要多少钱。</span></p>
-      <p><span class="en">Sellers of jumbo flats should not treat “pricey” as a number they can write on the listing. Buyers comparing a jumbo with a private condo should put the monthly loan, the conservancy or maintenance, and the lease next to each other before they decide the jumbo is the bigger home.</span><span class="zh" lang="zh-Hans">卖巨型组屋的人，不能把“昂贵”当成可以写上挂牌的数字。如果买家同时在看私人公寓，应该把每月供款、管理费和屋契放在一起，再决定巨型组屋是不是更大的家。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>

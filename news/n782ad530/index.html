@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "HDB resale transactions jump 19.5% q-o-q in 3Q2026 amid policy changes",
   "description": "HDB resale deals jumped 19.5% in Q3 2026. That is more transactions, not a 19.5% rise in prices.",
-  "articleBody": "EdgeProp: HDB resale transactions rose 19.5% quarter on quarter in Q3 2026\n\nThe headline links the jump to policy changes but does not name the rule\n\n19.5% is a change in the number of deals, not in the price index\n\nMore sales can happen while prices are flat or slightly down\n\nEdgeProp reported that HDB resale transactions jumped 19.5% quarter on quarter in the third quarter of 2026, and linked the rise to policy changes. The headline does not say which rule changed, and it does not say prices rose by 19.5%. Transactions and prices are different.\n\nMore deals can mean buyers who had waited are now willing to sign. It can also mean sellers finally accepted offers. A busier market is not the same as a more expensive market. The separate Q3 price line was a 0.1% dip, which shows volume and prices can move in different directions.\n\nBuyers should ask which policy the people they are competing with are reacting to, instead of assuming every rule was loosened. Sellers may see more viewings. They should still price from recent sales, because more buyers do not accept every asking price.\n\nRead 19.5% as more resale deals, not as a 19.5% rise in your flat’s value.\n\nAsk which rule actually changed before you assume demand is back for every town. A policy headline without the rule is incomplete.\n\nSellers can expect more interest. Price from the last few sales in the block, and be ready for offers that do not match the first asking price.",
+  "articleBody": "EdgeProp: HDB resale transactions rose 19.5% quarter on quarter in Q3 2026\n\nThe headline links the jump to policy changes but does not name the rule\n\n19.5% is a change in the number of deals, not in the price index\n\nMore sales can happen while prices are flat or slightly down\n\nRead 19.5% as more resale deals, not as a 19.5% rise in your flat’s value.\n\nAsk which rule actually changed before you assume demand is back for every town. A policy headline without the rule is incomplete.\n\nSellers can expect more interest. Price from the last few sales in the block, and be ready for offers that do not match the first asking price.",
   "datePublished": "2026-10-22T08:00:00+08:00",
   "dateModified": "2026-10-22T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,8 +409,8 @@
     <p class="story-meta"><time class="story-date" datetime="2026-10-22"><span class="en">2026/10/22</span><span class="zh" lang="zh-Hans">2026年10月22日</span></time></p>
     <p class="source-name"><span class="en">Source: EdgeProp Singapore</span><span class="zh" lang="zh-Hans">来源：EdgeProp</span></p>
     <div class="hero hero-fallback" role="img" aria-label="Real Estate SG">Real Estate SG</div>
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">EdgeProp: HDB resale transactions rose 19.5% quarter on quarter in Q3 2026</span><span class="zh" lang="zh-Hans">EdgeProp：2026年第三季组屋转售成交按季增加19.5%</span></li>
         <li><span class="en">The headline links the jump to policy changes but does not name the rule</span><span class="zh" lang="zh-Hans">标题把升幅和政策变化连在一起，但没有写出是哪一条规则</span></li>
@@ -415,12 +418,6 @@
         <li><span class="en">More sales can happen while prices are flat or slightly down</span><span class="zh" lang="zh-Hans">成交可以增加，价格同时持平或微跌</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">EdgeProp reported that HDB resale transactions jumped 19.5% quarter on quarter in the third quarter of 2026, and linked the rise to policy changes. The headline does not say which rule changed, and it does not say prices rose by 19.5%. Transactions and prices are different.</span><span class="zh" lang="zh-Hans">EdgeProp报道，2026年第三季HDB转售成交按季增加19.5%，并把升幅和政策变化连在一起。标题没有说改的是哪一条规则，也没有说价格涨了19.5%。成交量和价格是两件事。</span></p>
-      <p><span class="en">More deals can mean buyers who had waited are now willing to sign. It can also mean sellers finally accepted offers. A busier market is not the same as a more expensive market. The separate Q3 price line was a 0.1% dip, which shows volume and prices can move in different directions.</span><span class="zh" lang="zh-Hans">成交变多，可能是等过的买家现在愿意签约，也可能是卖家终于接受了出价。市场比较忙，不等于市场比较贵。同一季另有价格微跌0.1%的说法，说明成交量和价格可以朝不同方向走。</span></p>
-      <p><span class="en">Buyers should ask which policy the people they are competing with are reacting to, instead of assuming every rule was loosened. Sellers may see more viewings. They should still price from recent sales, because more buyers do not accept every asking price.</span><span class="zh" lang="zh-Hans">买家应该问，和你抢房子的人到底在回应哪一条政策，不要假设每条规则都放宽了。卖家可能会看到更多看房。仍然要用近期成交定价，因为买家变多，不代表每一个开价都会被接受。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>

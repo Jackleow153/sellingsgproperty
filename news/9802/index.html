@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "Thomson Reserve sells 90% of units at average of S$2,900 psf over launch weekend",
   "description": "Thomson Reserve sold 1,143 of 1,268 units at about $2,900 psf. What new launch buyers and nearby resale sellers should compare.",
-  "articleBody": "Project: Thomson Reserve, Bright Hill Drive, Upper Thomson\n\nDevelopers: UOL and CapitaLand Development\n\nSold: 1,143 of 1,268 units, about 90%, on 30–31 October 2026\n\nAverage price: about $2,900 per square foot\n\nWhat sold out: 3-bedroom and 4-bedroom types; most 5-bedroom homes\n\nWhat is left: 125 units, of which 123 were smaller 2-bedroom homes and 2 were 5-bedroom suites\n\nReported starting prices: about $1.5 million for a 2-bedroom and about $2.5 million for a 3-bedroom\n\nThomson Reserve, the new condo by UOL and CapitaLand Development at Bright Hill Drive in Upper Thomson, sold 1,143 of its 1,268 units over the launch on 30 and 31 October 2026. That is about 90%. The average price of the units sold was about $2,900 per square foot. Most buyers were Singaporeans, buying both to live in and as an investment.\n\nThe preview drew about 32,000 visitors over two weekends. Three-bedroom and four-bedroom types sold out. Of the 125 homes left, 123 were smaller two-bedroom units and two were five-bedroom suites. Reported starting prices were about $1.5 million for a two-bedroom and about $2.5 million for a three-bedroom. PropNex chief executive Kelvin Fong said it was the highest launch-weekend sale of 2026 by number of units, ahead of the 853 units sold at Tengah Garden Residences in April.\n\nA fast weekend tells you there was demand at that price, on those two days. It does not mean every remaining stack is worth the average. If you are still looking, the useful comparison is what is left. If you are selling a resale condo nearby, buyers may use $2,900 psf as a reference, so be ready to explain how your home is different.\n\nA 90% launch is a sign of interest, not proof you should buy. Work out the full price, the stamp duty and the monthly loan before you treat the weekend result as a reason to proceed.\n\nIf you are still choosing a unit, judge what is left. The $2,900 psf average hides both the dearer homes and the cheaper ones. Of the 125 unsold homes, 123 were two-bedroom and two were five-bedroom suites.\n\nResale sellers near Upper Thomson should price against recent sales of similar homes, not only against this new-launch average. Buyers will ask why your condo costs more or less than $2,900 psf.",
+  "articleBody": "Project: Thomson Reserve, Bright Hill Drive, Upper Thomson\n\nDevelopers: UOL and CapitaLand Development\n\nSold: 1,143 of 1,268 units, about 90%, on 30–31 October 2026\n\nAverage price: about $2,900 per square foot\n\nWhat sold out: 3-bedroom and 4-bedroom types; most 5-bedroom homes\n\nWhat is left: 125 units, of which 123 were smaller 2-bedroom homes and 2 were 5-bedroom suites\n\nReported starting prices: about $1.5 million for a 2-bedroom and about $2.5 million for a 3-bedroom\n\nA 90% launch is a sign of interest, not proof you should buy. Work out the full price, the stamp duty and the monthly loan before you treat the weekend result as a reason to proceed.\n\nIf you are still choosing a unit, judge what is left. The $2,900 psf average hides both the dearer homes and the cheaper ones. Of the 125 unsold homes, 123 were two-bedroom and two were five-bedroom suites.\n\nResale sellers near Upper Thomson should price against recent sales of similar homes, not only against this new-launch average. Buyers will ask why your condo costs more or less than $2,900 psf.",
   "datePublished": "2026-11-02T08:00:00+08:00",
   "dateModified": "2026-11-02T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,8 +409,8 @@
     <p class="story-meta"><time class="story-date" datetime="2026-11-02"><span class="en">2026/11/02</span><span class="zh" lang="zh-Hans">2026年11月2日</span></time></p>
     <p class="source-name"><span class="en">Source: Business Times</span><span class="zh" lang="zh-Hans">来源：商业时报</span></p>
     <img class="hero" src="/news/images/9802.jpg" alt="" width="760" height="280" onerror="this.onerror=null;var n=document.createElement('div');n.className='hero hero-fallback';n.setAttribute('role','img');n.setAttribute('aria-label','Real Estate SG');n.textContent='Real Estate SG';this.replaceWith(n)">
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">Project: Thomson Reserve, Bright Hill Drive, Upper Thomson</span><span class="zh" lang="zh-Hans">项目：Thomson Reserve，光明山通道，汤申路上段</span></li>
         <li><span class="en">Developers: UOL and CapitaLand Development</span><span class="zh" lang="zh-Hans">发展商：华业集团（UOL）与凯德发展（CapitaLand Development）</span></li>
@@ -418,12 +421,6 @@
         <li><span class="en">Reported starting prices: about $1.5 million for a 2-bedroom and about $2.5 million for a 3-bedroom</span><span class="zh" lang="zh-Hans">报道中的起价：两房约150万新元，三房约250万新元</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">Thomson Reserve, the new condo by UOL and CapitaLand Development at Bright Hill Drive in Upper Thomson, sold 1,143 of its 1,268 units over the launch on 30 and 31 October 2026. That is about 90%. The average price of the units sold was about $2,900 per square foot. Most buyers were Singaporeans, buying both to live in and as an investment.</span><span class="zh" lang="zh-Hans">华业集团（UOL）与凯德发展（CapitaLand Development）在汤申路上段光明山通道的新私宅（condo）Thomson Reserve，于2026年10月30日和31日售出1268个单位中的1143个，约九成。售出单位的平均价格约每平方英尺2900新元（psf）。大部分买家是新加坡人，既有自住，也有投资。</span></p>
-      <p><span class="en">The preview drew about 32,000 visitors over two weekends. Three-bedroom and four-bedroom types sold out. Of the 125 homes left, 123 were smaller two-bedroom units and two were five-bedroom suites. Reported starting prices were about $1.5 million for a two-bedroom and about $2.5 million for a three-bedroom. PropNex chief executive Kelvin Fong said it was the highest launch-weekend sale of 2026 by number of units, ahead of the 853 units sold at Tengah Garden Residences in April.</span><span class="zh" lang="zh-Hans">两个周末的预览吸引了约3万2000人次。三房和四房单位售罄。剩下的125个单位里，123个是较小的两房单位，两个是五房套间。报道中的起价，两房约150万新元，三房约250万新元。博纳（PropNex）首席执行官Kelvin Fong说，以单位数量计算，这是2026年开盘周末售出最多的项目，超过今年4月登加Tengah Garden Residences售出的853个单位。</span></p>
-      <p><span class="en">A fast weekend tells you there was demand at that price, on those two days. It does not mean every remaining stack is worth the average. If you are still looking, the useful comparison is what is left. If you are selling a resale condo nearby, buyers may use $2,900 psf as a reference, so be ready to explain how your home is different.</span><span class="zh" lang="zh-Hans">一个周末卖得快，只说明那两天、在那个价格上有需求。这不代表剩下的每一叠单位都值那个平均价。如果你还在看，真正该比较的是还剩下什么。如果你在转售附近的私宅，买家可能会拿每平方英尺2900新元当参照，所以要准备好说明你的房子有什么不同。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>

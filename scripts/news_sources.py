@@ -1010,6 +1010,9 @@ def draft_copy(title: str, source_name: str) -> dict:
     ]
     facts = [f"Source named on this page: {source}", f"Headline: {title}"]
     facts.extend(f"Figure in the headline: {figure}" for figure in figures)
+    keypoints = [title if title.endswith((".", "?", "!")) else title + "."]
+    if figures:
+        keypoints.append("Figures named in the headline: " + ", ".join(figures) + ".")
     zh_title = chinese_headline(title)
     zh_summary = [
         f"{source}报道了这则新加坡房地产标题：{zh_title}。下面的说明是写给买家和卖家的，不是原文照搬。",
@@ -1028,12 +1031,16 @@ def draft_copy(title: str, source_name: str) -> dict:
     ]
     zh_facts = [f"本页来源：{source}", f"标题：{zh_title}"]
     zh_facts.extend(f"标题中的数字：{figure}" for figure in figures)
-    description = summary[0]
+    zh_keypoints = [zh_title if str(zh_title).endswith(("。", "？", "！")) else f"{zh_title}。"]
+    if figures:
+        zh_keypoints.append("标题里的数字：" + "、".join(figures) + "。")
+    description = keypoints[0]
     if len(description) > 158:
         description = description[:158].rsplit(" ", 1)[0].rstrip(".,;:") + "."
     return {
         "summary": summary,
         "facts": facts,
+        "keypoints": keypoints[:12],
         "takeaways": takeaways,
         "questions": questions,
         "description": description,
@@ -1042,6 +1049,7 @@ def draft_copy(title: str, source_name: str) -> dict:
             "title": zh_title,
             "summary": zh_summary,
             "facts": zh_facts,
+            "keypoints": zh_keypoints[:12],
             "takeaways": zh_takeaways,
             "questions": zh_questions,
         },

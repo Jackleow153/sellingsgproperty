@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "Even The Cheapest 4-Room HDB Flats Aren't Cheap Anymore — One Statistic Reveals Just How Rare $500K Flats Are",
   "description": "S$500,000 4-room HDB flats are described as rare. Check the town and the lease before you treat that number as the market.",
-  "articleBody": "Stacked Homes: S$500,000 4-room HDB flats are described as rare\n\nThe headline does not publish the statistic it mentions\n\nS$500,000 is not a national price for every 4-room\n\nTown and remaining lease change what that budget can buy\n\nStacked Homes says even the cheapest 4-room HDB flats are not cheap any more, and that flats at S$500,000 have become rare. The headline teases “one statistic” and does not give it. Do not fill that gap with a guess.\n\nS$500,000 can still be a real asking price in some towns and a fantasy in others. Lease, floor and the years left matter as much as the round number. A buyer hunting only for S$500,000 may be looking in the wrong town, or at flats with a short lease.\n\nSellers in towns where S$500,000 is now low should not assume every 4-room has cleared that bar. Buyers who can pay more should still ask what the extra money buys: a longer lease, a better floor, or simply a hotter estate.\n\nSearch current 4-room listings in the town you would live in. Rare in one headline is not the same as unavailable in every town.\n\nIf a S$500,000 flat appears, read the lease and the floor before you treat it as a bargain. A low price often has a reason.\n\nSellers should price from their town’s recent 4-room sales. A line about rare S$500,000 flats is not permission to add a premium with no comparable sale.",
+  "articleBody": "Stacked Homes: S$500,000 4-room HDB flats are described as rare\n\nS$500,000 is not a national price for every 4-room\n\nTown and remaining lease change what that budget can buy\n\nSearch current 4-room listings in the town you would live in. Rare in one headline is not the same as unavailable in every town.\n\nIf a S$500,000 flat appears, read the lease and the floor before you treat it as a bargain. A low price often has a reason.\n\nSellers should price from their town’s recent 4-room sales. A line about rare S$500,000 flats is not permission to add a premium with no comparable sale.",
   "datePublished": "2026-10-21T08:00:00+08:00",
   "dateModified": "2026-10-21T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,21 +409,14 @@
     <p class="story-meta"><time class="story-date" datetime="2026-10-21"><span class="en">2026/10/21</span><span class="zh" lang="zh-Hans">2026年10月21日</span></time></p>
     <p class="source-name"><span class="en">Source: Stacked Homes</span><span class="zh" lang="zh-Hans">来源：Stacked Homes</span></p>
     <div class="hero hero-fallback" role="img" aria-label="Real Estate SG">Real Estate SG</div>
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">Stacked Homes: S$500,000 4-room HDB flats are described as rare</span><span class="zh" lang="zh-Hans">Stacked Homes：50万新元的四房组屋被形容为少见</span></li>
-        <li><span class="en">The headline does not publish the statistic it mentions</span><span class="zh" lang="zh-Hans">标题没有公布它提到的那个统计数字</span></li>
         <li><span class="en">S$500,000 is not a national price for every 4-room</span><span class="zh" lang="zh-Hans">50万新元不是全岛每一套四房的价钱</span></li>
         <li><span class="en">Town and remaining lease change what that budget can buy</span><span class="zh" lang="zh-Hans">市镇和剩余屋契会改变这个预算买得到什么</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">Stacked Homes says even the cheapest 4-room HDB flats are not cheap any more, and that flats at S$500,000 have become rare. The headline teases “one statistic” and does not give it. Do not fill that gap with a guess.</span><span class="zh" lang="zh-Hans">Stacked Homes说，就算是最便宜的四房组屋也不便宜了，50万新元的单位已经变得少见。标题提起“一个统计”，但没有把数字写出来。不要自己补一个猜测。</span></p>
-      <p><span class="en">S$500,000 can still be a real asking price in some towns and a fantasy in others. Lease, floor and the years left matter as much as the round number. A buyer hunting only for S$500,000 may be looking in the wrong town, or at flats with a short lease.</span><span class="zh" lang="zh-Hans">50万新元在一些市镇仍可能是真实开价，在另一些市镇则不现实。屋契、楼层和剩余年数，和这个整数一样重要。只找50万新元的买家，可能找错了市镇，或找到的是屋契很短的房子。</span></p>
-      <p><span class="en">Sellers in towns where S$500,000 is now low should not assume every 4-room has cleared that bar. Buyers who can pay more should still ask what the extra money buys: a longer lease, a better floor, or simply a hotter estate.</span><span class="zh" lang="zh-Hans">在50万新元已经偏低的市镇，卖家也不该假设每一套四房都越过了这条线。付得起更多的买家，仍要问多出来的钱买到了什么：更长的屋契、更好的楼层，还是只是一个更热的邻里。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>

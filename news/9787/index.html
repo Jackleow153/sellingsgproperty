@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "About 11,000 homes planned on Maju Forest, Gillman Barracks sites with more greenery to be retained",
   "description": "About 11,000 homes are planned at Maju Forest and Gillman Barracks, including 9,500 public homes. What nearby buyers and sellers should treat as a long-term.",
-  "articleBody": "Sites: Maju Forest and Gillman Barracks\n\nHomes planned: about 11,000\n\nSplit: about 9,500 public homes and about 1,500 private units\n\nDesign change: more greenery kept, with some taller blocks\n\nTiming: a long-term plan, not a project on sale now\n\nRevised plans for the Maju Forest and Gillman Barracks sites set aside about 11,000 homes. About 9,500 would be public housing and about 1,500 private. The revision also keeps more greenery, with some blocks built taller so more land can stay open.\n\nThese homes are not for sale this month. A plan on this scale is carried out over many years. The first question for anyone nearby is what has actually been confirmed, and how close future blocks would sit to the home they care about.\n\nMore homes nearby can mean more people to support shops and transport. It can also mean more future competition, and a change to the view or the quiet edge that made the area attractive.\n\nTreat this as a long-term plan, not a BTO or a new launch you can book now. Ask what has been approved, and whether any date has been given for the first homes.\n\nIf trees, a view or a quiet edge are why you like a home nearby, look at the revised layout. Taller blocks and retained greenery change a view in different ways.\n\nSellers should not add a premium just because 11,000 homes are planned. Buyers pay for what they can use today, and they discount what is still uncertain.",
+  "articleBody": "Sites: Maju Forest and Gillman Barracks\n\nHomes planned: about 11,000\n\nSplit: about 9,500 public homes and about 1,500 private units\n\nDesign change: more greenery kept, with some taller blocks\n\nTiming: a long-term plan, not a project on sale now\n\nTreat this as a long-term plan, not a BTO or a new launch you can book now. Ask what has been approved, and whether any date has been given for the first homes.\n\nIf trees, a view or a quiet edge are why you like a home nearby, look at the revised layout. Taller blocks and retained greenery change a view in different ways.\n\nSellers should not add a premium just because 11,000 homes are planned. Buyers pay for what they can use today, and they discount what is still uncertain.",
   "datePublished": "2026-10-29T08:00:00+08:00",
   "dateModified": "2026-10-29T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,8 +409,8 @@
     <p class="story-meta"><time class="story-date" datetime="2026-10-29"><span class="en">2026/10/29</span><span class="zh" lang="zh-Hans">2026年10月29日</span></time></p>
     <p class="source-name"><span class="en">Source: Business Times</span><span class="zh" lang="zh-Hans">来源：商业时报</span></p>
     <img class="hero" src="/news/images/9787.jpg" alt="" width="760" height="280" onerror="this.onerror=null;var n=document.createElement('div');n.className='hero hero-fallback';n.setAttribute('role','img');n.setAttribute('aria-label','Real Estate SG');n.textContent='Real Estate SG';this.replaceWith(n)">
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">Sites: Maju Forest and Gillman Barracks</span><span class="zh" lang="zh-Hans">地段：Maju森林与吉门军营（Gillman Barracks）</span></li>
         <li><span class="en">Homes planned: about 11,000</span><span class="zh" lang="zh-Hans">计划中的住家：约1万1000个</span></li>
@@ -416,12 +419,6 @@
         <li><span class="en">Timing: a long-term plan, not a project on sale now</span><span class="zh" lang="zh-Hans">时间：长期计划，不是现在发售的项目</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">Revised plans for the Maju Forest and Gillman Barracks sites set aside about 11,000 homes. About 9,500 would be public housing and about 1,500 private. The revision also keeps more greenery, with some blocks built taller so more land can stay open.</span><span class="zh" lang="zh-Hans">Maju森林与吉门军营（Gillman Barracks）地段的修订计划，预留约1万1000个住家。其中约9500个是公共住房，约1500个是私人住宅。修订也保留更多绿化，部分组屋建得更高，好让更多土地保持开阔。</span></p>
-      <p><span class="en">These homes are not for sale this month. A plan on this scale is carried out over many years. The first question for anyone nearby is what has actually been confirmed, and how close future blocks would sit to the home they care about.</span><span class="zh" lang="zh-Hans">这些住家不是这个月发售。这个规模的计划要很多年才落实。附近的人首先该问的是：哪些已经确定，以及未来的楼宇会离自己在意的房子有多近。</span></p>
-      <p><span class="en">More homes nearby can mean more people to support shops and transport. It can also mean more future competition, and a change to the view or the quiet edge that made the area attractive.</span><span class="zh" lang="zh-Hans">附近多了住家，可以有更多人支撑商店和交通。它也可能带来更多未来的竞争，并改变当初让这个地区吸引人的景观或安静边缘。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>

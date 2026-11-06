@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "Million-dollar HDB resale transactions in Singapore climb to record 597 in Q3",
   "description": "Million-dollar HDB resales hit a record 597 in Q3 2026. That count is the top end, not the price of a typical flat.",
-  "articleBody": "Real Estate Asia: 597 million-dollar HDB resale transactions in Q3 2026, a record count\n\nThe figure counts flats sold at S$1 million or more\n\nIt is not the median price of all resale flats\n\nA busy top end can happen in the same quarter as a small move in the broad index\n\nReal Estate Asia reported that million-dollar HDB resale deals rose to a record 597 in the third quarter of 2026. That is a count of flats that crossed S$1 million. It is not the price of a typical resale flat, and it does not mean 597 towns each set a record.\n\nThese deals cluster in central and city-fringe estates, on longer leases and larger flat types. A 4-room in a suburban town can still trade far below S$1 million. Buyers who only read the count can think the whole market has jumped. Sellers outside those estates can think their flat should join the list.\n\nUse 597 as a sign that the top end of HDB resale was busy in that quarter. Then look at your flat type and your town. The separate Q3 price note, a 0.1% dip, can sit beside a record count. More expensive flats can change hands while the broad index barely moves.\n\nRead 597 as a count of S$1 million-and-above sales in Q3, not as the going rate for a 4-room.\n\nIf your estate is not in that top group, price from your own town and flat type. Buyers will not pay a million-dollar headline for a different flat.\n\nBuyers should separate the top-end count from the flat they can afford. A record number of expensive sales does not remove cheaper towns.",
+  "articleBody": "Real Estate Asia: 597 million-dollar HDB resale transactions in Q3 2026, a record count\n\nThe figure counts flats sold at S$1 million or more\n\nIt is not the median price of all resale flats\n\nA busy top end can happen in the same quarter as a small move in the broad index\n\nRead 597 as a count of S$1 million-and-above sales in Q3, not as the going rate for a 4-room.\n\nIf your estate is not in that top group, price from your own town and flat type. Buyers will not pay a million-dollar headline for a different flat.\n\nBuyers should separate the top-end count from the flat they can afford. A record number of expensive sales does not remove cheaper towns.",
   "datePublished": "2026-10-26T08:00:00+08:00",
   "dateModified": "2026-10-26T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,8 +409,8 @@
     <p class="story-meta"><time class="story-date" datetime="2026-10-26"><span class="en">2026/10/26</span><span class="zh" lang="zh-Hans">2026年10月26日</span></time></p>
     <p class="source-name"><span class="en">Source: Real Estate Asia</span><span class="zh" lang="zh-Hans">来源：Real Estate Asia</span></p>
     <div class="hero hero-fallback" role="img" aria-label="Real Estate SG">Real Estate SG</div>
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">Real Estate Asia: 597 million-dollar HDB resale transactions in Q3 2026, a record count</span><span class="zh" lang="zh-Hans">Real Estate Asia：2026年第三季百万组屋转售597宗，次数创纪录</span></li>
         <li><span class="en">The figure counts flats sold at S$1 million or more</span><span class="zh" lang="zh-Hans">这个数字计算的是售价达到或超过100万新元的组屋</span></li>
@@ -415,12 +418,6 @@
         <li><span class="en">A busy top end can happen in the same quarter as a small move in the broad index</span><span class="zh" lang="zh-Hans">顶端活跃，可以和整体指数的小幅变动出现在同一季</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">Real Estate Asia reported that million-dollar HDB resale deals rose to a record 597 in the third quarter of 2026. That is a count of flats that crossed S$1 million. It is not the price of a typical resale flat, and it does not mean 597 towns each set a record.</span><span class="zh" lang="zh-Hans">Real Estate Asia报道，2026年第三季，成交价达到100万新元的HDB转售升到597宗，是纪录。这是跨过100万新元的套数，不是一套普通转售组屋的价钱，也不代表597个市镇各自创了纪录。</span></p>
-      <p><span class="en">These deals cluster in central and city-fringe estates, on longer leases and larger flat types. A 4-room in a suburban town can still trade far below S$1 million. Buyers who only read the count can think the whole market has jumped. Sellers outside those estates can think their flat should join the list.</span><span class="zh" lang="zh-Hans">这类成交多半集中在中部和城市边缘、屋契较长、房型较大的邻里。郊区的四房仍然可以远低于100万新元。只看这个数字的买家，会以为整个市场都跳了。不在这些邻里的卖家，会以为自己的房子也该上这份名单。</span></p>
-      <p><span class="en">Use 597 as a sign that the top end of HDB resale was busy in that quarter. Then look at your flat type and your town. The separate Q3 price note, a 0.1% dip, can sit beside a record count. More expensive flats can change hands while the broad index barely moves.</span><span class="zh" lang="zh-Hans">把597看成那个季度组屋转售顶端比较活跃。然后再看你的房型和市镇。同一季的价格笔记可以是微跌0.1%，同时百万成交创纪录。高价的房子在换手，整体指数却几乎没动。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>

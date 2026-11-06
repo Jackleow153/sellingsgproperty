@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-05T17:17:52+08:00",
+  "updated": "2026-11-06T10:25:19+08:00",
   "sources": [
     "Singapore Business Review",
     "The Straits Times",
@@ -34,7 +34,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/ncce3da5c/",
-      "description": "Singapore Business Review carried this Singapore property headline: HDB to offer 4,300 BTO flats in February. The notes below are for buyers and sellers."
+      "description": "HDB will launch about 4,300 Build-To-Order flats in February 2027, across five projects in Toa Payoh, Bishan, Tampines and Tengah. There is one project each."
     },
     {
       "id": "9819",
@@ -46,7 +46,7 @@
       "sourceFeed": "propnex",
       "category": "Real estate",
       "path": "/news/9819/",
-      "description": "The Straits Times carried this Singapore property headline: Three new MRT stations in the east to open on Dec 26. The notes below are for buyers and sellers."
+      "description": "Three stations open on 26 December: Bedok South and Sungei Bedok on the Thomson-East Coast Line, and Xilin on the Downtown Line. Sungei Bedok is an."
     },
     {
       "id": "9817",
@@ -58,7 +58,7 @@
       "sourceFeed": "propnex",
       "category": "Real estate",
       "path": "/news/9817/",
-      "description": "Business Times carried this Singapore property headline: Small fraction of residential rent disputes involve corporate tenants; current laws protect."
+      "description": "Senior Minister of State for Law Murali Pillai told Parliament that only a small share of residential rent disputes in the Small Claims Tribunal involve a."
     },
     {
       "id": "n5e9c8190",
@@ -70,7 +70,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/n5e9c8190/",
-      "description": "99.co carried this Singapore property headline: Million-dollar HDB resales hit third straight monthly record in October 2026. The notes below are for buyers."
+      "description": "Unofficial figures from 99.co and SRX counted 238 HDB resale flats sold for at least $1 million in October 2026. That was the third month in a row with a new."
     },
     {
       "id": "n95c9965c",
@@ -82,7 +82,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/n95c9965c/",
-      "description": "EdgeProp.sg carried this Singapore property headline: Five-room flat in Bedok sold for $1.588 million, breaking the town’s HDB resale record for third time."
+      "description": "A five-room flat at Block 152B Bedok South Road, in Bedok South Horizon, sold for $1.588 million in November 2026, or about $1,305 per square foot. It is the."
     },
     {
       "id": "n179f206b",
@@ -94,7 +94,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/n179f206b/",
-      "description": "EdgeProp.sg carried this Singapore property headline: November BTO exercise launches nearly 8,000 flats, including Toa Payoh and Bayshore units. The headline."
+      "description": "HDB’s November 2026 Build-To-Order exercise launched 7,964 flats, close to the “nearly 8,000” in the headline. The flats are in seven projects across Bedok."
     },
     {
       "id": "nb873e1da",
@@ -106,7 +106,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/nb873e1da/",
-      "description": "AsiaOne carried this Singapore property headline: HDB launches 7,964 BTO flats across 6 towns in first exercise under higher income ceilings. The notes below."
+      "description": "HDB launched 7,964 Build-To-Order flats on 4 November 2026, the last sales exercise of the year. Seven projects are on sale in Bedok, Geylang, Sembawang."
     },
     {
       "id": "9811",
@@ -118,7 +118,7 @@
       "sourceFeed": "propnex",
       "category": "Real estate",
       "path": "/news/9811/",
-      "description": "The Straits Times carried this Singapore property headline: Luxury homes seized in $3b money laundering case prove a hard sell. The headline gives these."
+      "description": "A freehold unit at New Futura on Leonie Hill Road, owned by the wife of Wang Bingang, a suspect in the $3 billion money-laundering case, sold at auction on."
     },
     {
       "id": "nf63c9c83",
@@ -130,7 +130,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/nf63c9c83/",
-      "description": "The Independent Singapore carried this Singapore property headline: 5-room HDB flat with 94 years left on lease sold for S$1.8 billion; highest resale price."
+      "description": "The article’s own figure is S$1.818 million, not S$1.8 billion. That is the price of a five-room HDB resale in Queenstown, described as the highest on."
     },
     {
       "id": "nd682cbef",
@@ -142,7 +142,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/nd682cbef/",
-      "description": "99.co carried this Singapore property headline: Tampines executive flat sells for record S$1.275M, becoming the town’s second priciest HDB resale. The."
+      "description": "An executive flat at Block 938 Tampines Avenue 5, in Tampines Palmspring, sold for $1.275 million in November 2026. That is a new record for an executive."
     },
     {
       "id": "n8337ed06",
@@ -154,7 +154,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/n8337ed06/",
-      "description": "Tatler Asia carried this Singapore property headline: Home tour: how Peter Tay breathes new soul into a Good Class Bungalow once owned by a Singapore."
+      "description": "The piece is a home tour of a Good Class Bungalow whose interiors were designed by Peter Tay. The house was commissioned by a food entrepreneur for a family."
     },
     {
       "id": "n3abc175b",
@@ -166,7 +166,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/n3abc175b/",
-      "description": "Borneo Bulletin carried this Singapore property headline: Singapore explores build-to-rent model as demand for independent living grows. The notes below are."
+      "description": "The Ministry of National Development said home ownership remains central, and there is also demand for longer-stay rental housing from younger Singaporeans."
     },
     {
       "id": "na2f0567e",
@@ -178,7 +178,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/na2f0567e/",
-      "description": "SavePoint Gaming carried this Singapore property headline: IKEA Singapore and City Energy Partner on Smarter Home Design for BTO and HDB Owners. The notes."
+      "description": "IKEA Singapore has added Life by City Energy, the home-solutions arm of the town-gas provider, to its Home Design Service. The partnership was announced on 3."
     },
     {
       "id": "n261828b6",
@@ -190,7 +190,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/n261828b6/",
-      "description": "DollarsAndSense.sg carried this Singapore property headline: At What Point Does Lease Decay Start Affecting The Value Of Your HDB Flat?. The notes below are."
+      "description": "The article explains lease decay: an HDB flat is on a 99-year lease, and its value falls as that lease runs down. As of 2025, 77.2% of resident households."
     },
     {
       "id": "nc61398b4",
@@ -202,7 +202,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/nc61398b4/",
-      "description": "Real Estate Asia carried this Singapore property headline: Singapore HDB resale prices forecast to grow up to 1% in 2026. The headline gives these figures."
+      "description": "Realion revised its forecast for 2026 HDB resale prices to growth of 0% to 1%, from an earlier range of a 1% fall to 2% growth. It expects larger flats and."
     },
     {
       "id": "9806",
@@ -262,7 +262,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/n76aa293e/",
-      "description": "PropertyNet.SG carried this Singapore property headline: Sell HDB Before or After HIP 2026: Works Take About 18 Months, 10 Working Days in Your Flat. The."
+      "description": "HDB’s Home Improvement Programme booklet says a typical project takes about 18 months after a successful poll, while the work inside one flat usually takes."
     },
     {
       "id": "9799",
@@ -370,7 +370,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/ne142ee1d/",
-      "description": "FZINE Singapore carried this Singapore property headline: Get Your S*** Together: When Is The Right Time To Apply For A BTO With My Partner?. The notes below."
+      "description": "The article asks when a couple should apply together for a Build-To-Order flat. It is about timing, not a new launch. Clara says there is no fixed number of."
     },
     {
       "id": "n5a7c5eac",
@@ -382,7 +382,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/n5a7c5eac/",
-      "description": "8days.sg carried this Singapore property headline: Man Trespasses S'pore Couple's BTO Flat Twice, Brings Wife On Second Visit. The notes below are for buyers."
+      "description": "A Singapore couple said a man entered their BTO flat twice in late July, while it was being renovated. They did not name the location. They posted the."
     },
     {
       "id": "n17060ea2",
@@ -394,7 +394,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/n17060ea2/",
-      "description": "99.co carried this Singapore property headline: First S$1.8M HDB resale flat in Singapore recorded in Queenstown. The headline gives these figures: S$1.8M."
+      "description": "The recorded price is S$1.818 million for a five-room HDB resale in Queenstown. Reports described it as Singapore’s first HDB resale at about S$1.8 million."
     },
     {
       "id": "n49d504b4",
@@ -454,7 +454,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/n333c4ed0/",
-      "description": "EdgeProp.sg carried this Singapore property headline: UOB prices 38 Marina Collection units from $1,269 psf, below recent Sentosa Cove resales. The headline."
+      "description": "UOB is selling 38 units at Marina Collection in Sentosa Cove, with asking prices from $1,269 per square foot. The batch is 17 three-bedroom units and 21."
     },
     {
       "id": "n6e7db465",
@@ -466,7 +466,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/n6e7db465/",
-      "description": "EdgeProp.sg carried this Singapore property headline: Another duplex penthouse at Mon Jervois heads to auction, this time at $4.38 mil. The headline gives."
+      "description": "A duplex penthouse at Mon Jervois was listed for auction on 28 October 2026 with a guide price of $4.38 million. The report does not say it sold. It is an."
     },
     {
       "id": "n4d41823c",
@@ -550,7 +550,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/ne18b8d4b/",
-      "description": "AsiaOne carried this Singapore property headline: Woman, 61, found dead at foot of Jurong East HDB block. The notes below are for buyers and sellers. They."
+      "description": "A 61-year-old woman was found dead at the foot of Block 286A Toh Guan Road in Jurong East. This was at about 11.20am on Friday, 23 October 2026."
     },
     {
       "id": "9774",
@@ -574,7 +574,7 @@
       "sourceFeed": "business-times",
       "category": "Real estate",
       "path": "/news/n5b099b77/",
-      "description": "Business Times carried this Singapore property headline: Good Class Bungalow market activity picks up pace on ‘realistic’ pricing. The notes below are for."
+      "description": "A Business Times report by Kalpana Rashiwala, dated 16 October 2026 and updated on 22 October, says Good Class Bungalow deals have picked up when sellers."
     },
     {
       "id": "nd155cf8f",
@@ -586,7 +586,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/nd155cf8f/",
-      "description": "Real Estate Asia carried this Singapore property headline: Singapore's higher income ceiling may intensify November BTO competition. The notes below are for."
+      "description": "A 22 October report, written before the November launch, said the higher HDB income ceiling could make that exercise more competitive. From August 2026 the."
     },
     {
       "id": "n782ad530",
@@ -634,7 +634,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/n00054fe5/",
-      "description": "PropertyGuru carried this Singapore property headline: Cat Licensing in Singapore: What HDB Residents Need to Know. The notes below are for buyers and."
+      "description": "The transition for pet-cat licensing ran from 1 September 2024 to 31 August 2026. From 1 September 2026, keeping a pet cat without a licence is an offence."
     }
   ]
 }

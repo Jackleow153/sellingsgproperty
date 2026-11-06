@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "Private home launch pipeline set to climb to 14-year high in 2027",
   "description": "About 14,800 private homes could launch in 2027, the most since 2013. What that means for HDB upgraders and resale sellers.",
-  "articleBody": "Source of the forecast: Realion (OrangeTee) 2027 market outlook\n\nAbout 16,800 new homes in more than 30 projects, including five ECs\n\nAbout 14,800 private units excluding ECs, the most since 15,885 units in 2013\n\nWhere they sit: about 8,424 in the suburbs, 3,434 on the city fringe, 2,943 in the core central region\n\nProjects named: Bayshore Drive (about 1,280 units), Lentor Signature, Hougang Central Residences\n\nHome buyers are likely to have more new private projects to compare in 2027. Realion, the research arm of OrangeTee, expects more than 30 projects to be ready for launch, including five executive condominiums, yielding about 16,800 homes. Leave out the ECs and the estimate is about 14,800 private units, the most since 2013, when 15,885 units were launched.\n\nMore than half of those private units, about 8,424, are expected in the suburbs, outside the central region. About 3,434 are expected on the city fringe and about 2,943 in the core central region. Projects named as ones to watch include a 1,280-unit site at Bayshore Drive, Lentor Signature in Lentor Central, and Hougang Central Residences. Suburban prices are usually the ones HDB upgraders can reach.\n\nMore choice is not the same thing as lower prices. Land and construction still have to be paid for. If you need a home before 2027, waiting is a guess. If you are selling a resale flat or condo in the next year or two, some buyers may look at a new launch instead.\n\nMore launches in 2027 do not guarantee cheaper homes. Compare a home you can buy now with what it costs you to keep waiting.\n\nHDB upgraders who can wait should use the extra suburban supply to be picky about the MRT walk, the layout and the total price, not only a brochure discount.\n\nResale sellers should not assume a busy new launch nearby will lift their price. Some buyers will simply pick a 2027 project instead.",
+  "articleBody": "Source of the forecast: Realion (OrangeTee) 2027 market outlook\n\nAbout 16,800 new homes in more than 30 projects, including five ECs\n\nAbout 14,800 private units excluding ECs, the most since 15,885 units in 2013\n\nWhere they sit: about 8,424 in the suburbs, 3,434 on the city fringe, 2,943 in the core central region\n\nProjects named: Bayshore Drive (about 1,280 units), Lentor Signature, Hougang Central Residences\n\nMore launches in 2027 do not guarantee cheaper homes. Compare a home you can buy now with what it costs you to keep waiting.\n\nHDB upgraders who can wait should use the extra suburban supply to be picky about the MRT walk, the layout and the total price, not only a brochure discount.\n\nResale sellers should not assume a busy new launch nearby will lift their price. Some buyers will simply pick a 2027 project instead.",
   "datePublished": "2026-10-31T08:00:00+08:00",
   "dateModified": "2026-10-31T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,8 +409,8 @@
     <p class="story-meta"><time class="story-date" datetime="2026-10-31"><span class="en">2026/10/31</span><span class="zh" lang="zh-Hans">2026年10月31日</span></time></p>
     <p class="source-name"><span class="en">Source: The Straits Times</span><span class="zh" lang="zh-Hans">来源：海峡时报</span></p>
     <img class="hero" src="/news/images/9794.jpg" alt="" width="760" height="280" onerror="this.onerror=null;var n=document.createElement('div');n.className='hero hero-fallback';n.setAttribute('role','img');n.setAttribute('aria-label','Real Estate SG');n.textContent='Real Estate SG';this.replaceWith(n)">
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">Source of the forecast: Realion (OrangeTee) 2027 market outlook</span><span class="zh" lang="zh-Hans">预测来源：Realion（OrangeTee）2027年市场展望</span></li>
         <li><span class="en">About 16,800 new homes in more than 30 projects, including five ECs</span><span class="zh" lang="zh-Hans">超过30个项目、约1万6800个新住家，包括五个执行共管公寓（EC）</span></li>
@@ -416,12 +419,6 @@
         <li><span class="en">Projects named: Bayshore Drive (about 1,280 units), Lentor Signature, Hougang Central Residences</span><span class="zh" lang="zh-Hans">被点名的项目：碧湾通道（约1280个单位）、Lentor Signature、Hougang Central Residences</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">Home buyers are likely to have more new private projects to compare in 2027. Realion, the research arm of OrangeTee, expects more than 30 projects to be ready for launch, including five executive condominiums, yielding about 16,800 homes. Leave out the ECs and the estimate is about 14,800 private units, the most since 2013, when 15,885 units were launched.</span><span class="zh" lang="zh-Hans">2027年，购房者可能会有更多新的私人项目可以比较。OrangeTee旗下研究机构Realion预计，超过30个项目会准备好推出，包括五个执行共管公寓（EC），合计约1万6800个住家。剔除执行共管公寓后，私人单位约1万4800个，是2013年推出1万5885个单位以来最多的一年。</span></p>
-      <p><span class="en">More than half of those private units, about 8,424, are expected in the suburbs, outside the central region. About 3,434 are expected on the city fringe and about 2,943 in the core central region. Projects named as ones to watch include a 1,280-unit site at Bayshore Drive, Lentor Signature in Lentor Central, and Hougang Central Residences. Suburban prices are usually the ones HDB upgraders can reach.</span><span class="zh" lang="zh-Hans">这些私人单位超过一半、约8424个，预计位于中央区以外的郊区。约3434个在城市边缘，约2943个在核心中央区。被点名值得留意的项目，包括碧湾通道一块约1280个单位的地段、伦多的Lentor Signature，以及后港的Hougang Central Residences。郊区的价格，通常才是组屋升级者够得着的。</span></p>
-      <p><span class="en">More choice is not the same thing as lower prices. Land and construction still have to be paid for. If you need a home before 2027, waiting is a guess. If you are selling a resale flat or condo in the next year or two, some buyers may look at a new launch instead.</span><span class="zh" lang="zh-Hans">选择多，不等于价格更低。地价和建筑成本仍然要付。如果你在2027年之前就需要房子，等待只是一个猜测。如果你在未来一两年出售转售组屋或公寓，有些买家可能会转去看新盘。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>

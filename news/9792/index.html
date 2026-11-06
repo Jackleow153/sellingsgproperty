@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "Hao Mart founder halts foreclosure of his Jervois Hill bungalow by OG",
   "description": "A Jervois Hill bungalow foreclosure was halted. What one landed loan does, and does not, say about Singapore property prices.",
-  "articleBody": "Property: a bungalow on Jervois Hill\n\nWhat was halted: a foreclosure by OG\n\nWhat a foreclosure is: a lender moving to sell because the loan is not being paid as agreed\n\nWhat it is not: a completed sale, or a signal that landed prices nearby have reset\n\nThe founder of Hao Mart has halted a foreclosure of his bungalow on Jervois Hill by OG. A foreclosure is when a lender moves to sell a home because the loan is not being paid as agreed. Halting it means that forced sale is paused.\n\nThe debt has not vanished, and the house has not changed hands. This is one owner’s loan on one landed house. It is not a wave of bungalows being dumped on the market, and it is not a new price for Jervois Hill.\n\nIt is still a useful reminder. A valuable home can be pushed toward a sale if the repayments stop. When a home is sold under pressure, the price is not always a fair reading of the street.\n\nDo not read one paused foreclosure as a sign that landed prices in the area are falling. It is one loan, not the whole market.\n\nIf you are offered a home from a lender sale, check the condition, what is still owed, and what similar houses nearby actually sold for before you call it a bargain.\n\nKeep your own loan at a level you can pay in a bad year. A valuable home does not protect you if the repayments stop.",
+  "articleBody": "Property: a bungalow on Jervois Hill\n\nWhat was halted: a foreclosure by OG\n\nWhat a foreclosure is: a lender moving to sell because the loan is not being paid as agreed\n\nWhat it is not: a completed sale, or a signal that landed prices nearby have reset\n\nDo not read one paused foreclosure as a sign that landed prices in the area are falling. It is one loan, not the whole market.\n\nIf you are offered a home from a lender sale, check the condition, what is still owed, and what similar houses nearby actually sold for before you call it a bargain.\n\nKeep your own loan at a level you can pay in a bad year. A valuable home does not protect you if the repayments stop.",
   "datePublished": "2026-10-30T08:00:00+08:00",
   "dateModified": "2026-10-30T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,8 +409,8 @@
     <p class="story-meta"><time class="story-date" datetime="2026-10-30"><span class="en">2026/10/30</span><span class="zh" lang="zh-Hans">2026年10月30日</span></time></p>
     <p class="source-name"><span class="en">Source: The Straits Times</span><span class="zh" lang="zh-Hans">来源：海峡时报</span></p>
     <img class="hero" src="/news/images/9792.jpg" alt="" width="760" height="280" onerror="this.onerror=null;var n=document.createElement('div');n.className='hero hero-fallback';n.setAttribute('role','img');n.setAttribute('aria-label','Real Estate SG');n.textContent='Real Estate SG';this.replaceWith(n)">
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">Property: a bungalow on Jervois Hill</span><span class="zh" lang="zh-Hans">房产：佐沃士山（Jervois Hill）的一栋洋房</span></li>
         <li><span class="en">What was halted: a foreclosure by OG</span><span class="zh" lang="zh-Hans">被暂缓的事：OG进行的法拍</span></li>
@@ -415,12 +418,6 @@
         <li><span class="en">What it is not: a completed sale, or a signal that landed prices nearby have reset</span><span class="zh" lang="zh-Hans">它不是什么：不是一宗已完成的交易，也不代表附近有地住宅的价格已经重订</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">The founder of Hao Mart has halted a foreclosure of his bungalow on Jervois Hill by OG. A foreclosure is when a lender moves to sell a home because the loan is not being paid as agreed. Halting it means that forced sale is paused.</span><span class="zh" lang="zh-Hans">Hao Mart创办人暂缓了OG对其佐沃士山（Jervois Hill）洋房的法拍。法拍是指贷款人因为贷款没有按约定偿还，而着手出售房子。暂缓意味着这场被迫出售先停下来。</span></p>
-      <p><span class="en">The debt has not vanished, and the house has not changed hands. This is one owner’s loan on one landed house. It is not a wave of bungalows being dumped on the market, and it is not a new price for Jervois Hill.</span><span class="zh" lang="zh-Hans">债务没有消失，房子也没有转手。这是一个业主、一栋有地住宅上的一笔贷款。这不是一整片洋房被抛售，也不是佐沃士山的新价格。</span></p>
-      <p><span class="en">It is still a useful reminder. A valuable home can be pushed toward a sale if the repayments stop. When a home is sold under pressure, the price is not always a fair reading of the street.</span><span class="zh" lang="zh-Hans">它仍然是一个有用的提醒。还款一停，一套值钱的房子也可能被推向出售。在压力下卖出的房子，价格不一定能公平反映那条街的行情。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>

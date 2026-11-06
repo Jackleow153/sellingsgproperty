@@ -31,7 +31,7 @@
   "@type": "NewsArticle",
   "headline": "Why Singapore is exploring build-to-rent",
   "description": "Why Singapore is exploring build-to-rent, and what it means for people who rent now and hope to buy an HDB flat or condo later.",
-  "articleBody": "Build-to-rent: homes built to be rented, not sold off at launch\n\nWhy it is being discussed: demand for a private place before a mortgage\n\nWho is driving interest: younger Singaporeans who want to live on their own\n\nStatus: being explored, not a project you can book\n\nBuild-to-rent means a block is built and then rented out over many years, instead of being carved up and sold to individual buyers at a new launch. Singapore is looking at it because more people want a private home before they take on a mortgage.\n\nThe demand described in the reports is practical: younger Singaporeans want their own front door, not a room in someone else’s flat. Privacy and a stable place to live come first. Buying an HDB flat or a condo is a much larger step, and many are not there yet.\n\nThis is still an idea. It is not a showflat, and it does not change today’s resale prices. The only useful test is whether the rent would leave enough money to keep saving.\n\nRenting can be a sensible bridge if the monthly cost still lets you save for an HDB or condo down payment. Add the rent, your other bills, and what is left.\n\nA headline about a new way to rent is not a reason to rush a new launch or a resale purchase. Buy when the monthly loan is comfortable.\n\nIf you are selling or renting out an investment unit, watch whether tenants later prefer purpose-built rental homes. An older condo may need a sharper rent or better condition to compete.",
+  "articleBody": "Build-to-rent: homes built to be rented, not sold off at launch\n\nWhy it is being discussed: demand for a private place before a mortgage\n\nWho is driving interest: younger Singaporeans who want to live on their own\n\nStatus: being explored, not a project you can book\n\nRenting can be a sensible bridge if the monthly cost still lets you save for an HDB or condo down payment. Add the rent, your other bills, and what is left.\n\nA headline about a new way to rent is not a reason to rush a new launch or a resale purchase. Buy when the monthly loan is comfortable.\n\nIf you are selling or renting out an investment unit, watch whether tenants later prefer purpose-built rental homes. An older condo may need a sharper rent or better condition to compete.",
   "datePublished": "2026-11-02T08:00:00+08:00",
   "dateModified": "2026-11-02T08:00:00+08:00",
   "inLanguage": "en-SG",
@@ -55,8 +55,7 @@
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [
-      ".facts li",
-      ".summary p",
+      ".keypoints li",
       ".takeaways li"
     ]
   }
@@ -247,26 +246,30 @@
       text-align: center;
       line-height: 1.2;
     }
-    .summary h2,
-    .facts h2 {
+    .keypoints h2 {
       margin: 28px 0 8px;
       font-size: 1.25rem;
       letter-spacing: -0.02em;
     }
-    .summary p {
-      color: #ececec;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin: 1.15rem 0;
-    }
-    .facts ul { margin: 0; padding: 0; list-style: none; }
-    .facts li {
+    .keypoints ul { margin: 0; padding: 0; list-style: none; }
+    .keypoints li {
+      position: relative;
       margin: 0;
-      padding: 10px 0;
+      padding: 12px 0 12px 18px;
       border-bottom: 1px solid var(--line);
       color: #f2f2f2;
-      line-height: 1.5;
-      font-size: 1rem;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+    .keypoints li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
     }
     .takeaways {
       margin-top: 36px;
@@ -358,7 +361,7 @@
       h1 { font-size: 1.45rem; }
       .hero { height: 190px; }
       .hero-fallback { font-size: 1.05rem; letter-spacing: 0.05em; }
-      .summary p, .takeaways li { font-size: 1rem; }
+      .keypoints li, .takeaways li { font-size: 1rem; }
       .lang-switch button { padding: 8px 12px; }
     }
 </style>
@@ -406,8 +409,8 @@
     <p class="story-meta"><time class="story-date" datetime="2026-11-02"><span class="en">2026/11/02</span><span class="zh" lang="zh-Hans">2026年11月2日</span></time></p>
     <p class="source-name"><span class="en">Source: The Straits Times</span><span class="zh" lang="zh-Hans">来源：海峡时报</span></p>
     <img class="hero" src="/news/images/9805.jpg" alt="" width="760" height="280" onerror="this.onerror=null;var n=document.createElement('div');n.className='hero hero-fallback';n.setAttribute('role','img');n.setAttribute('aria-label','Real Estate SG');n.textContent='Real Estate SG';this.replaceWith(n)">
-    <section class="facts" aria-labelledby="facts-heading">
-      <h2 id="facts-heading"><span class="en">Key facts</span><span class="zh" lang="zh-Hans">重点</span></h2>
+    <section class="keypoints" aria-labelledby="keypoints-heading">
+      <h2 id="keypoints-heading"><span class="en">Key points</span><span class="zh" lang="zh-Hans">要点</span></h2>
       <ul>
         <li><span class="en">Build-to-rent: homes built to be rented, not sold off at launch</span><span class="zh" lang="zh-Hans">建造供出租：住房建来出租，而不是在开盘时卖出</span></li>
         <li><span class="en">Why it is being discussed: demand for a private place before a mortgage</span><span class="zh" lang="zh-Hans">讨论原因：人们希望在承担房贷前先有私人住所</span></li>
@@ -415,12 +418,6 @@
         <li><span class="en">Status: being explored, not a project you can book</span><span class="zh" lang="zh-Hans">现状：仍在探讨，不是可以预订的项目</span></li>
       </ul>
     </section>
-    <div class="summary">
-      <h2><span class="en">What this means</span><span class="zh" lang="zh-Hans">这对你意味着什么</span></h2>
-      <p><span class="en">Build-to-rent means a block is built and then rented out over many years, instead of being carved up and sold to individual buyers at a new launch. Singapore is looking at it because more people want a private home before they take on a mortgage.</span><span class="zh" lang="zh-Hans">建造供出租（build-to-rent）是指一整栋房子建好后，多年来用来出租，而不是在新盘时分割卖给个别买家。新加坡在研究这个做法，是因为更多人希望在承担房贷之前，先有一个属于自己的住处。</span></p>
-      <p><span class="en">The demand described in the reports is practical: younger Singaporeans want their own front door, not a room in someone else’s flat. Privacy and a stable place to live come first. Buying an HDB flat or a condo is a much larger step, and many are not there yet.</span><span class="zh" lang="zh-Hans">报道里的需求很实际：年轻新加坡人想要自己的家门，而不是住在别人家里的一个房间。隐私和稳定的住处排在前面。购买HDB组屋或公寓是大得多的一步，很多人还没到那一步。</span></p>
-      <p><span class="en">This is still an idea. It is not a showflat, and it does not change today’s resale prices. The only useful test is whether the rent would leave enough money to keep saving.</span><span class="zh" lang="zh-Hans">这仍是一个构想。它不是示范单位，也不会改变今天的转售价格。唯一有用的检验是：这样的租金是否仍让你存得下钱。</span></p>
-    </div>
     <section class="takeaways" aria-labelledby="takeaways-heading">
       <h2 id="takeaways-heading"><span class="en">3 Takeaways for Buyers &amp; Sellers</span><span class="zh" lang="zh-Hans">给买家与卖家的3个要点</span></h2>
       <ul>
