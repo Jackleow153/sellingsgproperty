@@ -995,17 +995,20 @@ def draft_copy(title: str, source_name: str) -> dict:
         seller + " If you are timing a sale or an HDB upgrade, use the figure as a question to research, then confirm it on the official data or the listing itself.",
     ]
     questions = [
-        "What should a buyer check before acting on this headline?",
-        "What should a seller avoid assuming?",
-        "Which figure, if any, is safe to repeat?",
+        "Should a buyer act on this now, or is waiting the stronger side of the headline?",
+        "Who feels this on the selling side, and who is the likely buyer?",
+        "What direction does this set for that part of the market?",
     ]
     takeaways = [
-        buyer + " Walk away from any purchase that only makes sense because of a headline.",
-        seller + " Show the lease, the size and recent nearby sales rather than a screenshot of the news.",
-        (
-            "Only repeat figures that are in the headline"
-            + (": " + ", ".join(figures) + "." if figures else ".")
-            + " Do not fill gaps with a guess about grants, timing or a project that was not named."
+        buyer
+        + " Waiting only helps if a later supply or a real price gap is already in the headline. A headline by itself is not a reason to rush or to pause.",
+        seller
+        + " The buyer they meet is still comparing a specific home with nearby sales, not reacting to the news line.",
+        "Read the direction from what the headline actually is. One record can leave ordinary homes unchanged. A supply story shows up only when those homes are on sale. "
+        + (
+            "The figures named are " + ", ".join(figures) + ". Nothing beyond those figures is established."
+            if figures
+            else "No figure in the headline is established as a market-wide move."
         ),
     ]
     facts = [f"Source named on this page: {source}", f"Headline: {title}"]
@@ -1020,14 +1023,14 @@ def draft_copy(title: str, source_name: str) -> dict:
         "卖房的人不要把一条标题直接套到自己的单位上。准备出售或从组屋升级时，把数字当成要去核实的问题，再对照官方数据或真实挂牌。",
     ]
     zh_questions = [
-        "买家在根据这则标题行动之前该核对什么？",
-        "卖家不该擅自假设什么？",
-        "哪些数字可以复述？",
+        "买家该现在行动，还是等一等更有利？",
+        "卖家这边谁会受影响，未来的买家是谁？",
+        "这对这一块市场的方向说明什么？",
     ]
     zh_takeaways = [
-        "买家要核对房子、地点和每月能负担的开销。只因为一条标题而划算的交易，就不该成交。",
-        "卖家要用屋契、面积和附近的成交来回答问题，而不是只拿出新闻截图。",
-        "只复述标题里出现的数字。标题没有写的补助、时间表或项目名称，不要自己补。",
+        "只有标题里已经写明稍后会有供应，或者价钱上真有差距，等待才有意义。一条标题本身不是抢买或暂停的理由。",
+        "卖家遇到的买家，比的仍是某一套房子和附近的成交，不是新闻标题。",
+        "方向要看标题实际在说什么。一宗高价可以和普通房子无关。供应的影响要等那些房子真正开卖才出现。标题没有写出的数字，不能当成已经发生的事。",
     ]
     zh_facts = [f"本页来源：{source}", f"标题：{zh_title}"]
     zh_facts.extend(f"标题中的数字：{figure}" for figure in figures)
