@@ -1180,6 +1180,7 @@ def render_detail_page(item: dict, copy: dict) -> str:
     </section>
   </article>
   <script>{MENU_JS}{LANG_JS}</script>
+  <script src="/js/content-protect.js"></script>
 </body>
 </html>
 """
