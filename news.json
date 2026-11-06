@@ -1,40 +1,98 @@
 {
-  "updated": "2026-11-06T10:25:19+08:00",
+  "updated": "2026-11-06T16:12:05+08:00",
   "sources": [
-    "Singapore Business Review",
     "The Straits Times",
-    "Business Times",
+    "PropertyNet.SG",
     "99.co",
-    "EdgeProp.sg",
     "AsiaOne",
+    "Business Times",
+    "Singapore Business Review",
+    "EdgeProp.sg",
     "The Independent Singapore",
     "Tatler Asia",
     "Borneo Bulletin",
     "SavePoint Gaming",
     "DollarsAndSense.sg",
     "Real Estate Asia",
-    "PropertyNet.SG",
     "CNA",
     "Vulcan Post",
     "FZINE Singapore",
     "8days.sg",
     "EdgeProp Singapore",
-    "Mingtiandi",
-    "Stacked Homes",
-    "PropertyGuru"
+    "Mingtiandi"
   ],
   "items": [
     {
-      "id": "ncce3da5c",
-      "title": "HDB to offer 4,300 BTO flats in February",
-      "date": "2026/11/05",
+      "id": "n811ee041",
+      "title": "SingPost H1 profit up 183.7% at $55.9 million on sale and leaseback of HDB shophouses",
+      "date": "2026/11/06",
       "image": "/news/images/placeholder.svg",
-      "sourceName": "Singapore Business Review",
-      "sourceNameZh": "新加坡商业评论",
+      "sourceName": "The Straits Times",
+      "sourceNameZh": "海峡时报",
       "sourceFeed": "google-news",
       "category": "Real estate",
-      "path": "/news/ncce3da5c/",
-      "description": "HDB will launch about 4,300 Build-To-Order flats in February 2027, across five projects in Toa Payoh, Bishan, Tampines and Tengah. There is one project each."
+      "path": "/news/n811ee041/",
+      "description": "SingPost H1 profit up 183.7% at $55.9 million on sale and leaseback of HDB shophouses."
+    },
+    {
+      "id": "n5a68e6e0",
+      "title": "Selling a Jurong West HDB Flat 2026: 4-Room Median $534,500 and What You Can Upgrade To",
+      "date": "2026/11/06",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "PropertyNet.SG",
+      "sourceNameZh": "PropertyNet.SG",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n5a68e6e0/",
+      "description": "Selling a Jurong West HDB Flat 2026: 4-Room Median $534,500 and What You Can Upgrade To."
+    },
+    {
+      "id": "9824",
+      "title": "Bishan flats with shorter waiting times among BTO launches in February",
+      "date": "2026/11/06",
+      "image": "/news/images/9824.jpg",
+      "sourceName": "The Straits Times",
+      "sourceNameZh": "海峡时报",
+      "sourceFeed": "propnex",
+      "category": "Real estate",
+      "path": "/news/9824/",
+      "description": "Bishan flats with shorter waiting times among BTO launches in February."
+    },
+    {
+      "id": "n3a4efa83",
+      "title": "November 2026 BTO launch: 7 standout features buyers should know",
+      "date": "2026/11/05",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "99.co",
+      "sourceNameZh": "99.co",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n3a4efa83/",
+      "description": "November 2026 BTO launch: 7 standout features buyers should know."
+    },
+    {
+      "id": "nb18cf7d2",
+      "title": "Feb 2027 BTO launch to include second Mount Pleasant project, Bishan flats with shorter waiting times",
+      "date": "2026/11/05",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "The Straits Times",
+      "sourceNameZh": "海峡时报",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/nb18cf7d2/",
+      "description": "Feb 2027 BTO launch to include second Mount Pleasant project, Bishan flats with shorter waiting times."
+    },
+    {
+      "id": "n4f045ca0",
+      "title": "Chee Hong Tat pledges continued HDB cooperation to weed out errant heartland massage parlours",
+      "date": "2026/11/05",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "AsiaOne",
+      "sourceNameZh": "亚洲新闻网",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n4f045ca0/",
+      "description": "Chee Hong Tat pledges continued HDB cooperation to weed out errant heartland massage parlours."
     },
     {
       "id": "9819",
@@ -59,6 +117,18 @@
       "category": "Real estate",
       "path": "/news/9817/",
       "description": "Senior Minister of State for Law Murali Pillai told Parliament that only a small share of residential rent disputes in the Small Claims Tribunal involve a."
+    },
+    {
+      "id": "ncce3da5c",
+      "title": "HDB to offer 4,300 BTO flats in February",
+      "date": "2026/11/05",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Singapore Business Review",
+      "sourceNameZh": "新加坡商业评论",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/ncce3da5c/",
+      "description": "HDB will launch about 4,300 Build-To-Order flats in February 2027, across five projects in Toa Payoh, Bishan, Tampines and Tengah. There is one project each."
     },
     {
       "id": "n5e9c8190",
@@ -563,78 +633,6 @@
       "category": "Real estate",
       "path": "/news/9774/",
       "description": "One-bedroom condos can be easy to rent and hard to sell. Investors should check resale demand, not only the rent."
-    },
-    {
-      "id": "n5b099b77",
-      "title": "Good Class Bungalow market activity picks up pace on ‘realistic’ pricing",
-      "date": "2026/10/22",
-      "image": "/news/images/n5b099b77.webp",
-      "sourceName": "Business Times",
-      "sourceNameZh": "商业时报",
-      "sourceFeed": "business-times",
-      "category": "Real estate",
-      "path": "/news/n5b099b77/",
-      "description": "A Business Times report by Kalpana Rashiwala, dated 16 October 2026 and updated on 22 October, says Good Class Bungalow deals have picked up when sellers."
-    },
-    {
-      "id": "nd155cf8f",
-      "title": "Singapore's higher income ceiling may intensify November BTO competition",
-      "date": "2026/10/22",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Real Estate Asia",
-      "sourceNameZh": "Real Estate Asia",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/nd155cf8f/",
-      "description": "A 22 October report, written before the November launch, said the higher HDB income ceiling could make that exercise more competitive. From August 2026 the."
-    },
-    {
-      "id": "n782ad530",
-      "title": "HDB resale transactions jump 19.5% q-o-q in 3Q2026 amid policy changes",
-      "date": "2026/10/22",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "EdgeProp Singapore",
-      "sourceNameZh": "EdgeProp",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n782ad530/",
-      "description": "HDB resale deals jumped 19.5% in Q3 2026. That is more transactions, not a 19.5% rise in prices."
-    },
-    {
-      "id": "nea3ce065",
-      "title": "Even The Cheapest 4-Room HDB Flats Aren't Cheap Anymore — One Statistic Reveals Just How Rare $500K Flats Are",
-      "date": "2026/10/21",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Stacked Homes",
-      "sourceNameZh": "Stacked Homes",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/nea3ce065/",
-      "description": "S$500,000 4-room HDB flats are described as rare. Check the town and the lease before you treat that number as the market."
-    },
-    {
-      "id": "9770",
-      "title": "En bloc sales of old condos: Offer affected owners ABSD concessions for replacement homes",
-      "date": "2026/10/20",
-      "image": "/news/images/9770.jpg",
-      "sourceName": "Business Times",
-      "sourceNameZh": "商业时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9770/",
-      "description": "A commentary says en bloc owners should get ABSD relief on a replacement home. That is an argument, not a new rule."
-    },
-    {
-      "id": "n00054fe5",
-      "title": "Cat Licensing in Singapore: What HDB Residents Need to Know",
-      "date": "2026/10/20",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "PropertyGuru",
-      "sourceNameZh": "PropertyGuru",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n00054fe5/",
-      "description": "The transition for pet-cat licensing ran from 1 September 2024 to 31 August 2026. From 1 September 2026, keeping a pet cat without a licence is an offence."
     }
   ]
 }
