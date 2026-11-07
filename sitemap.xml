@@ -34,6 +34,12 @@
   </url>
   <!-- news-details:start -->
   <url>
+    <loc>https://www.sellingsgproperty.com/news/9824/</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.sellingsgproperty.com/news/n811ee041/</loc>
     <lastmod>2026-11-06</lastmod>
     <changefreq>monthly</changefreq>
@@ -46,8 +52,20 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.sellingsgproperty.com/news/9824/</loc>
-    <lastmod>2026-11-06</lastmod>
+    <loc>https://www.sellingsgproperty.com/news/n15c8d016/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sellingsgproperty.com/news/9819/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.sellingsgproperty.com/news/9817/</loc>
+    <lastmod>2026-11-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -65,18 +83,6 @@
   </url>
   <url>
     <loc>https://www.sellingsgproperty.com/news/n4f045ca0/</loc>
-    <lastmod>2026-11-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sellingsgproperty.com/news/9819/</loc>
-    <lastmod>2026-11-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sellingsgproperty.com/news/9817/</loc>
     <lastmod>2026-11-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -330,12 +336,6 @@
   <url>
     <loc>https://www.sellingsgproperty.com/news/ne18b8d4b/</loc>
     <lastmod>2026-10-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.sellingsgproperty.com/news/9774/</loc>
-    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

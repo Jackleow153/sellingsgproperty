@@ -1,11 +1,11 @@
 {
-  "updated": "2026-11-06T16:12:05+08:00",
+  "updated": "2026-11-07T15:29:12+08:00",
   "sources": [
     "The Straits Times",
     "PropertyNet.SG",
+    "Business Times",
     "99.co",
     "AsiaOne",
-    "Business Times",
     "Singapore Business Review",
     "EdgeProp.sg",
     "The Independent Singapore",
@@ -22,6 +22,18 @@
     "Mingtiandi"
   ],
   "items": [
+    {
+      "id": "9824",
+      "title": "Bishan flats with shorter waiting times among BTO launches in February",
+      "date": "2026/11/06",
+      "image": "/news/images/9824.jpg",
+      "sourceName": "The Straits Times",
+      "sourceNameZh": "海峡时报",
+      "sourceFeed": "propnex",
+      "category": "Real estate",
+      "path": "/news/9824/",
+      "description": "Bishan flats with shorter waiting times among BTO launches in February."
+    },
     {
       "id": "n811ee041",
       "title": "SingPost H1 profit up 183.7% at $55.9 million on sale and leaseback of HDB shophouses",
@@ -47,16 +59,40 @@
       "description": "Selling a Jurong West HDB Flat 2026: 4-Room Median $534,500 and What You Can Upgrade To."
     },
     {
-      "id": "9824",
-      "title": "Bishan flats with shorter waiting times among BTO launches in February",
-      "date": "2026/11/06",
-      "image": "/news/images/9824.jpg",
+      "id": "n15c8d016",
+      "title": "Bayshore Sails BTO 2026: What Bedok HDB Owners Selling Now Face, 4-Room Median $600,000",
+      "date": "2026/11/05",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "PropertyNet.SG",
+      "sourceNameZh": "PropertyNet.SG",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n15c8d016/",
+      "description": "Bayshore Sails BTO 2026: What Bedok HDB Owners Selling Now Face, 4-Room Median $600,000."
+    },
+    {
+      "id": "9819",
+      "title": "Three new MRT stations in the east to open on Dec 26",
+      "date": "2026/11/05",
+      "image": "/news/images/9819.jpg",
       "sourceName": "The Straits Times",
       "sourceNameZh": "海峡时报",
       "sourceFeed": "propnex",
       "category": "Real estate",
-      "path": "/news/9824/",
-      "description": "Bishan flats with shorter waiting times among BTO launches in February."
+      "path": "/news/9819/",
+      "description": "Three stations open on 26 December: Bedok South and Sungei Bedok on the Thomson-East Coast Line, and Xilin on the Downtown Line. Sungei Bedok is an."
+    },
+    {
+      "id": "9817",
+      "title": "Small fraction of residential rent disputes involve corporate tenants; current laws protect landlords: Murali",
+      "date": "2026/11/05",
+      "image": "/news/images/9817.jpg",
+      "sourceName": "Business Times",
+      "sourceNameZh": "商业时报",
+      "sourceFeed": "propnex",
+      "category": "Real estate",
+      "path": "/news/9817/",
+      "description": "Senior Minister of State for Law Murali Pillai told Parliament that only a small share of residential rent disputes in the Small Claims Tribunal involve a."
     },
     {
       "id": "n3a4efa83",
@@ -93,30 +129,6 @@
       "category": "Real estate",
       "path": "/news/n4f045ca0/",
       "description": "Chee Hong Tat pledges continued HDB cooperation to weed out errant heartland massage parlours."
-    },
-    {
-      "id": "9819",
-      "title": "Three new MRT stations in the east to open on Dec 26",
-      "date": "2026/11/05",
-      "image": "/news/images/9819.jpg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9819/",
-      "description": "Three stations open on 26 December: Bedok South and Sungei Bedok on the Thomson-East Coast Line, and Xilin on the Downtown Line. Sungei Bedok is an."
-    },
-    {
-      "id": "9817",
-      "title": "Small fraction of residential rent disputes involve corporate tenants; current laws protect landlords: Murali",
-      "date": "2026/11/05",
-      "image": "/news/images/9817.jpg",
-      "sourceName": "Business Times",
-      "sourceNameZh": "商业时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9817/",
-      "description": "Senior Minister of State for Law Murali Pillai told Parliament that only a small share of residential rent disputes in the Small Claims Tribunal involve a."
     },
     {
       "id": "ncce3da5c",
@@ -621,18 +633,6 @@
       "category": "Real estate",
       "path": "/news/ne18b8d4b/",
       "description": "A 61-year-old woman was found dead at the foot of Block 286A Toh Guan Road in Jurong East. This was at about 11.20am on Friday, 23 October 2026."
-    },
-    {
-      "id": "9774",
-      "title": "Easy to rent out, hard to sell: Buyers could be losing interest in one-bedroom condos",
-      "date": "2026/10/23",
-      "image": "/news/images/9774.jpg",
-      "sourceName": "Business Times",
-      "sourceNameZh": "商业时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9774/",
-      "description": "One-bedroom condos can be easy to rent and hard to sell. Investors should check resale demand, not only the rent."
     }
   ]
 }
