@@ -1,9 +1,10 @@
 {
-  "updated": "2026-11-08T11:55:04+08:00",
+  "updated": "2026-11-09T00:23:42+08:00",
   "sources": [
+    "Stacked Homes",
     "The Independent Singapore",
-    "deeparrival.com",
     "The Straits Times",
+    "deeparrival.com",
     "PropertyNet.SG",
     "Business Times",
     "99.co",
@@ -25,6 +26,18 @@
   ],
   "items": [
     {
+      "id": "n88f449a3",
+      "title": "How To Tell If A Singapore Condo Is Really A Good Rental Investment",
+      "date": "2026/11/08",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Stacked Homes",
+      "sourceNameZh": "Stacked Homes",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n88f449a3/",
+      "description": "How To Tell If A Singapore Condo Is Really A Good Rental Investment."
+    },
+    {
       "id": "n608926cf",
       "title": "Couple’s BTO plans in doubt after serious argument leaves Singaporean man uncertain",
       "date": "2026/11/07",
@@ -37,18 +50,6 @@
       "description": "A 27-year-old man is unsure about a BTO application with his girlfriend after a serious argument."
     },
     {
-      "id": "nb1399715",
-      "title": "Singapore’s 99 Year HDB Lease: Why The Clock Does Not Reset",
-      "date": "2026/11/06",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "deeparrival.com",
-      "sourceNameZh": "deeparrival.com",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/nb1399715/",
-      "description": "Singapore’s 99 Year HDB Lease: Why The Clock Does Not Reset."
-    },
-    {
       "id": "9824",
       "title": "Bishan flats with shorter waiting times among BTO launches in February",
       "date": "2026/11/06",
@@ -59,6 +60,18 @@
       "category": "Real estate",
       "path": "/news/9824/",
       "description": "Bishan flats with shorter waiting times among BTO launches in February."
+    },
+    {
+      "id": "nb1399715",
+      "title": "Singapore’s 99 Year HDB Lease: Why The Clock Does Not Reset",
+      "date": "2026/11/06",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "deeparrival.com",
+      "sourceNameZh": "deeparrival.com",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/nb1399715/",
+      "description": "Singapore’s 99 Year HDB Lease: Why The Clock Does Not Reset."
     },
     {
       "id": "n811ee041",
@@ -623,18 +636,6 @@
       "category": "Real estate",
       "path": "/news/na08aeee8/",
       "description": "Where will November’s BTO launch draw demand? Rank towns by commute, flat type and waiting time, not by the headline."
-    },
-    {
-      "id": "nab771468",
-      "title": "Million-dollar HDB resale transactions in Singapore climb to record 597 in Q3",
-      "date": "2026/10/26",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Real Estate Asia",
-      "sourceNameZh": "Real Estate Asia",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/nab771468/",
-      "description": "Million-dollar HDB resales hit a record 597 in Q3 2026. That count is the top end, not the price of a typical flat."
     }
   ]
 }
