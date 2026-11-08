@@ -51,9 +51,9 @@ skips image downloads, masthead reading, and the page rebuild, and does
 not commit. This script does not install cron or launchd. A plain run
 without --deploy still writes the local files and does not push.
 
-Plain-English summaries and three buyer/seller questions live in
+Plain-English summaries and one buyer or seller question live in
 news/copy.json, keyed by story id. The page shows the article's key
-points, then the three questions, and does not show an answer. The same
+points, then that one question, and does not show an answer. The same
 entry can include a "zh" object (title, summary, facts, questions) in
 Simplified Chinese. The EN / 中文 choice is stored in the browser under
 localStorage key ssp-news-lang.
@@ -569,17 +569,13 @@ def story_copy(post_id: str, title: str, copy_book: dict) -> dict:
             "如果你在卖房，准备用白话回答关于这个地区的问题。买家记得住他们核实得了的事情。",
         ]
         zh_questions = [
-            "这对在新加坡买房的人意味着什么？",
-            "卖家该从这则市场消息里拿走什么？",
-            "根据这则消息行动之前，该检查什么？",
+            "如果这就是你心里的那套房子，你还把什么留到以后？",
         ]
         zh_facts: list[str] = []
     questions = text_list(entry, "questions")
-    if len(questions) != 3:
+    if len(questions) != 1:
         questions = [
-            "What does this mean for someone buying property in Singapore?",
-            "What should a seller take from this market update?",
-            "What should you check before you act on this news?",
+            "If this is the home you had in mind, what are you still leaving for later?",
         ]
     description = str(entry.get("description") or summary[0]).strip()
     keywords = str(
@@ -1340,6 +1336,10 @@ def write_detail_pages(items: list[dict]) -> None:
             raise SystemExit(f"Detail page {item['id']} still shows a takeaway answer.")
         if 'id="questions-heading"' not in page or 'id="keypoints-heading"' not in page:
             raise SystemExit(f"Detail page {item['id']} is missing key points or questions.")
+        question_block = re.search(r'<section class="questions".*?</section>', page, re.S)
+        question_count = len(re.findall(r"<li\b", question_block.group(0))) if question_block else 0
+        if question_count != 1:
+            raise SystemExit(f"Detail page {item['id']} should ask one question, found {question_count}.")
         source = re.search(r'<p class="source-name">(.*?)</p>', page, re.S)
         if not source or "Source:" not in source.group(1) or "<a" in source.group(1).lower():
             raise SystemExit(f"Detail page {item['id']} is missing a plain-text source line.")
