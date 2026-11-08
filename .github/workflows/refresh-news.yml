@@ -2,9 +2,12 @@ name: Publish property news
 
 on:
   schedule:
-    # Once a day at 09:30 Asia/Singapore (UTC+8, no daylight saving).
-    # 09:30 SGT is 01:30 UTC.
-    - cron: "30 1 * * *"
+    # GitHub delays or drops a cron that lands on a busy minute, and a missed
+    # run does not catch up. These two times are Asia/Singapore (UTC+8).
+    # 09:17 SGT is 01:17 UTC. 17:47 SGT is 09:47 UTC.
+    # The evening run is only a backup. An unchanged news list does not commit.
+    - cron: "17 1 * * *"
+    - cron: "47 9 * * *"
   workflow_dispatch:
 
 permissions:
