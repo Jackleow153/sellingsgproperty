@@ -1,6 +1,8 @@
 {
-  "updated": "2026-11-07T15:29:12+08:00",
+  "updated": "2026-11-08T11:06:42+08:00",
   "sources": [
+    "The Independent Singapore",
+    "deeparrival.com",
     "The Straits Times",
     "PropertyNet.SG",
     "Business Times",
@@ -8,7 +10,7 @@
     "AsiaOne",
     "Singapore Business Review",
     "EdgeProp.sg",
-    "The Independent Singapore",
+    "Home & Decor Singapore",
     "Tatler Asia",
     "Borneo Bulletin",
     "SavePoint Gaming",
@@ -22,6 +24,30 @@
     "Mingtiandi"
   ],
   "items": [
+    {
+      "id": "n608926cf",
+      "title": "Couple’s BTO plans in doubt after serious argument leaves Singaporean man uncertain",
+      "date": "2026/11/07",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "The Independent Singapore",
+      "sourceNameZh": "The Independent Singapore",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n608926cf/",
+      "description": "Couple’s BTO plans in doubt after serious argument leaves Singaporean man uncertain."
+    },
+    {
+      "id": "nb1399715",
+      "title": "Singapore’s 99 Year HDB Lease: Why The Clock Does Not Reset",
+      "date": "2026/11/06",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "deeparrival.com",
+      "sourceNameZh": "deeparrival.com",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/nb1399715/",
+      "description": "Singapore’s 99 Year HDB Lease: Why The Clock Does Not Reset."
+    },
     {
       "id": "9824",
       "title": "Bishan flats with shorter waiting times among BTO launches in February",
@@ -59,18 +85,6 @@
       "description": "Selling a Jurong West HDB Flat 2026: 4-Room Median $534,500 and What You Can Upgrade To."
     },
     {
-      "id": "n15c8d016",
-      "title": "Bayshore Sails BTO 2026: What Bedok HDB Owners Selling Now Face, 4-Room Median $600,000",
-      "date": "2026/11/05",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "PropertyNet.SG",
-      "sourceNameZh": "PropertyNet.SG",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n15c8d016/",
-      "description": "Bayshore Sails BTO 2026: What Bedok HDB Owners Selling Now Face, 4-Room Median $600,000."
-    },
-    {
       "id": "9819",
       "title": "Three new MRT stations in the east to open on Dec 26",
       "date": "2026/11/05",
@@ -93,6 +107,18 @@
       "category": "Real estate",
       "path": "/news/9817/",
       "description": "Senior Minister of State for Law Murali Pillai told Parliament that only a small share of residential rent disputes in the Small Claims Tribunal involve a."
+    },
+    {
+      "id": "n15c8d016",
+      "title": "Bayshore Sails BTO 2026: What Bedok HDB Owners Selling Now Face, 4-Room Median $600,000",
+      "date": "2026/11/05",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "PropertyNet.SG",
+      "sourceNameZh": "PropertyNet.SG",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n15c8d016/",
+      "description": "Bayshore Sails BTO 2026: What Bedok HDB Owners Selling Now Face, 4-Room Median $600,000."
     },
     {
       "id": "n3a4efa83",
@@ -201,6 +227,18 @@
       "category": "Real estate",
       "path": "/news/9811/",
       "description": "A freehold unit at New Futura on Leonie Hill Road, owned by the wife of Wang Bingang, a suspect in the $3 billion money-laundering case, sold at auction on."
+    },
+    {
+      "id": "n27310332",
+      "title": "Tengah Plantation Dew BTO Review: Rare 5-room and 3Gen units (November 2026)",
+      "date": "2026/11/03",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Home & Decor Singapore",
+      "sourceNameZh": "Home & Decor Singapore",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n27310332/",
+      "description": "Tengah Plantation Dew BTO Review: Rare 5-room and 3Gen units (November 2026)."
     },
     {
       "id": "nf63c9c83",
@@ -597,42 +635,6 @@
       "category": "Real estate",
       "path": "/news/nab771468/",
       "description": "Million-dollar HDB resales hit a record 597 in Q3 2026. That count is the top end, not the price of a typical flat."
-    },
-    {
-      "id": "9781",
-      "title": "HDB Q3 resale prices dip 0.1% even as more flats sold",
-      "date": "2026/10/24",
-      "image": "/news/images/9781.jpg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9781/",
-      "description": "HDB resale prices dipped 0.1% in Q3 2026 while more flats sold. What that small move means for one purchase or sale."
-    },
-    {
-      "id": "9778",
-      "title": "Home sales set to recover in Q4 with prices seen rising further on new launch momentum",
-      "date": "2026/10/24",
-      "image": "/news/images/9778.jpg",
-      "sourceName": "Business Times",
-      "sourceNameZh": "商业时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9778/",
-      "description": "Home sales are expected to recover in Q4 on new-launch momentum. That is a forecast, not a reason to skip the numbers on one home."
-    },
-    {
-      "id": "ne18b8d4b",
-      "title": "Woman, 61, found dead at foot of Jurong East HDB block",
-      "date": "2026/10/24",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "AsiaOne",
-      "sourceNameZh": "亚洲新闻网",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/ne18b8d4b/",
-      "description": "A 61-year-old woman was found dead at the foot of Block 286A Toh Guan Road in Jurong East. This was at about 11.20am on Friday, 23 October 2026."
     }
   ]
 }
