@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Fetch Singapore property headlines from Business Times, Stomp and Google News.
 
-PropNex stays in refresh-news.py. This module only returns headlines, dates,
-publisher names and image URLs. It does not keep article bodies or outbound
-links, and it does not write the site.
+PropNex stays in refresh-news.py. This module returns headlines, dates,
+publisher names, image URLs, and an in-memory article URL when the listing
+page or the feed item has one. It does not keep article bodies, it does not
+write the site, and the article URL is dropped before anything is saved.
 """
 
 from __future__ import annotations
@@ -17,6 +18,9 @@ from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from html import unescape
 from xml.etree import ElementTree as ET
+
+from article_points import choose_article_url, pick_article_href
+from article_points import self_check as article_points_self_check
 
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
@@ -701,6 +705,7 @@ def make_post(
     image_url: str | None = None,
     referer: str | None = None,
     post_id: str | None = None,
+    article_url: str = "",
 ) -> dict:
     title = re.sub(r"\s+", " ", title).strip()
     return {
@@ -715,6 +720,7 @@ def make_post(
         "sourceNameZh": source_name_zh,
         "sourceFeed": feed,
         "category": "Real estate",
+        "article_url": article_url or "",
         "saved": False,
     }
 
@@ -759,6 +765,7 @@ def collect_business_times() -> list[dict]:
             when = parse_dt(time_match.group(1).strip())
             before = text[max(0, pos - 2200) : pos]
             image_url = image_from_html(before) or image_from_html(chunk)
+            article_url = pick_article_href(text[max(0, pos - 1800) : end], page_url, title)
             seen.add(key)
             found.append(
                 make_post(
@@ -769,13 +776,14 @@ def collect_business_times() -> list[dict]:
                     "商业时报",
                     image_url=image_url,
                     referer="https://www.businesstimes.com.sg/",
+                    article_url=article_url,
                 )
             )
     found.sort(key=lambda post: post["datetime"], reverse=True)
     return found
 
 
-def google_feed(query: str) -> list[tuple[str, datetime, str, str]]:
+def google_feed(query: str) -> list[tuple[str, datetime, str, str, str]]:
     url = (
         "https://news.google.com/rss/search?q="
         + urllib.parse.quote(query)
@@ -793,14 +801,15 @@ def google_feed(query: str) -> list[tuple[str, datetime, str, str]]:
             continue
         when = parse_dt(pub_date)
         description = item.findtext("description") or ""
-        rows.append((title, when, publisher, description))
+        link = (item.findtext("link") or item.findtext("guid") or "").strip()
+        rows.append((title, when, publisher, description, link))
     return rows
 
 
 def collect_google_news() -> list[dict]:
     posts = []
     seen = set()
-    for title, when, publisher, description in google_feed(GN_QUERY):
+    for title, when, publisher, description, link in google_feed(GN_QUERY):
         if not singapore_property(title):
             continue
         if not STRONG_RE.search(title) and not SG_SIGNAL_RE.search(title):
@@ -818,6 +827,7 @@ def collect_google_news() -> list[dict]:
                 source_name,
                 source_zh,
                 image_url=image_from_html(description),
+                article_url=link if link.startswith("http") else "",
             )
         )
     posts.sort(key=lambda post: (post["datetime"], richness(post["title"])), reverse=True)
@@ -827,7 +837,7 @@ def collect_google_news() -> list[dict]:
 def collect_stomp() -> list[dict]:
     posts = []
     seen = set()
-    for title, when, publisher, description in google_feed(STOMP_QUERY):
+    for title, when, publisher, description, link in google_feed(STOMP_QUERY):
         if "stomp" not in publisher.lower():
             continue
         if VIRAL_RE.search(title) or not STOMP_LESSON_RE.search(title):
@@ -846,6 +856,7 @@ def collect_stomp() -> list[dict]:
                 "Stomp",
                 "Stomp",
                 image_url=image_from_html(description),
+                article_url=link if link.startswith("http") else "",
             )
         )
     posts.sort(key=lambda post: post["datetime"], reverse=True)
@@ -890,6 +901,10 @@ def merge_posts(saved: list[dict], fresh: list[dict], now: datetime | None = Non
     for post in ordered:
         match = find(post)
         if match:
+            match["article_url"] = choose_article_url(
+                str(match.get("article_url") or ""),
+                str(post.get("article_url") or ""),
+            )
             if post.get("image_url") and not match.get("image_url"):
                 image = match.get("image") or ""
                 if not image or image.endswith("placeholder.svg"):
@@ -1236,6 +1251,7 @@ def self_check() -> None:
             failed.append("headline map failed: " + english[:50])
     if propnex_own_piece("THE BUSINESS TIMES"):
         failed.append("a newspaper masthead is not a seminar")
+    failed.extend(article_points_self_check())
     if failed:
         raise SystemExit("news source self-check failed:\n" + "\n".join(failed))
 

@@ -42,14 +42,24 @@ Publish the refreshed pages to the live site:
 Netlify publishes https://www.sellingsgproperty.com. A run with no new
 story leaves those files uncommitted.
 
-GitHub Actions runs that command once a day at 09:30 Singapore time
-(.github/workflows/refresh-news.yml). 09:30 Asia/Singapore is 01:30 UTC.
-The job does not call a language model. Chinese headlines come from the
-local glossary. A new clipping's publisher is read on the Mac runner only
-when the caption does not already name one. A run that finds no new story
-skips image downloads, masthead reading, and the page rebuild, and does
-not commit. This script does not install cron or launchd. A plain run
-without --deploy still writes the local files and does not push.
+GitHub Actions runs that command twice a day, at 09:17 and 17:47
+Singapore time (.github/workflows/refresh-news.yml). 09:17 Asia/Singapore
+is 01:17 UTC. The 17:47 run is only a backup. An unchanged news list
+does not commit.
+
+When a new story's article page can be opened, the job calls grok-4.7
+once for that article and stores original key points. The article URL
+is not written to the site. A page that cannot be opened stays a
+headline draft. Stories that already have key points are not sent.
+The call needs XAI_API_KEY. A missing key still publishes the headline.
+A filled story's Chinese headline comes from that same call. A new
+clipping's publisher is read on the Mac runner only when the caption
+does not already name one. A run that finds no new story, and no
+headline-only article it can open, skips image downloads, masthead
+reading, and the page rebuild, and does not commit. This script does
+not install cron or launchd. A plain run without --deploy still writes
+the local files and does not push. --dry-run and --pages-only do not
+call the model.
 
 Plain-English summaries and one buyer or seller question live in
 news/copy.json, keyed by story id. The page shows the article's key
@@ -73,6 +83,7 @@ import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+from article_points import caption_article_url, fill_article_points, stories_awaiting_points
 from news_sources import (
     collect_business_times,
     collect_google_news,
@@ -1424,6 +1435,7 @@ def tag_propnex(posts: list[dict]) -> list[dict]:
                 "sourceFeed": "propnex",
                 "category": "Real estate",
                 "body": post.get("body") or "",
+                "article_url": caption_article_url(post.get("body") or ""),
                 "saved": False,
             }
         )
@@ -1584,6 +1596,14 @@ def entry_is_written(entry: dict | None) -> bool:
     return 2 <= len(summary) <= 4 and len(takeaways) == 3
 
 
+def save_copy(book: dict) -> None:
+    raw = json.dumps(book, ensure_ascii=False, indent=2) + "\n"
+    if re.search(r"https?://|t\.me/", raw):
+        raise SystemExit("news/copy.json would contain an external URL. Aborting.")
+    COPY_PATH.parent.mkdir(parents=True, exist_ok=True)
+    COPY_PATH.write_text(raw, encoding="utf-8")
+
+
 def ensure_copy(items: list[dict]) -> None:
     """Fill missing briefs. Never replace a summary that is already written."""
     book = load_copy()
@@ -1595,8 +1615,21 @@ def ensure_copy(items: list[dict]) -> None:
         changed = True
         print(f"draft brief for {item['id']}: {item['title'][:80]}")
     if changed:
-        COPY_PATH.parent.mkdir(parents=True, exist_ok=True)
-        COPY_PATH.write_text(json.dumps(book, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        save_copy(book)
+
+
+def write_opened_points(items: list[dict]) -> None:
+    """Fill headline-only briefs from articles that opened on this run."""
+    book = load_copy()
+    if fill_article_points(items, book):
+        save_copy(book)
+
+
+def drop_private_fields(items: list[dict]) -> None:
+    """Drop the article URL and clipping text before any page is written."""
+    for item in items:
+        item.pop("article_url", None)
+        item.pop("body", None)
 
 
 def dump_news(items: list[dict]) -> None:
@@ -1749,6 +1782,17 @@ def pages_only() -> None:
     print(f"Rebuilt {len(items)} stories from news.json")
 
 
+def publish_stories(items: list[dict]) -> None:
+    drop_private_fields(items)
+    write_detail_pages(items)
+    dump_news(items)
+    print(f"Wrote {len(items)} items to {JSON_PATH.relative_to(ROOT)}")
+    for item in items:
+        print(f"  {item['date']}  [{item['sourceFeed']}]  {item['title']}")
+    if "--deploy" in sys.argv:
+        deploy_news()
+
+
 def main() -> None:
     self_check()
     saved = load_saved_posts()
@@ -1758,7 +1802,14 @@ def main() -> None:
         raise SystemExit(
             f"Only {len(items)} stories after merging. The news list was left unchanged."
         )
-    if "--dry-run" not in sys.argv and list_unchanged(saved, items):
+    pending = stories_awaiting_points(items, load_copy())
+    key_set = bool(os.environ.get("XAI_API_KEY", "").strip())
+    if "--dry-run" not in sys.argv and list_unchanged(saved, items) and not (pending and key_set):
+        if pending:
+            print(
+                "XAI_API_KEY is not set. "
+                "Headline drafts were left as they are."
+            )
         print(
             f"No new stories among {len(items)}. "
             "Skipped image download, masthead reading, and page rebuild."
@@ -1766,27 +1817,37 @@ def main() -> None:
         if "--deploy" in sys.argv:
             deploy_news()
         return
+    if "--dry-run" not in sys.argv and list_unchanged(saved, items):
+        print(
+            f"No new stories among {len(items)}. "
+            f"Opening {len(pending)} headline-only article(s) that still have a link."
+        )
+        ensure_copy(items)
+        write_opened_points(items)
+        publish_stories(items)
+        return
     apply_article_sources(items)
     if "--dry-run" in sys.argv:
         print(f"\n{len(items)} stories")
         for item in items:
             flag = "keep" if item.get("saved") else "NEW"
+            link = "link" if item.get("article_url") else "no-link"
             print(
-                f"{flag}\t{item['id']}\t{item['date']}\t{item['sourceFeed']}\t"
+                f"{flag}\t{link}\t{item['id']}\t{item['date']}\t{item['sourceFeed']}\t"
                 f"{item['sourceName']}\t{item['title']}"
+            )
+        if pending:
+            print(
+                f"{len(pending)} headline-only stories have an article link. "
+                "Dry run does not open them or call the model."
             )
         return
     attach_images(items)
     apply_article_sources(items)
     items = drop_unsourced(items)
     ensure_copy(items)
-    write_detail_pages(items)
-    dump_news(items)
-    print(f"Wrote {len(items)} items to {JSON_PATH.relative_to(ROOT)}")
-    for item in items:
-        print(f"  {item['date']}  [{item['sourceFeed']}]  {item['title']}")
-    if "--deploy" in sys.argv:
-        deploy_news()
+    write_opened_points(items)
+    publish_stories(items)
 
 
 if __name__ == "__main__":
