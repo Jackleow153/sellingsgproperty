@@ -1,17 +1,17 @@
 {
-  "updated": "2026-11-09T10:55:05+08:00",
+  "updated": "2026-11-09T16:06:50+08:00",
   "sources": [
     "Stacked Homes",
     "The Independent Singapore",
     "The Straits Times",
     "deeparrival.com",
     "PropertyNet.SG",
+    "Home & Decor Singapore",
     "Business Times",
     "99.co",
     "AsiaOne",
     "Singapore Business Review",
     "EdgeProp.sg",
-    "Home & Decor Singapore",
     "Tatler Asia",
     "Borneo Bulletin",
     "SavePoint Gaming",
@@ -98,6 +98,18 @@
       "description": "Selling a Jurong West HDB Flat 2026: 4-Room Median $534,500 and What You Can Upgrade To."
     },
     {
+      "id": "nba13776a",
+      "title": "Merpati Meadow BTO Review: Small 438-unit estate with strong demand (November 2026 Launch)",
+      "date": "2026/11/05",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Home & Decor Singapore",
+      "sourceNameZh": "Home & Decor Singapore",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/nba13776a/",
+      "description": "Merpati Meadow BTO Review: Small 438-unit estate with strong demand (November 2026 Launch)."
+    },
+    {
       "id": "9819",
       "title": "Three new MRT stations in the east to open on Dec 26",
       "date": "2026/11/05",
@@ -180,6 +192,18 @@
       "category": "Real estate",
       "path": "/news/ncce3da5c/",
       "description": "HDB will launch about 4,300 Build-To-Order flats in February 2027, across five projects in Toa Payoh, Bishan, Tampines and Tengah. There is one project each."
+    },
+    {
+      "id": "n7d28886d",
+      "title": "November 2026 BTO Launch Review: Ultimate Guide To Choosing The Best Unit",
+      "date": "2026/11/04",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Stacked Homes",
+      "sourceNameZh": "Stacked Homes",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n7d28886d/",
+      "description": "November 2026 BTO Launch Review: Ultimate Guide To Choosing The Best Unit."
     },
     {
       "id": "n5e9c8190",
@@ -612,30 +636,6 @@
       "category": "Real estate",
       "path": "/news/n4d41823c/",
       "description": "Bukit Sembawang plans a central Singapore condo after a $153 million site buy. That number is land cost, not a unit price."
-    },
-    {
-      "id": "nf5af3de7",
-      "title": "‘Supply onslaught’ to weigh on HDB resale market in 2027, but cash-rich buyers to support prices",
-      "date": "2026/10/27",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "EdgeProp Singapore",
-      "sourceNameZh": "EdgeProp",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/nf5af3de7/",
-      "description": "An EdgeProp headline says 2027 HDB supply may weigh on resale prices, while cash-rich buyers could still support them."
-    },
-    {
-      "id": "na08aeee8",
-      "title": "Which locations will draw strong demand at Singapore’s November BTO launch?",
-      "date": "2026/10/27",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Real Estate Asia",
-      "sourceNameZh": "Real Estate Asia",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/na08aeee8/",
-      "description": "Where will November’s BTO launch draw demand? Rank towns by commute, flat type and waiting time, not by the headline."
     }
   ]
 }
