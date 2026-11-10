@@ -1,13 +1,14 @@
 {
-  "updated": "2026-11-09T16:06:50+08:00",
+  "updated": "2026-11-10T16:29:32+08:00",
   "sources": [
-    "Stacked Homes",
+    "Manifold Times",
     "The Independent Singapore",
+    "Stacked Homes",
     "The Straits Times",
     "deeparrival.com",
     "PropertyNet.SG",
-    "Home & Decor Singapore",
     "Business Times",
+    "Home & Decor Singapore",
     "99.co",
     "AsiaOne",
     "Singapore Business Review",
@@ -21,10 +22,33 @@
     "Vulcan Post",
     "FZINE Singapore",
     "8days.sg",
-    "EdgeProp Singapore",
-    "Mingtiandi"
+    "EdgeProp Singapore"
   ],
   "items": [
+    {
+      "id": "n5f9cd3fe",
+      "title": "Singapore: OK Lim’s grandson fails to keep Tanglin condo out of aunt’s bankruptcy estate",
+      "date": "2026/11/10",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Manifold Times",
+      "sourceNameZh": "Manifold Times",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n5f9cd3fe/",
+      "description": "Singapore: OK Lim’s grandson fails to keep Tanglin condo out of aunt’s bankruptcy estate."
+    },
+    {
+      "id": "n68a68d65",
+      "title": "Singapore woman who married for BTO called it the worst mistake of her life",
+      "date": "2026/11/09",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "The Independent Singapore",
+      "sourceNameZh": "The Independent Singapore",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n68a68d65/",
+      "description": "Singapore woman who married for BTO called it the worst mistake of her life."
+    },
     {
       "id": "n88f449a3",
       "title": "How To Tell If A Singapore Condo Is Really A Good Rental Investment",
@@ -98,18 +122,6 @@
       "description": "Selling a Jurong West HDB Flat 2026: 4-Room Median $534,500 and What You Can Upgrade To."
     },
     {
-      "id": "nba13776a",
-      "title": "Merpati Meadow BTO Review: Small 438-unit estate with strong demand (November 2026 Launch)",
-      "date": "2026/11/05",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Home & Decor Singapore",
-      "sourceNameZh": "Home & Decor Singapore",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/nba13776a/",
-      "description": "Merpati Meadow BTO Review: Small 438-unit estate with strong demand (November 2026 Launch)."
-    },
-    {
       "id": "9819",
       "title": "Three new MRT stations in the east to open on Dec 26",
       "date": "2026/11/05",
@@ -132,6 +144,18 @@
       "category": "Real estate",
       "path": "/news/9817/",
       "description": "Senior Minister of State for Law Murali Pillai told Parliament that only a small share of residential rent disputes in the Small Claims Tribunal involve a."
+    },
+    {
+      "id": "nba13776a",
+      "title": "Merpati Meadow BTO Review: Small 438-unit estate with strong demand (November 2026 Launch)",
+      "date": "2026/11/05",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Home & Decor Singapore",
+      "sourceNameZh": "Home & Decor Singapore",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/nba13776a/",
+      "description": "Merpati Meadow BTO Review: Small 438-unit estate with strong demand (November 2026 Launch)."
     },
     {
       "id": "n15c8d016",
@@ -612,30 +636,6 @@
       "category": "Real estate",
       "path": "/news/n333c4ed0/",
       "description": "UOB is selling 38 units at Marina Collection in Sentosa Cove, with asking prices from $1,269 per square foot. The batch is 17 three-bedroom units and 21."
-    },
-    {
-      "id": "n6e7db465",
-      "title": "Another duplex penthouse at Mon Jervois heads to auction, this time at $4.38 mil",
-      "date": "2026/10/29",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "EdgeProp.sg",
-      "sourceNameZh": "EdgeProp.sg",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n6e7db465/",
-      "description": "A duplex penthouse at Mon Jervois was listed for auction on 28 October 2026 with a guide price of $4.38 million. The report does not say it sold. It is an."
-    },
-    {
-      "id": "n4d41823c",
-      "title": "Bukit Sembawang Plans Central Singapore Condo Project After $153M Site Buy",
-      "date": "2026/10/27",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Mingtiandi",
-      "sourceNameZh": "Mingtiandi",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n4d41823c/",
-      "description": "Bukit Sembawang plans a central Singapore condo after a $153 million site buy. That number is land cost, not a unit price."
     }
   ]
 }
