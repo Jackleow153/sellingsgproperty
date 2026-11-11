@@ -43,7 +43,7 @@ Weekly job, install it yourself if you want it. This script does not install
 cron or launchd. Monday 07:00 in the Mac's local timezone:
 
     crontab -e
-    0 7 * * 1 cd /Users/jackleow/sellingsgproperty/sg-property-news/sellingsgproperty && /usr/bin/python3 scripts/refresh-buylow.py --deploy >> /tmp/buylow-refresh.log 2>&1
+    0 7 * * 1 cd /Users/jackleow/sellingsgproperty && /usr/bin/python3 scripts/refresh-buylow.py --deploy >> /tmp/buylow-refresh.log 2>&1
 
 launchd: a StartCalendarInterval of Weekday 1, Hour 7, Minute 0, with
 ProgramArguments python3, scripts/refresh-buylow.py, --deploy, and
