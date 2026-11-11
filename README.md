@@ -3,7 +3,7 @@
 Exact replica of the Singapore New Launch Condos website (single-file static site).
 
 ## Current State
-- 39 verified new launch condo projects
+- 51 tracked new launch condo projects (tabs: Launched in 2024 / 2025 / 2026, Upcoming 2027; updated 11 Nov 2026)
 - 25 in-depth Insights articles (SEO + AEO optimized with tables, FAQs as accordions, auto-generated TOC, Article+FAQPage JSON-LD, dynamic per-article meta/OG) — latest: Thomson Reserve Price Review 2026 (19 Jun 2026)
 - Clean URLs via Netlify `_redirects` + client-side router (e.g. `/insights/which-condo-to-buy-2026`)
 - GitHub → Netlify continuous deployment (push to `main` auto-deploys)
