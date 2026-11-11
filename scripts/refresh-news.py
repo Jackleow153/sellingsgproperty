@@ -79,6 +79,7 @@ import shutil
 import ssl
 import subprocess
 import sys
+import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -743,6 +744,7 @@ NAV_HTML = """
         <a href="/insights">Insights</a>
         <a href="/news/" class="active" aria-current="page">News</a>
         <a href="/undervalued-pty/">Undervalued Pty</a>
+        <a href="https://the-one-chuan-grove.sg/" target="_blank" rel="noopener">One Chuan Grove</a>
         <a href="/contact">Get my free situation check.</a>
         <a href="/mortgage-calculator">Mortgage loan calculator</a>
       </div>
@@ -754,6 +756,7 @@ NAV_HTML = """
       <a href="/insights">Insights</a>
       <a href="/news/" class="active" aria-current="page">News</a>
       <a href="/undervalued-pty/">Undervalued Pty</a>
+      <a href="https://the-one-chuan-grove.sg/" target="_blank" rel="noopener">One Chuan Grove</a>
       <a href="/contact">Get my free situation check.</a>
       <a href="/mortgage-calculator">Mortgage loan calculator</a>
     </div>
@@ -804,7 +807,7 @@ DETAIL_CSS = """
       color: #334155;
       font-size: 0.9rem;
       font-weight: 500;
-      padding: 8px 18px;
+      padding: 8px 8px;
       border-bottom: 3px solid transparent;
     }
     .nav-links a:hover { color: #0f172a; }
@@ -943,7 +946,7 @@ DETAIL_CSS = """
       border-radius: 50%;
       background: var(--red);
     }
-    @media (max-width: 1200px) {
+    @media (max-width: 1360px) {
       .nav-links { display: none; }
       .menu-btn { display: inline-flex; align-items: center; justify-content: center; }
       .site-nav-inner { padding: 0 16px; }
@@ -1340,6 +1343,7 @@ def write_detail_pages(items: list[dict]) -> None:
             url
             for url in re.findall(r"<a\b[^>]*\bhref=[\"'](https?://[^\"']+)", page)
             if "sellingsgproperty.com" not in url
+            and urllib.parse.urlparse(url).hostname != "the-one-chuan-grove.sg"
         ]
         if offsite:
             raise SystemExit(f"Detail page {item['id']} contains an off-site link: {offsite[0]}")

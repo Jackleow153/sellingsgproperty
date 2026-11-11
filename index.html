@@ -371,13 +371,14 @@
 
                 <!-- Desktop Navigation -->
                 <div class="hidden xl:flex items-center gap-x-1 text-sm font-medium">
-                    <button data-page="home" class="nav-link whitespace-nowrap px-3 py-2 rounded-3xl nav-active" id="nav-home">Home</button>
-                    <button data-page="about" class="nav-link whitespace-nowrap px-3 py-2 rounded-3xl" id="nav-about">About</button>
-                    <button data-page="blog" class="nav-link whitespace-nowrap px-3 py-2 rounded-3xl" id="nav-blog">Insights</button>
-                    <a href="/news" class="nav-link whitespace-nowrap px-3 py-2 rounded-3xl">News</a>
-                    <a href="/undervalued-pty/" class="nav-link whitespace-nowrap px-3 py-2 rounded-3xl">Undervalued Pty</a>
-                    <button data-page="contact" class="nav-link whitespace-nowrap px-3 py-2 rounded-3xl text-sm font-semibold" id="nav-situation">Get my free situation check.</button>
-                    <button data-page="mortgage-calculator" class="nav-link whitespace-nowrap px-3 py-2 rounded-3xl text-sm font-semibold" id="nav-mortgage">Mortgage loan calculator</button>
+                    <button data-page="home" class="nav-link whitespace-nowrap px-2 py-2 rounded-3xl nav-active" id="nav-home">Home</button>
+                    <button data-page="about" class="nav-link whitespace-nowrap px-2 py-2 rounded-3xl" id="nav-about">About</button>
+                    <button data-page="blog" class="nav-link whitespace-nowrap px-2 py-2 rounded-3xl" id="nav-blog">Insights</button>
+                    <a href="/news" class="nav-link whitespace-nowrap px-2 py-2 rounded-3xl">News</a>
+                    <a href="/undervalued-pty/" class="nav-link whitespace-nowrap px-2 py-2 rounded-3xl">Undervalued Pty</a>
+                    <a href="https://the-one-chuan-grove.sg/" target="_blank" rel="noopener noreferrer" class="nav-link whitespace-nowrap px-2 py-2 rounded-3xl">One Chuan Grove</a>
+                    <button data-page="contact" class="nav-link whitespace-nowrap px-2 py-2 rounded-3xl text-sm font-semibold" id="nav-situation">Get my free situation check.</button>
+                    <button data-page="mortgage-calculator" class="nav-link whitespace-nowrap px-2 py-2 rounded-3xl text-sm font-semibold" id="nav-mortgage">Mortgage loan calculator</button>
                 </div>
 
                 <button id="mobile-menu-btn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu" class="xl:hidden w-11 h-11 flex items-center justify-center text-slate-600 hover:text-violet-700">
@@ -1991,10 +1992,12 @@
                             
                             <div class="flex items-center justify-between mt-4 text-xs">
                                 <div class="px-2.5 py-px bg-slate-100 text-slate-500 rounded text-[10px]">~2030</div>
-                                
-                                <button onclick="showProjectModal(31); event.stopImmediatePropagation();" class="px-5 py-1.5 text-xs font-semibold border border-violet-700 text-violet-700 hover:bg-violet-700 hover:text-white rounded-2xl transition">
-                                    View Details
-                                </button>
+                                <div class="flex items-center gap-2">
+                                    <a href="https://the-one-chuan-grove.sg/" target="_blank" rel="noopener noreferrer" class="px-5 py-1.5 text-xs font-semibold bg-violet-700 text-white rounded-2xl">One Chuan Grove guide</a>
+                                    <button onclick="showProjectModal(31); event.stopImmediatePropagation();" class="px-5 py-1.5 text-xs font-semibold border border-violet-700 text-violet-700 hover:bg-violet-700 hover:text-white rounded-2xl transition">
+                                        View Details
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -6375,10 +6378,12 @@ function toggleAmortization(){
                             
                             <div class="flex items-center justify-between mt-4 text-xs">
                                 <div class="px-2.5 py-px bg-slate-100 text-slate-500 rounded text-[10px]">${project.top}</div>
-                                
-                                <button onclick="showProjectModal(${project.id}); event.stopImmediatePropagation();" class="px-5 py-1.5 text-xs font-semibold border border-violet-700 text-violet-700 hover:bg-violet-700 hover:text-white rounded-2xl transition">
-                                    View Details
-                                </button>
+                                <div class="flex items-center gap-2">
+                                    ${project.id === 31 ? '<a href="https://the-one-chuan-grove.sg/" target="_blank" rel="noopener noreferrer" class="px-5 py-1.5 text-xs font-semibold bg-violet-700 text-white rounded-2xl">One Chuan Grove guide</a>' : ''}
+                                    <button onclick="showProjectModal(${project.id}); event.stopImmediatePropagation();" class="px-5 py-1.5 text-xs font-semibold border border-violet-700 text-violet-700 hover:bg-violet-700 hover:text-white rounded-2xl transition">
+                                        View Details
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -6602,6 +6607,17 @@ function toggleAmortization(){
                             e.stopImmediatePropagation()
                             window.location.href = 'https://www.sellingsgproperty.com/project/dunearn-house/';
                         }
+                        overviewTab.parentNode.insertBefore(specialBtn, overviewTab.nextSibling)
+                    }
+                } else if (currentProject && currentProject.id === 31) {
+                    const overviewTab = tabBar.querySelector('[data-tab="0"]')
+                    if (overviewTab) {
+                        const specialBtn = document.createElement('a')
+                        specialBtn.className = 'aukuwa-paper-btn ml-3 px-4 py-1.5 text-xs font-semibold bg-violet-700 text-white rounded-2xl whitespace-nowrap'
+                        specialBtn.href = 'https://the-one-chuan-grove.sg/'
+                        specialBtn.target = '_blank'
+                        specialBtn.rel = 'noopener noreferrer'
+                        specialBtn.textContent = 'One Chuan Grove guide'
                         overviewTab.parentNode.insertBefore(specialBtn, overviewTab.nextSibling)
                     }
                 }
@@ -7189,6 +7205,7 @@ function toggleAmortization(){
                                 <button data-page="blog" class="block w-full text-left font-medium py-2 px-1 -mx-1 rounded-lg hover:bg-slate-100 active:bg-slate-200 transition-colors cursor-pointer">Insights</button>
                                 <a href="/news" class="block w-full text-left font-medium py-2 px-1 -mx-1 rounded-lg hover:bg-slate-100 active:bg-slate-200 transition-colors">News</a>
                                 <a href="/undervalued-pty/" class="block w-full text-left font-medium py-2 px-1 -mx-1 rounded-lg hover:bg-slate-100 active:bg-slate-200 transition-colors">Undervalued Pty</a>
+                                <a href="https://the-one-chuan-grove.sg/" target="_blank" rel="noopener noreferrer" class="block w-full text-left font-medium py-2 px-1 -mx-1 rounded-lg hover:bg-slate-100 active:bg-slate-200 transition-colors">One Chuan Grove</a>
                                 <button data-page="contact" class="block w-full text-left font-medium py-2 px-1 -mx-1 rounded-lg hover:bg-slate-100 active:bg-slate-200 transition-colors cursor-pointer">Get my free situation check.</button>
                                 <button data-page="mortgage-calculator" class="block w-full text-left font-medium py-2 px-1 -mx-1 rounded-lg hover:bg-slate-100 active:bg-slate-200 transition-colors cursor-pointer">Mortgage loan calculator</button>
                             </div>
