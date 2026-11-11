@@ -19,6 +19,8 @@ Every condo and every article now has its own crawlable HTML page, so Google and
 | A project card (add / edit / move year) | `const projects = [...]` in `index.html` | `node scripts/build-pages.cjs` |
 | An article (add / edit) | `data/articles.js` (source of truth; bodies are no longer in index.html) | `node scripts/build-pages.cjs` |
 | Shared page styling | `assets/site.css` | `node scripts/build-pages.cjs` (bumps the cache-busting version) |
+| Homepage look / any Tailwind class in `index.html` | `index.html`, `tailwind.config.cjs`, `input.css` | `npm install` once, then `node scripts/build-pages.cjs` (compiles `assets/home.css`) |
+| Title / description of About, Contact, Mortgage calculator, Arina analysis | `ROUTE_META` in `index.html` | `node scripts/build-pages.cjs` (re-renders `about/`, `contact/` etc.) |
 
 The build writes `project/<slug>/index.html` (hand-built Thomson Reserve, Dunearn House and Lentor Gardens pages are left alone), `new-launch-condos/index.html` (hub), `insights/<slug>/index.html`, `insights/index.html`, the static project cards and article metadata inside `index.html`, `sitemap.xml` and `llms.txt`. Commit the generated files and push.
 

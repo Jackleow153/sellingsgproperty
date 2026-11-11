@@ -51,6 +51,25 @@ function extractProjects(html) {
   return new Function(html.slice(a, b) + '\nreturn projects;')();
 }
 const projects = extractProjects(indexHtml);
+const ROUTE_META = (() => {
+  const a = indexHtml.indexOf('/* BUILD:ROUTE-META START */'), b = indexHtml.indexOf('/* BUILD:ROUTE-META END */');
+  if (a < 0 || b < 0) throw new Error('BUILD:ROUTE-META markers missing in index.html');
+  // eslint-disable-next-line no-new-func
+  return new Function(indexHtml.slice(a, b) + '\nreturn ROUTE_META;')();
+})();
+function setHead(html, meta) {
+  const url = SITE + meta.path, t = esc(meta.title), d = esc(meta.desc);
+  const rep = (re, val) => { if (!re.test(html)) throw new Error('head tag not found: ' + re); html = html.replace(re, val); };
+  rep(/<title>[^<]*<\/title>/, `<title>${t}</title>`);
+  rep(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${d}">`);
+  rep(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${url}">`);
+  rep(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${t}">`);
+  rep(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${d}">`);
+  rep(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${url}">`);
+  rep(/<meta name="twitter:title" content="[^"]*">/, `<meta name="twitter:title" content="${t}">`);
+  rep(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${d}">`);
+  return html;
+}
 delete require.cache[require.resolve(path.join(ROOT, 'data/articles.js'))];
 const ARTICLES = require(path.join(ROOT, 'data/articles.js'));
 
@@ -103,9 +122,11 @@ function layout({ title, description, canonical, body, schema = [], ogImage, nav
 <meta property="og:image" content="${og}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0C1B2A">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&family=Marcellus&display=swap" media="print" onload="this.media='all'">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/marcellus-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/site.css?v=${CSS_V}">
 ${schema.map(jsonLd).join('\n')}
 </head>
@@ -113,20 +134,20 @@ ${schema.map(jsonLd).join('\n')}
 <header class="top"><div class="wrap">
 <a class="brand" href="/">SellingSg<span>Property</span></a>
 <nav class="nav" aria-label="Main">${navLink('/new-launch-condos/', 'New Launches', 'launches')}${navLink('/insights/', 'Insights', 'insights')}${navLink('/mortgage-calculator', 'Mortgage Calculator', 'calc')}${navLink('/about', 'About', 'about')}${navLink('/contact', 'Contact', 'contact')}</nav>
-<a class="btn" href="/contact">Free 30-min consultation</a>
+<a class="btn" href="/contact/">Free 30-min consultation</a>
 </div></header>
 <div class="trust"><div class="wrap"><span><b>Jack Leow</b> · CEA Reg. No. R074023I</span><span>PropNex Realty Pte Ltd (L3008022J)</span><span>Data from URA, developers and published launch reports</span></div></div>
 <main>
 ${body}
 </main>
 <footer><div class="wrap">
-<div class="fl"><a href="/">Home</a><a href="/new-launch-condos/">New launch condos</a><a href="/insights/">Insights</a><a href="/mortgage-calculator">Mortgage calculator</a><a href="/about">About</a><a href="/contact">Contact</a></div>
+<div class="fl"><a href="/">Home</a><a href="/new-launch-condos/">New launch condos</a><a href="/insights/">Insights</a><a href="/mortgage-calculator/">Mortgage calculator</a><a href="/about/">About</a><a href="/contact/">Contact</a></div>
 <p>sellingsgproperty.com is an educational and branding platform operated by CEA-licensed salespersons of PropNex Realty Pte Ltd. Jack Leow, CEA Reg. No. R074023I, PropNex Realty Pte Ltd (L3008022J).</p>
 <p>This site is not the official website of any property developer and does not represent itself as an exclusive sales portal.</p>
 <p>The information on this site is for general guidance only and does not constitute financial, legal or property investment advice. Figures are based on publicly available sources and may change; please verify with the developer's latest materials and seek professional advice before acting.</p>
 <p>© ${AS_OF.slice(0, 4)} sellingsgproperty.com · Singapore</p>
 </div></footer>
-<div class="mbar"><a class="btn" href="/contact">Free 30-min consultation</a></div>
+<div class="mbar"><a class="btn" href="/contact/">Free 30-min consultation</a></div>
 </body>
 </html>
 `;
@@ -228,7 +249,7 @@ ${p.id === 31 ? '<p>Independent guide with sources: <a href="https://the-one-chu
 <ul class="links">${rel.map(r => `<li><a href="${projectPath(r)}">${esc(r.name)}</a><span>D${districtOf(r)} · ${esc(YEAR_TAB[r.year])}</span></li>`).join('')}</ul>
 <p><a href="/new-launch-condos/">See every new launch condo (2024–2027) →</a></p>
 </article>
-<aside class="side"><div class="card cta-card"><h3>Weighing up ${esc(n)}?</h3><p>Get an independent 30-minute review of price, alternatives and affordability before you commit. No obligation.</p><a class="btn" href="/contact">Book a free consultation</a></div></aside>
+<aside class="side"><div class="card cta-card"><h3>Weighing up ${esc(n)}?</h3><p>Get an independent 30-minute review of price, alternatives and affordability before you commit. No obligation.</p><a class="btn" href="/contact/">Book a free consultation</a></div></aside>
 </div></div>`;
   const schema = [
     { '@context': 'https://schema.org', '@type': 'WebPage', '@id': url + '#webpage', url, name: title, description: desc, dateModified: AS_OF, inLanguage: 'en-SG', isPartOf: { '@type': 'WebSite', name: 'SellingSgProperty', url: SITE + '/' }, author: PERSON, about: { '@id': url + '#place' } },
@@ -270,7 +291,7 @@ ${crumbs([['/', 'Home'], ['/new-launch-condos/', 'New Launch Condos']])}
 <p class="asof">Upcoming launch dates come from developers where announced and from market reports otherwise; they are marked as estimates on each page. Average psf for launched projects is the developer-announced or reported launch average.</p>
 <div class="tabs"><a href="#y2027">Upcoming 2027</a><a href="#y2026">Launched in 2026</a><a href="#y2025">Launched in 2025</a><a href="#y2024">Launched in 2024</a></div>
 ${['2027', '2026', '2025', '2024'].map(section).join('\n')}
-<div class="card cta-card" style="margin-top:30px"><h2>Not sure which launch fits your budget?</h2><p>A free 30-minute session covers affordability (TDSR, CPF, cash), timing your HDB sale, and how each shortlisted launch compares on price and location.</p><a class="btn" href="/contact">Book a free consultation</a></div>
+<div class="card cta-card" style="margin-top:30px"><h2>Not sure which launch fits your budget?</h2><p>A free 30-minute session covers affordability (TDSR, CPF, cash), timing your HDB sale, and how each shortlisted launch compares on price and location.</p><a class="btn" href="/contact/">Book a free consultation</a></div>
 </div>`;
   const schema = [
     { '@context': 'https://schema.org', '@type': 'CollectionPage', url, name: title, description: desc, dateModified: AS_OF, author: PERSON },
@@ -320,13 +341,13 @@ ${crumbs(bc)}
 <article>
 <div class="kicker">${esc(post.category || 'Insights')}</div>
 <h1>${esc(post.title)}</h1>
-<div class="meta"><span>By <a href="/about">Jack Leow</a>, CEA Reg. No. R074023I</span><time datetime="${published}">${esc(post.date)}</time><span>${esc(post.readTime || '')}</span></div>
+<div class="meta"><span>By <a href="/about/">Jack Leow</a>, CEA Reg. No. R074023I</span><time datetime="${published}">${esc(post.date)}</time><span>${esc(post.readTime || '')}</span></div>
 ${toc.length > 2 ? `<nav class="toc" aria-label="Contents" style="margin-top:20px"><strong>In this article</strong><ol>${toc.map(([i, t]) => `<li><a href="#${i}">${esc(t)}</a></li>`).join('')}</ol></nav>` : ''}
 <div class="article-body">
 ${html}
 </div>
 <div class="author"><div class="av" aria-hidden="true">JL</div><div><strong>Jack Leow</strong> · CEA Reg. No. R074023I · PropNex Realty Pte Ltd<p>Property agent with an auditing background. Writes data-first guides for HDB upgraders, first-time buyers and investors, using URA, IRAS, CPF and developer data.</p></div></div>
-<div class="card cta-card"><h2>Want this applied to your numbers?</h2><p>A free 30-minute session works through your budget, CPF, timing and shortlist. No obligation.</p><a class="btn" href="/contact">Book a free consultation</a></div>
+<div class="card cta-card"><h2>Want this applied to your numbers?</h2><p>A free 30-minute session works through your budget, CPF, timing and shortlist. No obligation.</p><a class="btn" href="/contact/">Book a free consultation</a></div>
 <h2>More insights</h2>
 <ul class="links">${rel.map(([k, a]) => `<li><a href="${articlePath(k)}">${esc(a.title)}</a><span>${esc(a.date)}</span></li>`).join('')}</ul>
 </article>
@@ -369,7 +390,8 @@ function refreshHomepage(html) {
   html = html.slice(0, s) + startM + '\nconst ARTICLES = ' + JSON.stringify(meta).replace(/</g, '\\u003c') + ';\n' + html.slice(e);
 
   // 2) static pre-rendered project cards (same template as the client-side renderer)
-  const fnStart = html.indexOf('        function getReviewScore(project)');
+  const fnStart = html.indexOf('        // BUILD:CARD-RENDER START');
+  if (fnStart < 0) throw new Error('BUILD:CARD-RENDER START marker missing in index.html');
   const fnEnd = html.indexOf('        // Filter Functions');
   const grid = { innerHTML: '' };
   // eslint-disable-next-line no-new-func
@@ -381,7 +403,42 @@ function refreshHomepage(html) {
   const gridEnd = html.indexOf('\n            </div>\n            \n            <div class="text-center mt-10">', cEnd);
   if (cStart < 0 || gridEnd < 0) throw new Error('static card markers missing in index.html');
   const comment = html.slice(cStart, cEnd).replace(/<!-- \d+ project cards/, `<!-- ${env.projects.length} project cards`);
-  return html.slice(0, cStart) + comment + '\n' + grid.innerHTML + html.slice(gridEnd);
+  html = html.slice(0, cStart) + comment + '\n' + grid.innerHTML + html.slice(gridEnd);
+
+  // 3) article count + hero 'tracker' panel (dated, links to the newest pages)
+  const VALS = { articles: sortedArticles.length, total: projects.length, asof: AS_OF_LABEL };
+  for (const y of ['2024', '2025', '2026', '2027']) VALS['y' + y] = projects.filter(p => p.year === y).length;
+  html = html.replace(/<!--BUILD:VAL:(\w+)-->[^<]*<!--\/BUILD:VAL-->/g, (m, k) => {
+    if (!(k in VALS)) throw new Error('unknown BUILD:VAL key ' + k);
+    return `<!--BUILD:VAL:${k}-->${VALS[k]}<!--/BUILD:VAL-->`;
+  });
+  const hs = html.indexOf('<!-- BUILD:HERO-PANEL START -->'), he = html.indexOf('<!-- BUILD:HERO-PANEL END -->');
+  if (hs < 0 || he < 0) throw new Error('BUILD:HERO-PANEL markers missing in index.html');
+  return html.slice(0, hs) + '<!-- BUILD:HERO-PANEL START -->\n' + heroPanel() + '\n                ' + html.slice(he);
+}
+
+function heroPanel() {
+  const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const mon = p => `${MON[(p.launchSort % 100) - 1]} ${Math.floor(p.launchSort / 100)}`;
+  const launched = projects.filter(p => !isUpcoming(p)).sort((a, b) => b.launchSort - a.launchSort).slice(0, 3);
+  const next = projects.filter(isUpcoming).sort((a, b) => a.launchSort - b.launchSort).slice(0, 3);
+  const n = y => projects.filter(p => p.year === y).length;
+  const row = (p, note) => `<li class="flex items-baseline justify-between gap-4 py-2 border-t border-white/10"><a href="${projectPath(p)}" class="text-white hover:text-violet-300 underline-offset-4 hover:underline">${esc(p.name)}</a><span class="text-xs text-slate-400 whitespace-nowrap">${esc(note)}</span></li>`;
+  return `                <aside class="hidden md:block md:col-span-5" aria-label="New launch tracker summary">
+                    <div class="border border-white/15 bg-white/[0.04] rounded-2xl p-7">
+                        <div class="text-[11px] tracking-[0.2em] uppercase text-violet-400 font-semibold mb-5">New launch tracker &middot; data as of ${AS_OF_LABEL}</div>
+                        <dl class="grid grid-cols-3 gap-4 mb-6">
+                            <div><dt class="text-xs text-slate-400">Condos tracked</dt><dd class="heading-display text-4xl text-white mt-1">${projects.length}</dd></div>
+                            <div><dt class="text-xs text-slate-400">Launched 2026</dt><dd class="heading-display text-4xl text-white mt-1">${n('2026')}</dd></div>
+                            <div><dt class="text-xs text-slate-400">Upcoming 2027</dt><dd class="heading-display text-4xl text-white mt-1">${n('2027')}</dd></div>
+                        </dl>
+                        <div class="text-xs uppercase tracking-wider text-slate-400 mb-1">Latest launches</div>
+                        <ul class="text-sm mb-5">${launched.map(p => row(p, `D${districtOf(p)} · ${mon(p)}`)).join('')}</ul>
+                        <div class="text-xs uppercase tracking-wider text-slate-400 mb-1">Next up</div>
+                        <ul class="text-sm mb-6">${next.map(p => row(p, p.launchShort || 'TBC')).join('')}</ul>
+                        <a href="/new-launch-condos/" class="inline-flex items-center gap-2 text-sm font-semibold text-violet-300 hover:text-white">See all ${projects.length} condos with launch results <i class="fa-solid fa-arrow-right text-xs"></i></a>
+                    </div>
+                </aside>`;
 }
 
 // ---------- sitemap & llms.txt ----------
@@ -389,6 +446,7 @@ function sitemap() {
   const old = read('sitemap.xml').replace(/<!--[\s\S]*?-->/g, '');
   const keep = [...old.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(m => m[1])
     .filter(u => !/\/insights|\/project\/|\/new-launch-condos/.test(u))
+    .map(u => u.replace(/<loc>(https:\/\/www\.sellingsgproperty\.com\/(?:about|contact|mortgage-calculator|deep-analysis\/arina-east-residences))<\/loc>/, '<loc>$1/</loc>'))
     .map(u => `  <url>${u.trim().replace(/\s*\n\s*/g, '\n    ').replace(/^/, '\n    ')}\n  </url>`);
   const entry = (loc, lastmod, pr) => `  <url>\n    <loc>${SITE}${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${pr}</priority>\n  </url>`;
   const add = [entry('/new-launch-condos/', AS_OF, '0.9'), entry('/insights/', AS_OF, '0.8')]
@@ -427,6 +485,45 @@ write('new-launch-condos/index.html', hubPage());
 for (const [k, a] of sortedArticles) write(`insights/${articleSlug(k)}/index.html`, articlePage(k, a));
 write('insights/index.html', insightsIndex());
 write('index.html', refreshHomepage(indexHtml));
+
+// ---------- homepage CSS (compiled Tailwind, replaces the Play CDN) ----------
+// Rebuilt from index.html classes every run, then cache-busted with ?v=<hash>.
+{
+  const cli = path.join(ROOT, 'node_modules/tailwindcss/lib/cli.js');
+  if (fs.existsSync(cli)) {
+    require('child_process').execFileSync(process.execPath, [cli, '-c', 'tailwind.config.cjs', '-i', 'input.css', '-o', 'assets/home.css', '--minify'], { cwd: ROOT, stdio: ['ignore', 'ignore', 'pipe'] });
+  } else {
+    console.warn('WARNING: tailwindcss not installed (run `npm install`). Kept the committed assets/home.css; new Tailwind classes in index.html will not be styled.');
+  }
+  const homeCss = read('assets/home.css');
+  const v = crypto.createHash('sha1').update(homeCss).digest('hex').slice(0, 8);
+  let html = read('index.html').replace(/\/assets\/home\.css\?v=[A-Za-z0-9]+/, `/assets/home.css?v=${v}`);
+  html = setHead(html, ROUTE_META.home);
+  write('index.html', html);
+  console.log(`assets/home.css ${(homeCss.length / 1024).toFixed(1)} KB, v=${v}`);
+
+  // ---------- SPA routes pre-rendered with their own head + visible section ----------
+  // Without these, /about, /contact etc. served index.html with the homepage title and
+  // canonical, so Google saw them as duplicates of the homepage.
+  for (const [page, meta] of Object.entries(ROUTE_META)) {
+    if (page === 'home' || page === 'blog') continue; // blog = static /insights/
+    let h = setHead(html, meta).replace('<div id="page-home" class="page-section active">', '<div id="page-home" class="page-section">');
+    const re = new RegExp(`(<div id="page-${page}" class="page-section)`);
+    if (!re.test(h)) throw new Error(`section page-${page} not found in index.html`);
+    h = h.replace(re, '$1 active');
+    write(meta.path.replace(/^\//, '') + 'index.html', h);
+  }
+
+  // ---------- branded 404 (served by Netlify with a real 404 status) ----------
+  write('404.html', layout({
+    title: 'Page not found | SellingSgProperty',
+    description: 'This page does not exist. Browse Singapore new launch condos or property insights instead.',
+    canonical: SITE + '/404.html',
+    body: `<main class="wrap" style="padding-top:56px;padding-bottom:72px"><p class="kicker">Error 404</p><h1>We couldn't find that page</h1>
+<p>The link may be old or mistyped. These are the pages most people are looking for:</p>
+<ul><li><a href="/new-launch-condos/">All new launch condos (2024–2027)</a></li><li><a href="/insights/">Property insights and guides</a></li><li><a href="/mortgage-calculator/">Mortgage calculator</a></li><li><a href="/">Homepage</a></li></ul></main>`,
+  }).replace('<head>', '<head>\n<meta name="robots" content="noindex">'));
+}
 write('sitemap.xml', sitemap());
 write('llms.txt', llms());
 console.log(`Built ${built} project pages (+${Object.keys(HANDBUILT).length} hand-built kept), ${sortedArticles.length} articles, hub, insights index, sitemap, llms.txt. CSS v=${CSS_V}`);

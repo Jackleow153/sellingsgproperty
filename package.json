@@ -7,7 +7,8 @@
     "serve": "npm run start",
     "dev": "npm run start",
     "refresh-news": "python3 scripts/refresh-news.py",
-    "refresh-buylow": "python3 scripts/refresh-buylow.py"
+    "refresh-buylow": "python3 scripts/refresh-buylow.py",
+    "build": "node scripts/build-pages.cjs"
   },
   "license": "UNLICENSED",
   "private": true,
@@ -27,6 +28,6 @@
   },
   "homepage": "https://github.com/Jackleow153/sellingsgproperty#readme",
   "devDependencies": {
-    "tailwindcss": "^4.3.1"
+    "tailwindcss": "^3.4.17"
   }
 }

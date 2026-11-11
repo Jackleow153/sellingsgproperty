@@ -21,16 +21,20 @@ Work as a senior SEO / AIO / GEO / UX / UI specialist who understands how people
 - Hosting: GitHub `main` → Netlify (auto-deploy, publish dir `.`, no build command on Netlify).
 - `index.html`: homepage single-page app. **Source of truth for projects** is the `const projects = [...]` array in it.
 - `data/articles.js`: **source of truth for Insights articles** (bodies are not in index.html any more).
-- `scripts/build-pages.cjs`: generates the crawlable static pages. **Run it after any change to projects, articles or `assets/site.css`, and commit the output:**
+- `scripts/build-pages.cjs`: generates the crawlable static pages **and the homepage CSS**. Run `npm install` once (Tailwind v3 CLI), then **run it after any change to `index.html`, projects, articles or `assets/site.css`, and commit the output:**
 
   ```bash
-  node scripts/build-pages.cjs        # optional: AS_OF=YYYY-MM-DD node scripts/build-pages.cjs
+  npm install                         # once per machine
+  node scripts/build-pages.cjs        # or: npm run build. Optional: AS_OF=YYYY-MM-DD node scripts/build-pages.cjs
   ```
 
-  It writes `project/<slug>/index.html`, `new-launch-condos/index.html`, `insights/<slug>/index.html`, `insights/index.html`, the static project cards and article metadata inside `index.html`, `sitemap.xml` and `llms.txt`.
+  It writes `project/<slug>/index.html`, `new-launch-condos/index.html`, `insights/<slug>/index.html`, `insights/index.html`, `404.html`, the pre-rendered SPA routes `about/`, `contact/`, `mortgage-calculator/`, `deep-analysis/arina-east-residences/` (copies of `index.html` with their own head; never edit those copies), `assets/home.css` (compiled Tailwind) plus its `?v=` hash, `sitemap.xml` and `llms.txt`. Inside `index.html` it refreshes the static project cards, article metadata, the hero tracker panel and every `<!--BUILD:VAL:key-->` number.
+- Homepage styling: Tailwind classes in `index.html`, compiled by `tailwind.config.cjs` + `input.css` into `assets/home.css`. **Never re-add the Tailwind CDN, Font Awesome CDN or Google Fonts links.** Tailwind `violet`/`indigo` classes are remapped to the brand navy/brass in `tailwind.config.cjs`. Icons are CSS masks in `input.css` (only the icons in use; to add one, add its Font Awesome Free SVG there). Fonts are self-hosted in `assets/fonts/`.
+- Per-route titles, descriptions and canonicals for the SPA live in `ROUTE_META` in `index.html` (one place, used by the JS router and the build).
 - Hand-built pages that the build must not overwrite: `project/thomson-reserve-condo/`, `project/dunearn-house/`, `project/lentor-gardens-residences/`.
 - Shared styles for static pages: `assets/site.css` (brand: porcelain `#F6F4EF`, navy `#0C1B2A`, brass `#B89B5E`; Marcellus headings, Hanken Grotesk text).
-- Redirects: `_redirects`. Put 301s **above** the `/*` catch-all (first match wins).
+- Redirects: `_redirects`. There is **no catch-all**: unknown URLs return `/404.html` with a real 404 (no soft 404s). Every public URL must be a real file; add 301s for any URL you retire.
+- `/assets/*` is cached for a year: reference changed assets with a new `?v=` or a new file name.
 
 ## Project data rules
 
@@ -42,7 +46,7 @@ Work as a senior SEO / AIO / GEO / UX / UI specialist who understands how people
 
 ## Before you push
 
-1. `node scripts/build-pages.cjs` ran with no errors and the output is committed.
+1. `node scripts/build-pages.cjs` ran with no errors (no "tailwindcss not installed" warning) and the output is committed.
 2. Spot-check one project page and one article on a narrow (390 px) viewport: no sideways scrolling.
 3. Every page keeps a unique `<title>`, meta description, canonical and valid JSON-LD.
 4. Mention any goal conflicts you noticed in your summary.

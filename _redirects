@@ -1,43 +1,41 @@
-# Netlify rewrites for cleaner shareable/SEO-friendly article URLs (optional)
-# These still load the same single index.html but give nicer paths in address bar and some backlinks.
-# Point your internal links or future sitemap to the clean version if desired.
-# The JS router now supports both clean paths (/insights/slug) and old hash paths.
+# Netlify redirects. First match wins, and a real file on disk is served before any
+# non-forced rule. There is deliberately NO catch-all: unknown URLs get /404.html with a
+# real 404 status, so Google never indexes junk URLs as copies of the homepage (soft 404).
+#
+# Every public page is now a real file:
+#   /                         index.html (homepage SPA)
+#   /about/ /contact/ /mortgage-calculator/ /deep-analysis/arina-east-residences/
+#                             pre-rendered copies of the SPA with their own head (build-pages.cjs)
+#   /project/<slug>/  /new-launch-condos/  /insights/  /insights/<slug>/   (build-pages.cjs)
+#   /news/  /undervalued-pty/  /hdb-resale-timeline/   (their own scripts)
+# Without a trailing slash Netlify redirects /about -> /about/ automatically.
 
-# Google Search Console ownership verification files (serve statically, do not redirect to SPA)
 # Legacy / alternate URLs -> canonical pages (301 keeps any ranking signals)
- /insights/dunearn-vs-fourth-avenue        /insights/dunearn-vs-fourth-avenue-2026/  301
- /insights/dunearn-vs-fourth-avenue/       /insights/dunearn-vs-fourth-avenue-2026/  301
- /project/thomson-reserve                  /project/thomson-reserve-condo/           301
- /project/thomson-reserve/                 /project/thomson-reserve-condo/           301
- /new-launches                             /new-launch-condos/                       301
+/insights/dunearn-vs-fourth-avenue        /insights/dunearn-vs-fourth-avenue-2026/  301
+/insights/dunearn-vs-fourth-avenue/       /insights/dunearn-vs-fourth-avenue-2026/  301
+/project/thomson-reserve                  /project/thomson-reserve-condo/           301
+/project/thomson-reserve/                 /project/thomson-reserve-condo/           301
+/new-launches                             /new-launch-condos/                       301
+/new-launches/                            /new-launch-condos/                       301
+/home                                     /                                         301
+/home/                                    /                                         301
+/blog                                     /insights/                                301
+/blog/                                    /insights/                                301
+/deep-analysis/arina                      /deep-analysis/arina-east-residences/     301
+/deep-analysis/arina/                     /deep-analysis/arina-east-residences/     301
+/deep-analysis                            /deep-analysis/arina-east-residences/     301
+/deep-analysis/                           /deep-analysis/arina-east-residences/     301
 
- /google3a98157436f9af5a.html  /google3a98157436f9af5a.html  200
-
-# Insights articles are real static pages at /insights/<slug>/ (built by scripts/build-pages.cjs).
-# To add an article: edit data/articles.js, run `node scripts/build-pages.cjs`, commit & push.
-
-# Legacy hash support (still works)
-
-# Main subpages (clean URLs for mortgage calculator, deep analysis, about, contact, project modals)
-# These load the SPA (index.html) then JS router shows the matching section / modal and updates active state.
- /mortgage-calculator                     /index.html   200
- /about                                   /index.html   200
- /contact                                 /index.html   200
- /deep-analysis/arina-east-residences     /index.html   200
- /project/lentor-gardens-residences     /project/lentor-gardens-residences/index.html   200
- /project/lentor-gardens-residences/      /project/lentor-gardens-residences/index.html   200
- /project/*                               /index.html   200
+# Google Search Console ownership verification file
+/google3a98157436f9af5a.html  /google3a98157436f9af5a.html  200
 
 # Condo Buy-Low Screen. A real HTML file, not the SPA.
- /undervalued-pty                         /undervalued-pty/index.html   200
- /undervalued-pty/                        /undervalued-pty/index.html   200
- /undervalued-pty/listings.json           /undervalued-pty/listings.json  200
+/undervalued-pty                          /undervalued-pty/index.html   200
+/undervalued-pty/                         /undervalued-pty/index.html   200
+/undervalued-pty/listings.json            /undervalued-pty/listings.json  200
 
 # Local News page (news/index.html + /news.json). Do not proxy this elsewhere.
- /news                                    /news/index.html   200
- /news/                                   /news/index.html   200
- /news/:id                                /news/:id/index.html   200
- /news/:id/                               /news/:id/index.html   200
-
-# Fallback: everything else serves the SPA (required for client-side routing of all subpages + modals)
- /*                                       /index.html   200
+/news                                     /news/index.html   200
+/news/                                    /news/index.html   200
+/news/:id                                 /news/:id/index.html   200
+/news/:id/                                /news/:id/index.html   200
