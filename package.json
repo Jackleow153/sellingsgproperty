@@ -13,5 +13,20 @@
   "private": true,
   "dependencies": {
     "resend": "^4.0.0"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jackleow153/sellingsgproperty.git"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Jackleow153/sellingsgproperty/issues"
+  },
+  "homepage": "https://github.com/Jackleow153/sellingsgproperty#readme",
+  "devDependencies": {
+    "tailwindcss": "^4.3.1"
   }
 }
