@@ -5,7 +5,8 @@
 
 # Google Search Console ownership verification files (serve statically, do not redirect to SPA)
 # Legacy / alternate URLs -> canonical pages (301 keeps any ranking signals)
- /insights/dunearn-vs-fourth-avenue        /insights/dunearn-vs-fourth-avenue-2026   301
+ /insights/dunearn-vs-fourth-avenue        /insights/dunearn-vs-fourth-avenue-2026/  301
+ /insights/dunearn-vs-fourth-avenue/       /insights/dunearn-vs-fourth-avenue-2026/  301
  /project/thomson-reserve                  /project/thomson-reserve-condo/           301
  /project/thomson-reserve/                 /project/thomson-reserve-condo/           301
  /new-launches                             /new-launch-condos/                       301

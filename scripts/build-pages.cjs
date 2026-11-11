@@ -60,7 +60,7 @@ const CSS_V = crypto.createHash('sha1').update(cssFile).digest('hex').slice(0, 8
 const projectSlug = p => HANDBUILT[p.id] || slugify(p.name);
 const projectPath = p => `/project/${projectSlug(p)}/`;
 const articleSlug = id => id.replace(/^post-/, '');
-const articlePath = id => `/insights/${articleSlug(id)}`;
+const articlePath = id => `/insights/${articleSlug(id)}/`;   // trailing slash: Netlify serves /insights/<slug>/index.html there without a redirect
 const districtOf = p => (p.location.match(/D(\d+)/) || [])[1] || '';
 const segmentOf = p => ({ ccr: 'CCR', rcr: 'RCR', ocr: 'OCR' }[p.district] || '');
 const placeOf = p => p.location.replace(/,\s*D\d+\s*$/, '');
@@ -294,7 +294,9 @@ function prepareBody(html) {
     .replace(/<i class="[^"]*fa-plus[^"]*faq-icon[^"]*"><\/i>/g, '<span class="faq-icon" aria-hidden="true">+</span>')
     .replace(/<i class="fa-[^"]*"[^>]*><\/i>/g, '')
     // SPA-style links to articles -> real URLs
-    .replace(/href="#insights\/([a-z0-9-]+)"/g, (m, s) => `href="/insights/${ARTICLE_ALIASES[s] || s}"`)
+    .replace(/href="#insights\/([a-z0-9-]+)"/g, (m, s) => `href="/insights/${ARTICLE_ALIASES[s] || s}/"`)
+    // bare /insights/<slug> links in article bodies -> trailing-slash URL (no 301 hop)
+    .replace(/href="\/insights\/([a-z0-9-]+)"/g, (m, s) => `href="/insights/${ARTICLE_ALIASES[s] || s}/"`)
     .replace(/onclick="showArticle\('([^']+)'\)[^"]*"/g, (m, id) => `data-href="${articlePath(id)}"`);
   out = out.replace(/<h2([^>]*)>([\s\S]*?)<\/h2>/g, (m, attrs, inner) => {
     const text = strip(inner);
