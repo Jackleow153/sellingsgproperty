@@ -10,8 +10,22 @@ Exact replica of the Singapore New Launch Condos website (single-file static sit
 - Google Search Console verified (HTML file + meta tag)
 - Custom domain `www.sellingsgproperty.com` live with HTTPS
 
+## Build workflow (static pages for SEO / AIO / GEO) — added Nov 2026
+
+Every condo and every article now has its own crawlable HTML page, so Google and AI assistants can rank and link them individually.
+
+| What you change | Where | Then run |
+|---|---|---|
+| A project card (add / edit / move year) | `const projects = [...]` in `index.html` | `node scripts/build-pages.cjs` |
+| An article (add / edit) | `data/articles.js` (source of truth; bodies are no longer in index.html) | `node scripts/build-pages.cjs` |
+| Shared page styling | `assets/site.css` | `node scripts/build-pages.cjs` (bumps the cache-busting version) |
+
+The build writes `project/<slug>/index.html` (hand-built Thomson Reserve, Dunearn House and Lentor Gardens pages are left alone), `new-launch-condos/index.html` (hub), `insights/<slug>/index.html`, `insights/index.html`, the static project cards and article metadata inside `index.html`, `sitemap.xml` and `llms.txt`. Commit the generated files and push.
+
+Set the "data as of" date with `AS_OF=2026-11-11 node scripts/build-pages.cjs` (defaults to the date in the script).
+
 ## Files
-- `index.html` — The complete self-contained website (Tailwind via CDN + Font Awesome via CDN + all JS/data inline). 39 projects + 25 full articles.
+- `index.html` — Homepage single-page app (project grid, tools). Article bodies now live in `data/articles.js` and are served as static pages.
 - `sitemap.xml`, `robots.txt`, `_redirects`, `netlify.toml` — SEO + deployment config.
 
 Articles now open as a **dedicated full page** (under the Insights section) instead of a popup modal. Deep links like `#insights/post-hdb-phantom-fear` are supported, with proper browser back/forward and Escape-to-go-back.

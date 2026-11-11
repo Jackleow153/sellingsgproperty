@@ -4,40 +4,18 @@
 # The JS router now supports both clean paths (/insights/slug) and old hash paths.
 
 # Google Search Console ownership verification files (serve statically, do not redirect to SPA)
+# Legacy / alternate URLs -> canonical pages (301 keeps any ranking signals)
+ /insights/dunearn-vs-fourth-avenue        /insights/dunearn-vs-fourth-avenue-2026   301
+ /project/thomson-reserve                  /project/thomson-reserve-condo/           301
+ /project/thomson-reserve/                 /project/thomson-reserve-condo/           301
+ /new-launches                             /new-launch-condos/                       301
+
  /google3a98157436f9af5a.html  /google3a98157436f9af5a.html  200
 
-# All 25 insights articles (clean slugs)
-# To add a new one: append another line like
-#  /insights/my-new-slug                 /index.html   200
-# Then update counts in index.html and sitemap.xml, commit & push.
- /insights/hdb-phantom-fear               /index.html   200
- /insights/absd-foreigners                /index.html   200
- /insights/decoupling                     /index.html   200
- /insights/resolution-2026                /index.html   200
- /insights/new-launch-vs-resale           /index.html   200
- /insights/cpf-private                    /index.html   200
- /insights/district-guide                 /index.html   200
- /insights/hdb-sell-signs                 /index.html   200
- /insights/fomo-new-launch-2026           /index.html   200
- /insights/first-condo-anxiety            /index.html   200
- /insights/progressive-payment-psychology /index.html   200
- /insights/absorption-herd-2026           /index.html   200
- /insights/developer-incentives-psych     /index.html   200
- /insights/dunearn-house-2026             /index.html   200
- /insights/dunearn-vs-fourth-avenue       /index.html   200
- /insights/how-to-buy-new-launch-2026     /index.html   200
- /insights/new-launch-vs-resale-cheaper-2026 /index.html   200
- /insights/which-condo-to-buy-2026        /index.html   200
- /insights/dunearn-house-review-2026      /index.html   200
- /insights/turf-city-masterplan-2026      /index.html   200
-/insights/dunearn-house-family-living-guide-2026 /index.html   200
- /insights/dunearn-house-buyers-guide-2026 /index.html   200
- /insights/dunearn-house-investment-analysis-2026 /index.html   200
- /insights/hdb-vs-ec-vs-private-property-2026 /index.html   200
- /insights/thomson-reserve-price-review-2026 /index.html   200
+# Insights articles are real static pages at /insights/<slug>/ (built by scripts/build-pages.cjs).
+# To add an article: edit data/articles.js, run `node scripts/build-pages.cjs`, commit & push.
 
 # Legacy hash support (still works)
- /#insights/*                             /index.html   200
 
 # Main subpages (clean URLs for mortgage calculator, deep analysis, about, contact, project modals)
 # These load the SPA (index.html) then JS router shows the matching section / modal and updates active state.
