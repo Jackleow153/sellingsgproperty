@@ -1768,20 +1768,7 @@
                 
                     <div class="condo-card bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm group" data-id="26" data-district="ocr" data-price="1356600" data-year="2026" data-bedrooms="2,3,4">
                         <div class="relative">
-                            
-                <div class="w-full h-56 bg-gradient-to-br from-slate-600 via-slate-700 to-zinc-800 flex flex-col items-center justify-center p-6 text-white text-center relative overflow-hidden">
-                    <div class="absolute inset-0 bg-[radial-gradient(#ffffff10_1px,transparent_1px)] bg-[length:3px_3px]"></div>
-                    <div class="relative z-10">
-                        <div class="uppercase tracking-[2px] text-[10px] opacity-70 mb-1">NEW LAUNCH • 2026</div>
-                        <div class="font-black text-[22px] leading-[1.05] tracking-[-1.2px]">Lentor Gardens Residences</div>
-                        <div class="text-sm opacity-90 mt-0.5">Lentor Gardens (Lentor Hills)</div>
-                        <div class="mt-3 text-xs inline-flex items-center gap-x-1 bg-white/15 px-3 py-px rounded-full">
-                            <span>from</span>
-                            <span class="font-bold tabular-nums">$2,350 psf</span>
-                        </div>
-                    </div>
-                </div>
-            
+                            <img src="/project/lentor-gardens-residences/lentor-gardens-card.webp" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="Lentor Gardens Residences" loading="lazy" width="400" height="224">
                             
                             <div class="absolute top-4 left-4 flex gap-2">
                                 <span class="px-3 py-1 text-xs font-bold bg-white/95 text-violet-700 rounded-2xl shadow">Private Condominium</span>
@@ -1790,6 +1777,8 @@
                             
                             <div class="absolute top-4 right-4 bg-emerald-500 text-white text-[10px] font-bold px-2.5 py-px rounded">AVAILABLE</div>
                             
+                            
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/75 to-transparent h-20"></div>
                             
                             
                             <div class="absolute bottom-4 right-4 text-right z-10">
@@ -7241,7 +7230,7 @@ function toggleAmortization(){
         }
 
         function getProjectVisual(project) {
-            const hasUniqueImage = project.image && project.image.startsWith('http') && !project.image.includes('chuanpark.sg');
+            const hasUniqueImage = project.image && (project.image.startsWith('http') || project.image.startsWith('/')) && !project.image.includes('chuanpark.sg');
 
             if (hasUniqueImage) {
                 return `<img src="${project.image}" class="w-full h-56 object-cover group-hover:scale-[1.03] transition duration-700" alt="${project.name}" loading="lazy" width="400" height="224">`;
