@@ -1048,6 +1048,7 @@ const ARTICLES = {
     img: "",
     linkedinUrl: 'https://www.linkedin.com/pulse/dunearn-house-2026-steal-jack-leow',
     body: `
+      <div class="tldr launch-update"><p><strong>Launch update, 12 Nov 2026:</strong> Dunearn House launched on 25–26 July 2026 at an average of $3,140 psf, and 212 of its 380 units (56%) sold over the launch weekend; the three-bedroom types sold out. This article was written before launch, so its prices are pre-launch estimates. For the results and what is still available, see the <a href="/project/dunearn-house/">Dunearn House page</a>.</p></div>
       <p><strong>Dunearn House is the first private residential launch in the transformative Bukit Timah Turf City masterplan — and at a land cost that positions it as one of the most compelling CCR value plays of 2026.</strong> Developed by Frasers Property, Sekisui House and CSC Land Group, this 380-unit 99-year leasehold condo on Dunearn Road offers families and upgraders a rare chance to buy into Singapore's next major growth precinct at new-launch pricing.</p>
 
       <p>This guide covers everything you need to know: the project details, the value case, the risks, and what serious buyers should do next.</p>
@@ -1259,6 +1260,7 @@ const ARTICLES = {
     img: "",
     linkedinUrl: 'https://www.linkedin.com/pulse/dunearn-vs-fourth-avenue-2026-jack-leow',
     body: `
+      <div class="tldr launch-update"><p><strong>Launch update, 12 Nov 2026:</strong> Dunearn House launched on 25–26 July 2026 at an average of $3,140 psf, and 212 of its 380 units (56%) sold over the launch weekend; the three-bedroom types sold out. This article was written before launch, so its prices are pre-launch estimates. For the results and what is still available, see the <a href="/project/dunearn-house/">Dunearn House page</a>.</p></div>
       <p><strong>If you are weighing <strong>Dunearn House</strong> as an investment against the already-completed Fourth Avenue Residences, here is the short answer: Dunearn House is a <em>forward-looking</em> play built on first-mover advantage in the new Bukit Timah Turf City precinct, while Fourth Avenue Residences is a <em>proven</em> asset with real transaction data, a stable ~3–3.5% rental yield and a liquid resale market.</strong> They earn differently because they sit at different stages of the property life cycle. In this guide, you will learn how each stacks up on price, yield, growth drivers and risk — so you can decide which fits your goals.</p>
 
       <p><strong>A quick note on data:</strong> Dunearn House had not officially launched at the time of writing (showflat expected 2H 2026). Its pricing, exact unit mix and yields are not yet confirmed and must be verified at launch. Fourth Avenue Residences figures below are drawn from public transaction records.</p>
@@ -2260,6 +2262,7 @@ const ARTICLES = {
     img: "",
     linkedinUrl: 'https://www.linkedin.com/pulse/dunearn-house-review-2026-jack-leow',
     body: `
+      <div class="tldr launch-update"><p><strong>Launch update, 12 Nov 2026:</strong> Dunearn House launched on 25–26 July 2026 at an average of $3,140 psf, and 212 of its 380 units (56%) sold over the launch weekend; the three-bedroom types sold out. This article was written before launch, so its prices are pre-launch estimates. For the results and what is still available, see the <a href="/project/dunearn-house/">Dunearn House page</a>.</p></div>
       <p><strong>If you're reading this, chances are you've already seen the buzz around <strong>Dunearn House</strong> — the first private condo to launch within the new <strong>Bukit Timah Turf City</strong> masterplan. And you probably have one question: <em>is it actually worth the money?</em></strong></p>
 
       <p>Short answer: <strong>Dunearn House looks like a strong long-term buy for families and CCR upgraders who can stomach a 99-year leasehold at around $2.8k–$3.1k psf.</strong> It sits in a low-supply prime pocket, walking distance to Sixth Avenue MRT, with first-mover positioning in a 20–30 year transformation story. But it's not for everyone — especially investors hunting for quick rental yield or buyers who need a freehold.</p>
@@ -2578,6 +2581,7 @@ const ARTICLES = {
     img: "",
     linkedinUrl: 'https://www.linkedin.com/pulse/turf-city-masterplan-2026-dunearn-house-jack-leow',
     body: `
+      <div class="tldr launch-update"><p><strong>Launch update, 12 Nov 2026:</strong> Dunearn House launched on 25–26 July 2026 at an average of $3,140 psf, and 212 of its 380 units (56%) sold over the launch weekend; the three-bedroom types sold out. This article was written before launch, so its prices are pre-launch estimates. For the results and what is still available, see the <a href="/project/dunearn-house/">Dunearn House page</a>.</p></div>
       <p><strong>The Bukit Timah Turf City masterplan is the defining long-term catalyst for Dunearn House and other new launches in the area through 2030 and beyond.</strong> Knowing the exact timeline for the Cross Island Line MRT, conserved heritage buildings, new parks, and community facilities will help you evaluate if the project's 99-year leasehold and ~$2,800–$3,100 psf pricing is a smart long-horizon bet.</p>
 
       <p>Dunearn House is the first private residential launch inside this 176-hectare former racecourse site. The URA's vision will transform it into a new residential precinct with 15,000–20,000 homes (public and private), conserved heritage assets, green corridors, and major transport upgrades. This is not a small precinct upgrade — it is one of the largest masterplans in central Singapore in decades.</p>
@@ -2689,6 +2693,7 @@ const ARTICLES = {
     img: "",
     linkedinUrl: 'https://www.linkedin.com/pulse/dunearn-house-buyers-guide-2026-jack-leow',
     body: `
+      <div class="tldr launch-update"><p><strong>Launch update, 12 Nov 2026:</strong> Dunearn House launched on 25–26 July 2026 at an average of $3,140 psf, and 212 of its 380 units (56%) sold over the launch weekend; the three-bedroom types sold out. This article was written before launch, so its prices are pre-launch estimates. For the results and what is still available, see the <a href="/project/dunearn-house/">Dunearn House page</a>.</p></div>
       <p><strong>Dunearn House is expected to launch at roughly $2,800–$2,950 psf, with quantum ranging from ~$1.9M (smallest 2BR) to ~$3.3M+ (larger 4BR+Study).</strong> Singapore Citizens face the lowest stamp duty and Additional Buyer's Stamp Duty (ABSD) burden, while foreigners pay the highest. Like all new launches, it uses the <strong>Progressive Payment Scheme (PPS)</strong> — you only pay progressively as construction reaches each stage, not the full amount upfront. Compared to resale Bukit Timah and competing 2026 launches, it offers strong fundamentals: first-mover Turf City positioning, near Sixth Avenue MRT, and a top-tier developer JV.</p>
 
       <p>As a new launch specialist who has studied the Turf City masterplan closely, here's the honest, practical buyer's guide to help you decide.</p>
@@ -3132,6 +3137,7 @@ const ARTICLES = {
     img: "",
     linkedinUrl: 'https://www.linkedin.com/pulse/dunearn-house-family-living-guide-2026-jack-leow',
     body: `
+      <div class="tldr launch-update"><p><strong>Launch update, 12 Nov 2026:</strong> Dunearn House launched on 25–26 July 2026 at an average of $3,140 psf, and 212 of its 380 units (56%) sold over the launch weekend; the three-bedroom types sold out. This article was written before launch, so its prices are pre-launch estimates. For the results and what is still available, see the <a href="/project/dunearn-house/">Dunearn House page</a>.</p></div>
       <p><strong>Dunearn House is genuinely one of the most family-friendly new launches of 2026.</strong> It sits about a 7-minute walk from Sixth Avenue MRT, surrounded by Singapore's top school belt (Methodist Girls', Nanyang Primary, Hwa Chong, Nanyang Girls' High), wrapped by nature — Bukit Timah Nature Reserve, the Rail Corridor, and the upcoming Bukit Timah-Rochor Green Corridor — and built as a low-density development of just ~380 units across 145,000+ sqft with a heavy family unit mix (no 1BR units).</p>
 
       <p>If you're a parent or HDB upgrader looking at Dunearn House in Bukit Timah, your real question isn't just "is it a good investment?" — it's "will my family actually be happy living here day-to-day?" Below is a practical look at schools, MRT access, greenery, retail, weekends, and real family routines.</p>
@@ -3563,6 +3569,7 @@ const ARTICLES = {
     img: "",
     linkedinUrl: 'https://www.linkedin.com/pulse/dunearn-house-investment-analysis-2026-turf-city-first-mover-roi-jack-leow',
     body: `
+      <div class="tldr launch-update"><p><strong>Launch update, 12 Nov 2026:</strong> Dunearn House launched on 25–26 July 2026 at an average of $3,140 psf, and 212 of its 380 units (56%) sold over the launch weekend; the three-bedroom types sold out. This article was written before launch, so its prices are pre-launch estimates. For the results and what is still available, see the <a href="/project/dunearn-house/">Dunearn House page</a>.</p></div>
       <p><strong>If you're sizing up <strong>Dunearn House new launch</strong> as an investment, you're really asking one bigger question: <em>what happens to property prices when a brand-new URA masterplanned precinct opens up — and is it worth being the first one in?</em></strong></p>
 
       <p>Short answer: <strong>Dunearn House is one of the rarest first-mover opportunities in Singapore's CCR (Core Central Region) in decades.</strong> It's the first private residential GLS site to launch within the Bukit Timah Turf City masterplan — essentially the first major opening of Bukit Timah to modern condo housing in nearly 40 years. Backed by a heavyweight Frasers Property × Sekisui House × CSC Land joint venture, sitting on a $1,410 psf ppr land bid, and positioned ahead of an adjacent site that already sold 15% higher, the <strong>investment case is unusually clear</strong> — provided you can ride out a 5–10 year time horizon.</p>
