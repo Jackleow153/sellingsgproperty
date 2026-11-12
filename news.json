@@ -1,8 +1,11 @@
 {
-  "updated": "2026-11-12T23:26:32+08:00",
+  "updated": "2026-11-13T01:55:16+08:00",
   "sources": [
-    "Singapore Business Review",
     "Stacked Homes",
+    "EdgeProp.sg",
+    "The Independent Singapore",
+    "Singapore Business Review",
+    "联合早报",
     "99.co",
     "CNA",
     "The Straits Times",
@@ -11,13 +14,72 @@
     "PropertyNet.SG",
     "Business Times",
     "Home & Decor Singapore",
-    "EdgeProp.sg",
     "AsiaOne",
-    "The Independent Singapore",
     "Borneo Bulletin",
-    "Real Estate Asia"
+    "Real Estate Asia",
+    "Mingtiandi"
   ],
   "items": [
+    {
+      "id": "n41ef7a07",
+      "title": "We Review The February 2027 BTO Launch Sites (Bishan, Tampines, Toa Payoh & Tengah)",
+      "date": "2026/11/12",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Stacked Homes",
+      "sourceNameZh": "Stacked Homes",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n41ef7a07/",
+      "description": "We Review The February 2027 BTO Launch Sites (Bishan, Tampines, Toa Payoh & Tengah)."
+    },
+    {
+      "id": "n17b7e796",
+      "title": "18 Resale Condos Near Popular Singapore Primary School, With 3-Bedders Below $2 Million",
+      "date": "2026/11/12",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Stacked Homes",
+      "sourceNameZh": "Stacked Homes",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n17b7e796/",
+      "description": "18 Resale Condos Near Popular Singapore Primary School, With 3-Bedders Below $2 Million."
+    },
+    {
+      "id": "nec63a2e8",
+      "title": "Freehold condo Mirage Tower's $2,673 psf transaction sets new price benchmark",
+      "date": "2026/11/12",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "EdgeProp.sg",
+      "sourceNameZh": "EdgeProp.sg",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/nec63a2e8/",
+      "description": "Freehold condo Mirage Tower's $2,673 psf transaction sets new price benchmark."
+    },
+    {
+      "id": "n04b4506d",
+      "title": "Good Class Bungalow in Ridley Park put on market with undisclosed guide price",
+      "date": "2026/11/12",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "EdgeProp.sg",
+      "sourceNameZh": "EdgeProp.sg",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n04b4506d/",
+      "description": "Good Class Bungalow in Ridley Park put on market with undisclosed guide price."
+    },
+    {
+      "id": "n61c893d2",
+      "title": "Residents say cars in Yishun hit by bags of suspected urine thrown from HDB flats",
+      "date": "2026/11/12",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "The Independent Singapore",
+      "sourceNameZh": "The Independent Singapore",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n61c893d2/",
+      "description": "Residents say cars in Yishun hit by bags of suspected urine thrown from HDB flats."
+    },
     {
       "id": "n28f17bb8",
       "title": "Four-room flats lead HDB resale volume in October",
@@ -29,6 +91,18 @@
       "category": "Real estate",
       "path": "/news/n28f17bb8/",
       "description": "Four-room flats lead HDB resale volume in October."
+    },
+    {
+      "id": "n0c706bfd",
+      "title": "BTO applications exceed 35,000, set to hit two-year high",
+      "date": "2026/11/11",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "联合早报",
+      "sourceNameZh": "联合早报",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n0c706bfd/",
+      "description": "BTO applications exceed 35,000, set to hit two-year high."
     },
     {
       "id": "n0301c38f",
@@ -70,7 +144,7 @@
       "id": "nbdaff927",
       "title": "HDB deficit narrows to $4.7 billion, down from $6.34 billion a year ago",
       "date": "2026/11/11",
-      "image": "/news/images/placeholder.svg",
+      "image": "/news/images/nbdaff927.jpg",
       "sourceName": "The Straits Times",
       "sourceNameZh": "海峡时报",
       "sourceFeed": "google-news",
@@ -274,7 +348,7 @@
       "id": "n179f206b",
       "title": "November BTO exercise launches nearly 8,000 flats, including Toa Payoh and Bayshore units",
       "date": "2026/11/04",
-      "image": "/news/images/placeholder.svg",
+      "image": "/news/images/n179f206b.jpg",
       "sourceName": "EdgeProp.sg",
       "sourceNameZh": "EdgeProp.sg",
       "sourceFeed": "google-news",
@@ -473,6 +547,90 @@
       "category": "Real estate",
       "path": "/news/9794/",
       "description": "About 14,800 private homes could launch in 2027, the most since 2013. What that means for HDB upgraders and resale sellers."
+    },
+    {
+      "id": "9792",
+      "title": "Hao Mart founder halts foreclosure of his Jervois Hill bungalow by OG",
+      "date": "2026/10/30",
+      "image": "/news/images/9792.jpg",
+      "sourceName": "The Straits Times",
+      "sourceNameZh": "海峡时报",
+      "sourceFeed": "propnex",
+      "category": "Real estate",
+      "path": "/news/9792/",
+      "description": "A Jervois Hill bungalow foreclosure was halted. What one landed loan does, and does not, say about Singapore property prices."
+    },
+    {
+      "id": "9790",
+      "title": "Hong Leong, TID place top bid of S$181.86m or S$1,755 psf ppr for Orchard plot",
+      "date": "2026/10/30",
+      "image": "/news/images/9790.jpg",
+      "sourceName": "Business Times",
+      "sourceNameZh": "商业时报",
+      "sourceFeed": "propnex",
+      "category": "Real estate",
+      "path": "/news/9790/",
+      "description": "Hong Leong and TID bid $181.86 million for an Orchard plot, about $1,755 psf of floor area. Why that is not a condo price."
+    },
+    {
+      "id": "9789",
+      "title": "Two Tiong Bahru HDB blocks to get HIP upgrade after re-poll",
+      "date": "2026/10/29",
+      "image": "/news/images/9789.jpg",
+      "sourceName": "The Straits Times",
+      "sourceNameZh": "海峡时报",
+      "sourceFeed": "propnex",
+      "category": "Real estate",
+      "path": "/news/9789/",
+      "description": "Two Tiong Bahru HDB blocks will get HIP after a fresh poll. What owners pay for, and what resale buyers should still check."
+    },
+    {
+      "id": "9788",
+      "title": "Tampines is S’pore’s most populous planning area, but not its fastest-growing",
+      "date": "2026/10/29",
+      "image": "/news/images/9788.jpg",
+      "sourceName": "The Straits Times",
+      "sourceNameZh": "海峡时报",
+      "sourceFeed": "propnex",
+      "category": "Real estate",
+      "path": "/news/9788/",
+      "description": "Tampines has the most people of any planning area, but Punggol and Sengkang grew faster. How to choose a mature town or a growing one."
+    },
+    {
+      "id": "9787",
+      "title": "About 11,000 homes planned on Maju Forest, Gillman Barracks sites with more greenery to be retained",
+      "date": "2026/10/29",
+      "image": "/news/images/9787.jpg",
+      "sourceName": "Business Times",
+      "sourceNameZh": "商业时报",
+      "sourceFeed": "propnex",
+      "category": "Real estate",
+      "path": "/news/9787/",
+      "description": "About 11,000 homes are planned at Maju Forest and Gillman Barracks, including 9,500 public homes. What nearby buyers and sellers should treat as a long-term."
+    },
+    {
+      "id": "n4d41823c",
+      "title": "Bukit Sembawang Plans Central Singapore Condo Project After $153M Site Buy",
+      "date": "2026/10/27",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Mingtiandi",
+      "sourceNameZh": "Mingtiandi",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n4d41823c/",
+      "description": "Bukit Sembawang plans a central Singapore condo after a $153 million site buy. That number is land cost, not a unit price."
+    },
+    {
+      "id": "n0fa68d88",
+      "title": "HDB resale prices dipped 0.1% in Q3; more flats sold after 15-month wait-out period lifted",
+      "date": "2026/10/23",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "The Straits Times",
+      "sourceNameZh": "海峡时报",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n0fa68d88/",
+      "description": "HDB resale prices dipped 0.1% in Q3; more flats sold after 15-month wait-out period lifted."
     }
   ]
 }
