@@ -17,7 +17,7 @@ const brand = {
   950: '#050C14',
 };
 module.exports = {
-  content: ['./index.html'],
+  content: ['./index.html', './assets/app.js'], // app.js renders cards/modals with Tailwind classes
   theme: {
     extend: {
       colors: { violet: brand, indigo: brand, purple: brand, fuchsia: brand },

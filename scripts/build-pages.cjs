@@ -43,19 +43,22 @@ const jsonLd = o => `<script type="application/ld+json">${JSON.stringify(o).repl
 
 // ---------- load data ----------
 let indexHtml = read('index.html');
+// The homepage app script (projects data, card renderer, router, ROUTE_META, ARTICLES meta) lives in
+// assets/app.js so the homepage and its pre-rendered route copies share one cached file.
+let appJs = read('assets/app.js');
 function extractProjects(html) {
   const a = html.indexOf('const projects = [');
   const b = html.indexOf('function getDistrictGradient', a);
-  if (a < 0 || b < 0) throw new Error('projects array not found in index.html');
+  if (a < 0 || b < 0) throw new Error('projects array not found in assets/app.js');
   // eslint-disable-next-line no-new-func
   return new Function(html.slice(a, b) + '\nreturn projects;')();
 }
-const projects = extractProjects(indexHtml);
+const projects = extractProjects(appJs);
 const ROUTE_META = (() => {
-  const a = indexHtml.indexOf('/* BUILD:ROUTE-META START */'), b = indexHtml.indexOf('/* BUILD:ROUTE-META END */');
-  if (a < 0 || b < 0) throw new Error('BUILD:ROUTE-META markers missing in index.html');
+  const a = appJs.indexOf('/* BUILD:ROUTE-META START */'), b = appJs.indexOf('/* BUILD:ROUTE-META END */');
+  if (a < 0 || b < 0) throw new Error('BUILD:ROUTE-META markers missing in assets/app.js');
   // eslint-disable-next-line no-new-func
-  return new Function(indexHtml.slice(a, b) + '\nreturn ROUTE_META;')();
+  return new Function(appJs.slice(a, b) + '\nreturn ROUTE_META;')();
 })();
 function setHead(html, meta) {
   const url = SITE + meta.path, t = esc(meta.title), d = esc(meta.desc);
@@ -385,17 +388,17 @@ function refreshHomepage(html) {
     meta[k] = { title: a.title, date: a.date, readTime: a.readTime, category: a.category, chipClass: a.chipClass, img: a.img || null, excerpt: getExcerpt(a.body, 110) };
   }
   const startM = '/* BUILD:ARTICLES-META START */', endM = '/* BUILD:ARTICLES-META END */';
-  const s = html.indexOf(startM), e = html.indexOf(endM);
-  if (s < 0 || e < 0) throw new Error('ARTICLES meta markers missing in index.html');
-  html = html.slice(0, s) + startM + '\nconst ARTICLES = ' + JSON.stringify(meta).replace(/</g, '\\u003c') + ';\n' + html.slice(e);
+  const s = appJs.indexOf(startM), e = appJs.indexOf(endM);
+  if (s < 0 || e < 0) throw new Error('ARTICLES meta markers missing in assets/app.js');
+  appJs = appJs.slice(0, s) + startM + '\nconst ARTICLES = ' + JSON.stringify(meta).replace(/</g, '\\u003c') + ';\n' + appJs.slice(e);
 
   // 2) static pre-rendered project cards (same template as the client-side renderer)
-  const fnStart = html.indexOf('        // BUILD:CARD-RENDER START');
-  if (fnStart < 0) throw new Error('BUILD:CARD-RENDER START marker missing in index.html');
-  const fnEnd = html.indexOf('        // Filter Functions');
+  const fnStart = appJs.indexOf('        // BUILD:CARD-RENDER START');
+  if (fnStart < 0) throw new Error('BUILD:CARD-RENDER START marker missing in assets/app.js');
+  const fnEnd = appJs.indexOf('        // Filter Functions');
   const grid = { innerHTML: '' };
   // eslint-disable-next-line no-new-func
-  const run = new Function('document', html.slice(fnStart, fnEnd) + '\nreturn { projects, renderProjects, compareNewest };');
+  const run = new Function('document', appJs.slice(fnStart, fnEnd) + '\nreturn { projects, renderProjects, compareNewest };');
   const env = run({ getElementById: () => grid });
   env.renderProjects(env.projects.slice().sort(env.compareNewest));
   const cStart = html.search(/<!-- \d+ project cards statically pre-rendered/);
@@ -485,6 +488,7 @@ write('new-launch-condos/index.html', hubPage());
 for (const [k, a] of sortedArticles) write(`insights/${articleSlug(k)}/index.html`, articlePage(k, a));
 write('insights/index.html', insightsIndex());
 write('index.html', refreshHomepage(indexHtml));
+write('assets/app.js', appJs);
 
 // ---------- homepage CSS (compiled Tailwind, replaces the Play CDN) ----------
 // Rebuilt from index.html classes every run, then cache-busted with ?v=<hash>.
@@ -497,10 +501,12 @@ write('index.html', refreshHomepage(indexHtml));
   }
   const homeCss = read('assets/home.css');
   const v = crypto.createHash('sha1').update(homeCss).digest('hex').slice(0, 8);
-  let html = read('index.html').replace(/\/assets\/home\.css\?v=[A-Za-z0-9]+/, `/assets/home.css?v=${v}`);
+  const appV = crypto.createHash('sha1').update(appJs).digest('hex').slice(0, 8);
+  let html = read('index.html').replace(/\/assets\/home\.css\?v=[A-Za-z0-9]+/, `/assets/home.css?v=${v}`)
+    .replace(/\/assets\/app\.js\?v=[A-Za-z0-9]+/, `/assets/app.js?v=${appV}`);
   html = setHead(html, ROUTE_META.home);
   write('index.html', html);
-  console.log(`assets/home.css ${(homeCss.length / 1024).toFixed(1)} KB, v=${v}`);
+  console.log(`assets/home.css ${(homeCss.length / 1024).toFixed(1)} KB, v=${v}; assets/app.js ${(appJs.length / 1024).toFixed(1)} KB, v=${appV}`);
 
   // ---------- SPA routes pre-rendered with their own head + visible section ----------
   // Without these, /about, /contact etc. served index.html with the homepage title and

@@ -19,18 +19,18 @@ Work as a senior SEO / AIO / GEO / UX / UI specialist who understands how people
 ## How the site is built
 
 - Hosting: GitHub `main` → Netlify (auto-deploy, publish dir `.`, no build command on Netlify).
-- `index.html`: homepage single-page app. **Source of truth for projects** is the `const projects = [...]` array in it.
+- `index.html`: homepage single-page app (markup, pre-rendered cards, head). Its main script lives in `assets/app.js`, loaded with a plain `<script src>` at the same spot (one cached file shared by the homepage and its route copies). **Source of truth for projects** is the `const projects = [...]` array in `assets/app.js`.
 - `data/articles.js`: **source of truth for Insights articles** (bodies are not in index.html any more).
-- `scripts/build-pages.cjs`: generates the crawlable static pages **and the homepage CSS**. Run `npm install` once (Tailwind v3 CLI), then **run it after any change to `index.html`, projects, articles or `assets/site.css`, and commit the output:**
+- `scripts/build-pages.cjs`: generates the crawlable static pages **and the homepage CSS**. Run `npm install` once (Tailwind v3 CLI), then **run it after any change to `index.html`, `assets/app.js` (projects), articles or `assets/site.css`, and commit the output:**
 
   ```bash
   npm install                         # once per machine
   node scripts/build-pages.cjs        # or: npm run build. Optional: AS_OF=YYYY-MM-DD node scripts/build-pages.cjs
   ```
 
-  It writes `project/<slug>/index.html`, `new-launch-condos/index.html`, `insights/<slug>/index.html`, `insights/index.html`, `404.html`, the pre-rendered SPA routes `about/`, `contact/`, `mortgage-calculator/`, `deep-analysis/arina-east-residences/` (copies of `index.html` with their own head; never edit those copies), `assets/home.css` (compiled Tailwind) plus its `?v=` hash, `sitemap.xml` and `llms.txt`. Inside `index.html` it refreshes the static project cards, article metadata, the hero tracker panel and every `<!--BUILD:VAL:key-->` number.
-- Homepage styling: Tailwind classes in `index.html`, compiled by `tailwind.config.cjs` + `input.css` into `assets/home.css`. **Never re-add the Tailwind CDN, Font Awesome CDN or Google Fonts links.** Tailwind `violet`/`indigo` classes are remapped to the brand navy/brass in `tailwind.config.cjs`. Icons are CSS masks in `input.css` (only the icons in use; to add one, add its Font Awesome Free SVG there). Fonts are self-hosted in `assets/fonts/`.
-- Per-route titles, descriptions and canonicals for the SPA live in `ROUTE_META` in `index.html` (one place, used by the JS router and the build).
+  It writes `project/<slug>/index.html`, `new-launch-condos/index.html`, `insights/<slug>/index.html`, `insights/index.html`, `404.html`, the pre-rendered SPA routes `about/`, `contact/`, `mortgage-calculator/`, `deep-analysis/arina-east-residences/` (copies of `index.html` with their own head; never edit those copies), `assets/home.css` (compiled Tailwind) plus its `?v=` hash, `sitemap.xml` and `llms.txt`. Inside `index.html` it refreshes the static project cards, the hero tracker panel, every `<!--BUILD:VAL:key-->` number and the `?v=` hashes of `assets/home.css` and `assets/app.js`; inside `assets/app.js` it refreshes the article metadata.
+- Homepage styling: Tailwind classes in `index.html` and `assets/app.js`, compiled by `tailwind.config.cjs` + `input.css` into `assets/home.css`. **Never re-add the Tailwind CDN, Font Awesome CDN or Google Fonts links.** Tailwind `violet`/`indigo` classes are remapped to the brand navy/brass in `tailwind.config.cjs`. Icons are CSS masks in `input.css` (only the icons in use; to add one, add its Font Awesome Free SVG there). Fonts are self-hosted in `assets/fonts/`.
+- Per-route titles, descriptions and canonicals for the SPA live in `ROUTE_META` in `assets/app.js` (one place, used by the JS router and the build).
 - Hand-built pages that the build must not overwrite: `project/thomson-reserve-condo/`, `project/dunearn-house/`, `project/lentor-gardens-residences/`.
 - Shared styles for static pages: `assets/site.css` (brand: porcelain `#F6F4EF`, navy `#0C1B2A`, brass `#B89B5E`; Marcellus headings, Hanken Grotesk text).
 - Redirects: `_redirects`. There is **no catch-all**: unknown URLs return `/404.html` with a real 404 (no soft 404s). Every public URL must be a real file; add 301s for any URL you retire.
