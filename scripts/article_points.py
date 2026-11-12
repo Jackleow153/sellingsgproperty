@@ -662,8 +662,9 @@ def fill_article_points(items: list[dict], book: dict) -> bool:
         try:
             payload = call_model(title, str(item.get("sourceName") or ""), text)
             brief = review_model_brief(payload, f"{title}\n{text}")
-        except Exception:
-            print(f"left headline draft {story_id}: model call failed")
+        except Exception as exc:
+            reason = (str(exc) or type(exc).__name__)[:120]
+            print(f"left headline draft {story_id}: model call failed ({reason})")
             continue
         if not brief:
             print(f"left headline draft {story_id}: model output was not usable")
