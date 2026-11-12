@@ -1,0 +1,47 @@
+name: Monthly launch data check
+
+on:
+  schedule:
+    # 09:23 SGT on the 1st of each month (01:23 UTC). Off-the-hour minute so GitHub does not drop it.
+    - cron: "23 1 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: check-launches
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Find projects whose launch data is out of date
+        run: node scripts/check-launches.cjs > report.md
+
+      - name: Open, update or close the tracking issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: "Launch data needs updating"
+        run: |
+          existing=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number,title --jq ".[] | select(.title == env.TITLE) | .number" | head -n1)
+          if [ -s report.md ]; then
+            if [ -n "$existing" ]; then
+              gh issue edit "$existing" --body-file report.md
+              gh issue comment "$existing" --body "Re-checked on $(date -u +%Y-%m-%d); the list above is current."
+            else
+              gh issue create --title "$TITLE" --body-file report.md
+            fi
+          elif [ -n "$existing" ]; then
+            gh issue close "$existing" --comment "All clear on $(date -u +%Y-%m-%d): every tracked launch has its result recorded."
+          else
+            echo "All clear: nothing to update."
+          fi
