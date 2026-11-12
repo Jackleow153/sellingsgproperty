@@ -1258,6 +1258,31 @@ def render_pager(count: int) -> str:
     return '<nav class="pager" id="news-pager" aria-label="News pages">' + "".join(parts) + "</nav>"
 
 
+def _point_key(text: str) -> str:
+    return re.sub(r"[^a-z0-9\u4e00-\u9fff]+", "", text.lower())
+
+
+def list_keypoints(item: dict, copy_book: dict) -> list[tuple[str, str]]:
+    """Up to three points for a news row. A point that only repeats the headline is left out."""
+    copy = story_copy(item["id"], item["title"], copy_book)
+    title_key = _point_key(item["title"])
+    title_zh_key = _point_key(copy["zh"]["title"])
+    shown = []
+    zh_points = copy["zh"].get("keypoints") or []
+    for index, point in enumerate(copy["keypoints"]):
+        if _point_key(point) == title_key:
+            continue
+        if point.lower().startswith("figures named in the headline"):
+            continue
+        zh_point = zh_points[index] if index < len(zh_points) else point
+        if _point_key(zh_point) == title_zh_key:
+            zh_point = point
+        shown.append((point, zh_point))
+        if len(shown) >= 3:
+            break
+    return shown
+
+
 def render_list_html(items: list[dict], copy_book: dict) -> str:
     rows = []
     for index, item in enumerate(items):
@@ -1272,12 +1297,20 @@ def render_list_html(items: list[dict], copy_book: dict) -> str:
         title_zh = str(zh_entry.get("title") or "").strip()
         if not has_cjk(title_zh):
             title_zh = chinese_headline(item["title"])
+        points = list_keypoints(item, copy_book)
+        points_html = ""
+        if points:
+            items_html = "".join(
+                "<li>" + bi(point, zh_point) + "</li>" for point, zh_point in points
+            )
+            points_html = '<ul class="news-points">' + items_html + "</ul>"
         rows.append(
             f"    <li{start}{hidden}><a class=\"news-row\" href=\"" + esc(href) + "\">"
             + media_markup(image, hero=False)
             + "<div class=\"news-copy\">"
             + "<span class=\"news-cat\">" + bi("Real estate", "房地产") + "</span>"
             + "<h2 class=\"news-title\">" + bi(item["title"], title_zh) + "</h2>"
+            + points_html
             + "<time class=\"news-date\" datetime=\"" + esc(iso_date) + "\">" + bi(date, chinese_date(date)) + "</time>"
             + "</div></a></li>"
         )
