@@ -518,6 +518,18 @@ write('assets/app.js', appJs);
     const re = new RegExp(`(<div id="page-${page}" class="page-section)`);
     if (!re.test(h)) throw new Error(`section page-${page} not found in index.html`);
     h = h.replace(re, '$1 active');
+    // Exactly one <h1> per page: demote the homepage hero heading and promote this section's
+    // main heading (marked data-route-h1 in index.html). h1 and h2 are styled identically.
+    const heroH1 = h.indexOf('<h1 ');
+    if (heroH1 < 0 || h.indexOf('<h1 ', heroH1 + 1) >= 0) throw new Error('expected exactly one <h1> in index.html');
+    const heroEnd = h.indexOf('</h1>', heroH1);
+    h = h.slice(0, heroH1) + '<h2 ' + h.slice(heroH1 + 4, heroEnd) + '</h2>' + h.slice(heroEnd + 5);
+    const secStart = h.indexOf(`<div id="page-${page}" class="page-section`);
+    const secEnd = h.indexOf('<div id="page-', secStart + 10);
+    const mark = h.indexOf('<h2 data-route-h1', secStart);
+    if (mark < 0 || (secEnd > 0 && mark > secEnd)) throw new Error(`no data-route-h1 heading in page-${page}`);
+    const markEnd = h.indexOf('</h2>', mark);
+    h = h.slice(0, mark) + '<h1' + h.slice(mark + 3, markEnd) + '</h1>' + h.slice(markEnd + 5);
     write(meta.path.replace(/^\//, '') + 'index.html', h);
   }
 
