@@ -2,25 +2,19 @@
   "updated": "2026-11-12T23:26:32+08:00",
   "sources": [
     "Singapore Business Review",
-    "The Straits Times",
     "Stacked Homes",
     "99.co",
     "CNA",
-    "VnExpress International",
+    "The Straits Times",
     "DollarsAndSense.sg",
-    "Yahoo News Singapore",
-    "Manifold Times",
-    "The Independent Singapore",
-    "DANAMIC",
     "deeparrival.com",
     "PropertyNet.SG",
     "Business Times",
     "Home & Decor Singapore",
-    "AsiaOne",
     "EdgeProp.sg",
-    "Tatler Asia",
+    "AsiaOne",
+    "The Independent Singapore",
     "Borneo Bulletin",
-    "SavePoint Gaming",
     "Real Estate Asia"
   ],
   "items": [
@@ -35,18 +29,6 @@
       "category": "Real estate",
       "path": "/news/n28f17bb8/",
       "description": "Four-room flats lead HDB resale volume in October."
-    },
-    {
-      "id": "9836",
-      "title": "Four charged over ruse to use stranger’s home to get $6m loan",
-      "date": "2026/11/11",
-      "image": "/news/images/9836.jpg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9836/",
-      "description": "Four charged over ruse to use stranger’s home to get $6m loan."
     },
     {
       "id": "n0301c38f",
@@ -97,18 +79,6 @@
       "description": "HDB deficit narrows to $4.7 billion, down from $6.34 billion a year ago."
     },
     {
-      "id": "n4327b466",
-      "title": "Singapore condo unit owner loses bid to remove vending machines outside shops",
-      "date": "2026/11/11",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "VnExpress International",
-      "sourceNameZh": "VnExpress International",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n4327b466/",
-      "description": "Boon Trading's bid to remove the Robinson Suites vending machines was dismissed. Two machines were later taken away."
-    },
-    {
       "id": "n1e01f29b",
       "title": "[2026 Edition] How Much Salary You Need To Earn (After Government Subsidies) To Afford The Different BTO Flat Sizes In Singapore",
       "date": "2026/11/11",
@@ -133,42 +103,6 @@
       "description": "Flash estimates from 99.co and SRX put overall HDB resale prices 0.2% lower in October than the month before."
     },
     {
-      "id": "nb895783d",
-      "title": "Are Singapore couples marrying earlier for love or an HDB flat?",
-      "date": "2026/11/10",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Yahoo News Singapore",
-      "sourceNameZh": "Yahoo News Singapore",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/nb895783d/",
-      "description": "Are Singapore couples marrying earlier for love or an HDB flat?"
-    },
-    {
-      "id": "n5f9cd3fe",
-      "title": "Singapore: OK Lim’s grandson fails to keep Tanglin condo out of aunt’s bankruptcy estate",
-      "date": "2026/11/10",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Manifold Times",
-      "sourceNameZh": "Manifold Times",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n5f9cd3fe/",
-      "description": "Singapore: OK Lim’s grandson fails to keep Tanglin condo out of aunt’s bankruptcy estate."
-    },
-    {
-      "id": "n68a68d65",
-      "title": "Singapore woman who married for BTO called it the worst mistake of her life",
-      "date": "2026/11/09",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "The Independent Singapore",
-      "sourceNameZh": "The Independent Singapore",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n68a68d65/",
-      "description": "Singapore woman who married for BTO called it the worst mistake of her life."
-    },
-    {
       "id": "n88f449a3",
       "title": "How To Tell If A Singapore Condo Is Really A Good Rental Investment",
       "date": "2026/11/08",
@@ -179,30 +113,6 @@
       "category": "Real estate",
       "path": "/news/n88f449a3/",
       "description": "Stacked Homes sets The Esta's two-bedder yield at 2.29% and #1 Suites at 5.75%, and says a higher yield can be a weaker price."
-    },
-    {
-      "id": "naf61bb67",
-      "title": "Ah Girl Brings a 1994 HDB Childhood to the Big Screen",
-      "date": "2026/11/07",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "DANAMIC",
-      "sourceNameZh": "DANAMIC",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/naf61bb67/",
-      "description": "Ah Girl Brings a 1994 HDB Childhood to the Big Screen."
-    },
-    {
-      "id": "n608926cf",
-      "title": "Couple’s BTO plans in doubt after serious argument leaves Singaporean man uncertain",
-      "date": "2026/11/07",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "The Independent Singapore",
-      "sourceNameZh": "The Independent Singapore",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n608926cf/",
-      "description": "A 27-year-old man is unsure about a BTO application with his girlfriend after a serious argument."
     },
     {
       "id": "9824",
@@ -227,18 +137,6 @@
       "category": "Real estate",
       "path": "/news/nb1399715/",
       "description": "Singapore’s 99 Year HDB Lease: Why The Clock Does Not Reset."
-    },
-    {
-      "id": "n811ee041",
-      "title": "SingPost H1 profit up 183.7% at $55.9 million on sale and leaseback of HDB shophouses",
-      "date": "2026/11/06",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n811ee041/",
-      "description": "SingPost H1 profit up 183.7% at $55.9 million on sale and leaseback of HDB shophouses."
     },
     {
       "id": "n5a68e6e0",
@@ -325,18 +223,6 @@
       "description": "Feb 2027 BTO launch to include second Mount Pleasant project, Bishan flats with shorter waiting times."
     },
     {
-      "id": "n4f045ca0",
-      "title": "Chee Hong Tat pledges continued HDB cooperation to weed out errant heartland massage parlours",
-      "date": "2026/11/05",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "AsiaOne",
-      "sourceNameZh": "亚洲新闻网",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n4f045ca0/",
-      "description": "Chee Hong Tat pledges continued HDB cooperation to weed out errant heartland massage parlours."
-    },
-    {
       "id": "ncce3da5c",
       "title": "HDB to offer 4,300 BTO flats in February",
       "date": "2026/11/05",
@@ -409,18 +295,6 @@
       "description": "HDB launched 7,964 Build-To-Order flats on 4 November 2026, the last sales exercise of the year. Seven projects are on sale in Bedok, Geylang, Sembawang."
     },
     {
-      "id": "9811",
-      "title": "Luxury homes seized in $3b money laundering case prove a hard sell",
-      "date": "2026/11/03",
-      "image": "/news/images/9811.jpg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9811/",
-      "description": "A freehold unit at New Futura on Leonie Hill Road, owned by the wife of Wang Bingang, a suspect in the $3 billion money-laundering case, sold at auction on."
-    },
-    {
       "id": "n27310332",
       "title": "Tengah Plantation Dew BTO Review: Rare 5-room and 3Gen units (November 2026)",
       "date": "2026/11/03",
@@ -457,18 +331,6 @@
       "description": "An executive flat at Block 938 Tampines Avenue 5, in Tampines Palmspring, sold for $1.275 million in November 2026. That is a new record for an executive."
     },
     {
-      "id": "n8337ed06",
-      "title": "Home tour: how Peter Tay breathes new soul into a Good Class Bungalow once owned by a Singapore president",
-      "date": "2026/11/03",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Tatler Asia",
-      "sourceNameZh": "Tatler Asia",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n8337ed06/",
-      "description": "The piece is a home tour of a Good Class Bungalow whose interiors were designed by Peter Tay. The house was commissioned by a food entrepreneur for a family."
-    },
-    {
       "id": "n3abc175b",
       "title": "Singapore explores build-to-rent model as demand for independent living grows",
       "date": "2026/11/03",
@@ -479,18 +341,6 @@
       "category": "Real estate",
       "path": "/news/n3abc175b/",
       "description": "The Ministry of National Development said home ownership remains central, and there is also demand for longer-stay rental housing from younger Singaporeans."
-    },
-    {
-      "id": "na2f0567e",
-      "title": "IKEA Singapore and City Energy Partner on Smarter Home Design for BTO and HDB Owners",
-      "date": "2026/11/03",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "SavePoint Gaming",
-      "sourceNameZh": "SavePoint Gaming",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/na2f0567e/",
-      "description": "IKEA Singapore has added Life by City Energy, the home-solutions arm of the town-gas provider, to its Home Design Service. The partnership was announced on 3."
     },
     {
       "id": "n261828b6",
@@ -611,18 +461,6 @@
       "category": "Real estate",
       "path": "/news/n3199077c/",
       "description": "CNA calls jumbo HDB flats rare, roomy and pricey. What buyers should check before paying extra for the space."
-    },
-    {
-      "id": "9798",
-      "title": "Ex-condo chairman loses defamation suit over undisclosed links",
-      "date": "2026/10/31",
-      "image": "/news/images/9798.jpg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9798/",
-      "description": "A former condo chairman lost a defamation case over undisclosed links. What Singapore condo buyers and sellers should ask about the estate."
     },
     {
       "id": "9794",

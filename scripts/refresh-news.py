@@ -95,6 +95,7 @@ from news_sources import (
     is_relay_label,
     merge_posts,
     outlet_from_text,
+    off_goal,
     propnex_own_piece,
     self_check,
 )
@@ -294,7 +295,7 @@ def keep_post(post: dict) -> bool:
     if len(title) < 8:
         return False
     blob = f"{title}\n{post['body']}"
-    if PROMO_RE.search(blob) or CRIME_TITLE_RE.search(title):
+    if PROMO_RE.search(blob) or CRIME_TITLE_RE.search(title) or off_goal(title):
         return False
     if re.search(r"\bbuilding\b", title, re.I) and not re.search(
         r"\b(hdb|bto|condo|flat|flats|home|homes)\b", title, re.I

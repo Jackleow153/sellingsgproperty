@@ -121,6 +121,18 @@ CRIME_RE = re.compile(
     r")\b",
     re.I,
 )
+# Crime, court, relationship, promo, and lifestyle titles. They are not a
+# reason to cite this site for a launch, a price, or a floor plan. "charged"
+# is included because "Four charged over" is not caught by CRIME_RE.
+OFF_GOAL_RE = re.compile(
+    r"\b("
+    r"charged|jail|jailed|launder|laundering|scam|bankruptcy|defamation|"
+    r"convicted|vending|ikea|massage parlours?"
+    r")\b|"
+    r"\b(?:married for|marrying earlier|worst mistake|serious argument|"
+    r"ah girl|home tour|breathes new soul|sale and leaseback)\b",
+    re.I,
+)
 STOMP_LESSON_RE = re.compile(
     r"\b(bto|renovat|reno\b|kitchen)\b",
     re.I,
@@ -671,8 +683,19 @@ def iso_dt(value: datetime) -> str:
     return value.astimezone(timezone.utc).isoformat(timespec="seconds")
 
 
+def off_goal(title: str) -> bool:
+    """True when a headline would dilute launch, price, and buyer pages."""
+    return bool(OFF_GOAL_RE.search(title or ""))
+
+
 def singapore_property(title: str, *, residential_page: bool = False) -> bool:
-    if VIRAL_RE.search(title) or COMMERCIAL_RE.search(title) or SKIP_RE.search(title) or CRIME_RE.search(title):
+    if (
+        VIRAL_RE.search(title)
+        or COMMERCIAL_RE.search(title)
+        or SKIP_RE.search(title)
+        or CRIME_RE.search(title)
+        or off_goal(title)
+    ):
         return False
     if re.search(r"\bbuilding\b", title, re.I) and not re.search(
         r"\b(hdb|bto|condo|flat|flats|home|homes)\b", title, re.I
@@ -840,7 +863,7 @@ def collect_stomp() -> list[dict]:
     for title, when, publisher, description, link in google_feed(STOMP_QUERY):
         if "stomp" not in publisher.lower():
             continue
-        if VIRAL_RE.search(title) or not STOMP_LESSON_RE.search(title):
+        if VIRAL_RE.search(title) or off_goal(title) or not STOMP_LESSON_RE.search(title):
             continue
         if not PROPERTY_RE.search(title):
             continue
@@ -876,9 +899,16 @@ def merge_posts(saved: list[dict], fresh: list[dict], now: datetime | None = Non
 
     Higher-priority feeds should appear earlier in ``fresh``. A Google News
     copy of a Business Times or PropNex story is dropped. Saved titles and
-    ids stay in place.
+    ids stay in place. An off-goal saved story is dropped, because these
+    titles are still inside the 40-day window and would otherwise stay.
     """
-    kept = [dict(item) for item in saved]
+    kept = []
+    for item in saved:
+        title = str(item.get("title") or "")
+        if off_goal(title):
+            print(f"drop off-goal [{item.get('id')}] {title[:90]}")
+            continue
+        kept.append(dict(item))
     added = {feed: 0 for feed in FEED_CAPS}
 
     def find(post: dict) -> dict | None:
@@ -899,6 +929,9 @@ def merge_posts(saved: list[dict], fresh: list[dict], now: datetime | None = Non
         reverse=True,
     )
     for post in ordered:
+        if off_goal(str(post.get("title") or "")):
+            print(f"skip off-goal [{post.get('sourceFeed')}] {post['title'][:90]}")
+            continue
         match = find(post)
         if match:
             match["article_url"] = choose_article_url(
@@ -1238,6 +1271,66 @@ def self_check() -> None:
         failed.append("a real publisher is not the channel name")
     if not propnex_own_piece("PropNex Consumer Seminar"):
         failed.append("seminar poster should stay PropNex's own piece")
+    drop_titles = [
+        "Four charged over ruse to use stranger’s home to get $6m loan",
+        "Are Singapore couples marrying earlier for love or an HDB flat?",
+        "Singapore: OK Lim’s grandson fails to keep Tanglin condo out of aunt’s bankruptcy estate",
+        "Singapore woman who married for BTO called it the worst mistake of her life",
+        "Ah Girl Brings a 1994 HDB Childhood to the Big Screen",
+        "Couple’s BTO plans in doubt after serious argument leaves Singaporean man uncertain",
+        "SingPost H1 profit up 183.7% at $55.9 million on sale and leaseback of HDB shophouses",
+        "Chee Hong Tat pledges continued HDB cooperation to weed out errant heartland massage parlours",
+        "Luxury homes seized in $3b money laundering case prove a hard sell",
+        "Home tour: how Peter Tay breathes new soul into a Good Class Bungalow once owned by a Singapore president",
+        "IKEA Singapore and City Energy Partner on Smarter Home Design for BTO and HDB Owners",
+        "Singapore condo unit owner loses bid to remove vending machines outside shops",
+        "Ex-condo chairman loses defamation suit over undisclosed links",
+    ]
+    keep_titles = [
+        "Thomson Reserve sells 90% of units at average of S$2,900 psf over launch weekend",
+        "Four-room flats lead HDB resale volume in October",
+        "Singapore’s 99 Year HDB Lease: Why The Clock Does Not Reset",
+        "HDB deficit narrows to $4.7 billion, down from $6.34 billion a year ago",
+        "November BTO Draws Over 35,600 Applications",
+    ]
+    for title in drop_titles:
+        if not off_goal(title):
+            failed.append("off-goal should drop: " + title[:60])
+        if singapore_property(title):
+            failed.append("singapore_property should reject off-goal: " + title[:60])
+    for title in keep_titles:
+        if off_goal(title):
+            failed.append("off-goal should keep: " + title[:60])
+    thomson = {
+        "id": "9802",
+        "title": keep_titles[0],
+        "datetime": "2026-11-02T08:00:00+08:00",
+        "date": "2026/11/02",
+        "sourceFeed": "propnex",
+        "sourceName": "The Straits Times",
+    }
+    retired = {
+        "id": "9811",
+        "title": "Luxury homes seized in $3b money laundering case prove a hard sell",
+        "datetime": "2026-11-03T08:00:00+08:00",
+        "date": "2026/11/03",
+        "sourceFeed": "propnex",
+        "sourceName": "The Straits Times",
+    }
+    incoming = {
+        "id": "n4327b466",
+        "title": "Singapore condo unit owner loses bid to remove vending machines outside shops",
+        "datetime": "2026-11-11T08:00:00+08:00",
+        "date": "2026/11/11",
+        "sourceFeed": "google-news",
+        "sourceName": "VnExpress International",
+    }
+    merged_ids = {
+        item["id"]
+        for item in merge_posts([retired, thomson], [incoming], datetime(2026, 11, 12, tzinfo=SGT))
+    }
+    if merged_ids != {"9802"}:
+        failed.append("merge should keep Thomson Reserve and drop off-goal stories: " + ",".join(sorted(merged_ids)))
     luxury = chinese_headline("Luxury homes seized in $3b money laundering case prove a hard sell")
     if luxury != "涉30亿元洗钱案被扣押的豪宅难以出售":
         failed.append("luxury headline should be Chinese: " + luxury)

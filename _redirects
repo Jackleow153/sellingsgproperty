@@ -37,5 +37,35 @@
 # Local News page (news/index.html + /news.json). Do not proxy this elsewhere.
 /news                                     /news/index.html   200
 /news/                                    /news/index.html   200
+
+# Retired stories. The directories are gone. A real file is served before a
+# non-forced rule, and the first match wins, so these stay above /news/:id.
+/news/9836                                /news/  301
+/news/9836/                               /news/  301
+/news/n4327b466                           /news/  301
+/news/n4327b466/                          /news/  301
+/news/nb895783d                           /news/  301
+/news/nb895783d/                          /news/  301
+/news/n5f9cd3fe                           /news/  301
+/news/n5f9cd3fe/                          /news/  301
+/news/n68a68d65                           /news/  301
+/news/n68a68d65/                          /news/  301
+/news/naf61bb67                           /news/  301
+/news/naf61bb67/                          /news/  301
+/news/n608926cf                           /news/  301
+/news/n608926cf/                          /news/  301
+/news/n811ee041                           /news/  301
+/news/n811ee041/                          /news/  301
+/news/n4f045ca0                           /news/  301
+/news/n4f045ca0/                          /news/  301
+/news/9811                                /news/  301
+/news/9811/                               /news/  301
+/news/n8337ed06                           /news/  301
+/news/n8337ed06/                          /news/  301
+/news/na2f0567e                           /news/  301
+/news/na2f0567e/                          /news/  301
+/news/9798                                /news/  301
+/news/9798/                               /news/  301
+
 /news/:id                                 /news/:id/index.html   200
 /news/:id/                                /news/:id/index.html   200
