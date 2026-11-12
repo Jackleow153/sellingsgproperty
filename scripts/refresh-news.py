@@ -42,9 +42,10 @@ Publish the refreshed pages to the live site:
 Netlify publishes https://www.sellingsgproperty.com. A run with no new
 story leaves those files uncommitted.
 
-Automatic publishing is off. The scheduled workflow
-.github/workflows/refresh-news.yml was removed on 2026-11-11. Nothing
-commits or pushes news unless someone runs this script with --deploy.
+GitHub Actions runs that command twice a day, at 09:17 and 17:47
+Singapore time (.github/workflows/refresh-news.yml). 09:17 Asia/Singapore
+is 01:17 UTC. The 17:47 run is only a backup. An unchanged news list
+does not commit.
 
 When a new story's article page can be opened, the job calls grok-4.7
 once for that article and stores original key points. The article URL
