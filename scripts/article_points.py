@@ -629,7 +629,13 @@ def call_model(title: str, source_name: str, article: str) -> dict:
         with urllib.request.urlopen(req, timeout=120, context=ssl.create_default_context()) as res:
             raw = json.loads(res.read().decode("utf-8", "replace"))
     except urllib.error.HTTPError as exc:
-        raise RuntimeError(f"HTTP {exc.code}") from None
+        try:
+            detail = exc.read().decode("utf-8", "replace")
+            detail = json.loads(detail).get("error", detail) if detail.lstrip().startswith("{") else detail
+        except Exception:
+            detail = ""
+        detail = " ".join(str(detail).split())[:160]
+        raise RuntimeError(f"HTTP {exc.code}: {detail}" if detail else f"HTTP {exc.code}") from None
     return parse_model_response(raw)
 
 
@@ -663,7 +669,7 @@ def fill_article_points(items: list[dict], book: dict) -> bool:
             payload = call_model(title, str(item.get("sourceName") or ""), text)
             brief = review_model_brief(payload, f"{title}\n{text}")
         except Exception as exc:
-            reason = (str(exc) or type(exc).__name__)[:120]
+            reason = (str(exc) or type(exc).__name__)[:200]
             print(f"left headline draft {story_id}: model call failed ({reason})")
             continue
         if not brief:
