@@ -10,11 +10,6 @@
 #   /news/  /undervalued-pty/  /hdb-resale-timeline/   (their own scripts)
 # Without a trailing slash Netlify redirects /about -> /about/ automatically.
 
-# Bare domain -> https://www in ONE hop (otherwise http://bare went http->https->www).
-# Forced (!) so they apply before any file match; listed first so nothing else wins.
-http://sellingsgproperty.com/*    https://www.sellingsgproperty.com/:splat   301!
-https://sellingsgproperty.com/*   https://www.sellingsgproperty.com/:splat   301!
-
 # Legacy / alternate URLs -> canonical pages (301 keeps any ranking signals)
 /insights/dunearn-vs-fourth-avenue        /insights/dunearn-vs-fourth-avenue-2026/  301
 /insights/dunearn-vs-fourth-avenue/       /insights/dunearn-vs-fourth-avenue-2026/  301
