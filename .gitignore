@@ -19,3 +19,10 @@ build/
 # Local env
 .env
 .env.local
+
+# Separate local projects kept in this folder; never part of the sellingsgproperty.com site
+/my-new-site Nextjs/
+/my-new-site astro/
+/my-new-site-astro-backup/
+/my-new-site.zip
+/sg-property-news/
