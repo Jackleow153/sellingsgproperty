@@ -113,7 +113,7 @@ const ARTICLES = {
     readTime: '7 min read',
     category: 'FOREIGN BUYERS',
     chipClass: 'chip-absd',
-    img: 'https://theaureacondo.com.sg/wp-content/uploads/2025/02/Aurea-Perspective5.jpg',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/pulse/60-absd-foreigners-singapore-property-still-investable-jack-leow-sxlac',
     body: `
       <p><strong>For most non-FTA foreigners, buying residential new launch condos in Singapore in 2026 is extremely challenging due to the 60% ABSD.</strong> However, the market remains investable through commercial properties (0% ABSD), shophouses, and strategic pathways like PR or corporate structures for the right high-net-worth buyer.</p>
@@ -203,7 +203,7 @@ const ARTICLES = {
     readTime: '9 min read',
     category: 'DECOUPLING',
     chipClass: 'chip-decouple',
-    img: 'https://bagnallhauscondo.com.sg/wp-content/uploads/2025/01/Bagnall-Haus-Condo-Facade-View-from-Street-Level.jpg',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/pulse/decoupling-guide-2026-legal-costs-vs-absd-savings-calculator-leow-6x4fc',
     body: `
       <p><strong>Decoupling can save $200k–$350k in ABSD on a second property in 2026, but only makes sense above ~$1.2M–$1.5M purchase price.</strong> Below that threshold, legal fees, BSD on the transfer, and refinancing penalties usually wipe out the benefit.</p>
@@ -316,7 +316,7 @@ const ARTICLES = {
     readTime: '10 min read',
     category: 'WEALTH BUILDING',
     chipClass: 'chip-wealth',
-    img: 'https://thesoracondo.sg/wp-content/uploads/2024/01/Sora-Condo-Facade-View-from-Lake.jpg',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/pulse/why-buying-private-property-should-your-top-resolution-jack-leow-c89ac',
     body: `
       <p><strong>Every year, thousands of Singaporean families have the financial means to buy a private property — and don't.</strong> Not because they can't afford it. But because they're afraid. This post is for those people. If that's you, I want you to know that I understand the fear — and I also want to show you why 2026 is the year to face it.</p>
@@ -428,7 +428,7 @@ const ARTICLES = {
     readTime: '7 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
-    img: 'https://emerald-katong.sg/wp-content/uploads/2024/11/Emerald-of-Katong-Aerial-View.jpg',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/newsletters/find-your-treasure-7410244299805757440/',
     body: `
       <p><strong>New Launch Condos vs Resale Condos in Singapore 2026: which should you buy?</strong> Short answer — new launch condos win for most HDB upgraders with a 5+ year horizon thanks to progressive payments (lower upfront cash), brand new facilities and first-mover pricing in growth areas. Resale condos win if you need to move in now or want immediate rental yield. There is no universal winner — only the right choice for your timeline, ABSD position and cash flow. Full data-driven breakdown below.</p>
@@ -503,7 +503,7 @@ const ARTICLES = {
     readTime: '6 min read',
     category: 'CPF & FINANCING',
     chipClass: 'chip-cpf',
-    img: 'https://www.nava-grove.sg/wp-content/uploads/2024/10/Nava-Grove-Aerial-View-Pine-Grove.jpg',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/newsletters/find-your-treasure-7410244299805757440/',
     body: `
       <p><strong>CPF is most Singaporeans' largest financial asset — and most people dramatically underestimate how powerful it is for property financing.</strong> When used correctly, your CPF Ordinary Account (OA) can fund your downpayment, legal fees, and monthly mortgage instalments — potentially eliminating any out-of-pocket cash requirement for years.</p>
@@ -588,7 +588,7 @@ const ARTICLES = {
     readTime: '8 min read',
     category: 'DISTRICT GUIDE',
     chipClass: 'chip-district',
-    img: 'https://www.theparktownresidences.sg/wp-content/uploads/2025/01/parktown-residence-Green-Boulevard-by-UOL-capitaland-.jpg',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/newsletters/find-your-treasure-7410244299805757440/',
     body: `
       <p><strong>Location determines 70% of your property's long-term performance.</strong> You can get everything else right — price, timing, financing — but buy in the wrong district and you'll underperform. Here's my 2026 district scorecard based on capital growth potential, rental yield, and long-term URA master plan alignment.</p>
@@ -651,7 +651,7 @@ const ARTICLES = {
     readTime: '6 min read',
     category: 'SELL YOUR HDB',
     chipClass: 'chip-sell',
-    img: 'https://norwoodgrand-condo.sg/wp-content/uploads/2024/10/Norwood-Grand-Condo-Facade.jpg',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/newsletters/find-your-treasure-7410244299805757440/',
     body: `
       <p><strong>The difference between selling your HDB at the right time versus the wrong time in 2026 can easily be $50k–$200k in net proceeds.</strong> Too early and you leave money on the table. Too late and you chase a cooling market while new launch condo prices continue rising in growth districts.</p>
@@ -719,7 +719,7 @@ const ARTICLES = {
     readTime: '9 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
-    img: 'https://emerald-katong.sg/wp-content/uploads/2024/11/Emerald-of-Katong-Aerial-View.jpg',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/newsletters/find-your-treasure-7410244299805757440/',
     body: `
       <p><strong>The single biggest driver of new launch condo purchases in Singapore right now is not price or location — it is FOMO (Fear Of Missing Out).</strong> Developers know this and engineer sales processes to trigger it. Smart buyers recognise the bias and use data instead.</p>
@@ -810,7 +810,7 @@ const ARTICLES = {
     readTime: '8 min read',
     category: 'WEALTH',
     chipClass: 'chip-wealth',
-    img: 'https://www.nava-grove.sg/wp-content/uploads/2024/10/Nava-Grove-Aerial-View-Pine-Grove.jpg',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/newsletters/find-your-treasure-7410244299805757440/',
     body: `
       <p><strong>The biggest barrier for many HDB upgraders is not money — it is "first private condo anxiety".</strong> This specific form of decision paralysis causes capable families to stay in HDBs years longer than they should, costing them hundreds of thousands in missed capital appreciation on new launch condos.</p>
@@ -881,7 +881,7 @@ const ARTICLES = {
     readTime: '7 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
-    img: 'https://www.theparktownresidences.sg/wp-content/uploads/2025/01/parktown-residence-Green-Boulevard-by-UOL-capitaland-.jpg',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/newsletters/find-your-treasure-7410244299805757440/',
     body: `
       <p><strong>The progressive payment scheme is one of the most powerful (and under-appreciated) psychological tools in Singapore new launch condos.</strong> Instead of paying 25% upfront like resale, you pay ~20% over 3–5 years tied to construction milestones. This dramatically lowers the "pain of paying" at any single point in time.</p>
@@ -993,7 +993,7 @@ const ARTICLES = {
     readTime: '7 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
-    img: 'https://www.union-square-residences.sg/wp-content/uploads/2024/11/Union-Square-Residences-Hero-Shot.jpg',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/newsletters/find-your-treasure-7410244299805757440/',
     body: `
       <p><strong>Developer incentives (stamp duty absorption, legal fees paid, furniture vouchers, price discounts) are not gifts.</strong> They are carefully designed psychological tools that make the total price feel lower while protecting the developer's headline PSF.</p>
@@ -1045,7 +1045,7 @@ const ARTICLES = {
     readTime: '14 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
-    img: 'https://dunearnhousecondo.com.sg/wp-content/uploads/2026/01/Dunearn-House.png',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/pulse/dunearn-house-2026-steal-jack-leow',
     body: `
       <p><strong>Dunearn House is the first private residential launch in the transformative Bukit Timah Turf City masterplan — and at a land cost that positions it as one of the most compelling CCR value plays of 2026.</strong> Developed by Frasers Property, Sekisui House and CSC Land Group, this 380-unit 99-year leasehold condo on Dunearn Road offers families and upgraders a rare chance to buy into Singapore's next major growth precinct at new-launch pricing.</p>
@@ -1256,7 +1256,7 @@ const ARTICLES = {
     readTime: '13 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
-    img: 'https://dunearnhousecondo.com.sg/wp-content/uploads/2026/01/Dunearn-House.png',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/pulse/dunearn-vs-fourth-avenue-2026-jack-leow',
     body: `
       <p><strong>If you are weighing <strong>Dunearn House</strong> as an investment against the already-completed Fourth Avenue Residences, here is the short answer: Dunearn House is a <em>forward-looking</em> play built on first-mover advantage in the new Bukit Timah Turf City precinct, while Fourth Avenue Residences is a <em>proven</em> asset with real transaction data, a stable ~3–3.5% rental yield and a liquid resale market.</strong> They earn differently because they sit at different stages of the property life cycle. In this guide, you will learn how each stacks up on price, yield, growth drivers and risk — so you can decide which fits your goals.</p>
@@ -1490,7 +1490,7 @@ const ARTICLES = {
     readTime: '15 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
-    img: 'https://emerald-katong.sg/wp-content/uploads/2024/11/Emerald-of-Katong-Aerial-View.jpg',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/pulse/how-to-buy-new-launch-condo-2026-jack-leow',
     body: `
       <p><strong>To buy a new launch condo in Singapore, you'll: (1) get your finances and loan approval ready, (2) register interest and ballot for the project, (3) pick your unit on launch day and pay a 5% booking fee, (4) exercise the Option to Purchase (OTP) within the deadline, (5) pay stamp duties, and (6) follow the Progressive Payment Scheme until you collect keys at TOP.</strong> The whole journey runs from a few weeks to 3–4 years, because you're buying a property that is still being built.</p>
@@ -1763,7 +1763,7 @@ const ARTICLES = {
     readTime: '12 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
-    img: 'https://theaureacondo.com.sg/wp-content/uploads/2025/02/Aurea-Perspective5.jpg',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/pulse/new-launch-vs-resale-cheaper-2026-jack-leow',
     body: `
       <p><strong>Short answer: no — new launch condos are usually more expensive than resale on a per-square-foot (PSF) basis, often by 15%–35% in the same area.</strong> But that headline hides the part that actually matters to your wallet: new launches typically demand far less cash upfront thanks to the progressive payment scheme, and their total cost over time can work out differently once you factor in renovation, holding costs, and capital growth.</p>
@@ -1976,7 +1976,7 @@ const ARTICLES = {
     readTime: '14 min read',
     category: 'WEALTH BUILDING',
     chipClass: 'chip-wealth',
-    img: 'https://www.theparktownresidences.sg/wp-content/uploads/2025/01/parktown-residence-Green-Boulevard-by-UOL-capitaland-.jpg',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/pulse/which-condo-to-buy-singapore-2026-jack-leow',
     body: `
       <p><strong>The best condo to buy in Singapore in 2026 is the one that matches three things: <strong>your purpose</strong> (own-stay, upgrade, or investment), <strong>your holding horizon</strong>, and <strong>your financial headroom</strong> after ABSD, BSD, and CPF deductions — not the project with the loudest hoarding.</strong> For most buyers this year, that means prioritising location fundamentals, sensible quantum, and developer track record over chasing hype.</p>
@@ -2257,7 +2257,7 @@ const ARTICLES = {
     readTime: '14 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
-    img: 'https://dunearnhousecondo.com.sg/wp-content/uploads/2026/01/Dunearn-House.png',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/pulse/dunearn-house-review-2026-jack-leow',
     body: `
       <p><strong>If you're reading this, chances are you've already seen the buzz around <strong>Dunearn House</strong> — the first private condo to launch within the new <strong>Bukit Timah Turf City</strong> masterplan. And you probably have one question: <em>is it actually worth the money?</em></strong></p>
@@ -2575,7 +2575,7 @@ const ARTICLES = {
     readTime: '12 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
-    img: 'https://dunearnhousecondo.com.sg/wp-content/uploads/2026/01/Dunearn-House.png',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/pulse/turf-city-masterplan-2026-dunearn-house-jack-leow',
     body: `
       <p><strong>The Bukit Timah Turf City masterplan is the defining long-term catalyst for Dunearn House and other new launches in the area through 2030 and beyond.</strong> Knowing the exact timeline for the Cross Island Line MRT, conserved heritage buildings, new parks, and community facilities will help you evaluate if the project's 99-year leasehold and ~$2,800–$3,100 psf pricing is a smart long-horizon bet.</p>
@@ -2686,7 +2686,7 @@ const ARTICLES = {
     readTime: '15 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
-    img: 'https://dunearnhousecondo.com.sg/wp-content/uploads/2026/01/Dunearn-House.png',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/pulse/dunearn-house-buyers-guide-2026-jack-leow',
     body: `
       <p><strong>Dunearn House is expected to launch at roughly $2,800–$2,950 psf, with quantum ranging from ~$1.9M (smallest 2BR) to ~$3.3M+ (larger 4BR+Study).</strong> Singapore Citizens face the lowest stamp duty and Additional Buyer's Stamp Duty (ABSD) burden, while foreigners pay the highest. Like all new launches, it uses the <strong>Progressive Payment Scheme (PPS)</strong> — you only pay progressively as construction reaches each stage, not the full amount upfront. Compared to resale Bukit Timah and competing 2026 launches, it offers strong fundamentals: first-mover Turf City positioning, near Sixth Avenue MRT, and a top-tier developer JV.</p>
@@ -3129,7 +3129,7 @@ const ARTICLES = {
     readTime: '14 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
-    img: 'https://dunearnhousecondo.com.sg/wp-content/uploads/2026/01/Dunearn-House.png',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/pulse/dunearn-house-family-living-guide-2026-jack-leow',
     body: `
       <p><strong>Dunearn House is genuinely one of the most family-friendly new launches of 2026.</strong> It sits about a 7-minute walk from Sixth Avenue MRT, surrounded by Singapore's top school belt (Methodist Girls', Nanyang Primary, Hwa Chong, Nanyang Girls' High), wrapped by nature — Bukit Timah Nature Reserve, the Rail Corridor, and the upcoming Bukit Timah-Rochor Green Corridor — and built as a low-density development of just ~380 units across 145,000+ sqft with a heavy family unit mix (no 1BR units).</p>
@@ -3560,7 +3560,7 @@ const ARTICLES = {
     readTime: '15 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
-    img: 'https://dunearnhousecondo.com.sg/wp-content/uploads/2026/01/Dunearn-House.png',
+    img: "",
     linkedinUrl: 'https://www.linkedin.com/pulse/dunearn-house-investment-analysis-2026-turf-city-first-mover-roi-jack-leow',
     body: `
       <p><strong>If you're sizing up <strong>Dunearn House new launch</strong> as an investment, you're really asking one bigger question: <em>what happens to property prices when a brand-new URA masterplanned precinct opens up — and is it worth being the first one in?</em></strong></p>
