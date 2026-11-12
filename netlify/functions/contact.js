@@ -39,7 +39,7 @@ export default async (req, context) => {
     try {
       await resend.emails.send({
         from: 'Sellingsgproperty <enquiries@sellingsgproperty.com>', // Update to your verified domain in Resend
-        to: ['questrepreneur@gmail.com', 'hr@tech2reach.com'],
+        to: ['questrepreneur@gmail.com'],
         subject: `New Enquiry from ${name}`,
         html: emailHtml,
       });
