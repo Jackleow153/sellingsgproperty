@@ -1042,6 +1042,7 @@ const ARTICLES = {
   'post-dunearn-house-2026': {
     title: 'Dunearn House 2026: Why It\'s a Smart Buy in Prime Bukit Timah',
     date: '28 May 2026',
+    updated: '12 Nov 2026',
     readTime: '14 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
@@ -1254,6 +1255,7 @@ const ARTICLES = {
   'post-dunearn-vs-fourth-avenue-2026': {
     title: 'Dunearn House vs Fourth Avenue Residences: Which Is the Better Investment? (2026)',
     date: '29 May 2026',
+    updated: '12 Nov 2026',
     readTime: '13 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
@@ -2256,6 +2258,7 @@ const ARTICLES = {
   'post-dunearn-house-review-2026': {
     title: 'Dunearn House Review 2026: Is It Worth Buying? (Honest Pros & Cons)',
     date: '2 Jun 2026',
+    updated: '12 Nov 2026',
     readTime: '14 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
@@ -2575,6 +2578,7 @@ const ARTICLES = {
   'post-turf-city-masterplan-2026': {
     title: 'Turf City Masterplan 2026: What Dunearn House Buyers Need to Know',
     date: '3 Jun 2026',
+    updated: '12 Nov 2026',
     readTime: '12 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
@@ -2687,6 +2691,7 @@ const ARTICLES = {
   'post-dunearn-house-buyers-guide-2026': {
     title: 'Dunearn House Buyer\'s Guide 2026: Price, Eligibility & Compare',
     date: '4 Jun 2026',
+    updated: '12 Nov 2026',
     readTime: '15 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
@@ -3131,6 +3136,7 @@ const ARTICLES = {
   'post-dunearn-house-family-living-guide-2026': {
     title: 'Why Families Love Dunearn House Bukit Timah: Prime Location Near Sixth Avenue MRT, Top Schools & Green Living in Turf City',
     date: '5 Jun 2026',
+    updated: '12 Nov 2026',
     readTime: '14 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
@@ -3563,6 +3569,7 @@ const ARTICLES = {
   'post-dunearn-house-investment-analysis-2026': {
     title: 'Dunearn House Investment Analysis 2026: First-Mover ROI in Turf City',
     date: '7 Jun 2026',
+    updated: '12 Nov 2026',
     readTime: '15 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
@@ -4226,6 +4233,7 @@ const ARTICLES = {
   'post-thomson-reserve-price-review-2026': {
     title: 'Thomson Reserve Price: Is It Really Too Expensive in 2026?',
     date: '19 Jun 2026',
+    updated: '12 Nov 2026',
     readTime: '24 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
@@ -4540,6 +4548,7 @@ const ARTICLES = {
   'post-thomson-reserve-risks-2026': {
     title: 'Thomson Reserve Risks: The 8 Real Risks Every Buyer Should Know in 2026',
     date: '27 Jun 2026',
+    updated: '12 Nov 2026',
     readTime: '30 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
@@ -5336,6 +5345,7 @@ const ARTICLES = {
   'post-thomson-reserve-prestige-trap-2026': {
     title: 'Thomson Reserve and the Prestige Trap: Why "Good District" May Be Costing You More Than You Think',
     date: '7 Aug 2026',
+    updated: '12 Nov 2026',
     readTime: '19 min read',
     category: 'BUYER PSYCHOLOGY',
     chipClass: 'chip-psychology',
@@ -5585,6 +5595,7 @@ const ARTICLES = {
   'post-thomson-reserve-enbloc-illusion-2026': {
     title: 'Thomson Reserve and the $810 Million Illusion: Why a Big En Bloc Price Is Not Proof You Should Buy',
     date: '8 Aug 2026',
+    updated: '12 Nov 2026',
     readTime: '12 min read',
     category: 'BUYER PSYCHOLOGY',
     chipClass: 'chip-psychology',

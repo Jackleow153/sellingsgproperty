@@ -40,6 +40,7 @@ Work as a senior SEO / AIO / GEO / UX / UI specialist who understands how people
 
 - Tabs by launch year: `year` is `"2024"`, `"2025"`, `"2026"` (launched) or `"2027"` (upcoming). Each project needs `launchSort` (YYYYMM); upcoming ones also need `launchShort` (e.g. `"Q1 2027 (est.)"`).
 - When a project launches: move it to the launch year, add the verified launch result (date, units sold, average psf, source) and remove estimates.
+  Also update its hand-built page and any articles about it (dated `launch-update` note at the top of an article; keep the original analysis). When you change an article, set `updated: 'D Mon YYYY'` in `data/articles.js`; when you change a hand-built page, bump its JSON-LD `dateModified`. Both feed the sitemap `lastmod`.
 - Upcoming projects: `startingPrice: null`, `avgPSF: null`, `unitMix: []`, `amenities: []` until the developer releases them. Mark market-report dates as "est.".
 - Never reuse another project's image. No image → leave `image: ""` (upcoming cards show "Upcoming"). Prefer self-hosted WebP under ~200 KB.
 - Verify facts against developer announcements, URA/HDB and reputable reports (EdgeProp, Business Times, Straits Times, Stacked, 99.co) before publishing. Projects re-verified line by line are listed in `VERIFIED_DETAIL` in the build script; only those show unit-mix tables on their static pages.
