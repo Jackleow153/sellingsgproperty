@@ -133,7 +133,7 @@ ${schema.map(jsonLd).join('\n')}
 <body>
 <header class="top"><div class="wrap">
 <a class="brand" href="/">SellingSg<span>Property</span></a>
-<nav class="nav" aria-label="Main">${navLink('/new-launch-condos/', 'New Launches', 'launches')}${navLink('/insights/', 'Insights', 'insights')}${navLink('/mortgage-calculator', 'Mortgage Calculator', 'calc')}${navLink('/about', 'About', 'about')}${navLink('/contact', 'Contact', 'contact')}</nav>
+<nav class="nav" aria-label="Main">${navLink('/new-launch-condos/', 'New Launches', 'launches')}${navLink('/insights/', 'Insights', 'insights')}${navLink('/mortgage-calculator/', 'Mortgage Calculator', 'calc')}${navLink('/about/', 'About', 'about')}${navLink('/contact/', 'Contact', 'contact')}</nav>
 <a class="btn" href="/contact/">Free 30-min consultation</a>
 </div></header>
 <div class="trust"><div class="wrap"><span><b>Jack Leow</b> · CEA Reg. No. R074023I</span><span>PropNex Realty Pte Ltd (L3008022J)</span><span>Data from URA, developers and published launch reports</span></div></div>

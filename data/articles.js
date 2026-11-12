@@ -100,7 +100,7 @@ const ARTICLES = {
       <p>3. <a href="/insights/hdb-sell-signs" onclick="showArticle('post-hdb-sell-signs'); return false;" class="underline hover:text-violet-700"><strong>5 Signs Your HDB Flat Is Ready to Sell — And How to Time It Right in 2026</strong></a></p>
       <p>4. <a href="/insights/district-guide" onclick="showArticle('post-district-guide'); return false;" class="underline hover:text-violet-700"><strong>Which Singapore District Should You Buy In? The 2026 Growth Map</strong></a></p>
       <p>5. <a href="/insights/which-condo-to-buy-2026" onclick="showArticle('post-which-condo-to-buy-2026'); return false;" class="underline hover:text-violet-700"><strong>Which Condo to Buy in Singapore in 2026: A Practical Buyer\'s Guide</strong></a></p>
-      <p>6. <a href="/mortgage-calculator" class="underline hover:text-violet-700"><strong>Check your affordability with our Singapore Mortgage Calculator</strong></a></p>
+      <p>6. <a href="/mortgage-calculator/" class="underline hover:text-violet-700"><strong>Check your affordability with our Singapore Mortgage Calculator</strong></a></p>
     `
   },
 
@@ -303,7 +303,7 @@ const ARTICLES = {
       <p>3. <a href="/insights/new-launch-vs-resale" onclick="showArticle('post-new-launch-vs-resale'); return false;" class="underline hover:text-violet-700"><strong>New Launch vs Resale Condo in 2026: Which Should You Buy?</strong></a></p>
       <p>4. <a href="/insights/hdb-sell-signs" onclick="showArticle('post-hdb-sell-signs'); return false;" class="underline hover:text-violet-700"><strong>5 Signs Your HDB Flat Is Ready to Sell — And How to Time It Right in 2026</strong></a></p>
       <p>5. <a href="/insights/which-condo-to-buy-2026" onclick="showArticle('post-which-condo-to-buy-2026'); return false;" class="underline hover:text-violet-700"><strong>Which Condo to Buy in Singapore in 2026: A Practical Buyer\'s Guide</strong></a></p>
-      <p>6. <a href="/mortgage-calculator" class="underline hover:text-violet-700"><strong>Check your affordability with our Singapore Mortgage Calculator</strong></a></p>
+      <p>6. <a href="/mortgage-calculator/" class="underline hover:text-violet-700"><strong>Check your affordability with our Singapore Mortgage Calculator</strong></a></p>
     `
   },
 
@@ -415,7 +415,7 @@ const ARTICLES = {
       <p>3. <a href="/insights/new-launch-vs-resale" onclick="showArticle('post-new-launch-vs-resale'); return false;" class="underline hover:text-violet-700"><strong>New Launch vs Resale Condo in 2026: Which Should You Buy?</strong></a></p>
       <p>4. <a href="/insights/cpf-private" onclick="showArticle('post-cpf-private'); return false;" class="underline hover:text-violet-700"><strong>How Much CPF Can You Use for a Private Property in Singapore? (2026 Guide)</strong></a></p>
       <p>5. <a href="/insights/which-condo-to-buy-2026" onclick="showArticle('post-which-condo-to-buy-2026'); return false;" class="underline hover:text-violet-700"><strong>Which Condo to Buy in Singapore in 2026: A Practical Buyer\'s Guide</strong></a></p>
-      <p>6. <a href="/mortgage-calculator" class="underline hover:text-violet-700"><strong>Check your affordability with our Singapore Mortgage Calculator</strong></a></p>
+      <p>6. <a href="/mortgage-calculator/" class="underline hover:text-violet-700"><strong>Check your affordability with our Singapore Mortgage Calculator</strong></a></p>
     `
   },
 
@@ -706,7 +706,7 @@ const ARTICLES = {
       <p>3. <a href="/insights/cpf-private" onclick="showArticle('post-cpf-private'); return false;" class="underline hover:text-violet-700"><strong>How Much CPF Can You Use for a Private Property in Singapore? (2026 Guide)</strong></a></p>
       <p>4. <a href="/insights/new-launch-vs-resale" onclick="showArticle('post-new-launch-vs-resale'); return false;" class="underline hover:text-violet-700"><strong>New Launch vs Resale Condo in 2026: Which Should You Buy?</strong></a></p>
       <p>5. <a href="/insights/which-condo-to-buy-2026" onclick="showArticle('post-which-condo-to-buy-2026'); return false;" class="underline hover:text-violet-700"><strong>Which Condo to Buy in Singapore in 2026: A Practical Buyer\'s Guide</strong></a></p>
-      <p>6. <a href="/mortgage-calculator" class="underline hover:text-violet-700"><strong>Check your affordability with our Singapore Mortgage Calculator</strong></a></p>
+      <p>6. <a href="/mortgage-calculator/" class="underline hover:text-violet-700"><strong>Check your affordability with our Singapore Mortgage Calculator</strong></a></p>
     `
   },
 
@@ -797,7 +797,7 @@ const ARTICLES = {
       <p>3. <a href="/insights/developer-incentives-psych" onclick="showArticle('post-developer-incentives-psych'); return false;" class="underline hover:text-violet-700"><strong>How Developer Incentives in New Launch Condos Exploit Buyer Psychology in 2026 (And How to See Through Them)</strong></a></p>
       <p>4. <a href="/insights/hdb-phantom-fear" onclick="showArticle('post-hdb-phantom-fear'); return false;" class="underline hover:text-violet-700"><strong>HDB Upgraders: Are You Trapped by Your Own "Phantom Fear"? (2026 Edition)</strong></a></p>
       <p>5. <a href="/insights/which-condo-to-buy-2026" onclick="showArticle('post-which-condo-to-buy-2026'); return false;" class="underline hover:text-violet-700"><strong>Which Condo to Buy in Singapore in 2026: A Practical Buyer\'s Guide</strong></a></p>
-      <p>6. <a href="/mortgage-calculator" class="underline hover:text-violet-700"><strong>Check your affordability with our Singapore Mortgage Calculator</strong></a></p>
+      <p>6. <a href="/mortgage-calculator/" class="underline hover:text-violet-700"><strong>Check your affordability with our Singapore Mortgage Calculator</strong></a></p>
     `
   },
 
@@ -3545,7 +3545,7 @@ const ARTICLES = {
       <p>2. <a href="/insights/dunearn-house-review-2026" onclick="showArticle('post-dunearn-house-review-2026'); return false;" class="underline hover:text-violet-700"><strong>Dunearn House Review 2026: Is It Worth Buying? (Honest Pros &amp; Cons)</strong></a></p>
       <p>3. <a href="/insights/dunearn-vs-fourth-avenue" onclick="showArticle('post-dunearn-vs-fourth-avenue-2026'); return false;" class="underline hover:text-violet-700"><strong>Dunearn House vs Fourth Avenue Residences: Which Is the Better Investment? (2026)</strong></a></p>
       <p>4. <a href="/insights/turf-city-masterplan-2026" onclick="showArticle('post-turf-city-masterplan-2026'); return false;" class="underline hover:text-violet-700"><strong>Turf City Masterplan 2026: What Dunearn House Buyers Need to Know</strong></a></p>
-      <p>5. <a href="/insights/new-launch-vs-resale-2026" onclick="showArticle('post-new-launch-vs-resale'); return false;" class="underline hover:text-violet-700"><strong>New Launch vs Resale Condo in 2026: Which Should You Buy?</strong></a></p>
+      <p>5. <a href="/insights/new-launch-vs-resale/" onclick="showArticle('post-new-launch-vs-resale'); return false;" class="underline hover:text-violet-700"><strong>New Launch vs Resale Condo in 2026: Which Should You Buy?</strong></a></p>
 
       <p><em>Disclaimer: This article is for general informational purposes and does not constitute financial or property investment advice. Masterplan timelines and details are based on URA publications as of June 2026 and are subject to change. Always verify the latest plans directly with URA and consult a licensed advisor before making any purchase decision.</em></p>
     `
@@ -4513,7 +4513,7 @@ const ARTICLES = {
 
       <p><em>Last updated: June 2026. Pricing indicative until the developer's official launch. Verify all stamp duty rates with IRAS and seek licensed advice before transacting.</em></p>
 
-      <p>If you would like a fair, data-driven walk-through of Thomson Reserve against your specific situation — your existing property, your financing, your hold horizon — a <strong>free 30-minute consultation</strong> is available via the <a href="/contact" class="underline hover:text-violet-700">/contact page</a>.</p>
+      <p>If you would like a fair, data-driven walk-through of Thomson Reserve against your specific situation — your existing property, your financing, your hold horizon — a <strong>free 30-minute consultation</strong> is available via the <a href="/contact/" class="underline hover:text-violet-700">/contact page</a>.</p>
 
       <h2>Related Reads</h2>
       <p>1. <a href="/insights/which-condo-to-buy-2026" onclick="showArticle('post-which-condo-to-buy-2026'); return false;" class="underline hover:text-violet-700"><strong>Which Condo to Buy in Singapore in 2026: A Practical Buyer’s Guide</strong></a></p>
@@ -5039,12 +5039,12 @@ const ARTICLES = {
       <p>2. <a href="/insights/progressive-payment-psychology" onclick="showArticle(\'post-progressive-payment-psychology\'); return false;" class="underline hover:text-violet-700"><strong>How the Progressive Payment Scheme Works for New Launch Condos</strong></a></p>
       <p>3. <a href="/insights/hdb-phantom-fear" onclick="showArticle(\'post-hdb-phantom-fear\'); return false;" class="underline hover:text-violet-700"><strong>HDB Upgraders: Are You Trapped by Your Own Phantom Fear? (2026 Edition)</strong></a></p>
       <p>4. <a href="/insights/how-to-buy-new-launch-2026" onclick="showArticle(\'post-how-to-buy-new-launch-2026\'); return false;" class="underline hover:text-violet-700"><strong>How to Buy a New Launch Condo in Singapore: Step-by-Step 2026 Guide</strong></a></p>
-      <p>5. <a href="/mortgage-calculator" onclick="showPage(\'mortgage-calculator\'); return false;" class="underline hover:text-violet-700"><strong>Check your affordability with our Singapore Mortgage Calculator</strong></a></p>
+      <p>5. <a href="/mortgage-calculator/" onclick="showPage(\'mortgage-calculator\'); return false;" class="underline hover:text-violet-700"><strong>Check your affordability with our Singapore Mortgage Calculator</strong></a></p>
 
       <div class="key-takeaway" style="margin-top:2rem">
         <p class="font-bold text-violet-900 mb-2">A Final Note</p>
         <p class="text-sm text-violet-800">If you are serious about a 2026 launch — Lentor Gardens Residences, Thomson Reserve, Dunearn House, or any resale — the single most valuable two weeks you can spend is the ones <em>before</em> Booking Day, sitting with two or three bankers and getting your IPAs in writing. I run free 30-minute consultations — no obligation, no hard sell.</p>
-        <p class="text-sm text-violet-800 mt-2"><a href="/contact" onclick="showPage(\'contact\'); return false;" class="underline font-semibold">Contact Jack</a></p>
+        <p class="text-sm text-violet-800 mt-2"><a href="/contact/" onclick="showPage(\'contact\'); return false;" class="underline font-semibold">Contact Jack</a></p>
       </div>
 
       <p><em>Last updated: July 2026. TDSR, LTV, ABSD rates, and OTP forfeiture rules cited are current as of July 2026 per MAS and URA guidelines. Verify all figures before transacting. CEA Licence L3008022J (PropNex Realty Pte Ltd).</em></p>
@@ -5259,7 +5259,7 @@ const ARTICLES = {
       <div class="art-cta">
         <h3>Want your exact numbers modelled?</h3>
         <p>Every household's CPF balance, income mix, and existing commitments are different. A 30-minute session gives you a personalised affordability projection for both HDB and condo scenarios &mdash; using your real numbers.</p>
-        <a href="/contact" onclick="showPage('contact'); return false;" class="cta-btn">Book a Free Consultation</a>
+        <a href="/contact/" onclick="showPage('contact'); return false;" class="cta-btn">Book a Free Consultation</a>
       </div>
 
       <h2>Frequently asked questions</h2>
@@ -5554,7 +5554,7 @@ const ARTICLES = {
       <div class="art-cta">
         <h3>Want your specific numbers separated &mdash; prestige from fundamentals?</h3>
         <p>If you would like help separating the measurable fundamentals from the prestige premium on any specific project &mdash; including Thomson Reserve &mdash; a free 30-minute consultation is available. No sales pitch. Just an honest breakdown of what you would actually be paying for.</p>
-        <a href="/contact" onclick="showPage('contact'); return false;" class="cta-btn">Book a Free Consultation</a>
+        <a href="/contact/" onclick="showPage('contact'); return false;" class="cta-btn">Book a Free Consultation</a>
       </div>
 
       <h2>Related Reads</h2>
