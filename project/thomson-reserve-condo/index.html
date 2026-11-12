@@ -236,8 +236,6 @@
 }
 </script>
 
-  <!-- Tailwind CDN (same as your main site) -->
-  <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
 
@@ -888,8 +886,13 @@
 
   </style>
 
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<!-- Precompiled Tailwind v3 base + the few utilities this page used (replaces the cdn.tailwindcss.com runtime; kept last in <head> where the CDN injected it) -->
+<style>
+*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width:640px){.container{max-width:640px}}@media (min-width:768px){.container{max-width:768px}}@media (min-width:1024px){.container{max-width:1024px}}@media (min-width:1280px){.container{max-width:1280px}}@media (min-width:1536px){.container{max-width:1536px}}.table{display:table}.grid{display:grid}.shrink{flex-shrink:1}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.outline{outline-style:solid}
+/* Icons: Font Awesome Free 6.5.1 (CC BY 4.0, fontawesome.com/license/free), inlined as CSS masks; only the icons this page uses. */
+.fa-solid,.fa-regular,.fa-brands{display:inline-block;height:1em;width:1em;vertical-align:-.125em;background-color:currentColor;-webkit-mask:var(--fa) center/contain no-repeat;mask:var(--fa) center/contain no-repeat;font-style:normal}
+.fa-whatsapp{--fa:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z'/%3E%3C/svg%3E");width:0.875em}
+</style>
 
 </head>
 <body>
@@ -1514,66 +1517,84 @@
     });
   });
 
-  // PSF Comparison Chart
-  const ctx = document.getElementById('psfChart').getContext('2d');
-  const navy = '#0C1B2A';
-  const brass = '#B89B5E';
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: [
-        ['Springleaf', 'Residence', '(Parcel B)'],
-        ['Jadescape', '(Resale Avg.)'],
-        ['Upper Thomson', 'Parcel A', '(Projected)'],
-        ['Thomson Reserve', '(Launch Est.)']
-      ],
-      datasets: [{
-        label: 'Average PSF (S$)',
-        data: [2175, 2293, 2325, 2550],
-        backgroundColor: [navy, navy, navy, brass],
-        borderColor: [navy, navy, navy, brass],
-        borderWidth: 0,
-        borderRadius: 0,
-        barThickness: 64
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: navy,
-          padding: 12,
-          titleFont: { family: 'Marcellus', size: 14 },
-          bodyFont: { family: 'Hanken Grotesk', size: 13 },
-          callbacks: {
-            label: (ctx) => '$' + ctx.parsed.y.toLocaleString() + ' psf'
-          }
-        }
+  // PSF Comparison Chart. Chart.js (self-hosted, /assets/vendor) loads only when the chart is near the screen.
+  function drawPsfChart() {
+    const ctx = document.getElementById('psfChart').getContext('2d');
+    const navy = '#0C1B2A';
+    const brass = '#B89B5E';
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [
+          ['Springleaf', 'Residence', '(Parcel B)'],
+          ['Jadescape', '(Resale Avg.)'],
+          ['Upper Thomson', 'Parcel A', '(Projected)'],
+          ['Thomson Reserve', '(Launch Est.)']
+        ],
+        datasets: [{
+          label: 'Average PSF (S$)',
+          data: [2175, 2293, 2325, 2550],
+          backgroundColor: [navy, navy, navy, brass],
+          borderColor: [navy, navy, navy, brass],
+          borderWidth: 0,
+          borderRadius: 0,
+          barThickness: 64
+        }]
       },
-      scales: {
-        y: {
-          beginAtZero: false,
-          min: 2000,
-          max: 2700,
-          grid: { color: '#E5DDD0', drawBorder: false },
-          ticks: {
-            color: '#5A6B7B',
-            font: { family: 'Hanken Grotesk', size: 12 },
-            callback: (v) => '$' + v.toLocaleString()
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: navy,
+            padding: 12,
+            titleFont: { family: 'Marcellus', size: 14 },
+            bodyFont: { family: 'Hanken Grotesk', size: 13 },
+            callbacks: {
+              label: (ctx) => '$' + ctx.parsed.y.toLocaleString() + ' psf'
+            }
           }
         },
-        x: {
-          grid: { display: false, drawBorder: false },
-          ticks: {
-            color: '#0C1B2A',
-            font: { family: 'Hanken Grotesk', size: 12, weight: '500' }
+        scales: {
+          y: {
+            beginAtZero: false,
+            min: 2000,
+            max: 2700,
+            grid: { color: '#E5DDD0', drawBorder: false },
+            ticks: {
+              color: '#5A6B7B',
+              font: { family: 'Hanken Grotesk', size: 12 },
+              callback: (v) => '$' + v.toLocaleString()
+            }
+          },
+          x: {
+            grid: { display: false, drawBorder: false },
+            ticks: {
+              color: '#0C1B2A',
+              font: { family: 'Hanken Grotesk', size: 12, weight: '500' }
+            }
           }
         }
       }
-    }
-  });
+    });
+  }
+  (function () {
+    const el = document.getElementById('psfChart');
+    if (!el) return;
+    let started = false;
+    const load = () => {
+      if (started) return; started = true;
+      const s = document.createElement('script');
+      s.src = '/assets/vendor/chart.umd.js?v=4.4.0';
+      s.onload = drawPsfChart;
+      document.head.appendChild(s);
+    };
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); load(); } }, { rootMargin: '400px' });
+      io.observe(el);
+    } else { load(); }
+  })();
 </script>
 </body>
 </html>
