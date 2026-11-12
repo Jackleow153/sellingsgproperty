@@ -96,7 +96,8 @@ function parseDate(d) {
 }
 const isoDate = d => { const x = parseDate(d); return x ? new Date(Date.UTC(x.getFullYear(), x.getMonth(), x.getDate())).toISOString().slice(0, 10) : AS_OF; };
 function getExcerpt(body, n = 160) {
-  const lead = (body || '').match(/<p[^>]*>(.*?)<\/p>/s);
+  // Dated launch-update notes sit at the top of some articles; excerpts come from the article itself.
+  const lead = (body || '').replace(/<div class="tldr launch-update">[\s\S]*?<\/div>/g, '').match(/<p[^>]*>(.*?)<\/p>/s);
   return lead ? clip(strip(lead[1]), n) : '';
 }
 

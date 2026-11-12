@@ -4225,6 +4225,7 @@ const ARTICLES = {
     img: 'insights/thomson-reserve-price-review-2026.jpg',
     linkedinUrl: null,
     body: `
+      <div class="tldr launch-update"><p><strong>Launch update, 12 Nov 2026:</strong> Thomson Reserve launched on 31 October 2026 at an average of $2,900 psf, and 1,143 of its 1,268 units (90.1%) sold over the launch weekend, the best-selling launch of 2026. This article was written before launch, so the prices below are pre-launch estimates. For the results and what is still available, see the <a href="/project/thomson-reserve-condo/">Thomson Reserve page</a>.</p></div>
       <p><strong>Let's start with the honest version.</strong> Yes, Thomson Reserve will likely launch in the S$2,500 to S$3,100 psf range. Yes, that feels heavy. And yes, if you have been watching the Upper Thomson corridor for years, the new pricing can give you that quiet, uneasy "am I being asked to pay tomorrow's price today?" feeling.</p>
 
       <p>That feeling is rational. Hold onto it for a moment. We will look at it from every angle in this post.</p>
@@ -4538,6 +4539,7 @@ const ARTICLES = {
     img: null,
     linkedinUrl: null,
     body: `
+      <div class="tldr launch-update"><p><strong>Launch update, 12 Nov 2026:</strong> Thomson Reserve launched on 31 October 2026 at an average of $2,900 psf, and 1,143 of its 1,268 units (90.1%) sold over the launch weekend, the best-selling launch of 2026. This article was written before launch, so the prices below are pre-launch estimates. For the results and what is still available, see the <a href="/project/thomson-reserve-condo/">Thomson Reserve page</a>.</p></div>
       <p><strong>The eight real risks of buying Thomson Reserve are: floating-rate BUC loan exposure, a 2027–2028 supply wave from the same consortium, future cooling measures, a four-year construction window, density at 1,240 units, off-plan uncertainty, the extended 4-year SSD window (post-July 2025), and quantum overstretch.</strong> Most are manageable. The two that hurt buyers most — the SSD liquidity trap and quantum overstretch — are personal financial risks, not project risks.</p>
 
       <p>Some buyers are quietly walking away from Thomson Reserve. They have read the headlines, looked at the launch PSF, weighed the four-year wait until 2030, and decided the risk profile does not fit their life. They are not wrong to ask the question. Buying a $2 million unit that does not exist yet, in a market where the next round of cooling measures is always one quarter away, is not a casual decision.</p>
@@ -5333,6 +5335,7 @@ const ARTICLES = {
     img: null,
     linkedinUrl: null,
     body: `
+      <div class="tldr launch-update"><p><strong>Launch update, 12 Nov 2026:</strong> Thomson Reserve launched on 31 October 2026 at an average of $2,900 psf, and 1,143 of its 1,268 units (90.1%) sold over the launch weekend, the best-selling launch of 2026. This article was written before launch, so the prices below are pre-launch estimates. For the results and what is still available, see the <a href="/project/thomson-reserve-condo/">Thomson Reserve page</a>.</p></div>
       <p><strong>Here is a question almost nobody asks before buying a condo in Singapore: how much of this price am I paying for the property, and how much am I paying for the postcode?</strong></p>
 
       <p>Most Singaporeans cannot answer that. Not because they are careless &mdash; but because the two feel like the same thing. "Good district" and "good investment" have become so fused in the Singaporean mind that questioning one feels like questioning the other. This piece pulls them apart. And it uses Thomson Reserve &mdash; a genuinely strong project in a genuinely desirable location &mdash; as the case study, precisely <em>because</em> it is strong. If the prestige premium quietly costs you money even on a good project, imagine what it does on a weak one.</p>
@@ -5581,6 +5584,7 @@ const ARTICLES = {
     img: null,
     linkedinUrl: null,
     body: `
+      <div class="tldr launch-update"><p><strong>Launch update, 12 Nov 2026:</strong> Thomson Reserve launched on 31 October 2026 at an average of $2,900 psf, and 1,143 of its 1,268 units (90.1%) sold over the launch weekend, the best-selling launch of 2026. This article was written before launch, so the prices below are pre-launch estimates. For the results and what is still available, see the <a href="/project/thomson-reserve-condo/">Thomson Reserve page</a>.</p></div>
       <div class="qa-box">
         <div class="lbl">Quick Answer</div>
         <p>The $810 million paid for the former Thomson View site does <em>not</em> mean Thomson Reserve is a good buy for you. It means the land was expensive for the <em>developers</em>. That is their cost, and they will pass it on to you. A big, confident number from three famous developers is one of the most powerful psychological triggers in property marketing, and most buyers never notice it working on them. This article is about that trigger, why it fools smart people, and how to switch it off before you sign anything.</p>
