@@ -1,11 +1,11 @@
 {
-  "updated": "2026-11-12T10:50:08+08:00",
+  "updated": "2026-11-12T10:57:42+08:00",
   "sources": [
     "Singapore Business Review",
+    "The Straits Times",
     "Stacked Homes",
     "99.co",
     "CNA",
-    "The Straits Times",
     "VnExpress International",
     "DollarsAndSense.sg",
     "Yahoo News Singapore",
@@ -35,6 +35,18 @@
       "category": "Real estate",
       "path": "/news/n28f17bb8/",
       "description": "Four-room flats lead HDB resale volume in October."
+    },
+    {
+      "id": "9836",
+      "title": "Four charged over ruse to use stranger’s home to get $6m loan",
+      "date": "2026/11/11",
+      "image": "/news/images/9836.jpg",
+      "sourceName": "The Straits Times",
+      "sourceNameZh": "海峡时报",
+      "sourceFeed": "propnex",
+      "category": "Real estate",
+      "path": "/news/9836/",
+      "description": "Four charged over ruse to use stranger’s home to get $6m loan."
     },
     {
       "id": "n0301c38f",
@@ -83,18 +95,6 @@
       "category": "Real estate",
       "path": "/news/nbdaff927/",
       "description": "HDB deficit narrows to $4.7 billion, down from $6.34 billion a year ago."
-    },
-    {
-      "id": "9836",
-      "title": "Four charged over ruse to use stranger’s home to get $6m loan",
-      "date": "2026/11/11",
-      "image": "/news/images/9836.jpg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9836/",
-      "description": "Four charged over ruse to use stranger’s home to get $6m loan."
     },
     {
       "id": "n4327b466",
