@@ -22,7 +22,7 @@ const crypto = require('crypto');
 
 const ROOT = path.resolve(__dirname, '..');
 const SITE = 'https://www.sellingsgproperty.com';
-const AS_OF = process.env.AS_OF || '2026-11-11';            // data freshness date shown on pages
+const AS_OF = process.env.AS_OF || '2026-11-13';            // data freshness date shown on pages
 const AS_OF_LABEL = new Date(AS_OF + 'T00:00:00Z').toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
 
 // Hand-built project pages that the builder must not overwrite (id -> slug)
@@ -43,7 +43,7 @@ const CHUAN_LLMS = `
   - Launch date: https://the-one-chuan-grove.sg/launch-date/`;
 // Projects whose data was re-verified line by line (Nov 2026): show overview text and unit-mix tables
 const VERIFIED_DETAIL = new Set([26, 27, 28, 29, 30, 31, 32, 33]);
-const YEAR_TAB = { '2024': 'Launched in 2024', '2025': 'Launched in 2025', '2026': 'Launched in 2026', '2027': 'Upcoming 2027' };
+const YEAR_TAB = { '2024': 'Launched in 2024', '2025': 'Launched in 2025', '2026': 'Launched in 2026', '2027': 'Upcoming (2027 onwards)' };
 const ARTICLE_ALIASES = { 'dunearn-vs-fourth-avenue': 'dunearn-vs-fourth-avenue-2026' };
 
 const read = f => fs.readFileSync(path.join(ROOT, f), 'utf8');
@@ -68,6 +68,14 @@ function extractProjects(html) {
   return new Function(html.slice(a, b) + '\nreturn projects;')();
 }
 const projects = extractProjects(appJs);
+const landSites = (() => {
+  const a = appJs.indexOf('/* BUILD:LAND-SITES START'), b = appJs.indexOf('/* BUILD:LAND-SITES END */');
+  if (a < 0 || b < 0) throw new Error('BUILD:LAND-SITES markers missing in assets/app.js');
+  const src = appJs.slice(appJs.indexOf('*/', a) + 2, b);
+  // eslint-disable-next-line no-new-func
+  return new Function(src + '\nreturn landSites;')().sort((x, y) => x.sort - y.sort);
+})();
+const landPath = g => `/land-sites/${g.slug}/`;
 const ROUTE_META = (() => {
   const a = appJs.indexOf('/* BUILD:ROUTE-META START */'), b = appJs.indexOf('/* BUILD:ROUTE-META END */');
   if (a < 0 || b < 0) throw new Error('BUILD:ROUTE-META markers missing in assets/app.js');
@@ -174,6 +182,9 @@ const crumbs = items => `<nav class="crumbs" aria-label="Breadcrumb"><ol>${items
 const crumbSchema = items => ({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map(([href, label], i) => ({ '@type': 'ListItem', position: i + 1, name: label, item: SITE + href })) });
 
 // ---------- project pages ----------
+const unitsText = p => p.totalUnits ? `${p.unitsEst ? 'about ' : ''}${p.totalUnits.toLocaleString('en-US')}` : null;
+const tenureKnown = p => !/^(Not stated|To be confirmed|TBC)/i.test(p.tenure || '');
+const launchKnown = p => p.launchShort && !/^Not announced/i.test(p.launchShort);
 function launchedLine(p) {
   if (isUpcoming(p)) return `Expected launch: ${p.launchDate}.`;
   return `Launched: ${p.launchDate}.`;
@@ -181,8 +192,9 @@ function launchedLine(p) {
 function summary(p) {
   const kind = isEC(p) ? 'executive condominium (EC)' : (/mixed-use/i.test(p.type) ? 'mixed-use condominium' : 'private condominium');
   const tenure = /freehold/i.test(p.tenure) ? 'freehold' : (p.tenure.match(/(\d+)[- ]?(?:year|yr|LH)/i) ? p.tenure.match(/(\d+)/)[1] + '-year leasehold' : p.tenure);
-  const parts = [`${shortName(p)} is a ${tenure} ${kind} at ${placeOf(p)} in District ${districtOf(p)} (${segmentOf(p)}), developed by ${p.developer.replace(/\s*\((?:entity|entities)[^)]*\)/i, '')}, with ${p.totalUnits.toLocaleString('en-US')} homes.`];
-  if (isUpcoming(p)) parts.push(`It is expected to launch in ${p.launchShort ? p.launchShort.replace(/\s*\((?:est\.|reported|target|expected|announced|flagged)\)/, '') : '2027'}; prices have not been released.`);
+  const parts = [`${shortName(p)} is a ${tenureKnown(p) ? tenure + ' ' : ''}${kind} at ${placeOf(p)} in District ${districtOf(p)} (${segmentOf(p)}), developed by ${p.developer.replace(/\s*\((?:entity|entities)[^)]*\)/i, '')}${unitsText(p) ? `, with ${unitsText(p)} homes` : ''}.`];
+  if (p.landCost && isUpcoming(p)) parts.push(`Land cost: ${p.landCost}.`);
+  if (isUpcoming(p)) parts.push(launchKnown(p) ? `It is expected to launch in ${p.launchShort.replace(/\s*\((?:est\.|reported|target|expected|announced|flagged|developer target)\)/, '')}; prices have not been released.` : 'The developer has not announced a launch date or prices.');
   else {
     parts.push(`It launched on ${p.launchDate.replace(/\s*\(.*$/, '')}`
       + (p.avgPSF && VERIFIED_DETAIL.has(p.id) ? ` at an average of about $${p.avgPSF.toLocaleString('en-US')} psf.` : '.'));
@@ -197,11 +209,13 @@ function factRows(p) {
     ['Location', `${placeOf(p)} · District ${districtOf(p)} (${segmentOf(p)})`],
     ['Property type', p.type],
     ['Tenure', p.tenure],
-    ['Total units', p.totalUnits.toLocaleString('en-US')],
+    ['Total units', unitsText(p) ? unitsText(p) + (isUpcoming(p) ? ' (planned)' : '') : 'Not announced'],
     [isUpcoming(p) ? 'Expected launch' : 'Launch date', p.launchDate],
   ];
   if (!isUpcoming(p) && p.avgPSF) rows.push([VERIFIED_DETAIL.has(p.id) ? 'Average price at launch' : 'Average price (reported)', `$${p.avgPSF.toLocaleString('en-US')} psf`]);
   if (!isUpcoming(p) && p.startingPrice && VERIFIED_DETAIL.has(p.id)) rows.push(['Starting price (reported)', 'from ' + money(p.startingPrice)]);
+  if (p.landCost) rows.push(['Land cost', p.landCost]);
+  if (p.landDate) rows.push(['Land sale', p.landDate]);
   rows.push(['Expected TOP', p.top || 'TBC']);
   rows.push(['Nearest MRT', p.distanceMRT || p.mrt || 'To be confirmed']);
   rows.push(['Primary schools within 1 km', p.schools || 'To be confirmed']);
@@ -213,9 +227,9 @@ function faqFor(p) {
   const q = [
     [`Who is the developer of ${n}?`, `${n} is developed by ${p.developer}.`],
     [`Where is ${n} located?`, `${n} is at ${placeOf(p)}, District ${districtOf(p)}, in the ${segmentOf(p) === 'CCR' ? 'Core Central Region' : segmentOf(p) === 'RCR' ? 'Rest of Central Region' : 'Outside Central Region'} (${segmentOf(p)}). Nearest MRT: ${p.distanceMRT || p.mrt || 'to be confirmed'}.`],
-    [`How many units does ${n} have?`, `${n} has ${p.totalUnits.toLocaleString('en-US')} homes${isUpcoming(p) ? ' (planned; final count may change)' : ''}.`],
-    [isUpcoming(p) ? `When will ${n} launch?` : `When did ${n} launch?`, isUpcoming(p) ? `${p.launchDate}. Dates are not final until the developer announces the preview and booking day.` : `${n} launched on ${p.launchDate}.`],
-    [`What is the tenure of ${n}?`, `${p.tenure}.`],
+    [`How many units does ${n} have?`, unitsText(p) ? `${n} has ${unitsText(p)} homes${isUpcoming(p) ? ' (planned; final count may change)' : ''}.` : `The developer has not announced the number of homes yet.`],
+    [isUpcoming(p) ? `When will ${n} launch?` : `When did ${n} launch?`, isUpcoming(p) ? (launchKnown(p) ? `${p.launchDate}. Dates are not final until the developer announces the preview and booking day.` : 'No launch date has been announced yet. We update this page when the developer announces the preview and booking day.') : `${n} launched on ${p.launchDate}.`],
+    [`What is the tenure of ${n}?`, tenureKnown(p) ? `${p.tenure}.` : 'The tenure has not been stated by the developer yet.'],
   ];
   if (p.top && !/^TBC/.test(p.top)) q.push([`When is ${n} expected to be completed?`, `Expected TOP: ${p.top}.`]);
   return q;
@@ -228,8 +242,10 @@ function related(p) {
 function projectPage(p) {
   const url = SITE + projectPath(p);
   const n = shortName(p);
+  const tag = /2027/.test(p.launchShort || '') ? '2027 Launch' : 'Upcoming Launch';
+  const upTitle = [`${n}: ${tag}, Units & Land Price | D${districtOf(p)}`, `${n}: ${tag} & Land Price | D${districtOf(p)}`, `${n} | ${tag}, D${districtOf(p)}`].find(t => t.length <= 65) || `${n} | ${tag}`;
   const title = isUpcoming(p)
-    ? `${n}: 2027 Launch, Developer, Units & Land Price | D${districtOf(p)}`
+    ? upTitle
     : `${n} ${isEC(p) ? 'EC' : 'Condo'}: Launch Price, Sales & Facts | D${districtOf(p)}`;
   const desc = clip(summary(p), 158);
   const bc = [['/', 'Home'], ['/new-launch-condos/', 'New Launch Condos'], [`/new-launch-condos/#y${p.year}`, YEAR_TAB[p.year]], [projectPath(p), n]];
@@ -241,7 +257,8 @@ function projectPage(p) {
 ${p.unitMix.map(u => `<tr><td>${esc(u.type)}</td><td>${esc(u.units)}</td><td>${esc(u.size)}</td><td>${esc(u.psfLabel || (u.psf ? '$' + u.psf.toLocaleString('en-US') : '—'))}</td><td>${esc(u.priceLabel || money(u.price) || '—')}</td></tr>`).join('\n')}
 </tbody></table></div>
 <p class="note">${esc(p.pricingNote || 'Indicative figures; check the developer\'s latest price list.')}</p>` : '';
-  const overview = verified ? `<h2>Overview</h2><p>${esc(p.description)}</p>` : '';
+  const overview = verified || p.sources ? `<h2>Overview</h2><p>${esc(p.description)}</p>` : '';
+  const srcList = p.sources ? `<h2>Sources</h2><ul class="links">${p.sources.map(x => `<li><a href="${esc(x.u)}" rel="noopener">${esc(x.t)}</a></li>`).join('')}</ul>` : '';
   const faq = faqFor(p);
   const rel = related(p);
   const body = `<div class="wrap">
@@ -250,7 +267,7 @@ ${crumbs(bc)}
 <div class="kicker">${esc(YEAR_TAB[p.year])} · ${esc(p.type)}</div>
 <h1>${esc(p.name)}</h1>
 <p class="sub">${esc(placeOf(p))} · District ${districtOf(p)} (${segmentOf(p)})</p>
-<div class="badges"><span class="badge ${isUpcoming(p) ? 'up' : 'ok'}">${isUpcoming(p) ? 'Upcoming · ' + esc(p.launchShort || '2027') : 'Launched · ' + esc(p.launchDate.replace(/\s*\(.*$/, ''))}</span><span class="badge">${/freehold/i.test(p.tenure) ? 'Freehold' : esc(p.tenure.replace(/\s*\(.*$/, ''))}</span><span class="badge">${p.totalUnits.toLocaleString('en-US')} units</span></div>
+<div class="badges"><span class="badge ${isUpcoming(p) ? 'up' : 'ok'}">${isUpcoming(p) ? 'Upcoming · ' + esc(p.launchShort || 'Not announced') : 'Launched · ' + esc(p.launchDate.replace(/\s*\(.*$/, ''))}</span><span class="badge">${/freehold/i.test(p.tenure) ? 'Freehold' : tenureKnown(p) ? esc(p.tenure.replace(/\s*\(.*$/, '')) : 'Tenure TBC'}</span><span class="badge">${unitsText(p) ? unitsText(p) + ' units' : 'Units TBC'}</span></div>
 ${img}
 <div class="answer"><p>${esc(summary(p))}</p></div>
 <p class="asof">Data as of ${AS_OF_LABEL}. Sources: URA, developer announcements and published launch reports (EdgeProp, Stacked, 99.co, The Business Times).</p>
@@ -260,6 +277,7 @@ ${overview}
 ${factRows(p).map(([k, v]) => `<tr><th scope="row">${esc(k)}</th><td>${esc(v)}</td></tr>`).join('\n')}
 </tbody></table>
 ${mix}
+${srcList}
 <h2>Frequently asked questions</h2>
 <div class="faq">${faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('\n')}</div>
 ${p.id === 31 ? CHUAN_CITE : ''}
@@ -271,11 +289,76 @@ ${p.id === 31 ? CHUAN_CITE : ''}
 </div></div>`;
   const schema = [
     { '@context': 'https://schema.org', '@type': 'WebPage', '@id': url + '#webpage', url, name: title, description: desc, dateModified: AS_OF, inLanguage: 'en-SG', isPartOf: { '@type': 'WebSite', name: 'SellingSgProperty', url: SITE + '/' }, author: PERSON, about: { '@id': url + '#place' } },
-    { '@context': 'https://schema.org', '@type': 'ApartmentComplex', '@id': url + '#place', name: p.name, description: summary(p), url, numberOfAccommodationUnits: p.totalUnits, address: { '@type': 'PostalAddress', streetAddress: placeOf(p), addressLocality: 'Singapore', addressRegion: 'District ' + districtOf(p), addressCountry: 'SG' } },
+    { '@context': 'https://schema.org', '@type': 'ApartmentComplex', '@id': url + '#place', name: p.name, description: summary(p), url, ...(p.totalUnits ? { numberOfAccommodationUnits: p.totalUnits } : {}), address: { '@type': 'PostalAddress', streetAddress: placeOf(p), addressLocality: 'Singapore', addressRegion: 'District ' + districtOf(p), addressCountry: 'SG' } },
     { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
     crumbSchema(bc),
   ];
   return layout({ title, description: desc, canonical: url, body, schema, nav: 'launches', ogImage: p.image && p.image.startsWith('/') ? SITE + p.image : undefined });
+}
+
+// ---------- government land sites (not yet sold) ----------
+function glsSection() {
+  const rows = landSites.map(g => `<tr><td><a href="${landPath(g)}">${esc(g.name)}</a></td><td>D${districtOf(g)} ${g.district.toUpperCase()}</td><td>${esc(g.list)}</td><td>${g.unitsNote ? esc(g.unitsNote) + ' ' : '~'}${g.units.toLocaleString('en-US')}</td><td>${esc(g.status)}</td></tr>`).join('\n');
+  return `<h2 id="gls">Government land sites still to be sold (${landSites.length})</h2>
+<p>These sites are on the Government Land Sales programme but have not been sold, so there is no developer, project name or price yet. Confirmed List sites are tendered on schedule; Reserve List sites are only tendered when a developer offers an acceptable minimum price. Sites already awarded appear in the Upcoming table above.</p>
+<div class="tbl"><table><thead><tr><th>Site</th><th>District</th><th>Programme</th><th>Est. homes</th><th>Status</th></tr></thead><tbody>
+${rows}
+</tbody></table></div>`;
+}
+function landSitePage(g) {
+  const url = SITE + landPath(g);
+  const n = g.name.replace(/\s*\((?:GLS site|Reserve List|White site, Reserve List|EC site)\)\s*$/, '');
+  const isEcSite = /EC/.test(g.name);
+  const units = `${g.unitsNote ? g.unitsNote + ' ' : 'about '}${g.units.toLocaleString('en-US')}`;
+  const base = g.name.replace(/\s*\((?:GLS site|Reserve List|White site, Reserve List|White site|2H2026 GLS site|third site, Reserve List|EC site)\)\s*/g, ' ').replace(/\s+/g, ' ').trim() + (/\(EC site\)/.test(g.name) ? ' EC' : '');
+  const reserve = /Reserve/.test(g.list);
+  const when = reserve ? 'Open for Application' : g.status.replace(/\s*\(.*\)$/, '').replace(/^Tender launch planned/, 'Tender').replace(/ 2026$/, '');
+  const title = [`${base} ${reserve ? 'Reserve List' : 'GLS'} Site (D${districtOf(g)}): ${g.units.toLocaleString('en-US')} Homes, ${when}`, `${base} ${reserve ? 'Reserve List' : 'GLS'} Site (D${districtOf(g)}): ${g.units.toLocaleString('en-US')} Homes`, `${base} GLS Site | D${districtOf(g)}`].find(t => t.length <= 66);
+  const lead = `${n} is a ${g.areaHa} ha government land site at ${placeOf(g)} in District ${districtOf(g)} (${g.district.toUpperCase()}), on the ${g.list}. URA estimates ${units} homes at a plot ratio of ${g.gpr}. Status: ${g.status}.`;
+  const desc = clip(lead, 158);
+  const bc = [['/', 'Home'], ['/new-launch-condos/', 'New Launch Condos'], ['/new-launch-condos/#gls', 'Land sites (GLS)'], [landPath(g), n]];
+  const rows = [
+    ['Programme', g.list], ['Status', g.status], ['Sales agent', g.agent], ['Allowed use', g.use], ['Site area', `${g.areaHa} ha (about ${Math.round(g.areaHa * 107639).toLocaleString('en-US')} sq ft)`],
+    ['Gross plot ratio', g.gpr], ['Estimated homes', units], ['Commercial / other space', g.commercial || '—'],
+  ];
+  if (g.tenure) rows.push(['Lease', g.tenure]);
+  const faq = [
+    [`What is the ${n} land site?`, lead],
+    [`When will the ${n} site be sold?`, /Reserve/.test(g.list) ? `It is on the Reserve List, so it is only put up for tender if a developer offers a minimum price the Government accepts. Status: ${g.status}.` : `${g.status}. The site is awarded after URA${g.agent === 'HDB' ? ' and HDB' : ''} evaluate the bids, usually within a few weeks of the tender closing.`],
+    [`How many homes can the ${n} site have?`, `About ${g.units.toLocaleString('en-US')} homes, based on the official estimate; the developer decides the final number.`],
+    [`When could homes at ${n} be launched for sale?`, `Developers usually launch 12 to 18 months after winning a site, so a sale launch is unlikely before ${isEcSite ? '2028' : 'late 2027 or 2028'}. No date can be confirmed until the site is sold.`],
+  ];
+  const others = landSites.filter(x => x.slug !== g.slug).slice(0, 6);
+  const body = `<div class="wrap">
+${crumbs(bc)}
+<div class="grid"><article>
+<div class="kicker">Government land site · ${esc(g.list)}</div>
+<h1>${esc(g.name)}</h1>
+<p class="sub">${esc(placeOf(g))} · District ${districtOf(g)} (${g.district.toUpperCase()})</p>
+<div class="badges"><span class="badge up">${esc(g.status)}</span><span class="badge">${esc(units)} homes</span><span class="badge">${g.areaHa} ha</span></div>
+<div class="answer"><p>${esc(lead)}</p></div>
+<p class="asof">Data as of ${AS_OF_LABEL}. Sources: URA and HDB.</p>
+<h2>Key facts</h2>
+<table class="facts"><tbody>
+${rows.map(([k, v]) => `<tr><th scope="row">${esc(k)}</th><td>${esc(v)}</td></tr>`).join('\n')}
+</tbody></table>
+${g.notes ? `<h2>What to know</h2><p>${esc(g.notes)}</p>` : ''}
+<h2>Sources</h2><ul class="links">${g.sources.map(x => `<li><a href="${esc(x.u)}" rel="noopener">${esc(x.t)}</a></li>`).join('')}</ul>
+<h2>Frequently asked questions</h2>
+<div class="faq">${faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('\n')}</div>
+<h2>Other land sites</h2>
+<ul class="links">${others.map(r => `<li><a href="${landPath(r)}">${esc(r.name)}</a><span>D${districtOf(r)} · ${esc(r.status)}</span></li>`).join('')}</ul>
+<p><a href="/new-launch-condos/#gls">All government land sites still to be sold →</a></p>
+</article>
+<aside class="side"><div class="card cta-card"><h3>Planning a purchase around new supply?</h3><p>Get an independent 30-minute review of what upcoming land sales mean for prices and timing in your target area. No obligation.</p><a class="btn" href="/contact/">Book a free consultation</a></div></aside>
+</div></div>`;
+  const schema = [
+    { '@context': 'https://schema.org', '@type': 'WebPage', '@id': url + '#webpage', url, name: title, description: desc, dateModified: AS_OF, inLanguage: 'en-SG', isPartOf: { '@type': 'WebSite', name: 'SellingSgProperty', url: SITE + '/' }, author: PERSON, about: { '@id': url + '#place' } },
+    { '@context': 'https://schema.org', '@type': 'Place', '@id': url + '#place', name: g.name, description: lead, address: { '@type': 'PostalAddress', streetAddress: placeOf(g), addressLocality: 'Singapore', addressRegion: 'District ' + districtOf(g), addressCountry: 'SG' } },
+    { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
+    crumbSchema(bc),
+  ];
+  return layout({ title, description: desc, canonical: url, body, schema, nav: 'launches' });
 }
 
 // ---------- hub ----------
@@ -287,14 +370,14 @@ function hubPage() {
   const by = y => sortForHub(projects.filter(p => p.year === y), y);
   const counts = Object.fromEntries(['2024', '2025', '2026', '2027'].map(y => [y, by(y).length]));
   const title = 'New Launch Condos Singapore 2026–2027: Full List & Launch Results';
-  const desc = clip(`All ${projects.length} Singapore new launch condos and ECs we track: ${counts['2027']} upcoming 2027 launches and ${counts['2026']} launched in 2026, with developer, units, launch date and average psf. Updated ${AS_OF_LABEL}.`, 158);
+  const desc = clip(`All ${projects.length} Singapore new launch condos and ECs we track: ${counts['2027']} upcoming, ${counts['2026']} launched in 2026, plus ${landSites.length} government land sites still to be sold. Developer, units, launch date and psf. Updated ${AS_OF_LABEL}.`, 158);
   const section = y => {
     const list = by(y);
     const head = y === '2027'
       ? '<tr><th>Project</th><th>District</th><th>Developer</th><th>Units</th><th>Expected launch</th></tr>'
       : '<tr><th>Project</th><th>District</th><th>Launched</th><th>Units</th><th>Avg psf</th></tr>';
     const rows = list.map(p => y === '2027'
-      ? `<tr><td><a href="${projectPath(p)}">${esc(p.name)}</a></td><td>D${districtOf(p)} ${segmentOf(p)}</td><td>${esc(p.developer.split(/\s*\(/)[0])}</td><td>${p.totalUnits.toLocaleString('en-US')}</td><td>${esc(p.launchShort || p.launchDate)}</td></tr>`
+      ? `<tr><td><a href="${projectPath(p)}">${esc(p.name)}</a></td><td>D${districtOf(p)} ${segmentOf(p)}</td><td>${esc(p.developer.split(/\s*\(/)[0])}</td><td>${unitsText(p) || 'TBC'}</td><td>${esc(p.launchShort || p.launchDate)}</td></tr>`
       : `<tr><td><a href="${projectPath(p)}">${esc(p.name)}</a></td><td>D${districtOf(p)} ${segmentOf(p)}</td><td>${esc(p.launchDate.replace(/\s*\(.*$/, ''))}</td><td>${p.totalUnits.toLocaleString('en-US')}</td><td>${p.avgPSF ? '$' + p.avgPSF.toLocaleString('en-US') : '—'}</td></tr>`).join('\n');
     return `<h2 id="y${y}">${YEAR_TAB[y]} (${list.length})</h2>
 <div class="tbl"><table><thead>${head}</thead><tbody>
@@ -305,10 +388,11 @@ ${rows}
 ${crumbs([['/', 'Home'], ['/new-launch-condos/', 'New Launch Condos']])}
 <div class="kicker">Updated ${AS_OF_LABEL}</div>
 <h1>New Launch Condos in Singapore (2024–2027)</h1>
-<div class="answer"><p>We track ${projects.length} Singapore new launch condos and ECs. ${counts['2027']} are expected to launch in 2027, ${counts['2026']} launched in 2026, ${counts['2025']} in 2025 and ${counts['2024']} in 2024. Each project page lists the developer, tenure, units, launch date, average price where published, expected TOP, nearest MRT and schools.</p></div>
+<div class="answer"><p>We track ${projects.length} Singapore new launch condos and ECs. ${counts['2027']} are upcoming (land sold or redevelopment confirmed, most expected from 2027), ${counts['2026']} launched in 2026, ${counts['2025']} in 2025 and ${counts['2024']} in 2024. Each project page lists the developer, tenure, units, launch date, average price where published, expected TOP, nearest MRT and schools.</p></div>
 <p class="asof">Upcoming launch dates come from developers where announced and from market reports otherwise; they are marked as estimates on each page. Average psf for launched projects is the developer-announced or reported launch average.</p>
-<div class="tabs"><a href="#y2027">Upcoming 2027</a><a href="#y2026">Launched in 2026</a><a href="#y2025">Launched in 2025</a><a href="#y2024">Launched in 2024</a></div>
+<div class="tabs"><a href="#y2027">Upcoming</a><a href="#y2026">Launched in 2026</a><a href="#y2025">Launched in 2025</a><a href="#y2024">Launched in 2024</a><a href="#gls">Land sites (GLS)</a></div>
 ${['2027', '2026', '2025', '2024'].map(section).join('\n')}
+${glsSection()}
 <div class="card cta-card" style="margin-top:30px"><h2>Not sure which launch fits your budget?</h2><p>A free 30-minute session covers affordability (TDSR, CPF, cash), timing your HDB sale, and how each shortlisted launch compares on price and location.</p><a class="btn" href="/contact/">Book a free consultation</a></div>
 </div>`;
   const schema = [
@@ -449,7 +533,7 @@ function heroPanel() {
                         <dl class="grid grid-cols-3 gap-4 mb-6">
                             <div><dt class="text-xs text-slate-400">Condos tracked</dt><dd class="heading-display text-4xl text-white mt-1">${projects.length}</dd></div>
                             <div><dt class="text-xs text-slate-400">Launched 2026</dt><dd class="heading-display text-4xl text-white mt-1">${n('2026')}</dd></div>
-                            <div><dt class="text-xs text-slate-400">Upcoming 2027</dt><dd class="heading-display text-4xl text-white mt-1">${n('2027')}</dd></div>
+                            <div><dt class="text-xs text-slate-400">Upcoming</dt><dd class="heading-display text-4xl text-white mt-1">${n('2027')}</dd></div>
                         </dl>
                         <div class="text-xs uppercase tracking-wider text-slate-400 mb-1">Latest launches</div>
                         <ul class="text-sm mb-5">${launched.map(p => row(p, `D${districtOf(p)} · ${mon(p)}`)).join('')}</ul>
@@ -470,12 +554,13 @@ function projectLastmod(p) {
 function sitemap() {
   const old = read('sitemap.xml').replace(/<!--[\s\S]*?-->/g, '');
   const keep = [...old.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(m => m[1])
-    .filter(u => !/\/insights|\/project\/|\/new-launch-condos/.test(u))
+    .filter(u => !/\/insights|\/project\/|\/new-launch-condos|\/land-sites\//.test(u))
     .map(u => u.replace(/<loc>(https:\/\/www\.sellingsgproperty\.com\/(?:about|contact|mortgage-calculator|deep-analysis\/arina-east-residences))<\/loc>/, '<loc>$1/</loc>'))
     .map(u => `  <url>${u.trim().replace(/\s*\n\s*/g, '\n    ').replace(/^/, '\n    ')}\n  </url>`);
   const entry = (loc, lastmod, pr) => `  <url>\n    <loc>${SITE}${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${pr}</priority>\n  </url>`;
   const add = [entry('/new-launch-condos/', AS_OF, '0.9'), entry('/insights/', AS_OF, '0.8')]
     .concat(projects.map(p => entry(projectPath(p), projectLastmod(p), isUpcoming(p) || p.year === '2026' ? '0.8' : '0.6')))
+    .concat(landSites.map(g => entry(landPath(g), AS_OF, '0.6')))
     .concat(sortedArticles.map(([k, a]) => entry(articlePath(k), isoDate(a.updated || a.date), '0.7')));
   return `<?xml version="1.0" encoding="UTF-8"?>\n<!-- Generated by scripts/build-pages.cjs on ${AS_OF}. Project and insights URLs are rebuilt on every run. -->\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${keep.join('\n')}\n${add.join('\n')}\n</urlset>\n`;
 }
@@ -483,7 +568,7 @@ function llms() {
   const old = read('llms.txt');
   const head = old.split(/\n## New Launch Projects/)[0].trimEnd();
   const tail = (old.split(/\n## Property Insights Articles[^\n]*\n/)[1] || '').split(/\n## /).slice(1).map(s => '## ' + s).join('\n');
-  const yearBlock = y => `### ${YEAR_TAB[y]}\n` + sortForHub(projects.filter(p => p.year === y), y).map(p => `- ${p.name} (D${districtOf(p)}, ${placeOf(p)}; ${p.totalUnits} units; ${isUpcoming(p) ? 'expected ' + (p.launchShort || '2027') : 'launched ' + p.launchDate.replace(/\s*\(.*$/, '')}): ${SITE}${projectPath(p)}${p.id === 31 ? CHUAN_LLMS : ''}`).join('\n');
+  const yearBlock = y => `### ${YEAR_TAB[y]}\n` + sortForHub(projects.filter(p => p.year === y), y).map(p => `- ${p.name} (D${districtOf(p)}, ${placeOf(p)}; ${unitsText(p) ? unitsText(p) + ' units' : 'units not announced'}; ${isUpcoming(p) ? 'expected launch: ' + (p.launchShort || 'not announced') : 'launched ' + p.launchDate.replace(/\s*\(.*$/, '')}): ${SITE}${projectPath(p)}${p.id === 31 ? CHUAN_LLMS : ''}`).join('\n');
   return `${head}
 
 ## New Launch Projects (2024–2027)
@@ -491,6 +576,10 @@ function llms() {
 Full list with launch results: ${SITE}/new-launch-condos/ (data as of ${AS_OF_LABEL})
 
 ${['2027', '2026', '2025', '2024'].map(yearBlock).join('\n\n')}
+
+## Government Land Sites Still To Be Sold (GLS)
+
+${landSites.map(g => `- ${g.name} (D${districtOf(g)}; ${g.list}; ${g.unitsNote ? g.unitsNote + ' ' : 'about '}${g.units} homes; ${g.status}): ${SITE}${landPath(g)}`).join('\n')}
 
 ## Property Insights Articles
 
@@ -507,6 +596,7 @@ for (const p of projects) {
   write(`project/${projectSlug(p)}/index.html`, projectPage(p)); built++;
 }
 write('new-launch-condos/index.html', hubPage());
+for (const g of landSites) write(`land-sites/${g.slug}/index.html`, landSitePage(g));
 for (const [k, a] of sortedArticles) write(`insights/${articleSlug(k)}/index.html`, articlePage(k, a));
 write('insights/index.html', insightsIndex());
 write('index.html', refreshHomepage(indexHtml));
