@@ -1,30 +1,77 @@
 {
-  "updated": "2026-11-13T01:55:16+08:00",
+  "updated": "2026-11-13T15:59:01+08:00",
   "sources": [
+    "AsiaOne",
+    "PropertyNet.SG",
+    "Singapore Business Review",
     "Stacked Homes",
     "EdgeProp.sg",
     "The Independent Singapore",
-    "Singapore Business Review",
     "联合早报",
     "99.co",
     "CNA",
     "The Straits Times",
     "DollarsAndSense.sg",
     "deeparrival.com",
-    "PropertyNet.SG",
     "Business Times",
     "Home & Decor Singapore",
-    "AsiaOne",
     "Borneo Bulletin",
-    "Real Estate Asia",
-    "Mingtiandi"
+    "Real Estate Asia"
   ],
   "items": [
+    {
+      "id": "nf9a0f7b4",
+      "title": "Car skids, ends up on grass verge near Tampines HDB block",
+      "date": "2026/11/13",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "AsiaOne",
+      "sourceNameZh": "亚洲新闻网",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/nf9a0f7b4/",
+      "description": "Car skids, ends up on grass verge near Tampines HDB block."
+    },
+    {
+      "id": "n40c3e25d",
+      "title": "What $1M Buys in HDB Resale 2026: An Executive in 15 Towns, a 5-Room in 5",
+      "date": "2026/11/13",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "PropertyNet.SG",
+      "sourceNameZh": "PropertyNet.SG",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n40c3e25d/",
+      "description": "What $1M Buys in HDB Resale 2026: An Executive in 15 Towns, a 5-Room in 5."
+    },
+    {
+      "id": "n615c645e",
+      "title": "'No family, no neighbours': Volunteer finds senior dead alone in Toa Payoh HDB rental flat",
+      "date": "2026/11/13",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "AsiaOne",
+      "sourceNameZh": "亚洲新闻网",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n615c645e/",
+      "description": "'No family, no neighbours': Volunteer finds senior dead alone in Toa Payoh HDB rental flat."
+    },
+    {
+      "id": "n9d207b45",
+      "title": "Location, growth prospects drive strongest BTO demand since 2022",
+      "date": "2026/11/13",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Singapore Business Review",
+      "sourceNameZh": "新加坡商业评论",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n9d207b45/",
+      "description": "Location, growth prospects drive strongest BTO demand since 2022."
+    },
     {
       "id": "n41ef7a07",
       "title": "We Review The February 2027 BTO Launch Sites (Bishan, Tampines, Toa Payoh & Tengah)",
       "date": "2026/11/12",
-      "image": "/news/images/placeholder.svg",
+      "image": "/news/images/n41ef7a07.jpg",
       "sourceName": "Stacked Homes",
       "sourceNameZh": "Stacked Homes",
       "sourceFeed": "google-news",
@@ -583,54 +630,6 @@
       "category": "Real estate",
       "path": "/news/9789/",
       "description": "Two Tiong Bahru HDB blocks will get HIP after a fresh poll. What owners pay for, and what resale buyers should still check."
-    },
-    {
-      "id": "9788",
-      "title": "Tampines is S’pore’s most populous planning area, but not its fastest-growing",
-      "date": "2026/10/29",
-      "image": "/news/images/9788.jpg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9788/",
-      "description": "Tampines has the most people of any planning area, but Punggol and Sengkang grew faster. How to choose a mature town or a growing one."
-    },
-    {
-      "id": "9787",
-      "title": "About 11,000 homes planned on Maju Forest, Gillman Barracks sites with more greenery to be retained",
-      "date": "2026/10/29",
-      "image": "/news/images/9787.jpg",
-      "sourceName": "Business Times",
-      "sourceNameZh": "商业时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9787/",
-      "description": "About 11,000 homes are planned at Maju Forest and Gillman Barracks, including 9,500 public homes. What nearby buyers and sellers should treat as a long-term."
-    },
-    {
-      "id": "n4d41823c",
-      "title": "Bukit Sembawang Plans Central Singapore Condo Project After $153M Site Buy",
-      "date": "2026/10/27",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Mingtiandi",
-      "sourceNameZh": "Mingtiandi",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n4d41823c/",
-      "description": "Bukit Sembawang plans a central Singapore condo after a $153 million site buy. That number is land cost, not a unit price."
-    },
-    {
-      "id": "n0fa68d88",
-      "title": "HDB resale prices dipped 0.1% in Q3; more flats sold after 15-month wait-out period lifted",
-      "date": "2026/10/23",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n0fa68d88/",
-      "description": "HDB resale prices dipped 0.1% in Q3; more flats sold after 15-month wait-out period lifted."
     }
   ]
 }
