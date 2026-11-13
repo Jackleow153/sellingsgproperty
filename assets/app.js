@@ -306,8 +306,8 @@
             }
             
             if (['2024', '2025', '2026', '2027'].includes(currentFilter)) filtered = filtered.filter(p => p.year === currentFilter)
-            else if (currentFilter === 'ccr') filtered = filtered.filter(p => p.district === 'ccr')
-            else if (currentFilter === 'family') filtered = filtered.filter(p => p.bedrooms.some(b => b >= 3))
+            else if (['ccr', 'rcr', 'ocr'].includes(currentFilter)) filtered = filtered.filter(p => p.district === currentFilter)
+            else if (currentFilter === 'ec') filtered = filtered.filter(p => /Executive/i.test(p.type))
             
             filtered = filtered.slice()
             // Projects without released prices sort to the end for price/psf sorts
@@ -349,7 +349,7 @@
                 el.classList.remove('filter-active', 'border-violet-700', 'bg-violet-50')
                 el.classList.add('border-slate-300')
                 
-                if ((filterType === 'all' && el.dataset.filter === 'all') || (['2024', '2025', '2026', '2027', 'gls'].includes(filterType) && el.dataset.filter === filterType) || (filterType === 'ccr' && el.dataset.filter === 'ccr') || (filterType === 'family' && el.dataset.filter === 'family')) {
+                if (el.dataset.filter === filterType) {
                     el.classList.add('filter-active', 'border-violet-700', 'bg-violet-50')
                     el.classList.remove('border-slate-300')
                 }
