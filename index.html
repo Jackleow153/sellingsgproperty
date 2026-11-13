@@ -85,7 +85,7 @@
 
   <!-- (Article schema moved to end of body for better initial render performance while keeping SEO value) -->
 
-    <link rel="stylesheet" href="/assets/home.css?v=b58a20af">
+    <link rel="stylesheet" href="/assets/home.css?v=20a916e8">
     <!-- Brand fonts, self-hosted (@font-face lives in /assets/home.css) -->
     <link rel="preload" href="/assets/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/fonts/marcellus-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -514,22 +514,22 @@
                 </div>
             </div>
             
-            <!-- Quick Filters -->
-            <div class="flex flex-wrap gap-2 mb-6">
-                <div onclick="applyQuickFilter('all')" class="quick-filter px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer active-filter" data-filter="all">All Projects</div>
-                <div onclick="applyQuickFilter('2024')" class="quick-filter px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="2024">Launched in 2024</div>
-                <div onclick="applyQuickFilter('2025')" class="quick-filter px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="2025">Launched in 2025</div>
-                <div onclick="applyQuickFilter('2026')" class="quick-filter px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="2026">Launched in 2026</div>
-                <div onclick="applyQuickFilter('2027')" class="quick-filter px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="2027">Upcoming 2027+</div>
-                <div onclick="applyQuickFilter('gls')" class="quick-filter px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="gls">Land sites (GLS)</div>
-                <div onclick="applyQuickFilter('ccr')" class="quick-filter px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="ccr">Core Central (CCR)</div>
-                <div onclick="applyQuickFilter('rcr')" class="quick-filter px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="rcr">Rest of Central (RCR)</div>
-                <div onclick="applyQuickFilter('ocr')" class="quick-filter px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="ocr">Outside Central (OCR)</div>
-                <div onclick="applyQuickFilter('ec')" class="quick-filter px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="ec">Executive Condo (EC)</div>
-                <div onclick="applyQuickFilter('mall')" class="quick-filter px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="mall">Integrated with mall</div>
-                <div onclick="applyQuickFilter('u-s')" class="quick-filter px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="u-s">Under 500 units</div>
-                <div onclick="applyQuickFilter('u-m')" class="quick-filter px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="u-m">500–999 units</div>
-                <div onclick="applyQuickFilter('u-l')" class="quick-filter px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="u-l">1,000+ units</div>
+            <!-- Quick Filters: one swipeable row on mobile, wrapped rows from sm up -->
+            <div id="quick-filters" class="no-scrollbar flex flex-nowrap gap-2 mb-6 -mx-8 px-8 overflow-x-auto overscroll-x-contain sm:flex-wrap sm:mx-0 sm:px-0 sm:overflow-visible">
+                <div onclick="applyQuickFilter('all')" class="quick-filter shrink-0 whitespace-nowrap px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer active-filter" data-filter="all">All Projects</div>
+                <div onclick="applyQuickFilter('2024')" class="quick-filter shrink-0 whitespace-nowrap px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="2024">Launched in 2024</div>
+                <div onclick="applyQuickFilter('2025')" class="quick-filter shrink-0 whitespace-nowrap px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="2025">Launched in 2025</div>
+                <div onclick="applyQuickFilter('2026')" class="quick-filter shrink-0 whitespace-nowrap px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="2026">Launched in 2026</div>
+                <div onclick="applyQuickFilter('2027')" class="quick-filter shrink-0 whitespace-nowrap px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="2027">Upcoming 2027+</div>
+                <div onclick="applyQuickFilter('gls')" class="quick-filter shrink-0 whitespace-nowrap px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="gls">Land sites (GLS)</div>
+                <div onclick="applyQuickFilter('ccr')" class="quick-filter shrink-0 whitespace-nowrap px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="ccr">Core Central (CCR)</div>
+                <div onclick="applyQuickFilter('rcr')" class="quick-filter shrink-0 whitespace-nowrap px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="rcr">Rest of Central (RCR)</div>
+                <div onclick="applyQuickFilter('ocr')" class="quick-filter shrink-0 whitespace-nowrap px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="ocr">Outside Central (OCR)</div>
+                <div onclick="applyQuickFilter('ec')" class="quick-filter shrink-0 whitespace-nowrap px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="ec">Executive Condo (EC)</div>
+                <div onclick="applyQuickFilter('mall')" class="quick-filter shrink-0 whitespace-nowrap px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="mall">Integrated with mall</div>
+                <div onclick="applyQuickFilter('u-s')" class="quick-filter shrink-0 whitespace-nowrap px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="u-s">Under 500 units</div>
+                <div onclick="applyQuickFilter('u-m')" class="quick-filter shrink-0 whitespace-nowrap px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="u-m">500–999 units</div>
+                <div onclick="applyQuickFilter('u-l')" class="quick-filter shrink-0 whitespace-nowrap px-5 py-1.5 text-xs font-medium border border-slate-300 hover:border-violet-400 rounded-3xl cursor-pointer" data-filter="u-l">1,000+ units</div>
             </div>
             
             <!-- Projects Grid -->
@@ -6395,7 +6395,7 @@ function toggleAmortization(){
         </div>
     </div>
 
-        <script src="/assets/app.js?v=8aac97b8"></script>
+        <script src="/assets/app.js?v=5cf9bd3c"></script>
 <footer class="bg-white border-t py-10 text-xs text-slate-600">
         <div class="max-w-screen-2xl mx-auto px-8">
             <div class="max-w-6xl space-y-3 leading-relaxed">

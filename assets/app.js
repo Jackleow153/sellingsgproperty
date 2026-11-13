@@ -356,6 +356,12 @@
                 if (el.dataset.filter === filterType) {
                     el.classList.add('filter-active', 'border-violet-700', 'bg-violet-50')
                     el.classList.remove('border-slate-300')
+                    // Mobile: centre the chosen tab in the swipeable row (no vertical page jump)
+                    const row = el.parentElement
+                    if (row && row.scrollWidth > row.clientWidth) {
+                        const er = el.getBoundingClientRect(), rr = row.getBoundingClientRect()
+                        row.scrollTo({ left: row.scrollLeft + er.left - rr.left - (rr.width - er.width) / 2, behavior: 'smooth' })
+                    }
                 }
             })
             
