@@ -559,6 +559,7 @@ const CA = (() => {
   const markup = src.replace(/<style>[\s\S]*?<\/style>\s*/, '').replace(/\s*<script>[\s\S]*?<\/script>/, '');
   const nl = JSON.parse(js.match(/const NL = (\{.*\});\n/)[1]);
   const data = JSON.parse(js.match(/const DATA = (\{.*\});\n/)[1]);
+  const vstat = JSON.parse(js.match(/const VSTAT = (\{.*\});\n/)[1]);
   const norm = t => String(t).toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z0-9]/g, '');
   const up = sortForHub(projects.filter(isUpcoming), '2027');
   const lByName = new Map(nl.L.map(l => [norm(l.name), l]));
@@ -582,7 +583,7 @@ const CA = (() => {
   files.set('mall-condo-study', { kind: 'study' });
   const analysisOf = new Map([...files].filter(([, f]) => f.p && f.kind !== 'upcoming-basic').map(([id, f]) => [f.p.id, id]));
   const cssV = crypto.createHash('sha1').update(css).digest('hex').slice(0, 8), jsV = crypto.createHash('sha1').update(js).digest('hex').slice(0, 8);
-  return { css, js, cssV, jsV, markup, nl, data, files, analysisOf, up, launched };
+  return { css, js, cssV, jsV, markup, nl, data, vstat, files, analysisOf, up, launched };
 })();
 const caPath = id => id === 'home' ? '/condo-analysis/' : `/condo-analysis/${id}/`;
 const caIndexable = f => !['upcoming-basic', 'study'].includes(f.kind);
@@ -602,7 +603,7 @@ function caStatic(id, f) {
   if (f.kind === 'launched') {
     const p = f.p;
     return `${back}<h1>${esc(p.name)}</h1><p>${esc(placeOf(p))} · District ${districtOf(p)} (${segmentOf(p)}) · ${esc(p.developer.replace(/\s*\((?:entity|entities)[^)]*\)/i, ''))}</p>
-<p>${esc(shortName(p))} launched in ${esc(p.launchDate.replace(/\s*\(.*$/, ''))}${p.avgPSF ? ` at a reported average of about $${p.avgPSF.toLocaleString('en-US')} psf` : ''}. Units left and current prices are being verified against dated sources.</p>${tools}${fs.existsSync(path.join(ROOT, 'deep-analysis', projectSlug(p), 'index.html')) ? `<p><a href="/deep-analysis/${projectSlug(p)}/">Read the full written review of ${esc(p.name)}</a></p>` : ''}
+<p>${esc(shortName(p))} launched in ${esc(p.launchDate.replace(/\s*\(.*$/, ''))}${p.avgPSF ? ` at a reported average of about $${p.avgPSF.toLocaleString('en-US')} psf` : ''}. ${CA.vstat[id] ? `Sales status: ${esc(CA.vstat[id].line)} (${esc(CA.vstat[id].asOf)}). ${esc(CA.vstat[id].note)}` : 'Units left and current prices are being verified against dated sources.'}</p>${tools}${fs.existsSync(path.join(ROOT, 'deep-analysis', projectSlug(p), 'index.html')) ? `<p><a href="/deep-analysis/${projectSlug(p)}/">Read the full written review of ${esc(p.name)}</a></p>` : ''}
 <ul>${li([['Homes', p.totalUnits ? p.totalUnits.toLocaleString('en-US') : ''], ['Tenure', p.tenure], ['Completion', p.top], ['Nearest MRT', p.distanceMRT || p.mrt]])}</ul><p><a href="${projectPath(p)}">Project page with FAQs</a></p>`;
   }
   if (f.kind === 'upcoming' || f.kind === 'upcoming-basic') {

@@ -457,7 +457,9 @@ const CONDOS = [{id: 'home', name: 'Browse all condos', also_known_as: 'new laun
   ...NL.U.map(x => ({id: x.id, name: x.name, also_known_as: x.dev + ' ' + (x.alias || ''), area: x.where, nearest_mrt: x.mrt, district: '', coverage: x.basic ? 'Upcoming project' : 'Upcoming: land bids'}))];
 const UP = Object.fromEntries(NL.U.map(x => [x.id, x]));
 /* Launched projects on the main site that have no scored file yet: post-launch files. */
-const LB = (SITE.launched || []).map(s => ({...s, id: s.slug, reg: (s.reg || '').toUpperCase(), soldOut: /sold out/i.test((NL.REF[s.slug] || {}).name || '')}));
+/* Verified sales status for post-launch condos without a full scored file (dated, sourced). */
+const VSTAT = {"emerald-of-katong":{"line":"2 of 846","asOf":"Sep 2026","soldPct":99.8,"note":"844 of 846 units sold; 835 went on the launch weekend of 16 Nov 2024. New sales so far average about $2,640 psf (CondoWatch, from URA caveats).","src":[["Pricevero (checked 16 Oct 2026)","https://www.pricevero.com/condo/emerald-of-katong/"],["CondoWatch","https://condowatch.sg/condo/emerald-of-katong"]]}};
+const LB = (SITE.launched || []).map(s => ({...s, id: s.slug, reg: (s.reg || '').toUpperCase(), soldOut: /sold out/i.test((NL.REF[s.slug] || {}).name || ''), v: VSTAT[s.slug] || null}));
 const LBA = Object.fromEntries(LB.map(x => [x.id, x]));
 CONDOS.push(...LB.map(x => ({id: x.id, name: x.name, also_known_as: x.dev, area: x.where, nearest_mrt: x.mrt || '', district: '', coverage: 'Post-launch file'})));
 const norm = s => s.toLowerCase().replace(/@/g, 'at').replace(/[^a-z0-9 ]/g, ' ').replace(/\bthe\b/g, ' ').replace(/\s+/g, ' ').trim();
@@ -803,7 +805,7 @@ function unitList(x) { return x.fp.filter(inStock).filter(r => priceOf(r[3])).so
 const REGNAME = {CCR: 'prime city (CCR)', RCR: 'city fringe (RCR)', OCR: 'suburbs (OCR)'};
 function regionRows(reg) {
   return [...NL.L.map(x => { const d = derive(x); return {id: x.id, name: x.name, reg: d.reg, psf: x.avgPsf, from: d.min, sold: x.soldPct + '%', score: overall(x), status: 'Selling now'}; }),
-    ...LB.map(x => ({id: x.id, name: x.name, reg: x.reg, psf: x.avgPSF, from: x.startingPrice, sold: x.soldOut ? 'Sold out' : 'Being verified', score: null, status: 'Post-launch'}))]
+    ...LB.map(x => ({id: x.id, name: x.name, reg: x.reg, psf: x.avgPSF, from: x.startingPrice, sold: x.soldOut ? 'Sold out' : x.v ? x.v.soldPct + '%' : 'Being verified', score: null, status: 'Post-launch'}))]
     .filter(r => r.reg === reg && r.psf).sort((a, b) => a.psf - b.psf);
 }
 function regionHTML(id, reg) {
@@ -1053,7 +1055,7 @@ function cardHTML(it) {
     <p class="pnote"><b>Expected launch:</b> ${x.launch}</p>`;
   } else if (it.kind === 'launched') {
     body = `<dl class="pstats">${cell('Launch price', x.avgPSF ? `${money(x.avgPSF)} <small>psf</small>` : 'n/a', '<div class="sub">average, as reported</div>')}${x.startingPrice ? cell('From', moneyK(x.startingPrice), '<div class="sub">at launch, as reported</div>') : cell('Completion', (String(x.top || '').match(/20\d\d/) || ['TBC'])[0], '<div class="sub">expected</div>')}${cell('Homes', x.units ? comma(x.units) : 'n/a')}${cell('Launched', x.launchShort || 'n/a')}</dl>
-    <p class="pnote"><b>Units left:</b> ${x.soldOut ? 'sold out' : 'being verified'}</p>`;
+    <p class="pnote"><b>Units left:</b> ${x.soldOut ? 'sold out' : x.v ? `${x.v.line} (${x.v.asOf})` : 'being verified'}</p>`;
   } else {
     body = `<dl class="pstats">${cell('Average price', `${money(x.psf)} <small>psf</small>`)}${cell('Gain a year', x.gain != null ? x.gain + '%' : 'n/a')}${cell('3-bed about', x.q3 ? moneyK(x.q3) : 'n/a')}${cell('Completed', x.top || 'n/a')}</dl>
     <p class="pnote">${it.id === 'panorama' ? it.line : `Resale benchmark${x.km ? ` · ${x.km} km from The Panorama` : ''}`}</p>`;
@@ -1151,9 +1153,9 @@ function renderLaunchedBasic(id) {
   const units = x.startingPrice ? [[`Cheapest unit at launch (reported), ${moneyK(x.startingPrice)}`, x.startingPrice, null]] : [];
   if (x.avgPSF) units.push([`A 1,000 sq ft unit at the average launch price, ${moneyK(x.avgPSF * 1000)}`, x.avgPSF * 1000, 1000]);
   w.innerHTML = `<p class="small" style="margin-top:16px"><a href="#home">← All condos</a></p>
-  <div class="hero" style="padding-top:8px"><div><div class="eyebrow">Post-launch file · units left being verified</div><h1>${x.name}</h1><p class="sub">${x.where} · ${x.dev} · <a href="/project/${x.slug}/">Project page</a></p>
+  <div class="hero" style="padding-top:8px"><div><div class="eyebrow">Post-launch file · ${x.v ? 'sales status verified ' + x.v.asOf : x.soldOut ? 'sold out' : 'units left being verified'}</div><h1>${x.name}</h1><p class="sub">${x.where} · ${x.dev} · <a href="/project/${x.slug}/">Project page</a></p>
     <div class="pillrow"><span class="pill brown">${(REGNAME[x.reg] || x.reg).replace(/^./, c => c.toUpperCase())}</span>${x.units ? `<span class="pill">${comma(x.units)} homes</span>` : ''}<span class="pill">${x.tenure || 'Tenure not stated'}</span><span class="pill">Launched ${x.launchShort || x.launchDate}</span>${x.ec ? '<span class="pill brown">Executive condo</span>' : ''}</div></div>
-    <div class="verdict"><div class="eyebrow">Research status</div><h3>${x.soldOut ? 'Reported sold out' : 'Units left are being verified'}</h3><p>${x.soldOut ? 'Sources report every unit sold, so new buyers can only buy on the resale market after completion.' : 'Units left, today\'s prices and a comparison with nearby resale condos are being checked against dated sources and added in batches.'} The figures below are as reported at launch.</p></div></div>
+    <div class="verdict"><div class="eyebrow">Research status</div><h3>${x.soldOut ? 'Reported sold out' : x.v ? `Nearly sold out: ${x.v.line} left (${x.v.asOf})` : 'Units left are being verified'}</h3><p>${x.soldOut ? 'Sources report every unit sold, so new buyers can only buy on the resale market after completion.' : x.v ? `${x.v.note} With so few units left, most buyers will be choosing between the last units and resale after completion.` : 'Units left, today\'s prices and a comparison with nearby resale condos are being checked against dated sources and added in batches.'} ${x.v ? 'Other figures below are as reported at launch.' : 'The figures below are as reported at launch.'}</p>${x.v ? `<p class="small muted">Sources: ${x.v.src.map(a => `<a href="${a[1]}" target="_blank" rel="noopener">${a[0]}</a>`).join(' · ')}</p>` : ''}</div></div>
   <div class="keystrip">${k('Launch price', x.avgPSF ? money(x.avgPSF) + ' psf' : 'Not published', 'Average, as reported')}${x.startingPrice ? k('From', moneyK(x.startingPrice), 'At launch, as reported') : ''}${k('Homes', x.units ? comma(x.units) : 'n/a', '')}${k('Completion', String(x.top || 'TBC').replace(/\s*\(.*\)/, ''), '')}${k('Nearest MRT', x.mrt ? x.mrt.split(/[(,]/)[0].trim() : 'n/a', x.distanceMRT || '')}</div>
   ${x.review ? `<div class="inshort" style="margin-top:14px;max-width:none"><span class="eyebrow">Written review</span><p>Our full review of ${x.name} covers the verdict, quick facts, the case for and against, and who it suits: <a href="${x.review}">read the ${x.name} review →</a></p></div>` : ''}
   ${mallNote(id)}
