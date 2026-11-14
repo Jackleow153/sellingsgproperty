@@ -9,6 +9,7 @@
  *   1. Still marked "Upcoming 2027" although its expected launch month has arrived.
  *   2. Launched in the last 6 months but no launch result (units sold) recorded.
  *   3. Hand-built page not updated since its project launched (JSON-LD dateModified).
+ *   4. Launched project with no Condo Analysis score (data/condo-analysis.html: NL.L or XSCORE).
  * Run by .github/workflows/check-launches.yml, which opens/updates a GitHub issue when
  * anything is flagged. See CLAUDE.md "Project data rules" for how to fix each one.
  */
@@ -31,11 +32,15 @@ if (a < 0 || b < 0) throw new Error('projects array not found in assets/app.js')
 // eslint-disable-next-line no-new-func
 const projects = new Function(js.slice(a, b) + '\nreturn projects;')();
 
-const upcomingDue = [], noResult = [], staleHandbuilt = [];
+const ca = read('data/condo-analysis.html');
+const norm = t => String(t).toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z0-9]/g, '');
+const scored = new Set([...JSON.parse(ca.match(/const NL = (\{.*\});\n/)[1]).L.map(l => norm(l.name)), ...Object.values(JSON.parse(ca.match(/const XSCORE = (\{.*\});\n/)[1])).map(x => norm(x.name))]);
+const upcomingDue = [], noResult = [], staleHandbuilt = [], noScore = [];
 const hasResult = p => /\bsold\b|take-up|taken up/i.test(JSON.stringify(p));
 for (const p of projects) {
   if (p.year === '2027' && p.launchSort <= NOW) upcomingDue.push(`- **${p.name}** (id ${p.id}): expected ${p.launchShort || label(p.launchSort)}, still marked Upcoming.`);
   if (p.year !== '2027' && p.launchSort >= sixMonthsAgo && p.launchSort <= NOW && !hasResult(p)) noResult.push(`- **${p.name}** (id ${p.id}): launched ${p.launchDate}, no units-sold figure recorded.`);
+  if (p.year !== '2027' && !scored.has(norm(p.name))) noScore.push(`- **${p.name}** (id ${p.id}): launched ${p.launchDate}, no Condo Analysis score yet.`);
   if (HANDBUILT[p.id] && p.year !== '2027') {
     const f = `project/${HANDBUILT[p.id]}/index.html`;
     const m = read(f).match(/"dateModified":\s*"(\d{4})-(\d{2})-\d{2}"/);
@@ -48,6 +53,7 @@ const sections = [
   ['Launch month reached but still marked Upcoming 2027', 'Move the project to its launch year in `assets/app.js` and add the verified launch result.', upcomingDue],
   ['Recent launches without a recorded result', 'Add the launch result (date, units sold, average psf, source) to the project in `assets/app.js`.', noResult],
   ['Hand-built pages not updated since launch', 'Update the page with the launch result, add dated notes to related articles, and bump `dateModified`.', staleHandbuilt],
+  ['Launched projects without a Condo Analysis score', 'Score it with the written rules: a full file in `NL.L` if units are still selling, otherwise an `XSCORE` record. Verify every fact with a second source (CLAUDE.md, Before you push).', noScore],
 ].filter(([, , items]) => items.length);
 
 if (sections.length) {

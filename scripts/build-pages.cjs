@@ -560,6 +560,7 @@ const CA = (() => {
   const nl = JSON.parse(js.match(/const NL = (\{.*\});\n/)[1]);
   const data = JSON.parse(js.match(/const DATA = (\{.*\});\n/)[1]);
   const vstat = JSON.parse(js.match(/const VSTAT = (\{.*\});\n/)[1]);
+  const xscore = JSON.parse(js.match(/const XSCORE = (\{.*\});\n/)[1]);
   const norm = t => String(t).toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z0-9]/g, '');
   const up = sortForHub(projects.filter(isUpcoming), '2027');
   const lByName = new Map(nl.L.map(l => [norm(l.name), l]));
@@ -583,10 +584,12 @@ const CA = (() => {
   files.set('mall-condo-study', { kind: 'study' });
   const analysisOf = new Map([...files].filter(([, f]) => f.p && f.kind !== 'upcoming-basic').map(([id, f]) => [f.p.id, id]));
   const cssV = crypto.createHash('sha1').update(css).digest('hex').slice(0, 8), jsV = crypto.createHash('sha1').update(js).digest('hex').slice(0, 8);
-  return { css, js, cssV, jsV, markup, nl, data, vstat, files, analysisOf, up, launched };
+  return { css, js, cssV, jsV, markup, nl, data, vstat, xscore, files, analysisOf, up, launched };
 })();
 const caPath = id => id === 'home' ? '/condo-analysis/' : `/condo-analysis/${id}/`;
 const caIndexable = f => !['upcoming-basic', 'study'].includes(f.kind);
+const caOv = id => CA.xscore[id] ? (Object.values(CA.xscore[id].scores).reduce((a, v) => a + v[0], 0) / 5).toFixed(1) : null;
+const caScoreText = id => { const x = CA.xscore[id]; if (!x) return ''; return `<p><strong>Overall score ${caOv(id)} out of 10.</strong> ${esc(x.verdict)}. ${esc(x.why)}</p><h2>Scores</h2><ul>${[['loc', 'Location'], ['entry', 'Entry price'], ['exit', 'Exit plan'], ['food', 'Nearby food'], ['mrt', 'MRT closeness']].map(([k, n]) => `<li><strong>${n}: ${x.scores[k][0]}/10.</strong> ${esc(x.scores[k][1])}</li>`).join('')}</ul>`; };
 function caStatic(id, f) {
   const li = rows => rows.filter(r => r[1]).map(([k, v]) => `<li><strong>${esc(k)}:</strong> ${esc(v)}</li>`).join('');
   const srcs = list => list && list.length ? `<p class="small muted">Sources: ${list.map(a => `<a href="${esc(a[1])}" rel="noopener">${esc(a[0])}</a>`).join(' · ')}</p>` : '';
@@ -604,7 +607,7 @@ function caStatic(id, f) {
     const p = f.p;
     return `${back}<h1>${esc(p.name)}</h1><p>${esc(placeOf(p))} · District ${districtOf(p)} (${segmentOf(p)}) · ${esc(p.developer.replace(/\s*\((?:entity|entities)[^)]*\)/i, ''))}</p>
 <p>${esc(shortName(p))} launched in ${esc(p.launchDate.replace(/\s*\(.*$/, ''))}${p.avgPSF ? ` at a reported average of about $${p.avgPSF.toLocaleString('en-US')} psf` : ''}. ${CA.vstat[id] ? `Sales status: ${esc(CA.vstat[id].line)}${CA.vstat[id].out ? '' : ' left'}${CA.vstat[id].early ? ' (mostly unsold)' : ''} (${esc(CA.vstat[id].asOf)}). ${esc(CA.vstat[id].note)}` : 'Units left and current prices are being verified against dated sources.'}</p>${tools}${fs.existsSync(path.join(ROOT, 'deep-analysis', projectSlug(p), 'index.html')) ? `<p><a href="/deep-analysis/${projectSlug(p)}/">Read the full written review of ${esc(p.name)}</a></p>` : ''}
-<ul>${li([['Homes', p.totalUnits ? p.totalUnits.toLocaleString('en-US') : ''], ['Tenure', p.tenure], ['Completion', p.top], ['Nearest MRT', p.distanceMRT || p.mrt]])}</ul><p><a href="${projectPath(p)}">Project page with FAQs</a></p>`;
+${caScoreText(id)}<ul>${li([['Homes', p.totalUnits ? p.totalUnits.toLocaleString('en-US') : ''], ['Tenure', p.tenure], ['Completion', p.top], ['Nearest MRT', p.distanceMRT || p.mrt]])}</ul><p><a href="${projectPath(p)}">Project page with FAQs</a></p>`;
   }
   if (f.kind === 'upcoming' || f.kind === 'upcoming-basic') {
     const p = f.p, x = f.x || {};
@@ -612,8 +615,8 @@ function caStatic(id, f) {
 <p>Upcoming project, not launched yet. Expected launch: ${esc(p.launchShort || 'not announced')}.${p.landCost ? ` Land cost: ${esc(p.landCost)}.` : ''}${x.bids ? ` ${x.bids} bids at the land tender.` : ''}</p>
 ${x.notes ? `<ul>${x.notes.map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}${srcs(x.src)}<p><a href="${projectPath(p)}">Project page with FAQs</a></p>`;
   }
-  if (f.kind === 'panorama') return `${back}<h1>The Panorama</h1><p>Ang Mo Kio Avenue 2, D20. A 698-home, 99-year condo completed in 2017.</p><p>Full case study: 3-bedroom price and profit year by year since 2014, whether Mayflower MRT pushed prices up, who buys from owners, an HDB upgrader affordability calculator, and nearby competitors.</p>`;
-  if (f.kind === 'resale') { const c = f.x; return `${back}<h1>${esc(c.name)}</h1><p>${esc(c.area)}, ${esc(c.district)} · ${esc(c.tenure)} · completed ${esc(c.top)}${c.units ? ` · ${esc(c.units)} homes` : ''}</p><p>Resale comparison against The Panorama, with an HDB upgrader affordability calculator and a break-even resale price calculator.</p>`; }
+  if (f.kind === 'panorama') return `${back}<h1>The Panorama</h1><p>Ang Mo Kio Avenue 2, D20. A 698-home, 99-year condo completed in 2017.</p><p>Full case study: 3-bedroom price and profit year by year since 2014, whether Mayflower MRT pushed prices up, who buys from owners, an HDB upgrader affordability calculator, and nearby competitors.</p>${caScoreText(id)}`;
+  if (f.kind === 'resale') { const c = f.x; return `${back}<h1>${esc(c.name)}</h1><p>${esc(c.area)}, ${esc(c.district)} · ${esc(c.tenure)} · completed ${esc(c.top)}${c.units ? ` · ${esc(c.units)} homes` : ''}</p><p>Resale comparison against The Panorama, with an HDB upgrader affordability calculator and a break-even resale price calculator.</p>${caScoreText(id)}`; }
   return `${back}<h1>Do condos with a mall make more profit?</h1><p>8 integrated mall condos compared with 20 nearby condos of similar size. Full write-up: <a href="/insights/integrated-mall-condo-returns-2026/">Do Integrated Condos With a Mall Make More Profit?</a></p>`;
 }
 function caMeta(id, f) {
@@ -621,9 +624,11 @@ function caMeta(id, f) {
   const fit = list => list.find(t => t.length <= 65) || list[list.length - 1];
   if (f.kind === 'selling') { const x = f.x, ov = (Object.values(x.scores).reduce((a, v) => a + v[0], 0) / 5).toFixed(1);
     return { title: fit([`${x.name} Analysis: Score ${ov}/10, Prices & Break-even`, `${x.name} Analysis: Score ${ov}/10 & Prices`, `${x.name} Analysis | Condo Analysis`]), desc: clip(`${x.name}: ${x.verdict}. Scored ${ov}/10; ${x.sold}. Units left by type, an HDB upgrader affordability check and the resale price you need to break even.`, 158) }; }
+  if (f.kind === 'launched' && caOv(id)) return { title: fit([`${nm} Analysis: Score ${caOv(id)}/10, Affordability & Break-even`, `${nm} Analysis: Score ${caOv(id)}/10 & Calculators`, `${nm} Analysis: Score ${caOv(id)}/10`]), desc: clip(`${nm}: ${CA.xscore[id].verdict}. Scored ${caOv(id)}/10 on location, entry price, exit plan, food and MRT, with affordability and break-even calculators.`, 158) };
   if (f.kind === 'launched') return { title: fit([`${nm} Analysis: Affordability & Break-even Price`, `${nm} Analysis & Calculators`, `${nm} | Condo Analysis`]), desc: clip(`${nm}: launched ${f.p.launchDate.replace(/\s*\(.*$/, '')}${f.p.avgPSF ? ` at about $${f.p.avgPSF.toLocaleString('en-US')} psf (reported)` : ''}. Check if an HDB upgrader can afford it, the resale price you need to break even, and how it compares in its region.`, 158) };
   if (f.kind === 'upcoming' || f.kind === 'upcoming-basic') return { title: fit([`${nm}: Land Bid & Expected Price Analysis`, `${nm}: Land Bid Analysis`, `${nm} | Condo Analysis`]), desc: clip(`${nm}: upcoming project. Land price, bids, expected launch price range and launch timing, with sources.${f.p.launchShort ? ' Expected launch: ' + f.p.launchShort + '.' : ''}`, 158) };
   if (f.kind === 'panorama') return { title: 'The Panorama Condo: Price History, MRT Effect & Calculator', desc: 'The Panorama (Ang Mo Kio): 3-bedroom profit year by year since 2014, the Mayflower MRT effect, an HDB upgrader affordability calculator and nearby competitors.' };
+  if (f.kind === 'resale' && caOv(id)) return { title: fit([`${nm}: Score ${caOv(id)}/10, Resale Comparison & Calculators`, `${nm}: Score ${caOv(id)}/10, Resale Analysis`, `${nm} Analysis: Score ${caOv(id)}/10`]), desc: clip(`${nm} (${f.x.area}, ${f.x.district}): ${CA.xscore[id].verdict}. Scored ${caOv(id)}/10 against nearby resale condos, with affordability and break-even calculators.`, 158) };
   if (f.kind === 'resale') return { title: fit([`${nm}: Resale Comparison & Affordability`, `${nm} | Condo Analysis`]), desc: clip(`${nm} (${f.x.area}, ${f.x.district}): resale price psf, yearly gain and rough 3-bedroom price against The Panorama, plus affordability and break-even calculators.`, 158) };
   return { title: 'Do Condos With a Mall Make More Profit? Interactive Study', desc: '8 integrated mall condos against 20 neighbours of similar size: yearly returns since launch, what decided the winner in each area, and what it means for buyers.' };
 }
