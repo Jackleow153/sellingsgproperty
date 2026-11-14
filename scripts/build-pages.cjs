@@ -631,6 +631,7 @@ function caPage(id) {
   const url = SITE + caPath(id);
   let markup = CA.markup;
   if (home) {
+    markup = markup.replace(/<!--BUILD:CA-L-->[\s\S]*?<!--\/BUILD:CA-L-->/, () => `<!--BUILD:CA-L--><li><strong>${CA.nl.L.length} launches still selling</strong>, each scored out of 10 for location, entry price, exit plan, food and MRT, with affordability and break-even calculators: ${CA.nl.L.map(l => `<a href="#${l.id}">${esc(l.name)}</a>`).join(', ')}.</li><!--/BUILD:CA-L-->`);
     markup = markup.replace(/<!--BUILD:CA-UP-->[\s\S]*?<!--\/BUILD:CA-UP-->/, () => `<!--BUILD:CA-UP--><li><strong>${CA.up.length} upcoming projects</strong> (land sold or redevelopment confirmed) with land prices, expected launch dates and price estimates: ${CA.up.map(p => `<a href="#${[...CA.files].find(([, v]) => v.p && v.p.id === p.id)[0]}">${esc(p.name)}</a>`).join(', ')}.</li><!--/BUILD:CA-UP--><li><strong>${CA.launched.length} post-launch condos</strong> with affordability and break-even calculators: ${CA.launched.map(p => `<a href="#${projectSlug(p)}">${esc(p.name)}</a>`).join(', ')}.</li>`);
   } else {
     markup = markup.replace(/<div id="main"><div class="wrap ca-intro" id="ca-static">[\s\S]*?<\/div><\/div>\n/, () => `<div id="main"><div class="wrap ca-intro" id="ca-static">\n${caStatic(id, f)}\n</div></div>\n`);
