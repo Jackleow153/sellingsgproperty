@@ -603,7 +603,7 @@ function caStatic(id, f) {
   if (f.kind === 'launched') {
     const p = f.p;
     return `${back}<h1>${esc(p.name)}</h1><p>${esc(placeOf(p))} · District ${districtOf(p)} (${segmentOf(p)}) · ${esc(p.developer.replace(/\s*\((?:entity|entities)[^)]*\)/i, ''))}</p>
-<p>${esc(shortName(p))} launched in ${esc(p.launchDate.replace(/\s*\(.*$/, ''))}${p.avgPSF ? ` at a reported average of about $${p.avgPSF.toLocaleString('en-US')} psf` : ''}. ${CA.vstat[id] ? `Sales status: ${esc(CA.vstat[id].line)} (${esc(CA.vstat[id].asOf)}). ${esc(CA.vstat[id].note)}` : 'Units left and current prices are being verified against dated sources.'}</p>${tools}${fs.existsSync(path.join(ROOT, 'deep-analysis', projectSlug(p), 'index.html')) ? `<p><a href="/deep-analysis/${projectSlug(p)}/">Read the full written review of ${esc(p.name)}</a></p>` : ''}
+<p>${esc(shortName(p))} launched in ${esc(p.launchDate.replace(/\s*\(.*$/, ''))}${p.avgPSF ? ` at a reported average of about $${p.avgPSF.toLocaleString('en-US')} psf` : ''}. ${CA.vstat[id] ? `Sales status: ${esc(CA.vstat[id].line)}${CA.vstat[id].out ? '' : ' left'} (${esc(CA.vstat[id].asOf)}). ${esc(CA.vstat[id].note)}` : 'Units left and current prices are being verified against dated sources.'}</p>${tools}${fs.existsSync(path.join(ROOT, 'deep-analysis', projectSlug(p), 'index.html')) ? `<p><a href="/deep-analysis/${projectSlug(p)}/">Read the full written review of ${esc(p.name)}</a></p>` : ''}
 <ul>${li([['Homes', p.totalUnits ? p.totalUnits.toLocaleString('en-US') : ''], ['Tenure', p.tenure], ['Completion', p.top], ['Nearest MRT', p.distanceMRT || p.mrt]])}</ul><p><a href="${projectPath(p)}">Project page with FAQs</a></p>`;
   }
   if (f.kind === 'upcoming' || f.kind === 'upcoming-basic') {
