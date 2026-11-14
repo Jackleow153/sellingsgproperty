@@ -550,13 +550,23 @@ function heroPanel() {
 function condoAnalysisPage() {
   const url = SITE + '/condo-analysis/';
   const title = 'Condo Analysis: Compare Singapore Condos, Scores & Returns';
-  const desc = 'Search and compare Singapore condos: 2026 new launches scored out of 10, upcoming 2027 sites with land bids, The Panorama case study and mall condo returns.';
+  const desc = clip(`Search and compare Singapore condos: launches still selling scored out of 10, ${projects.filter(isUpcoming).length} upcoming projects with land prices, and mall condo returns.`, 158);
   const bc = [['/', 'Home'], ['/condo-analysis/', 'Condo Analysis']];
   const schema = [
     { '@context': 'https://schema.org', '@type': 'WebPage', '@id': url + '#webpage', url, name: title, description: desc, dateModified: AS_OF, inLanguage: 'en-SG', isPartOf: { '@type': 'WebSite', name: 'SellingSgProperty', url: SITE + '/' }, author: PERSON },
     crumbSchema(bc),
   ];
-  const body = `<div class="wrap">${crumbs(bc)}</div>\n${read('data/condo-analysis.html')}`;
+  // Upcoming projects come from assets/app.js so this page always matches the rest of the site.
+  let page = read('data/condo-analysis.html');
+  const up = sortForHub(projects.filter(isUpcoming), '2027');
+  const site = { up: up.map(p => ({ pid: p.id, slug: projectSlug(p), name: p.name, dev: p.developer.replace(/\s*\((?:entity|entities)[^)]*\)/i, ''), units: p.totalUnits || null, unitsEst: !!p.unitsEst, where: p.location, launch: p.launchShort || null, landCost: p.landCost || null, landDate: p.landDate || null, tenure: p.tenure || null, mrt: p.mrt || null, ec: isEC(p), reg: p.district, mall: !!p.mall, desc: p.description || '', src: (p.sources || []).map(x => [x.t, x.u]) })) };
+  const nl = JSON.parse(page.match(/const NL = (\{.*\});\n/)[1]);
+  const pageId = new Map(nl.U.map(u => [u.pid, u.id]));
+  const json = JSON.stringify(site).replace(/</g, '\\u003c');
+  page = page.replace(/\/\* BUILD:SITE-UP START \*\/.*?\/\* BUILD:SITE-UP END \*\//, () => `/* BUILD:SITE-UP START */const SITE = ${json};/* BUILD:SITE-UP END */`);
+  page = page.replace(/<!--BUILD:CA-UP-->[\s\S]*?<!--\/BUILD:CA-UP-->/, () => `<!--BUILD:CA-UP--><li><strong>${up.length} upcoming projects</strong> (land sold or redevelopment confirmed) with land prices, expected launch dates and price estimates: ${up.map(p => `<a href="#${pageId.get(p.id) || projectSlug(p)}">${esc(p.name)}</a>`).join(', ')}.</li><!--/BUILD:CA-UP-->`);
+  if (!page.includes(`const SITE = {"up"`)) throw new Error('condo-analysis: SITE-UP marker not filled');
+  const body = `<div class="wrap">${crumbs(bc)}</div>\n${page}`;
   return layout({ title, description: desc, canonical: url, body, schema, nav: 'analysis' });
 }
 
@@ -599,7 +609,7 @@ ${landSites.map(g => `- ${g.name} (D${districtOf(g)}; ${g.list}; ${g.unitsNote ?
 
 ## Condo Analysis (interactive)
 
-- Search and compare Singapore condos: new launches scored out of 10, upcoming 2027 sites with land bids, The Panorama case study and the integrated mall condo study: ${SITE}/condo-analysis/
+- Search and compare Singapore condos: launches still selling scored out of 10, ${projects.filter(isUpcoming).length} upcoming projects with land prices and price estimates, and the integrated mall condo study: ${SITE}/condo-analysis/
 
 ## Property Insights Articles
 
