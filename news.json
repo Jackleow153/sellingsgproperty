@@ -1,10 +1,11 @@
 {
-  "updated": "2026-11-13T15:59:01+08:00",
+  "updated": "2026-11-14T15:37:19+08:00",
   "sources": [
+    "Stacked Homes",
+    "Mothership",
     "AsiaOne",
     "PropertyNet.SG",
     "Singapore Business Review",
-    "Stacked Homes",
     "EdgeProp.sg",
     "The Independent Singapore",
     "联合早报",
@@ -19,6 +20,30 @@
     "Real Estate Asia"
   ],
   "items": [
+    {
+      "id": "n373b7909",
+      "title": "5 Of Singapore’s Most Expensive HDB Flats For Sale",
+      "date": "2026/11/13",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Stacked Homes",
+      "sourceNameZh": "Stacked Homes",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n373b7909/",
+      "description": "5 Of Singapore’s Most Expensive HDB Flats For Sale."
+    },
+    {
+      "id": "nc1e5d28c",
+      "title": "8 teens, aged 12-15, arrested for allegedly pranking occupants of Hougang HDB unit",
+      "date": "2026/11/13",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Mothership",
+      "sourceNameZh": "Mothership",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/nc1e5d28c/",
+      "description": "8 teens, aged 12-15, arrested for allegedly pranking occupants of Hougang HDB unit."
+    },
     {
       "id": "nf9a0f7b4",
       "title": "Car skids, ends up on grass verge near Tampines HDB block",
@@ -596,40 +621,16 @@
       "description": "About 14,800 private homes could launch in 2027, the most since 2013. What that means for HDB upgraders and resale sellers."
     },
     {
-      "id": "9792",
-      "title": "Hao Mart founder halts foreclosure of his Jervois Hill bungalow by OG",
+      "id": "n2bdba4f9",
+      "title": "Dawson 5-room flat sets new HDB resale record, selling for $1.818m, Money News",
       "date": "2026/10/30",
-      "image": "/news/images/9792.jpg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "propnex",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "AsiaOne",
+      "sourceNameZh": "亚洲新闻网",
+      "sourceFeed": "google-news",
       "category": "Real estate",
-      "path": "/news/9792/",
-      "description": "A Jervois Hill bungalow foreclosure was halted. What one landed loan does, and does not, say about Singapore property prices."
-    },
-    {
-      "id": "9790",
-      "title": "Hong Leong, TID place top bid of S$181.86m or S$1,755 psf ppr for Orchard plot",
-      "date": "2026/10/30",
-      "image": "/news/images/9790.jpg",
-      "sourceName": "Business Times",
-      "sourceNameZh": "商业时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9790/",
-      "description": "Hong Leong and TID bid $181.86 million for an Orchard plot, about $1,755 psf of floor area. Why that is not a condo price."
-    },
-    {
-      "id": "9789",
-      "title": "Two Tiong Bahru HDB blocks to get HIP upgrade after re-poll",
-      "date": "2026/10/29",
-      "image": "/news/images/9789.jpg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9789/",
-      "description": "Two Tiong Bahru HDB blocks will get HIP after a fresh poll. What owners pay for, and what resale buyers should still check."
+      "path": "/news/n2bdba4f9/",
+      "description": "Dawson 5-room flat sets new HDB resale record, selling for $1.818m, Money News."
     }
   ]
 }
