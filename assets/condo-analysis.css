@@ -292,6 +292,10 @@ body.on-file #ca .quick{display:none}
 #ca .pbar i{display:block;height:100%;background:var(--good)}
 #ca .pscores{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
 #ca .pscores div{font-size:.7rem;color:var(--muted);text-align:center;min-width:0}
+#ca .ptbl table th:first-child,#ca .ptbl table td:first-child{position:static;max-width:none;box-shadow:none}
+#ca .ptbl td .small{min-width:0;max-width:none;margin-left:0}
+#ca .ptbl table{min-width:0}
+@media(max-width:640px){#ca .ptbl th,#ca .ptbl td{padding:8px 6px;font-size:.85rem}}
 #ca .pscores.six{grid-template-columns:repeat(6,minmax(0,1fr))}
 #ca .pscores b{display:block;font-size:.98rem;color:var(--ink)}
 #ca .pscores i{display:block;height:3px;border-radius:2px;background:var(--sunk);margin-top:4px;overflow:hidden}
