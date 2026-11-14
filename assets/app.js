@@ -1123,6 +1123,7 @@
                                 <a href="/insights/" data-page="blog" class="block w-full text-left font-medium py-2 px-1 -mx-1 rounded-lg hover:bg-slate-100 active:bg-slate-200 transition-colors cursor-pointer">Insights</a>
                                 <a href="/news" class="block w-full text-left font-medium py-2 px-1 -mx-1 rounded-lg hover:bg-slate-100 active:bg-slate-200 transition-colors">News</a>
                                 <a href="/undervalued-pty/" class="block w-full text-left font-medium py-2 px-1 -mx-1 rounded-lg hover:bg-slate-100 active:bg-slate-200 transition-colors">Undervalued Pty</a>
+                                <a href="/condo-analysis/" class="block w-full text-left font-medium py-2 px-1 -mx-1 rounded-lg hover:bg-slate-100 active:bg-slate-200 transition-colors">Condo Analysis</a>
                                 <a href="/contact/" data-page="contact" class="block w-full text-left font-medium py-2 px-1 -mx-1 rounded-lg hover:bg-slate-100 active:bg-slate-200 transition-colors cursor-pointer">Free situation check</a>
                                 <a href="/mortgage-calculator/" data-page="mortgage-calculator" class="block w-full text-left font-medium py-2 px-1 -mx-1 rounded-lg hover:bg-slate-100 active:bg-slate-200 transition-colors cursor-pointer">Mortgage calculator</a>
                             </div>

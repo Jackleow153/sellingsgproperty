@@ -5819,6 +5819,8 @@ const ARTICLES = {
         <p><strong>Key takeaway:</strong> Where the mall condo launched 15% or more above its neighbours, the neighbours grew faster in 5 of 7 areas. The one clear win, The Poiz Residences, was the only mall condo that launched <em>cheaper</em> than the condos around it.</p>
       </div>
 
+      <p>Want to filter and compare these condos yourself? Open the same study in our <a href="/condo-analysis/#mall-condo-study">Condo Analysis tool</a>.</p>
+
       <h2>The results in one table</h2>
       <p>"Launch premium" is how much more the mall condo cost per square foot at launch than the average of its neighbours. "A year since launch" is the steady yearly growth rate from the launch price to the November 2026 average price.</p>
       <div class="data-tbl">

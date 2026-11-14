@@ -159,7 +159,7 @@ ${schema.map(jsonLd).join('\n')}
 <body>
 <header class="top"><div class="wrap">
 <a class="brand" href="/">SellingSg<span>Property</span></a>
-<nav class="nav" aria-label="Main">${navLink('/new-launch-condos/', 'New Launches', 'launches')}${navLink('/insights/', 'Insights', 'insights')}${navLink('/mortgage-calculator/', 'Mortgage Calculator', 'calc')}${navLink('/about/', 'About', 'about')}${navLink('/contact/', 'Contact', 'contact')}</nav>
+<nav class="nav" aria-label="Main">${navLink('/new-launch-condos/', 'New Launches', 'launches')}${navLink('/condo-analysis/', 'Condo Analysis', 'analysis')}${navLink('/insights/', 'Insights', 'insights')}${navLink('/mortgage-calculator/', 'Mortgage Calculator', 'calc')}${navLink('/about/', 'About', 'about')}${navLink('/contact/', 'Contact', 'contact')}</nav>
 <a class="btn" href="/contact/">Free 30-min consultation</a>
 </div></header>
 <div class="trust"><div class="wrap"><span><b>Jack Leow</b> · CEA Reg. No. R074023I</span><span>PropNex Realty Pte Ltd (L3008022J)</span><span>Data from URA, developers and published launch reports</span></div></div>
@@ -167,7 +167,7 @@ ${schema.map(jsonLd).join('\n')}
 ${body}
 </main>
 <footer><div class="wrap">
-<div class="fl"><a href="/">Home</a><a href="/new-launch-condos/">New launch condos</a><a href="/insights/">Insights</a><a href="/mortgage-calculator/">Mortgage calculator</a><a href="/about/">About</a><a href="/contact/">Contact</a></div>
+<div class="fl"><a href="/">Home</a><a href="/new-launch-condos/">New launch condos</a><a href="/condo-analysis/">Condo analysis</a><a href="/insights/">Insights</a><a href="/mortgage-calculator/">Mortgage calculator</a><a href="/about/">About</a><a href="/contact/">Contact</a></div>
 <p>sellingsgproperty.com is an educational and branding platform operated by CEA-licensed salespersons of PropNex Realty Pte Ltd. Jack Leow, CEA Reg. No. R074023I, PropNex Realty Pte Ltd (L3008022J).</p>
 <p>This site is not the official website of any property developer and does not represent itself as an exclusive sales portal.</p>
 <p>The information on this site is for general guidance only and does not constitute financial, legal or property investment advice. Figures are based on publicly available sources and may change; please verify with the developer's latest materials and seek professional advice before acting.</p>
@@ -544,6 +544,22 @@ function heroPanel() {
                 </aside>`;
 }
 
+// ---------- Condo Analysis tool (/condo-analysis/) ----------
+// Interactive search-and-compare tool. Its markup, scoped CSS (#ca) and script live in
+// data/condo-analysis.html; the static intro inside #main is what crawlers see before JS runs.
+function condoAnalysisPage() {
+  const url = SITE + '/condo-analysis/';
+  const title = 'Condo Analysis: Compare Singapore Condos, Scores & Returns';
+  const desc = 'Search and compare Singapore condos: 2026 new launches scored out of 10, upcoming 2027 sites with land bids, The Panorama case study and mall condo returns.';
+  const bc = [['/', 'Home'], ['/condo-analysis/', 'Condo Analysis']];
+  const schema = [
+    { '@context': 'https://schema.org', '@type': 'WebPage', '@id': url + '#webpage', url, name: title, description: desc, dateModified: AS_OF, inLanguage: 'en-SG', isPartOf: { '@type': 'WebSite', name: 'SellingSgProperty', url: SITE + '/' }, author: PERSON },
+    crumbSchema(bc),
+  ];
+  const body = `<div class="wrap">${crumbs(bc)}</div>\n${read('data/condo-analysis.html')}`;
+  return layout({ title, description: desc, canonical: url, body, schema, nav: 'analysis' });
+}
+
 // ---------- sitemap & llms.txt ----------
 // Hand-built project pages carry their own "dateModified" in JSON-LD; use it as the sitemap lastmod.
 function projectLastmod(p) {
@@ -554,11 +570,11 @@ function projectLastmod(p) {
 function sitemap() {
   const old = read('sitemap.xml').replace(/<!--[\s\S]*?-->/g, '');
   const keep = [...old.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(m => m[1])
-    .filter(u => !/\/insights|\/project\/|\/new-launch-condos|\/land-sites\//.test(u))
+    .filter(u => !/\/insights|\/project\/|\/new-launch-condos|\/land-sites\/|\/condo-analysis/.test(u))
     .map(u => u.replace(/<loc>(https:\/\/www\.sellingsgproperty\.com\/(?:about|contact|mortgage-calculator|deep-analysis\/arina-east-residences))<\/loc>/, '<loc>$1/</loc>'))
     .map(u => `  <url>${u.trim().replace(/\s*\n\s*/g, '\n    ').replace(/^/, '\n    ')}\n  </url>`);
   const entry = (loc, lastmod, pr) => `  <url>\n    <loc>${SITE}${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${pr}</priority>\n  </url>`;
-  const add = [entry('/new-launch-condos/', AS_OF, '0.9'), entry('/insights/', AS_OF, '0.8')]
+  const add = [entry('/new-launch-condos/', AS_OF, '0.9'), entry('/condo-analysis/', AS_OF, '0.8'), entry('/insights/', AS_OF, '0.8')]
     .concat(projects.map(p => entry(projectPath(p), projectLastmod(p), isUpcoming(p) || p.year === '2026' ? '0.8' : '0.6')))
     .concat(landSites.map(g => entry(landPath(g), AS_OF, '0.6')))
     .concat(sortedArticles.map(([k, a]) => entry(articlePath(k), isoDate(a.updated || a.date), '0.7')));
@@ -581,6 +597,10 @@ ${['2027', '2026', '2025', '2024'].map(yearBlock).join('\n\n')}
 
 ${landSites.map(g => `- ${g.name} (D${districtOf(g)}; ${g.list}; ${g.unitsNote ? g.unitsNote + ' ' : 'about '}${g.units} homes; ${g.status}): ${SITE}${landPath(g)}`).join('\n')}
 
+## Condo Analysis (interactive)
+
+- Search and compare Singapore condos: new launches scored out of 10, upcoming 2027 sites with land bids, The Panorama case study and the integrated mall condo study: ${SITE}/condo-analysis/
+
 ## Property Insights Articles
 
 Index: ${SITE}/insights/
@@ -599,6 +619,7 @@ write('new-launch-condos/index.html', hubPage());
 for (const g of landSites) write(`land-sites/${g.slug}/index.html`, landSitePage(g));
 for (const [k, a] of sortedArticles) write(`insights/${articleSlug(k)}/index.html`, articlePage(k, a));
 write('insights/index.html', insightsIndex());
+write('condo-analysis/index.html', condoAnalysisPage());
 write('index.html', refreshHomepage(indexHtml));
 write('assets/app.js', appJs);
 
