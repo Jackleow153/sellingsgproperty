@@ -1,6 +1,7 @@
 {
-  "updated": "2026-11-14T15:37:19+08:00",
+  "updated": "2026-11-15T00:08:11+08:00",
   "sources": [
+    "The Straits Times",
     "Stacked Homes",
     "Mothership",
     "AsiaOne",
@@ -11,7 +12,6 @@
     "联合早报",
     "99.co",
     "CNA",
-    "The Straits Times",
     "DollarsAndSense.sg",
     "deeparrival.com",
     "Business Times",
@@ -20,6 +20,18 @@
     "Real Estate Asia"
   ],
   "items": [
+    {
+      "id": "n50193e04",
+      "title": "Man lost his share of HDB flat due to ignorance of property rules",
+      "date": "2026/11/14",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "The Straits Times",
+      "sourceNameZh": "海峡时报",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n50193e04/",
+      "description": "Man lost his share of HDB flat due to ignorance of property rules."
+    },
     {
       "id": "n373b7909",
       "title": "5 Of Singapore’s Most Expensive HDB Flats For Sale",
@@ -619,18 +631,6 @@
       "category": "Real estate",
       "path": "/news/9794/",
       "description": "About 14,800 private homes could launch in 2027, the most since 2013. What that means for HDB upgraders and resale sellers."
-    },
-    {
-      "id": "n2bdba4f9",
-      "title": "Dawson 5-room flat sets new HDB resale record, selling for $1.818m, Money News",
-      "date": "2026/10/30",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "AsiaOne",
-      "sourceNameZh": "亚洲新闻网",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n2bdba4f9/",
-      "description": "Dawson 5-room flat sets new HDB resale record, selling for $1.818m, Money News."
     }
   ]
 }
