@@ -128,7 +128,7 @@ const PERSON = {
   '@type': 'Person', '@id': SITE + '/#jackleow', name: 'Jack Leow', jobTitle: 'Property Agent (CEA Reg. No. R074023I)',
   worksFor: { '@type': 'RealEstateAgent', name: 'PropNex Realty Pte Ltd', identifier: 'L3008022J' }, url: SITE + '/about'
 };
-function layout({ title, description, canonical, body, schema = [], ogImage, nav = '', ogType = 'website' }) {
+function layout({ title, description, canonical, body, schema = [], ogImage, nav = '', ogType = 'website', head = '' }) {
   const og = ogImage || SITE + '/assets/og-default.png';
   const navLink = (href, label, key) => `<a href="${href}"${nav === key ? ' aria-current="page"' : ''}>${label}</a>`;
   return `<!DOCTYPE html>
@@ -153,7 +153,7 @@ function layout({ title, description, canonical, body, schema = [], ogImage, nav
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/marcellus-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=${CSS_V}">
+<link rel="stylesheet" href="/assets/site.css?v=${CSS_V}">${head ? '\n' + head : ''}
 ${schema.map(jsonLd).join('\n')}
 </head>
 <body>
@@ -261,6 +261,8 @@ ${p.unitMix.map(u => `<tr><td>${esc(u.type)}</td><td>${esc(u.units)}</td><td>${e
   const srcList = p.sources ? `<h2>Sources</h2><ul class="links">${p.sources.map(x => `<li><a href="${esc(x.u)}" rel="noopener">${esc(x.t)}</a></li>`).join('')}</ul>` : '';
   const faq = faqFor(p);
   const rel = related(p);
+  const aid = CA.analysisOf.get(p.id);
+  const analysis = aid ? `<p class="note"><a href="/condo-analysis/${aid}/">Deep analysis of ${esc(n)}: affordability, break-even price and region comparison →</a></p>` : '';
   const body = `<div class="wrap">
 ${crumbs(bc)}
 <div class="grid"><article>
@@ -278,6 +280,7 @@ ${factRows(p).map(([k, v]) => `<tr><th scope="row">${esc(k)}</th><td>${esc(v)}</
 </tbody></table>
 ${mix}
 ${srcList}
+${analysis}
 <h2>Frequently asked questions</h2>
 <div class="faq">${faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('\n')}</div>
 ${p.id === 31 ? CHUAN_CITE : ''}
@@ -544,30 +547,106 @@ function heroPanel() {
                 </aside>`;
 }
 
-// ---------- Condo Analysis tool (/condo-analysis/) ----------
-// Interactive search-and-compare tool. Its markup, scoped CSS (#ca) and script live in
-// data/condo-analysis.html; the static intro inside #main is what crawlers see before JS runs.
-function condoAnalysisPage() {
-  const url = SITE + '/condo-analysis/';
-  const title = 'Condo Analysis: Compare Singapore Condos, Scores & Returns';
-  const desc = clip(`Search and compare Singapore condos: launches still selling scored out of 10, ${projects.filter(isUpcoming).length} upcoming projects with land prices, and mall condo returns.`, 158);
-  const bc = [['/', 'Home'], ['/condo-analysis/', 'Condo Analysis']];
+// ---------- Condo Analysis tool (/condo-analysis/ and /condo-analysis/<id>/) ----------
+// Source: data/condo-analysis.html (scoped CSS, markup, script with the research data). The build
+// splits it into a cached CSS file and JS file, fills in the project lists from assets/app.js, and
+// writes one pre-rendered page per condo file so each analysis has its own crawlable address.
+// The script then takes over and makes the page interactive (search, filters, calculators).
+const CA = (() => {
+  const src = read('data/condo-analysis.html');
+  const css = src.match(/<style>([\s\S]*?)<\/style>/)[1];
+  let js = src.match(/<script>([\s\S]*?)<\/script>/)[1];
+  const markup = src.replace(/<style>[\s\S]*?<\/style>\s*/, '').replace(/\s*<script>[\s\S]*?<\/script>/, '');
+  const nl = JSON.parse(js.match(/const NL = (\{.*\});\n/)[1]);
+  const data = JSON.parse(js.match(/const DATA = (\{.*\});\n/)[1]);
+  const norm = t => String(t).toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z0-9]/g, '');
+  const up = sortForHub(projects.filter(isUpcoming), '2027');
+  const lByName = new Map(nl.L.map(l => [norm(l.name), l]));
+  const launched = projects.filter(p => !isUpcoming(p) && !lByName.has(norm(p.name))).sort((x, y) => y.launchSort - x.launchSort || x.id - y.id);
+  const mon = n => `${['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][(n % 100) - 1]} ${Math.floor(n / 100)}`;
+  const dev = p => p.developer.replace(/\s*\((?:entity|entities)[^)]*\)/i, '');
+  const site = {
+    up: up.map(p => ({ pid: p.id, slug: projectSlug(p), name: p.name, dev: dev(p), units: p.totalUnits || null, unitsEst: !!p.unitsEst, where: p.location, launch: p.launchShort || null, landCost: p.landCost || null, landDate: p.landDate || null, tenure: p.tenure || null, mrt: p.mrt || null, ec: isEC(p), reg: p.district, mall: !!p.mall, desc: p.description || '', src: (p.sources || []).map(x => [x.t, x.u]) })),
+    // Unverified projects: only the reported launch average is shown (as on their project pages), never the placeholder units-left figure.
+    launched: launched.map(p => ({ pid: p.id, slug: projectSlug(p), name: p.name, dev: dev(p), units: p.totalUnits || null, where: p.location, launchDate: p.launchDate.replace(/\s*\(.*$/, ''), launchShort: mon(p.launchSort), avgPSF: p.avgPSF || null, startingPrice: VERIFIED_DETAIL.has(p.id) ? p.startingPrice || null : null, tenure: p.tenure || null, top: p.top || null, mrt: p.mrt || null, distanceMRT: p.distanceMRT || null, schools: p.schools || null, type: p.type, reg: p.district, ec: isEC(p), mall: !!p.mall, desc: VERIFIED_DETAIL.has(p.id) ? p.description || '' : '' })),
+  };
+  js = js.replace(/\/\* BUILD:SITE-UP START \*\/.*?\/\* BUILD:SITE-UP END \*\//, () => `/* BUILD:SITE-UP START */const SITE = ${JSON.stringify(site).replace(/</g, '\\u003c')};/* BUILD:SITE-UP END */`);
+  if (!js.includes('const SITE = {"up"')) throw new Error('condo-analysis: SITE-UP marker not filled');
+  // Every condo file: id -> {kind, name, project}
+  const files = new Map();
+  const upId = new Map(nl.U.map(u => [u.pid, u]));
+  nl.L.forEach(l => files.set(l.id, { kind: 'selling', x: l, p: projects.find(p => norm(p.name) === norm(l.name)) }));
+  launched.forEach(p => files.set(projectSlug(p), { kind: 'launched', p }));
+  up.forEach(p => { const r = upId.get(p.id); files.set(projectSlug(p), { kind: r ? 'upcoming' : 'upcoming-basic', x: r, p }); });
+  data.condos.forEach(c => files.set(c.id, { kind: c.id === 'panorama' ? 'panorama' : 'resale', x: c }));
+  files.set('mall-condo-study', { kind: 'study' });
+  const analysisOf = new Map([...files].filter(([, f]) => f.p && f.kind !== 'upcoming-basic').map(([id, f]) => [f.p.id, id]));
+  const cssV = crypto.createHash('sha1').update(css).digest('hex').slice(0, 8), jsV = crypto.createHash('sha1').update(js).digest('hex').slice(0, 8);
+  return { css, js, cssV, jsV, markup, nl, data, files, analysisOf, up, launched };
+})();
+const caPath = id => id === 'home' ? '/condo-analysis/' : `/condo-analysis/${id}/`;
+const caIndexable = f => !['upcoming-basic', 'study'].includes(f.kind);
+function caStatic(id, f) {
+  const li = rows => rows.filter(r => r[1]).map(([k, v]) => `<li><strong>${esc(k)}:</strong> ${esc(v)}</li>`).join('');
+  const srcs = list => list && list.length ? `<p class="small muted">Sources: ${list.map(a => `<a href="${esc(a[1])}" rel="noopener">${esc(a[0])}</a>`).join(' · ')}</p>` : '';
+  const back = `<p class="small"><a href="/condo-analysis/">← All condos</a></p>`;
+  const tools = '<p>This file includes an HDB upgrader affordability calculator, a break-even resale price calculator and a comparison with other launches in the same region.</p>';
+  if (f.kind === 'selling') {
+    const x = f.x, ov = Object.values(x.scores).reduce((a, v) => a + v[0], 0) / 5;
+    return `${back}<h1>${esc(x.name)}</h1><p>${esc(x.area)}, ${esc(x.district)} · ${esc(x.dev)}</p>
+<p><strong>Overall score ${ov.toFixed(1)} out of 10.</strong> ${esc(x.verdict)}. ${esc(x.why)}</p>${tools}
+<h2>Key facts</h2><ul>${li([['Sales so far', x.sold], ['Price', x.avg], ['Land cost', x.land], ['Completion', x.top], ['Lease', x.tenure], ['MRT', x.mrt], ['Food and shops', x.food], ['Primary schools', x.school]])}</ul>
+<h2>Scores</h2><ul>${[['loc', 'Location'], ['entry', 'Entry price'], ['exit', 'Exit plan'], ['food', 'Nearby food'], ['mrt', 'MRT closeness']].map(([k, n]) => `<li><strong>${n}: ${x.scores[k][0]}/10.</strong> ${esc(x.scores[k][1])}</li>`).join('')}</ul>
+<h2>Pros</h2><ul>${x.pros.map(t => `<li>${esc(t)}</li>`).join('')}</ul><h2>Cons</h2><ul>${x.cons.map(t => `<li>${esc(t)}</li>`).join('')}</ul>${srcs(x.src)}`;
+  }
+  if (f.kind === 'launched') {
+    const p = f.p;
+    return `${back}<h1>${esc(p.name)}</h1><p>${esc(placeOf(p))} · District ${districtOf(p)} (${segmentOf(p)}) · ${esc(p.developer.replace(/\s*\((?:entity|entities)[^)]*\)/i, ''))}</p>
+<p>${esc(shortName(p))} launched in ${esc(p.launchDate.replace(/\s*\(.*$/, ''))}${p.avgPSF ? ` at a reported average of about $${p.avgPSF.toLocaleString('en-US')} psf` : ''}. Units left and current prices are being verified against dated sources.</p>${tools}
+<ul>${li([['Homes', p.totalUnits ? p.totalUnits.toLocaleString('en-US') : ''], ['Tenure', p.tenure], ['Completion', p.top], ['Nearest MRT', p.distanceMRT || p.mrt]])}</ul><p><a href="${projectPath(p)}">Project page with FAQs</a></p>`;
+  }
+  if (f.kind === 'upcoming' || f.kind === 'upcoming-basic') {
+    const p = f.p, x = f.x || {};
+    return `${back}<h1>${esc(p.name)}</h1><p>${esc(placeOf(p))} · ${esc(p.developer.replace(/\s*\((?:entity|entities)[^)]*\)/i, ''))}</p>
+<p>Upcoming project, not launched yet. Expected launch: ${esc(p.launchShort || 'not announced')}.${p.landCost ? ` Land cost: ${esc(p.landCost)}.` : ''}${x.bids ? ` ${x.bids} bids at the land tender.` : ''}</p>
+${x.notes ? `<ul>${x.notes.map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}${srcs(x.src)}<p><a href="${projectPath(p)}">Project page with FAQs</a></p>`;
+  }
+  if (f.kind === 'panorama') return `${back}<h1>The Panorama</h1><p>Ang Mo Kio Avenue 2, D20. A 698-home, 99-year condo completed in 2017.</p><p>Full case study: 3-bedroom price and profit year by year since 2014, whether Mayflower MRT pushed prices up, who buys from owners, an HDB upgrader affordability calculator, and nearby competitors.</p>`;
+  if (f.kind === 'resale') { const c = f.x; return `${back}<h1>${esc(c.name)}</h1><p>${esc(c.area)}, ${esc(c.district)} · ${esc(c.tenure)} · completed ${esc(c.top)}${c.units ? ` · ${esc(c.units)} homes` : ''}</p><p>Resale comparison against The Panorama, with an HDB upgrader affordability calculator and a break-even resale price calculator.</p>`; }
+  return `${back}<h1>Do condos with a mall make more profit?</h1><p>8 integrated mall condos compared with 20 nearby condos of similar size. Full write-up: <a href="/insights/integrated-mall-condo-returns-2026/">Do Integrated Condos With a Mall Make More Profit?</a></p>`;
+}
+function caMeta(id, f) {
+  const nm = f.p ? f.p.name : f.x ? f.x.name : 'Mall condo study';
+  const fit = list => list.find(t => t.length <= 65) || list[list.length - 1];
+  if (f.kind === 'selling') { const x = f.x, ov = (Object.values(x.scores).reduce((a, v) => a + v[0], 0) / 5).toFixed(1);
+    return { title: fit([`${x.name} Analysis: Score ${ov}/10, Prices & Break-even`, `${x.name} Analysis: Score ${ov}/10 & Prices`, `${x.name} Analysis | Condo Analysis`]), desc: clip(`${x.name}: ${x.verdict}. Scored ${ov}/10; ${x.sold}. Units left by type, an HDB upgrader affordability check and the resale price you need to break even.`, 158) }; }
+  if (f.kind === 'launched') return { title: fit([`${nm} Analysis: Affordability & Break-even Price`, `${nm} Analysis & Calculators`, `${nm} | Condo Analysis`]), desc: clip(`${nm}: launched ${f.p.launchDate.replace(/\s*\(.*$/, '')}${f.p.avgPSF ? ` at about $${f.p.avgPSF.toLocaleString('en-US')} psf (reported)` : ''}. Check if an HDB upgrader can afford it, the resale price you need to break even, and how it compares in its region.`, 158) };
+  if (f.kind === 'upcoming' || f.kind === 'upcoming-basic') return { title: fit([`${nm}: Land Bid & Expected Price Analysis`, `${nm}: Land Bid Analysis`, `${nm} | Condo Analysis`]), desc: clip(`${nm}: upcoming project. Land price, bids, expected launch price range and launch timing, with sources.${f.p.launchShort ? ' Expected launch: ' + f.p.launchShort + '.' : ''}`, 158) };
+  if (f.kind === 'panorama') return { title: 'The Panorama Condo: Price History, MRT Effect & Calculator', desc: 'The Panorama (Ang Mo Kio): 3-bedroom profit year by year since 2014, the Mayflower MRT effect, an HDB upgrader affordability calculator and nearby competitors.' };
+  if (f.kind === 'resale') return { title: fit([`${nm}: Resale Comparison & Affordability`, `${nm} | Condo Analysis`]), desc: clip(`${nm} (${f.x.area}, ${f.x.district}): resale price psf, yearly gain and rough 3-bedroom price against The Panorama, plus affordability and break-even calculators.`, 158) };
+  return { title: 'Do Condos With a Mall Make More Profit? Interactive Study', desc: '8 integrated mall condos against 20 neighbours of similar size: yearly returns since launch, what decided the winner in each area, and what it means for buyers.' };
+}
+function caPage(id) {
+  const home = id === 'home', f = home ? null : CA.files.get(id);
+  const url = SITE + caPath(id);
+  let markup = CA.markup;
+  if (home) {
+    markup = markup.replace(/<!--BUILD:CA-UP-->[\s\S]*?<!--\/BUILD:CA-UP-->/, () => `<!--BUILD:CA-UP--><li><strong>${CA.up.length} upcoming projects</strong> (land sold or redevelopment confirmed) with land prices, expected launch dates and price estimates: ${CA.up.map(p => `<a href="#${[...CA.files].find(([, v]) => v.p && v.p.id === p.id)[0]}">${esc(p.name)}</a>`).join(', ')}.</li><!--/BUILD:CA-UP--><li><strong>${CA.launched.length} post-launch condos</strong> with affordability and break-even calculators: ${CA.launched.map(p => `<a href="#${projectSlug(p)}">${esc(p.name)}</a>`).join(', ')}.</li>`);
+  } else {
+    markup = markup.replace(/<div id="main"><div class="wrap ca-intro" id="ca-static">[\s\S]*?<\/div><\/div>\n/, () => `<div id="main"><div class="wrap ca-intro" id="ca-static">\n${caStatic(id, f)}\n</div></div>\n`);
+  }
+  markup = markup.replace(/href="#([a-z0-9-]+)"/g, (m, k) => k === 'home' ? 'href="/condo-analysis/"' : CA.files.has(k) ? `href="${caPath(k)}"` : m);
+  const meta = home ? { title: 'Condo Analysis: Compare Singapore Condos, Scores & Returns', desc: clip(`Search and compare Singapore condos: launches still selling scored out of 10, ${CA.launched.length} post-launch condos, ${CA.up.length} upcoming projects with land prices, and mall condo returns.`, 158) } : caMeta(id, f);
+  const name = home ? 'Condo Analysis' : (f.p ? f.p.name : f.x ? f.x.name : 'Mall condo study');
+  const bc = home ? [['/', 'Home'], ['/condo-analysis/', 'Condo Analysis']] : [['/', 'Home'], ['/condo-analysis/', 'Condo Analysis'], [caPath(id), name]];
+  // Thin or duplicate files point search engines at the fuller page.
+  const canonical = home || caIndexable(f) ? url : f.kind === 'study' ? SITE + '/insights/integrated-mall-condo-returns-2026/' : SITE + projectPath(f.p);
   const schema = [
-    { '@context': 'https://schema.org', '@type': 'WebPage', '@id': url + '#webpage', url, name: title, description: desc, dateModified: AS_OF, inLanguage: 'en-SG', isPartOf: { '@type': 'WebSite', name: 'SellingSgProperty', url: SITE + '/' }, author: PERSON },
+    { '@context': 'https://schema.org', '@type': 'WebPage', '@id': url + '#webpage', url, name: meta.title, description: meta.desc, dateModified: AS_OF, inLanguage: 'en-SG', isPartOf: { '@type': 'WebSite', name: 'SellingSgProperty', url: SITE + '/' }, author: PERSON },
     crumbSchema(bc),
   ];
-  // Upcoming projects come from assets/app.js so this page always matches the rest of the site.
-  let page = read('data/condo-analysis.html');
-  const up = sortForHub(projects.filter(isUpcoming), '2027');
-  const site = { up: up.map(p => ({ pid: p.id, slug: projectSlug(p), name: p.name, dev: p.developer.replace(/\s*\((?:entity|entities)[^)]*\)/i, ''), units: p.totalUnits || null, unitsEst: !!p.unitsEst, where: p.location, launch: p.launchShort || null, landCost: p.landCost || null, landDate: p.landDate || null, tenure: p.tenure || null, mrt: p.mrt || null, ec: isEC(p), reg: p.district, mall: !!p.mall, desc: p.description || '', src: (p.sources || []).map(x => [x.t, x.u]) })) };
-  const nl = JSON.parse(page.match(/const NL = (\{.*\});\n/)[1]);
-  const pageId = new Map(nl.U.map(u => [u.pid, u.id]));
-  const json = JSON.stringify(site).replace(/</g, '\\u003c');
-  page = page.replace(/\/\* BUILD:SITE-UP START \*\/.*?\/\* BUILD:SITE-UP END \*\//, () => `/* BUILD:SITE-UP START */const SITE = ${json};/* BUILD:SITE-UP END */`);
-  page = page.replace(/<!--BUILD:CA-UP-->[\s\S]*?<!--\/BUILD:CA-UP-->/, () => `<!--BUILD:CA-UP--><li><strong>${up.length} upcoming projects</strong> (land sold or redevelopment confirmed) with land prices, expected launch dates and price estimates: ${up.map(p => `<a href="#${pageId.get(p.id) || projectSlug(p)}">${esc(p.name)}</a>`).join(', ')}.</li><!--/BUILD:CA-UP-->`);
-  if (!page.includes(`const SITE = {"up"`)) throw new Error('condo-analysis: SITE-UP marker not filled');
-  const body = `<div class="wrap">${crumbs(bc)}</div>\n${page}`;
-  return layout({ title, description: desc, canonical: url, body, schema, nav: 'analysis' });
+  const body = `<div class="wrap">${crumbs(bc)}</div>\n${markup}\n<script src="/assets/condo-analysis.js?v=${CA.jsV}"></script>`;
+  return layout({ title: meta.title, description: meta.desc, canonical, body, schema, nav: 'analysis', head: `<link rel="stylesheet" href="/assets/condo-analysis.css?v=${CA.cssV}">` });
 }
 
 // ---------- sitemap & llms.txt ----------
@@ -587,6 +666,7 @@ function sitemap() {
   const add = [entry('/new-launch-condos/', AS_OF, '0.9'), entry('/condo-analysis/', AS_OF, '0.8'), entry('/insights/', AS_OF, '0.8')]
     .concat(projects.map(p => entry(projectPath(p), projectLastmod(p), isUpcoming(p) || p.year === '2026' ? '0.8' : '0.6')))
     .concat(landSites.map(g => entry(landPath(g), AS_OF, '0.6')))
+    .concat([...CA.files].filter(([, f]) => caIndexable(f)).map(([id]) => entry(caPath(id), AS_OF, '0.7')))
     .concat(sortedArticles.map(([k, a]) => entry(articlePath(k), isoDate(a.updated || a.date), '0.7')));
   return `<?xml version="1.0" encoding="UTF-8"?>\n<!-- Generated by scripts/build-pages.cjs on ${AS_OF}. Project and insights URLs are rebuilt on every run. -->\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${keep.join('\n')}\n${add.join('\n')}\n</urlset>\n`;
 }
@@ -609,7 +689,8 @@ ${landSites.map(g => `- ${g.name} (D${districtOf(g)}; ${g.list}; ${g.unitsNote ?
 
 ## Condo Analysis (interactive)
 
-- Search and compare Singapore condos: launches still selling scored out of 10, ${projects.filter(isUpcoming).length} upcoming projects with land prices and price estimates, and the integrated mall condo study: ${SITE}/condo-analysis/
+- Search and compare Singapore condos: launches still selling scored out of 10, post-launch condos, ${projects.filter(isUpcoming).length} upcoming projects with land prices and price estimates, and the integrated mall condo study: ${SITE}/condo-analysis/
+${[...CA.files].filter(([, f]) => caIndexable(f)).map(([id, f]) => `- ${f.p ? f.p.name : f.x.name} analysis: ${SITE}${caPath(id)}`).join('\n')}
 
 ## Property Insights Articles
 
@@ -629,7 +710,14 @@ write('new-launch-condos/index.html', hubPage());
 for (const g of landSites) write(`land-sites/${g.slug}/index.html`, landSitePage(g));
 for (const [k, a] of sortedArticles) write(`insights/${articleSlug(k)}/index.html`, articlePage(k, a));
 write('insights/index.html', insightsIndex());
-write('condo-analysis/index.html', condoAnalysisPage());
+write('assets/condo-analysis.css', CA.css.trim() + '\n');
+write('assets/condo-analysis.js', CA.js.trim() + '\n');
+write('condo-analysis/index.html', caPage('home'));
+{ // one page per condo file; remove pages for files that no longer exist
+  const keep = new Set(CA.files.keys());
+  for (const d of fs.readdirSync(path.join(ROOT, 'condo-analysis'), { withFileTypes: true })) if (d.isDirectory() && !keep.has(d.name)) fs.rmSync(path.join(ROOT, 'condo-analysis', d.name), { recursive: true });
+  for (const id of CA.files.keys()) write(`condo-analysis/${id}/index.html`, caPage(id));
+}
 write('index.html', refreshHomepage(indexHtml));
 write('assets/app.js', appJs);
 
