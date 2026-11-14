@@ -55,7 +55,8 @@ Work as a senior SEO / AIO / GEO / UX / UI specialist who understands how people
 1. `node scripts/build-pages.cjs` ran with no errors (no "tailwindcss not installed" warning) and the output is committed.
 2. Spot-check one project page and one article on a narrow (390 px) viewport: no sideways scrolling.
 3. Every page keeps a unique `<title>`, meta description, canonical and valid JSON-LD.
-4. Mention any goal conflicts you noticed in your summary.
+4. Double-check every new or changed fact (prices, psf, units sold or left, dates, land prices, distances, regions) against a second, independent source, preferably the developer's release, URA/HDB, EdgeProp, Business Times or Straits Times. Recheck the arithmetic (score workings, % gaps, sold %) and that `assets/app.js` agrees with the Condo Analysis data. If a fact has only one source or sources disagree, say so on the page and in your summary.
+5. Mention any goal conflicts you noticed in your summary.
 
 ## Standing rules
 
