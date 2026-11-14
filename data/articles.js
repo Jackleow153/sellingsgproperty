@@ -5790,6 +5790,331 @@ const ARTICLES = {
         <strong>Disclaimer.</strong> This article is for general informational purposes and does not constitute financial, tax, or investment advice. Thomson Reserve's official price list has not been released; all price figures referenced are estimates or illustrative and are clearly marked as such. All comparable-project figures are based on publicly available data as of mid-2026 and are subject to change. Property values can go down as well as up. Always conduct your own due diligence and consult a licensed financial advisor, solicitor, and property professional before making any decision.
       </div>
     `
+  },
+  /* ======================================================
+     INTEGRATED MALL CONDOS VS NEIGHBOURS (Nov 2026)
+  ====================================================== */
+  'post-integrated-mall-condo-returns-2026': {
+    title: 'Do Integrated Condos With a Mall Make More Profit? 8 Projects vs 20 Neighbours (2026 Data)',
+    seoTitle: 'Do Integrated Mall Condos Make More Profit? 2026 Data',
+    date: '14 Nov 2026',
+    readTime: '14 min read',
+    category: 'NEW LAUNCH',
+    chipClass: 'chip-newlaunch',
+    img: null,
+    linkedinUrl: null,
+    body: `
+      <div class="qa-box">
+        <div class="lbl">Quick Answer</div>
+        <p><strong>No, not reliably. 8 Singapore mall condos grew an average 2.6% a year from launch to 2026, while nearby condos of similar size grew 3.2% a year.</strong> I compared each of the 8 completed mall condos with 2 or 3 neighbours (20 in all). The 3.2% uses the 17 neighbours whose launch price is known; prices run to November 2026. The mall condo beat all its neighbours in only 1 of 8 areas. What decided the winner was not the mall but <strong>how much more the mall condo cost at launch</strong>, and when in the market cycle it launched.</p>
+      </div>
+
+      <p>"Integrated" condos, built on top of a mall and usually next to an MRT station, are sold as the safest new launch you can buy. Convenience is real, and so is the price premium. The question for a buyer is simple: <em>does the premium come back to you when you sell?</em></p>
+
+      <p>This article answers that with sale records, not opinions. For each mall condo I picked 2 to 3 condos nearby of similar size, then compared launch price, MRT distance, developer, completion year and yearly price growth. For every condo, I also explain why it did better or worse.</p>
+
+      <p><em>Data as of November 2026. Prices are yearly averages from URA caveats via the Stacked Homes condo directory; launch prices are from launch reports. Past performance does not predict future prices.</em></p>
+
+      <div class="key-takeaway">
+        <p><strong>Key takeaway:</strong> Where the mall condo launched 15% or more above its neighbours, the neighbours grew faster in 5 of 7 areas. The one clear win, The Poiz Residences, was the only mall condo that launched <em>cheaper</em> than the condos around it.</p>
+      </div>
+
+      <h2>The results in one table</h2>
+      <p>"Launch premium" is how much more the mall condo cost per square foot at launch than the average of its neighbours. "A year since launch" is the steady yearly growth rate from the launch price to the November 2026 average price.</p>
+      <div class="data-tbl">
+        <table>
+          <caption>Mall condo vs nearby condos of similar size, launch to Nov 2026</caption>
+          <thead><tr><th>Area (mall condo)</th><th>Launch premium</th><th class="condo-col">Mall condo, a year</th><th>Neighbours, a year</th><th>Result</th></tr></thead>
+          <tbody>
+            <tr><td class="metric">Potong Pasir (The Poiz Residences)</td><td>&minus;5%</td><td><strong>3.6%</strong></td><td>2.4%</td><td>Mall condo won</td></tr>
+            <tr><td class="metric">Bukit Panjang (Hillion Residences)</td><td>+16%</td><td><strong>2.5%</strong></td><td>2.9%</td><td>Mixed</td></tr>
+            <tr><td class="metric">Paya Lebar (Park Place Residences)</td><td>+17%</td><td><strong>2.5%</strong></td><td>3.4%</td><td>Neighbours won</td></tr>
+            <tr><td class="metric">Bedok (Bedok Residences)</td><td>+19%</td><td><strong>2.0%</strong></td><td>2.4%</td><td>Neighbours won</td></tr>
+            <tr><td class="metric">Punggol (Watertown)</td><td>+25%</td><td><strong>2.7%</strong></td><td>4.1%</td><td>Neighbours won</td></tr>
+            <tr><td class="metric">Woodleigh (The Woodleigh Residences)</td><td>+30%</td><td><strong>2.5%</strong></td><td>3.7%</td><td>Neighbours won</td></tr>
+            <tr><td class="metric">Sengkang / Buangkok (Sengkang Grand Residences)</td><td>+34%</td><td><strong>2.4%</strong></td><td>3.6%</td><td>Neighbours won</td></tr>
+            <tr><td class="metric">Yishun (North Park Residences)</td><td>+35%</td><td><strong>2.7%</strong></td><td>2.5%</td><td>About level</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="barviz">
+        <div class="bv-row"><div class="bv-lbl">North Park Residences<small>Yishun &middot; with mall</small></div><div class="bv-track"><div class="bv-fill f-brass" style="width:60%">2.7%</div></div><div class="bv-amt">a year</div></div>
+        <div class="bv-row"><div class="bv-lbl">Neighbours<small>Yishun &middot; average</small></div><div class="bv-track"><div class="bv-fill f-navy" style="width:56%">2.5%</div></div><div class="bv-amt">a year</div></div>
+        <div class="bv-row"><div class="bv-lbl">The Poiz Residences<small>Potong Pasir &middot; with mall</small></div><div class="bv-track"><div class="bv-fill f-brass" style="width:80%">3.6%</div></div><div class="bv-amt">a year</div></div>
+        <div class="bv-row"><div class="bv-lbl">Neighbours<small>Potong Pasir &middot; average</small></div><div class="bv-track"><div class="bv-fill f-navy" style="width:53%">2.4%</div></div><div class="bv-amt">a year</div></div>
+        <div class="bv-row"><div class="bv-lbl">Park Place Residences<small>Paya Lebar &middot; with mall</small></div><div class="bv-track"><div class="bv-fill f-brass" style="width:56%">2.5%</div></div><div class="bv-amt">a year</div></div>
+        <div class="bv-row"><div class="bv-lbl">Neighbours<small>Paya Lebar &middot; average</small></div><div class="bv-track"><div class="bv-fill f-navy" style="width:76%">3.4%</div></div><div class="bv-amt">a year</div></div>
+        <div class="bv-row"><div class="bv-lbl">Sengkang Grand Residences<small>Sengkang / Buangkok &middot; with mall</small></div><div class="bv-track"><div class="bv-fill f-brass" style="width:53%">2.4%</div></div><div class="bv-amt">a year</div></div>
+        <div class="bv-row"><div class="bv-lbl">Neighbours<small>Sengkang / Buangkok &middot; average</small></div><div class="bv-track"><div class="bv-fill f-navy" style="width:79%">3.6%</div></div><div class="bv-amt">a year</div></div>
+        <div class="bv-row"><div class="bv-lbl">The Woodleigh Residences<small>Woodleigh &middot; with mall</small></div><div class="bv-track"><div class="bv-fill f-brass" style="width:56%">2.5%</div></div><div class="bv-amt">a year</div></div>
+        <div class="bv-row"><div class="bv-lbl">Neighbours<small>Woodleigh &middot; average</small></div><div class="bv-track"><div class="bv-fill f-navy" style="width:83%">3.7%</div></div><div class="bv-amt">a year</div></div>
+        <div class="bv-row"><div class="bv-lbl">Hillion Residences<small>Bukit Panjang &middot; with mall</small></div><div class="bv-track"><div class="bv-fill f-brass" style="width:56%">2.5%</div></div><div class="bv-amt">a year</div></div>
+        <div class="bv-row"><div class="bv-lbl">Neighbours<small>Bukit Panjang &middot; average</small></div><div class="bv-track"><div class="bv-fill f-navy" style="width:64%">2.9%</div></div><div class="bv-amt">a year</div></div>
+        <div class="bv-row"><div class="bv-lbl">Bedok Residences<small>Bedok &middot; with mall</small></div><div class="bv-track"><div class="bv-fill f-brass" style="width:44%">2.0%</div></div><div class="bv-amt">a year</div></div>
+        <div class="bv-row"><div class="bv-lbl">Neighbours<small>Bedok &middot; average</small></div><div class="bv-track"><div class="bv-fill f-navy" style="width:54%">2.4%</div></div><div class="bv-amt">a year</div></div>
+        <div class="bv-row"><div class="bv-lbl">Watertown<small>Punggol &middot; with mall</small></div><div class="bv-track"><div class="bv-fill f-brass" style="width:60%">2.7%</div></div><div class="bv-amt">a year</div></div>
+        <div class="bv-row"><div class="bv-lbl">Neighbours<small>Punggol &middot; average</small></div><div class="bv-track"><div class="bv-fill f-navy" style="width:91%">4.1%</div></div><div class="bv-amt">a year</div></div>
+        <div class="bv-cap">Yearly price growth from launch to Nov 2026. Brass: the condo with a mall. Navy: average of its nearby condos with a known launch price.</div>
+      </div>
+
+      <h2>Five reasons that explain most of the results</h2>
+      <ol>
+        <li><strong>The launch premium.</strong> A mall condo that starts 20% to 50% dearer needs its neighbours to stand still to keep its lead. They rarely did. Bedok Residences launched 35% to 47% above Waterfront Isle and Archipelago, and was only 2% higher five years later.</li>
+        <li><strong>Market timing.</strong> Condos launched in 2011 to 2013 (Bedok Residences, Urban Vista, The Venue Residences, Sennett Residence) were bought near a peak, then hit the 2013 loan limits; most were flat for five years. 2015 launches (The Poiz Residences, Symphony Suites) were bought near a low. 2018 to 2019 launches rode the 2020 to 2023 rise.</li>
+        <li><strong>How close the neighbours are to the same MRT.</strong> At Woodleigh, Punggol and Potong Pasir the neighbours sit within 500 m of the same station, so the mall condo's transport edge was small. At Yishun the neighbours are 1.4 km and more from the MRT, and North Park Residences held level.</li>
+        <li><strong>Too much new supply at once.</strong> North Park Residences (920 homes) and Watertown (992) stayed flat until a few years after completion, when hundreds of owners could sell at the same time.</li>
+        <li><strong>Unit design and mix.</strong> Urban Vista had small 3-bedders, loft units and road and train noise. It did worst of all 28 condos in this study.</li>
+      </ol>
+
+      <h2>Where the mall condo did hold up</h2>
+      <ul>
+        <li>It still sells for more per square foot than its neighbours in 6 of 8 areas. The exceptions: Parc Esta now sells above Park Place Residences, and Parc Centros has edged past Watertown.</li>
+        <li>On a 1,000 sq ft home bought at launch, North Park Residences (about $489k) and The Poiz Residences (about $672k) gained more in dollars to November 2026 than any of their neighbours.</li>
+        <li>Over the first five years, Hillion Residences beat Eco Sanctuary (2.7% against 1.4% a year), helped by the Bukit Panjang Downtown Line station that opened next door in December 2015.</li>
+      </ul>
+
+      <h2>Yishun: North Park Residences vs its neighbours</h2>
+      <p><strong>About level. North Park grew 2.7% a year since launch against 2.5% for Symphony Suites, on a 35% higher entry price, so its dollar gain was larger. Skies Miltonia, far from the MRT and launched in 2012, lagged both.</strong></p>
+      <div class="data-tbl">
+        <table>
+          <caption>Yishun. Returns are yearly price growth. Walking distance to the nearest MRT from OneMap.</caption>
+          <thead><tr><th>Condo</th><th>Since launch, a year</th><th>First 5 years, a year</th><th>Launch price psf</th><th>Walk to MRT</th><th>Completed</th><th>Homes</th><th>Developer</th></tr></thead>
+          <tbody>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/north-park-residences/" target="_blank" rel="noopener">North Park Residences</a> (with mall)</td><td><strong>2.7%</strong></td><td>1.3%</td><td>$1,374 (Apr 2015)</td><td>170 m, Yishun</td><td>2018</td><td>920</td><td>Frasers Centrepoint</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/symphony-suites/" target="_blank" rel="noopener">Symphony Suites</a></td><td>2.5%</td><td>1.6%</td><td>$1,016 (Feb 2015)</td><td>1.4 km, Yishun</td><td>2018</td><td>660</td><td>EL Development</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/skies-miltonia/" target="_blank" rel="noopener">Skies Miltonia</a></td><td>&ndash;</td><td>&ndash;</td><td>Not found (2012)</td><td>1.9 km, Khatib</td><td>2016</td><td>420</td><td>TG Master</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Why each did better or worse:</strong></p>
+      <ul>
+        <li><strong>North Park Residences (2.7% a year):</strong> Launched at a premium of about 32% over other Yishun projects (EdgeProp, Apr 2015). Prices stayed flat until completion in 2018, when 920 new homes came onto the market at once, then rose with Northpoint City and the MRT next door. About the same yearly growth as Symphony Suites, on a higher price.</li>
+        <li><strong>Symphony Suites (2.5% a year):</strong> Launched at $1,016, about a quarter cheaper, so a similar percentage gain on a lower base. It is 1.4 km from the MRT and its 3-bedders are compact (786 to 915 sq ft).</li>
+        <li><strong>Skies Miltonia:</strong> Launched in 2012 during a market upswing, which Stacked Homes gives as the reason for its flat prices. It is 1.9 km from Khatib MRT. Its 2026 price is only 16% above 2015, the weakest in the group.</li>
+      </ul>
+      <h2>Potong Pasir: The Poiz Residences vs its neighbours</h2>
+      <p><strong>The mall condo won. The Poiz launched in 2015 at a lower price than the 2013 launches around it, then grew 3.6% a year against 1.6% to 3.1% for its neighbours.</strong></p>
+      <div class="data-tbl">
+        <table>
+          <caption>Potong Pasir. Returns are yearly price growth. Walking distance to the nearest MRT from OneMap.</caption>
+          <thead><tr><th>Condo</th><th>Since launch, a year</th><th>First 5 years, a year</th><th>Launch price psf</th><th>Walk to MRT</th><th>Completed</th><th>Homes</th><th>Developer</th></tr></thead>
+          <tbody>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/the-poiz-residences/" target="_blank" rel="noopener">The Poiz Residences</a> (with mall)</td><td><strong>3.6%</strong></td><td>3.9%</td><td>$1,413 (Dec 2015)</td><td>380 m, Potong Pasir</td><td>2018</td><td>731</td><td>MCC Land</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/the-venue-residences/" target="_blank" rel="noopener">The Venue Residences</a></td><td>2.5%</td><td>0.3%</td><td>$1,450 (Oct 2013)</td><td>360 m, Potong Pasir</td><td>2017</td><td>266</td><td>City Developments, Hong Leong</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/sennett-residence/" target="_blank" rel="noopener">Sennett Residence</a></td><td>1.6%</td><td>0.6%</td><td>$1,450 (Mar 2013)</td><td>170 m, Potong Pasir</td><td>2016</td><td>335</td><td>Clerodendrum Land</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/the-tre-ver/" target="_blank" rel="noopener">The Tre Ver</a></td><td>3.1%</td><td>4.3%</td><td>$1,555 (Aug 2018)</td><td>970 m, Potong Pasir</td><td>2022</td><td>729</td><td>UOL, UIC (UVD Projects)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Why each did better or worse:</strong></p>
+      <ul>
+        <li><strong>The Poiz Residences (3.6% a year):</strong> The only mall condo in this study that launched at or below its neighbours' prices: $1,413 in Dec 2015, when the market was low, against about $1,450 for the 2013 launches nearby. It did best in its group.</li>
+        <li><strong>The Venue Residences (2.5% a year):</strong> Launched Oct 2013 at $1,450, near the 2013 peak, just before loan limits slowed the market. Prices were flat for 5 years. It is small (266 homes) and has its own row of 28 shops.</li>
+        <li><strong>Sennett Residence (1.6% a year):</strong> Also launched in 2013 at about $1,450 and also flat for 5 years, although it is 170 m from the MRT. Few sales each year, so its yearly averages jump around.</li>
+        <li><strong>The Tre Ver (3.1% a year):</strong> Launched Aug 2018 at about $1,555, just before the 2020 to 2023 price rise. Strong first 5 years even though it is 970 m from the MRT.</li>
+      </ul>
+      <h2>Paya Lebar: Park Place Residences vs its neighbours</h2>
+      <p><strong>The neighbours won. Park Place launched about 17% above them and has grown 2.5% a year since launch, against 2.9% and 3.9%.</strong></p>
+      <div class="data-tbl">
+        <table>
+          <caption>Paya Lebar. Returns are yearly price growth. Walking distance to the nearest MRT from OneMap.</caption>
+          <thead><tr><th>Condo</th><th>Since launch, a year</th><th>First 5 years, a year</th><th>Launch price psf</th><th>Walk to MRT</th><th>Completed</th><th>Homes</th><th>Developer</th></tr></thead>
+          <tbody>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/park-place-residences-at-plq/" target="_blank" rel="noopener">Park Place Residences</a> (with mall)</td><td><strong>2.5%</strong></td><td>3.4%</td><td>$1,800 (Mar 2017)</td><td>190 m, Paya Lebar</td><td>2019</td><td>429</td><td>Lendlease</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/sims-urban-oasis/" target="_blank" rel="noopener">Sims Urban Oasis</a></td><td>2.9%</td><td>1.9%</td><td>$1,384 (2015)</td><td>500 m, Aljunied</td><td>2017</td><td>1,024</td><td>GuocoLand</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/parc-esta/" target="_blank" rel="noopener">Parc Esta</a></td><td>3.9%</td><td>4.7%</td><td>$1,701 (Sep 2018)</td><td>410 m, Eunos</td><td>2022</td><td>1,399</td><td>MCL Land</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Why each did better or worse:</strong></p>
+      <ul>
+        <li><strong>Park Place Residences (2.5% a year):</strong> Launched at about $1,800, about 30% above Sims Urban Oasis. Strong first 5 years as Paya Lebar Quarter's offices and mall opened, but since 2022 prices have risen only about 1.6% a year. Small (429 homes).</li>
+        <li><strong>Sims Urban Oasis (2.9% a year):</strong> Lower entry price and a steady rise. Agents said its sales picked up after Park Place launched (EdgeProp, Apr 2017).</li>
+        <li><strong>Parc Esta (3.9% a year):</strong> Launched Sep 2018 at about $1,701, then rode the 2020 to 2023 rise. Large (1,399 homes), 410 m from Eunos MRT.</li>
+      </ul>
+      <h2>Sengkang / Buangkok: Sengkang Grand Residences vs its neighbours</h2>
+      <p><strong>The neighbours won. Sengkang Grand launched about a third above them and grew 2.4% a year, against 3.4% to 3.7%.</strong></p>
+      <div class="data-tbl">
+        <table>
+          <caption>Sengkang / Buangkok. Returns are yearly price growth. Walking distance to the nearest MRT from OneMap.</caption>
+          <thead><tr><th>Condo</th><th>Since launch, a year</th><th>First 5 years, a year</th><th>Launch price psf</th><th>Walk to MRT</th><th>Completed</th><th>Homes</th><th>Developer</th></tr></thead>
+          <tbody>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/sengkang-grand-residences/" target="_blank" rel="noopener">Sengkang Grand Residences</a> (with mall)</td><td><strong>2.4%</strong></td><td>3.0%</td><td>$1,747 (May 2019)</td><td>180 m, Buangkok</td><td>2023</td><td>680</td><td>CapitaLand, City Developments</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/riverfront-residences/" target="_blank" rel="noopener">Riverfront Residences</a></td><td>3.4%</td><td>4.5%</td><td>$1,313 (Jul 2018)</td><td>1.4 km, Hougang</td><td>2024</td><td>1,472</td><td>Oxley-led group (Rio Casa Venture)</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/the-florence-residences/" target="_blank" rel="noopener">The Florence Residences</a></td><td>3.7%</td><td>4.1%</td><td>$1,448 (May 2019)</td><td>960 m, Kovan</td><td>2023</td><td>1,410</td><td>Logan Property, Nanshan Group</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/jewel-at-buangkok/" target="_blank" rel="noopener">Jewel @ Buangkok</a></td><td>3.6%</td><td>2.1%</td><td>$1,150 (Jun 2013)</td><td>280 m, Buangkok</td><td>2016</td><td>616</td><td>City Developments</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Why each did better or worse:</strong></p>
+      <ul>
+        <li><strong>Sengkang Grand Residences (2.4% a year):</strong> Launched at about $1,747, about a third above Riverfront and a fifth above Florence. Prices have been nearly flat since completion in 2023 (about 1.5% a year).</li>
+        <li><strong>Riverfront Residences (3.4% a year):</strong> Lowest entry price in the group. It is 1.4 km from the MRT, but the low base let it grow faster.</li>
+        <li><strong>The Florence Residences (3.7% a year):</strong> Launched the same year as Sengkang Grand at about $1,448, and grew faster from the lower base. 960 m from Kovan MRT.</li>
+        <li><strong>Jewel @ Buangkok (3.6% a year):</strong> Launched in 2013 at about $1,150 and was flat until 2018. It then narrowed its price gap to Sengkang Grand by about 40% (Stacked Homes). 280 m from the same MRT.</li>
+      </ul>
+      <h2>Woodleigh: The Woodleigh Residences vs its neighbours</h2>
+      <p><strong>The neighbours won. The Woodleigh Residences launched about 30% above them and grew 2.5% a year, against 3.1% to 4.2%. Park Colonial shares the same MRT station.</strong></p>
+      <div class="data-tbl">
+        <table>
+          <caption>Woodleigh. Returns are yearly price growth. Walking distance to the nearest MRT from OneMap.</caption>
+          <thead><tr><th>Condo</th><th>Since launch, a year</th><th>First 5 years, a year</th><th>Launch price psf</th><th>Walk to MRT</th><th>Completed</th><th>Homes</th><th>Developer</th></tr></thead>
+          <tbody>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/the-woodleigh-residences/" target="_blank" rel="noopener">The Woodleigh Residences</a> (with mall)</td><td><strong>2.5%</strong></td><td>2.6%</td><td>$2,036 (Nov 2018)</td><td>100 m, Woodleigh</td><td>2024</td><td>667</td><td>SPH, Kajima</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/park-colonial/" target="_blank" rel="noopener">Park Colonial</a></td><td>3.9%</td><td>4.0%</td><td>$1,725 (Jul 2018)</td><td>110 m, Woodleigh</td><td>2022</td><td>805</td><td>Chip Eng Seng (CEL Development)</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/the-tre-ver/" target="_blank" rel="noopener">The Tre Ver</a></td><td>3.1%</td><td>4.3%</td><td>$1,555 (Aug 2018)</td><td>970 m, Potong Pasir</td><td>2022</td><td>729</td><td>UOL, UIC (UVD Projects)</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/forest-woods/" target="_blank" rel="noopener">Forest Woods</a></td><td>4.2%</td><td>3.5%</td><td>$1,408 (2016)</td><td>550 m, Serangoon</td><td>2020</td><td>519</td><td>City Developments-linked (Serangoon Green)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Why each did better or worse:</strong></p>
+      <ul>
+        <li><strong>The Woodleigh Residences (2.5% a year):</strong> First units sold at about $2,036 in Nov 2018, about 18% above Park Colonial next door. Park Colonial is 110 m from the same MRT, so the mall was Woodleigh's only real edge. Prices have picked up since the mall and homes were finished in 2024.</li>
+        <li><strong>Park Colonial (3.9% a year):</strong> Same MRT station, launched the same year at a lower price, and grew faster.</li>
+        <li><strong>The Tre Ver (3.1% a year):</strong> Launched Aug 2018 at about $1,555, just before the 2020 to 2023 price rise. Strong first 5 years even though it is 970 m from the MRT.</li>
+        <li><strong>Forest Woods (4.2% a year):</strong> Launched in 2016 at about $1,408, two years before the 2018 launches in the area. 550 m from Serangoon MRT.</li>
+      </ul>
+      <h2>Bukit Panjang: Hillion Residences vs its neighbours</h2>
+      <p><strong>Mixed. Hillion beat Eco Sanctuary over the first 5 years (2.7% against 1.4% a year) but is slightly behind since launch (2.5% against 2.9%). It beat the smaller, older neighbours.</strong></p>
+      <div class="data-tbl">
+        <table>
+          <caption>Bukit Panjang. Returns are yearly price growth. Walking distance to the nearest MRT from OneMap.</caption>
+          <thead><tr><th>Condo</th><th>Since launch, a year</th><th>First 5 years, a year</th><th>Launch price psf</th><th>Walk to MRT</th><th>Completed</th><th>Homes</th><th>Developer</th></tr></thead>
+          <tbody>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/hillion-residences/" target="_blank" rel="noopener">Hillion Residences</a> (with mall)</td><td><strong>2.5%</strong></td><td>2.7%</td><td>$1,275 (Mar 2013)</td><td>420 m, Bukit Panjang (Downtown Line)</td><td>2017</td><td>546</td><td>Sim Lian</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/eco-sanctuary/" target="_blank" rel="noopener">Eco Sanctuary</a></td><td>2.9%</td><td>1.4%</td><td>$1,100 (Dec 2012)</td><td>1.7 km, Cashew (Downtown Line)</td><td>2016</td><td>483</td><td>S P Setia</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/hillsta/" target="_blank" rel="noopener">Hillsta</a></td><td>&ndash;</td><td>&ndash;</td><td>Not found (2012)</td><td>720 m, Bukit Panjang (Downtown Line)</td><td>2016</td><td>416</td><td>Trusthouse</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/the-tennery/" target="_blank" rel="noopener">The Tennery</a></td><td>&ndash;</td><td>&ndash;</td><td>Not found (2011)</td><td>360 m, Bukit Panjang (Downtown Line)</td><td>2014</td><td>338</td><td>Dollar Land</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Why each did better or worse:</strong></p>
+      <ul>
+        <li><strong>Hillion Residences (2.5% a year):</strong> Launched Mar 2013 at about $1,250 to $1,300, near a market peak. Bukit Panjang Downtown Line station next door opened in Dec 2015, and 99.co found buyer demand moved to Hillion for its transport hub and mall. Beat Eco Sanctuary over the first 5 years; level with it since.</li>
+        <li><strong>Eco Sanctuary (2.9% a year):</strong> Launched Dec 2012 at about $1,100. It is 1.7 km from the Downtown Line. Slow first 5 years, then grew faster from 2020.</li>
+        <li><strong>Hillsta:</strong> Prices rose about 1.8% a year from 2016 to 2026, behind Hillion. Launch price not found.</li>
+        <li><strong>The Tennery:</strong> Only 1 and 2-bedroom homes, and an older lease. 99.co said its resale was hurt when buyer demand moved to Hillion. Prices rose about 1.5% a year from 2015 to 2026.</li>
+      </ul>
+      <h2>Bedok: Bedok Residences vs its neighbours</h2>
+      <p><strong>The cheaper neighbours won. Bedok Residences launched 35% to 47% above Waterfront Isle and Archipelago and grew 2.0% a year, against 3.0% to 4.0%. Urban Vista, launched even higher, did worst.</strong></p>
+      <div class="data-tbl">
+        <table>
+          <caption>Bedok. Returns are yearly price growth. Walking distance to the nearest MRT from OneMap.</caption>
+          <thead><tr><th>Condo</th><th>Since launch, a year</th><th>First 5 years, a year</th><th>Launch price psf</th><th>Walk to MRT</th><th>Completed</th><th>Homes</th><th>Developer</th></tr></thead>
+          <tbody>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/bedok-residences/" target="_blank" rel="noopener">Bedok Residences</a> (with mall)</td><td><strong>2.0%</strong></td><td>0.4%</td><td>$1,350 (Nov 2011)</td><td>210 m, Bedok</td><td>2015</td><td>583</td><td>CapitaLand</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/waterfront-isle/" target="_blank" rel="noopener">Waterfront Isle</a></td><td>4.0%</td><td>3.8%</td><td>$920 (Feb 2011)</td><td>1.1 km, Bedok Reservoir</td><td>2015</td><td>561</td><td>Far East Organization, Frasers</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/archipelago/" target="_blank" rel="noopener">Archipelago</a></td><td>3.0%</td><td>2.9%</td><td>$1,000 (Dec 2011)</td><td>580 m, Bedok North</td><td>2015</td><td>577</td><td>UOL, Singapore Land</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/urban-vista/" target="_blank" rel="noopener">Urban Vista</a></td><td>0.3%</td><td>-0.8%</td><td>$1,494 (Mar 2013)</td><td>360 m, Tanah Merah</td><td>2016</td><td>582</td><td>Bayfront Realty</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Why each did better or worse:</strong></p>
+      <ul>
+        <li><strong>Bedok Residences (2.0% a year):</strong> Launched Nov 2011 at about $1,350, about 47% above Waterfront Isle and 35% above Archipelago. Loan limits in 2013 and a falling market followed. Prices were only 2% higher after 5 years.</li>
+        <li><strong>Waterfront Isle (4.0% a year):</strong> Launched at about $920. It is 1.1 km from Bedok Reservoir MRT, but the low base gave the best return in the group.</li>
+        <li><strong>Archipelago (3.0% a year):</strong> Launched at about $1,000 in the same month as Bedok Residences. 580 m from Bedok North MRT.</li>
+        <li><strong>Urban Vista (0.3% a year):</strong> Launched at about $1,494, above Bedok Residences. Small 3-bedders, loft units, train and road noise, and a large rival opposite (Grandeur Park). By Feb 2022, 19 resales had made a profit and 61 a loss (Stacked Homes).</li>
+      </ul>
+      <h2>Punggol: Watertown vs its neighbours</h2>
+      <p><strong>The neighbours won. Watertown launched about a quarter above them and grew 2.7% a year, against 3.9% and 4.3%. All three are within 460 m of Punggol MRT.</strong></p>
+      <div class="data-tbl">
+        <table>
+          <caption>Punggol. Returns are yearly price growth. Walking distance to the nearest MRT from OneMap.</caption>
+          <thead><tr><th>Condo</th><th>Since launch, a year</th><th>First 5 years, a year</th><th>Launch price psf</th><th>Walk to MRT</th><th>Completed</th><th>Homes</th><th>Developer</th></tr></thead>
+          <tbody>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/watertown/" target="_blank" rel="noopener">Watertown</a> (with mall)</td><td><strong>2.7%</strong></td><td>2.3%</td><td>$1,169 (Jan 2012)</td><td>250 m, Punggol</td><td>2017</td><td>992</td><td>Far East Organization, Frasers, Sekisui House</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/a-treasure-trove/" target="_blank" rel="noopener">A Treasure Trove</a></td><td>3.9%</td><td>2.3%</td><td>$915 (Sep 2011)</td><td>460 m, Punggol</td><td>2015</td><td>882</td><td>Sim Lian</td></tr>
+            <tr><td class="metric"><a href="https://directory.stackedhomes.com/condo/parc-centros/" target="_blank" rel="noopener">Parc Centros</a></td><td>4.3%</td><td>3.0%</td><td>$950 (Jul 2012)</td><td>320 m, Punggol</td><td>2016</td><td>618</td><td>Wee Hur</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Why each did better or worse:</strong></p>
+      <ul>
+        <li><strong>Watertown (2.7% a year):</strong> First-month median $1,169, then about $1,341 the next month. Punggol was then seen as remote. In 2016, 6 of 10 traceable early resales were at a loss (EdgeProp). Average yearly return across all resales: 1.8% (Stacked Homes, Apr 2025). From the second-month price, about 1.7% a year to today.</li>
+        <li><strong>A Treasure Trove (3.9% a year):</strong> Launched Sep 2011 at about $915. All 61 traceable early resales were profitable by 2016 (EdgeProp). 460 m from the same MRT.</li>
+        <li><strong>Parc Centros (4.3% a year):</strong> Launched Jul 2012 at about $950, 320 m from the same MRT. Best return in the group.</li>
+      </ul>
+
+      <h2>What other studies found</h2>
+      <ul>
+        <li><strong>Stacked Homes (May 2025):</strong> across 17 mall condos, the average total gain was 29.9% over 2,300 deals, against 32.4% for other condos over 157,181 deals. For buyers who bought new and sold at resale: 30.2% against 29.5%.</li>
+        <li><strong>99.co (2021):</strong> no clear, guaranteed advantage in price growth or rental return; scarcity was the only clear edge.</li>
+        <li><strong>EdgeProp (May 2025):</strong> concluded mall condos tend to give sellers higher profits, citing the largest single deals. Watertown had 377 profitable resales and 33 at a loss; Compass Heights 515 and 89.</li>
+        <li><strong>A PropNex agent's guide (Oct 2026):</strong> the extra price tends to hold when the gap to the nearest condo is about 7% to 10%, and resale gets harder at 20% to 30%. The figures in this study agree.</li>
+      </ul>
+
+      <h2>What this means if you are looking at a mall condo now</h2>
+      <ol>
+        <li><strong>Compare the launch price with the nearest condos first.</strong> Under about 10% above them, mall condos have held value well. At 20% or more, expect the neighbours to catch up.</li>
+        <li><strong>Check where the neighbours are.</strong> If they are also within 500 m of the same MRT, you are paying mainly for the mall.</li>
+        <li><strong>Check the market timing.</strong> A launch priced at a market high starts with less room to grow, mall or not.</li>
+        <li><strong>Count the supply.</strong> A 900-plus-unit project completing at the same time as its neighbours can stay flat for years after completion.</li>
+        <li><strong>Plan to hold, not to sell in a collective sale.</strong> Shop owners in the same development can block a collective sale, and running costs are higher with two maintenance funds.</li>
+      </ol>
+      <p>Mall condos on this site that this applies to now include <a href="/project/lucerne-grand/">Lucerne Grand</a>, <a href="/project/pinery-residences/">Pinery Residences</a>, <a href="/project/parktown-residence/">Parktown Residence</a>, <a href="/project/chencharu-central-residences/">Chencharu Central Residences</a> and <a href="/project/hougang-central-mixed-use/">Hougang Central</a>. Each project page lists the nearby condos to compare against.</p>
+
+      <div class="art-cta">
+        <h3>Weighing a mall condo against the condos around it?</h3>
+        <p>A free 30-minute session compares the launch premium, MRT distance and supply for your shortlist, using sale records.</p>
+        <a href="/contact/" onclick="showPage('contact'); return false;" class="cta-btn">Book a Free Consultation</a>
+      </div>
+
+      <h2>Frequently asked questions</h2>
+      <div class="art-faq">
+        <details>
+          <summary>Do integrated condos with a mall appreciate faster in Singapore?</summary>
+          <p>Not reliably. Across 8 completed mall condos and 20 nearby condos of similar size, the mall condos grew about 2.6% a year from launch to November 2026, against about 3.2% for the neighbours with a known launch price. The mall condo beat all its neighbours in only 1 of 8 areas.</p>
+        </details>
+        <details>
+          <summary>Why did cheaper nearby condos often grow faster than the mall condo?</summary>
+          <p>Mostly because they started from a lower price. Mall condos in this study launched up to 35% above their neighbours. Market timing, how close the neighbours were to the same MRT station, and large amounts of supply completing at once also mattered.</p>
+        </details>
+        <details>
+          <summary>Is a mall condo still worth buying?</summary>
+          <p>It can be, for own stay, when the launch premium over the nearest comparable condos is small (about 10% or less) and the neighbours are not close to the same MRT station. The Poiz Residences, which launched below its neighbours' prices, was the best performer in its area.</p>
+        </details>
+        <details>
+          <summary>Do mall condos earn higher rent?</summary>
+          <p>Not clearly. In this study the mall condo's gross rental yield was higher in 6 of 8 pairs, usually by only 0.1 to 0.4 percentage points, and lower at North Park Residences and Sengkang Grand Residences.</p>
+        </details>
+        <details>
+          <summary>How was this study measured?</summary>
+          <p>Yearly growth from the reported launch price to the November 2026 average price per square foot in URA caveat records. It is a price comparison, not each owner's actual profit, and leaves out stamp duty, loan interest, fees and rent.</p>
+        </details>
+      </div>
+
+      <div class="art-src">
+        <h3>Sources &amp; References</h3>
+        <ol>
+          <li>Stacked Homes condo directory: yearly average prices (URA caveats), MRT walking distances (OneMap), units, developers and completion years for all 28 condos, Nov 2026. Each condo name in the tables above links to its page.</li>
+          <li>Stacked Homes, "Are Integrated Developments In Singapore Worth the Premium? We Analysed 17 Projects", May 2025. <a href="https://stackedhomes.com/are-integrated-developments-in-singapore-worth-the-premium-we-analysed-17-projects-to-find-out/" target="_blank" rel="noopener">stackedhomes.com</a></li>
+          <li>EdgeProp, "Do integrated developments outperform standard condos?", May 2025. <a href="https://www.edgeprop.sg/property-news/do-integrated-developments-outperform-standard-condos" target="_blank" rel="noopener">edgeprop.sg</a></li>
+          <li>99.co, "Are integrated condos really worth their price premium?", 2021. <a href="https://www.99.co/singapore/insider/are-integrated-condos-really-worth-their-price-premium/" target="_blank" rel="noopener">99.co</a></li>
+          <li>99.co, "Neighbourhood condos are affected when integrated-MRT condos come to town". <a href="https://www.99.co/singapore/insider/neighbourhood-condos-affected-integrated-mrt/" target="_blank" rel="noopener">99.co</a></li>
+          <li>EdgeProp, "Contrasting fortunes in Punggol", Jun 2016. <a href="https://edgeprop.sg/property-news/contrasting-fortunes-punggol" target="_blank" rel="noopener">edgeprop.sg</a></li>
+          <li>Stacked Homes, Watertown 10-year case study, Apr 2025. <a href="https://stackedhomes.com/watertown-condos-10-year-case-study-when-holding-period-and-exit-timing-mattered-more-than-buying-early/" target="_blank" rel="noopener">stackedhomes.com</a></li>
+          <li>Stacked Homes, "6 reasons why Urban Vista has performed poorly", Feb 2022. <a href="https://stackedhomes.com/6-reasons-why-urban-vista-has-performed-poorly" target="_blank" rel="noopener">stackedhomes.com</a></li>
+          <li>Stacked Homes, "Can a new integrated project raise the value of your condo? Sengkang Grand Residences", May 2025. <a href="https://stackedhomes.com/can-a-new-integrated-project-raise-the-value-of-your-condo-the-surprising-results-near-sengkang-grand-residences/" target="_blank" rel="noopener">stackedhomes.com</a></li>
+          <li>EdgeProp, "The Woodleigh Residences' launch drives up prices and transaction volume in neighbourhood", Nov 2018. <a href="https://www.edgeprop.sg/property-news/woodleigh-residences-launch-drives-prices-and-transaction-volume-neighbourhood" target="_blank" rel="noopener">edgeprop.sg</a></li>
+          <li>EdgeProp, "Sales at Sims Urban Oasis, Tre Residences pick up on back of Park Place Residences' launch", Apr 2017. <a href="https://www.edgeprop.sg/property-news/sales-sims-urban-oasis-tre-residences-pick-back-park-place-residences-launch" target="_blank" rel="noopener">edgeprop.sg</a></li>
+          <li>EdgeProp, "North Park Residences best seller in April", May 2015. <a href="https://edgeprop.sg/property-news/north-park-residences-best-seller-april" target="_blank" rel="noopener">edgeprop.sg</a></li>
+          <li>EdgeProp, "Buying interest in Symphony Suites rises in December", Jan 2018. <a href="https://www.edgeprop.sg/property-news/buying-interest-symphony-suites-rises-december-project-90-sold" target="_blank" rel="noopener">edgeprop.sg</a></li>
+          <li>Stacked Homes, "Symphony Suites, Skies Miltonia or Signature at Yishun", Jun 2022. <a href="https://stackedhomes.com/symphony-suites-skies-miltonia-or-signature-at-yishun-which-3-bedroom-is-better-for-a-5-10-year-horizon-exit/" target="_blank" rel="noopener">stackedhomes.com</a></li>
+          <li>EdgeProp, "S P Setia's global push" (Eco Sanctuary launch price). <a href="https://www.edgeprop.sg/property-news/s-p-setias-global-push" target="_blank" rel="noopener">edgeprop.sg</a></li>
+          <li>PropertyGuru launch reports: Bedok Residences (Nov 2011), Watertown (Jan 2012), Parc Centros (Jul 2012), Archipelago (Dec 2011), Potong Pasir launches (Mar 2013). <a href="https://www.propertyguru.com.sg/property-management-news/2011/11/44455/over-350-units-sold-at-bedok-residences-on-day-1" target="_blank" rel="noopener">propertyguru.com.sg</a></li>
+          <li>CDL press releases: Jewel @ Buangkok (Jun 2013) and The Venue Residences (Oct 2013). <a href="https://cdl.com.sg/newsroom/jewel-buangkok-sells-over-70-of-launched-units-over-the-weekend-preview" target="_blank" rel="noopener">cdl.com.sg</a></li>
+          <li>PropNex agent's guide, "Integrated Developments at Resale: When the Premium Pays", Oct 2026. <a href="https://www.mychoicehomez.com/integrated-development-resale-performance/" target="_blank" rel="noopener">mychoicehomez.com</a></li>
+        </ol>
+      </div>
+
+      <p><em>Method notes: launch price is the average or median reported at launch; where none was found, the average of developer sales in the launch year is used. Hillion Residences ($1,250 to $1,300) and Park Colonial ($1,700 to $1,750) use the middle of the reported range. Watertown uses its first-month median of $1,169; buyers in its second month paid about $1,341, which gives about 1.7% a year to today. Launch prices for Skies Miltonia, Hillsta and The Tennery were not found. Yearly averages mix unit sizes and floors.</em></p>
+
+      <div class="art-disc">
+        <strong>Disclaimer.</strong> This article is for general information and educational purposes only and does not constitute financial, legal, or investment advice. Figures are based on publicly available URA caveat data and published launch reports as at November 2026 and may contain errors or be revised. Past price performance does not indicate future returns. Property values may rise or fall. Buyers should do their own due diligence and seek independent advice before making any decision. PropNex Realty Pte Ltd and its salespersons will not be responsible for any errors or omissions, or for the results obtained from the use of this information.
+      </div>
+    `
   }
 
 }; // end ARTICLES
