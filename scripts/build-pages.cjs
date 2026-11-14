@@ -568,7 +568,7 @@ const CA = (() => {
   const site = {
     up: up.map(p => ({ pid: p.id, slug: projectSlug(p), name: p.name, dev: dev(p), units: p.totalUnits || null, unitsEst: !!p.unitsEst, where: p.location, launch: p.launchShort || null, landCost: p.landCost || null, landDate: p.landDate || null, tenure: p.tenure || null, mrt: p.mrt || null, ec: isEC(p), reg: p.district, mall: !!p.mall, desc: p.description || '', src: (p.sources || []).map(x => [x.t, x.u]) })),
     // Unverified projects: only the reported launch average is shown (as on their project pages), never the placeholder units-left figure.
-    launched: launched.map(p => ({ pid: p.id, slug: projectSlug(p), name: p.name, dev: dev(p), units: p.totalUnits || null, where: p.location, launchDate: p.launchDate.replace(/\s*\(.*$/, ''), launchShort: mon(p.launchSort), avgPSF: p.avgPSF || null, startingPrice: VERIFIED_DETAIL.has(p.id) ? p.startingPrice || null : null, tenure: p.tenure || null, top: p.top || null, mrt: p.mrt || null, distanceMRT: p.distanceMRT || null, schools: p.schools || null, type: p.type, reg: p.district, ec: isEC(p), mall: !!p.mall, desc: VERIFIED_DETAIL.has(p.id) ? p.description || '' : '' })),
+    launched: launched.map(p => ({ pid: p.id, slug: projectSlug(p), name: p.name, dev: dev(p), units: p.totalUnits || null, where: p.location, launchDate: p.launchDate.replace(/\s*\(.*$/, ''), launchShort: mon(p.launchSort), avgPSF: p.avgPSF || null, startingPrice: VERIFIED_DETAIL.has(p.id) ? p.startingPrice || null : null, tenure: p.tenure || null, top: p.top || null, mrt: p.mrt || null, distanceMRT: p.distanceMRT || null, schools: p.schools || null, type: p.type, reg: p.district, ec: isEC(p), mall: !!p.mall, desc: VERIFIED_DETAIL.has(p.id) ? p.description || '' : '', review: fs.existsSync(path.join(ROOT, 'deep-analysis', projectSlug(p), 'index.html')) ? `/deep-analysis/${projectSlug(p)}/` : null })),
   };
   js = js.replace(/\/\* BUILD:SITE-UP START \*\/.*?\/\* BUILD:SITE-UP END \*\//, () => `/* BUILD:SITE-UP START */const SITE = ${JSON.stringify(site).replace(/</g, '\\u003c')};/* BUILD:SITE-UP END */`);
   if (!js.includes('const SITE = {"up"')) throw new Error('condo-analysis: SITE-UP marker not filled');
@@ -602,7 +602,7 @@ function caStatic(id, f) {
   if (f.kind === 'launched') {
     const p = f.p;
     return `${back}<h1>${esc(p.name)}</h1><p>${esc(placeOf(p))} · District ${districtOf(p)} (${segmentOf(p)}) · ${esc(p.developer.replace(/\s*\((?:entity|entities)[^)]*\)/i, ''))}</p>
-<p>${esc(shortName(p))} launched in ${esc(p.launchDate.replace(/\s*\(.*$/, ''))}${p.avgPSF ? ` at a reported average of about $${p.avgPSF.toLocaleString('en-US')} psf` : ''}. Units left and current prices are being verified against dated sources.</p>${tools}
+<p>${esc(shortName(p))} launched in ${esc(p.launchDate.replace(/\s*\(.*$/, ''))}${p.avgPSF ? ` at a reported average of about $${p.avgPSF.toLocaleString('en-US')} psf` : ''}. Units left and current prices are being verified against dated sources.</p>${tools}${fs.existsSync(path.join(ROOT, 'deep-analysis', projectSlug(p), 'index.html')) ? `<p><a href="/deep-analysis/${projectSlug(p)}/">Read the full written review of ${esc(p.name)}</a></p>` : ''}
 <ul>${li([['Homes', p.totalUnits ? p.totalUnits.toLocaleString('en-US') : ''], ['Tenure', p.tenure], ['Completion', p.top], ['Nearest MRT', p.distanceMRT || p.mrt]])}</ul><p><a href="${projectPath(p)}">Project page with FAQs</a></p>`;
   }
   if (f.kind === 'upcoming' || f.kind === 'upcoming-basic') {
