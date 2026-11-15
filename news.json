@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-15T18:12:14+08:00",
+  "updated": "2026-11-16T00:37:29+08:00",
   "sources": [
     "EdgeProp Singapore",
     "The Straits Times",
@@ -237,6 +237,18 @@
       "description": "Stacked Homes sets The Esta's two-bedder yield at 2.29% and #1 Suites at 5.75%, and says a higher yield can be a weaker price."
     },
     {
+      "id": "n3199077c",
+      "title": "Rare, roomy and pricey? Inside Singapore's niche jumbo HDB flat market",
+      "date": "2026/11/07",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "CNA",
+      "sourceNameZh": "CNA",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n3199077c/",
+      "description": "CNA calls jumbo HDB flats rare, roomy and pricey. What buyers should check before paying extra for the space."
+    },
+    {
       "id": "9824",
       "title": "Bishan flats with shorter waiting times among BTO launches in February",
       "date": "2026/11/06",
@@ -429,6 +441,18 @@
       "description": "HDB launched 7,964 Build-To-Order flats on 4 November 2026, the last sales exercise of the year. Seven projects are on sale in Bedok, Geylang, Sembawang."
     },
     {
+      "id": "9808",
+      "title": "1 in 5 prime-region private home resale deals made at a loss in Q3",
+      "date": "2026/11/03",
+      "image": "/news/images/9808.jpg",
+      "sourceName": "Business Times",
+      "sourceNameZh": "商业时报",
+      "sourceFeed": "propnex",
+      "category": "Real estate",
+      "path": "/news/9808/",
+      "description": "1 in 5 prime-region private home resale deals made at a loss in Q3."
+    },
+    {
       "id": "n27310332",
       "title": "Tengah Plantation Dew BTO Review: Rare 5-room and 3Gen units (November 2026)",
       "date": "2026/11/03",
@@ -571,6 +595,42 @@
       "category": "Real estate",
       "path": "/news/9799/",
       "description": "Toa Payoh Hillside offers about 1,600 BTO flats beside Caldecott MRT in November 2026, inside a plan for 6,000 homes. What is real today."
+    },
+    {
+      "id": "9794",
+      "title": "Private home launch pipeline set to climb to 14-year high in 2027",
+      "date": "2026/10/31",
+      "image": "/news/images/9794.jpg",
+      "sourceName": "The Straits Times",
+      "sourceNameZh": "海峡时报",
+      "sourceFeed": "propnex",
+      "category": "Real estate",
+      "path": "/news/9794/",
+      "description": "About 14,800 private homes could launch in 2027, the most since 2013. What that means for HDB upgraders and resale sellers."
+    },
+    {
+      "id": "n17060ea2",
+      "title": "First S$1.8M HDB resale flat in Singapore recorded in Queenstown",
+      "date": "2026/10/30",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "99.co",
+      "sourceNameZh": "99.co",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n17060ea2/",
+      "description": "The recorded price is S$1.818 million for a five-room HDB resale in Queenstown. Reports described it as Singapore’s first HDB resale at about S$1.8 million."
+    },
+    {
+      "id": "9792",
+      "title": "Hao Mart founder halts foreclosure of his Jervois Hill bungalow by OG",
+      "date": "2026/10/30",
+      "image": "/news/images/9792.jpg",
+      "sourceName": "The Straits Times",
+      "sourceNameZh": "海峡时报",
+      "sourceFeed": "propnex",
+      "category": "Real estate",
+      "path": "/news/9792/",
+      "description": "A Jervois Hill bungalow foreclosure was halted. What one landed loan does, and does not, say about Singapore property prices."
     }
   ]
 }
