@@ -563,6 +563,9 @@ const CA = (() => {
   const xscore = JSON.parse(js.match(/const XSCORE = (\{.*\});\n/)[1]);
   const hist = JSON.parse(js.match(/const HIST = (\{.*\});\n/)[1]);
   const cx = JSON.parse(js.match(/const CX = (\{.*\});\n/)[1]);
+  const fp = require('./floorplans.cjs')(ROOT);
+  js = js.replace(/\/\* BUILD:FP START \*\/.*?\/\* BUILD:FP END \*\//, () => `/* BUILD:FP START */const FP_URL = '${fp.url}';/* BUILD:FP END */`);
+  if (!js.includes(fp.url)) throw new Error('condo-analysis: FP marker not filled');
   const norm = t => String(t).toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z0-9]/g, '');
   const up = sortForHub(projects.filter(isUpcoming), '2027');
   const lByName = new Map(nl.L.map(l => [norm(l.name), l]));
@@ -586,19 +589,23 @@ const CA = (() => {
   files.set('mall-condo-study', { kind: 'study' });
   const analysisOf = new Map([...files].filter(([, f]) => f.p && f.kind !== 'upcoming-basic').map(([id, f]) => [f.p.id, id]));
   const cssV = crypto.createHash('sha1').update(css).digest('hex').slice(0, 8), jsV = crypto.createHash('sha1').update(js).digest('hex').slice(0, 8);
-  return { css, js, cssV, jsV, markup, nl, data, vstat, xscore, hist, cx, files, analysisOf, up, launched };
+  return { css, js, cssV, jsV, markup, nl, data, vstat, xscore, hist, cx, fp: fp.data, files, analysisOf, up, launched };
 })();
 const caPath = id => id === 'home' ? '/condo-analysis/' : `/condo-analysis/${id}/`;
 const caIndexable = f => !['upcoming-basic', 'study'].includes(f.kind);
 const caOv = id => { const x = CA.xscore[id]; if (!x) return null; const five = Object.values(x.scores).reduce((a, v) => a + v[0], 0) / 5; return (x.growth ? 0.4 * x.growth[0] + 0.6 * five : five).toFixed(1); };
 const caScoreText = id => { const x = CA.xscore[id]; if (!x) return ''; return `<p><strong>Overall score ${caOv(id)} out of 10.</strong> ${esc(x.verdict)}. ${esc(x.why)}</p><h2>Scores</h2><ul>${[['loc', 'Location'], ['entry', 'Entry price'], ['exit', 'Exit plan'], ['food', 'Nearby food'], ['mrt', 'MRT closeness']].map(([k, n]) => `<li><strong>${n}: ${x.scores[k][0]}/10.</strong> ${esc(x.scores[k][1])}</li>`).join('')}${x.growth ? `<li><strong>Price growth (counts for 40%): ${x.growth[0]}/10.</strong> ${esc(x.growth[1])}</li>` : ''}</ul>`; };
+function caPlansText(id) {
+  const list = CA.fp[id]; if (!list || !list.length) return '';
+  return `<h2>Floor plans</h2><ul>${list.map(p => `<li><strong>${p.k}-bedroom, ${esc(p.type)} (${p.sqft.toLocaleString('en-US')} sq ft): layout score ${p.sc}/10.</strong> Pros: ${esc(p.pros.join('; '))}. Cons: ${esc(p.cons.join('; '))}.</li>`).join('')}</ul>`;
+}
 function caCompletedText(id) {
   const x = CA.cx[id], h = CA.hist[id]; if (!x || !h) return '';
   const q = h.profit, e = q.ep, k = n => Math.round(n / 1000).toLocaleString('en-US');
   const won = q.basis === 'ep' ? `${e.win} of ${e.win + e.lose} resales from ${e.from} to ${e.to} made a profit (EdgeProp)` : `${q.n99.win} of ${q.n99.total} resales since resales began made a profit (99.co)`;
   const name = c => (CA.data.condos.find(d => d.id === c) || {}).name || c;
   const t = x.top[0];
-  return `<h2>Key facts</h2><ul><li><strong>Developer:</strong> ${esc(x.dev)}</li><li><strong>Address:</strong> ${esc(x.street)}</li><li><strong>Lease:</strong> 99 years from ${esc(x.lease)}</li><li><strong>Unit mix:</strong> ${esc(x.mix.map(m => `${m[2]} ${m[0].replace('BR', '-bedroom')} (${m[1].replace(' sqft', ' sq ft')})`).join(', '))}</li><li><strong>Nearest MRT:</strong> ${esc(x.mrt[0][0])}, about ${Math.round(x.mrt[0][1] / 10) * 10} m in a straight line</li><li><strong>Primary schools within 1 km:</strong> ${esc(x.schools.length ? x.schools.map(s => `${s[0]} (about ${Math.round(s[1] / 10) * 10} m)`).join(', ') : 'none')}</li><li><strong>Profitable resales:</strong> ${esc(won)}</li><li><strong>Average price growth:</strong> ${h.cagr}% a year since ${h.years[0][0]}, against ${h.distCagr}% for the ${esc(h.district)} average</li><li><strong>Biggest profit:</strong> a ${esc(t[0])}-bedroom bought ${esc(t[2])} for about $${k(t[3])}k and sold ${esc(t[4])} for about $${k(t[5])}k</li><li><strong>Buyers in the past 12 months:</strong> ${x.buyers[0]}% Singaporeans, ${x.buyers[1]}% permanent residents, ${x.buyers[2]}% foreigners; ${x.addr[0]}% came from HDB flats</li><li><strong>Nearby competitors:</strong> ${esc(x.riv.slice(0, 4).map(r => `${name(r[0])} (${r[1]} km)`).join(', '))}</li></ul>`;
+  return `<h2>Key facts</h2><ul><li><strong>Developer:</strong> ${esc(x.dev)}</li><li><strong>Address:</strong> ${esc(x.street)}</li><li><strong>Lease:</strong> 99 years from ${esc(x.lease)}</li><li><strong>Unit mix:</strong> ${esc(x.mix.map(m => `${m[2]} ${m[0].replace('BR', '-bedroom')} (${m[1].replace(' sqft', ' sq ft')})`).join(', '))}</li><li><strong>Nearest MRT:</strong> ${esc(x.mrt[0][0])}, about ${Math.round(x.mrt[0][1] / 10) * 10} m in a straight line</li><li><strong>Primary schools within 1 km:</strong> ${esc(x.schools.length ? x.schools.map(s => `${s[0]} (about ${Math.round(s[1] / 10) * 10} m)`).join(', ') : 'none')}</li><li><strong>Profitable resales:</strong> ${esc(won)}</li><li><strong>Average price growth:</strong> ${h.cagr}% a year since ${h.years[0][0]}, against ${h.distCagr}% for the ${esc(h.district)} average</li><li><strong>Biggest profit:</strong> a ${esc(t[0])}-bedroom bought ${esc(t[2])} for about $${k(t[3])}k and sold ${esc(t[4])} for about $${k(t[5])}k</li><li><strong>Buyers in the past 12 months:</strong> ${x.buyers[0]}% Singaporeans, ${x.buyers[1]}% permanent residents, ${x.buyers[2]}% foreigners; ${x.addr[0]}% came from HDB flats</li><li><strong>Nearby competitors:</strong> ${esc(x.riv.slice(0, 4).map(r => `${name(r[0])} (${r[1]} km)`).join(', '))}</li></ul>${caPlansText(id)}`;
 }
 function caStatic(id, f) {
   const li = rows => rows.filter(r => r[1]).map(([k, v]) => `<li><strong>${esc(k)}:</strong> ${esc(v)}</li>`).join('');
@@ -625,7 +632,7 @@ ${caScoreText(id)}<ul>${li([['Homes', p.totalUnits ? p.totalUnits.toLocaleString
 <p>Upcoming project, not launched yet. Expected launch: ${esc(p.launchShort || 'not announced')}.${p.landCost ? ` Land cost: ${esc(p.landCost)}.` : ''}${x.bids ? ` ${x.bids} bids at the land tender.` : ''}</p>
 ${x.notes ? `<ul>${x.notes.map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}${srcs(x.src)}<p><a href="${projectPath(p)}">Project page with FAQs</a></p>`;
   }
-  if (f.kind === 'panorama') return `${back}<h1>The Panorama</h1><p>Ang Mo Kio Avenue 2, D20. A 698-home, 99-year condo completed in 2017.</p><p>Full case study: 3-bedroom price and profit year by year since 2014, whether Mayflower MRT pushed prices up, who buys from owners, an HDB upgrader affordability calculator, and nearby competitors.</p>${caScoreText(id)}`;
+  if (f.kind === 'panorama') return `${back}<h1>The Panorama</h1><p>Ang Mo Kio Avenue 2, D20. A 698-home, 99-year condo completed in 2017.</p><p>Full case study: 3-bedroom price and profit year by year since 2014, whether Mayflower MRT pushed prices up, who buys from owners, an HDB upgrader affordability calculator, floor plans and nearby competitors.</p>${caPlansText(id)}${caScoreText(id)}`;
   if (f.kind === 'resale') { const c = f.x; return `${back}<h1>${esc(c.name)}</h1><p>${esc(c.area)}, ${esc(c.district)} · ${esc(c.tenure)} · completed ${esc(c.top)}${c.units ? ` · ${esc(c.units)} homes` : ''}</p><p>Deep dive: facts at a glance, average price and profit year by year for each unit type, actual resale deals, growth against the district, who buys here, an HDB upgrader affordability calculator, a break-even resale price calculator and nearby competitors.</p>${caCompletedText(id)}${caScoreText(id)}`; }
   return `${back}<h1>Do condos with a mall make more profit?</h1><p>8 integrated mall condos compared with 20 nearby condos of similar size. Full write-up: <a href="/insights/integrated-mall-condo-returns-2026/">Do Integrated Condos With a Mall Make More Profit?</a></p>`;
 }
