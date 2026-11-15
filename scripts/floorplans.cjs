@@ -6,8 +6,8 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-const FILL = { room: '#FFFFFF', living: '#FBF8F1', kitchen: '#F3E6CC', wet: '#DCE8EE', hall: '#F1EEE7', study: '#EEF0E4', balcony: '#E3EEDC', ledge: '#D9D5CC', planter: '#D6E6CF', bay: '#E8E2F0', yard: '#E9E5DC', shelter: '#CFC9BD', store: '#E6E1D6' };
-const HATCH = { balcony: 'hb', ledge: 'hl', planter: 'hp', bay: 'hl' };
+const FILL = { room: '#FFFFFF', living: '#FBF8F1', kitchen: '#F3E6CC', wet: '#DCE8EE', hall: '#F1EEE7', study: '#EEF0E4', balcony: '#E3EEDC', ledge: '#D9D5CC', planter: '#D6E6CF', bay: '#E8E2F0', yard: '#E9E5DC', shelter: '#CFC9BD', store: '#E6E1D6', xledge: '#EEEBE4' };
+const HATCH = { balcony: 'hb', ledge: 'hl', planter: 'hp', bay: 'hl', xledge: 'hx' };
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const area = r => (r[4] - r[2]) * (r[5] - r[3]);
 
@@ -45,6 +45,7 @@ function svg(p, name) {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${x0 - pad} ${y0 - pad} ${W} ${H}" role="img" aria-label="${esc(name)}: simplified floor-plan sketch, not to scale">`
     + `<defs><pattern id="hb" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="12" height="12" fill="${FILL.balcony}"/><line y2="12" stroke="#B9CDAE" stroke-width="3"/></pattern>`
     + `<pattern id="hl" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="${FILL.ledge}"/><line y2="10" stroke="#A9A397" stroke-width="3"/></pattern>`
+    + `<pattern id="hx" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="${FILL.xledge}"/><line y2="10" stroke="#D3CEC4" stroke-width="2"/></pattern>`
     + `<pattern id="hp" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><rect width="10" height="10" fill="${FILL.planter}"/><line y2="10" stroke="#9DBB8E" stroke-width="3"/></pattern></defs>`
     + `<rect x="${x0 - pad}" y="${y0 - pad}" width="${W}" height="${H}" fill="#FAF8F3"/>`
     + `<g stroke="#0C1B2A" stroke-width="${sw}" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" text-anchor="middle" dominant-baseline="middle"><g>${rects}</g></g>`
@@ -58,14 +59,14 @@ module.exports = function buildFloorPlans(ROOT) {
   const out = {}; let n = 0;
   for (const [cid, list] of Object.entries(src)) {
     out[cid] = list.map(p => {
-      const tot = p.rects.reduce((a, r) => a + area(r), 0), share = ks => p.rects.filter(r => ks.includes(r[0])).reduce((a, r) => a + area(r), 0) / tot * 100;
+      const counted = p.rects.filter(r => r[0] !== 'xledge'), tot = counted.reduce((a, r) => a + area(r), 0), share = ks => counted.filter(r => ks.includes(r[0])).reduce((a, r) => a + area(r), 0) / tot * 100;
       const waste = p.stated ? p.stated[1] / p.stated[2] * 100 : share(['ledge', 'planter', 'bay']);
       const bal = p.stated ? p.stated[0] / p.stated[2] * 100 : share(['balcony']);
       const [sc, why] = score(p, waste, bal);
       const s = svg(p, `${cid} ${p.type}`); const v = crypto.createHash('sha1').update(s).digest('hex').slice(0, 8);
       const file = `${cid}-${p.k}.svg`; fs.writeFileSync(path.join(dir, file), s); n++;
       const xs = p.rects.flatMap(r => [r[2], r[4]]), ys = p.rects.flatMap(r => [r[3], r[5]]);
-      return { k: p.k, type: p.type, sqft: p.sqft, note: p.note || null, units: p.units || null, sc, why, f: p.f, waste: +waste.toFixed(1), bal: +bal.toFixed(1), stated: !!p.stated, pros: p.pros, cons: p.cons, src: p.src, svg: `/assets/fp/${file}?v=${v}`, ar: +((Math.max(...ys) - Math.min(...ys)) / (Math.max(...xs) - Math.min(...xs))).toFixed(3) };
+      return { k: p.k, type: p.type, sqft: p.sqft, note: p.note || null, harm: !!p.harm, units: p.units || null, sc, why, f: p.f, waste: +waste.toFixed(1), bal: +bal.toFixed(1), stated: !!p.stated, pros: p.pros, cons: p.cons, src: p.src, svg: `/assets/fp/${file}?v=${v}`, ar: +((Math.max(...ys) - Math.min(...ys)) / (Math.max(...xs) - Math.min(...xs))).toFixed(3) };
     });
   }
   const json = JSON.stringify({ p: out, s: all.sales || {}, src: all.salesSrc || '' });
