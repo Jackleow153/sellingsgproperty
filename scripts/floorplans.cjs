@@ -65,7 +65,7 @@ module.exports = function buildFloorPlans(ROOT) {
       const s = svg(p, `${cid} ${p.type}`); const v = crypto.createHash('sha1').update(s).digest('hex').slice(0, 8);
       const file = `${cid}-${p.k}.svg`; fs.writeFileSync(path.join(dir, file), s); n++;
       const xs = p.rects.flatMap(r => [r[2], r[4]]), ys = p.rects.flatMap(r => [r[3], r[5]]);
-      return { k: p.k, type: p.type, sqft: p.sqft, units: p.units || null, sc, why, f: p.f, waste: +waste.toFixed(1), bal: +bal.toFixed(1), stated: !!p.stated, pros: p.pros, cons: p.cons, src: p.src, svg: `/assets/fp/${file}?v=${v}`, ar: +((Math.max(...ys) - Math.min(...ys)) / (Math.max(...xs) - Math.min(...xs))).toFixed(3) };
+      return { k: p.k, type: p.type, sqft: p.sqft, note: p.note || null, units: p.units || null, sc, why, f: p.f, waste: +waste.toFixed(1), bal: +bal.toFixed(1), stated: !!p.stated, pros: p.pros, cons: p.cons, src: p.src, svg: `/assets/fp/${file}?v=${v}`, ar: +((Math.max(...ys) - Math.min(...ys)) / (Math.max(...xs) - Math.min(...xs))).toFixed(3) };
     });
   }
   const json = JSON.stringify(out);

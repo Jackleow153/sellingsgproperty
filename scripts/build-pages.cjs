@@ -597,7 +597,7 @@ const caOv = id => { const x = CA.xscore[id]; if (!x) return null; const five = 
 const caScoreText = id => { const x = CA.xscore[id]; if (!x) return ''; return `<p><strong>Overall score ${caOv(id)} out of 10.</strong> ${esc(x.verdict)}. ${esc(x.why)}</p><h2>Scores</h2><ul>${[['loc', 'Location'], ['entry', 'Entry price'], ['exit', 'Exit plan'], ['food', 'Nearby food'], ['mrt', 'MRT closeness']].map(([k, n]) => `<li><strong>${n}: ${x.scores[k][0]}/10.</strong> ${esc(x.scores[k][1])}</li>`).join('')}${x.growth ? `<li><strong>Price growth (counts for 40%): ${x.growth[0]}/10.</strong> ${esc(x.growth[1])}</li>` : ''}</ul>`; };
 function caPlansText(id) {
   const list = CA.fp[id]; if (!list || !list.length) return '';
-  return `<h2>Floor plans</h2><ul>${list.map(p => `<li><strong>${p.k}-bedroom, ${esc(p.type)} (${p.sqft.toLocaleString('en-US')} sq ft): layout score ${p.sc}/10.</strong> Pros: ${esc(p.pros.join('; '))}. Cons: ${esc(p.cons.join('; '))}.</li>`).join('')}</ul>`;
+  return `<h2>Floor plans</h2><ul>${list.map(p => `<li><strong>${p.k}-bedroom, ${esc(p.type)}${p.sqft ? ` (${p.sqft.toLocaleString('en-US')} sq ft)` : ''}: layout score ${p.sc}/10.</strong> Pros: ${esc(p.pros.join('; '))}. Cons: ${esc(p.cons.join('; '))}.</li>`).join('')}</ul>`;
 }
 function caCompletedText(id) {
   const x = CA.cx[id], h = CA.hist[id]; if (!x || !h) return '';
@@ -633,7 +633,7 @@ ${caScoreText(id)}<ul>${li([['Homes', p.totalUnits ? p.totalUnits.toLocaleString
 ${x.notes ? `<ul>${x.notes.map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}${srcs(x.src)}<p><a href="${projectPath(p)}">Project page with FAQs</a></p>`;
   }
   if (f.kind === 'panorama') return `${back}<h1>The Panorama</h1><p>Ang Mo Kio Avenue 2, D20. A 698-home, 99-year condo completed in 2017.</p><p>Full case study: 3-bedroom price and profit year by year since 2014, whether Mayflower MRT pushed prices up, who buys from owners, an HDB upgrader affordability calculator, floor plans and nearby competitors.</p>${caPlansText(id)}${caScoreText(id)}`;
-  if (f.kind === 'resale') { const c = f.x; return `${back}<h1>${esc(c.name)}</h1><p>${esc(c.area)}, ${esc(c.district)} · ${esc(c.tenure)} · completed ${esc(c.top)}${c.units ? ` · ${esc(c.units)} homes` : ''}</p><p>Deep dive: facts at a glance, average price and profit year by year for each unit type, actual resale deals, growth against the district, who buys here, an HDB upgrader affordability calculator, a break-even resale price calculator and nearby competitors.</p>${caCompletedText(id)}${caScoreText(id)}`; }
+  if (f.kind === 'resale') { const c = f.x; return `${back}<h1>${esc(c.name)}</h1><p>${esc(c.area)}, ${esc(c.district)} · ${esc(c.tenure)} · completed ${esc(c.top)}${c.units ? ` · ${esc(c.units)} homes` : ''}</p><p>Deep dive: facts at a glance, average price and profit year by year for each unit type, actual resale deals, growth against the district, who buys here, an HDB upgrader affordability calculator, a break-even resale price calculator, floor plans with a layout score and nearby competitors.</p>${caCompletedText(id)}${caScoreText(id)}`; }
   return `${back}<h1>Do condos with a mall make more profit?</h1><p>8 integrated mall condos compared with 20 nearby condos of similar size. Full write-up: <a href="/insights/integrated-mall-condo-returns-2026/">Do Integrated Condos With a Mall Make More Profit?</a></p>`;
 }
 function caMeta(id, f) {
