@@ -566,6 +566,9 @@ const CA = (() => {
   const fp = require('./floorplans.cjs')(ROOT);
   js = js.replace(/\/\* BUILD:FP START \*\/.*?\/\* BUILD:FP END \*\//, () => `/* BUILD:FP START */const FP_URL = '${fp.url}';/* BUILD:FP END */`);
   if (!js.includes(fp.url)) throw new Error('condo-analysis: FP marker not filled');
+  const near = require('./nearby.cjs')(ROOT);
+  js = js.replace(/\/\* BUILD:NEAR START \*\/.*?\/\* BUILD:NEAR END \*\//, () => `/* BUILD:NEAR START */const NEAR_URL = '${near.url}';/* BUILD:NEAR END */`);
+  if (!js.includes(near.url)) throw new Error('condo-analysis: NEAR marker not filled');
   const norm = t => String(t).toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z0-9]/g, '');
   const up = sortForHub(projects.filter(isUpcoming), '2027');
   const lByName = new Map(nl.L.map(l => [norm(l.name), l]));
@@ -589,7 +592,7 @@ const CA = (() => {
   files.set('mall-condo-study', { kind: 'study' });
   const analysisOf = new Map([...files].filter(([, f]) => f.p && f.kind !== 'upcoming-basic').map(([id, f]) => [f.p.id, id]));
   const cssV = crypto.createHash('sha1').update(css).digest('hex').slice(0, 8), jsV = crypto.createHash('sha1').update(js).digest('hex').slice(0, 8);
-  return { css, js, cssV, jsV, markup, nl, data, vstat, xscore, hist, cx, fp: fp.data, files, analysisOf, up, launched };
+  return { css, js, cssV, jsV, markup, nl, data, vstat, xscore, hist, cx, fp: fp.data, near: near.data, files, analysisOf, up, launched };
 })();
 const caPath = id => id === 'home' ? '/condo-analysis/' : `/condo-analysis/${id}/`;
 const caIndexable = f => !['upcoming-basic', 'study'].includes(f.kind);
@@ -607,7 +610,14 @@ function caCompletedText(id) {
   const t = x.top[0];
   return `<h2>Key facts</h2><ul><li><strong>Developer:</strong> ${esc(x.dev)}</li><li><strong>Address:</strong> ${esc(x.street)}</li><li><strong>Lease:</strong> 99 years from ${esc(x.lease)}</li><li><strong>Unit mix:</strong> ${esc(x.mix.map(m => `${m[2]} ${m[0].replace('BR', '-bedroom')} (${m[1].replace(' sqft', ' sq ft')})`).join(', '))}</li><li><strong>Nearest MRT:</strong> ${esc(x.mrt[0][0])}, about ${Math.round(x.mrt[0][1] / 10) * 10} m in a straight line</li><li><strong>Primary schools within 1 km:</strong> ${esc(x.schools.length ? x.schools.map(s => `${s[0]} (about ${Math.round(s[1] / 10) * 10} m)`).join(', ') : 'none')}</li><li><strong>Profitable resales:</strong> ${esc(won)}</li><li><strong>Average price growth:</strong> ${h.cagr}% a year since ${h.years[0][0]}, against ${h.distCagr}% for the ${esc(h.district)} average</li><li><strong>Biggest profit:</strong> a ${esc(t[0])}-bedroom bought ${esc(t[2])} for about $${k(t[3])}k and sold ${esc(t[4])} for about $${k(t[5])}k</li><li><strong>Buyers in the past 12 months:</strong> ${x.buyers[0]}% Singaporeans, ${x.buyers[1]}% permanent residents, ${x.buyers[2]}% foreigners; ${x.addr[0]}% came from HDB flats</li><li><strong>Nearby competitors:</strong> ${esc(x.riv.slice(0, 4).map(r => `${name(r[0])} (${r[1]} km)`).join(', '))}</li></ul>${caPlansText(id)}`;
 }
-function caStatic(id, f) {
+function caNearText(id) {
+  const n = CA.near[id]; if (!n) return '';
+  const nm = k => { const f = CA.files.get(k); return f ? (f.p ? f.p.name : f.x ? f.x.name : k) : k; };
+  const rs = n.resale.slice(0, 6), ls = n.launches.slice(0, 6);
+  return `<h2>Location and nearby competitors</h2><ul>${n.mrt[0] ? `<li><strong>Nearest MRT:</strong> ${esc(n.mrt[0][0])}, about ${Math.round(n.mrt[0][1] / 10) * 10} m in a straight line${n.approx ? ' (approximate site location)' : ''}</li>` : ''}<li><strong>Primary schools within 1 km:</strong> ${esc(n.schools.length ? n.schools.map(s => `${s[0]} (about ${Math.round(s[1] / 10) * 10} m)`).join(', ') : 'none')}</li>${rs.length ? `<li><strong>Resale condos within 1 km (average psf, past 12 months):</strong> ${esc(rs.map(r => `${r[0]} ($${r[4].toLocaleString('en-US')} psf, ${Math.round(r[3] / 10) * 10} m)`).join(', '))}</li>` : ''}${ls.length ? `<li><strong>Other new and upcoming projects within 3 km:</strong> ${esc(ls.map(l => `${nm(l[0])} (${l[1]} km)`).join(', '))}</li>` : ''}${n.ep && n.ep.buyers ? `<li><strong>Buyers in the past 12 months:</strong> ${n.ep.buyers[0]}% Singaporeans, ${n.ep.buyers[1]}% permanent residents, ${n.ep.buyers[2]}% foreigners${n.ep.addr ? `; ${n.ep.addr[0]}% came from HDB flats` : ''}</li>` : ''}</ul>`;
+}
+function caStatic(id, f) { return caStatic0(id, f) + (['selling', 'launched', 'upcoming', 'upcoming-basic'].includes(f.kind) ? caNearText(id) : ''); }
+function caStatic0(id, f) {
   const li = rows => rows.filter(r => r[1]).map(([k, v]) => `<li><strong>${esc(k)}:</strong> ${esc(v)}</li>`).join('');
   const srcs = list => list && list.length ? `<p class="small muted">Sources: ${list.map(a => `<a href="${esc(a[1])}" rel="noopener">${esc(a[0])}</a>`).join(' · ')}</p>` : '';
   const back = `<p class="small"><a href="/condo-analysis/">← All condos</a></p>`;
