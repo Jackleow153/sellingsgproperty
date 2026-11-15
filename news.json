@@ -1,6 +1,8 @@
 {
-  "updated": "2026-11-15T00:08:11+08:00",
+  "updated": "2026-11-15T15:52:51+08:00",
   "sources": [
+    "EdgeProp Singapore",
+    "Stomp",
     "The Straits Times",
     "Stacked Homes",
     "Mothership",
@@ -20,6 +22,30 @@
     "Real Estate Asia"
   ],
   "items": [
+    {
+      "id": "n6b589835",
+      "title": "KSH’s 1H2027 profit rises 23% on gains from Singapore condo JVs",
+      "date": "2026/11/15",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "EdgeProp Singapore",
+      "sourceNameZh": "EdgeProp",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n6b589835/",
+      "description": "KSH’s 1H2027 profit rises 23% on gains from Singapore condo JVs."
+    },
+    {
+      "id": "n3a7d1fd9",
+      "title": "1 dead, another prevented from falling at same Bedok HDB block over 2 consecutive days",
+      "date": "2026/11/14",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "Stomp",
+      "sourceNameZh": "Stomp",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n3a7d1fd9/",
+      "description": "1 dead, another prevented from falling at same Bedok HDB block over 2 consecutive days."
+    },
     {
       "id": "n50193e04",
       "title": "Man lost his share of HDB flat due to ignorance of property rules",
@@ -393,6 +419,18 @@
       "description": "HDB will launch about 4,300 Build-To-Order flats in February 2027, across five projects in Toa Payoh, Bishan, Tampines and Tengah. There is one project each."
     },
     {
+      "id": "n96d2fc71",
+      "title": "Nov 2026 BTO Launched, Locations, Projects, Prices, Classifications & More",
+      "date": "2026/11/04",
+      "image": "/news/images/placeholder.svg",
+      "sourceName": "99.co",
+      "sourceNameZh": "99.co",
+      "sourceFeed": "google-news",
+      "category": "Real estate",
+      "path": "/news/n96d2fc71/",
+      "description": "Nov 2026 BTO Launched, Locations, Projects, Prices, Classifications & More."
+    },
+    {
       "id": "n7d28886d",
       "title": "November 2026 BTO Launch Review: Ultimate Guide To Choosing The Best Unit",
       "date": "2026/11/04",
@@ -595,42 +633,6 @@
       "category": "Real estate",
       "path": "/news/9799/",
       "description": "Toa Payoh Hillside offers about 1,600 BTO flats beside Caldecott MRT in November 2026, inside a plan for 6,000 homes. What is real today."
-    },
-    {
-      "id": "nd75f398a",
-      "title": "One in five prime-region private home resale deals sold at a loss in Q3",
-      "date": "2026/11/01",
-      "image": "/news/images/nd75f398a.webp",
-      "sourceName": "Business Times",
-      "sourceNameZh": "商业时报",
-      "sourceFeed": "business-times",
-      "category": "Real estate",
-      "path": "/news/nd75f398a/",
-      "description": "One in five prime-region private resales sold at a loss in Q3 2026, Business Times reported. What buyers and sellers should check."
-    },
-    {
-      "id": "n3199077c",
-      "title": "Rare, roomy and pricey? Inside Singapore's niche jumbo HDB flat market",
-      "date": "2026/11/01",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "CNA",
-      "sourceNameZh": "CNA",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n3199077c/",
-      "description": "CNA calls jumbo HDB flats rare, roomy and pricey. What buyers should check before paying extra for the space."
-    },
-    {
-      "id": "9794",
-      "title": "Private home launch pipeline set to climb to 14-year high in 2027",
-      "date": "2026/10/31",
-      "image": "/news/images/9794.jpg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9794/",
-      "description": "About 14,800 private homes could launch in 2027, the most since 2013. What that means for HDB upgraders and resale sellers."
     }
   ]
 }
