@@ -1,16 +1,12 @@
 {
-  "updated": "2026-11-15T15:52:51+08:00",
+  "updated": "2026-11-15T18:12:14+08:00",
   "sources": [
     "EdgeProp Singapore",
-    "Stomp",
     "The Straits Times",
     "Stacked Homes",
-    "Mothership",
-    "AsiaOne",
     "PropertyNet.SG",
     "Singapore Business Review",
     "EdgeProp.sg",
-    "The Independent Singapore",
     "联合早报",
     "99.co",
     "CNA",
@@ -18,6 +14,8 @@
     "deeparrival.com",
     "Business Times",
     "Home & Decor Singapore",
+    "AsiaOne",
+    "The Independent Singapore",
     "Borneo Bulletin",
     "Real Estate Asia"
   ],
@@ -33,18 +31,6 @@
       "category": "Real estate",
       "path": "/news/n6b589835/",
       "description": "KSH’s 1H2027 profit rises 23% on gains from Singapore condo JVs."
-    },
-    {
-      "id": "n3a7d1fd9",
-      "title": "1 dead, another prevented from falling at same Bedok HDB block over 2 consecutive days",
-      "date": "2026/11/14",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Stomp",
-      "sourceNameZh": "Stomp",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n3a7d1fd9/",
-      "description": "1 dead, another prevented from falling at same Bedok HDB block over 2 consecutive days."
     },
     {
       "id": "n50193e04",
@@ -71,30 +57,6 @@
       "description": "5 Of Singapore’s Most Expensive HDB Flats For Sale."
     },
     {
-      "id": "nc1e5d28c",
-      "title": "8 teens, aged 12-15, arrested for allegedly pranking occupants of Hougang HDB unit",
-      "date": "2026/11/13",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Mothership",
-      "sourceNameZh": "Mothership",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/nc1e5d28c/",
-      "description": "8 teens, aged 12-15, arrested for allegedly pranking occupants of Hougang HDB unit."
-    },
-    {
-      "id": "nf9a0f7b4",
-      "title": "Car skids, ends up on grass verge near Tampines HDB block",
-      "date": "2026/11/13",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "AsiaOne",
-      "sourceNameZh": "亚洲新闻网",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/nf9a0f7b4/",
-      "description": "Car skids, ends up on grass verge near Tampines HDB block."
-    },
-    {
       "id": "n40c3e25d",
       "title": "What $1M Buys in HDB Resale 2026: An Executive in 15 Towns, a 5-Room in 5",
       "date": "2026/11/13",
@@ -107,18 +69,6 @@
       "description": "What $1M Buys in HDB Resale 2026: An Executive in 15 Towns, a 5-Room in 5."
     },
     {
-      "id": "n615c645e",
-      "title": "'No family, no neighbours': Volunteer finds senior dead alone in Toa Payoh HDB rental flat",
-      "date": "2026/11/13",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "AsiaOne",
-      "sourceNameZh": "亚洲新闻网",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n615c645e/",
-      "description": "'No family, no neighbours': Volunteer finds senior dead alone in Toa Payoh HDB rental flat."
-    },
-    {
       "id": "n9d207b45",
       "title": "Location, growth prospects drive strongest BTO demand since 2022",
       "date": "2026/11/13",
@@ -128,7 +78,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/n9d207b45/",
-      "description": "Location, growth prospects drive strongest BTO demand since 2022."
+      "description": "At 5pm on 11 November, Huttons counted 35,603 applicants for 7,964 flats, about 4.5 per flat."
     },
     {
       "id": "n41ef7a07",
@@ -164,7 +114,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/nec63a2e8/",
-      "description": "Freehold condo Mirage Tower's $2,673 psf transaction sets new price benchmark."
+      "description": "On 26 October a 1,227 sq ft three-bedroom at Mirage Tower sold for $3.28 million, or $2,673 psf."
     },
     {
       "id": "n04b4506d",
@@ -176,19 +126,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/n04b4506d/",
-      "description": "Good Class Bungalow in Ridley Park put on market with undisclosed guide price."
-    },
-    {
-      "id": "n61c893d2",
-      "title": "Residents say cars in Yishun hit by bags of suspected urine thrown from HDB flats",
-      "date": "2026/11/12",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "The Independent Singapore",
-      "sourceNameZh": "The Independent Singapore",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n61c893d2/",
-      "description": "Residents say cars in Yishun hit by bags of suspected urine thrown from HDB flats."
+      "description": "A two-storey bungalow on a 27,443 sq ft site in Ridley Park is for sale by expression of interest, with no guide price stated."
     },
     {
       "id": "n28f17bb8",

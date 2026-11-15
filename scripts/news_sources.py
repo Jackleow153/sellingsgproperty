@@ -127,7 +127,7 @@ CRIME_RE = re.compile(
 OFF_GOAL_RE = re.compile(
     r"\b("
     r"charged|jail|jailed|launder|laundering|scam|bankruptcy|defamation|"
-    r"convicted|vending|ikea|massage parlours?"
+    r"convicted|vending|ikea|massage parlours?|dead|arrested|skids?|urine|prank"
     r")\b|"
     r"\b(?:married for|marrying earlier|worst mistake|serious argument|"
     r"ah girl|home tour|breathes new soul|sale and leaseback)\b",
@@ -1285,6 +1285,11 @@ def self_check() -> None:
         "IKEA Singapore and City Energy Partner on Smarter Home Design for BTO and HDB Owners",
         "Singapore condo unit owner loses bid to remove vending machines outside shops",
         "Ex-condo chairman loses defamation suit over undisclosed links",
+        "1 dead, another prevented from falling at same Bedok HDB block over 2 consecutive days",
+        "8 teens, aged 12-15, arrested for allegedly pranking occupants of Hougang HDB unit",
+        "Car skids, ends up on grass verge near Tampines HDB block",
+        "'No family, no neighbours': Volunteer finds senior dead alone in Toa Payoh HDB rental flat",
+        "Residents say cars in Yishun hit by bags of suspected urine thrown from HDB flats",
     ]
     keep_titles = [
         "Thomson Reserve sells 90% of units at average of S$2,900 psf over launch weekend",
