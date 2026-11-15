@@ -53,7 +53,7 @@ function svg(p, name) {
 }
 
 module.exports = function buildFloorPlans(ROOT) {
-  const src = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/floorplans.json'), 'utf8')).plans;
+  const all = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/floorplans.json'), 'utf8')), src = all.plans;
   const dir = path.join(ROOT, 'assets/fp'); fs.mkdirSync(dir, { recursive: true });
   const out = {}; let n = 0;
   for (const [cid, list] of Object.entries(src)) {
@@ -68,7 +68,7 @@ module.exports = function buildFloorPlans(ROOT) {
       return { k: p.k, type: p.type, sqft: p.sqft, note: p.note || null, units: p.units || null, sc, why, f: p.f, waste: +waste.toFixed(1), bal: +bal.toFixed(1), stated: !!p.stated, pros: p.pros, cons: p.cons, src: p.src, svg: `/assets/fp/${file}?v=${v}`, ar: +((Math.max(...ys) - Math.min(...ys)) / (Math.max(...xs) - Math.min(...xs))).toFixed(3) };
     });
   }
-  const json = JSON.stringify(out);
+  const json = JSON.stringify({ p: out, s: all.sales || {}, src: all.salesSrc || '' });
   fs.writeFileSync(path.join(dir, 'plans.json'), json);
   return { url: `/assets/fp/plans.json?v=${crypto.createHash('sha1').update(json).digest('hex').slice(0, 8)}`, data: out, count: n };
 };
