@@ -19,10 +19,10 @@ function score(p, waste, bal) {
   if (f.dumb === true) add(1, 'dumbbell: bedrooms on both sides of the living room');
   if (f.kit === 'enclosed' || f.kit === 'dry+wet') add(1, f.kit === 'dry+wet' ? 'dry and wet kitchens; the wet kitchen can be closed off' : 'kitchen can be closed off');
   if (f.kwin) add(1, 'kitchen or its yard has a window to the outside');
-  if (waste < 5) add(1, `AC ledge, planter and bay window about ${waste.toFixed(0)}% of the area`);
-  else if (waste >= 10) add(-1, `AC ledge, planter and bay window about ${waste.toFixed(0)}% of the area`);
+  if (waste < 5) add(1, `AC ledge, planter and bay window about ${waste.toFixed(1)}% of the area`);
+  else if (waste >= 10) add(-1, `AC ledge, planter and bay window about ${waste.toFixed(1)}% of the area`);
   if (f.corr === 'long') add(-1, 'long corridor or entrance passage');
-  if (bal > 12) add(-1, `balcony about ${bal.toFixed(0)}% of the area`);
+  if (bal > 12) add(-1, `balcony about ${bal.toFixed(1)}% of the area`);
   if (f.store || f.hs || f.helper) add(1, 'store, household shelter or utility room');
   return [Math.max(1, Math.min(10, s)), why];
 }
