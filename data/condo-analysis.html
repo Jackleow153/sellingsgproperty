@@ -1420,7 +1420,7 @@ function renderHome() {
     <li><b>Developer's land cost.</b> A later site nearby sold at a higher land price supports today's price. A cheaper later site lets a competitor undercut you.</li>
     <li><b>Lease start.</b> The 99 years start when the land was bought, not when you buy, so some projects have already used 1 to 3 years.</li>
     <li><b>Unit facing.</b> Train tracks, expressways, afternoon sun and future blocks next door differ by stack. Sources here do not cover each stack.</li></ul></details>
-    <details style="margin-top:10px"><summary>Upcoming projects as a sortable table</summary><div class="tbl"><table id="uptab"><thead><tr><th class="sort" data-k="name">Project or site</th><th class="sort n" data-k="land">Land cost psf</th><th class="sort n" data-k="bids">Bids</th><th class="sort n" data-k="gap">Winner above 2nd</th><th>Next plot nearby</th><th class="sort n" data-k="est">My price estimate psf</th><th>Expected launch</th></tr></thead><tbody></tbody></table></div></details></section>`;
+    <details style="margin-top:10px"><summary>Upcoming projects as a sortable table</summary><div class="tbl"><table id="uptab"><thead><tr><th class="sort" data-k="name">Project or site</th><th class="sort n" data-k="land">Land cost psf</th><th class="sort n" data-k="bids">Bids</th><th class="sort n" data-k="gap">Winner above 2nd</th><th>Next plot nearby</th><th class="sort n" data-k="dist">Distance</th><th class="sort n" data-k="est">My price estimate psf</th><th>Expected launch</th></tr></thead><tbody></tbody></table></div></details></section>`;
   main.append(w);
   $('#fMore').open = !matchMedia('(max-width:640px)').matches || !!(F_.reg !== 'all' || F_.beds.length || F_.budget || F_.keys || F_.minScore || F_.mrt || F_.school || F_.noEc);
   const sync = () => {
@@ -1522,11 +1522,11 @@ function renderLaunch(id) {
 /* ---------- upcoming launches: land bids ---------- */
 let upK = 'name', upDir = 'asc';
 function drawUp(w) {
-  const rows = NL.U.map(x => ({x, name: x.name, land: x.land, bids: x.bids, gap: gap(x, 1), est: myEst(x) ? myEst(x)[0] : null}))
+  const rows = NL.U.map(x => ({x, name: x.name, land: x.land, bids: x.bids, gap: gap(x, 1), est: myEst(x) ? myEst(x)[0] : null, dist: x.nxtDist && x.nxtDist[0] && x.nxtDist[0].km != null ? x.nxtDist[0].km : null}))
     .sort((a, b) => { const p = a[upK], q = b[upK]; if (p == null) return 1; if (q == null) return -1; return (typeof p === 'string' ? p.localeCompare(q) : p - q) * (upDir === 'asc' ? 1 : -1); });
   w.querySelectorAll('#uptab th.sort').forEach(th => { if (th.dataset.k === upK) th.dataset.dir = upDir; else delete th.dataset.dir; th.onclick = () => { upDir = upK === th.dataset.k && upDir === 'asc' ? 'desc' : 'asc'; upK = th.dataset.k; drawUp(w); }; });
-  w.querySelector('#uptab tbody').innerHTML = rows.map(r => { const x = r.x, e = myEst(x), n = x.nxt[0] || ['Not compiled yet', null];
-    return `<tr><td><a href="#${x.id}"><b>${x.name}</b></a>${x.ec ? ' <span class="badge b-warn">Executive condo</span>' : ''}<div class="small muted" style="margin-left:0">${x.dev} · ${x.units} homes</div></td><td class="n">${x.land ? money(x.land) : 'No tender'}</td><td class="n">${x.bids || '–'}</td><td class="n">${r.gap == null ? (x.bids === 1 ? 'Sole bid' : '–') : pct(r.gap, 1)}</td><td style="min-width:230px">${n[0]}<div class="small muted" style="margin-left:0;max-width:none">${nextLine(x, n)}</div></td><td class="n">${e ? money(e[0]) + '–' + comma(e[1]) : '–'}</td><td style="min-width:150px">${x.launch}</td></tr>`; }).join('');
+  w.querySelector('#uptab tbody').innerHTML = rows.map(r => { const x = r.x, e = myEst(x), n = x.nxt[0] || ['Not compiled yet', null], d0 = (x.nxtDist || [])[0];
+    return `<tr><td><a href="#${x.id}"><b>${x.name}</b></a>${x.ec ? ' <span class="badge b-warn">Executive condo</span>' : ''}<div class="small muted" style="margin-left:0">${x.dev} · ${x.units} homes</div></td><td class="n">${x.land ? money(x.land) : 'No tender'}</td><td class="n">${x.bids || '–'}</td><td class="n">${r.gap == null ? (x.bids === 1 ? 'Sole bid' : '–') : pct(r.gap, 1)}</td><td style="min-width:230px">${n[0]}<div class="small muted" style="margin-left:0;max-width:none">${nextLine(x, n)}</div></td><td class="n">${d0 ? d0.label : '–'}</td><td class="n">${e ? money(e[0]) + '–' + comma(e[1]) : '–'}</td><td style="min-width:150px">${x.launch}</td></tr>`; }).join('');
 }
 function renderUpBasic(x) {
   const main = $('#main'); main.innerHTML = '';
@@ -1545,6 +1545,25 @@ function renderUpBasic(x) {
   main.append(w);
   buildMenu([['facts', 'Key facts'], ['about', 'What we know']]);
   main.querySelectorAll('section.part').forEach(s => obs.observe(s));
+}
+function nxtDistCell(x, i) {
+  if (!x.nxtDist) return '';
+  const d = x.nxtDist[i] || {};
+  return `<td>${d.label || 'Not measured'}${d.note ? `<div class="small muted" style="margin-left:0;max-width:none">${d.note}</div>` : ''}</td>`;
+}
+function upcomingPlots(x) {
+  if (!x.uraPlots && !x.uraNote && !x.resale4) return '';
+  const uraRows = (x.uraPlots || []).map(p => `<tr><td>${p.name}</td><td>${p.use || '–'}</td><td>${p.status || '–'}</td><td class="n">${p.km == null ? 'Not measured' : 'about ' + p.km + ' km'}</td><td class="n">${p.units ? comma(p.units) : '–'}</td><td>${p.note || ''}</td></tr>`).join('');
+  const ura = (x.uraPlots || x.uraNote) ? `<section class="part" id="ura"><div class="parthead"><h2>Nearby URA plots</h2><p>Other government land plots, residential or commercial, that are not already the next plot above. Where two reports disagree, the status kept is named in the note.</p></div>${uraRows ? `<div class="tbl"><table><thead><tr><th>Plot</th><th>Use</th><th>Status</th><th class="n">Distance</th><th class="n">Homes</th><th>Note</th></tr></thead><tbody>${uraRows}</tbody></table></div>` : ''}${x.uraNote ? `<p style="margin-top:8px">${x.uraNote}</p>` : ''}</section>` : '';
+  const rs = x.resale4;
+  const rsRows = rs ? (rs.rows || []).map(a => `<tr><td>${a.name}</td><td>${a.tenure}</td><td class="n">${a.away}</td><td>${a.size || 'Not screened'}</td><td class="n">Not compiled from caveats yet</td><td class="n">Not compiled from caveats yet</td></tr>`).join('') : '';
+  const resale = rs ? `<section class="part" id="resale4"><div class="parthead"><h2>Resale comparison, out to 4 km</h2><p>99-year projects only. A like-for-like 3-bedroom size screen has not been applied, so the yearly price and the past three yearly changes stay blank.</p></div>${rsRows ? `<div class="tbl"><table><thead><tr><th>Condo</th><th>Lease</th><th class="n">Distance</th><th>3-bedroom size</th><th class="n">Yearly psf</th><th class="n">Change, past 3 years</th></tr></thead><tbody>${rsRows}</tbody></table></div>` : ''}<p class="small muted" style="margin-top:8px">${rs.note}</p></section>` : '';
+  return ura + resale;
+}
+function upcomingFair(x) {
+  if (!x.fair) return '';
+  const e = myEst(x);
+  return `<section class="part" id="fair"><div class="parthead"><h2>Fair entry</h2><p>Set against nearby projects of a similar lease. The developer has not released prices.</p></div><div class="card"><h3>${e ? money(e[0]) + '–' + comma(e[1]) + ' psf' : 'No land price to work from'}</h3><p style="margin-top:8px">This is the same estimate already on this page: land cost × 2.1 to 2.4, rounded to the nearest $10.${x.land >= 1500 ? ' For land this expensive, analysts expect a lower multiple, so treat this as the upper end.' : ''}</p><p>${x.fair.region}</p><ul style="margin:8px 0 0;padding-left:1.1em;display:grid;gap:6px"><li>This launch is after June 2023, so the developer's price will be harmonised. Air-con ledges are not counted in the strata area.</li><li>Harmonised adjustment: one line of 5%. It applies only when the comparison is an older resale median that still includes those ledges. No dollar amount is stated, because a 3-bedroom caveat median has not been compiled.</li><li>A further 5% is its own line. It is not folded into the first 5%.</li></ul><p class="small muted" style="margin-top:8px">${x.fair.note}</p></div></section>`;
 }
 function renderUpcoming(id) {
   if (UP[id].basic) return renderUpBasic(UP[id]);
@@ -1568,16 +1587,24 @@ function renderUpcoming(id) {
   <section class="part" id="bids"><div class="parthead"><h2>Land bid</h2><p>What the developer paid, and how it compared with rival bids.</p></div>
     <div class="grid g4">${tile('Land cost', x.land ? money(x.land) + ' psf' : 'No tender', x.total)}${tile('Number of bids', x.bids || '–', 'Tender closed: ' + x.close)}${tile('Winner above 2nd', g2 == null ? (x.bids === 1 ? 'Sole bid' : '–') : pct(g2, 1), x.bidders[1] ? x.bidders[1][0] : '')}${tile('Winner above 3rd', g3 == null ? '–' : pct(g3, 1), x.bidders[2] ? x.bidders[2][0] : 'Not reported')}</div>
     ${x.bidders.length ? `<div class="card" style="margin-top:14px"><h3>Bidders reported</h3><div class="bars" style="margin-top:10px">${x.bidders.map((b, i) => `<div class="row ${i ? '' : 'me'}"><span class="lab">${i + 1}. ${b[0]}</span><div class="track"><div class="fill" style="width:${b[1] / x.bidders[0][1] * 100}%"></div></div><span class="val">${money(b[1])}${i ? '<br>' + pct((b[1] / x.bidders[0][1] - 1) * 100, 1) : ''}</span></div>`).join('')}</div><p class="small muted" style="margin-top:8px">Land cost per sq ft of buildable floor area. The percentage is how far each bid was below the winner.${x.bids > x.bidders.length ? ` ${x.bids - x.bidders.length} lower bid(s) were not named in the reports.` : ''}</p></div>` : ''}</section>
-  <section class="part" id="next"><div class="parthead"><h2>Next plot nearby</h2><p>From government land sale lists and tender reports. A higher land price nearby supports this project's price; a lower one lets a neighbour undercut it.</p></div>
-    <div class="tbl"><table><thead><tr><th>Site</th><th class="n">Land cost psf</th><th>Against this project</th></tr></thead><tbody>${x.nxt.map(n => `<tr><td>${n[0]}</td><td class="n">${n[1] ? money(n[1]) : 'Not yet tendered'}</td><td>${n[1] && x.land ? `<span class="badge ${n[1] > x.land * 1.005 ? 'b-good' : n[1] < x.land * 0.995 ? 'b-bad' : 'b-warn'}">${nextLine(x, n).split(', ')[1]}</span>` : '–'}</td></tr>`).join('')}</tbody></table></div></section>
+  <section class="part" id="next"><div class="parthead"><h2>Next plot nearby</h2><p>From government land sale lists and tender reports. A higher land price nearby supports this project's price; a lower one lets a neighbour undercut it. Distance is a straight line, and only where it has been measured.</p></div>
+    <div class="tbl"><table><thead><tr><th>Site</th><th class="n">Land cost psf</th><th>Against this project</th>${x.nxtDist ? '<th>Distance</th>' : ''}</tr></thead><tbody>${x.nxt.map((n, i) => `<tr><td>${n[0]}</td><td class="n">${n[1] ? money(n[1]) : 'Not yet tendered'}</td><td>${n[1] && x.land ? `<span class="badge ${n[1] > x.land * 1.005 ? 'b-good' : n[1] < x.land * 0.995 ? 'b-bad' : 'b-warn'}">${nextLine(x, n).split(', ')[1]}</span>` : '–'}</td>${nxtDistCell(x, i)}</tr>`).join('')}</tbody></table></div></section>
+  ${upcomingPlots(x)}
   <section class="part" id="price"><div class="parthead"><h2>Expected launch price</h2><p>Three separate views. None is the developer's price.</p></div>
     <div class="grid g3">${tile('My estimate', e ? money(e[0]) + '–' + comma(e[1]) + ' psf' : 'Not possible', e ? 'Land cost × 2.1 to 2.4' + (x.land >= 1500 ? '. For land this expensive, analysts expect a lower multiple, so treat this as the upper end.' : '') : 'No land price to work from')}${tile('Analysts at the tender', x.analyst, 'Quoted in tender reports')}${tile('Listing site cost model', x.site + ' psf', 'Estimated cost to build plus 15-30% margin')}</div>
     <details class="more"><summary>Where the 2.1 to 2.4 comes from</summary><div class="tbl"><table><thead><tr><th>Recent launch</th><th class="n">Land cost psf</th><th class="n">Launch price psf</th><th class="n">Launch ÷ land</th></tr></thead><tbody>${CAL.map(c => `<tr><td>${c[0]}</td><td class="n">${money(c[1])}</td><td class="n">${money(c[2])}</td><td class="n">${(c[2] / c[1]).toFixed(2)}</td></tr>`).join('')}</tbody></table></div><p class="small muted" style="margin-top:8px">The 11 launches range from 2.03 to 2.55, with the middle at 2.19. Prime-city projects and projects next to an MRT tend to sit higher; building costs and the market at launch can move any project outside the range.</p></details></section>
+  ${upcomingFair(x)}
   <section class="part" id="quality"><div class="parthead"><h2>Developer build quality (CONQUAS band)</h2><p>BCA rates developers from Band 1 (very few major defects) to Band 6, based on their condos completed in the last 6 years.</p></div><div class="card"><p><b>${x.cq}</b></p><p class="small muted" style="margin-top:8px">BCA's list can only be searched by name on its Quality Housing Portal, and I could not pull the full list. Check the developer there before committing: <a href="https://www.bca.gov.sg/quality-housing-portal/ConquasScore.aspx" target="_blank" rel="noopener">BCA Quality Housing Portal</a>.</p></div></section>
   <section class="part" id="unsure"><div class="parthead"><h2>Points to note and not confirmed</h2></div><div class="card"><ul style="margin:0;padding-left:1.1em;display:grid;gap:6px">${[...x.notes, 'Home count, launch date and all price estimates are not from the developer', 'I did not open URA\'s Master Plan map for this site; nearby plots come from land sale lists and tender reports only'].map(u => `<li>${u}</li>`).join('')}</ul></div>
     <p class="small muted" style="margin-top:12px">Sources: ${x.src.map(a => `<a href="${a[1]}" target="_blank" rel="noopener">${a[0]}</a>`).join(' · ')}</p></section>`;
   main.append(w);
-  buildMenu([['bids', 'Land bid'], ['next', 'Next plot nearby'], ['price', 'Expected price'], ['quality', 'Build quality'], ['unsure', 'Not confirmed']]);
+  const upMenu = [['bids', 'Land bid'], ['next', 'Next plot nearby']];
+  if (x.uraPlots || x.uraNote) upMenu.push(['ura', 'Nearby URA plots']);
+  if (x.resale4) upMenu.push(['resale4', 'Resale within 4 km']);
+  upMenu.push(['price', 'Expected price']);
+  if (x.fair) upMenu.push(['fair', 'Fair entry']);
+  upMenu.push(['quality', 'Build quality'], ['unsure', 'Not confirmed']);
+  buildMenu(upMenu);
   main.querySelectorAll('section.part').forEach(s => obs.observe(s));
 }
 /* ---------- study: do condos with a mall profit more? ---------- */

@@ -616,6 +616,13 @@ function caNearText(id) {
   const rs = n.resale.slice(0, 6), ls = n.launches.slice(0, 6);
   return `<h2>Location and nearby competitors</h2><ul>${n.mrt[0] ? `<li><strong>Nearest MRT:</strong> ${esc(n.mrt[0][0])}, about ${Math.round(n.mrt[0][1] / 10) * 10} m in a straight line${n.approx ? ' (approximate site location)' : ''}</li>` : ''}<li><strong>Primary schools within 1 km:</strong> ${esc(n.schools.length ? n.schools.map(s => `${s[0]} (about ${Math.round(s[1] / 10) * 10} m)`).join(', ') : 'none')}</li>${rs.length ? `<li><strong>Resale condos within 1 km (average psf, past 12 months):</strong> ${esc(rs.map(r => `${r[0]} ($${r[4].toLocaleString('en-US')} psf, ${Math.round(r[3] / 10) * 10} m)`).join(', '))}</li>` : ''}${ls.length ? `<li><strong>Other new and upcoming projects within 3 km:</strong> ${esc(ls.map(l => `${nm(l[0])} (${l[1]} km)`).join(', '))}</li>` : ''}${n.ep && n.ep.buyers ? `<li><strong>Buyers in the past 12 months:</strong> ${n.ep.buyers[0]}% Singaporeans, ${n.ep.buyers[1]}% permanent residents, ${n.ep.buyers[2]}% foreigners${n.ep.addr ? `; ${n.ep.addr[0]}% came from HDB flats` : ''}</li>` : ''}</ul>`;
 }
+function caUpcomingExtra(x) {
+  if (!x || !x.fair) return '';
+  const dist = (x.nxtDist || []).map((d, i) => `<li><strong>${esc((x.nxt[i] || ['Next plot'])[0])}:</strong> ${esc(d.label || 'Not measured')}. ${esc(d.note || '')}</li>`).join('');
+  const plots = (x.uraPlots || []).map(p => `<li><strong>${esc(p.name)}:</strong> ${esc([p.use, p.status, p.km == null ? 'distance not measured' : 'about ' + p.km + ' km', p.units ? p.units.toLocaleString('en-US') + ' homes' : ''].filter(Boolean).join(', '))}. ${esc(p.note || '')}</li>`).join('');
+  const rows = ((x.resale4 && x.resale4.rows) || []).map(a => `<li><strong>${esc(a.name)}:</strong> ${esc(a.tenure)}, ${esc(a.away)}. 3-bedroom size ${esc(a.size || 'not screened')}. Yearly psf not compiled from caveats yet.</li>`).join('');
+  return `<h2>Distance, nearby plots and fair entry</h2><ul>${dist}${plots}${x.uraNote ? `<li>${esc(x.uraNote)}</li>` : ''}${rows}<li>${esc(x.resale4 ? x.resale4.note : '')}</li><li><strong>Fair entry.</strong> ${esc(x.fair.region)} ${esc(x.fair.note)} The harmonised adjustment is one line of 5%, only against an older non-harmonised resale median. A further 5% is a separate line and is not folded into the first. Neither line is given in dollars until a 3-bedroom caveat median is compiled.</li></ul>`;
+}
 function caStatic(id, f) { return caStatic0(id, f) + (['selling', 'launched', 'upcoming', 'upcoming-basic'].includes(f.kind) ? caNearText(id) : ''); }
 function caStatic0(id, f) {
   const li = rows => rows.filter(r => r[1]).map(([k, v]) => `<li><strong>${esc(k)}:</strong> ${esc(v)}</li>`).join('');
@@ -640,7 +647,7 @@ ${caScoreText(id)}<ul>${li([['Homes', p.totalUnits ? p.totalUnits.toLocaleString
     const p = f.p, x = f.x || {};
     return `${back}<h1>${esc(p.name)}</h1><p>${esc(placeOf(p))} · ${esc(p.developer.replace(/\s*\((?:entity|entities)[^)]*\)/i, ''))}</p>
 <p>Upcoming project, not launched yet. Expected launch: ${esc(p.launchShort || 'not announced')}.${p.landCost ? ` Land cost: ${esc(p.landCost)}.` : ''}${x.bids ? ` ${x.bids} bids at the land tender.` : ''}</p>
-${x.notes ? `<ul>${x.notes.map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}${srcs(x.src)}<p><a href="${projectPath(p)}">Project page with FAQs</a></p>`;
+${x.notes ? `<ul>${x.notes.map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}${caUpcomingExtra(x)}${srcs(x.src)}<p><a href="${projectPath(p)}">Project page with FAQs</a></p>`;
   }
   if (f.kind === 'panorama') return `${back}<h1>The Panorama</h1><p>Ang Mo Kio Avenue 2, D20. A 698-home, 99-year condo completed in 2017.</p><p>Full case study: 3-bedroom price and profit year by year since 2014, whether Mayflower MRT pushed prices up, who buys from owners, an HDB upgrader affordability calculator, floor plans and nearby competitors.</p>${caPlansText(id)}${caScoreText(id)}`;
   if (f.kind === 'resale') { const c = f.x; return `${back}<h1>${esc(c.name)}</h1><p>${esc(c.area)}, ${esc(c.district)} · ${esc(c.tenure)} · completed ${esc(c.top)}${c.units ? ` · ${esc(c.units)} homes` : ''}</p><p>Deep dive: facts at a glance, average price and profit year by year for each unit type, actual resale deals, growth against the district, who buys here, an HDB upgrader affordability calculator, a break-even resale price calculator, floor plans with a layout score and nearby competitors.</p>${caCompletedText(id)}${caScoreText(id)}`; }
