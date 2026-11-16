@@ -97,6 +97,16 @@ http://marvelous-begonia-99ba7b.netlify.app/*   https://www.sellingsgproperty.co
 /news/ne142ee1d/                          /news/  301
 /news/n5a7c5eac                           /news/  301
 /news/n5a7c5eac/                          /news/  301
+/news/n50193e04                           /news/  301
+/news/n50193e04/                          /news/  301
+/news/n40c3e25d                           /news/  301
+/news/n40c3e25d/                          /news/  301
+/news/n17b7e796                           /news/  301
+/news/n17b7e796/                          /news/  301
+/news/nb1399715                           /news/  301
+/news/nb1399715/                          /news/  301
+/news/n7d28886d                           /news/  301
+/news/n7d28886d/                          /news/  301
 
 /news/:id                                 /news/:id/index.html   200
 /news/:id/                                /news/:id/index.html   200

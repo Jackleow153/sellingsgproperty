@@ -38,9 +38,9 @@ Publish the refreshed pages to the live site:
 
     python3 scripts/refresh-news.py --deploy
 
---deploy commits news.json, news/, and sitemap.xml, then pushes main.
-Netlify publishes https://www.sellingsgproperty.com. A run with no new
-story leaves those files uncommitted.
+--deploy commits news.json, news/, sitemap.xml, and _redirects, then
+pushes main. Netlify publishes https://www.sellingsgproperty.com. A run
+with no story change leaves those files uncommitted.
 
 GitHub Actions runs that command twice a day, at 09:17 and 17:47
 Singapore time (.github/workflows/refresh-news.yml). 09:17 Asia/Singapore
@@ -49,17 +49,19 @@ does not commit.
 
 When a new story's article page can be opened, the job calls grok-4.7
 once for that article and stores original key points. The article URL
-is not written to the site. A page that cannot be opened stays a
-headline draft. Stories that already have key points are not sent.
-The call needs XAI_API_KEY. A missing key still publishes the headline.
-A filled story's Chinese headline comes from that same call. A new
-clipping's publisher is read on the Mac runner only when the caption
-does not already name one. A run that finds no new story, and no
-headline-only article it can open, skips image downloads, masthead
-reading, and the page rebuild, and does not commit. This script does
-not install cron or launchd. A plain run without --deploy still writes
-the local files and does not push. --dry-run and --pages-only do not
-call the model.
+is not written to the site. Stories that already have key points are
+not sent. An empty keypoint list is kept, because those older briefs
+show their facts. If the page still cannot be opened, the key is
+missing or rejected, or the model reply is unusable, that story is
+removed and is not published as a headline draft. A story that was
+already on the site gets a 301 from both /news/<id> and /news/<id>/
+to /news/. A filled story's Chinese headline comes from that same call.
+A new clipping's publisher is read on the Mac runner only when the
+caption does not already name one. A run whose public list is unchanged
+skips image downloads, masthead reading, and the page rebuild, and does
+not commit. This script does not install cron or launchd. A plain run
+without --deploy still writes the local files and does not push.
+--dry-run and --pages-only do not call the model.
 
 Plain-English summaries and one buyer or seller question live in
 news/copy.json, keyed by story id. The page shows the article's key
@@ -84,7 +86,12 @@ import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from article_points import caption_article_url, fill_article_points, stories_awaiting_points
+from article_points import (
+    caption_article_url,
+    fill_article_points,
+    is_headline_only,
+    stories_awaiting_points,
+)
 from news_sources import (
     collect_business_times,
     collect_google_news,
@@ -1590,7 +1597,7 @@ def deploy_news() -> None:
         branch = "main"
     if branch != "main":
         raise SystemExit(f"Refusing to deploy from branch {branch}. Push happens from main.")
-    paths = ["news.json", "news", "sitemap.xml"]
+    paths = ["news.json", "news", "sitemap.xml", "_redirects"]
     git_at("add", "-A", "--", *paths)
     staged = git_at("diff", "--cached", "--quiet", "--", *paths, check=False)
     if staged.returncode == 0:
@@ -1657,11 +1664,132 @@ def ensure_copy(items: list[dict]) -> None:
         save_copy(book)
 
 
-def write_opened_points(items: list[dict]) -> None:
+def write_opened_points(items: list[dict]) -> bool:
     """Fill headline-only briefs from articles that opened on this run."""
     book = load_copy()
-    if fill_article_points(items, book):
+    changed = fill_article_points(items, book)
+    if changed:
         save_copy(book)
+    return changed
+
+
+def partition_headline_only(items: list[dict], book: dict) -> tuple[list[dict], list[dict]]:
+    """Split stories that still have no real key points from the ones that do.
+
+    An empty keypoint list is kept. Those older briefs show their facts.
+    A missing brief, a title echo, and a figures-only line are not kept.
+    """
+    kept: list[dict] = []
+    dropped: list[dict] = []
+    for item in items:
+        entry = book.get(str(item.get("id"))) if isinstance(book, dict) else None
+        if is_headline_only(entry, item.get("title") or ""):
+            dropped.append(item)
+        else:
+            kept.append(item)
+    return kept, dropped
+
+
+def _check_partition() -> None:
+    title = "Example headline"
+    items = [
+        {"id": "keep", "title": title},
+        {"id": "drop", "title": title},
+        {"id": "empty", "title": title},
+    ]
+    book = {
+        "keep": {"keypoints": ["A real sentence about the sale."]},
+        "drop": {"keypoints": [title + ".", "Figures named in the headline: 1."]},
+        "empty": {"keypoints": []},
+    }
+    kept, dropped = partition_headline_only(items, book)
+    if [item["id"] for item in kept] != ["keep", "empty"]:
+        raise SystemExit("a real point and an empty keypoint list should stay")
+    if [item["id"] for item in dropped] != ["drop"]:
+        raise SystemExit("a headline-only brief should be removed")
+
+
+def retire_story_urls(story_ids: list[str]) -> None:
+    """Send a removed story to /news/ in one hop, with and without the slash."""
+    redirects = ROOT / "_redirects"
+    if not story_ids or not redirects.exists():
+        return
+    text = redirects.read_text(encoding="utf-8")
+    lines = text.splitlines(keepends=True)
+    insert_at = None
+    for index, line in enumerate(lines):
+        if line.startswith("/news/:id") and "index.html" in line:
+            insert_at = index
+            break
+    if insert_at is None:
+        raise SystemExit("Could not find the /news/:id rule. Refusing to retire a story URL.")
+    fresh: list[str] = []
+    for story_id in story_ids:
+        if not re.fullmatch(r"[a-z0-9]+", story_id):
+            continue
+        for path in (f"/news/{story_id}", f"/news/{story_id}/"):
+            if re.search(rf"^{re.escape(path)}[ \t]", text, re.M):
+                continue
+            fresh.append(f"{path:<42}/news/  301\n")
+    if not fresh:
+        return
+    lines[insert_at:insert_at] = fresh
+    redirects.write_text("".join(lines), encoding="utf-8")
+
+
+def drop_headline_only(items: list[dict], saved_ids: set[str]) -> list[dict]:
+    """Remove a story that still has no real key points after the open attempt.
+
+    A story that was already on the site gets a 301 to /news/. A headline
+    that was never published does not. Real briefs stay.
+    """
+    book = load_copy()
+    kept, dropped = partition_headline_only(items, book)
+    if len(kept) < 8:
+        raise SystemExit(
+            f"Only {len(kept)} stories would remain after removing briefs with no key points. "
+            "The news list was left unchanged."
+        )
+    if not dropped:
+        return kept
+    retired: list[str] = []
+    changed = False
+    for item in dropped:
+        story_id = str(item.get("id") or "")
+        title = (item.get("title") or "")[:90]
+        print(f"removed {story_id}: no key points ({title})")
+        if story_id in saved_ids or (NEWS_DIR / story_id / "index.html").is_file():
+            retired.append(story_id)
+        if story_id in book:
+            del book[story_id]
+            changed = True
+    if changed:
+        save_copy(book)
+    retire_story_urls(retired)
+    return kept
+
+
+def publish_if_changed(items: list[dict], saved: list[dict], points_written: bool) -> None:
+    """Publish when key points were written or a headline-only story was removed."""
+    saved_ids = {str(item.get("id")) for item in saved}
+    items = drop_headline_only(items, saved_ids)
+    if not list_unchanged(saved, items):
+        attach_images(items)
+        apply_article_sources(items)
+        items = drop_unsourced(items)
+        if len(items) < 8:
+            raise SystemExit(
+                f"Only {len(items)} stories after merging. The news list was left unchanged."
+            )
+    if list_unchanged(saved, items) and not points_written:
+        print(
+            f"No new stories among {len(items)}. "
+            "Skipped image download, masthead reading, and page rebuild."
+        )
+        if "--deploy" in sys.argv:
+            deploy_news()
+        return
+    publish_stories(items)
 
 
 def drop_private_fields(items: list[dict]) -> None:
@@ -1834,6 +1962,7 @@ def publish_stories(items: list[dict]) -> None:
 
 def main() -> None:
     self_check()
+    _check_partition()
     saved = load_saved_posts()
     fresh = fetch_fresh_posts(saved)
     items = merge_posts(saved, fresh)
@@ -1843,30 +1972,8 @@ def main() -> None:
         )
     pending = stories_awaiting_points(items, load_copy())
     key_set = bool(os.environ.get("XAI_API_KEY", "").strip())
-    if "--dry-run" not in sys.argv and list_unchanged(saved, items) and not (pending and key_set):
-        if pending:
-            print(
-                "XAI_API_KEY is not set. "
-                "Headline drafts were left as they are."
-            )
-        print(
-            f"No new stories among {len(items)}. "
-            "Skipped image download, masthead reading, and page rebuild."
-        )
-        if "--deploy" in sys.argv:
-            deploy_news()
-        return
-    if "--dry-run" not in sys.argv and list_unchanged(saved, items):
-        print(
-            f"No new stories among {len(items)}. "
-            f"Opening {len(pending)} headline-only article(s) that still have a link."
-        )
-        ensure_copy(items)
-        write_opened_points(items)
-        publish_stories(items)
-        return
-    apply_article_sources(items)
     if "--dry-run" in sys.argv:
+        apply_article_sources(items)
         print(f"\n{len(items)} stories")
         for item in items:
             flag = "keep" if item.get("saved") else "NEW"
@@ -1875,18 +1982,37 @@ def main() -> None:
                 f"{flag}\t{link}\t{item['id']}\t{item['date']}\t{item['sourceFeed']}\t"
                 f"{item['sourceName']}\t{item['title']}"
             )
+        _, dropped = partition_headline_only(items, load_copy())
+        if dropped:
+            print(
+                f"{len(dropped)} stories have no key points and would be removed "
+                "if an opened article still cannot supply them."
+            )
         if pending:
             print(
                 f"{len(pending)} headline-only stories have an article link. "
                 "Dry run does not open them or call the model."
             )
         return
-    attach_images(items)
+    if list_unchanged(saved, items) and not (pending and key_set):
+        if pending:
+            print(
+                "XAI_API_KEY is not set. "
+                "Stories that still have no key points are removed."
+            )
+        publish_if_changed(items, saved, False)
+        return
+    if list_unchanged(saved, items):
+        print(
+            f"No new stories among {len(items)}. "
+            f"Opening {len(pending)} headline-only article(s) that still have a link."
+        )
+        ensure_copy(items)
+        publish_if_changed(items, saved, write_opened_points(items))
+        return
     apply_article_sources(items)
-    items = drop_unsourced(items)
     ensure_copy(items)
-    write_opened_points(items)
-    publish_stories(items)
+    publish_if_changed(items, saved, write_opened_points(items))
 
 
 if __name__ == "__main__":

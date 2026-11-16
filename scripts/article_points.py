@@ -2,9 +2,10 @@
 """Open a new story's article and ask grok-4.7 for original key points.
 
 The article URL stays in memory for this run. It is not written to
-news.json, news/copy.json, or the HTML. A page that cannot be opened,
-a missing XAI_API_KEY, or an unusable model reply leaves the headline draft.
-Stories that already have real key points are not sent.
+news.json, news/copy.json, or the HTML. Stories that already have real
+key points are not sent. If the page cannot be opened, the key is
+missing, or the model reply is unusable, the caller removes that story
+instead of publishing a headline draft.
 """
 
 from __future__ import annotations
@@ -647,7 +648,7 @@ def fill_article_points(items: list[dict], book: dict) -> bool:
     if not os.environ.get("XAI_API_KEY", "").strip():
         print(
             "XAI_API_KEY is not set. "
-            "New articles stay as headline drafts until that secret is added."
+            "Stories that still have no key points will be removed."
         )
         return False
     changed = False
@@ -660,20 +661,20 @@ def fill_article_points(items: list[dict], book: dict) -> bool:
         try:
             text = opened_article_text(str(item.get("article_url") or ""), title)
         except Exception:
-            print(f"left headline draft {story_id}: could not open the article")
+            print(f"no key points for {story_id}: could not open the article")
             continue
         if not text:
-            print(f"left headline draft {story_id}: article page did not open")
+            print(f"no key points for {story_id}: article page did not open")
             continue
         try:
             payload = call_model(title, str(item.get("sourceName") or ""), text)
             brief = review_model_brief(payload, f"{title}\n{text}")
         except Exception as exc:
             reason = (str(exc) or type(exc).__name__)[:200]
-            print(f"left headline draft {story_id}: model call failed ({reason})")
+            print(f"no key points for {story_id}: model call failed ({reason})")
             continue
         if not brief:
-            print(f"left headline draft {story_id}: model output was not usable")
+            print(f"no key points for {story_id}: model output was not usable")
             continue
         apply_brief(entry, brief)
         changed = True

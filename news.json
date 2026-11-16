@@ -1,17 +1,16 @@
 {
-  "updated": "2026-11-16T00:37:29+08:00",
+  "updated": "2026-11-16T14:58:25+08:00",
   "sources": [
     "EdgeProp Singapore",
-    "The Straits Times",
     "Stacked Homes",
-    "PropertyNet.SG",
     "Singapore Business Review",
     "EdgeProp.sg",
     "联合早报",
     "99.co",
     "CNA",
+    "The Straits Times",
     "DollarsAndSense.sg",
-    "deeparrival.com",
+    "PropertyNet.SG",
     "Business Times",
     "Home & Decor Singapore",
     "AsiaOne",
@@ -30,19 +29,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/n6b589835/",
-      "description": "KSH’s 1H2027 profit rises 23% on gains from Singapore condo JVs."
-    },
-    {
-      "id": "n50193e04",
-      "title": "Man lost his share of HDB flat due to ignorance of property rules",
-      "date": "2026/11/14",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n50193e04/",
-      "description": "Man lost his share of HDB flat due to ignorance of property rules."
+      "description": "KSH's half-year earnings were $6.5 million, stated as 23.3% higher, on Singapore condo joint ventures."
     },
     {
       "id": "n373b7909",
@@ -54,19 +41,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/n373b7909/",
-      "description": "5 Of Singapore’s Most Expensive HDB Flats For Sale."
-    },
-    {
-      "id": "n40c3e25d",
-      "title": "What $1M Buys in HDB Resale 2026: An Executive in 15 Towns, a 5-Room in 5",
-      "date": "2026/11/13",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "PropertyNet.SG",
-      "sourceNameZh": "PropertyNet.SG",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n40c3e25d/",
-      "description": "What $1M Buys in HDB Resale 2026: An Executive in 15 Towns, a 5-Room in 5."
+      "description": "A Stacked Homes list put five HDB asking prices from $1,560,000 to $1,899,999, all on 99-year leases."
     },
     {
       "id": "n9d207b45",
@@ -90,19 +65,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/n41ef7a07/",
-      "description": "We Review The February 2027 BTO Launch Sites (Bishan, Tampines, Toa Payoh & Tengah)."
-    },
-    {
-      "id": "n17b7e796",
-      "title": "18 Resale Condos Near Popular Singapore Primary School, With 3-Bedders Below $2 Million",
-      "date": "2026/11/12",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Stacked Homes",
-      "sourceNameZh": "Stacked Homes",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n17b7e796/",
-      "description": "18 Resale Condos Near Popular Singapore Primary School, With 3-Bedders Below $2 Million."
+      "description": "Stacked Homes puts the February 2027 BTO at about 4,300 flats in Bishan, Toa Payoh, Tampines and Tengah."
     },
     {
       "id": "nec63a2e8",
@@ -138,7 +101,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/n28f17bb8/",
-      "description": "Four-room flats lead HDB resale volume in October."
+      "description": "A 99.co and SRX flash estimate put four-room flats at 41.6% of 2,178 October HDB resale deals."
     },
     {
       "id": "n0c706bfd",
@@ -150,7 +113,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/n0c706bfd/",
-      "description": "BTO applications exceed 35,000, set to hit two-year high."
+      "description": "By 5pm on 11 November, Zaobao counted 35,603 applications for 7,964 flats, with a first-timer family median of 2.6."
     },
     {
       "id": "n0301c38f",
@@ -198,7 +161,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/nbdaff927/",
-      "description": "HDB deficit narrows to $4.7 billion, down from $6.34 billion a year ago."
+      "description": "The Straits Times put HDB's FY2025 net deficit at $4.7 billion, down from $6.34 billion, with $4 billion on home ownership."
     },
     {
       "id": "n1e01f29b",
@@ -261,18 +224,6 @@
       "description": "Bishan flats with shorter waiting times among BTO launches in February."
     },
     {
-      "id": "nb1399715",
-      "title": "Singapore’s 99 Year HDB Lease: Why The Clock Does Not Reset",
-      "date": "2026/11/06",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "deeparrival.com",
-      "sourceNameZh": "deeparrival.com",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/nb1399715/",
-      "description": "Singapore’s 99 Year HDB Lease: Why The Clock Does Not Reset."
-    },
-    {
       "id": "n5a68e6e0",
       "title": "Selling a Jurong West HDB Flat 2026: 4-Room Median $534,500 and What You Can Upgrade To",
       "date": "2026/11/06",
@@ -318,7 +269,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/nba13776a/",
-      "description": "Merpati Meadow BTO Review: Small 438-unit estate with strong demand (November 2026 Launch)."
+      "description": "Home & Decor lists Merpati Meadow as 438 flats, Plus on the specification list, with four-room prices up to $726,000."
     },
     {
       "id": "n15c8d016",
@@ -378,19 +329,7 @@
       "sourceFeed": "google-news",
       "category": "Real estate",
       "path": "/news/n96d2fc71/",
-      "description": "Nov 2026 BTO Launched, Locations, Projects, Prices, Classifications & More."
-    },
-    {
-      "id": "n7d28886d",
-      "title": "November 2026 BTO Launch Review: Ultimate Guide To Choosing The Best Unit",
-      "date": "2026/11/04",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Stacked Homes",
-      "sourceNameZh": "Stacked Homes",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n7d28886d/",
-      "description": "November 2026 BTO Launch Review: Ultimate Guide To Choosing The Best Unit."
+      "description": "99.co's 4 November note lists 7,964 November BTO flats in seven projects, all with waits under four years."
     },
     {
       "id": "n5e9c8190",
@@ -450,7 +389,7 @@
       "sourceFeed": "propnex",
       "category": "Real estate",
       "path": "/news/9808/",
-      "description": "1 in 5 prime-region private home resale deals made at a loss in Q3."
+      "description": "Cushman & Wakefield told Business Times that 19.5% of prime-region resales in its Q3 count made a loss."
     },
     {
       "id": "n27310332",
