@@ -9,6 +9,17 @@
 #   /project/<slug>/  /new-launch-condos/  /insights/  /insights/<slug>/   (build-pages.cjs)
 #   /news/  /undervalued-pty/  /hdb-resale-timeline/   (their own scripts)
 # Without a trailing slash Netlify redirects /about -> /about/ automatically.
+# A real file is served before a non-forced rule, so the index.html rules are
+# forced. Do not add a rule that removes a trailing slash: that loops.
+
+# The Netlify subdomain serves the same files. Send it to the canonical host.
+https://marvelous-begonia-99ba7b.netlify.app/*  https://www.sellingsgproperty.com/:splat  301!
+http://marvelous-begonia-99ba7b.netlify.app/*   https://www.sellingsgproperty.com/:splat  301!
+
+# /about/index.html is the same document as /about/. Send the file URL to the directory.
+/index.html                               /                                         301!
+/:a/index.html                            /:a/                                      301!
+/:a/:b/index.html                         /:a/:b/                                   301!
 
 # Legacy / alternate URLs -> canonical pages (301 keeps any ranking signals)
 /insights/dunearn-vs-fourth-avenue        /insights/dunearn-vs-fourth-avenue-2026/  301
@@ -76,6 +87,16 @@
 /news/n615c645e/                          /news/  301
 /news/n61c893d2                           /news/  301
 /news/n61c893d2/                          /news/  301
+/news/nd75f398a                           /news/  301
+/news/nd75f398a/                          /news/  301
+/news/n1e61a153                           /news/  301
+/news/n1e61a153/                          /news/  301
+/news/9790                                /news/  301
+/news/9790/                               /news/  301
+/news/ne142ee1d                           /news/  301
+/news/ne142ee1d/                          /news/  301
+/news/n5a7c5eac                           /news/  301
+/news/n5a7c5eac/                          /news/  301
 
 /news/:id                                 /news/:id/index.html   200
 /news/:id/                                /news/:id/index.html   200
