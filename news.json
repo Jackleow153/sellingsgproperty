@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T03:52:57+08:00",
+  "updated": "2026-11-17T17:14:10+08:00",
   "sources": [
     "EdgeProp Singapore",
     "Stacked Homes",
@@ -16,8 +16,7 @@
     "AsiaOne",
     "The Independent Singapore",
     "Borneo Bulletin",
-    "Real Estate Asia",
-    "Mingtiandi"
+    "Real Estate Asia"
   ],
   "items": [
     {
@@ -559,30 +558,6 @@
       "category": "Real estate",
       "path": "/news/9792/",
       "description": "A Jervois Hill bungalow foreclosure was halted. What one landed loan does, and does not, say about Singapore property prices."
-    },
-    {
-      "id": "n17060ea2",
-      "title": "First S$1.8M HDB resale flat in Singapore recorded in Queenstown",
-      "date": "2026/10/30",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "99.co",
-      "sourceNameZh": "99.co",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n17060ea2/",
-      "description": "The recorded price is S$1.818 million for a five-room HDB resale in Queenstown. Reports described it as Singapore’s first HDB resale at about S$1.8 million."
-    },
-    {
-      "id": "n4d41823c",
-      "title": "Bukit Sembawang Plans Central Singapore Condo Project After $153M Site Buy",
-      "date": "2026/10/27",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Mingtiandi",
-      "sourceNameZh": "Mingtiandi",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n4d41823c/",
-      "description": "Bukit Sembawang plans a central Singapore condo after a $153 million site buy. That number is land cost, not a unit price."
     }
   ]
 }
