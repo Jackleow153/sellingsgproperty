@@ -616,8 +616,14 @@ function caNearText(id) {
   const rs = n.resale.slice(0, 6), ls = n.launches.slice(0, 6);
   return `<h2>Location and nearby competitors</h2><ul>${n.mrt[0] ? `<li><strong>Nearest MRT:</strong> ${esc(n.mrt[0][0])}, about ${Math.round(n.mrt[0][1] / 10) * 10} m in a straight line${n.approx ? ' (approximate site location)' : ''}</li>` : ''}<li><strong>Primary schools within 1 km:</strong> ${esc(n.schools.length ? n.schools.map(s => `${s[0]} (about ${Math.round(s[1] / 10) * 10} m)`).join(', ') : 'none')}</li>${rs.length ? `<li><strong>Resale condos within 1 km (average psf, past 12 months):</strong> ${esc(rs.map(r => `${r[0]} ($${r[4].toLocaleString('en-US')} psf, ${Math.round(r[3] / 10) * 10} m)`).join(', '))}</li>` : ''}${ls.length ? `<li><strong>Other new and upcoming projects within 3 km:</strong> ${esc(ls.map(l => `${nm(l[0])} (${l[1]} km)`).join(', '))}</li>` : ''}${n.ep && n.ep.buyers ? `<li><strong>Buyers in the past 12 months:</strong> ${n.ep.buyers[0]}% Singaporeans, ${n.ep.buyers[1]}% permanent residents, ${n.ep.buyers[2]}% foreigners${n.ep.addr ? `; ${n.ep.addr[0]}% came from HDB flats` : ''}</li>` : ''}</ul>`;
 }
+function caNextText(x) {
+  const rows = (x && x.nxt || []).filter(n => n[2] != null);
+  if (!rows.length || x.fair) return '';
+  const away = n => n[2] === 0 ? 'next door' : `${n[3] ? 'about ' : ''}${n[2] < 1 ? Math.round(n[2] * 10) * 100 + ' m' : n[2].toFixed(1) + ' km'} away in a straight line`;
+  return `<h2>Next plot nearby</h2><ul>${rows.map(n => `<li><strong>${esc(n[0])}:</strong> ${n[1] ? `land cost $${n[1].toLocaleString('en-US')} psf ppr, ` : 'not yet tendered, '}${away(n)}${n[3] ? ' (approximate site location)' : ''}.</li>`).join('')}</ul>`;
+}
 function caUpcomingExtra(x) {
-  if (!x || !x.fair) return '';
+  if (!x || !x.fair) return caNextText(x);
   const dist = (x.nxtDist || []).map((d, i) => `<li><strong>${esc((x.nxt[i] || ['Next plot'])[0])}:</strong> ${esc(d.label || 'Not measured')}. ${esc(d.note || '')}</li>`).join('');
   const plots = (x.uraPlots || []).map(p => `<li><strong>${esc(p.name)}:</strong> ${esc([p.use, p.status, p.km == null ? 'distance not measured' : 'about ' + p.km + ' km', p.units ? p.units.toLocaleString('en-US') + ' homes' : ''].filter(Boolean).join(', '))}. ${esc(p.note || '')}</li>`).join('');
   const rows = ((x.resale4 && x.resale4.rows) || []).map(a => `<li><strong>${esc(a.name)}:</strong> ${esc(a.tenure)}, ${esc(a.away)}. 3-bedroom size ${esc(a.size || 'not screened')}. Yearly psf not compiled from caveats yet.</li>`).join('');
