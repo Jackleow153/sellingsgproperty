@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-18T16:33:08+08:00",
+  "updated": "2026-11-19T02:29:58+08:00",
   "sources": [
     "EdgeProp Singapore",
     "Stacked Homes",
@@ -462,42 +462,6 @@
       "category": "Real estate",
       "path": "/news/nc61398b4/",
       "description": "Realion revised its forecast for 2026 HDB resale prices to growth of 0% to 1%, from an earlier range of a 1% fall to 2% growth. It expects larger flats and."
-    },
-    {
-      "id": "9806",
-      "title": "Build-to-rent homes could appeal to young S’poreans, but can rent be kept under $2,000?",
-      "date": "2026/11/02",
-      "image": "/news/images/9806.jpg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9806/",
-      "description": "Can Singapore build-to-rent homes stay under $2,000 a month? What that means for renters saving to buy, and for landlords."
-    },
-    {
-      "id": "9805",
-      "title": "Why Singapore is exploring build-to-rent",
-      "date": "2026/11/02",
-      "image": "/news/images/9805.jpg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9805/",
-      "description": "Why Singapore is exploring build-to-rent, and what it means for people who rent now and hope to buy an HDB flat or condo later."
-    },
-    {
-      "id": "9803",
-      "title": "1,310 flats in Sembawang with under 3 years’ wait to go on sale in Nov",
-      "date": "2026/11/02",
-      "image": "/news/images/9803.jpg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9803/",
-      "description": "About 1,310 Sembawang Anchor BTO flats, with a wait of about 2 years 10 months, go on sale in November 2026. What HDB buyers should check."
     }
   ]
 }
