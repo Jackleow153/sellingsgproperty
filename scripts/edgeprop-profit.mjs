@@ -13,7 +13,7 @@ const out = existsSync(OUT) ? JSON.parse(readFileSync(OUT, 'utf8')) : {};
 const today = new Date().toISOString().slice(0, 10), DAY = 864e5;
 for (const k of Object.keys(out)) if (out[k].win == null) delete out[k];   // old failed reads: try again
 const missing = slugs.filter(k => !out[k]);
-const stale = slugs.filter(k => out[k] && Date.now() - Date.parse(out[k].at || today) > 90 * DAY).sort((a, b) => (out[a].at || '').localeCompare(out[b].at || '')).slice(0, +(process.env.REFRESH ?? 100));
+const stale = slugs.filter(k => out[k] && Date.now() - Date.parse(out[k].at || today) >= +(process.env.STALE_DAYS ?? 90) * DAY).sort((a, b) => (out[a].at || '').localeCompare(out[b].at || '')).slice(0, +(process.env.REFRESH ?? 100));
 const todo = [...missing, ...stale];
 console.log(`${missing.length} new, ${stale.length} to refresh`);
 if (!todo.length) process.exit(0);

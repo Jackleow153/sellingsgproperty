@@ -11,6 +11,13 @@ on:
     # 10:37 SGT on the 3rd of each month (02:37 UTC). Off-the-hour minute so GitHub does not drop it.
     - cron: "37 2 3 * *"
   workflow_dispatch:
+    inputs:
+      refresh:
+        description: "EdgeProp profit counts to re-read (oldest first)"
+        default: "100"
+      stale_days:
+        description: "Only re-read counts at least this many days old (0 = any)"
+        default: "90"
 
 permissions:
   contents: write
@@ -45,6 +52,9 @@ jobs:
         # Never fails the run: if EdgeProp is slow or blocks the runner, last month's counts stay.
         continue-on-error: true
         timeout-minutes: 30
+        env:
+          REFRESH: ${{ inputs.refresh || '100' }}
+          STALE_DAYS: ${{ inputs.stale_days || '90' }}
         run: for i in 1 2 3 4 5; do node scripts/edgeprop-profit.mjs && break; pkill -f remote-debugging-port=9371 || true; done
 
       - name: Put the new counts into the 3 km tables
