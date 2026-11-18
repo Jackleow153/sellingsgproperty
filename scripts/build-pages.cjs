@@ -627,8 +627,7 @@ function caUpcomingExtra(x) {
   if (!x || !x.fair) return caNextText(x);
   const dist = (x.nxtDist || []).map((d, i) => `<li><strong>${esc((x.nxt[i] || ['Next plot'])[0])}:</strong> ${esc(d.label || 'Not measured')}. ${esc(d.note || '')}</li>`).join('');
   const plots = (x.uraPlots || []).map(p => `<li><strong>${esc(p.name)}:</strong> ${esc([p.use, p.status, p.km == null ? 'distance not measured' : 'about ' + p.km + ' km', p.units ? p.units.toLocaleString('en-US') + ' homes' : ''].filter(Boolean).join(', '))}. ${esc(p.note || '')}</li>`).join('');
-  const rows = [].map(a => `<li><strong>${esc(a.name)}:</strong> ${esc(a.tenure)}, ${esc(a.away)}. 3-bedroom size ${esc(a.size || 'not screened')}. Yearly psf not compiled from caveats yet.</li>`).join('');
-  return `<h2>Distance, nearby plots and fair entry</h2><ul>${dist}${plots}${x.uraNote ? `<li>${esc(x.uraNote)}</li>` : ''}${rows}<li><strong>Fair entry.</strong> ${esc(x.fair.region)} ${esc(x.fair.note)} The harmonised adjustment is one line of 5%, only against an older non-harmonised resale median. A further 5% is a separate line and is not folded into the first. Neither line is given in dollars until a 3-bedroom caveat median is compiled.</li></ul>`;
+  return `<h2>Distance, nearby plots and fair entry</h2><ul>${dist}${plots}${x.uraNote ? `<li>${esc(x.uraNote)}</li>` : ''}<li><strong>Fair entry.</strong> ${esc(x.fair.region)} ${esc(x.fair.note)} New launches measure units without the air-con ledge (rules from June 2023), so their psf reads higher than an older condo's for the same home.</li></ul>`;
 }
 function caStatic(id, f) { return caStatic0(id, f) + (['selling', 'launched', 'upcoming', 'upcoming-basic'].includes(f.kind) ? caNearText(id) : ''); }
 function caStatic0(id, f) {
