@@ -18,9 +18,11 @@ const todo = [...missing, ...stale];
 console.log(`${missing.length} new, ${stale.length} to refresh`);
 if (!todo.length) process.exit(0);
 const CHROME = process.env.CHROME || (process.platform === 'darwin' ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' : 'google-chrome');
-const chrome = spawn(CHROME, [...(process.platform === 'linux' ? ['--no-sandbox'] : []), '--headless=new', '--remote-debugging-port=9371', `--user-data-dir=${mkdtempSync(join(tmpdir(), 'c-'))}`, '--window-size=1400,1000', 'about:blank'], { stdio: 'ignore' });
+const chrome = spawn(CHROME, [...(process.platform === 'linux' ? ['--no-sandbox'] : []), '--headless=new', '--remote-debugging-port=9371', `--user-data-dir=${mkdtempSync(join(tmpdir(), 'c-'))}`, '--window-size=1400,1000', 'about:blank'], { stdio: ['ignore', 'ignore', 'pipe'] });
+let chromeErr = ''; chrome.stderr.on('data', d => { chromeErr += d; }); chrome.on('error', e => { chromeErr += String(e); });
 const sleep = ms => new Promise(r => setTimeout(r, ms)); let ws;
-for (let i = 0; i < 50 && !ws; i++) { try { ws = (await (await fetch('http://127.0.0.1:9371/json')).json()).find(x => x.type === 'page')?.webSocketDebuggerUrl; } catch {} await sleep(200); }
+for (let i = 0; i < 150 && !ws; i++) { try { ws = (await (await fetch('http://127.0.0.1:9371/json')).json()).find(x => x.type === 'page')?.webSocketDebuggerUrl; } catch {} await sleep(200); }
+if (!ws) { console.log(`Chrome (${CHROME}) did not start:\n${chromeErr.slice(-1500)}`); chrome.kill(); process.exit(3); }
 const sock = new WebSocket(ws); await new Promise(r => sock.addEventListener('open', r)); let id = 0; const pend = new Map();
 sock.addEventListener('message', e => { const m = JSON.parse(e.data); if (m.id && pend.has(m.id)) { pend.get(m.id)(m); pend.delete(m.id); } });
 // a call that gets no answer in 20 s means the page hung: exit with code 2 and let the caller restart (the cache keeps progress)
