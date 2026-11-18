@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-18T02:46:04+08:00",
+  "updated": "2026-11-18T16:33:08+08:00",
   "sources": [
     "EdgeProp Singapore",
     "Stacked Homes",
@@ -498,78 +498,6 @@
       "category": "Real estate",
       "path": "/news/9803/",
       "description": "About 1,310 Sembawang Anchor BTO flats, with a wait of about 2 years 10 months, go on sale in November 2026. What HDB buyers should check."
-    },
-    {
-      "id": "9802",
-      "title": "Thomson Reserve sells 90% of units at average of S$2,900 psf over launch weekend",
-      "date": "2026/11/02",
-      "image": "/news/images/9802.jpg",
-      "sourceName": "Business Times",
-      "sourceNameZh": "商业时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9802/",
-      "description": "Thomson Reserve sold 1,143 of 1,268 units at about $2,900 psf. What new launch buyers and nearby resale sellers should compare."
-    },
-    {
-      "id": "n76aa293e",
-      "title": "Sell HDB Before or After HIP 2026: Works Take About 18 Months, 10 Working Days in Your Flat",
-      "date": "2026/11/02",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "PropertyNet.SG",
-      "sourceNameZh": "PropertyNet.SG",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n76aa293e/",
-      "description": "HDB’s Home Improvement Programme booklet says a typical project takes about 18 months after a successful poll, while the work inside one flat usually takes."
-    },
-    {
-      "id": "9799",
-      "title": "New mall, parks and plans for a school under Toa Payoh West masterplan",
-      "date": "2026/11/01",
-      "image": "/news/images/9799.jpg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9799/",
-      "description": "Toa Payoh Hillside offers about 1,600 BTO flats beside Caldecott MRT in November 2026, inside a plan for 6,000 homes. What is real today."
-    },
-    {
-      "id": "9794",
-      "title": "Private home launch pipeline set to climb to 14-year high in 2027",
-      "date": "2026/10/31",
-      "image": "/news/images/9794.jpg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9794/",
-      "description": "About 14,800 private homes could launch in 2027, the most since 2013. What that means for HDB upgraders and resale sellers."
-    },
-    {
-      "id": "9792",
-      "title": "Hao Mart founder halts foreclosure of his Jervois Hill bungalow by OG",
-      "date": "2026/10/30",
-      "image": "/news/images/9792.jpg",
-      "sourceName": "The Straits Times",
-      "sourceNameZh": "海峡时报",
-      "sourceFeed": "propnex",
-      "category": "Real estate",
-      "path": "/news/9792/",
-      "description": "A Jervois Hill bungalow foreclosure was halted. What one landed loan does, and does not, say about Singapore property prices."
-    },
-    {
-      "id": "n5b099b77",
-      "title": "Good Class Bungalow market activity picks up pace on ‘realistic’ pricing",
-      "date": "2026/10/22",
-      "image": "/news/images/n5b099b77.webp",
-      "sourceName": "Business Times",
-      "sourceNameZh": "商业时报",
-      "sourceFeed": "business-times",
-      "category": "Real estate",
-      "path": "/news/n5b099b77/",
-      "description": "A Business Times report by Kalpana Rashiwala, dated 16 October 2026 and updated on 22 October, says Good Class Bungalow deals have picked up when sellers."
     }
   ]
 }
