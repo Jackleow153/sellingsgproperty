@@ -567,8 +567,8 @@ const CA = (() => {
   js = js.replace(/\/\* BUILD:FP START \*\/.*?\/\* BUILD:FP END \*\//, () => `/* BUILD:FP START */const FP_URL = '${fp.url}';/* BUILD:FP END */`);
   if (!js.includes(fp.url)) throw new Error('condo-analysis: FP marker not filled');
   const near = require('./nearby.cjs')(ROOT);
-  js = js.replace(/\/\* BUILD:NEAR START \*\/.*?\/\* BUILD:NEAR END \*\//, () => `/* BUILD:NEAR START */const NEAR_URL = '${near.url}';/* BUILD:NEAR END */`);
-  if (!js.includes(near.url)) throw new Error('condo-analysis: NEAR marker not filled');
+  js = js.replace(/\/\* BUILD:NEAR START \*\/.*?\/\* BUILD:NEAR END \*\//, () => `/* BUILD:NEAR START */const NEAR_V = '${near.v}';/* BUILD:NEAR END */`);
+  if (!js.includes(`NEAR_V = '${near.v}'`)) throw new Error('condo-analysis: NEAR marker not filled');
   const norm = t => String(t).toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z0-9]/g, '');
   const up = sortForHub(projects.filter(isUpcoming), '2027');
   const lByName = new Map(nl.L.map(l => [norm(l.name), l]));

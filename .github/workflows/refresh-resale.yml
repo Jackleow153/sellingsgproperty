@@ -1,7 +1,9 @@
 name: Monthly URA resale refresh
 
-# Refreshes the "Resale condos within 3 km" table on upcoming Condo Analysis files
-# from URA caveat data, rebuilds the site and commits only if something changed.
+# Refreshes the "Resale condos within 3 km" table on selling, post-launch and upcoming
+# Condo Analysis files: prices and 3-bed growth from URA caveat data, profitable /
+# unprofitable resale counts from EdgeProp (new condos plus the 100 oldest counts, read
+# with the runner's Chrome). Rebuilds the site and commits only if something changed.
 # Needs the repository secret URA_ACCESS_KEY.
 
 on:
@@ -39,6 +41,17 @@ jobs:
           URA_ACCESS_KEY: ${{ secrets.URA_ACCESS_KEY }}
         run: node scripts/ura-resale.cjs
 
+      - name: Read profitable / unprofitable counts from EdgeProp
+        # Never fails the run: if EdgeProp is slow or blocks the runner, last month's counts stay.
+        continue-on-error: true
+        timeout-minutes: 30
+        run: for i in 1 2 3 4 5; do node scripts/edgeprop-profit.mjs && break; pkill -f remote-debugging-port=9371 || true; done
+
+      - name: Put the new counts into the 3 km tables
+        env:
+          URA_ACCESS_KEY: ${{ secrets.URA_ACCESS_KEY }}
+        run: node scripts/ura-resale.cjs
+
       - name: Rebuild pages
         run: node scripts/build-pages.cjs
 
@@ -48,6 +61,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A -- data assets condo-analysis
-          git commit -m "Monthly URA resale refresh for upcoming condo files"
+          git commit -m "Monthly resale refresh: URA prices and EdgeProp profit counts"
           for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0; sleep 10; done
           exit 1
