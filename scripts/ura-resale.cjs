@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Refreshes the "Resale condos within 3 km" table on upcoming Condo Analysis files.
+// Refreshes the "Resale condos within 3 km" table on selling, post-launch and upcoming Condo Analysis files.
 //
 //   node scripts/ura-resale.cjs        then   node scripts/build-pages.cjs
 //
@@ -7,9 +7,11 @@
 // The access key is read from the URA_ACCESS_KEY environment variable or from ~/.ura_access_key.
 // Never put the key in this repo.
 // Homes and completion year: EdgeProp project pages, cached in data/resale-homes.json (only new condos
-// are looked up, one page every ~1.5 s). Site map points: data/upcoming-geo.json; a newly added
-// upcoming project is placed with OneMap from its `where` text and marked approximate.
-// Writes `r3` into data/nearby.json for every upcoming project.
+// are looked up, one page every ~1.5 s). Profitable / unprofitable resale counts: EdgeProp, cached in
+// data/resale-profit.json by scripts/edgeprop-profit.mjs (run locally; it needs Chrome).
+// Site map points: data/site-geo.json; a newly added project is placed with OneMap from its `where`
+// text and marked approximate.
+// Writes `r3` into data/nearby.json for every selling, post-launch and upcoming project.
 const fs = require('fs'); const path = require('path'); const os = require('os');
 const ROOT = path.join(__dirname, '..');
 const rd = f => JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'));
@@ -77,7 +79,8 @@ async function edgeprop(name) {
     await sleep(1500);
     const nm = (h.match(/"projectDetail":\{[^]*?"name":"([^"]+)"/) || [])[1];
     if (!nm || norm(nm) !== norm(name)) continue;
-    const units = (h.match(/"name":"Number of Units","value":"([\d,]+) units"/) || [])[1];
+    const uv = (h.match(/"name":"Number of Units","value":"([^"]+)"/) || [])[1]; // "445 units" or "435 condos and 10 landed units"
+    const units = uv && /\d/.test(uv) ? String(uv.match(/[\d,]+/g).reduce((a, x) => a + +x.replace(/,/g, ''), 0)) : null;
     const top = (h.match(/"name":"Completion","value":"(\d{4})"/) || [])[1];
     const ll = h.match(/"projectDetail":\{[^]*?"lat":(-?[\d.]+),"lon":(-?[\d.]+)/);
     return { units: units ? +units.replace(/,/g, '') : null, top: top ? +top : null, lat: ll ? +ll[1] : null, lon: ll ? +ll[2] : null, slug };
@@ -88,16 +91,19 @@ async function edgeprop(name) {
 (async () => {
   const js = fs.readFileSync(path.join(ROOT, 'assets/condo-analysis.js'), 'utf8');
   const SITE = JSON.parse(js.match(/const SITE = (\{.*?\});\/\* BUILD:SITE-UP END/)[1]);
-  const GEO = rd('data/upcoming-geo.json'), HOMES = rd('data/resale-homes.json'), NEAR = rd('data/nearby.json');
+  const NL = JSON.parse(js.match(/const NL = (\{.*\});\n/)[1]);
+  const SITES = [...NL.L.map(x => ({ slug: x.id, name: x.name, where: x.area })), ...SITE.launched.map(x => ({ slug: x.slug, name: x.name, where: x.where })), ...SITE.up];
+  const GEO = rd('data/site-geo.json'), HOMES = rd('data/resale-homes.json'), NEAR = rd('data/nearby.json');
+  const PROFIT = fs.existsSync(path.join(ROOT, 'data/resale-profit.json')) ? rd('data/resale-profit.json') : {};
 
   // 1. map points for any new upcoming project
-  for (const s of SITE.up) {
+  for (const s of SITES) {
     if (GEO[s.slug]) continue;
     const r = (await onemap(String(s.where || s.name).split(/[,/]/)[0].trim()))[0];
     if (r) { GEO[s.slug] = { lat: +(+r.LATITUDE).toFixed(6), lon: +(+r.LONGITUDE).toFixed(6), by: 'approx' }; console.log('placed', s.slug, 'at', r.ADDRESS, '(approximate; check it)'); }
     else console.log('could not place', s.slug, '- add it to data/upcoming-geo.json by hand');
   }
-  wr('data/upcoming-geo.json', GEO, true);
+  wr('data/site-geo.json', GEO, true);
 
   // 2. URA resales grouped by project and street
   const all = await ura();
@@ -128,28 +134,33 @@ async function edgeprop(name) {
 
   // 3. per site: nearest active resale condos within 3 km
   const sets = {};
-  for (const s of SITE.up) {
+  for (const s of SITES) {
     const g = GEO[s.slug]; if (!g) continue;
     const near = pool.map(q => ({ q, d: dist(g, q) })).filter(v => v.d <= 3000 && v.q.n12 > 0).sort((a, b) => a.d - b.d);
     sets[s.slug] = { total: near.length, in1: near.filter(v => v.d <= 1000).length, shown: near.filter(v => v.q.n12 >= MIN_12M).slice(0, CAP) };
   }
 
   // 4. homes and completion year for condos not in the cache
+  const slugsNeeded = () => [...new Set(Object.values(sets).flatMap(s => s.shown.map(v => (HOMES[v.q.key] || {}).slug)).filter(Boolean))];
   const todo = [...new Set(Object.values(sets).flatMap(s => s.shown.map(v => v.q.key)))].filter(k => !HOMES[k]);
   if (todo.length) console.log(`EdgeProp: looking up ${todo.length} new condos (about ${Math.ceil(todo.length * 2.5 / 60)} min)`);
   for (const k of todo) { HOMES[k] = await edgeprop(k.split('|')[0]); wr('data/resale-homes.json', HOMES, true); }
 
+  const noProfit = slugsNeeded().filter(k => !PROFIT[k]);
+  if (noProfit.length) { fs.writeFileSync(path.join(os.tmpdir(), 'profit-todo.txt'), noProfit.join('\n')); console.log(`${noProfit.length} condos have no profit counts yet: run node scripts/edgeprop-profit.mjs (list in ${path.join(os.tmpdir(), 'profit-todo.txt')})`); }
+
   // 5. write r3
   const win = k => `${ym(W(k)[0])} to ${ym(W(k)[1])}`;
-  let rows = 0, homes = 0;
+  let rows = 0, homes = 0, profits = 0;
   for (const [slug, s] of Object.entries(sets)) {
     if (!NEAR.proj[slug]) { console.log('no nearby.json entry for', slug, '- run the scratch build_near step first'); continue; }
     NEAR.proj[slug].r3 = { w0: win(0), w1: win(1), w4: win(4), total: s.total, in1: s.in1, rows: s.shown.map(({ q, d }) => {
       const h = HOMES[q.key] || {}, ok = h.lat != null && dist(h, q) <= 400; // EdgeProp page must be the same place
       rows++; if (ok && h.units) homes++;
-      return [tc(/^RESIDENTIAL APARTMENTS$/.test(q.name) ? `Apartments on ${q.street}` : q.name), Math.round(d), q.tenure, ok ? h.top : null, ok ? h.units : null, q.psf12, q.n12, q.size, q.yoy, q.yoyAll, q.cagr4, q.cagr4All, q.ec ? 1 : 0];
+      const pr = ok && h.slug && PROFIT[h.slug] && PROFIT[h.slug].win != null ? PROFIT[h.slug] : null; if (pr) profits++;
+      return [tc(/^RESIDENTIAL APARTMENTS$/.test(q.name) ? `Apartments on ${q.street}` : q.name), Math.round(d), q.tenure, ok ? h.top : null, ok ? h.units : null, q.psf12, q.n12, q.size, q.yoy, q.yoyAll, q.cagr4, q.cagr4All, q.ec ? 1 : 0, pr ? pr.win : null, pr ? pr.lose : null];
     }) };
   }
   wr('data/nearby.json', NEAR);
-  console.log(`Done: ${Object.keys(sets).length} sites, ${rows} rows, ${homes} with homes. Prices ${ym(W(4)[0])} to ${ym(LAST)}. Now run node scripts/build-pages.cjs`);
+  console.log(`Done: ${Object.keys(sets).length} sites, ${rows} rows, ${homes} with homes, ${profits} with profit counts. Prices ${ym(W(4)[0])} to ${ym(LAST)}. Now run node scripts/build-pages.cjs`);
 })().catch(e => { console.error(e.message); process.exit(1); });
