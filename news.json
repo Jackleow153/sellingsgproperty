@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T16:48:45+08:00",
+  "updated": "2026-11-20T02:41:16+08:00",
   "sources": [
     "EdgeProp Singapore",
     "Stacked Homes",
@@ -437,18 +437,6 @@
       "category": "Real estate",
       "path": "/news/n3abc175b/",
       "description": "The Ministry of National Development said home ownership remains central, and there is also demand for longer-stay rental housing from younger Singaporeans."
-    },
-    {
-      "id": "n261828b6",
-      "title": "At What Point Does Lease Decay Start Affecting The Value Of Your HDB Flat?",
-      "date": "2026/11/03",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "DollarsAndSense.sg",
-      "sourceNameZh": "DollarsAndSense.sg",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n261828b6/",
-      "description": "The article explains lease decay: an HDB flat is on a 99-year lease, and its value falls as that lease runs down. As of 2025, 77.2% of resident households."
     }
   ]
 }
