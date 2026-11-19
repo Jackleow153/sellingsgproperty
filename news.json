@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T02:29:58+08:00",
+  "updated": "2026-11-19T16:48:45+08:00",
   "sources": [
     "EdgeProp Singapore",
     "Stacked Homes",
@@ -15,8 +15,7 @@
     "Home & Decor Singapore",
     "AsiaOne",
     "The Independent Singapore",
-    "Borneo Bulletin",
-    "Real Estate Asia"
+    "Borneo Bulletin"
   ],
   "items": [
     {
@@ -450,18 +449,6 @@
       "category": "Real estate",
       "path": "/news/n261828b6/",
       "description": "The article explains lease decay: an HDB flat is on a 99-year lease, and its value falls as that lease runs down. As of 2025, 77.2% of resident households."
-    },
-    {
-      "id": "nc61398b4",
-      "title": "Singapore HDB resale prices forecast to grow up to 1% in 2026",
-      "date": "2026/11/03",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Real Estate Asia",
-      "sourceNameZh": "Real Estate Asia",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/nc61398b4/",
-      "description": "Realion revised its forecast for 2026 HDB resale prices to growth of 0% to 1%, from an earlier range of a 1% fall to 2% growth. It expects larger flats and."
     }
   ]
 }
