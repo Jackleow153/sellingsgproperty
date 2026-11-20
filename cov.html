@@ -155,7 +155,7 @@
 <div class="container">
   <div class="card">
     <h2>Estimate Cash Over Valuation (COV)</h2>
-    <p>Enter the postal code and unit number of the HDB flat. This tool estimates a fair market value based on past transactions of the <strong>same block only</strong> (not neighbouring blocks), matching unit size where possible, adjusting for floor difference and inflation.</p>
+    <p>Enter the postal code, unit number, and the flat’s actual floor area. This tool estimates a fair market value from past transactions of the <strong>same block and that exact floor area only</strong> (not neighbouring blocks), adjusting for floor difference and inflation.</p>
     <p class="note">Goal: Help HDB buyers avoid paying unnecessary COV by understanding realistic transaction prices from the block’s own history.</p>
 
     <form id="covForm">
@@ -164,6 +164,9 @@
 
       <label for="unit">Unit Number</label>
       <input type="text" id="unit" name="unit" placeholder="e.g. #08-123 or 08-123" required>
+
+      <label for="area">Floor area (sqm)</label>
+      <input type="text" id="area" name="area" placeholder="e.g. 110" inputmode="decimal" required>
 
       <button type="submit" id="calcBtn">Calculate Estimated Valuation</button>
     </form>
@@ -246,15 +249,26 @@ async function lookupAddress(postal) {
 
 async function fetchTransactions(block, street) {
   const filters = { block: String(block), street_name: street };
-  const params = new URLSearchParams({
-    resource_id: RESOURCE_ID,
-    filters: JSON.stringify(filters),
-    limit: '1000'
-  });
-  const res = await fetch(`${DATA_GOV_URL}?${params}`);
-  const data = await res.json();
-  if (!data.success) throw new Error('Failed to fetch transaction data.');
-  return data.result.records || [];
+  const all = [];
+  let offset = 0;
+  let total = Infinity;
+  while (offset < total && offset < 5000) {
+    const params = new URLSearchParams({
+      resource_id: RESOURCE_ID,
+      filters: JSON.stringify(filters),
+      limit: '1000',
+      offset: String(offset)
+    });
+    const res = await fetch(`${DATA_GOV_URL}?${params}`);
+    const data = await res.json();
+    if (!data.success) throw new Error('Failed to fetch transaction data.');
+    const records = data.result.records || [];
+    total = Number(data.result.total) || records.length;
+    all.push(...records);
+    if (!records.length || records.length < 1000) break;
+    offset += records.length;
+  }
+  return all;
 }
 
 function sizeKey(area) {
@@ -263,19 +277,13 @@ function sizeKey(area) {
   return Number.isFinite(n) ? String(n) : String(area || '').trim();
 }
 
-function calculateEstimate(records, targetFloor, currentYear = new Date().getFullYear()) {
+function calculateEstimate(records, targetFloor, targetArea, currentYear = new Date().getFullYear()) {
   if (!records.length) return null;
 
-  // Prefer most common floor area in the block. 110 and 110.00 count as one size.
-  const areaCount = {};
-  records.forEach(r => {
-    const area = sizeKey(r.floor_area_sqm);
-    if (!area) return;
-    areaCount[area] = (areaCount[area] || 0) + 1;
-  });
-  const preferredArea = Object.keys(areaCount).reduce((a, b) => areaCount[a] > areaCount[b] ? a : b);
-
+  const preferredArea = sizeKey(targetArea);
+  if (!preferredArea) return null;
   const sameSize = records.filter(r => sizeKey(r.floor_area_sqm) === preferredArea);
+  if (!sameSize.length) return null;
 
   // Group by year
   const byYear = {};
@@ -354,6 +362,7 @@ document.getElementById('covForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const postal = document.getElementById('postal').value.trim();
   const unit = document.getElementById('unit').value.trim();
+  const area = sizeKey(document.getElementById('area').value.trim());
   const resultDiv = document.getElementById('result');
   const btn = document.getElementById('calcBtn');
 
@@ -370,6 +379,9 @@ document.getElementById('covForm').addEventListener('submit', async (e) => {
     if (!floor) {
       throw new Error('Could not read floor number from unit. Please use format like #08-123 or 08-123.');
     }
+    if (!area || !(parseFloat(area) > 0)) {
+      throw new Error('Enter the flat’s floor area in sqm, for example 110.');
+    }
 
     let records = await fetchTransactions(block, street);
     // Fallback if normalised street didn't match
@@ -377,13 +389,12 @@ document.getElementById('covForm').addEventListener('submit', async (e) => {
       records = await fetchTransactions(block, rawStreet.toUpperCase());
     }
 
-    const calc = calculateEstimate(records, floor);
+    const calc = calculateEstimate(records, floor, area);
 
     if (!calc) {
       resultDiv.innerHTML = `
-        <p class="error">No suitable past transactions found for this block and unit size in recent years.</p>
-        <p>Address found: ${addr.ADDRESS || (block + ' ' + rawStreet)}</p>
-        <p class="note">Try contacting an advisor for a manual check.</p>
+        <p class="error">No comparable calculation is available for now.</p>
+        <p>Address found: ${addr.ADDRESS || (block + ' ' + rawStreet)}. No past resale in this block matches ${area} sqm.</p>
       `;
       return;
     }
@@ -391,7 +402,7 @@ document.getElementById('covForm').addEventListener('submit', async (e) => {
     let html = `
       <h3>Estimated Valuation</h3>
       <div class="estimate">$${calc.estimated.toLocaleString()}</div>
-      <p><strong>Based on:</strong> Same block (${block} ${rawStreet}), size ~${calc.preferredArea} sqm, year ${calc.selectedYear}${calc.yearsDiff > 0 ? ` (adjusted +${calc.yearsDiff}% inflation at 2% p.a.)` : ''}.</p>
+      <p><strong>Based on:</strong> Same block (${block} ${rawStreet}), size ${calc.preferredArea} sqm, year ${calc.selectedYear}${calc.yearsDiff > 0 ? ` (adjusted for ${calc.yearsDiff} year(s) at 2% a year)` : ''}.</p>
       <p>Closest floor comps used (floor difference adjustment: ${calc.floorDiff > 0 ? '+' : ''}$${Math.abs(calc.floorAdj).toLocaleString()}).</p>
       <p class="note">This estimate reflects typical past transaction prices for similar units in the same block. Official HDB valuation may differ. Use this to negotiate and avoid paying unnecessary COV above a fair price.</p>
     `;
