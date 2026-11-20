@@ -257,18 +257,25 @@ async function fetchTransactions(block, street) {
   return data.result.records || [];
 }
 
+function sizeKey(area) {
+  const n = parseFloat(area);
+  // HDB writes the same area as 110 and as 110.00.
+  return Number.isFinite(n) ? String(n) : String(area || '').trim();
+}
+
 function calculateEstimate(records, targetFloor, currentYear = new Date().getFullYear()) {
   if (!records.length) return null;
 
-  // Prefer most common floor area in the block
+  // Prefer most common floor area in the block. 110 and 110.00 count as one size.
   const areaCount = {};
   records.forEach(r => {
-    const area = r.floor_area_sqm;
+    const area = sizeKey(r.floor_area_sqm);
+    if (!area) return;
     areaCount[area] = (areaCount[area] || 0) + 1;
   });
   const preferredArea = Object.keys(areaCount).reduce((a, b) => areaCount[a] > areaCount[b] ? a : b);
 
-  const sameSize = records.filter(r => r.floor_area_sqm === preferredArea);
+  const sameSize = records.filter(r => sizeKey(r.floor_area_sqm) === preferredArea);
 
   // Group by year
   const byYear = {};
