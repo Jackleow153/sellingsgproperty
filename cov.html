@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COV Calculation | SellingSGProperty</title>
+<style>
+  :root {
+    --primary: #1a365d;
+    --accent: #2b6cb0;
+    --success: #276749;
+    --bg: #f7fafc;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background: var(--bg);
+    color: #2d3748;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+  header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem 1rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  header .sub {
+    margin: 0.3rem 0 0;
+    font-size: 1.1rem;
+    opacity: 0.95;
+    font-weight: 500;
+  }
+  .container {
+    max-width: 720px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  .card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 1.5rem;
+  }
+  h2 {
+    color: var(--primary);
+    margin-top: 0;
+    font-size: 1.4rem;
+  }
+  label {
+    display: block;
+    font-weight: 600;
+    margin: 1rem 0 0.4rem;
+    color: #2d3748;
+  }
+  input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border 0.2s;
+  }
+  input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.15);
+  }
+  button {
+    width: 100%;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.9rem;
+    border-radius: 8px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1.2rem;
+    transition: background 0.2s;
+  }
+  button:hover { background: #2c5282; }
+  button:disabled { background: #a0aec0; cursor: not-allowed; }
+  #result {
+    margin-top: 1.5rem;
+  }
+  .estimate {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--success);
+    margin: 0.5rem 0;
+  }
+  .note {
+    font-size: 0.9rem;
+    color: #718096;
+    margin-top: 0.5rem;
+  }
+  .comps {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+  }
+  .comps table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+  }
+  .comps th, .comps td {
+    text-align: left;
+    padding: 0.5rem 0.4rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .comps th { background: #edf2f7; font-weight: 600; }
+  .cta {
+    background: #ebf8ff;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+  }
+  .cta strong { color: var(--primary); }
+  .cta a {
+    color: var(--accent);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .error { color: #c53030; font-weight: 500; }
+  .loading { color: var(--accent); font-style: italic; }
+  footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: #718096;
+    font-size: 0.85rem;
+  }
+  @media (max-width: 600px) {
+    .container { margin: 1rem auto; }
+    .estimate { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>SellingSGProperty</h1>
+  <div class="sub">COV Calculation</div>
+</header>
+
+<div class="container">
+  <div class="card">
+    <h2>Estimate Cash Over Valuation (COV)</h2>
+    <p>Enter the postal code and unit number of the HDB flat. This tool estimates a fair market value based on past transactions of the <strong>same block only</strong> (not neighbouring blocks), matching unit size where possible, adjusting for floor difference and inflation.</p>
+    <p class="note">Goal: Help HDB buyers avoid paying unnecessary COV by understanding realistic transaction prices from the block’s own history.</p>
+
+    <form id="covForm">
+      <label for="postal">Postal Code</label>
+      <input type="text" id="postal" name="postal" placeholder="e.g. 460181" maxlength="6" required pattern="\d{6}">
+
+      <label for="unit">Unit Number</label>
+      <input type="text" id="unit" name="unit" placeholder="e.g. #08-123 or 08-123" required>
+
+      <button type="submit" id="calcBtn">Calculate Estimated Valuation</button>
+    </form>
+
+    <div id="result"></div>
+  </div>
+
+  <div class="cta">
+    <strong>Need an advisor to help you buy cheap?</strong><br>
+    Contact <a href="tel:80621538">8062-1538</a> for personalised guidance on securing the best deal and avoiding high COV.
+  </div>
+</div>
+
+<footer>
+  Estimates are based on public HDB resale transaction data from data.gov.sg.<br>
+  This is not an official HDB valuation. Always verify with official sources and licensed professionals.<br>
+  &copy; SellingSGProperty — Helping HDB buyers avoid unnecessary COV.
+</footer>
+
+<script>
+const DATA_GOV_URL = 'https://data.gov.sg/api/action/datastore_search';
+const RESOURCE_ID = 'd_8b84c4ee58e3cfc0ece0d773c8ca6abc';
+const ONEMAP_URL = 'https://www.onemap.gov.sg/api/common/elastic/search';
+
+// Normalise street names to match HDB dataset abbreviations
+function normaliseStreet(street) {
+  if (!street) return '';
+  let s = street.toUpperCase().trim();
+  const replacements = [
+    [/NORTH/g, 'NTH'],
+    [/SOUTH/g, 'STH'],
+    [/ROAD/g, 'RD'],
+    [/AVENUE/g, 'AVE'],
+    [/STREET/g, 'ST'],
+    [/DRIVE/g, 'DR'],
+    [/BOULEVARD/g, 'BLVD'],
+    [/CRESCENT/g, 'CRES'],
+    [/PLACE/g, 'PL'],
+    [/LANE/g, 'LN'],
+    [/CLOSE/g, 'CL'],
+    [/TERRACE/g, 'TER'],
+    [/WALK/g, 'WK'],
+    [/RISE/g, 'RISE'], // keep
+  ];
+  replacements.forEach(([regex, repl]) => { s = s.replace(regex, repl); });
+  return s.replace(/\s+/g, ' ').trim();
+}
+
+// Extract floor number from unit string e.g. "#08-123", "08-123", "8-123"
+function extractFloor(unit) {
+  const match = unit.replace('#', '').match(/^(\d{1,2})/);
+  if (match) {
+    return parseInt(match[1], 10);
+  }
+  return null;
+}
+
+// Parse storey range "07 TO 09" → midpoint
+function parseStoreyMid(storeyRange) {
+  if (!storeyRange) return null;
+  const parts = storeyRange.split(/\s+TO\s+/i);
+  if (parts.length === 2) {
+    const low = parseInt(parts[0], 10);
+    const high = parseInt(parts[1], 10);
+    if (!isNaN(low) && !isNaN(high)) return (low + high) / 2;
+  }
+  const single = parseInt(storeyRange, 10);
+  return isNaN(single) ? null : single;
+}
+
+async function lookupAddress(postal) {
+  const url = `${ONEMAP_URL}?searchVal=${encodeURIComponent(postal)}&returnGeom=N&getAddrDetails=Y&pageNum=1`;
+  const res = await fetch(url);
+  const data = await res.json();
+  if (data.results && data.results.length > 0) {
+    return data.results[0];
+  }
+  throw new Error('Address not found for this postal code.');
+}
+
+async function fetchTransactions(block, street) {
+  const filters = { block: String(block), street_name: street };
+  const params = new URLSearchParams({
+    resource_id: RESOURCE_ID,
+    filters: JSON.stringify(filters),
+    limit: '1000'
+  });
+  const res = await fetch(`${DATA_GOV_URL}?${params}`);
+  const data = await res.json();
+  if (!data.success) throw new Error('Failed to fetch transaction data.');
+  return data.result.records || [];
+}
+
+function calculateEstimate(records, targetFloor, currentYear = new Date().getFullYear()) {
+  if (!records.length) return null;
+
+  // Prefer most common floor area in the block
+  const areaCount = {};
+  records.forEach(r => {
+    const area = r.floor_area_sqm;
+    areaCount[area] = (areaCount[area] || 0) + 1;
+  });
+  const preferredArea = Object.keys(areaCount).reduce((a, b) => areaCount[a] > areaCount[b] ? a : b);
+
+  const sameSize = records.filter(r => r.floor_area_sqm === preferredArea);
+
+  // Group by year
+  const byYear = {};
+  sameSize.forEach(r => {
+    const year = parseInt(r.month.substring(0, 4), 10);
+    if (!byYear[year]) byYear[year] = [];
+    byYear[year].push(r);
+  });
+
+  // Find most recent year with data, going back from current
+  let selectedYear = null;
+  let selectedRecs = [];
+  for (let y = currentYear; y >= currentYear - 5; y--) {
+    if (byYear[y] && byYear[y].length > 0) {
+      selectedYear = y;
+      selectedRecs = byYear[y];
+      break;
+    }
+  }
+  if (!selectedRecs.length) {
+    // fallback to any available
+    const years = Object.keys(byYear).map(Number).sort((a,b) => b-a);
+    if (years.length) {
+      selectedYear = years[0];
+      selectedRecs = byYear[selectedYear];
+    }
+  }
+  if (!selectedRecs.length) return null;
+
+  // Find closest storey
+  let minDiff = Infinity;
+  let closestRecs = [];
+  selectedRecs.forEach(r => {
+    const mid = parseStoreyMid(r.storey_range);
+    if (mid === null) return;
+    const diff = Math.abs(mid - targetFloor);
+    if (diff < minDiff) {
+      minDiff = diff;
+      closestRecs = [r];
+    } else if (diff === minDiff) {
+      closestRecs.push(r);
+    }
+  });
+
+  if (!closestRecs.length) return null;
+
+  // Average price
+  const avgPrice = closestRecs.reduce((sum, r) => sum + parseFloat(r.resale_price), 0) / closestRecs.length;
+
+  // Inflation adjustment (2% per year)
+  const yearsDiff = currentYear - selectedYear;
+  const inflated = avgPrice * Math.pow(1.02, yearsDiff);
+
+  // Floor adjustment: $4000 per floor difference
+  const closestMid = parseStoreyMid(closestRecs[0].storey_range);
+  const floorDiff = targetFloor - closestMid;
+  const floorAdj = floorDiff * 4000;
+  const estimated = Math.round(inflated + floorAdj);
+
+  return {
+    estimated,
+    selectedYear,
+    yearsDiff,
+    avgPrice: Math.round(avgPrice),
+    inflated: Math.round(inflated),
+    floorDiff: Math.round(floorDiff),
+    floorAdj,
+    preferredArea,
+    comps: closestRecs.slice(0, 5), // show up to 5
+    totalComps: closestRecs.length,
+    addressNote: preferredArea
+  };
+}
+
+document.getElementById('covForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const postal = document.getElementById('postal').value.trim();
+  const unit = document.getElementById('unit').value.trim();
+  const resultDiv = document.getElementById('result');
+  const btn = document.getElementById('calcBtn');
+
+  resultDiv.innerHTML = '<p class="loading">Looking up address and fetching past transactions...</p>';
+  btn.disabled = true;
+
+  try {
+    const addr = await lookupAddress(postal);
+    const block = addr.BLK_NO;
+    const rawStreet = addr.ROAD_NAME;
+    const street = normaliseStreet(rawStreet);
+    const floor = extractFloor(unit);
+
+    if (!floor) {
+      throw new Error('Could not read floor number from unit. Please use format like #08-123 or 08-123.');
+    }
+
+    let records = await fetchTransactions(block, street);
+    // Fallback if normalised street didn't match
+    if (!records.length) {
+      records = await fetchTransactions(block, rawStreet.toUpperCase());
+    }
+
+    const calc = calculateEstimate(records, floor);
+
+    if (!calc) {
+      resultDiv.innerHTML = `
+        <p class="error">No suitable past transactions found for this block and unit size in recent years.</p>
+        <p>Address found: ${addr.ADDRESS || (block + ' ' + rawStreet)}</p>
+        <p class="note">Try contacting an advisor for a manual check.</p>
+      `;
+      return;
+    }
+
+    let html = `
+      <h3>Estimated Valuation</h3>
+      <div class="estimate">$${calc.estimated.toLocaleString()}</div>
+      <p><strong>Based on:</strong> Same block (${block} ${rawStreet}), size ~${calc.preferredArea} sqm, year ${calc.selectedYear}${calc.yearsDiff > 0 ? ` (adjusted +${calc.yearsDiff}% inflation at 2% p.a.)` : ''}.</p>
+      <p>Closest floor comps used (floor difference adjustment: ${calc.floorDiff > 0 ? '+' : ''}$${Math.abs(calc.floorAdj).toLocaleString()}).</p>
+      <p class="note">This estimate reflects typical past transaction prices for similar units in the same block. Official HDB valuation may differ. Use this to negotiate and avoid paying unnecessary COV above a fair price.</p>
+    `;
+
+    if (calc.comps.length) {
+      html += `<div class="comps"><strong>Closest comparable transactions used:</strong>
+        <table>
+          <thead><tr><th>Month</th><th>Storey</th><th>Size (sqm)</th><th>Price</th></tr></thead>
+          <tbody>
+      `;
+      calc.comps.forEach(c => {
+        html += `<tr>
+          <td>${c.month}</td>
+          <td>${c.storey_range}</td>
+          <td>${c.floor_area_sqm}</td>
+          <td>$${parseInt(c.resale_price).toLocaleString()}</td>
+        </tr>`;
+      });
+      html += `</tbody></table>
+        <p class="note">Showing up to 5 of ${calc.totalComps} closest comps. Average raw: $${calc.avgPrice.toLocaleString()} → adjusted $${calc.estimated.toLocaleString()}.</p>
+      </div>`;
+    }
+
+    resultDiv.innerHTML = html;
+  } catch (err) {
+    resultDiv.innerHTML = `<p class="error">Error: ${err.message}</p><p class="note">Please check the postal code and unit number, then try again.</p>`;
+  } finally {
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>

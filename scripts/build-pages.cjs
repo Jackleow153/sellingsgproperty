@@ -159,7 +159,7 @@ ${schema.map(jsonLd).join('\n')}
 <body>
 <header class="top"><div class="wrap">
 <a class="brand" href="/">SellingSg<span>Property</span></a>
-<nav class="nav" aria-label="Main">${navLink('/new-launch-condos/', 'New Launches', 'launches')}${navLink('/condo-analysis/', 'Condo Analysis', 'analysis')}${navLink('/insights/', 'Insights', 'insights')}${navLink('/mortgage-calculator/', 'Mortgage Calculator', 'calc')}${navLink('/about/', 'About', 'about')}${navLink('/contact/', 'Contact', 'contact')}</nav>
+<nav class="nav" aria-label="Main">${navLink('/new-launch-condos/', 'New Launches', 'launches')}${navLink('/condo-analysis/', 'Condo Analysis', 'analysis')}${navLink('/insights/', 'Insights', 'insights')}${navLink('/mortgage-calculator/', 'Mortgage Calculator', 'calc')}${navLink('/cov.html', 'COV Calculation', 'cov')}${navLink('/about/', 'About', 'about')}${navLink('/contact/', 'Contact', 'contact')}</nav>
 <a class="btn" href="/contact/">Free 30-min consultation</a>
 </div></header>
 <div class="trust"><div class="wrap"><span><b>Jack Leow</b> · CEA Reg. No. R074023I</span><span>PropNex Realty Pte Ltd (L3008022J)</span><span>Data from URA, developers and published launch reports</span></div></div>
@@ -167,7 +167,7 @@ ${schema.map(jsonLd).join('\n')}
 ${body}
 </main>
 <footer><div class="wrap">
-<div class="fl"><a href="/">Home</a><a href="/new-launch-condos/">New launch condos</a><a href="/condo-analysis/">Condo analysis</a><a href="/insights/">Insights</a><a href="/mortgage-calculator/">Mortgage calculator</a><a href="/about/">About</a><a href="/contact/">Contact</a></div>
+<div class="fl"><a href="/">Home</a><a href="/new-launch-condos/">New launch condos</a><a href="/condo-analysis/">Condo analysis</a><a href="/insights/">Insights</a><a href="/mortgage-calculator/">Mortgage calculator</a><a href="/cov.html">COV Calculation</a><a href="/about/">About</a><a href="/contact/">Contact</a></div>
 <p>sellingsgproperty.com is an educational and branding platform operated by CEA-licensed salespersons of PropNex Realty Pte Ltd. Jack Leow, CEA Reg. No. R074023I, PropNex Realty Pte Ltd (L3008022J).</p>
 <p>This site is not the official website of any property developer and does not represent itself as an exclusive sales portal.</p>
 <p>The information on this site is for general guidance only and does not constitute financial, legal or property investment advice. Figures are based on publicly available sources and may change; please verify with the developer's latest materials and seek professional advice before acting.</p>
@@ -845,7 +845,7 @@ write('assets/app.js', appJs);
     canonical: SITE + '/404.html',
     body: `<main class="wrap" style="padding-top:56px;padding-bottom:72px"><p class="kicker">Error 404</p><h1>We couldn't find that page</h1>
 <p>The link may be old or mistyped. These are the pages most people are looking for:</p>
-<ul><li><a href="/new-launch-condos/">All new launch condos (2024–2027)</a></li><li><a href="/insights/">Property insights and guides</a></li><li><a href="/mortgage-calculator/">Mortgage calculator</a></li><li><a href="/">Homepage</a></li></ul></main>`,
+<ul><li><a href="/new-launch-condos/">All new launch condos (2024–2027)</a></li><li><a href="/insights/">Property insights and guides</a></li><li><a href="/mortgage-calculator/">Mortgage calculator</a></li><li><a href="/cov.html">COV Calculation</a></li><li><a href="/">Homepage</a></li></ul></main>`,
   }).replace('<head>', '<head>\n<meta name="robots" content="noindex">'));
 }
 write('sitemap.xml', sitemap());
