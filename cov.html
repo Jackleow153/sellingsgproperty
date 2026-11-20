@@ -224,17 +224,84 @@ function extractFloor(unit) {
   return null;
 }
 
-// Parse storey range "07 TO 09" → midpoint
-function parseStoreyMid(storeyRange) {
+// Parse storey range "07 TO 09" → low, high, and midpoint
+function parseStoreyBounds(storeyRange) {
   if (!storeyRange) return null;
-  const parts = storeyRange.split(/\s+TO\s+/i);
+  const parts = String(storeyRange).split(/\s+TO\s+/i);
   if (parts.length === 2) {
     const low = parseInt(parts[0], 10);
     const high = parseInt(parts[1], 10);
-    if (!isNaN(low) && !isNaN(high)) return (low + high) / 2;
+    if (!isNaN(low) && !isNaN(high)) return { low, high, mid: (low + high) / 2 };
   }
   const single = parseInt(storeyRange, 10);
-  return isNaN(single) ? null : single;
+  if (isNaN(single)) return null;
+  return { low: single, high: single, mid: single };
+}
+
+function bandContains(bounds, floor) {
+  return bounds && floor >= bounds.low && floor <= bounds.high;
+}
+
+function byRecent(a, b) {
+  return String(b.month).localeCompare(String(a.month));
+}
+
+function pickYearRecords(byYear, currentYear, targetFloor) {
+  const thisYear = byYear[currentYear] || [];
+  const prevYear = byYear[currentYear - 1] || [];
+  const contains = (recs) => recs.some(r => bandContains(parseStoreyBounds(r.storey_range), targetFloor));
+  if (contains(thisYear) || thisYear.length >= 2) return { year: currentYear, recs: thisYear };
+  if (prevYear.length >= 2 || (thisYear.length === 0 && prevYear.length > 0)) {
+    return { year: currentYear - 1, recs: prevYear };
+  }
+  if (thisYear.length) return { year: currentYear, recs: thisYear };
+  if (prevYear.length) return { year: currentYear - 1, recs: prevYear };
+  return null;
+}
+
+function selectComps(recs, targetFloor) {
+  const tagged = recs
+    .map(r => ({ r, b: parseStoreyBounds(r.storey_range) }))
+    .filter(x => x.b);
+  if (!tagged.length) return null;
+
+  const inside = tagged
+    .filter(x => bandContains(x.b, targetFloor))
+    .sort((a, b) => byRecent(a.r, b.r));
+  if (inside.length) {
+    return { chosen: inside.slice(0, 3).map(x => x.r), floorAdj: 0, floorDiff: 0 };
+  }
+
+  const below = tagged.filter(x => x.b.mid < targetFloor);
+  const above = tagged.filter(x => x.b.mid > targetFloor);
+  if (below.length && above.length) {
+    const belowMid = Math.max(...below.map(x => x.b.mid));
+    const aboveMid = Math.min(...above.map(x => x.b.mid));
+    const belowBand = below.filter(x => x.b.mid === belowMid).sort((a, b) => byRecent(a.r, b.r));
+    const aboveBand = above.filter(x => x.b.mid === aboveMid).sort((a, b) => byRecent(a.r, b.r));
+    const chosen = [belowBand[0], aboveBand[0]];
+    const rest = belowBand.slice(1).concat(aboveBand.slice(1)).sort((a, b) => byRecent(a.r, b.r));
+    rest.forEach(x => {
+      if (chosen.length < 3) chosen.push(x);
+    });
+    const avgMid = chosen.reduce((sum, x) => sum + x.b.mid, 0) / chosen.length;
+    return {
+      chosen: chosen.map(x => x.r),
+      floorAdj: (targetFloor - avgMid) * 4000,
+      floorDiff: targetFloor - avgMid
+    };
+  }
+
+  const nearest = tagged
+    .map(x => ({ ...x, diff: Math.abs(x.b.mid - targetFloor) }))
+    .sort((a, b) => a.diff - b.diff || byRecent(a.r, b.r))
+    .slice(0, 3);
+  const avgMid = nearest.reduce((sum, x) => sum + x.b.mid, 0) / nearest.length;
+  return {
+    chosen: nearest.map(x => x.r),
+    floorAdj: (targetFloor - avgMid) * 4000,
+    floorDiff: targetFloor - avgMid
+  };
 }
 
 async function lookupAddress(postal) {
@@ -310,13 +377,13 @@ function matchAreaSqm(records, sqft) {
 }
 
 function calculateEstimate(records, targetFloor, targetSqft, currentYear = new Date().getFullYear()) {
-  if (!records.length) return null;
+  if (!records.length) return { unavailable: 'size' };
 
   const matchedSqm = matchAreaSqm(records, targetSqft);
-  if (matchedSqm === null) return null;
+  if (matchedSqm === null) return { unavailable: 'size' };
   const preferredArea = sizeKey(matchedSqm);
   const sameSize = records.filter(r => sizeKey(r.floor_area_sqm) === preferredArea);
-  if (!sameSize.length) return null;
+  if (!sameSize.length) return { unavailable: 'size' };
 
   // Group by year
   const byYear = {};
@@ -326,55 +393,19 @@ function calculateEstimate(records, targetFloor, targetSqft, currentYear = new D
     byYear[year].push(r);
   });
 
-  // Find most recent year with data, going back from current
-  let selectedYear = null;
-  let selectedRecs = [];
-  for (let y = currentYear; y >= currentYear - 5; y--) {
-    if (byYear[y] && byYear[y].length > 0) {
-      selectedYear = y;
-      selectedRecs = byYear[y];
-      break;
-    }
-  }
-  if (!selectedRecs.length) {
-    // fallback to any available
-    const years = Object.keys(byYear).map(Number).sort((a,b) => b-a);
-    if (years.length) {
-      selectedYear = years[0];
-      selectedRecs = byYear[selectedYear];
-    }
-  }
-  if (!selectedRecs.length) return null;
+  const picked = pickYearRecords(byYear, currentYear, targetFloor);
+  if (!picked) return { unavailable: 'year' };
+  const selectedYear = picked.year;
+  const selected = selectComps(picked.recs, targetFloor);
+  if (!selected || !selected.chosen.length) return { unavailable: 'year' };
 
-  // Find closest storey
-  let minDiff = Infinity;
-  let closestRecs = [];
-  selectedRecs.forEach(r => {
-    const mid = parseStoreyMid(r.storey_range);
-    if (mid === null) return;
-    const diff = Math.abs(mid - targetFloor);
-    if (diff < minDiff) {
-      minDiff = diff;
-      closestRecs = [r];
-    } else if (diff === minDiff) {
-      closestRecs.push(r);
-    }
-  });
-
-  if (!closestRecs.length) return null;
-
-  // Average price
-  const avgPrice = closestRecs.reduce((sum, r) => sum + parseFloat(r.resale_price), 0) / closestRecs.length;
-
-  // Inflation adjustment (2% per year)
+  const avgPrice = selected.chosen.reduce((sum, r) => sum + parseFloat(r.resale_price), 0) / selected.chosen.length;
   const yearsDiff = currentYear - selectedYear;
   const inflated = avgPrice * Math.pow(1.02, yearsDiff);
-
-  // Floor adjustment: $4000 per floor difference
-  const closestMid = parseStoreyMid(closestRecs[0].storey_range);
-  const floorDiff = targetFloor - closestMid;
-  const floorAdj = floorDiff * 4000;
+  const floorAdj = selected.floorAdj;
+  const floorDiff = selected.floorDiff;
   const estimated = Math.round(inflated + floorAdj);
+  const closestRecs = selected.chosen;
 
   return {
     estimated,
@@ -425,10 +456,14 @@ document.getElementById('covForm').addEventListener('submit', async (e) => {
 
     const calc = calculateEstimate(records, floor, areaSqft);
 
-    if (!calc) {
+    if (!calc || calc.unavailable) {
+      const sqftLabel = Math.round(areaSqft).toLocaleString();
+      const why = calc && calc.unavailable === 'year'
+        ? `No sale of ${sqftLabel} sq ft in this block for this year or last year.`
+        : `No past resale in this block matches ${sqftLabel} sq ft.`;
       resultDiv.innerHTML = `
         <p class="error">No comparable calculation is available for now.</p>
-        <p>Address found: ${addr.ADDRESS || (block + ' ' + rawStreet)}. No past resale in this block matches ${Math.round(areaSqft).toLocaleString()} sq ft.</p>
+        <p>Address found: ${addr.ADDRESS || (block + ' ' + rawStreet)}. ${why}</p>
       `;
       return;
     }
@@ -437,7 +472,7 @@ document.getElementById('covForm').addEventListener('submit', async (e) => {
       <h3>Estimated Valuation</h3>
       <div class="estimate">$${calc.estimated.toLocaleString()}</div>
       <p><strong>Based on:</strong> Same block (${block} ${rawStreet}), size ${calc.sqft.toLocaleString()} sq ft (${calc.preferredArea} sqm), year ${calc.selectedYear}${calc.yearsDiff > 0 ? ` (adjusted for ${calc.yearsDiff} year(s) at 2% a year)` : ''}.</p>
-      <p>Closest floor comps used (floor difference adjustment: ${calc.floorDiff > 0 ? '+' : ''}$${Math.abs(calc.floorAdj).toLocaleString()}).</p>
+      <p>Averaged ${calc.totalComps} transaction(s), then applied inflation and a floor adjustment of ${calc.floorAdj > 0 ? '+' : calc.floorAdj < 0 ? '-' : ''}$${Math.abs(calc.floorAdj).toLocaleString()}.</p>
       <p class="note">This estimate reflects typical past transaction prices for similar units in the same block. Official HDB valuation may differ. Use this to negotiate and avoid paying unnecessary COV above a fair price.</p>
     `;
 
@@ -456,7 +491,7 @@ document.getElementById('covForm').addEventListener('submit', async (e) => {
         </tr>`;
       });
       html += `</tbody></table>
-        <p class="note">Showing up to 5 of ${calc.totalComps} closest comps. Average raw: $${calc.avgPrice.toLocaleString()} → adjusted $${calc.estimated.toLocaleString()}.</p>
+        <p class="note">Average of these ${calc.totalComps} transaction(s): $${calc.avgPrice.toLocaleString()} → adjusted $${calc.estimated.toLocaleString()}.</p>
       </div>`;
     }
 
