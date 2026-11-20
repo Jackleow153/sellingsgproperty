@@ -155,7 +155,7 @@
 <div class="container">
   <div class="card">
     <h2>Estimate Cash Over Valuation (COV)</h2>
-    <p>Enter the postal code, unit number, and the flat’s actual floor area. This tool estimates a fair market value from past transactions of the <strong>same block and that exact floor area only</strong> (not neighbouring blocks), adjusting for floor difference and inflation.</p>
+    <p>Enter the postal code, unit number, and the flat’s actual floor area in sq ft. This tool estimates a fair market value from past transactions of the <strong>same block and that exact floor area only</strong> (not neighbouring blocks), adjusting for floor difference and inflation.</p>
     <p class="note">Goal: Help HDB buyers avoid paying unnecessary COV by understanding realistic transaction prices from the block’s own history.</p>
 
     <form id="covForm">
@@ -165,8 +165,8 @@
       <label for="unit">Unit Number</label>
       <input type="text" id="unit" name="unit" placeholder="e.g. #08-123 or 08-123" required>
 
-      <label for="area">Floor area (sqm)</label>
-      <input type="text" id="area" name="area" placeholder="e.g. 110" inputmode="decimal" required>
+      <label for="area">Floor area (sq ft)</label>
+      <input type="text" id="area" name="area" placeholder="e.g. 990 or 1,184" inputmode="decimal" required>
 
       <button type="submit" id="calcBtn">Calculate Estimated Valuation</button>
     </form>
@@ -271,17 +271,50 @@ async function fetchTransactions(block, street) {
   return all;
 }
 
+const SQFT_PER_SQM = 10.7639;
+
 function sizeKey(area) {
   const n = parseFloat(area);
   // HDB writes the same area as 110 and as 110.00.
   return Number.isFinite(n) ? String(n) : String(area || '').trim();
 }
 
-function calculateEstimate(records, targetFloor, targetArea, currentYear = new Date().getFullYear()) {
+function parseSqft(value) {
+  const n = parseFloat(String(value).replace(/,/g, '').replace(/sq\.?\s*ft/ig, ''));
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+
+function sqmToSqft(sqm) {
+  return Math.round(parseFloat(sqm) * SQFT_PER_SQM);
+}
+
+function matchAreaSqm(records, sqft) {
+  const targetSqm = sqft / SQFT_PER_SQM;
+  const sizes = [...new Set(records.map(r => sizeKey(r.floor_area_sqm)).filter(Boolean))].map(Number);
+  let best = null;
+  let bestDiff = Infinity;
+  let tie = false;
+  sizes.forEach(sqm => {
+    const diff = Math.abs(sqm - targetSqm);
+    if (best === null || diff < bestDiff - 1e-6) {
+      best = sqm;
+      bestDiff = diff;
+      tie = false;
+    } else if (Math.abs(diff - bestDiff) <= 1e-6) {
+      tie = true;
+    }
+  });
+  // Half a square metre is about 5 sq ft, so a nearby size is not treated as exact.
+  if (best === null || tie || bestDiff >= 0.5) return null;
+  return best;
+}
+
+function calculateEstimate(records, targetFloor, targetSqft, currentYear = new Date().getFullYear()) {
   if (!records.length) return null;
 
-  const preferredArea = sizeKey(targetArea);
-  if (!preferredArea) return null;
+  const matchedSqm = matchAreaSqm(records, targetSqft);
+  if (matchedSqm === null) return null;
+  const preferredArea = sizeKey(matchedSqm);
   const sameSize = records.filter(r => sizeKey(r.floor_area_sqm) === preferredArea);
   if (!sameSize.length) return null;
 
@@ -352,6 +385,7 @@ function calculateEstimate(records, targetFloor, targetArea, currentYear = new D
     floorDiff: Math.round(floorDiff),
     floorAdj,
     preferredArea,
+    sqft: sqmToSqft(matchedSqm),
     comps: closestRecs.slice(0, 5), // show up to 5
     totalComps: closestRecs.length,
     addressNote: preferredArea
@@ -362,7 +396,7 @@ document.getElementById('covForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const postal = document.getElementById('postal').value.trim();
   const unit = document.getElementById('unit').value.trim();
-  const area = sizeKey(document.getElementById('area').value.trim());
+  const areaSqft = parseSqft(document.getElementById('area').value.trim());
   const resultDiv = document.getElementById('result');
   const btn = document.getElementById('calcBtn');
 
@@ -379,8 +413,8 @@ document.getElementById('covForm').addEventListener('submit', async (e) => {
     if (!floor) {
       throw new Error('Could not read floor number from unit. Please use format like #08-123 or 08-123.');
     }
-    if (!area || !(parseFloat(area) > 0)) {
-      throw new Error('Enter the flat’s floor area in sqm, for example 110.');
+    if (!areaSqft) {
+      throw new Error('Enter the flat’s floor area in sq ft, for example 990.');
     }
 
     let records = await fetchTransactions(block, street);
@@ -389,12 +423,12 @@ document.getElementById('covForm').addEventListener('submit', async (e) => {
       records = await fetchTransactions(block, rawStreet.toUpperCase());
     }
 
-    const calc = calculateEstimate(records, floor, area);
+    const calc = calculateEstimate(records, floor, areaSqft);
 
     if (!calc) {
       resultDiv.innerHTML = `
         <p class="error">No comparable calculation is available for now.</p>
-        <p>Address found: ${addr.ADDRESS || (block + ' ' + rawStreet)}. No past resale in this block matches ${area} sqm.</p>
+        <p>Address found: ${addr.ADDRESS || (block + ' ' + rawStreet)}. No past resale in this block matches ${Math.round(areaSqft).toLocaleString()} sq ft.</p>
       `;
       return;
     }
@@ -402,7 +436,7 @@ document.getElementById('covForm').addEventListener('submit', async (e) => {
     let html = `
       <h3>Estimated Valuation</h3>
       <div class="estimate">$${calc.estimated.toLocaleString()}</div>
-      <p><strong>Based on:</strong> Same block (${block} ${rawStreet}), size ${calc.preferredArea} sqm, year ${calc.selectedYear}${calc.yearsDiff > 0 ? ` (adjusted for ${calc.yearsDiff} year(s) at 2% a year)` : ''}.</p>
+      <p><strong>Based on:</strong> Same block (${block} ${rawStreet}), size ${calc.sqft.toLocaleString()} sq ft (${calc.preferredArea} sqm), year ${calc.selectedYear}${calc.yearsDiff > 0 ? ` (adjusted for ${calc.yearsDiff} year(s) at 2% a year)` : ''}.</p>
       <p>Closest floor comps used (floor difference adjustment: ${calc.floorDiff > 0 ? '+' : ''}$${Math.abs(calc.floorAdj).toLocaleString()}).</p>
       <p class="note">This estimate reflects typical past transaction prices for similar units in the same block. Official HDB valuation may differ. Use this to negotiate and avoid paying unnecessary COV above a fair price.</p>
     `;
@@ -410,14 +444,14 @@ document.getElementById('covForm').addEventListener('submit', async (e) => {
     if (calc.comps.length) {
       html += `<div class="comps"><strong>Closest comparable transactions used:</strong>
         <table>
-          <thead><tr><th>Month</th><th>Storey</th><th>Size (sqm)</th><th>Price</th></tr></thead>
+          <thead><tr><th>Month</th><th>Storey</th><th>Size (sq ft)</th><th>Price</th></tr></thead>
           <tbody>
       `;
       calc.comps.forEach(c => {
         html += `<tr>
           <td>${c.month}</td>
           <td>${c.storey_range}</td>
-          <td>${c.floor_area_sqm}</td>
+          <td>${sqmToSqft(c.floor_area_sqm).toLocaleString()}</td>
           <td>$${parseInt(c.resale_price).toLocaleString()}</td>
         </tr>`;
       });

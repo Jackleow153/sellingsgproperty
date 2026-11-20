@@ -10,7 +10,7 @@ SellingSgProperty is an educational and property advisory platform operated by C
 
 ## Tools
 
-- COV Calculation — Estimate an HDB flat's value from past resale transactions in the same block and the same floor area, so a buyer can see a fair price before paying cash over valuation. Postal code, unit number, and floor area in sqm. If that block has no sale of that size, no comparable calculation is available. Public data.gov.sg transactions and OneMap. An estimate, not an official HDB valuation: https://www.sellingsgproperty.com/cov.html
+- COV Calculation — Estimate an HDB flat's value from past resale transactions in the same block and the same floor area, so a buyer can see a fair price before paying cash over valuation. Postal code, unit number, and floor area in sq ft. HDB sizes are stored in sqm: 92 sqm is 990 sq ft and 110 sqm is 1,184 sq ft. If that block has no sale of that size, no comparable calculation is available. Public data.gov.sg transactions and OneMap. An estimate, not an official HDB valuation: https://www.sellingsgproperty.com/cov.html
 - Undervalued Pty — Condo Buy-Low Screen. Compares older Singapore private condo resale medians with newer resale condos and post-launch projects in the same postal district, using URA private residential caveats. Shows the price gap and the size-adjusted gap. A separate section shows registered HDB resale gaps for the same town and flat type, using the HDB open dataset. Those HDB prices are not mixed into the URA condo medians: https://www.sellingsgproperty.com/undervalued-pty/
 
 ## New Launch Projects (2024–2027)
