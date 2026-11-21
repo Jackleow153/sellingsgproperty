@@ -43,7 +43,7 @@ Full list with launch results: https://www.sellingsgproperty.com/new-launch-cond
 - River Valley Green (Parcel C) (D09, River Valley Green (Great World); 470 units; expected launch: 2027 (est.)): https://www.sellingsgproperty.com/project/river-valley-green-parcel-c/
 - Yishun 10 Redevelopment (D27, 51 Yishun Central 1 (Yishun 10); 110 units; expected launch: Mid-2027 (developer target)): https://www.sellingsgproperty.com/project/yishun-10-redevelopment/
 - Dunearn Road (Turf City 2nd site) (D11, Dunearn Road (Bukit Timah Turf City); 330 units; expected launch: 2027 (est.)): https://www.sellingsgproperty.com/project/dunearn-road-turf-city-2nd-site/
-- Valley Point Redevelopment (D10, 491 River Valley Road (Singapore River); 407 units; expected launch: 2027 (announced)): https://www.sellingsgproperty.com/project/valley-point-redevelopment/
+- River Opus (D10, 491 River Valley Road (Singapore River); 407 units; expected launch: 2027 (announced)): https://www.sellingsgproperty.com/project/river-opus/
 - Hougang Central (mixed-use) (D19, Hougang Central / Hougang Avenue 10; 830 units; expected launch: 2H 2027 (expected)): https://www.sellingsgproperty.com/project/hougang-central-mixed-use/
 - Miltonia Close EC (D27, Miltonia Close (Yishun); 450 units; expected launch: 2027 (est.)): https://www.sellingsgproperty.com/project/miltonia-close-ec/
 - Lorong Puntong (Sin Ming Avenue GLS) (D20, Lorong Puntong / Sin Ming Avenue (near Bright Hill MRT); 140 units; expected launch: Not announced): https://www.sellingsgproperty.com/project/lorong-puntong-sin-ming-avenue-gls/
@@ -179,7 +179,7 @@ Full list with launch results: https://www.sellingsgproperty.com/new-launch-cond
 - Kallang Close (GLS) analysis: https://www.sellingsgproperty.com/condo-analysis/kallang-close-gls/
 - River Valley Green (Parcel C) analysis: https://www.sellingsgproperty.com/condo-analysis/river-valley-green-parcel-c/
 - Dunearn Road (Turf City 2nd site) analysis: https://www.sellingsgproperty.com/condo-analysis/dunearn-road-turf-city-2nd-site/
-- Valley Point Redevelopment analysis: https://www.sellingsgproperty.com/condo-analysis/valley-point-redevelopment/
+- River Opus analysis: https://www.sellingsgproperty.com/condo-analysis/river-opus/
 - Hougang Central (mixed-use) analysis: https://www.sellingsgproperty.com/condo-analysis/hougang-central-mixed-use/
 - Miltonia Close EC analysis: https://www.sellingsgproperty.com/condo-analysis/miltonia-close-ec/
 - Peck Hay Road (GLS) analysis: https://www.sellingsgproperty.com/condo-analysis/peck-hay-road-gls/

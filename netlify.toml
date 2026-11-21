@@ -26,6 +26,26 @@
 #   status = 200
 
 [[redirects]]
+  from = "/project/valley-point-redevelopment"
+  to = "/project/river-opus/"
+  status = 301
+
+[[redirects]]
+  from = "/project/valley-point-redevelopment/"
+  to = "/project/river-opus/"
+  status = 301
+
+[[redirects]]
+  from = "/condo-analysis/valley-point-redevelopment"
+  to = "/condo-analysis/river-opus/"
+  status = 301
+
+[[redirects]]
+  from = "/condo-analysis/valley-point-redevelopment/"
+  to = "/condo-analysis/river-opus/"
+  status = 301
+
+[[redirects]]
   from = "/project/thomson-reserve-condo"
   to = "/project/thomson-reserve-condo/index.html"
   status = 200
