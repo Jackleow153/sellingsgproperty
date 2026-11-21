@@ -134,6 +134,14 @@ function layout({ title, description, canonical, body, schema = [], ogImage, nav
   return `<!DOCTYPE html>
 <html lang="en-SG">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WFWKVD161K');
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
@@ -846,7 +854,7 @@ write('assets/app.js', appJs);
     body: `<main class="wrap" style="padding-top:56px;padding-bottom:72px"><p class="kicker">Error 404</p><h1>We couldn't find that page</h1>
 <p>The link may be old or mistyped. These are the pages most people are looking for:</p>
 <ul><li><a href="/new-launch-condos/">All new launch condos (2024–2027)</a></li><li><a href="/insights/">Property insights and guides</a></li><li><a href="/mortgage-calculator/">Mortgage calculator</a></li><li><a href="/cov.html">COV Calculation</a></li><li><a href="/">Homepage</a></li></ul></main>`,
-  }).replace('<head>', '<head>\n<meta name="robots" content="noindex">'));
+  }).replace("gtag('config', 'G-WFWKVD161K');\n</script>\n", "gtag('config', 'G-WFWKVD161K');\n</script>\n<meta name=\"robots\" content=\"noindex\">\n"));
 }
 write('sitemap.xml', sitemap());
 write('llms.txt', llms());
