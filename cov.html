@@ -4,6 +4,64 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>COV Calculation | SellingSGProperty</title>
+<meta name="description" content="Check a realistic HDB resale price before you agree to pay cash over valuation. An estimate from published transactions, not an official HDB valuation and not a guarantee.">
+<link rel="canonical" href="https://www.sellingsgproperty.com/cov.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "I do not want to pay COV. How does this help?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cash over valuation is the cash you pay when the price you agree is higher than HDB's valuation. CPF savings and your housing loan do not cover that gap, and you usually learn the official valuation only after the Option to Purchase. The estimate gives you a published-market price to negotiate around before you commit that cash. It does not promise that your COV will be zero."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this calculation reliable?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is a careful estimate drawn from published HDB resale transactions, so it is grounded in prices buyers and sellers have registered. You can use it with confidence as a sense-check before you negotiate. It is not HDB's valuation of this flat, and it is not a guarantee of the price, the valuation, or a zero-COV purchase. Condition, renovation, remaining lease, and the day of valuation can move the official figure."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this HDB's official valuation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. HDB issues the valuation after the Option to Purchase, through a Request for Value. Use this estimate before that step. Confirm the official figure with HDB before you exercise the Option."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "The asking price is higher than the estimate. Should I still buy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only if you can pay the gap in cash, on top of your deposit and other costs. If HDB's valuation comes in lower than the price, that gap is cash over valuation. Negotiate, or look at another flat, rather than agreeing to cash you did not plan for. Call 8062-1538 if you want an adviser to review the flat before you pay the option fee."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "The page says to double-check the floor area. What does that mean?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The floor area you entered does not look like this flat. Check the square footage on the listing or the floor plan, then try again. The page will not show a price until the size fits the flat."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "The page says no comparable calculation is available. What now?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There is not a published sale close enough to support an estimate for this flat right now. That is not a value of zero, and it is not advice to pay the asking price. Call 8062-1538 for a manual check before you agree to cash over valuation."
+      }
+    }
+  ]
+}
+</script>
 <style>
   :root {
     --primary: #1a365d;
@@ -137,6 +195,13 @@
     text-decoration: none;
   }
   .error { color: #c53030; font-weight: 500; }
+  .lead { margin-top: 0; }
+  .points { margin: 0; padding-left: 1.2rem; }
+  .points li { margin: 0.45rem 0; }
+  .faq details { border-top: 1px solid #e2e8f0; padding: 0.75rem 0; }
+  .faq details:last-child { border-bottom: 1px solid #e2e8f0; }
+  .faq summary { cursor: pointer; font-weight: 600; color: var(--primary); }
+  .faq details p { margin: 0.45rem 0 0; }
   .loading { color: var(--accent); font-style: italic; }
   footer {
     text-align: center;
@@ -159,6 +224,7 @@
 <div class="container">
   <div class="card">
     <h2>Estimate Cash Over Valuation (COV)</h2>
+    <p class="lead">See a realistic resale price before you agree to pay cash over valuation. The figure is an estimate from published HDB transactions. It is not HDB's official valuation, and it is not a promise that you will pay zero COV.</p>
 
     <form id="covForm">
       <label for="postal">Postal Code</label>
@@ -174,6 +240,44 @@
     </form>
 
     <div id="result"></div>
+  </div>
+
+  <div class="card">
+    <h2>Buyers who do not want to pay COV</h2>
+    <p>Cash over valuation is the cash you pay when your agreed price is higher than HDB's valuation. CPF savings and your housing loan do not cover it. You usually find out the official number only after the seller grants the Option to Purchase and you submit a Request for Value.</p>
+    <ul class="points">
+      <li>Agreeing a high price first is how buyers get stuck with cash they did not budget.</li>
+      <li>A price backed by published resale transactions gives you a firmer place to negotiate.</li>
+      <li>If you cannot pay a gap in cash, do not treat the asking price as safe. Negotiate or keep looking.</li>
+    </ul>
+  </div>
+
+  <div class="card faq">
+    <h2>Questions buyers ask</h2>
+    <details>
+      <summary>I do not want to pay COV. How does this help?</summary>
+      <p>Cash over valuation is the cash you pay when the price you agree is higher than HDB's valuation. CPF savings and your housing loan do not cover that gap, and you usually learn the official valuation only after the Option to Purchase. The estimate gives you a published-market price to negotiate around before you commit that cash. It does not promise that your COV will be zero.</p>
+    </details>
+    <details>
+      <summary>Is this calculation reliable?</summary>
+      <p>It is a careful estimate drawn from published HDB resale transactions, so it is grounded in prices buyers and sellers have registered. You can use it with confidence as a sense-check before you negotiate. It is not HDB's valuation of this flat, and it is not a guarantee of the price, the valuation, or a zero-COV purchase. Condition, renovation, remaining lease, and the day of valuation can move the official figure.</p>
+    </details>
+    <details>
+      <summary>Is this HDB's official valuation?</summary>
+      <p>No. HDB issues the valuation after the Option to Purchase, through a Request for Value. Use this estimate before that step. Confirm the official figure with HDB before you exercise the Option.</p>
+    </details>
+    <details>
+      <summary>The asking price is higher than the estimate. Should I still buy?</summary>
+      <p>Only if you can pay the gap in cash, on top of your deposit and other costs. If HDB's valuation comes in lower than the price, that gap is cash over valuation. Negotiate, or look at another flat, rather than agreeing to cash you did not plan for. Call <a href="tel:80621538">8062-1538</a> if you want an adviser to review the flat before you pay the option fee.</p>
+    </details>
+    <details>
+      <summary>The page says to double-check the floor area. What does that mean?</summary>
+      <p>The floor area you entered does not look like this flat. Check the square footage on the listing or the floor plan, then try again. The page will not show a price until the size fits the flat.</p>
+    </details>
+    <details>
+      <summary>The page says no comparable calculation is available. What now?</summary>
+      <p>There is not a published sale close enough to support an estimate for this flat right now. That is not a value of zero, and it is not advice to pay the asking price. Call <a href="tel:80621538">8062-1538</a> for a manual check before you agree to cash over valuation.</p>
+    </details>
   </div>
 
   <div class="cta">
