@@ -33,6 +33,10 @@
     font-size: 1.5rem;
     font-weight: 700;
   }
+  header h1 a {
+    color: white;
+    text-decoration: none;
+  }
   header .sub {
     margin: 0.3rem 0 0;
     font-size: 1.1rem;
@@ -148,15 +152,13 @@
 </head>
 <body>
 <header>
-  <h1>SellingSGProperty</h1>
+  <h1><a href="https://www.sellingsgproperty.com/" target="_blank" rel="noopener noreferrer">SellingSGProperty</a></h1>
   <div class="sub">COV Calculation</div>
 </header>
 
 <div class="container">
   <div class="card">
     <h2>Estimate Cash Over Valuation (COV)</h2>
-    <p>Enter the postal code, unit number, and the flat’s actual floor area in sq ft. This tool estimates a fair market value from past transactions of the <strong>same block and that exact floor area only</strong> (not neighbouring blocks), adjusting for floor difference and inflation.</p>
-    <p class="note">Goal: Help HDB buyers avoid paying unnecessary COV by understanding realistic transaction prices from the block’s own history.</p>
 
     <form id="covForm">
       <label for="postal">Postal Code</label>
@@ -355,6 +357,12 @@ function sqmToSqft(sqm) {
   return Math.round(parseFloat(sqm) * SQFT_PER_SQM);
 }
 
+function nearestSqftGap(records, sqft) {
+  const sizes = [...new Set(records.map(r => sizeKey(r.floor_area_sqm)).filter(Boolean))].map(Number);
+  if (!sizes.length) return Infinity;
+  return Math.min(...sizes.map(sqm => Math.abs(sqmToSqft(sqm) - sqft)));
+}
+
 function matchAreaSqm(records, sqft) {
   const targetSqm = sqft / SQFT_PER_SQM;
   const sizes = [...new Set(records.map(r => sizeKey(r.floor_area_sqm)).filter(Boolean))].map(Number);
@@ -431,7 +439,7 @@ document.getElementById('covForm').addEventListener('submit', async (e) => {
   const resultDiv = document.getElementById('result');
   const btn = document.getElementById('calcBtn');
 
-  resultDiv.innerHTML = '<p class="loading">Looking up address and fetching past transactions...</p>';
+  resultDiv.innerHTML = '<p class="loading">Calculating...</p>';
   btn.disabled = true;
 
   try {
@@ -454,50 +462,24 @@ document.getElementById('covForm').addEventListener('submit', async (e) => {
       records = await fetchTransactions(block, rawStreet.toUpperCase());
     }
 
-    const calc = calculateEstimate(records, floor, areaSqft);
-
-    if (!calc || calc.unavailable) {
-      const sqftLabel = Math.round(areaSqft).toLocaleString();
-      const why = calc && calc.unavailable === 'year'
-        ? `No sale of ${sqftLabel} sq ft in this block for this year or last year.`
-        : `No past resale in this block matches ${sqftLabel} sq ft.`;
-      resultDiv.innerHTML = `
-        <p class="error">No comparable calculation is available for now.</p>
-        <p>Address found: ${addr.ADDRESS || (block + ' ' + rawStreet)}. ${why}</p>
-      `;
+    if (records.length && nearestSqftGap(records, areaSqft) >= 50) {
+      resultDiv.innerHTML = `<p class="error">Double check the sqft key in.</p>`;
       return;
     }
 
-    let html = `
-      <h3>Estimated Valuation</h3>
-      <div class="estimate">$${calc.estimated.toLocaleString()}</div>
-      <p><strong>Based on:</strong> Same block (${block} ${rawStreet}), size ${calc.sqft.toLocaleString()} sq ft (${calc.preferredArea} sqm), year ${calc.selectedYear}${calc.yearsDiff > 0 ? ` (adjusted for ${calc.yearsDiff} year(s) at 2% a year)` : ''}.</p>
-      <p>Averaged ${calc.totalComps} transaction(s), then applied inflation and a floor adjustment of ${calc.floorAdj > 0 ? '+' : calc.floorAdj < 0 ? '-' : ''}$${Math.abs(calc.floorAdj).toLocaleString()}.</p>
-      <p class="note">This estimate reflects typical past transaction prices for similar units in the same block. Official HDB valuation may differ. Use this to negotiate and avoid paying unnecessary COV above a fair price.</p>
-    `;
+    const calc = calculateEstimate(records, floor, areaSqft);
 
-    if (calc.comps.length) {
-      html += `<div class="comps"><strong>Closest comparable transactions used:</strong>
-        <table>
-          <thead><tr><th>Month</th><th>Storey</th><th>Size (sq ft)</th><th>Price</th></tr></thead>
-          <tbody>
-      `;
-      calc.comps.forEach(c => {
-        html += `<tr>
-          <td>${c.month}</td>
-          <td>${c.storey_range}</td>
-          <td>${sqmToSqft(c.floor_area_sqm).toLocaleString()}</td>
-          <td>$${parseInt(c.resale_price).toLocaleString()}</td>
-        </tr>`;
-      });
-      html += `</tbody></table>
-        <p class="note">Average of these ${calc.totalComps} transaction(s): $${calc.avgPrice.toLocaleString()} → adjusted $${calc.estimated.toLocaleString()}.</p>
-      </div>`;
+    if (!calc || calc.unavailable) {
+      resultDiv.innerHTML = `<p class="error">No comparable calculation is available for now.</p>`;
+      return;
     }
 
-    resultDiv.innerHTML = html;
+    resultDiv.innerHTML = `
+      <h3>Estimated Valuation</h3>
+      <div class="estimate">$${calc.estimated.toLocaleString()}</div>
+    `;
   } catch (err) {
-    resultDiv.innerHTML = `<p class="error">Error: ${err.message}</p><p class="note">Please check the postal code and unit number, then try again.</p>`;
+    resultDiv.innerHTML = `<p class="error">Error: ${err.message}</p>`;
   } finally {
     btn.disabled = false;
   }
