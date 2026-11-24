@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-23T17:06:22+08:00",
+  "updated": "2026-11-24T18:55:35+08:00",
   "sources": [
     "EdgeProp Singapore",
     "Stacked Homes",
@@ -14,8 +14,7 @@
     "Business Times",
     "Home & Decor Singapore",
     "AsiaOne",
-    "The Independent Singapore",
-    "Borneo Bulletin"
+    "The Independent Singapore"
   ],
   "items": [
     {
@@ -425,18 +424,6 @@
       "category": "Real estate",
       "path": "/news/nd682cbef/",
       "description": "An executive flat at Block 938 Tampines Avenue 5, in Tampines Palmspring, sold for $1.275 million in November 2026. That is a new record for an executive."
-    },
-    {
-      "id": "n3abc175b",
-      "title": "Singapore explores build-to-rent model as demand for independent living grows",
-      "date": "2026/11/03",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "Borneo Bulletin",
-      "sourceNameZh": "Borneo Bulletin",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/n3abc175b/",
-      "description": "The Ministry of National Development said home ownership remains central, and there is also demand for longer-stay rental housing from younger Singaporeans."
     }
   ]
 }
