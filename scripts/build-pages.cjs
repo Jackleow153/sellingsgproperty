@@ -442,6 +442,8 @@ function prepareBody(html) {
   });
   return { html: out, toc };
 }
+// Cover image path for an article (img may be '/insights/x.jpg', 'insights/x.jpg' or a full URL)
+const coverSrc = post => !post.img ? '' : (/^https?:/.test(post.img) ? post.img : '/' + post.img.replace(/^\//, ''));
 function articlePage(id, post) {
   const url = SITE + articlePath(id);
   const desc = articleDescription(post);
@@ -456,6 +458,7 @@ ${crumbs(bc)}
 <div class="kicker">${esc(post.category || 'Insights')}</div>
 <h1>${esc(post.title)}</h1>
 <div class="meta"><span>By <a href="/about/">Jack Leow</a>, CEA Reg. No. R074023I</span><time datetime="${published}">${esc(post.date)}</time>${post.updated ? `<span>Updated <time datetime="${modified}">${esc(post.updated)}</time></span>` : ''}<span>${esc(post.readTime || '')}</span></div>
+${coverSrc(post) ? `<img class="hero-img" src="${esc(coverSrc(post))}" alt="${esc(post.title)}" width="1200" height="675" fetchpriority="high">` : ''}
 ${toc.length > 2 ? `<nav class="toc" aria-label="Contents" style="margin-top:20px"><strong>In this article</strong><ol>${toc.map(([i, t]) => `<li><a href="#${i}">${esc(t)}</a></li>`).join('')}</ol></nav>` : ''}
 <div class="article-body">
 ${html}
@@ -481,7 +484,7 @@ function insightsIndex() {
 ${crumbs([['/', 'Home'], ['/insights/', 'Insights']])}
 <h1>Singapore Property Insights</h1>
 <div class="answer"><p>${sortedArticles.length} data-first guides on buying new launch condos, upgrading from HDB, CPF and ABSD rules, and the psychology of property decisions. Each article cites its data sources.</p></div>
-<ul class="links" style="margin-top:20px">${sortedArticles.map(([k, a]) => `<li><a href="${articlePath(k)}">${esc(a.title)}</a><span>${esc(a.date)} · ${esc(a.readTime || '')}</span></li>`).join('')}</ul>
+<ul class="icards">${sortedArticles.map(([k, a], i) => `<li><a href="${articlePath(k)}">${coverSrc(a) ? `<img src="${esc(coverSrc(a))}" alt="" width="1200" height="675"${i < 4 ? '' : ' loading="lazy" decoding="async"'}>` : `<div class="ph" aria-hidden="true"><span>${esc(a.category || 'Insights')}</span></div>`}<div class="tx"><span class="k">${esc(a.category || 'Insights')}</span><strong>${esc(a.title)}</strong><span class="d">${esc(a.date)} · ${esc(a.readTime || '')}</span></div></a></li>`).join('')}</ul>
 </div>`;
   const schema = [
     { '@context': 'https://schema.org', '@type': 'CollectionPage', url, name: title, description: desc, author: PERSON },
