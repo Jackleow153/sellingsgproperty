@@ -36,6 +36,7 @@ Work as a senior SEO / AIO / GEO / UX / UI specialist who understands how people
 - Shared styles for static pages: `assets/site.css` (brand: porcelain `#F6F4EF`, navy `#0C1B2A`, brass `#B89B5E`; Marcellus headings, Hanken Grotesk text).
 - Redirects: `_redirects`. There is **no catch-all**: unknown URLs return `/404.html` with a real 404 (no soft 404s). Every public URL must be a real file; add 301s for any URL you retire.
 - `/assets/*` is cached for a year: reference changed assets with a new `?v=` or a new file name.
+- IndexNow (Bing, Copilot, ChatGPT search): after Netlify has deployed new or changed pages, run `node scripts/indexnow.cjs <full URLs>`. The key file is `/706cab0374fd4c34baad5abd8e5264d2.txt`; never delete it.
 
 ## Project data rules
 

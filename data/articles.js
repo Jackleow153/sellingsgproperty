@@ -4237,7 +4237,7 @@ const ARTICLES = {
     readTime: '24 min read',
     category: 'NEW LAUNCH',
     chipClass: 'chip-newlaunch',
-    img: 'insights/thomson-reserve-price-review-2026.jpg',
+    img: '/insights/thomson-reserve-price-review-2026.jpg',
     linkedinUrl: null,
     body: `
       <div class="tldr launch-update"><p><strong>Launch update, 12 Nov 2026:</strong> Thomson Reserve launched on 31 October 2026 at an average of $2,900 psf, and 1,143 of its 1,268 units (90.1%) sold over the launch weekend, the best-selling launch of 2026. This article was written before launch, so the prices below are pre-launch estimates. For the results and what is still available, see the <a href="/project/thomson-reserve-condo/">Thomson Reserve page</a>.</p></div>
@@ -5078,7 +5078,7 @@ const ARTICLES = {
     readTime: '8 min read',
     category: 'HDB UPGRADERS',
     chipClass: 'chip-buyer',
-    img: 'insights/hdb-vs-condo-affordability-2026.jpg',
+    img: '/insights/hdb-vs-condo-affordability-2026.jpg',
     linkedinUrl: null,
     body: `
       <div class="tldr">
