@@ -194,9 +194,12 @@ def build(pid, c):
     A = floor_price(c['land'], c['build'])
     r1 = [round(p * IDX['2026Q3'] / IDX[q] / 5) * 5 for (_, p, q, _) in c['route1']]
     b1 = round(sum(r1) / len(r1) / 5) * 5
-    nm2, p2, note2, integ, newp, newnote = c['route2']
-    b2 = (round(p2 * (1 + integ) * (1 + newp[0]) / 5) * 5, round(p2 * (1 + integ) * (1 + newp[1]) / 5) * 5)
-    B = round((b1 + sum(b2) / 2) / 2 / 10) * 10
+    if c.get('route2'):
+        nm2, p2, note2, integ, newp, newnote = c['route2']
+        b2 = (round(p2 * (1 + integ) * (1 + newp[0]) / 5) * 5, round(p2 * (1 + integ) * (1 + newp[1]) / 5) * 5)
+        B = round((b1 + sum(b2) / 2) / 2 / 10) * 10
+    else:
+        B = round(b1 / 10) * 10
     gr = comps_growth({k: MALL[k] for k in c['comps']})
     base = round(median(list(gr.values())), 3)
     g = {'bear': base / 2, 'base': base, 'bull': base + c['bull_add']}
@@ -278,7 +281,7 @@ def build(pid, c):
         since = cagr(lp, psf['2026'], 2026.5 - ly) * 100
         comps_rows.append([k, UNITS_MALL[k], str(int(ly)), lp, top, psf['2026'], round(since, 1), round(gr[k] * 100, 1) if k in gr else None, 'Not available yet', ''])
     yrs = c['years']
-    buy_year = {'chencharu-central-residences': 2027, 'one-chuan-grove': 2027, 'bayshore-drive-site': 2028}[pid]
+    buy_year = c.get('buy_year') or {'chencharu-central-residences': 2027, 'one-chuan-grove': 2027, 'bayshore-drive-site': 2028}[pid]
     std = {
      'asOf': AS_OF, 'confidence': c['confidence'],
      'confNote': f"No developer price list yet. Price range: {c['expected_note']} {c['sizes_note']} The verdict will be re-checked the day prices are released.",
@@ -301,10 +304,11 @@ def build(pid, c):
                 ['Developer floor price', f"about {fmt_money(A['floor'][0])} to {fmt_money(A['floor'][1])} psf", 'E', None, 'Cost plus a normal 10% to 15% margin on the selling price. Below this, a launch is unrealistic.']],
      'priceB': [[f"Route 1: {lab}", f"{fmt_money(p)} psf", 'C', sk, f"Moved to Q3 2026 with URA's non-landed index: about {fmt_money(v)} psf."] for (lab, p, q, sk), v in zip(c['route1'], r1)]
                + [['Route 1 result', f"about {fmt_money(b1)} psf", 'E', None, 'Average of the route 1 anchors.' if len(r1) > 1 else 'No location adjustment: same area.'],
-                  [f"Route 2: {nm2}", f"{fmt_money(p2)} psf", 'C', 'caveats' if nm2 in ('North Park Residences',) else 'mall', note2],
+                  ] + ([[f"Route 2: {nm2}", f"{fmt_money(p2)} psf", 'C', c.get('route2_src', 'caveats' if nm2 in ('North Park Residences',) else 'mall'), note2],
                   ['Adjustments', (f"+{integ*100:.1f}% and " if integ else '') + f"+{newp[0]*100:.0f}% to +{newp[1]*100:.0f}%", 'E', None, newnote],
                   ['Route 2 result', f"about {fmt_money(b2[0])} to {fmt_money(b2[1])} psf", 'E', None, ''],
-                  ['Fair value today', f"about {fmt_money(B)} psf", 'E', None, 'Average of the two routes.']],
+                  ['Fair value today', f"about {fmt_money(B)} psf", 'E', None, 'Average of the two routes.']] if c.get('route2') else
+                  [['Fair value today', f"about {fmt_money(B)} psf", 'E', None, 'Route 1 result; no recent resale condo nearby is a fair second route.']]),
      'priceC': f"Working backwards from the base-case resale price (about {fmt_money(round(pr.exit_psf(base)))} psf after {yrs:g} years), the highest entry that still earns 5% a year after costs is about " + ', '.join(f"{fmt_money(u['C'])} psf for a {t}" for t, u in units.items()) + '.',
      'priceDecide': (f"Buy-at price = the lower of fair value ({fmt_money(B)}) and the 5% ceiling ({fmt_money(u3['C'])}) = about {fmt_money(u3['buy'])} psf. "
                      + (f"That is below the developer's floor of about {fmt_money(A['floor'][0])}, so at any realistic launch price this won't deliver 5% a year: buy it only to live in. " if u3['buy'] < A['floor'][0] else 'That is above the developer floor, so a launch at this level is possible. ')
@@ -341,5 +345,6 @@ def build(pid, c):
     return std
 
 
-out = {pid: build(pid, c) for pid, c in P.items()}
-print(json.dumps(out, ensure_ascii=False, separators=(',', ':')))
+if __name__ == '__main__':
+    out = {pid: build(pid, c) for pid, c in P.items()}
+    print(json.dumps(out, ensure_ascii=False, separators=(',', ':')))

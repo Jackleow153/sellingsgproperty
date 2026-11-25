@@ -650,17 +650,16 @@ function caUpcomingExtra(x) {
   const plots = (x.uraPlots || []).map(p => `<li><strong>${esc(p.name)}:</strong> ${esc([p.use, p.status, p.km == null ? 'distance not measured' : 'about ' + p.km + ' km', p.units ? p.units.toLocaleString('en-US') + ' homes' : ''].filter(Boolean).join(', '))}. ${esc(p.note || '')}</li>`).join('');
   return `<h2>Distance, nearby plots and fair entry</h2><ul>${dist}${plots}${x.uraNote ? `<li>${esc(x.uraNote)}</li>` : ''}<li><strong>Fair entry.</strong> ${esc(x.fair.region)} ${esc(x.fair.note)} New launches measure units without the air-con ledge (rules from June 2023), so their psf reads higher than an older condo's for the same home.</li></ul>`;
 }
-// Crawlable summary of a standard analysis: verdict, per-unit prices, 5% test, comparables, exit, scorecard.
+// Crawlable summary of a standard analysis: verdict, per-unit prices, closest competitors, potential gain, exit, scorecard.
 function caStdText(f) {
   const s = f.x && CA.std[f.x.id]; if (!s) return '';
-  const p = f.p, strip = t => String(t).replace(/<[^>]+>/g, '');
+  const p = f.p, strip = v => String(v).replace(/<[^>]+>/g, '');
   return `<p class="small"><a href="/condo-analysis/">← All condos</a></p><h1>${esc(p.name)}: analysis and verdict</h1><p>${esc(placeOf(p))} · checked ${esc(s.asOf)} · confidence ${esc(s.confidence)}</p>
 <p><strong>Verdict: ${esc(s.verdict.line)}</strong></p><ul>${s.verdict.reasons.map(r => `<li>${esc(r)}</li>`).join('')}</ul>
-<p><strong>Suits:</strong> ${esc(s.verdict.suits)} <strong>Skip it if:</strong> ${esc(s.verdict.skip)}</p>
+<p><strong>Buy at or below:</strong> ${esc(s.strip[1][1])}. <strong>Walk away above:</strong> ${esc(s.strip[2][1])}. <strong>Potential gain:</strong> ${esc(s.strip[3][1])} (${esc(s.strip[3][2])}).</p>
 <h2>Verdict by unit type</h2><ul>${s.types.map(t => `<li><strong>${esc(t[0])}: ${esc(t[1])}.</strong> Buy at or below ${esc(t[2])}; walk away above ${esc(t[3])}. ${esc(t[4])}</li>`).join('')}</ul>
-<h2>Buy-at and walk-away prices</h2><p>${esc(s.priceDecide)}</p>
-<h2>The 5% test</h2><p>${esc(s.test.key)} ${esc(s.test.result)}</p>
-<h2>Competitor performance</h2><p>${esc(s.compsLine)}</p>
+<h2>Closest competitors</h2><p>${esc(s.compsNote)}</p><ul>${s.comps.map(c => `<li><strong>${esc(c[0])}</strong> (${c[1] < 1000 ? Math.round(c[1] / 10) * 10 + ' m' : (c[1] / 1000).toFixed(1) + ' km'} away, ${esc(String(c[2] || ''))} homes, ${esc(c[5])}): $${c[6].toLocaleString('en-US')} psf, about $${c[11].toLocaleString('en-US')} psf as a new launch here${c[12] == null ? '' : `; ${c[12].toFixed(1)}% a year over 4 years`}.</li>`).join('')}</ul><p>${esc(s.priceDecide)}</p>
+<h2>Potential gain</h2><p>${esc(s.gain.costs)}</p><ul>${s.gain.scen.map(r => `<li><strong>${esc(r[0])} (${esc(r[1])}):</strong> ${esc(r[2])}</li>`).join('')}</ul>
 <h2>District</h2><p>${esc(s.district.line)}</p>
 <h2>Future buyers</h2><p>${esc(s.exit.line)}</p>
 <h2>Master Plan</h2><p>${esc(s.planLine)}</p>
@@ -707,7 +706,7 @@ function caMeta(id, f) {
   if (f.kind === 'launched' && caOv(id)) return { title: fit([`${nm} Analysis: Score ${caOv(id)}/10, Affordability & Break-even`, `${nm} Analysis: Score ${caOv(id)}/10 & Calculators`, `${nm} Analysis: Score ${caOv(id)}/10`]), desc: clip(`${nm}: ${CA.xscore[id].verdict}. Scored ${caOv(id)}/10 on location, entry price, exit plan, food and MRT, with affordability and break-even calculators.`, 158) };
   if (f.kind === 'launched') return { title: fit([`${nm} Analysis: Affordability & Break-even Price`, `${nm} Analysis & Calculators`, `${nm} | Condo Analysis`]), desc: clip(`${nm}: launched ${f.p.launchDate.replace(/\s*\(.*$/, '')}${f.p.avgPSF ? ` at about $${f.p.avgPSF.toLocaleString('en-US')} psf (reported)` : ''}. Check if an HDB upgrader can afford it, the resale price you need to break even, and how it compares in its region.`, 158) };
   if (f.kind === 'upcoming' && f.x && CA.std[f.x.id]) { const s = CA.std[f.x.id], v = s.strip[0][1], wa = s.strip[2][1];
-    return { title: fit([`${nm} Analysis: ${v}, Walk Away Above ${wa}`, `${nm} Analysis: ${v}`, `${nm}: ${v}`, `${nm} | Condo Analysis`]), desc: clip(`${nm} verdict: ${v}; the 5% test is a ${s.strip[3][1].toLowerCase()}. Buy-at and walk-away prices by unit type, comparables, exit buyers, sources.`, 158) }; }
+    return { title: fit([`${nm} Analysis: ${v}, Walk Away Above ${wa}`, `${nm} Analysis: ${v}`, `${nm}: ${v}`, `${nm} | Condo Analysis`]), desc: clip(`${nm} verdict: ${v}. Buy at or below ${s.strip[1][1]}, with the closest competitors, potential gain by unit type, exit buyers and sources.`, 158) }; }
   if (f.kind === 'upcoming' || f.kind === 'upcoming-basic') return { title: fit([`${nm}: Land Bid & Expected Price Analysis`, `${nm}: Land Bid Analysis`, `${nm} | Condo Analysis`]), desc: clip(`${nm}: upcoming project. Land price, bids, expected launch price range and launch timing, with sources.${f.p.launchShort ? ' Expected launch: ' + f.p.launchShort + '.' : ''}`, 158) };
   if (f.kind === 'panorama') return { title: 'The Panorama Condo: Price History, MRT Effect & Calculator', desc: 'The Panorama (Ang Mo Kio): 3-bedroom profit year by year since 2014, the Mayflower MRT effect, an HDB upgrader affordability calculator and nearby competitors.' };
   if (f.kind === 'resale' && caOv(id)) return { title: fit([`${nm} Deep Dive: Price Growth, Profit & Score ${caOv(id)}/10`, `${nm} Deep Dive: Profit Year by Year, ${caOv(id)}/10`, `${nm} Deep Dive: Score ${caOv(id)}/10`]), desc: clip(`${nm} (${f.x.area}, ${f.x.district}): ${CA.xscore[id].verdict}. Scored ${caOv(id)}/10 against nearby resale condos, with affordability and break-even calculators.`, 158) };

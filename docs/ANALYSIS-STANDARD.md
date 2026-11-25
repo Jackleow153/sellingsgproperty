@@ -1,5 +1,14 @@
 # ANALYSIS-STANDARD.md — sellingsgproperty.com condo analysis
 
+> ## Amendment, 25 Nov 2026 (Jack): overrides every mention below of the 5% test, the 5% ceiling, the 5% path and medians
+> 1. **No 5% test.** Show the **potential gain**: total % made (and % a year) after Buyer's Stamp Duty, about $6,000 legal and a 2% + GST selling fee, at the buy-at, expected and walk-away prices, in bear / base / bull cases. The hero strip's fourth tile is "Potential gain".
+> 2. **Competitors:** closest first, **within 1 km**; widen to 2 km, then 3 km, only if fewer than 3 qualify. Same tenure (99-year with 99-year, freehold with freehold), similar size (0.4x to 2.5x the homes), completed 2011 or later or launched in the past 24 months where possible; no ECs.
+> 3. **Harmonised areas:** a competitor launched before June 2023 measured its area under the old rules (including AC ledges): **add 5%** to its psf and say so in the table.
+> 4. **Buy at or below** = the plain average (never the median) of the competitors' new-launch equivalents: resale psf +5% (old area rules) +15% (new-launch premium) +10% if this project is integrated and the competitor is not; recent launches are moved to today with URA's non-landed index instead of the new-launch premium. **Walk away above** = buy-at + 5%. Show the developer's floor price as a check.
+> 5. **Growth:** base = the average (not the median) of the same competitors' URA 4-year yearly price change (3-bed where available); bear = half; bull adds a premium only for a Confirmed catalyst.
+> 6. **Verdict:** Buy if the expected price is at or below buy-at; "Buy only below [walk-away]" if between; "Walk away above [walk-away]" if above; Walk away for a unit type whose resale quantum needs over 1.8x the median household income.
+
+
 Mandatory for every condo analysis page (new launch or resale). Read it before writing or updating any analysis.
 
 **The one rule:** facts are the evidence, not the product. Every page must reach a clear, opinionated conclusion and show the reasoning that got there, the way a top advisor would talk to a client they respect. Plain words. Explain every technical term the first time it appears (e.g. "psf ppr = land price per square foot of buildable floor area").
