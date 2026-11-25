@@ -1,7 +1,7 @@
 [build]
   publish = "."
   # Skip the deploy (saves Netlify credits) when a push changes only internal files that are never served.
-  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)CLAUDE.md' ':(exclude)README.md' ':(exclude)NEW_BLOG_TEMPLATE.md' ':(exclude)scripts' ':(exclude)data' ':(exclude).github' ':(exclude)package.json' ':(exclude)package-lock.json' ':(exclude)input.css' ':(exclude)tailwind.config.cjs' ':(exclude)news/copy.json'"
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)CLAUDE.md' ':(exclude)README.md' ':(exclude)NEW_BLOG_TEMPLATE.md' ':(exclude)docs' ':(exclude)scripts' ':(exclude)data' ':(exclude).github' ':(exclude)package.json' ':(exclude)package-lock.json' ':(exclude)input.css' ':(exclude)tailwind.config.cjs' ':(exclude)news/copy.json'"
 
 [[headers]]
   for = "/*"

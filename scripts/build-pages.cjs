@@ -582,6 +582,8 @@ const CA = (() => {
   const xscore = JSON.parse(js.match(/const XSCORE = (\{.*\});\n/)[1]);
   const hist = JSON.parse(js.match(/const HIST = (\{.*\});\n/)[1]);
   const cx = JSON.parse(js.match(/const CX = (\{.*\});\n/)[1]);
+  // Analyses rebuilt to docs/ANALYSIS-STANDARD.md (verdict first), keyed by the original file id
+  const std = JSON.parse(js.match(/const STD = (\{.*\});\n/)[1]);
   const fp = require('./floorplans.cjs')(ROOT);
   js = js.replace(/\/\* BUILD:FP START \*\/.*?\/\* BUILD:FP END \*\//, () => `/* BUILD:FP START */const FP_URL = '${fp.url}';/* BUILD:FP END */`);
   if (!js.includes(fp.url)) throw new Error('condo-analysis: FP marker not filled');
@@ -611,7 +613,7 @@ const CA = (() => {
   files.set('mall-condo-study', { kind: 'study' });
   const analysisOf = new Map([...files].filter(([, f]) => f.p && f.kind !== 'upcoming-basic').map(([id, f]) => [f.p.id, id]));
   const cssV = crypto.createHash('sha1').update(css).digest('hex').slice(0, 8), jsV = crypto.createHash('sha1').update(js).digest('hex').slice(0, 8);
-  return { css, js, cssV, jsV, markup, nl, data, vstat, xscore, hist, cx, fp: fp.data, near: near.data, files, analysisOf, up, launched };
+  return { css, js, cssV, jsV, markup, nl, data, vstat, xscore, hist, cx, std, fp: fp.data, near: near.data, files, analysisOf, up, launched };
 })();
 const caPath = id => id === 'home' ? '/condo-analysis/' : `/condo-analysis/${id}/`;
 const caIndexable = f => !['upcoming-basic', 'study'].includes(f.kind);
@@ -648,6 +650,24 @@ function caUpcomingExtra(x) {
   const plots = (x.uraPlots || []).map(p => `<li><strong>${esc(p.name)}:</strong> ${esc([p.use, p.status, p.km == null ? 'distance not measured' : 'about ' + p.km + ' km', p.units ? p.units.toLocaleString('en-US') + ' homes' : ''].filter(Boolean).join(', '))}. ${esc(p.note || '')}</li>`).join('');
   return `<h2>Distance, nearby plots and fair entry</h2><ul>${dist}${plots}${x.uraNote ? `<li>${esc(x.uraNote)}</li>` : ''}<li><strong>Fair entry.</strong> ${esc(x.fair.region)} ${esc(x.fair.note)} New launches measure units without the air-con ledge (rules from June 2023), so their psf reads higher than an older condo's for the same home.</li></ul>`;
 }
+// Crawlable summary of a standard analysis: verdict, per-unit prices, 5% test, comparables, exit, scorecard.
+function caStdText(f) {
+  const s = f.x && CA.std[f.x.id]; if (!s) return '';
+  const p = f.p, strip = t => String(t).replace(/<[^>]+>/g, '');
+  return `<p class="small"><a href="/condo-analysis/">← All condos</a></p><h1>${esc(p.name)}: analysis and verdict</h1><p>${esc(placeOf(p))} · checked ${esc(s.asOf)} · confidence ${esc(s.confidence)}</p>
+<p><strong>Verdict: ${esc(s.verdict.line)}</strong></p><ul>${s.verdict.reasons.map(r => `<li>${esc(r)}</li>`).join('')}</ul>
+<p><strong>Suits:</strong> ${esc(s.verdict.suits)} <strong>Skip it if:</strong> ${esc(s.verdict.skip)}</p>
+<h2>Verdict by unit type</h2><ul>${s.types.map(t => `<li><strong>${esc(t[0])}: ${esc(t[1])}.</strong> Buy at or below ${esc(t[2])}; walk away above ${esc(t[3])}. ${esc(t[4])}</li>`).join('')}</ul>
+<h2>Buy-at and walk-away prices</h2><p>${esc(s.priceDecide)}</p>
+<h2>The 5% test</h2><p>${esc(s.test.key)} ${esc(s.test.result)}</p>
+<h2>Competitor performance</h2><p>${esc(s.compsLine)}</p>
+<h2>District</h2><p>${esc(s.district.line)}</p>
+<h2>Future buyers</h2><p>${esc(s.exit.line)}</p>
+<h2>Master Plan</h2><p>${esc(s.planLine)}</p>
+<h2>Scorecard</h2><ul>${s.score.map(r => `<li><strong>${esc(r[0])}: ${r[1]}/10.</strong> ${esc(r[2])}</li>`).join('')}</ul><p>${esc(s.scoreNote)}</p>
+<h2>Questions</h2>${s.faq.map(q => `<h3>${esc(q[0])}</h3><p>${esc(q[1])}</p>`).join('')}
+<p class="small muted">Sources: ${Object.values(s.src).map(a => `<a href="${esc(a[1])}" rel="noopener">${esc(strip(a[0]))}</a>`).join(' · ')}</p><p><a href="${projectPath(p)}">Project page with FAQs</a></p>`;
+}
 function caStatic(id, f) { return caStatic0(id, f) + (['selling', 'launched', 'upcoming', 'upcoming-basic'].includes(f.kind) ? caNearText(id) : ''); }
 function caStatic0(id, f) {
   const li = rows => rows.filter(r => r[1]).map(([k, v]) => `<li><strong>${esc(k)}:</strong> ${esc(v)}</li>`).join('');
@@ -668,6 +688,7 @@ function caStatic0(id, f) {
 <p>${esc(shortName(p))} launched in ${esc(p.launchDate.replace(/\s*\(.*$/, ''))}${p.avgPSF ? ` at a reported average of about $${p.avgPSF.toLocaleString('en-US')} psf` : ''}. ${CA.vstat[id] ? `Sales status: ${esc(CA.vstat[id].line)}${CA.vstat[id].out ? '' : ' left'}${CA.vstat[id].early ? ' (mostly unsold)' : ''} (${esc(CA.vstat[id].asOf)}). ${esc(CA.vstat[id].note)}` : 'Units left and current prices are being verified against dated sources.'}</p>${tools}${fs.existsSync(path.join(ROOT, 'deep-analysis', projectSlug(p), 'index.html')) ? `<p><a href="/deep-analysis/${projectSlug(p)}/">Read the full written review of ${esc(p.name)}</a></p>` : ''}
 ${caScoreText(id)}<ul>${li([['Homes', p.totalUnits ? p.totalUnits.toLocaleString('en-US') : ''], ['Tenure', p.tenure], ['Completion', p.top], ['Nearest MRT', p.distanceMRT || p.mrt]])}</ul><p><a href="${projectPath(p)}">Project page with FAQs</a></p>`;
   }
+  if (f.kind === 'upcoming' && caStdText(f)) return caStdText(f);
   if (f.kind === 'upcoming' || f.kind === 'upcoming-basic') {
     const p = f.p, x = f.x || {};
     return `${back}<h1>${esc(p.name)}</h1><p>${esc(placeOf(p))} · ${esc(p.developer.replace(/\s*\((?:entity|entities)[^)]*\)/i, ''))}</p>
@@ -685,6 +706,8 @@ function caMeta(id, f) {
     return { title: fit([`${x.name} Analysis: Score ${ov}/10, Prices & Break-even`, `${x.name} Analysis: Score ${ov}/10 & Prices`, `${x.name} Analysis | Condo Analysis`]), desc: clip(`${x.name}: ${x.verdict}. Scored ${ov}/10; ${x.sold}. Units left by type, an HDB upgrader affordability check and the resale price you need to break even.`, 158) }; }
   if (f.kind === 'launched' && caOv(id)) return { title: fit([`${nm} Analysis: Score ${caOv(id)}/10, Affordability & Break-even`, `${nm} Analysis: Score ${caOv(id)}/10 & Calculators`, `${nm} Analysis: Score ${caOv(id)}/10`]), desc: clip(`${nm}: ${CA.xscore[id].verdict}. Scored ${caOv(id)}/10 on location, entry price, exit plan, food and MRT, with affordability and break-even calculators.`, 158) };
   if (f.kind === 'launched') return { title: fit([`${nm} Analysis: Affordability & Break-even Price`, `${nm} Analysis & Calculators`, `${nm} | Condo Analysis`]), desc: clip(`${nm}: launched ${f.p.launchDate.replace(/\s*\(.*$/, '')}${f.p.avgPSF ? ` at about $${f.p.avgPSF.toLocaleString('en-US')} psf (reported)` : ''}. Check if an HDB upgrader can afford it, the resale price you need to break even, and how it compares in its region.`, 158) };
+  if (f.kind === 'upcoming' && f.x && CA.std[f.x.id]) { const s = CA.std[f.x.id], v = s.strip[0][1], wa = s.strip[2][1];
+    return { title: fit([`${nm} Analysis: ${v}, Walk Away Above ${wa}`, `${nm} Analysis: ${v} Verdict`, `${nm} | Condo Analysis`]), desc: clip(`${nm} verdict: ${v}; the 5% test is a ${s.strip[3][1].toLowerCase()}. Buy-at and walk-away prices by unit type, comparables, exit buyers, sources.`, 158) }; }
   if (f.kind === 'upcoming' || f.kind === 'upcoming-basic') return { title: fit([`${nm}: Land Bid & Expected Price Analysis`, `${nm}: Land Bid Analysis`, `${nm} | Condo Analysis`]), desc: clip(`${nm}: upcoming project. Land price, bids, expected launch price range and launch timing, with sources.${f.p.launchShort ? ' Expected launch: ' + f.p.launchShort + '.' : ''}`, 158) };
   if (f.kind === 'panorama') return { title: 'The Panorama Condo: Price History, MRT Effect & Calculator', desc: 'The Panorama (Ang Mo Kio): 3-bedroom profit year by year since 2014, the Mayflower MRT effect, an HDB upgrader affordability calculator and nearby competitors.' };
   if (f.kind === 'resale' && caOv(id)) return { title: fit([`${nm} Deep Dive: Price Growth, Profit & Score ${caOv(id)}/10`, `${nm} Deep Dive: Profit Year by Year, ${caOv(id)}/10`, `${nm} Deep Dive: Score ${caOv(id)}/10`]), desc: clip(`${nm} (${f.x.area}, ${f.x.district}): ${CA.xscore[id].verdict}. Scored ${caOv(id)}/10 against nearby resale condos, with affordability and break-even calculators.`, 158) };

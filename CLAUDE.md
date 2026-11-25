@@ -16,6 +16,10 @@ Work as a senior SEO / AIO / GEO / UX / UI specialist who understands how people
 
 **If a requested feature or change conflicts with the goal, say so before building it**, explain the trade-off, and propose an alternative. Examples of conflicts: content that only appears after JavaScript runs, entry pop-ups/interstitials, heavy scripts or widgets, hotlinked third-party images, unverified or exaggerated claims, copied competitor text, blocking copy/right-click, anything that breaks a page's own URL/title/canonical.
 
+## Condo analysis standard (mandatory)
+
+`docs/ANALYSIS-STANDARD.md` is mandatory for every condo analysis page (new launch or resale). Read it in full before writing or updating any analysis: verdict first, buy-at and walk-away prices, the 5% test, district, competitors, exit buyers, Master Plan, scorecard, and its evidence rules. `docs/` is internal and never served (forced 404 in `_redirects`).
+
 ## How the site is built
 
 - Hosting: GitHub `main` → Netlify (auto-deploy, publish dir `.`, no build command on Netlify).
