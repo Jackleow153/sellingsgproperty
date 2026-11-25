@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-24T18:55:35+08:00",
+  "updated": "2026-11-25T17:51:58+08:00",
   "sources": [
     "EdgeProp Singapore",
     "Stacked Homes",
@@ -412,18 +412,6 @@
       "category": "Real estate",
       "path": "/news/nf63c9c83/",
       "description": "The article’s own figure is S$1.818 million, not S$1.8 billion. That is the price of a five-room HDB resale in Queenstown, described as the highest on."
-    },
-    {
-      "id": "nd682cbef",
-      "title": "Tampines executive flat sells for record S$1.275M, becoming the town’s second priciest HDB resale",
-      "date": "2026/11/03",
-      "image": "/news/images/placeholder.svg",
-      "sourceName": "99.co",
-      "sourceNameZh": "99.co",
-      "sourceFeed": "google-news",
-      "category": "Real estate",
-      "path": "/news/nd682cbef/",
-      "description": "An executive flat at Block 938 Tampines Avenue 5, in Tampines Palmspring, sold for $1.275 million in November 2026. That is a new record for an executive."
     }
   ]
 }
