@@ -1,0 +1,150 @@
+"""Batch 4 on method v2, executive condos: Wynwood Grand, Clovelle of Woodlands (Woodlands Drive 17 EC, Sim Lian), Solano Grand,
+Miltonia Close EC. All four tenders closed before 8 May 2026, so the 5-year minimum occupation period (MOP) applies."""
+
+HDB4 = {  # C: our medians from HDB resale records (data.gov.sg), Nov 2025 to Oct 2026 [price, deals]
+ 'Woodlands': {'4-room': (548000, 892), '5-room': (655000, 546)}, 'Choa Chu Kang': {'4-room': (551944, 516), '5-room': (670000, 343)}}
+
+ARC = "No developer cost published. Arcadis 2022 put above-average condos at S$2,550 to 3,350 per sq m of construction area; allowing for construction area above floor area and cost rises since 2022 gives about $380 psf of floor area."
+SIZES = {'3-bed': 950, '4-bed': 1200, '5-bed': 1450}
+SIZES_NOTE = 'No unit mix released. Sizes are typical of recent executive condos (our assumption).'
+MP = ['URA, Master Plan 2025 gazetted, 1 Dec 2025', 'https://www.ura.gov.sg/Corporate/Media-Room/Media-Releases/pr25-64']
+ECRULES = ['EdgeProp, government tightens EC rules with 10-year MOP for sites closing on or after 8 May 2026', 'https://www.edgeprop.sg/property-news/government-tightens-ec-rules-10-year-mop-deferred-payment-scheme-removal-and-higher-first-timer']
+HDBEC = ['HDB, EC sites sold', 'https://www.hdb.gov.sg/-/media/business-partners/land-developers-and-land-users/buying-land-land-sales/sites-sold-by-hdb/ec-sites-sold.pdf']
+HDBCOND = ['HDB, conditions after buying an executive condo (5-year MOP, open market after MOP)', 'https://www.hdb.gov.sg/residential/buying-a-flat/executive-condominium/conditions-after-buying-for-ec']
+ONEMAP = ['OneMap (SLA), straight-line distances', 'https://www.onemap.gov.sg/']
+TL = lambda when: (f"Buy at the launch ({when}). Executive condos usually complete about 3.5 years after launch, so TOP around 2030 or 2031. The 5-year minimum occupation period "
+                   "then runs to about 2036, when any Singaporean or PR can buy it (foreigners only after 10 years). We look at a sale in 2036 (9 years). Its tender closed before 8 May 2026, so the 5-year rule applies; later EC sites have a 10-year MOP.")
+WHO_EC = 'At the 2036 resale, buyers are Singaporeans and PRs with no income ceiling, mostly HDB upgraders from {towns}, plus families who want a near-new condo below private prices.'
+FAQ_MOP = ['Can I sell before 2036?', 'Not on the open market. An executive condo must be lived in for 5 years from TOP before it can be sold to any Singaporean or PR (HDB). Its tender closed before 8 May 2026, so the 5-year rule applies; EC sites closing later have 10 years.']
+COMMON = dict(build=380, build_lab='E', build_src='arcadis', build_note=ARC, sizes=SIZES, sizes_note=SIZES_NOTE, bull_add=0.0, years=9, buy_year=2027, ec=True, confidence='Low')
+
+P = {}
+P['wynwood-grand'] = dict(COMMON,
+ name='Wynwood Grand', land=782, land_src='HDB tender: $360.9M, about $782 psf ppr, 5 bids (an EC land record at the time)',
+ expected=(1750, 1850), expected_note='A listing-site analysis expects the high $1,700s to mid $1,800s psf; no major-agency estimate found.',
+ bull_why='No new Confirmed catalyst within reach of the site in the holding period, so the bull case equals the base case.',
+ timeline=TL('booking targeted for January 2027'), towns=['Woodlands', 'Sembawang'], who=WHO_EC.format(towns='Woodlands and Sembawang'),
+ district=[['10-year price trend', 'URA non-landed index about 4.7% a year islandwide. Woodlands ECs nearby grew 4.8% to 6.4% a year over the past 4 years (Twin Fountains, Forestville, Bellewoods; URA caveats).', 'C', 'caveats'],
+           ['New vs older resale gap', 'Expected high $1,700s to mid $1,800s psf against resale ECs nearby at $1,240 to $1,340 (completed 2016 to 2017), before the 5% area adjustment.', 'C', 'caveats'],
+           ['Volume and liquidity', 'Seven resale ECs within 3 km; Twin Fountains, Forestville and Bellewoods had 65 resales between them in the past 12 months. How fast units sell: Not available yet.', 'C', 'caveats'],
+           ['Rents', 'Gross yields of nearby ECs: Not available yet. URA: suburban (OCR) rents rose 3.1% in Q3 2026.', 'C', 'ura'],
+           ['Supply risk', 'Clovelle of Woodlands (about 560 homes) on the same road launches a few months later and completes at about the same time; Norwood Grand (348 private homes) is about 300 m away.', 'C', 'hdbec']],
+ district_summary='Woodlands Drive 17 is a quiet estate by Woodlands South MRT where two new ECs will finish side by side.',
+ district_line='This district is in a supply phase: about 1,000 new EC homes on one road reach their minimum occupation period together, around 2036.',
+ plan=[['Woodlands South MRT (Thomson-East Coast Line)', 'About 264 m', 'Open since 2020', 'Direct line to Orchard; already in prices', 'Confirmed', 'onemap'],
+       ['Master Plan 2025 (gazetted 1 Dec 2025)', 'Islandwide', 'In force', 'Sets the land use around the site', 'Confirmed', 'mp']],
+ plan_line='No Confirmed catalyst near the site in the holding period. Any growth has to come from the EC discount closing and the wider market.',
+ score=[['Location', 6, 'Quiet Woodlands estate by Woodlands South MRT; a deep pool of HDB upgraders (892 four-room resales a year in Woodlands).'],
+        ['Entry price', None, 'entry'], ['Exit plan', None, 'exit'],
+        ['Nearby food', 5, 'Neighbourhood shops nearby. Hawker centres within a 5-minute walk: Not checked yet.'],
+        ['MRT proximity', 8, 'Woodlands South MRT about 264 m in a straight line (OneMap): about a 4-minute walk.']],
+ pros=['Woodlands South MRT about 264 m away', 'One of the last ECs with a 5-year MOP', 'Deep pool of Woodlands upgraders', 'Resale ECs nearby grew about 5% a year over 4 years'],
+ cons=['Expected price well above what nearby resale ECs support', 'Clovelle of Woodlands next door competes at the exit', 'Large units need a bigger down payment under the 30% MSR', 'No published unit mix yet'],
+ compare=[['Clovelle of Woodlands', 'Not released', 'From about Apr 2027', 'Same road', 'Land $794 psf ppr'], ['Bellewoods (resale EC)', '$1,340 resale', 'Completed 2017', 'About 1.3 km', 'URA median, past 12 months']],
+ facts=[['Land price', '$360.9M, about $782 psf ppr', 'C', 'edgeprop_wg', '5 Aug 2025'], ['Bids', '5', 'C', 'edgeprop_wg', '5 Aug 2025'],
+        ['Developer', 'City Developments (CDL Divine Pte Ltd)', 'C', 'hdbec', '26 Aug 2025'], ['Homes', 'About 430 (estimate)', 'R', 'edgeprop_wg', 'Aug 2025'],
+        ['Tenure', '99 years (executive condo)', 'C', 'hdbec', 'Aug 2025'], ['Minimum occupation period', '5 years from TOP (tender closed before 8 May 2026)', 'C', 'ecrules', '8 May 2026'],
+        ['Launch', 'Preview about 11 Dec 2026; booking January 2027 (targets)', 'R', '99_wg', '2026'], ['Expected price', 'High $1,700s to mid $1,800s psf (listing-site analysis)', 'E', 'cos_wg', '2025'],
+        ['Price list, unit mix', 'Not available yet', 'C', 'hdbec', '25 Nov 2026']],
+ faq_extra=[['Is Wynwood Grand a good investment?', None], FAQ_MOP],
+ src_extra={'edgeprop_wg': ['EdgeProp, CDL submits record-breaking bid of $782 psf ppr for EC site at Woodlands Drive 17, Aug 2025', 'https://www.edgeprop.sg/property-news/cdl-submits-record-breaking-bid-782-psf-ppr-ec-site-woodlands-drive-17'],
+            'cos_wg': ['cos.sg, Woodlands Drive 17 EC land sale analysis (listing site)', 'https://cos.sg/woodlands-drive-17-ec-land-sale-analysis-cdls-782-psf-ppr-bid-expected-launch-price-why-old-rule-ecs-could-see-strong-demand/'],
+            '99_wg': ['99.co, Wynwood Grand project page', 'https://www.99.co/singapore/condos-apartments/wynwood-grand'],
+            'hdbec': HDBEC, 'ecrules': ECRULES, 'hdbcond': HDBCOND, 'onemap': ONEMAP, 'mp': MP})
+
+P['clovelle-of-woodlands'] = dict(COMMON,
+ name='Clovelle of Woodlands', land=794, land_src='HDB tender: $484.0M, about $794 psf ppr, 3 bids (a new EC land record)', exp_word='tested',
+ expected=(1750, 1850), expected_note='No analyst estimate found. We test the same range expected for Wynwood Grand on the same road, whose land cost slightly less ($782 psf ppr).',
+ bull_why='No new Confirmed catalyst within reach of the site in the holding period, so the bull case equals the base case.',
+ timeline=TL('from about April 2027'), towns=['Woodlands', 'Sembawang'], who=WHO_EC.format(towns='Woodlands and Sembawang'),
+ district=[['10-year price trend', 'URA non-landed index about 4.7% a year islandwide. Woodlands ECs nearby grew 4.8% to 6.4% a year over the past 4 years (Twin Fountains, Forestville, Bellewoods; URA caveats).', 'C', 'caveats'],
+           ['New vs older resale gap', 'Tested $1,750 to $1,850 psf against resale ECs nearby at $1,240 to $1,340 (completed 2016 to 2017), before the 5% area adjustment.', 'C', 'caveats'],
+           ['Volume and liquidity', 'Seven resale ECs within 3 km; Twin Fountains, Forestville and Bellewoods had 65 resales between them in the past 12 months. How fast units sell: Not available yet.', 'C', 'caveats'],
+           ['Rents', 'Gross yields of nearby ECs: Not available yet. URA: suburban (OCR) rents rose 3.1% in Q3 2026.', 'C', 'ura'],
+           ['Supply risk', 'Wynwood Grand (about 430 homes) on the same road launches first and completes at about the same time; Norwood Grand (348 private homes) is about 400 m away.', 'C', 'hdbec']],
+ district_summary='Woodlands Drive 17 is a quiet estate by Woodlands South MRT where two new ECs will finish side by side.',
+ district_line='This district is in a supply phase: about 1,000 new EC homes on one road reach their minimum occupation period together, around 2036.',
+ plan=[['Woodlands South MRT (Thomson-East Coast Line)', 'About 73 m', 'Open since 2020', 'Direct line to Orchard; already in prices', 'Confirmed', 'onemap'],
+       ['Master Plan 2025 (gazetted 1 Dec 2025)', 'Islandwide', 'In force', 'Sets the land use around the site', 'Confirmed', 'mp']],
+ plan_line='No Confirmed catalyst near the site in the holding period. Any growth has to come from the EC discount closing and the wider market.',
+ score=[['Location', 6, 'Quiet Woodlands estate next to Woodlands South MRT; a deep pool of HDB upgraders (892 four-room resales a year in Woodlands).'],
+        ['Entry price', None, 'entry'], ['Exit plan', None, 'exit'],
+        ['Nearby food', 5, 'Neighbourhood shops nearby. Hawker centres within a 5-minute walk: Not checked yet.'],
+        ['MRT proximity', 10, 'Woodlands South MRT about 73 m in a straight line (OneMap): about a 1-minute walk.']],
+ pros=['Woodlands South MRT about 73 m away', 'One of the last ECs with a 5-year MOP', 'Deep pool of Woodlands upgraders', 'Resale ECs nearby grew about 5% a year over 4 years'],
+ cons=['Record EC land price: hard to launch near what nearby resale ECs support', 'Wynwood Grand next door launches first and competes at the exit', 'Large units need a bigger down payment under the 30% MSR', 'No published unit mix or price estimate yet'],
+ compare=[['Wynwood Grand', 'High $1,700s to mid $1,800s (estimate)', 'Jan 2027 (target)', 'Same road', 'Land $782 psf ppr'], ['Bellewoods (resale EC)', '$1,340 resale', 'Completed 2017', 'About 1.0 km', 'URA median, past 12 months']],
+ facts=[['Land price', '$484.0M, about $794 psf ppr', 'C', 'edgeprop_cw', '13 Jan 2026'], ['Bids', '3', 'C', 'edgeprop_cw', '13 Jan 2026'],
+        ['Developer', 'Sim Lian Land and Sim Lian Development', 'C', 'hdbec', '20 Jan 2026'], ['Homes', 'About 560 to 570 (estimate)', 'R', 'edgeprop_cw', 'Jan 2026'],
+        ['Tenure', '99 years (executive condo)', 'C', 'hdbec', 'Jan 2026'], ['Minimum occupation period', '5 years from TOP (tender closed before 8 May 2026)', 'C', 'ecrules', '8 May 2026'],
+        ['Launch', 'From about 20 April 2027 (listing site)', 'R', 'pi_cw', '2026'], ['Price list, unit mix', 'Not available yet', 'C', 'hdbec', '25 Nov 2026']],
+ faq_extra=[['Is Clovelle of Woodlands a good investment?', None], FAQ_MOP],
+ src_extra={'edgeprop_cw': ['EdgeProp, Sim Lian submits top bid of $794 psf ppr for second EC site at Woodlands Drive 17, Jan 2026', 'https://www.edgeprop.sg/property-news/sim-lian-submits-top-bid-794-psf-ppr-second-ec-site-woodlands-drive-17'],
+            'pi_cw': ['Property Insider, Woodlands Drive 17 EC (Sim Lian)', 'https://www.propertyinsider.sg/new-launches/woodlands-drive-17-2h-2025-ec/'],
+            'hdbec': HDBEC, 'ecrules': ECRULES, 'hdbcond': HDBCOND, 'onemap': ONEMAP, 'mp': MP})
+
+P['solano-grand'] = dict(COMMON,
+ name='Solano Grand', land=771, land_src='HDB tender: $252.9M, about $771 psf ppr, 5 bids',
+ expected=(1800, 1900), expected_note='PropNex expects above $1,800 psf (EdgeProp, Aug 2025).',
+ bull_why='No new Confirmed catalyst near the site in the holding period, so the bull case equals the base case.',
+ timeline=TL('e-applications targeted from 8 January 2027'), towns=['Bukit Panjang', 'Choa Chu Kang'], who=WHO_EC.format(towns='Bukit Panjang and Choa Chu Kang'),
+ district=[['10-year price trend', 'URA non-landed index about 4.7% a year islandwide. Bukit Panjang ECs nearby grew 5.0% to 6.2% a year over the past 4 years (Blossom Residences, The Rainforest; URA caveats).', 'C', 'caveats'],
+           ['New vs older resale gap', 'Expected above $1,800 psf against resale ECs nearby at $1,281 to $1,605 (completed 2014 to 2018), before the 5% area adjustment.', 'C', 'caveats'],
+           ['Volume and liquidity', 'At least eight resale ECs within 2 km; Sol Acres alone had 76 resales in the past 12 months. How fast units sell: Not available yet.', 'C', 'caveats'],
+           ['Rents', 'Gross yields of nearby ECs: Not available yet. URA: suburban (OCR) rents rose 3.1% in Q3 2026.', 'C', 'ura'],
+           ['Supply risk', 'A small project (about 300 homes) with no other new EC within 2 km; Narra Residences and the Dairy Farm Walk site (private) are about 2.6 to 2.7 km away.', 'C', 'caveats']],
+ district_summary='Senja is a settled Bukit Panjang estate on the LRT loop with many older ECs and little new EC supply.',
+ district_line='This district is mature: steady EC resale demand and little new EC supply nearby, but the MRT is a train-and-LRT ride away.',
+ plan=[['Jelapang LRT (Bukit Panjang LRT)', 'About 360 m', 'Open', 'Links to Bukit Panjang MRT (Downtown Line) about 1.2 km away; already in prices', 'Confirmed', 'onemap'],
+       ['Master Plan 2025 (gazetted 1 Dec 2025)', 'Islandwide', 'In force', 'Sets the land use around the site', 'Confirmed', 'mp']],
+ plan_line='No Confirmed catalyst near the site in the holding period. Any growth has to come from the EC discount closing and the wider market.',
+ score=[['Location', 5, 'Settled Senja estate in Bukit Panjang near the nature parks; the MRT is about 1.2 km away by LRT.'],
+        ['Entry price', None, 'entry'], ['Exit plan', None, 'exit'],
+        ['Nearby food', 5, 'Neighbourhood shops nearby. Hawker centres within a 5-minute walk: Not checked yet.'],
+        ['MRT proximity', 4, 'Jelapang LRT about 360 m (OneMap); Bukit Panjang MRT about 1.2 km.']],
+ pros=['One of the last ECs with a 5-year MOP', 'Small project: less competing supply at the exit', 'Little new EC supply within 2 km', 'Resale ECs nearby grew 5% to 6% a year over 4 years'],
+ cons=['Expected price above what nearby resale ECs support', 'LRT, not MRT, at the doorstep', 'Large units need a bigger down payment under the 30% MSR', 'No published unit mix yet'],
+ compare=[['Wandervale (resale EC)', '$1,605 resale', 'Completed 2018', 'About 1.5 km', 'URA median, past 12 months'], ['The Rainforest (resale EC)', '$1,515 resale', 'Completed 2015', 'About 1.6 km', 'URA median, past 12 months']],
+ facts=[['Land price', '$252.9M, about $771 psf ppr', 'C', 'edgeprop_sg', '5 Aug 2025'], ['Bids', '5; next bid about $725 psf ppr (TID Residential)', 'C', 'edgeprop_sg', '5 Aug 2025'],
+        ['Developer', 'City Developments (CDL Constellation Pte Ltd)', 'C', 'hdbec', '26 Aug 2025'], ['Homes', 'About 300 (estimate)', 'R', 'edgeprop_sg', 'Aug 2025'],
+        ['Tenure', '99 years (executive condo)', 'C', 'hdbec', 'Aug 2025'], ['Minimum occupation period', '5 years from TOP (tender closed before 8 May 2026)', 'C', 'ecrules', '8 May 2026'],
+        ['Launch', 'E-applications from 8 Jan 2027; booking about 13 Feb 2027 (targets)', 'R', '99_sg', '2026'], ['Expected price', 'Above $1,800 psf (PropNex)', 'E', 'edgeprop_sg', 'Aug 2025'],
+        ['Price list, unit mix', 'Not available yet', 'C', 'hdbec', '25 Nov 2026']],
+ faq_extra=[['Is Solano Grand a good investment?', None], FAQ_MOP],
+ src_extra={'edgeprop_sg': ['EdgeProp, CDL submits top bid of $771 psf ppr for Senja Close EC site, Aug 2025', 'https://www.edgeprop.sg/property-news/cdl-submits-top-bid-771-psf-ppr-senja-close-ec-site'],
+            '99_sg': ['99.co, Solano Grand project page', 'https://www.99.co/singapore/condos-apartments/senja-close-gls'],
+            'hdbec': HDBEC, 'ecrules': ECRULES, 'hdbcond': HDBCOND, 'onemap': ONEMAP, 'mp': MP})
+
+P['miltonia-close-executive-condo'] = dict(COMMON,
+ name='Miltonia Close EC', land=732, land_src='HDB tender: $340.85M, about $732 psf ppr, 3 bids',
+ expected=(1700, 1800), expected_note='SRI and PropNex expect $1,700 to $1,800 psf or more (EdgeProp, Apr 2026).',
+ bull_why='No new Confirmed catalyst near the site in the holding period, so the bull case equals the base case.',
+ timeline=TL('estimated for the third quarter of 2027'), towns=['Yishun', 'Sembawang'], who=WHO_EC.format(towns='Yishun and Sembawang'),
+ district=[['10-year price trend', 'URA non-landed index about 4.7% a year islandwide. Yishun ECs nearby grew 3.5% to 8.3% a year over the past 4 years (Signature At Yishun, The Canopy, The Criterion; URA caveats).', 'C', 'caveats'],
+           ['New vs older resale gap', 'Expected $1,700 to $1,800 psf against resale ECs nearby at $1,144 to $1,378 (completed 2014 to 2018), before the 5% area adjustment.', 'C', 'caveats'],
+           ['Volume and liquidity', 'Four resale ECs within 1 km with 90 resales in the past 12 months. How fast units sell: Not available yet.', 'C', 'caveats'],
+           ['Rents', 'Gross yields of nearby ECs: Not available yet. URA: suburban (OCR) rents rose 3.1% in Q3 2026.', 'C', 'ura'],
+           ['Supply risk', 'Chencharu Central Residences (about 875 private homes, about 2.1 km) and the Canberra Drive EC site are coming; Yishun has several older ECs.', 'C', 'caveats']],
+ district_summary='Miltonia Close is a quiet Yishun estate surrounded by older ECs, far from the MRT.',
+ district_line='This district is mature: many ECs nearby set resale prices, and new supply is coming at Chencharu and Canberra Drive.',
+ plan=[['Khatib MRT (North-South Line)', 'About 1.6 km', 'Open', 'A bus ride away; already in prices', 'Confirmed', 'onemap'],
+       ['Master Plan 2025 (gazetted 1 Dec 2025)', 'Islandwide', 'In force', 'Sets the land use around the site', 'Confirmed', 'mp']],
+ plan_line='No Confirmed catalyst near the site in the holding period. Any growth has to come from the EC discount closing and the wider market.',
+ score=[['Location', 5, 'Quiet Yishun estate next to several older ECs; the MRT is a bus ride away.'],
+        ['Entry price', None, 'entry'], ['Exit plan', None, 'exit'],
+        ['Nearby food', 4, 'Little within a short walk. Hawker centres within a 5-minute walk: Not checked yet.'],
+        ['MRT proximity', 3, 'Khatib MRT about 1.6 km in a straight line (OneMap): about 25 minutes on foot.']],
+ pros=['Lowest land rate of these four ECs ($732 psf ppr)', 'One of the last ECs with a 5-year MOP', 'Deep pool of Yishun upgraders (796 four-room resales a year)', 'Resale ECs nearby with an active market'],
+ cons=['Expected price well above what nearby resale ECs support', 'Far from the MRT', 'Chencharu and Canberra Drive supply is coming', 'No published unit mix yet'],
+ compare=[['The Criterion (resale EC)', '$1,378 resale', 'Completed 2018', 'About 260 m', 'URA median, past 12 months'], ['Signature At Yishun (resale EC)', '$1,291 resale', 'Completed 2017', 'About 310 m', 'URA median, past 12 months']],
+ facts=[['Land price', '$340.85M, about $732 psf ppr', 'C', 'edgeprop_mc', '14 Apr 2026'], ['Bids', '3', 'C', 'edgeprop_mc', '14 Apr 2026'],
+        ['Developer', 'Hoi Hup Realty', 'C', 'edgeprop_mc', 'Apr 2026'], ['Homes', 'About 430 to 450 (estimate)', 'R', 'edgeprop_mc', 'Apr 2026'],
+        ['Tenure', '99 years (executive condo)', 'C', 'hdbec', 'Apr 2026'], ['Minimum occupation period', '5 years from TOP (tender closed before 8 May 2026)', 'C', 'ecrules', '8 May 2026'],
+        ['Launch', 'Third quarter of 2027 (estimate)', 'E', 'edgeprop_mc', '2026'], ['Expected price', '$1,700 to $1,800 psf or more (SRI, PropNex)', 'E', 'edgeprop_mc', 'Apr 2026'],
+        ['Price list, unit mix', 'Not available yet', 'C', 'hdbec', '25 Nov 2026']],
+ faq_extra=[['Is the Miltonia Close EC a good investment?', None], FAQ_MOP],
+ src_extra={'edgeprop_mc': ['EdgeProp, Hoi Hup Realty submits top bid of $732 psf ppr for Miltonia Close EC site, Apr 2026', 'https://www.edgeprop.sg/property-news/hoi-hup-realty-submits-top-bid-732-psf-ppr-miltonia-close-ec-site'],
+            'hdbec': HDBEC, 'ecrules': ECRULES, 'hdbcond': HDBCOND, 'onemap': ONEMAP, 'mp': MP})
+
+META4 = {'wynwood-grand': ('wynwood-grand-ec', 430), 'clovelle-of-woodlands': ('woodlands-drive-17-ec-sim-lian', 560),
+         'solano-grand': ('solano-grand-ec', 302), 'miltonia-close-executive-condo': ('miltonia-close-ec', 450)}

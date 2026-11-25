@@ -50,7 +50,7 @@ def competitors(c):
     pool = []
     for r in NEAR[c['nearby_key']]['r3']['rows']:
         name, dist, ten, top, h, psf, n = r[:7]
-        if r[12] or not psf or (n or 0) < 3 or _lh(ten) != lh: continue
+        if bool(r[12]) != bool(c.get('ec')) or not psf or (n or 0) < 3 or _lh(ten) != lh: continue
         g = r[10] if r[10] is not None else r[11]
         if g is None: g = FALLBACK_4Y.get(name)
         pool.append(dict(name=name, dist=dist, units=h, tenure=ten, top=top, psf=psf, deals=n, g=g, g3=r[10], kind='Resale',
@@ -58,7 +58,8 @@ def competitors(c):
                          new=bool(top) and top >= 2000))
     me = GEO.get(c['geo_key'])
     for p in RECENT:
-        if p['launchSort'] > 202611 or 'EC' in p['name'] or 'Executive' in p['type'] or _lh(p['tenure']) != lh or _slug(p['name']) == c['geo_key']: continue
+        is_ec = 'EC' in p['name'] or 'Executive' in p['type']
+        if p['launchSort'] > 202611 or is_ec != bool(c.get('ec')) or _lh(p['tenure']) != lh or _slug(p['name']) == c['geo_key']: continue
         g = GEO.get(_slug(p['name']))
         if not (me and g and 'lat' in g): continue
         d = _km(me, g) * 1000
@@ -101,7 +102,7 @@ def build(pid, c):
     walk = round(buy * (1 + WALK) / 10) * 10
     # Growth: suitable record = 3-bed 4-year change (URA) with at least 10 resales in 12 months. Competitors first;
     # if fewer than 2 qualify, add the nearest suitable same-tenure condos within 2 km; then any distance; then the index.
-    ok = lambda r: r[10] is not None and (r[6] or 0) >= 10 and not r[12] and _lh(r[2]) == c.get('leasehold', True)
+    ok = lambda r: r[10] is not None and (r[6] or 0) >= 10 and bool(r[12]) == bool(c.get('ec')) and _lh(r[2]) == c.get('leasehold', True)
     gsrc = [(x['name'], x['g3']) for x in comps if x.get('g3') is not None and (x['deals'] or 0) >= 10]
     growth_only = []
     rows = sorted(NEAR[c['nearby_key']]['r3']['rows'], key=lambda r: r[1])
@@ -123,12 +124,13 @@ def build(pid, c):
     units = {}
     for t, sz in c['sizes'].items():
         xq = ex['base'] * sz; inc = income_needed(xq); up = .25 * xq + bsd(xq)
+        msr = income_needed(mid * sz) * .55 / .30   # EC from the developer: 30% mortgage servicing ratio
         gm = {k: gain(mid, sz, ex[k]) for k in g}
         if inc > 1.8 * MEDIAN_INCOME: v = 'Walk away'
         elif mid <= buy: v = 'Buy'
         elif mid <= walk: v = f'Buy only below {fmt_money(walk)} psf'
         else: v = f'Walk away above {fmt_money(walk)} psf'
-        units[t] = dict(size=sz, xq=xq, inc=inc, up=up, gm=gm, v=v,
+        units[t] = dict(size=sz, xq=xq, inc=inc, up=up, gm=gm, v=v, msr=msr,
                         tab={lab: {k: gain(e, sz, ex[k]) for k in g} for lab, e in (('buy', buy), ('exp', mid), ('walk', walk))})
     tm = '3-bed' if '3-bed' in units else list(units)[0]; u = units[tm]
     pct = lambda x: f"{x*100:+.0f}%".replace('+-', '−').replace('-', '−')
@@ -152,6 +154,9 @@ def build(pid, c):
         f"The closest competitors ({comp_names}) work out to about {fmt_money(buy)} psf as a brand-new launch, after adding 5% where they were not built under the harmonised floor-area rules, a 15% new-launch premium{' and 10% for this project being integrated' if c['integrated'] else ''}.",
         f"Bought at the {EXP} {fmt_money(round(mid))} psf, the base case makes about {pct(u['gm']['base'])} after stamp duty and selling costs by {c['buy_year'] + int(n)} ({yr(u['gm']['base'])}); bought at {fmt_money(buy)} psf it makes about {pct(u['tab']['buy']['base'])}.",
         f"At the base-case resale price, a {tm} of about {u['size']:,} sq ft costs about {fmt_q(u['xq'])}; a buyer then needs about {fmt_money(round(u['inc'], -2))} a month and {fmt_q(round(u['up'], -3))} upfront, against {fmt_q(min(caps))} to {fmt_q(max(caps))} that typical {' and '.join(c['towns'])} upgraders bring."]
+    if c.get('ec'):
+        r = .04 / 12; cap = .30 * 16000 * (1 - (1 + r) ** -360) / r   # largest loan at the income ceiling under the 30% MSR, 4% test rate
+        reasons.append(f"At launch, a household at the $16,000 income ceiling can borrow at most about {fmt_q(round(cap, -4))} under the 30% mortgage servicing ratio, so a {tm} at {fmt_money(round(mid))} psf ({fmt_q(round(mid * u['size'], -3))}) needs about {fmt_q(round(mid * u['size'] - cap + bsd(mid * u['size']), -4))} in cash and CPF, including stamp duty.")
     entry_score = 7 if mid <= buy else 6 if mid <= walk else 4 if mid <= buy * 1.15 else 3
     exit_score = (7 if not risky else 5 if len(risky) < len(units) else 4) - (1 if c.get('heavy_supply') else 0)
     score = []
@@ -170,22 +175,23 @@ def build(pid, c):
                ['Potential gain', pct(u['gm']['base']), f"Base case after costs by {c['buy_year'] + int(n)}, bought at {fmt_money(round(mid))} psf ({yr(u['gm']['base'])}). Bear {pct(u['gm']['bear'])}, bull {pct(u['gm']['bull'])}"]],
      'verdict': {'line': line, 'reasons': reasons,
                  'suits': f"Buyers who can buy at or below about {fmt_money(walk)} psf and plan to live here for 5 years or more. {c['who'].split('.')[0]}.",
-                 'skip': 'Buyers who would have to pay above the walk-away price, or sell within the 4-year Seller\'s Stamp Duty period.',
+                 'skip': ('Buyers who would have to pay above the walk-away price, or who may need to sell before the 5-year minimum occupation period ends.' if c.get('ec') else 'Buyers who would have to pay above the walk-away price, or sell within the 4-year Seller\'s Stamp Duty period.'),
                  'change': [f"If the {tm} launches at or below about {fmt_money(buy)} psf, it is priced in line with its closest competitors.",
                             'If a closer or newer competitor launches or resells at a different price, the buy-at and walk-away prices move with it.',
                             'If official unit sizes are smaller than assumed, quanta fall and more local upgraders can afford the resale price.']},
      'types': [[f"{t} (about {x['size']:,} sq ft)", x['v'], f"{fmt_money(buy)} psf ({fmt_q(round(buy * x['size'], -3))})", f"{fmt_money(walk)} psf ({fmt_q(round(walk * x['size'], -3))})",
-                f"At {fmt_money(round(mid))} psf: about {pct(x['gm']['base'])} by {c['buy_year'] + int(n)}. Resale about {fmt_q(round(x['xq'], -3))} needs about {fmt_money(round(x['inc'], -2))} a month."] for t, x in units.items()],
+                f"At {fmt_money(round(mid))} psf: about {pct(x['gm']['base'])} by {c['buy_year'] + int(n)}. Resale about {fmt_q(round(x['xq'], -3))} needs about {fmt_money(round(x['inc'], -2))} a month." + (f" At launch, a 75% loan needs about {fmt_money(round(x['msr'], -2))} a month under the 30% mortgage limit" + (" (above the $16,000 income ceiling)." if x['msr'] > 16000 else " (ceiling $16,000).") if c.get('ec') else '')] for t, x in units.items()],
      'priceA': [['Land', f"{fmt_money(land)} psf ppr", 'C', None, c['land_src'] + '. psf ppr = land price per square foot of floor area the site may build.'],
                 ['Building cost', f"about {fmt_money(build_)} psf", c['build_lab'], c['build_src'], c['build_note']],
                 ['Finance, fees, marketing, stamp duty', f"about {fmt_money(fin + fees)} psf", 'E', None, 'Land carried about 3 years at about 3% a year, plus fees, show flat, stamp duty on the land and property tax while building.'],
                 ['Developer floor price', f"about {fmt_money(floor[0])} to {fmt_money(floor[1])} psf", 'E', None, 'Cost plus a normal 10% to 15% margin. A launch below this is unlikely.']],
      'comps': [[x['name'], x['dist'], x['units'], x['tenure'], x['top'] or '–', x['kind'], round(x['psf']), x.get('time'), x['adj_h'], x['adj_n'], x['adj_i'], round(x['equiv']), x['g']] for x in comps],
      'compsNote': (f"{len(near1)} of the {len(comps)} competitors are within 1 km. " if near1 else 'No suitable competitor within 1 km, so the nearest within 2 to 3 km are used. ')
-                  + "Chosen closest first, with the same tenure and a similar number of homes, completed 2000 or later where possible; executive condos are left out. Resale prices are URA medians for the past 12 months. Condos launched before June 2023 measured their areas under the old rules (including air-con ledges), so their psf is raised 5% to compare like for like.",
+                  + ("Only executive condos are compared (an EC sells below private condos because of its buyer rules), closest first, with a similar number of homes, completed 2011 or later where possible. Resale ECs past their 5-year minimum occupation period sell to any Singaporean or PR. Resale prices" if c.get('ec') else "Chosen closest first, with the same tenure and a similar number of homes, completed 2000 or later where possible; executive condos are left out. Resale prices")
+                  + " are URA medians for the past 12 months. Condos launched before June 2023 measured their areas under the old rules (including air-con ledges), so their psf is raised 5% to compare like for like.",
      'priceDecide': f"Buy at or below = the average of the competitors' new-launch equivalents = about {fmt_money(buy)} psf. Walk away above = 5% more = about {fmt_money(walk)} psf. The developer's floor is about {fmt_money(floor[0])} to {fmt_money(floor[1])} psf" + (', so expect the launch above our buy-at price.' if buy < floor[0] else '.'),
      'gain': {'timeline': c['timeline'],
-              'costs': "Potential gain is after Buyer's Stamp Duty at IRAS rates, about $6,000 legal fees and a 2% agent fee plus 9% GST when you sell. Loan interest, property tax, maintenance and rent are not included.",
+              'costs': ("No Seller's Stamp Duty: the sale is after the 5-year minimum occupation period. " if c.get('ec') else '') + "Potential gain is after Buyer's Stamp Duty at IRAS rates, about $6,000 legal fees and a 2% agent fee plus 9% GST when you sell. Loan interest, property tax, maintenance and rent are not included.",
               'scen': [['Bear', f"{g['bear']*100:.1f}% a year", ('Half the base case' if base > 0 else 'One and a half times the base-case fall') + ': competing supply at the exit, or a softer market.'],
                        ['Base', f"{g['base']*100:.1f}% a year", ("No condo nearby has a suitable record (a 3-bed price change over 4 years with at least 10 resales in the past year), so we use URA's islandwide non-landed index: 4.7% a year from Q3 2016 to Q3 2026." if growth_only == ['index'] else "The average yearly 3-bed price change over the past 4 years (URA caveats) of the competitors with a suitable record (at least 10 resales in the past year)" + (f", widened to the nearest suitable condos: {', '.join(growth_only)}" if growth_only and growth_only != ['index'] else '') + ': ' + ', '.join(f"{n} {v:.1f}%" for n, v in gsrc) + '. That period included the 2022–2023 rise.')],
                        ['Bull', f"{g['bull']*100:.1f}% a year", c['bull_why']]],
@@ -196,8 +202,8 @@ def build(pid, c):
      'exit': {'who': c['who'],
               'rows': [[t, fmt_q(round(x['xq'], -3)), fmt_money(round(x['inc'], -2)), fmt_q(round(x['up'], -3))] for t, x in units.items()],
               'capital': [[f"{t} {f} ({HDB_T[t][f][1]} resales)", fmt_money(HDB_T[t][f][0]), fmt_money(HDB_T[t][f][0] - OUTSTANDING)] for t in c['towns'] for f in HDB_T[t]],
-              'note': "Income needed: 75% loan over 30 years, tested at MAS's 4% rate under the 55% debt limit (TDSR, the share of income all loan repayments may take). Median household market income: $12,446 a month (SingStat, 2025). Upgrader capital = our median resale price minus an illustrative $150,000 still owed; the typical outstanding loan is Not available yet.",
-              'line': (f"The {' and '.join(risky)} resale prices outrun most local upgraders: exit risk." if risky else 'Resale prices stay within reach of typical local upgraders.')},
+              'note': ("At launch an EC bought from the developer is capped by the 30% mortgage servicing ratio (MSR) and a $16,000 household income ceiling; resale buyers after the minimum occupation period face only the 55% TDSR. " if c.get('ec') else '') + "Income needed: 75% loan over 30 years, tested at MAS's 4% rate under the 55% debt limit (TDSR, the share of income all loan repayments may take). Median household market income: $12,446 a month (SingStat, 2025). Upgrader capital = our median resale price minus an illustrative $150,000 still owed; the typical outstanding loan is Not available yet.",
+              'line': (f"The {(', '.join(risky[:-1]) + ' and ' + risky[-1]) if len(risky) > 1 else risky[0]} resale prices outrun most local upgraders: exit risk." if risky else 'Resale prices stay within reach of typical local upgraders.')},
      'plan': c['plan'], 'planLine': c['plan_line'],
      'score': score, 'scoreNote': f"Overall {sum(s[1] for s in score) / len(score):.1f} out of 10. The buy-at and walk-away prices decide the verdict; the scorecard shows how good the place is to live in.",
      'facts': c['facts'], 'pros': c['pros'], 'cons': c['cons'],
