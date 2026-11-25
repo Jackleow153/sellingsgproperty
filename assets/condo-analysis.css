@@ -281,7 +281,7 @@ body.on-file #ca .quick{display:none}
 #ca .ploc{font-size:.86rem;color:var(--muted);margin-top:3px}
 #ca .pscore{flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:60px;padding:8px 6px;border-radius:12px;line-height:1}
 #ca .pscore b{font-family:var(--f-display);font-size:1.65rem;font-weight:700}
-#ca .pscore span{font-size:.66rem;margin-top:4px;font-weight:600;opacity:.85}
+#ca .pscore span{font-size:.66rem;margin-top:4px;font-weight:600}
 #ca .pstats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:0}
 #ca .pstats>div{background:var(--bg);padding:9px 12px;min-width:0}
 #ca .pstats dt{font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700}
