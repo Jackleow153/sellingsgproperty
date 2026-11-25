@@ -221,7 +221,7 @@
                 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
                 const launchedLabel = project.launchSort ? `Launched ${MONTHS[(project.launchSort % 100) - 1]} ${Math.floor(project.launchSort / 100)}` : 'Launched'
                 const statusBadge = isUpcoming
-                    ? '<div class="absolute top-4 right-4 bg-[#B89B5E] text-white text-[10px] font-bold tracking-wide px-2.5 py-px rounded">UPCOMING</div>'
+                    ? '<div class="absolute top-4 right-4 bg-[#B89B5E] text-[#0C1B2A] text-[10px] font-bold tracking-wide px-2.5 py-px rounded">UPCOMING</div>'
                     : `<div class="absolute top-4 right-4 bg-[#0C1B2A]/90 text-white text-[10px] font-semibold tracking-wide px-2.5 py-px rounded">${launchedLabel}</div>`
                 const dateChip = isUpcoming ? `Launch: ${project.launchShort || 'TBC'}` : project.top
                 
@@ -262,7 +262,7 @@
                             </div>
                             
                             <div class="flex flex-wrap items-center justify-between gap-2 mt-4 text-xs">
-                                <div class="px-2.5 py-px bg-slate-100 text-slate-500 rounded text-[10px]">${dateChip}</div>
+                                <div class="px-2.5 py-px bg-slate-100 text-slate-600 rounded text-[10px]">${dateChip}</div>
                                 <div class="flex flex-wrap items-center gap-2">
                                     ${({31: ['https://the-one-chuan-grove.sg/', 'One Chuan Grove guide'], 37: ['https://chencharuyishun.sg/', 'Chencharu guide'], 39: ['https://hougangcentral.sg/', 'Hougang Central guide']})[project.id] ? `<a href="${({31: 'https://the-one-chuan-grove.sg/', 37: 'https://chencharuyishun.sg/', 39: 'https://hougangcentral.sg/'})[project.id]}" target="_blank" rel="noopener noreferrer" class="px-5 py-1.5 text-xs font-semibold bg-violet-700 text-white rounded-2xl">${({31: 'One Chuan Grove guide', 37: 'Chencharu guide', 39: 'Hougang Central guide'})[project.id]}</a>` : ''}
                                     <a href="${projectUrl(project)}" class="px-5 py-1.5 text-xs font-semibold border border-violet-700 text-violet-700 hover:bg-violet-700 hover:text-white rounded-2xl transition whitespace-nowrap" aria-label="View details of ${project.name}">
@@ -339,7 +339,7 @@
                             <div class="text-xs text-slate-500 mt-0.5">${g.location.split(',')[0]} · D${(g.location.match(/D(\d+)/) || [])[1] || ''} (${g.district.toUpperCase()})</div>
                             <div class="text-xs text-slate-600 mt-2">${g.areaHa} ha · plot ratio ${g.gpr} · ${g.unitsNote ? g.unitsNote + ' ' : '~'}${g.units.toLocaleString('en-US')} homes</div>
                             <div class="flex flex-wrap items-center justify-between gap-2 mt-4 text-xs">
-                                <div class="px-2.5 py-px bg-slate-100 text-slate-500 rounded text-[10px]">${g.use}</div>
+                                <div class="px-2.5 py-px bg-slate-100 text-slate-600 rounded text-[10px]">${g.use}</div>
                                 <a href="/land-sites/${g.slug}/" class="px-5 py-1.5 text-xs font-semibold border border-violet-700 text-violet-700 hover:bg-violet-700 hover:text-white rounded-2xl transition whitespace-nowrap" aria-label="Land site details: ${g.name}">Site details</a>
                             </div>
                         </div>

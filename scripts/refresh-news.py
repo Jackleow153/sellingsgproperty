@@ -42,10 +42,9 @@ Publish the refreshed pages to the live site:
 pushes main. Netlify publishes https://www.sellingsgproperty.com. A run
 with no story change leaves those files uncommitted.
 
-GitHub Actions runs that command twice a day, at 09:17 and 17:47
-Singapore time (.github/workflows/refresh-news.yml). 09:17 Asia/Singapore
-is 01:17 UTC. The 17:47 run is only a backup. An unchanged news list
-does not commit.
+GitHub Actions runs that command once a day, at 09:17 Singapore time
+(01:17 UTC; .github/workflows/refresh-news.yml), so news costs at most one
+Netlify deploy a day. An unchanged news list does not commit.
 
 When a new story's article page can be opened, the job calls grok-4.7
 once for that article and stores original key points. The article URL
@@ -65,7 +64,9 @@ without --deploy still writes the local files and does not push.
 
 Plain-English summaries and one buyer or seller question live in
 news/copy.json, keyed by story id. The page shows the article's key
-points, then that one question, and does not show an answer. The same
+points, then a one- or two-sentence "What this means if you're upgrading"
+view (the "upgrader" field, EN and zh; new stories get it from the same
+model call), then that one question, which it does not answer. The same
 entry can include a "zh" object (title, summary, facts, questions) in
 Simplified Chinese. The EN / 中文 choice is stored in the browser under
 localStorage key ssp-news-lang.
@@ -654,7 +655,10 @@ def story_copy(post_id: str, title: str, copy_book: dict) -> dict:
                 break
     if boilerplate_description(description):
         description = " ".join(keypoints[:2]) or title
+    upgrader = str(entry.get("upgrader") or "").strip()
+    zh_upgrader = str(zh_entry.get("upgrader") or "").strip() or upgrader
     return {
+        "upgrader": upgrader,
         "summary": summary,
         "keypoints": keypoints,
         "takeaways": takeaways,
@@ -670,6 +674,7 @@ def story_copy(post_id: str, title: str, copy_book: dict) -> dict:
             "takeaways": zh_takeaways,
             "questions": zh_questions,
             "facts": zh_facts,
+            "upgrader": zh_upgrader,
             "ready": bool(title_zh) and len(text_list(zh_entry, "summary")) >= 2 and len(text_list(zh_entry, "takeaways")) == 3,
         },
     }
@@ -925,6 +930,15 @@ DETAIL_CSS = """
       border-radius: 50%;
       background: var(--red);
     }
+    .upgrader {
+      margin-top: 28px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--red);
+      background: #161616;
+    }
+    .upgrader h2 { margin: 0 0 8px; font-size: 1.15rem; letter-spacing: -0.02em; }
+    .upgrader p { margin: 0; color: #f2f2f2; line-height: 1.6; font-size: 1.02rem; }
+    .upgrader p.upgrader-by { margin-top: 10px; color: #a3a3a3; font-size: 0.85rem; }
     .questions {
       margin-top: 36px;
       padding-top: 8px;
@@ -1150,6 +1164,15 @@ def render_detail_page(item: dict, copy: dict) -> str:
             "      </ul>\n"
             "    </section>\n"
         )
+    upgrader_html = ""
+    if copy.get("upgrader"):
+        upgrader_html = (
+            '    <section class="upgrader" aria-labelledby="upgrader-heading">\n'
+            '      <h2 id="upgrader-heading">' + bi("What this means if you're upgrading", "如果你打算升级换房") + "</h2>\n"
+            "      <p>" + bi(copy["upgrader"], zh.get("upgrader") or copy["upgrader"]) + "</p>\n"
+            '      <p class="upgrader-by">' + bi("View by Jack Leow, CEA R074023I, PropNex Realty", "观点：Jack Leow，CEA R074023I，PropNex Realty") + "</p>\n"
+            "    </section>\n"
+        )
     bullets = "\n".join(
         "        <li>"
         + bi(question, zh["questions"][index] if index < len(zh.get("questions") or []) else question)
@@ -1160,9 +1183,9 @@ def render_detail_page(item: dict, copy: dict) -> str:
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K"></script>
+<!-- Google tag (gtag.js): loaded on the first scroll, tap or key press so it does not slow the first paint -->
 <script>
+  (function(){{var done=false,evs=['scroll','pointerdown','touchstart','keydown'];function load(){{if(done)return;done=true;evs.forEach(function(e){{removeEventListener(e,load,{{passive:true}})}});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K';document.head.appendChild(s);}}evs.forEach(function(e){{addEventListener(e,load,{{passive:true}})}});}})();
   window.dataLayer = window.dataLayer || [];
   function gtag(){{dataLayer.push(arguments);}}
   gtag('js', new Date());
@@ -1202,7 +1225,7 @@ def render_detail_page(item: dict, copy: dict) -> str:
     <p class="story-meta"><time class="story-date" datetime="{esc(iso_date)}">{bi(date, chinese_date(date))}</time></p>
     <p class="source-name">{bi("Source: " + source_name, "来源：" + source_name_zh)}</p>
     {media_markup(image, hero=True)}
-{keypoints_html}    <section class="questions" aria-labelledby="questions-heading">
+{keypoints_html}{upgrader_html}    <section class="questions" aria-labelledby="questions-heading">
       <h2 id="questions-heading">{bi("Milo chat for thoughts", "Milo chat for thoughts")}</h2>
       <ul>
 {bullets}
@@ -1399,7 +1422,9 @@ def write_detail_pages(items: list[dict]) -> None:
         ]
         if offsite:
             raise SystemExit(f"Detail page {item['id']} contains an off-site link: {offsite[0]}")
-        if "takeaways-heading" in page or "What this means" in page:
+        # The old takeaways block stays banned. The short "What this means if you're upgrading" view
+        # (copy.json "upgrader", added at Jack's request on 25 Nov 2026) is allowed.
+        if "takeaways-heading" in page:
             raise SystemExit(f"Detail page {item['id']} still shows a takeaway answer.")
         if 'id="questions-heading"' not in page or 'id="keypoints-heading"' not in page:
             raise SystemExit(f"Detail page {item['id']} is missing key points or questions.")

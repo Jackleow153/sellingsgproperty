@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K"></script>
+<!-- Google tag (gtag.js): loaded on the first scroll, tap or key press so it does not slow the first paint -->
 <script>
+  (function(){var done=false,evs=['scroll','pointerdown','touchstart','keydown'];function load(){if(done)return;done=true;evs.forEach(function(e){removeEventListener(e,load,{passive:true})});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K';document.head.appendChild(s);}evs.forEach(function(e){addEventListener(e,load,{passive:true})});})();
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -249,6 +249,15 @@
       border-radius: 50%;
       background: var(--red);
     }
+    .upgrader {
+      margin-top: 28px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--red);
+      background: #161616;
+    }
+    .upgrader h2 { margin: 0 0 8px; font-size: 1.15rem; letter-spacing: -0.02em; }
+    .upgrader p { margin: 0; color: #f2f2f2; line-height: 1.6; font-size: 1.02rem; }
+    .upgrader p.upgrader-by { margin-top: 10px; color: #a3a3a3; font-size: 0.85rem; }
     .questions {
       margin-top: 36px;
       padding-top: 8px;
@@ -396,6 +405,11 @@
         <li><span class="en">An executive maisonette at 454 Sin Ming Avenue, with TOP in 1989, was listed at $1,600,000 for 2,013 sq ft, or $794.83 psf, with 5 bedrooms and 2 bathrooms, between Bright Hill and Upper Thomson.</span><span class="zh" lang="zh-Hans">Sin Ming Avenue 454号的公寓式组屋，1989年入伙，叫价160万新元，面积2013平方英尺，合每平方英尺794.83新元，五房两卫，位于 Bright Hill 和 Upper Thomson 之间。</span></li>
         <li><span class="en">A flat at 464A Clementi Avenue 1, with TOP in 2022, was listed at $1,588,888 for 1,216 sq ft, or $1,306.65 psf, above the 25th storey, a walk from Clementi MRT. The prose calls it a five-room flat, while the listing line says 3 bedrooms and 2 bathrooms.</span><span class="zh" lang="zh-Hans">金文泰1道464A，2022年入伙，叫价158万8888新元，面积1216平方英尺，合每平方英尺1306.65新元，在25楼以上，步行可达 Clementi 地铁站。正文称五房，列表写三房两卫。</span></li>
       </ul>
+    </section>
+    <section class="upgrader" aria-labelledby="upgrader-heading">
+      <h2 id="upgrader-heading"><span class="en">What this means if you&#x27;re upgrading</span><span class="zh" lang="zh-Hans">如果你打算升级换房</span></h2>
+      <p><span class="en">These are asking prices, not sales. If you own a big, well-located flat, price it off recent transacted prices in your block, not off the highest listings, before you size your condo budget.</span><span class="zh" lang="zh-Hans">这些是叫价，不是成交价。如果你拥有地点好、面积大的组屋，先用同一座组屋最近的成交价来估价，而不是看最高的挂牌价，再定公寓预算。</span></p>
+      <p class="upgrader-by"><span class="en">View by Jack Leow, CEA R074023I, PropNex Realty</span><span class="zh" lang="zh-Hans">观点：Jack Leow，CEA R074023I，PropNex Realty</span></p>
     </section>
     <section class="questions" aria-labelledby="questions-heading">
       <h2 id="questions-heading"><span class="en">Milo chat for thoughts</span><span class="zh" lang="zh-Hans">Milo chat for thoughts</span></h2>

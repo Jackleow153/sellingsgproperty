@@ -139,9 +139,9 @@ function layout({ title, description, canonical, body, schema = [], ogImage, nav
   return `<!DOCTYPE html>
 <html lang="en-SG">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K"></script>
+<!-- Google tag (gtag.js): loaded on the first scroll, tap or key press so it does not slow the first paint -->
 <script>
+  (function(){var done=false,evs=['scroll','pointerdown','touchstart','keydown'];function load(){if(done)return;done=true;evs.forEach(function(e){removeEventListener(e,load,{passive:true})});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K';document.head.appendChild(s);}evs.forEach(function(e){addEventListener(e,load,{passive:true})});})();
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());

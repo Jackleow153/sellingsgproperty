@@ -747,7 +747,8 @@
         "能不能买，仍要看购买资格和剩余屋契",
         "这篇特写没有给出价钱、实用面积或市镇。",
         "CNA把这个小众市场称为少见、宽敞、价钱高，但这三个词都没有配上数字。"
-      ]
+      ],
+      "upgrader": "大型组屋可以是为了空间而升级之外的另一个选择。在多付钱买之前，先查剩余地契和购买资格，因为这些决定日后是否容易转售。"
     },
     "keypoints": [
       "CNA, 1 November 2026: a feature on the niche market for jumbo HDB flats",
@@ -755,7 +756,8 @@
       "Eligibility and the remaining lease still decide whether you can buy one",
       "The feature gives no price, no floor area and no town.",
       "CNA called the niche rare, roomy and pricey, and did not put a number on any of those three words."
-    ]
+    ],
+    "upgrader": "A jumbo flat can be a real alternative to upgrading for space. Before you pay extra for one, check the remaining lease and eligibility, because those decide how easy it is to sell later."
   },
   "n1e61a153": {
     "summary": [
@@ -3093,7 +3095,8 @@
         "新纪录的面积少了76平方英尺，屋契大约短七年，价格却高出3万5000新元，约2.8%。两套都在7楼至9楼。",
         "淡滨尼最近几宗至少120万新元的行政公寓里，有四宗在120万至121万新元之间。高出这个区间的，是这一宗和6月那一宗。",
         "以1528平方英尺计算，它是被比较的七宗高价交易里面积最小的，价格却是第二高。"
-      ]
+      ],
+      "upgrader": "成熟市镇的公寓式组屋，即使只剩约61年地契，也能卖出高价。如果你拥有一间，在指望纪录价之前，先查剩余地契会如何影响买家的贷款和公积金使用。"
     },
     "keypoints": [
       "An executive flat at Block 938 Tampines Avenue 5, in Tampines Palmspring, sold for $1.275 million in November 2026.",
@@ -3104,7 +3107,8 @@
       "The new record is 76 square feet smaller, about seven years shorter on the lease, and $35,000 higher, about 2.8%. Both flats are on the 7th to 9th storeys.",
       "Of the recent executive sales at or above $1.2 million in Tampines, four were between $1.2 million and $1.21 million. This sale and the June sale are the ones above that band.",
       "At 1,528 square feet it was the smallest of the seven high sales being compared, and the second-highest price."
-    ]
+    ],
+    "upgrader": "Executive flats in mature towns can fetch high prices even with about 61 years left. If you own one, check how the remaining lease affects your buyers' loans and CPF use before you count on a record price."
   },
   "n8337ed06": {
     "summary": [
@@ -3514,7 +3518,8 @@
         "卖方经纪、ERA的Ted Wong说，这个单位收到超过八个出价，前三个都超过180万新元。",
         "他说原因包括面积、市中心地段、配套、绿化景观，以及五房式供应少。这座楼284个单位里，只有74个是五房式。",
         "2025年6月到2026年9月，荷兰通道有一个五房式、道森路有四个五房式，成交价在158万至170万新元之间。"
-      ]
+      ],
+      "upgrader": "女皇镇的一宗纪录成交，不会决定你组屋的价格。如果你在升级，要用条件相近的组屋（相近的地契、楼层和地点）的最近成交来规划出售。"
     },
     "keypoints": [
       "The article’s own figure is S$1.818 million, not S$1.8 billion. That is the price of a five-room HDB resale in Queenstown, described as the highest on record.",
@@ -3525,7 +3530,8 @@
       "The seller’s agent, Ted Wong of ERA, said the flat drew more than eight offers, and the top three were above $1.8 million.",
       "He pointed to the size, the central location, the amenities, a view of greenery, and a small supply of five-room flats. Only 74 of the 284 units in the block are five-room.",
       "From June 2025 to September 2026, one five-room flat on Holland Drive and four on Dawson Road sold between $1.58 million and $1.7 million."
-    ]
+    ],
+    "upgrader": "One record sale in Queenstown does not set the price of your flat. If you are upgrading, use recent deals for flats like yours, with similar lease, storey and location, to plan your sale."
   },
   "nd155cf8f": {
     "summary": [
@@ -3638,7 +3644,8 @@
         "标准项目是三巴旺的Sembawang Anchor（1310个）、登加的Plantation Dew（710个）和义顺的Chencharu Acres（1582个）。",
         "Sembawang Anchor的等候时间大约两年10个月。其余多数项目不到四年。大巴窑山坡大约三年九个月。",
         "这是家庭收入顶限提高到每月1万6000新元、单身人士提高到8000新元之后的第一轮销售。"
-      ]
+      ],
+      "upgrader": "Prime和Plus组屋出售时要回缴津贴。如果你在考虑买预购组屋而不是公寓，要把这笔回缴和较长的最低居住年限算进成本。"
     },
     "keypoints": [
       "HDB’s November 2026 Build-To-Order exercise launched 7,964 flats, close to the “nearly 8,000” in the headline.",
@@ -3649,7 +3656,8 @@
       "The Standard projects are Sembawang Anchor (1,310 flats), Plantation Dew in Tengah (710) and Chencharu Acres in Yishun (1,582).",
       "Sembawang Anchor has a wait of about two years and 10 months. Most of the other projects are under four years. Toa Payoh Hillside is about three years and nine months.",
       "This is the first sales exercise since the income ceiling rose to $16,000 a month for families and $8,000 for singles."
-    ]
+    ],
+    "upgrader": "Prime and Plus flats carry subsidy recovery when sold. If you are an upgrader thinking about a BTO instead of a condo, count that recovery and the longer occupation period as part of the cost."
   },
   "nb873e1da": {
     "summary": [
@@ -3702,7 +3710,8 @@
         "申请在2026年11月11日截止。抽签结果预计2027年1月公布，选购从2027年3月开始。",
         "优选和优质组屋有额外补贴、10年最低居住年限，转售时要缴回一部分补贴。",
         "未计津贴时，报道中的四房价格，Sembawang Anchor大约从31万2000新元起，Merpati Meadow大约从54万5000新元起。大巴窑山坡的四房，没有阳台的大约从55万8000新元起，有阳台的从61万9000新元起。"
-      ]
+      ],
+      "upgrader": "入息顶限提高，扩大了预购组屋的申请人群。对卖组屋升级的人来说，这可能表示一些买家改选预购组屋而不是转售，所以要根据最近的成交合理定价。"
     },
     "keypoints": [
       "HDB launched 7,964 Build-To-Order flats on 4 November 2026, the last sales exercise of the year.",
@@ -3716,7 +3725,8 @@
       "Applications close on 11 November 2026. Ballot results are due in January 2027, and bookings start in March 2027.",
       "Plus and Prime flats come with extra subsidies, a 10-year minimum occupation period, and a clawback when the flat is sold.",
       "Before grants, four-room flats were reported from about $312,000 at Sembawang Anchor and about $545,000 at Merpati Meadow. At Toa Payoh Hillside they start at about $558,000 without a balcony and $619,000 with one."
-    ]
+    ],
+    "upgrader": "Higher income ceilings widen the pool of BTO applicants. For upgraders selling a flat, that can mean some buyers now pick BTO over resale, so price your flat realistically from recent deals."
   },
   "ne18b8d4b": {
     "summary": [
@@ -3823,7 +3833,8 @@
         "成交价最高的是女皇镇SkyParc @ Dawson的一个五房式单位，181万8000新元。",
         "大巴窑有39宗百万转售，女皇镇31宗，勿洛26宗。",
         "非成熟市镇里，最高的是榜鹅一个五房式单位，132万新元。"
-      ]
+      ],
+      "upgrader": "更多百万元转售，对拥有大面积、好地点组屋的升级者有帮助。但它们仍是少数交易，在以七位数售价来规划公寓预算之前，先查你那座组屋的成交价。"
     },
     "keypoints": [
       "Unofficial figures from 99.co and SRX counted 238 HDB resale flats sold for at least $1 million in October 2026.",
@@ -3832,7 +3843,8 @@
       "The highest sale was a five-room flat at SkyParc @ Dawson in Queenstown, at $1.818 million.",
       "Toa Payoh had 39 million-dollar resales, Queenstown 31, and Bedok 26.",
       "Among non-mature towns, the highest was a five-room flat in Punggol at $1.32 million."
-    ]
+    ],
+    "upgrader": "More million-dollar resales help upgraders who own large, well-located flats. They are still a minority of deals, so check your own block's prices before you plan a condo budget around a seven-figure sale."
   },
   "n95c9965c": {
     "summary": [
@@ -3883,7 +3895,8 @@
         "勿洛转售价最高的10个组屋，全是勿洛南地平线1216平方英尺的五房式。",
         "这10宗都在2026年成交，其中8宗是从9月起成交的。",
         "这座楼较早的两宗纪录在13楼至15楼。这一宗最多比它们高出10万8000新元。"
-      ]
+      ],
+      "upgrader": "同一座组屋接连创下纪录，说明地点和楼层有多重要。如果你拥有附近的组屋，要用你那座组屋和相近楼层的成交来定价，而不是用纪录价。"
     },
     "keypoints": [
       "A five-room flat at Block 152B Bedok South Road, in Bedok South Horizon, sold for $1.588 million in November 2026, or about $1,305 per square foot.",
@@ -3893,7 +3906,8 @@
       "All 10 of Bedok’s highest HDB resale prices are 1,216-square-foot five-room flats at Bedok South Horizon.",
       "All of those 10 sales were in 2026, and eight of them were from September onward.",
       "The two earlier record flats in the block were on the 13th to 15th storeys. This sale was as much as $108,000 above them."
-    ]
+    ],
+    "upgrader": "A string of records in one block shows how much location and floor matter. If you own a flat nearby, use deals in your own block and storey band to price it, not the record."
   },
   "n00054fe5": {
     "summary": [
@@ -4010,7 +4024,8 @@
         "东部部分路程预计可缩短10到25分钟。现在从合乐到樟宜商业园大约要70分钟，中间还要转巴士。",
         "勿洛南站沿东海岸路上段，服务附近的住家和学校，包括白沙一带。",
         "新柔地铁（RTS）预计2027年2月通车后，乘客可以从兀兰北站一路前往柔佛的武吉查卡。"
-      ]
+      ],
+      "upgrader": "新地铁站可能提高附近房屋的需求。如果你的组屋或目标公寓靠近Bedok South、Sungei Bedok或Xilin，可以把新路线考虑进去，但组屋还是要按实际成交来定价，而不是凭预期。"
     },
     "keypoints": [
       "Three stations open on 26 December: Bedok South and Sungei Bedok on the Thomson-East Coast Line, and Xilin on the Downtown Line.",
@@ -4023,7 +4038,8 @@
       "Some journeys from the east are expected to be 10 to 25 minutes shorter. A trip from Havelock to Changi Business Park now takes about 70 minutes and includes a bus.",
       "Bedok South, along Upper East Coast Road, serves nearby homes and schools, including the Bayshore area.",
       "From Woodlands North, commuters will later be able to ride towards Bukit Chagar in Johor when the Johor Bahru–Singapore RTS Link opens in February 2027."
-    ]
+    ],
+    "upgrader": "New MRT stations can lift demand for homes nearby. If your flat or your target condo is close to Bedok South, Sungei Bedok or Xilin, factor in the new line, but price your flat on actual deals rather than expectations."
   },
   "9817": {
     "summary": [
@@ -4077,7 +4093,8 @@
         "穆仁理说，若强制每位房东都要个人担保，会少了弹性，也挡不住存心行骗的人。房地产代理理事会有给房东和租户的核对清单。",
         "公司租户拖延交还房子时，房东可以根据Civil Law Act，就拖到实际交房的那段时间索取双倍租金。",
         "他说，政策不该让房东或租户任何一方承担不公平的负担。"
-      ]
+      ],
+      "upgrader": "这则新闻是关于房东，不是关于升级。如果你打算把下一个家出租，它提醒你要仔细审查租户，但不会改变升级的决定。"
     },
     "keypoints": [
       "Senior Minister of State for Law Murali Pillai told Parliament that only a small share of residential rent disputes in the Small Claims Tribunal involve a company or other entity.",
@@ -4092,7 +4109,8 @@
       "Murali said forcing every landlord to take a personal guarantee would remove flexibility and still would not stop someone determined to cheat. The Council for Estate Agencies publishes checklists for landlords and tenants.",
       "Where a company tenant delays the return of a flat, a landlord can seek double rent for the period until handover, under the Civil Law Act.",
       "He said policy should not leave either landlords or tenants carrying an unfair burden."
-    ]
+    ],
+    "upgrader": "This story is about landlords, not upgraders. If you plan to rent out your next home, it is a reminder to check tenants carefully, but it does not change an upgrade decision."
   },
   "ncce3da5c": {
     "summary": [
@@ -4144,7 +4162,8 @@
         "碧山项目约1070个单位，有两房灵活、三房和四房。分析师认为需求会强，因为附近有公教中学和爱同学校等学校。",
         "合登（Huttons）把碧山和大巴窑项目看成可能的优质组屋。瑞联（Realion）则把碧山项目看成可能的优选（Plus）组屋。",
         "合登估计，若比照当地较早的优质组屋，碧山项目的四房价格可能从约53万新元起，补贴回收率大约10%。"
-      ]
+      ],
+      "upgrader": "二月的推出量较少，表示和转售组屋竞争的新组屋较少。如果你打算在2027年初卖组屋升级，这对你稍微有利，但你组屋本身的条件和地点更重要。"
     },
     "keypoints": [
       "HDB will launch about 4,300 Build-To-Order flats in February 2027, across five projects in Toa Payoh, Bishan, Tampines and Tengah.",
@@ -4157,7 +4176,8 @@
       "The Bishan project is about 1,070 flats, in two-room Flexi, three-room and four-room types. Analysts expect strong demand because schools such as Catholic High and Ai Tong are nearby.",
       "Huttons sees the Bishan and Toa Payoh projects as possible Prime flats. Realion has described the Bishan project as a possible Plus flat.",
       "Huttons estimated that four-room flats in the Bishan project could start from about $530,000, with a subsidy recovery of about 10% if it is priced like earlier Prime launches there."
-    ]
+    ],
+    "upgrader": "A small February launch means fewer new flats competing with resale. If you plan to sell to upgrade in early 2027, that is mildly in your favour, but your flat's own condition and location matter more."
   },
   "n5b099b77": {
     "summary": [
@@ -4345,8 +4365,10 @@
       ],
       "questions": [
         "裕廊西四房的中位数已经在这一页上。开价之前，你还想再看到什么？"
-      ]
-    }
+      ],
+      "upgrader": "如果你拥有裕廊西的四房式组屋，市镇中位数只是起点，不是你的售价。你的组屋座、楼层和地契决定你在价格范围中的位置，也决定你买公寓能有多少现金。"
+    },
+    "upgrader": "If you own a Jurong West four-room flat, the town median is a starting point, not your price. Your block, storey and lease decide where you sit in the range, and that sets the cash you will have for a condo."
   },
   "9824": {
     "summary": [
@@ -4414,8 +4436,10 @@
       ],
       "questions": [
         "下一轮抽签是2月。为了等它，你会先放下哪一套现在就在卖的房子？"
-      ]
-    }
+      ],
+      "upgrader": "等候时间较短的预购组屋，会和转售组屋争取急需住所的买家。如果你在2027年初前后卖组屋升级，要预计一些买家会拿碧山或大巴窑的预购组屋和你的组屋比较。"
+    },
+    "upgrader": "Shorter-wait BTO flats compete with resale flats for buyers who need a home soon. If you are selling to upgrade around early 2027, expect some of your buyers to be weighing a Bishan or Toa Payoh BTO against your flat."
   },
   "n3a4efa83": {
     "summary": [
@@ -4479,8 +4503,10 @@
       ],
       "questions": [
         "申请在11月11日晚上11时59分截止。七个项目里，你真正住得下的是哪一个？"
-      ]
-    }
+      ],
+      "upgrader": "十一月的预购组屋主要是给首次购屋者。对升级的人来说，重点是地点和等候时间的组合：你组屋附近的新供应，可能影响它卖出的速度。"
+    },
+    "upgrader": "The November BTO is mostly for first-timers. For upgraders, the takeaway is the mix of locations and waiting times: new supply near your flat can affect how quickly it sells."
   },
   "nb18cf7d2": {
     "summary": [
@@ -4548,8 +4574,10 @@
       ],
       "questions": [
         "下一轮抽签是2月。为了等它，你会先放下哪一套现在就在卖的房子？"
-      ]
-    }
+      ],
+      "upgrader": "又一个Mount Pleasant预购组屋项目，增加了大巴窑和碧山附近的供应。如果你在这些市镇拥有组屋，并打算在2027年卖出，要预计买家会把它和这些新项目比较。"
+    },
+    "upgrader": "Another Mount Pleasant BTO adds supply near Toa Payoh and Bishan. If you own a flat in those towns and plan to sell in 2027, expect buyers to compare it with these new projects."
   },
   "n4f045ca0": {
     "summary": [
@@ -4698,8 +4726,10 @@
       ],
       "questions": [
         "Bayshore Sails 在2037年之前进不了转售市场。如果你在卖勿洛的组屋，你还在等哪一类买家？"
-      ]
-    }
+      ],
+      "upgrader": "如果你拥有Bayshore附近的组屋，附近的转售价格范围可能远高于勿洛的中位数。要按你附近的成交定价，也要记得附近的新预购组屋给了你的买家另一个选择。"
+    },
+    "upgrader": "If you own a flat near Bayshore, the nearby resale range can be well above the Bedok median. Price off deals close to you, and remember that new BTO flats nearby give your buyers another choice."
   },
   "n608926cf": {
     "summary": [
@@ -4852,8 +4882,10 @@
       ],
       "questions": [
         "五房和三代同堂组屋是这个项目里较大的户型。你真正住得下的是哪一种？"
-      ]
-    }
+      ],
+      "upgrader": "少见的五房式和三代同堂预购组屋，可能适合为了空间而考虑升级的多代同堂家庭。在决定之前，把总成本和等候时间与面积相近的公寓比较。"
+    },
+    "upgrader": "Rare 5-room and 3Gen BTO flats can suit multi-generation families who are thinking of upgrading for space. Compare the total cost and waiting time against a condo of similar size before you decide."
   },
   "n88f449a3": {
     "summary": [
@@ -4917,8 +4949,10 @@
       ],
       "questions": [
         "更高的回报率，可以是因为价钱变弱。你还在只看那个百分比的，是哪一套？"
-      ]
-    }
+      ],
+      "upgrader": "如果你打算把下一个公寓先出租一段时间，不要只看毛租金回报。较高的回报可能只是价格较弱，所以要看扣除开销后还剩多少租金，以及地点能否保值。"
+    },
+    "upgrader": "If you plan to rent out your next condo for a while, do not pick it on gross yield alone. A higher yield can simply mean a weaker price, so check what the rent leaves after costs and whether the location will hold its value."
   },
   "nba13776a": {
     "summary": [
@@ -4974,8 +5008,10 @@
       ],
       "questions": [
         "规格表把 Merpati Meadow 列为 Plus，补贴回收8%，四房价格最高72万6000新元。这个最高价旁边，你还会放哪一宗附近的转售？"
-      ]
-    }
+      ],
+      "upgrader": "Plus组屋有较长的最低居住年限，并需要回缴部分津贴。如果你在转售组屋、Plus预购组屋和公寓之间比较，要把这些规定当作真实成本，而不只是看价格。"
+    },
+    "upgrader": "Plus flats come with a longer occupation period and a subsidy clawback. If you are an upgrader comparing a resale flat, a Plus BTO and a condo, count those rules as a real cost, not just the price."
   },
   "n5f9cd3fe": {
     "summary": [
@@ -5243,8 +5279,10 @@
       ],
       "questions": [
         "先不把这笔津贴算进第一笔账，你还会选哪一种房型？"
-      ]
-    }
+      ],
+      "upgrader": "预购组屋的收入参考不适用于私宅。买公寓时，银行以4%的利率测试你的贷款，所以在挑选项目之前，先算出你自己的上限。"
+    },
+    "upgrader": "Income guides for BTO flats do not apply to private homes. For a condo, the bank tests your loan at a 4% interest rate, so work out your own limit before you shortlist projects."
   },
   "nbf426300": {
     "summary": [
@@ -5302,8 +5340,10 @@
       ],
       "questions": [
         "各房型的价格并没有往同一个方向走。你正在估价的那一套，对应的是其中哪一种变动？"
-      ]
-    }
+      ],
+      "upgrader": "每月小幅下跌只是波动，不是趋势。如果你卖组屋来升级，更重要的是你的组屋要多久才卖得出，以及你下一个家的价格是不是比你的组屋涨得更快。"
+    },
+    "upgrader": "A small monthly dip is noise, not a trend. If you are selling to upgrade, it matters less than how long your flat takes to sell and whether your next home's price is moving faster than your flat's."
   },
   "nb895783d": {
     "summary": [
@@ -5404,8 +5444,10 @@
       ],
       "questions": [
         "这份快报里，四房占10月2178宗的41.6%。你还会把哪一个月的户型比例放在这个份额旁边？"
-      ]
-    }
+      ],
+      "upgrader": "四房式组屋交易最多，所以如果你拥有一间，有很多最近的成交可以参考定价。要看你自己市镇和那座组屋的成交，因为全岛快估会掩盖不同地区之间的大差距。"
+    },
+    "upgrader": "Four-room flats are the most traded, so if you own one there are plenty of recent deals to price it from. Use the deals in your own town and block, because islandwide flash estimates hide wide gaps between estates."
   },
   "n0301c38f": {
     "summary": [
@@ -5471,8 +5513,10 @@
       ],
       "questions": [
         "这一轮的申请率差得很远。你还会选的，是其中哪一个项目？"
-      ]
-    }
+      ],
+      "upgrader": "入息顶限提高后，更多家庭加入预购组屋的申请，其中一些本来会买转售组屋。如果你卖组屋来升级，要预计买家会把你的组屋和附近的新预购组屋比较。"
+    },
+    "upgrader": "Higher income ceilings bring more families into the BTO queue, and some of them would otherwise have bought resale flats. If you are selling to upgrade, expect buyers to compare your flat with new BTO options nearby."
   },
   "ne345ad8b": {
     "summary": [
@@ -5538,8 +5582,10 @@
       ],
       "questions": [
         "这宗成交高于附近其他公寓式组屋。你还会先核对剩余地契和那些成交，才把它当成价钱吗？"
-      ]
-    }
+      ],
+      "upgrader": "你市镇的纪录价格，只有在你的组屋条件相近时才对你有帮助。在指望类似价格来支付公寓首付之前，先对照面积、楼层和剩余地契。"
+    },
+    "upgrader": "Record prices in your town help your sale only if your flat is comparable. Check the size, storey and lease left against the record before you count on a similar price to fund your condo down payment."
   },
   "nebf39d4e": {
     "summary": [
@@ -5605,8 +5651,10 @@
       ],
       "questions": [
         "各个项目的申请率并不一样。你还会申请的，是其中哪一个？"
-      ]
-    }
+      ],
+      "upgrader": "入息顶限提高，意味着一些过去只能买转售或私宅的家庭，现在可以申请预购组屋。如果你在升级，这表示你的买家有更多选择，所以要清楚展示你组屋的优点。"
+    },
+    "upgrader": "The higher income ceiling means some households that once had to buy resale or private can now apply for BTO. If you are upgrading, that is more competition for your buyers' attention, so present your flat's strengths clearly."
   },
   "nbdaff927": {
     "summary": [
@@ -5662,8 +5710,10 @@
       ],
       "questions": [
         "《海峡时报》写的净赤字是47亿新元，其中居者有其屋计划是40亿新元。把哪一个再拆成补助和建造成本，你才会把它当成一套组屋的成本？"
-      ]
-    }
+      ],
+      "upgrader": "建屋发展局的账目不会改变你的升级决定。对你重要的是你自己组屋的售价、公积金退款和你能通过的贷款，而不是建屋局的赤字。"
+    },
+    "upgrader": "HDB's accounts do not change your upgrade decision. What matters to you is your own flat's sale price, your CPF refund and the loan you can pass, not HDB's deficit."
   },
   "naf61bb67": {
     "summary": [
@@ -5776,8 +5826,10 @@
       ],
       "questions": [
         "Sin Ming 约1070套，而且不在地铁站旁。Simei 地段在 Upper Changi 地铁站，约有120套五房。看价格之前，你还会想先知道这两处里哪一处的分类？"
-      ]
-    }
+      ],
+      "upgrader": "2027年2月的预购组屋供应较少，可能让转售组屋的需求保持稳定。如果你打算卖掉组屋升级，这对你的售价有利，但仍要以最近的成交价来定价，而不是看标题。"
+    },
+    "upgrader": "A smaller BTO supply in February 2027 can keep demand for resale flats firm. If you plan to sell your flat to upgrade, that supports your selling price, but price it off recent transactions, not off the headline."
   },
   "nec63a2e8": {
     "summary": [
@@ -5839,8 +5891,10 @@
       ],
       "questions": [
         "每平方英尺2673新元是 Kim Seng Road 的一套三房。你还会把附近哪一宗成交放在旁边，才把它当成价钱？"
-      ]
-    }
+      ],
+      "upgrader": "一个永久地契市区边缘项目的单笔转售纪录，对郊区公寓说明不了太多。要比较同类：同一区域、相近楼龄和面积的公寓。"
+    },
+    "upgrader": "One record resale in a freehold city-fringe project tells you little about suburban condos. Compare like with like: the same region, age and unit size as the condo you are looking at."
   },
   "n04b4506d": {
     "summary": [
@@ -5894,8 +5948,10 @@
       ],
       "questions": [
         "通稿写了地和房子，没有写价钱。你还要先弄清这栋洋房的哪一项，才把附近的一宗成交当成它的价钱？"
-      ]
-    }
+      ],
+      "upgrader": "优质洋房的出售与从组屋升级到公寓无关。它不会改变你的组屋价值，也不会改变公寓的价格。"
+    },
+    "upgrader": "A Good Class Bungalow sale has no bearing on an HDB-to-condo upgrade. It does not change what your flat is worth or what a condo costs."
   },
   "n61c893d2": {
     "summary": [
@@ -6006,8 +6062,10 @@
       ],
       "questions": [
         "下午5时的读数是35603份申请，三房或更大单位的首次申请家庭中位数是2.6。你还会想把哪个项目的申请率放在这个中位数旁边？"
-      ]
-    }
+      ],
+      "upgrader": "预购组屋的竞争不影响你买公寓能借多少。如果你是第二次购屋者，在新组屋和公寓之间考虑，要注意各项目的申请率差别很大，所以看具体项目，而不是整体数字。"
+    },
+    "upgrader": "BTO competition does not affect what you can borrow for a condo. If you are a second-timer weighing a new flat against a condo, note that application rates differ a lot by project, so look at the project, not the overall figure."
   },
   "n0fa68d88": {
     "summary": [
@@ -6208,8 +6266,10 @@
       ],
       "questions": [
         "Toa Payoh Hillside 的四房是本轮最贵的，83万2000新元，最低居住年限10年。这还是你会选的那一套吗？"
-      ]
-    }
+      ],
+      "upgrader": "预购组屋需求强劲，主要影响首次购屋者。对升级的人来说，有用的一点是买家愿意为了地点接受更长的最低居住年限，所以靠近好设施的组屋，在你换房时应该仍然好卖。"
+    },
+    "upgrader": "Strong BTO demand mostly matters to first-timers. For upgraders, the useful point is that buyers are accepting longer occupation periods for location, so a flat near good amenities should keep selling well when you move on."
   },
   "n373b7909": {
     "summary": [
@@ -6265,8 +6325,10 @@
       ],
       "questions": [
         "这份名单里最高叫价是美龄街的189万9999新元，最大的是 Sin Ming Avenue 那套2013平方英尺的公寓式组屋，叫价160万新元。这两个叫价里，你还会想先看哪一个的近期成交？"
-      ]
-    }
+      ],
+      "upgrader": "这些是叫价，不是成交价。如果你拥有地点好、面积大的组屋，先用同一座组屋最近的成交价来估价，而不是看最高的挂牌价，再定公寓预算。"
+    },
+    "upgrader": "These are asking prices, not sales. If you own a big, well-located flat, price it off recent transacted prices in your block, not off the highest listings, before you size your condo budget."
   },
   "nc1e5d28c": {
     "summary": [
@@ -6432,8 +6494,10 @@
       ],
       "questions": [
         "The Arcady at Boon Keng 已售69%，平均每平方英尺2607新元，也是 KSH 最大的权益。其余三个新加坡项目里，你还会把哪一个放在这个数字旁边？"
-      ]
-    }
+      ],
+      "upgrader": "承建商的盈利不会改变你的升级计算。如果你在看KSH合资伙伴的项目，要查的是发展商的往绩和项目的销售情况，而不是承建商的半年业绩。"
+    },
+    "upgrader": "A builder's profit does not change your upgrade maths. If you are looking at a project by one of KSH's joint ventures, check the developer's track record and the project's sales, not the contractor's half-year earnings."
   },
   "n3a7d1fd9": {
     "summary": [
@@ -6544,8 +6608,10 @@
       ],
       "questions": [
         "Sembawang Anchor 等候时间最短，2年10个月，而且全部1310套较短等候时间的单位都在那里。你还会拿它和 Bayshore 的一套 Plus 来比较吗？"
-      ]
-    }
+      ],
+      "upgrader": "预购组屋的等候时间短，使新组屋更接近转售组屋的替代品。如果你在三巴旺或登加附近卖组屋升级，要预计买家会拿短等候的预购组屋和你的组屋比较。"
+    },
+    "upgrader": "Short BTO waiting times make new flats a closer substitute for resale. If you are selling to upgrade near Sembawang or Tengah, expect buyers to weigh a short-wait BTO against your flat."
   },
   "9808": {
     "summary": [
@@ -6611,7 +6677,9 @@
       ],
       "questions": [
         "在这个统计里，核心中央区转售有19.5%亏钱，全岛比例是4.6%。这两个比例里，你还会想先知道哪一个旁边的项目名称？"
-      ]
-    }
+      ],
+      "upgrader": "亏损的转售交易大多在核心区，但全岛的比例在上升。如果你在升级，要选一个能长期持有的公寓，也不要付出你无法说服自己的新盘溢价。"
+    },
+    "upgrader": "Loss-making resales are mostly in the prime region, but the islandwide share is rising. If you are upgrading, choose a condo you can hold for the long term and avoid paying a launch premium you cannot defend."
   }
 }

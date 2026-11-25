@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K"></script>
+<!-- Google tag (gtag.js): loaded on the first scroll, tap or key press so it does not slow the first paint -->
 <script>
+  (function(){var done=false,evs=['scroll','pointerdown','touchstart','keydown'];function load(){if(done)return;done=true;evs.forEach(function(e){removeEventListener(e,load,{passive:true})});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K';document.head.appendChild(s);}evs.forEach(function(e){addEventListener(e,load,{passive:true})});})();
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -249,6 +249,15 @@
       border-radius: 50%;
       background: var(--red);
     }
+    .upgrader {
+      margin-top: 28px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--red);
+      background: #161616;
+    }
+    .upgrader h2 { margin: 0 0 8px; font-size: 1.15rem; letter-spacing: -0.02em; }
+    .upgrader p { margin: 0; color: #f2f2f2; line-height: 1.6; font-size: 1.02rem; }
+    .upgrader p.upgrader-by { margin-top: 10px; color: #a3a3a3; font-size: 0.85rem; }
     .questions {
       margin-top: 36px;
       padding-top: 8px;
@@ -398,6 +407,11 @@
         <li><span class="en">The same report&#x27;s lowest new psf price was at Marina Collection in Sentosa Cove. On 28 October a 2,347 sq ft four-bedroom sold for $3.15 million, or $1,342 psf, under a January 2020 sale of a 2,185 sq ft four-bedroom at $3 million, or $1,373 psf. The report says the project is 99-year, completed in 2011, with 124 units.</span><span class="zh" lang="zh-Hans">同一篇报道里，新的每平方英尺低位出现在圣淘沙湾的 Marina Collection。10月28日，一套2347平方英尺的四房以315万新元成交，即每平方英尺1342新元，低于2020年一月一套2185平方英尺四房的300万新元，即每平方英尺1373新元。报道说这个项目是99年地契，2011年建成，共124个单位。</span></li>
         <li><span class="en">That report also said UOB was selling 38 Marina Collection apartments after a loan dispute: 17 three-bedroom and 21 four-bedroom units, preview from 6 to 13 November, bookings on 14 November, on an as-is basis, from $1,269 psf and about $1,340 psf on average, roughly 20% under this year&#x27;s Sentosa Cove resale average.</span><span class="zh" lang="zh-Hans">报道还说，大华银行因一宗贷款纠纷，正在出售38套 Marina Collection：17套三房、21套四房，11月6日至13日预览，11月14日预订，按现状出售，从每平方英尺1269新元起，平均约1340新元，大约比今年圣淘沙湾转售均价低20%。</span></li>
       </ul>
+    </section>
+    <section class="upgrader" aria-labelledby="upgrader-heading">
+      <h2 id="upgrader-heading"><span class="en">What this means if you&#x27;re upgrading</span><span class="zh" lang="zh-Hans">如果你打算升级换房</span></h2>
+      <p><span class="en">One record resale in a freehold city-fringe project tells you little about suburban condos. Compare like with like: the same region, age and unit size as the condo you are looking at.</span><span class="zh" lang="zh-Hans">一个永久地契市区边缘项目的单笔转售纪录，对郊区公寓说明不了太多。要比较同类：同一区域、相近楼龄和面积的公寓。</span></p>
+      <p class="upgrader-by"><span class="en">View by Jack Leow, CEA R074023I, PropNex Realty</span><span class="zh" lang="zh-Hans">观点：Jack Leow，CEA R074023I，PropNex Realty</span></p>
     </section>
     <section class="questions" aria-labelledby="questions-heading">
       <h2 id="questions-heading"><span class="en">Milo chat for thoughts</span><span class="zh" lang="zh-Hans">Milo chat for thoughts</span></h2>

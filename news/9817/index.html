@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K"></script>
+<!-- Google tag (gtag.js): loaded on the first scroll, tap or key press so it does not slow the first paint -->
 <script>
+  (function(){var done=false,evs=['scroll','pointerdown','touchstart','keydown'];function load(){if(done)return;done=true;evs.forEach(function(e){removeEventListener(e,load,{passive:true})});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K';document.head.appendChild(s);}evs.forEach(function(e){addEventListener(e,load,{passive:true})});})();
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -249,6 +249,15 @@
       border-radius: 50%;
       background: var(--red);
     }
+    .upgrader {
+      margin-top: 28px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--red);
+      background: #161616;
+    }
+    .upgrader h2 { margin: 0 0 8px; font-size: 1.15rem; letter-spacing: -0.02em; }
+    .upgrader p { margin: 0; color: #f2f2f2; line-height: 1.6; font-size: 1.02rem; }
+    .upgrader p.upgrader-by { margin-top: 10px; color: #a3a3a3; font-size: 0.85rem; }
     .questions {
       margin-top: 36px;
       padding-top: 8px;
@@ -402,6 +411,11 @@
         <li><span class="en">Where a company tenant delays the return of a flat, a landlord can seek double rent for the period until handover, under the Civil Law Act.</span><span class="zh" lang="zh-Hans">公司租户拖延交还房子时，房东可以根据Civil Law Act，就拖到实际交房的那段时间索取双倍租金。</span></li>
         <li><span class="en">He said policy should not leave either landlords or tenants carrying an unfair burden.</span><span class="zh" lang="zh-Hans">他说，政策不该让房东或租户任何一方承担不公平的负担。</span></li>
       </ul>
+    </section>
+    <section class="upgrader" aria-labelledby="upgrader-heading">
+      <h2 id="upgrader-heading"><span class="en">What this means if you&#x27;re upgrading</span><span class="zh" lang="zh-Hans">如果你打算升级换房</span></h2>
+      <p><span class="en">This story is about landlords, not upgraders. If you plan to rent out your next home, it is a reminder to check tenants carefully, but it does not change an upgrade decision.</span><span class="zh" lang="zh-Hans">这则新闻是关于房东，不是关于升级。如果你打算把下一个家出租，它提醒你要仔细审查租户，但不会改变升级的决定。</span></p>
+      <p class="upgrader-by"><span class="en">View by Jack Leow, CEA R074023I, PropNex Realty</span><span class="zh" lang="zh-Hans">观点：Jack Leow，CEA R074023I，PropNex Realty</span></p>
     </section>
     <section class="questions" aria-labelledby="questions-heading">
       <h2 id="questions-heading"><span class="en">Milo chat for thoughts</span><span class="zh" lang="zh-Hans">Milo chat for thoughts</span></h2>

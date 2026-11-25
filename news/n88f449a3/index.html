@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K"></script>
+<!-- Google tag (gtag.js): loaded on the first scroll, tap or key press so it does not slow the first paint -->
 <script>
+  (function(){var done=false,evs=['scroll','pointerdown','touchstart','keydown'];function load(){if(done)return;done=true;evs.forEach(function(e){removeEventListener(e,load,{passive:true})});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K';document.head.appendChild(s);}evs.forEach(function(e){addEventListener(e,load,{passive:true})});})();
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -249,6 +249,15 @@
       border-radius: 50%;
       background: var(--red);
     }
+    .upgrader {
+      margin-top: 28px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--red);
+      background: #161616;
+    }
+    .upgrader h2 { margin: 0 0 8px; font-size: 1.15rem; letter-spacing: -0.02em; }
+    .upgrader p { margin: 0; color: #f2f2f2; line-height: 1.6; font-size: 1.02rem; }
+    .upgrader p.upgrader-by { margin-top: 10px; color: #a3a3a3; font-size: 0.85rem; }
     .questions {
       margin-top: 36px;
       padding-top: 8px;
@@ -400,6 +409,11 @@
         <li><span class="en">The article also describes owners who pass over older projects because the upkeep is heavier, and one Marine Parade owner who has left a condo empty for seven months rather than accept a lower rent or sell.</span><span class="zh" lang="zh-Hans">文章还写到，有些屋主因为维修更重而放过较旧的项目。也有一位马林百列的屋主，一套公寓空了七个月，也不肯收较低的租金，或者卖掉。</span></li>
         <li><span class="en">It separates owners who want the rent to cover the mortgage, the maintenance and the property tax now from the more common owner who uses the rent only to reduce the cost of holding. The question it leaves is what that owner needs the condo to do.</span><span class="zh" lang="zh-Hans">文章把屋主分成两类：一类要租金现在就盖过房贷、管理费和房产税；更常见的一类只用租金去减轻持有成本。它留下的问题是，这个屋主需要这套公寓做什么。</span></li>
       </ul>
+    </section>
+    <section class="upgrader" aria-labelledby="upgrader-heading">
+      <h2 id="upgrader-heading"><span class="en">What this means if you&#x27;re upgrading</span><span class="zh" lang="zh-Hans">如果你打算升级换房</span></h2>
+      <p><span class="en">If you plan to rent out your next condo for a while, do not pick it on gross yield alone. A higher yield can simply mean a weaker price, so check what the rent leaves after costs and whether the location will hold its value.</span><span class="zh" lang="zh-Hans">如果你打算把下一个公寓先出租一段时间，不要只看毛租金回报。较高的回报可能只是价格较弱，所以要看扣除开销后还剩多少租金，以及地点能否保值。</span></p>
+      <p class="upgrader-by"><span class="en">View by Jack Leow, CEA R074023I, PropNex Realty</span><span class="zh" lang="zh-Hans">观点：Jack Leow，CEA R074023I，PropNex Realty</span></p>
     </section>
     <section class="questions" aria-labelledby="questions-heading">
       <h2 id="questions-heading"><span class="en">Milo chat for thoughts</span><span class="zh" lang="zh-Hans">Milo chat for thoughts</span></h2>

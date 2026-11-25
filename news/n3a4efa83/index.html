@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K"></script>
+<!-- Google tag (gtag.js): loaded on the first scroll, tap or key press so it does not slow the first paint -->
 <script>
+  (function(){var done=false,evs=['scroll','pointerdown','touchstart','keydown'];function load(){if(done)return;done=true;evs.forEach(function(e){removeEventListener(e,load,{passive:true})});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K';document.head.appendChild(s);}evs.forEach(function(e){addEventListener(e,load,{passive:true})});})();
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -249,6 +249,15 @@
       border-radius: 50%;
       background: var(--red);
     }
+    .upgrader {
+      margin-top: 28px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--red);
+      background: #161616;
+    }
+    .upgrader h2 { margin: 0 0 8px; font-size: 1.15rem; letter-spacing: -0.02em; }
+    .upgrader p { margin: 0; color: #f2f2f2; line-height: 1.6; font-size: 1.02rem; }
+    .upgrader p.upgrader-by { margin-top: 10px; color: #a3a3a3; font-size: 0.85rem; }
     .questions {
       margin-top: 36px;
       padding-top: 8px;
@@ -400,6 +409,11 @@
         <li><span class="en">More than one in three homes are 2-room Flexi flats, offered in all seven projects. They are part of HDB’s plan to offer 20,000 of these flats from 2026 to 2028.</span><span class="zh" lang="zh-Hans">超过三分之一的单位是两房灵活，七个项目都有。这是建屋局2026年到2028年推出2万个这类单位的计划的一部分。</span></li>
         <li><span class="en">All three Standard projects offer 5-room flats, priced before grants from $479,000 at Sembawang Anchor, $484,000 at Chencharu Acres in Yishun, and $494,000 at Plantation Dew. Plantation Dew is the only project in this exercise with 3Gen flats, from $551,000 before grants.</span><span class="zh" lang="zh-Hans">三个标准项目都有五房，补助前的起价是三巴旺锚地47万9000新元、义顺Chencharu Acres 48万4000新元、Plantation Dew 49万4000新元。这一轮只有Plantation Dew有三代同堂组屋，补助前从55万1000新元起。</span></li>
       </ul>
+    </section>
+    <section class="upgrader" aria-labelledby="upgrader-heading">
+      <h2 id="upgrader-heading"><span class="en">What this means if you&#x27;re upgrading</span><span class="zh" lang="zh-Hans">如果你打算升级换房</span></h2>
+      <p><span class="en">The November BTO is mostly for first-timers. For upgraders, the takeaway is the mix of locations and waiting times: new supply near your flat can affect how quickly it sells.</span><span class="zh" lang="zh-Hans">十一月的预购组屋主要是给首次购屋者。对升级的人来说，重点是地点和等候时间的组合：你组屋附近的新供应，可能影响它卖出的速度。</span></p>
+      <p class="upgrader-by"><span class="en">View by Jack Leow, CEA R074023I, PropNex Realty</span><span class="zh" lang="zh-Hans">观点：Jack Leow，CEA R074023I，PropNex Realty</span></p>
     </section>
     <section class="questions" aria-labelledby="questions-heading">
       <h2 id="questions-heading"><span class="en">Milo chat for thoughts</span><span class="zh" lang="zh-Hans">Milo chat for thoughts</span></h2>

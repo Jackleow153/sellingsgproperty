@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K"></script>
+<!-- Google tag (gtag.js): loaded on the first scroll, tap or key press so it does not slow the first paint -->
 <script>
+  (function(){var done=false,evs=['scroll','pointerdown','touchstart','keydown'];function load(){if(done)return;done=true;evs.forEach(function(e){removeEventListener(e,load,{passive:true})});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K';document.head.appendChild(s);}evs.forEach(function(e){addEventListener(e,load,{passive:true})});})();
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -249,6 +249,15 @@
       border-radius: 50%;
       background: var(--red);
     }
+    .upgrader {
+      margin-top: 28px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--red);
+      background: #161616;
+    }
+    .upgrader h2 { margin: 0 0 8px; font-size: 1.15rem; letter-spacing: -0.02em; }
+    .upgrader p { margin: 0; color: #f2f2f2; line-height: 1.6; font-size: 1.02rem; }
+    .upgrader p.upgrader-by { margin-top: 10px; color: #a3a3a3; font-size: 0.85rem; }
     .questions {
       margin-top: 36px;
       padding-top: 8px;
@@ -398,6 +407,11 @@
         <li><span class="en">The illustrations take the grant off the price, then assume a loan of 75% of what is left and 25% in cash or CPF. The income shown is the lowest gross monthly household income that keeps repayments within 30% at 4%, using the grant tier for that income.</span><span class="zh" lang="zh-Hans">文中的例子先从房价减去津贴，再假设借入余额的75%，其余25%用现金或公积金支付。列出的收入，是在4%利率下把供款控制在30%以内、并对应同一收入津贴档的最低家庭月入。</span></li>
         <li><span class="en">The piece says the grant changes the picture most for smaller flats, and that some households may look at a 5-room flat or a dearer location because the grant is there.</span><span class="zh" lang="zh-Hans">文章说，这笔津贴对较小单位的价格影响更大，也可能让一些家庭因为有津贴而考虑5房，或考虑更贵的地点。</span></li>
       </ul>
+    </section>
+    <section class="upgrader" aria-labelledby="upgrader-heading">
+      <h2 id="upgrader-heading"><span class="en">What this means if you&#x27;re upgrading</span><span class="zh" lang="zh-Hans">如果你打算升级换房</span></h2>
+      <p><span class="en">Income guides for BTO flats do not apply to private homes. For a condo, the bank tests your loan at a 4% interest rate, so work out your own limit before you shortlist projects.</span><span class="zh" lang="zh-Hans">预购组屋的收入参考不适用于私宅。买公寓时，银行以4%的利率测试你的贷款，所以在挑选项目之前，先算出你自己的上限。</span></p>
+      <p class="upgrader-by"><span class="en">View by Jack Leow, CEA R074023I, PropNex Realty</span><span class="zh" lang="zh-Hans">观点：Jack Leow，CEA R074023I，PropNex Realty</span></p>
     </section>
     <section class="questions" aria-labelledby="questions-heading">
       <h2 id="questions-heading"><span class="en">Milo chat for thoughts</span><span class="zh" lang="zh-Hans">Milo chat for thoughts</span></h2>

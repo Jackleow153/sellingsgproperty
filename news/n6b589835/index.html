@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K"></script>
+<!-- Google tag (gtag.js): loaded on the first scroll, tap or key press so it does not slow the first paint -->
 <script>
+  (function(){var done=false,evs=['scroll','pointerdown','touchstart','keydown'];function load(){if(done)return;done=true;evs.forEach(function(e){removeEventListener(e,load,{passive:true})});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K';document.head.appendChild(s);}evs.forEach(function(e){addEventListener(e,load,{passive:true})});})();
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -249,6 +249,15 @@
       border-radius: 50%;
       background: var(--red);
     }
+    .upgrader {
+      margin-top: 28px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--red);
+      background: #161616;
+    }
+    .upgrader h2 { margin: 0 0 8px; font-size: 1.15rem; letter-spacing: -0.02em; }
+    .upgrader p { margin: 0; color: #f2f2f2; line-height: 1.6; font-size: 1.02rem; }
+    .upgrader p.upgrader-by { margin-top: 10px; color: #a3a3a3; font-size: 0.85rem; }
     .questions {
       margin-top: 36px;
       padding-top: 8px;
@@ -401,6 +410,11 @@
         <li><span class="en">The results put cash and fixed deposits at $142.5 million and net asset value at 50.89 cents a share. Choo Chee Onn is executive chairman and managing director.</span><span class="zh" lang="zh-Hans">业绩显示现金和定期存款1亿4250万新元，每股资产净值50.89分。Choo Chee Onn 是执行主席兼董事总经理。</span></li>
         <li><span class="en">EdgeProp also noted Gate+ at Tukang Innovation Drive, a 10% stake launched in May. It said 46% of the 265 factory units were sold at an average $605 psf, on a 33-year lease from August 2025. Tukang Plot B, at 30%, and Thomson Gem at Upper Thomson, at 25%, had not launched.</span><span class="zh" lang="zh-Hans">EdgeProp 还提到 Tukang Innovation Drive 的 Gate+，权益10%，5月开盘。265个厂房单位已售46%，平均每平方英尺605新元，地契从2025年8月起为33年。权益30%的 Tukang Plot B，以及 Upper Thomson、权益25%的 Thomson Gem，尚未开盘。</span></li>
       </ul>
+    </section>
+    <section class="upgrader" aria-labelledby="upgrader-heading">
+      <h2 id="upgrader-heading"><span class="en">What this means if you&#x27;re upgrading</span><span class="zh" lang="zh-Hans">如果你打算升级换房</span></h2>
+      <p><span class="en">A builder&#x27;s profit does not change your upgrade maths. If you are looking at a project by one of KSH&#x27;s joint ventures, check the developer&#x27;s track record and the project&#x27;s sales, not the contractor&#x27;s half-year earnings.</span><span class="zh" lang="zh-Hans">承建商的盈利不会改变你的升级计算。如果你在看KSH合资伙伴的项目，要查的是发展商的往绩和项目的销售情况，而不是承建商的半年业绩。</span></p>
+      <p class="upgrader-by"><span class="en">View by Jack Leow, CEA R074023I, PropNex Realty</span><span class="zh" lang="zh-Hans">观点：Jack Leow，CEA R074023I，PropNex Realty</span></p>
     </section>
     <section class="questions" aria-labelledby="questions-heading">
       <h2 id="questions-heading"><span class="en">Milo chat for thoughts</span><span class="zh" lang="zh-Hans">Milo chat for thoughts</span></h2>

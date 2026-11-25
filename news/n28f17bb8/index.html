@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K"></script>
+<!-- Google tag (gtag.js): loaded on the first scroll, tap or key press so it does not slow the first paint -->
 <script>
+  (function(){var done=false,evs=['scroll','pointerdown','touchstart','keydown'];function load(){if(done)return;done=true;evs.forEach(function(e){removeEventListener(e,load,{passive:true})});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K';document.head.appendChild(s);}evs.forEach(function(e){addEventListener(e,load,{passive:true})});})();
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -249,6 +249,15 @@
       border-radius: 50%;
       background: var(--red);
     }
+    .upgrader {
+      margin-top: 28px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--red);
+      background: #161616;
+    }
+    .upgrader h2 { margin: 0 0 8px; font-size: 1.15rem; letter-spacing: -0.02em; }
+    .upgrader p { margin: 0; color: #f2f2f2; line-height: 1.6; font-size: 1.02rem; }
+    .upgrader p.upgrader-by { margin-top: 10px; color: #a3a3a3; font-size: 0.85rem; }
     .questions {
       margin-top: 36px;
       padding-top: 8px;
@@ -395,6 +404,11 @@
         <li><span class="en">On price, the flash estimate put four-room flats 0.2% higher than a year earlier and five-room flats 0.4% higher. Three-room prices were 2% lower and executive prices 1.2% lower.</span><span class="zh" lang="zh-Hans">价格方面，快报估计四房比一年前高0.2%，五房高0.4%。三房低2%，公寓式组屋低1.2%。</span></li>
         <li><span class="en">Overall HDB resale prices in the same estimate were 0.2% lower than the month before and unchanged from a year earlier.</span><span class="zh" lang="zh-Hans">同一估计里，组屋转售整体价格比前一个月低0.2%，与一年前持平。</span></li>
       </ul>
+    </section>
+    <section class="upgrader" aria-labelledby="upgrader-heading">
+      <h2 id="upgrader-heading"><span class="en">What this means if you&#x27;re upgrading</span><span class="zh" lang="zh-Hans">如果你打算升级换房</span></h2>
+      <p><span class="en">Four-room flats are the most traded, so if you own one there are plenty of recent deals to price it from. Use the deals in your own town and block, because islandwide flash estimates hide wide gaps between estates.</span><span class="zh" lang="zh-Hans">四房式组屋交易最多，所以如果你拥有一间，有很多最近的成交可以参考定价。要看你自己市镇和那座组屋的成交，因为全岛快估会掩盖不同地区之间的大差距。</span></p>
+      <p class="upgrader-by"><span class="en">View by Jack Leow, CEA R074023I, PropNex Realty</span><span class="zh" lang="zh-Hans">观点：Jack Leow，CEA R074023I，PropNex Realty</span></p>
     </section>
     <section class="questions" aria-labelledby="questions-heading">
       <h2 id="questions-heading"><span class="en">Milo chat for thoughts</span><span class="zh" lang="zh-Hans">Milo chat for thoughts</span></h2>

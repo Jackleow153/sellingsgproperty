@@ -13,6 +13,24 @@
 # forced. Do not add a rule that removes a trailing slash: that loops.
 
 # The Netlify subdomain serves the same files. Send it to the canonical host.
+# Internal files are never public (publish dir is "."): build scripts, source data, notes and config
+# answer with the real 404 page. Forced (!) so the file on disk is not served. Nothing on the site loads these.
+/CLAUDE.md                /404.html  404!
+/README.md                /404.html  404!
+/NEW_BLOG_TEMPLATE.md     /404.html  404!
+/package.json             /404.html  404!
+/package-lock.json        /404.html  404!
+/netlify.toml             /404.html  404!
+/input.css                /404.html  404!
+/tailwind.config.cjs      /404.html  404!
+/news.json                /404.html  404!
+/news/copy.json           /404.html  404!
+/scripts/*                /404.html  404!
+/data/*                   /404.html  404!
+/netlify/*                /404.html  404!
+/.github/*                /404.html  404!
+/node_modules/*           /404.html  404!
+
 https://marvelous-begonia-99ba7b.netlify.app/*  https://www.sellingsgproperty.com/:splat  301!
 http://marvelous-begonia-99ba7b.netlify.app/*   https://www.sellingsgproperty.com/:splat  301!
 

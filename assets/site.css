@@ -8,7 +8,7 @@
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.7 "Hanken Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
 a{color:var(--navy);text-underline-offset:3px}
-a:hover{color:#8a6f35}
+a:hover{color:#7a5f28}
 img{max-width:100%;height:auto;display:block}
 h1,h2,h3{font-family:Marcellus,Georgia,"Times New Roman",serif;color:var(--navy);font-weight:400;line-height:1.25}
 h1{font-size:clamp(1.9rem,4.5vw,2.8rem);margin:.2em 0 .3em}
@@ -41,7 +41,7 @@ h3{font-size:1.2rem;margin:1.6rem 0 .5rem}
 .crumbs ol{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
 .crumbs li+li::before{content:"›";margin-right:6px;color:#a39b8c}
 /* Hero */
-.kicker{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:#8a6f35;font-weight:700}
+.kicker{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:#7a5f28;font-weight:700}
 .sub{color:var(--muted);margin:0 0 14px}
 .badges{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 18px}
 .badge{font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:2px;background:var(--soft);color:var(--navy);letter-spacing:.03em}
@@ -111,7 +111,7 @@ table.facts tr:last-child th,table.facts tr:last-child td{border-bottom:0}
 .article-body .faq-icon{color:var(--brass);font-style:normal;font-weight:700;transition:transform .2s}
 .article-body details[open] .faq-icon{transform:rotate(45deg)}
 .article-body .tldr{background:#fff;border:1px solid var(--brass);border-left:5px solid var(--brass);padding:22px 26px;margin:28px 0}
-.article-body .tldr .tag{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#8a6f35;font-weight:700;margin-bottom:10px}
+.article-body .tldr .tag{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#7a5f28;font-weight:700;margin-bottom:10px}
 .article-body .tldr h2{font-size:1.2rem;margin:0 0 10px}
 .article-body .tldr p{margin:0}
 .article-body .qa-box{background:var(--soft);border-left:3px solid var(--navy);padding:16px 20px;margin:20px 0}
@@ -174,7 +174,7 @@ footer .fl{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:14px}
 .icards .ph{background:linear-gradient(135deg,var(--navy),var(--navy2));display:flex;align-items:flex-end;padding:14px 16px;box-sizing:border-box}
 .icards .ph span{color:var(--brass2);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;border-top:2px solid var(--brass);padding-top:8px}
 .icards .tx{padding:14px 16px 16px}
-.icards .k{display:block;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:#8a6f35;font-weight:700;margin-bottom:6px}
+.icards .k{display:block;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:#7a5f28;font-weight:700;margin-bottom:6px}
 .icards strong{display:block;font-weight:600;line-height:1.35;color:var(--navy)}
 .icards a:hover strong{text-decoration:underline}
 .icards .d{display:block;font-size:.84rem;color:var(--muted);margin-top:6px}

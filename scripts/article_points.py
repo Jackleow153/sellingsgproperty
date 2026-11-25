@@ -117,7 +117,7 @@ GENERIC_QUESTION_ZH = "如果这就是你心里的那套房子，你还把什么
 _SCHEMA = {
     "type": "object",
     "additionalProperties": False,
-    "required": ["keypoints", "zh_keypoints", "question", "zh_question", "zh_title"],
+    "required": ["keypoints", "zh_keypoints", "question", "zh_question", "zh_title", "upgrader", "zh_upgrader"],
     "properties": {
         "keypoints": {
             "type": "array",
@@ -134,6 +134,8 @@ _SCHEMA = {
         "question": {"type": "string"},
         "zh_question": {"type": "string"},
         "zh_title": {"type": "string"},
+        "upgrader": {"type": "string"},
+        "zh_upgrader": {"type": "string"},
     },
 }
 
@@ -154,7 +156,9 @@ Call an HDB executive flat 公寓式组屋. Call a 3Gen flat 三代同堂组屋.
 Write money in Chinese as 55万9000新元, 278万新元, or 每月5300新元.
 Keep analyst names in English: Wong Siew Ying, Christine Sun, Eugene Lim, Nicholas Mak. 徐芳达 is fine for Chee Hong Tat.
 No URLs.
-zh_title is a Simplified Chinese headline for the same story."""
+zh_title is a Simplified Chinese headline for the same story.
+upgrader is one or two sentences (under 60 words) on what this story means for an HDB owner thinking of upgrading to a condo, or for an upgrader choosing between new launch and resale. It is a practical view, not a summary of the article: name the decision or the check it affects. Use no figure that is not in the supplied text. Never say buy now, act now, prices will rise, or guaranteed. If the story has no bearing on upgrading, say plainly that it does not change an upgrade decision and why.
+zh_upgrader is the same view in Simplified Chinese."""
 
 
 def has_cjk(text: str) -> bool:
@@ -544,12 +548,28 @@ def review_model_brief(payload: dict, source_text: str) -> dict | None:
     zh_title = re.sub(r"\s+", " ", str(payload.get("zh_title") or "")).strip()
     if not has_cjk(zh_title) or len(zh_title) > 120 or _URL_RE.search(zh_title):
         zh_title = ""
+    # "What this means if you're upgrading": kept only when it is short, adds no new figure and does not push a sale.
+    upgrader = re.sub(r"\s+", " ", str(payload.get("upgrader") or "")).strip()
+    zh_upgrader = re.sub(r"\s+", " ", str(payload.get("zh_upgrader") or "")).strip()
+    if (
+        not upgrader
+        or not has_cjk(zh_upgrader)
+        or len(upgrader) > 400
+        or len(zh_upgrader) > 300
+        or any(phrase in upgrader.lower() for phrase in _PUSH)
+        or any(phrase in zh_upgrader for phrase in _PUSH)
+        or not _numbers_ok(upgrader, source_text)
+        or not _numbers_ok(zh_upgrader, source_text)
+    ):
+        upgrader = zh_upgrader = ""
     return {
         "keypoints": kept_en,
         "zh_keypoints": kept_zh,
         "question": question,
         "zh_question": zh_question,
         "zh_title": zh_title,
+        "upgrader": upgrader,
+        "zh_upgrader": zh_upgrader,
         "description": _clip(" ".join(kept_en[:2])),
     }
 
@@ -567,6 +587,9 @@ def apply_brief(entry: dict, brief: dict) -> None:
     zh["questions"] = [brief["zh_question"]]
     if brief.get("zh_title"):
         zh["title"] = brief["zh_title"]
+    if brief.get("upgrader") and brief.get("zh_upgrader"):
+        entry["upgrader"] = brief["upgrader"]
+        zh["upgrader"] = brief["zh_upgrader"]
 
 
 def _parse_model_text(text: str) -> dict:

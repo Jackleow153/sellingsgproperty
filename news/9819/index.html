@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K"></script>
+<!-- Google tag (gtag.js): loaded on the first scroll, tap or key press so it does not slow the first paint -->
 <script>
+  (function(){var done=false,evs=['scroll','pointerdown','touchstart','keydown'];function load(){if(done)return;done=true;evs.forEach(function(e){removeEventListener(e,load,{passive:true})});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K';document.head.appendChild(s);}evs.forEach(function(e){addEventListener(e,load,{passive:true})});})();
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -249,6 +249,15 @@
       border-radius: 50%;
       background: var(--red);
     }
+    .upgrader {
+      margin-top: 28px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--red);
+      background: #161616;
+    }
+    .upgrader h2 { margin: 0 0 8px; font-size: 1.15rem; letter-spacing: -0.02em; }
+    .upgrader p { margin: 0; color: #f2f2f2; line-height: 1.6; font-size: 1.02rem; }
+    .upgrader p.upgrader-by { margin-top: 10px; color: #a3a3a3; font-size: 0.85rem; }
     .questions {
       margin-top: 36px;
       padding-top: 8px;
@@ -400,6 +409,11 @@
         <li><span class="en">Bedok South, along Upper East Coast Road, serves nearby homes and schools, including the Bayshore area.</span><span class="zh" lang="zh-Hans">勿洛南站沿东海岸路上段，服务附近的住家和学校，包括白沙一带。</span></li>
         <li><span class="en">From Woodlands North, commuters will later be able to ride towards Bukit Chagar in Johor when the Johor Bahru–Singapore RTS Link opens in February 2027.</span><span class="zh" lang="zh-Hans">新柔地铁（RTS）预计2027年2月通车后，乘客可以从兀兰北站一路前往柔佛的武吉查卡。</span></li>
       </ul>
+    </section>
+    <section class="upgrader" aria-labelledby="upgrader-heading">
+      <h2 id="upgrader-heading"><span class="en">What this means if you&#x27;re upgrading</span><span class="zh" lang="zh-Hans">如果你打算升级换房</span></h2>
+      <p><span class="en">New MRT stations can lift demand for homes nearby. If your flat or your target condo is close to Bedok South, Sungei Bedok or Xilin, factor in the new line, but price your flat on actual deals rather than expectations.</span><span class="zh" lang="zh-Hans">新地铁站可能提高附近房屋的需求。如果你的组屋或目标公寓靠近Bedok South、Sungei Bedok或Xilin，可以把新路线考虑进去，但组屋还是要按实际成交来定价，而不是凭预期。</span></p>
+      <p class="upgrader-by"><span class="en">View by Jack Leow, CEA R074023I, PropNex Realty</span><span class="zh" lang="zh-Hans">观点：Jack Leow，CEA R074023I，PropNex Realty</span></p>
     </section>
     <section class="questions" aria-labelledby="questions-heading">
       <h2 id="questions-heading"><span class="en">Milo chat for thoughts</span><span class="zh" lang="zh-Hans">Milo chat for thoughts</span></h2>

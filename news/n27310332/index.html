@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K"></script>
+<!-- Google tag (gtag.js): loaded on the first scroll, tap or key press so it does not slow the first paint -->
 <script>
+  (function(){var done=false,evs=['scroll','pointerdown','touchstart','keydown'];function load(){if(done)return;done=true;evs.forEach(function(e){removeEventListener(e,load,{passive:true})});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K';document.head.appendChild(s);}evs.forEach(function(e){addEventListener(e,load,{passive:true})});})();
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -249,6 +249,15 @@
       border-radius: 50%;
       background: var(--red);
     }
+    .upgrader {
+      margin-top: 28px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--red);
+      background: #161616;
+    }
+    .upgrader h2 { margin: 0 0 8px; font-size: 1.15rem; letter-spacing: -0.02em; }
+    .upgrader p { margin: 0; color: #f2f2f2; line-height: 1.6; font-size: 1.02rem; }
+    .upgrader p.upgrader-by { margin-top: 10px; color: #a3a3a3; font-size: 0.85rem; }
     .questions {
       margin-top: 36px;
       padding-top: 8px;
@@ -401,6 +410,11 @@
         <li><span class="en">The southern edge faces the expressway. The review says outward-facing and lower-floor units on that side are the ones exposed to road noise and dust, and that Tengah is still a town under construction.</span><span class="zh" lang="zh-Hans">南面临高速公路。评述说朝外和低层、靠近路缘的单位更容易有车声和灰尘，而且登加仍是建设中的市镇。</span></li>
         <li><span class="en">The review says Tengah has no resale transactions of its own. It uses nearby Bukit Batok and Jurong West resales as the comparison: 4-room flats about five to seven years old at $620,000 to $730,000, and 5-room flats from $780,000 to $900,000 and above.</span><span class="zh" lang="zh-Hans">评述说登加本身还没有转售成交。它用附近武吉巴督和裕廊西的转售做比较：约五到七年的四房为62万至73万新元，五房从78万新元到90万新元以上。</span></li>
       </ul>
+    </section>
+    <section class="upgrader" aria-labelledby="upgrader-heading">
+      <h2 id="upgrader-heading"><span class="en">What this means if you&#x27;re upgrading</span><span class="zh" lang="zh-Hans">如果你打算升级换房</span></h2>
+      <p><span class="en">Rare 5-room and 3Gen BTO flats can suit multi-generation families who are thinking of upgrading for space. Compare the total cost and waiting time against a condo of similar size before you decide.</span><span class="zh" lang="zh-Hans">少见的五房式和三代同堂预购组屋，可能适合为了空间而考虑升级的多代同堂家庭。在决定之前，把总成本和等候时间与面积相近的公寓比较。</span></p>
+      <p class="upgrader-by"><span class="en">View by Jack Leow, CEA R074023I, PropNex Realty</span><span class="zh" lang="zh-Hans">观点：Jack Leow，CEA R074023I，PropNex Realty</span></p>
     </section>
     <section class="questions" aria-labelledby="questions-heading">
       <h2 id="questions-heading"><span class="en">Milo chat for thoughts</span><span class="zh" lang="zh-Hans">Milo chat for thoughts</span></h2>

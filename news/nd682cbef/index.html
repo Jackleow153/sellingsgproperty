@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K"></script>
+<!-- Google tag (gtag.js): loaded on the first scroll, tap or key press so it does not slow the first paint -->
 <script>
+  (function(){var done=false,evs=['scroll','pointerdown','touchstart','keydown'];function load(){if(done)return;done=true;evs.forEach(function(e){removeEventListener(e,load,{passive:true})});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K';document.head.appendChild(s);}evs.forEach(function(e){addEventListener(e,load,{passive:true})});})();
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -249,6 +249,15 @@
       border-radius: 50%;
       background: var(--red);
     }
+    .upgrader {
+      margin-top: 28px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--red);
+      background: #161616;
+    }
+    .upgrader h2 { margin: 0 0 8px; font-size: 1.15rem; letter-spacing: -0.02em; }
+    .upgrader p { margin: 0; color: #f2f2f2; line-height: 1.6; font-size: 1.02rem; }
+    .upgrader p.upgrader-by { margin-top: 10px; color: #a3a3a3; font-size: 0.85rem; }
     .questions {
       margin-top: 36px;
       padding-top: 8px;
@@ -398,6 +407,11 @@
         <li><span class="en">Of the recent executive sales at or above $1.2 million in Tampines, four were between $1.2 million and $1.21 million. This sale and the June sale are the ones above that band.</span><span class="zh" lang="zh-Hans">淡滨尼最近几宗至少120万新元的行政公寓里，有四宗在120万至121万新元之间。高出这个区间的，是这一宗和6月那一宗。</span></li>
         <li><span class="en">At 1,528 square feet it was the smallest of the seven high sales being compared, and the second-highest price.</span><span class="zh" lang="zh-Hans">以1528平方英尺计算，它是被比较的七宗高价交易里面积最小的，价格却是第二高。</span></li>
       </ul>
+    </section>
+    <section class="upgrader" aria-labelledby="upgrader-heading">
+      <h2 id="upgrader-heading"><span class="en">What this means if you&#x27;re upgrading</span><span class="zh" lang="zh-Hans">如果你打算升级换房</span></h2>
+      <p><span class="en">Executive flats in mature towns can fetch high prices even with about 61 years left. If you own one, check how the remaining lease affects your buyers&#x27; loans and CPF use before you count on a record price.</span><span class="zh" lang="zh-Hans">成熟市镇的公寓式组屋，即使只剩约61年地契，也能卖出高价。如果你拥有一间，在指望纪录价之前，先查剩余地契会如何影响买家的贷款和公积金使用。</span></p>
+      <p class="upgrader-by"><span class="en">View by Jack Leow, CEA R074023I, PropNex Realty</span><span class="zh" lang="zh-Hans">观点：Jack Leow，CEA R074023I，PropNex Realty</span></p>
     </section>
     <section class="questions" aria-labelledby="questions-heading">
       <h2 id="questions-heading"><span class="en">Milo chat for thoughts</span><span class="zh" lang="zh-Hans">Milo chat for thoughts</span></h2>

@@ -36,6 +36,10 @@ Work as a senior SEO / AIO / GEO / UX / UI specialist who understands how people
 - Shared styles for static pages: `assets/site.css` (brand: porcelain `#F6F4EF`, navy `#0C1B2A`, brass `#B89B5E`; Marcellus headings, Hanken Grotesk text).
 - Redirects: `_redirects`. There is **no catch-all**: unknown URLs return `/404.html` with a real 404 (no soft 404s). Every public URL must be a real file; add 301s for any URL you retire.
 - `/assets/*` is cached for a year: reference changed assets with a new `?v=` or a new file name.
+- Internal files are never public: `_redirects` answers `/CLAUDE.md`, `/README.md`, `/scripts/*`, `/data/*`, `/news.json`, `/news/copy.json`, config files and `/.github/*` with a forced 404 (publish dir is `.`). Add any new internal file or folder there.
+- Google Analytics (G-WFWKVD161K) loads `gtag.js` only on the first scroll, tap or key press (speed: it was 179 KB on every first load). Never put back `<script async src=".../gtag/js...">` in `<head>`; the snippet lives in `scripts/build-pages.cjs`, `scripts/refresh-news.py`, `index.html` and the few hand-built pages.
+- Netlify credits: `netlify.toml` has an `ignore` rule that skips the deploy when a push only changes internal files. News refreshes once a day (09:17 SGT). Batch other changes into one push.
+- News pages carry a short "What this means if you're upgrading" view (`upgrader` and `zh.upgrader` in `news/copy.json`, written by the same model call for new stories). Keep it to one or two sentences, with no figure that is not in the story and no push to buy.
 - IndexNow (Bing, Copilot, ChatGPT search): after Netlify has deployed new or changed pages, run `node scripts/indexnow.cjs <full URLs>`. The key file is `/706cab0374fd4c34baad5abd8e5264d2.txt`; never delete it.
 
 ## Project data rules

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K"></script>
+<!-- Google tag (gtag.js): loaded on the first scroll, tap or key press so it does not slow the first paint -->
 <script>
+  (function(){var done=false,evs=['scroll','pointerdown','touchstart','keydown'];function load(){if(done)return;done=true;evs.forEach(function(e){removeEventListener(e,load,{passive:true})});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K';document.head.appendChild(s);}evs.forEach(function(e){addEventListener(e,load,{passive:true})});})();
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -249,6 +249,15 @@
       border-radius: 50%;
       background: var(--red);
     }
+    .upgrader {
+      margin-top: 28px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--red);
+      background: #161616;
+    }
+    .upgrader h2 { margin: 0 0 8px; font-size: 1.15rem; letter-spacing: -0.02em; }
+    .upgrader p { margin: 0; color: #f2f2f2; line-height: 1.6; font-size: 1.02rem; }
+    .upgrader p.upgrader-by { margin-top: 10px; color: #a3a3a3; font-size: 0.85rem; }
     .questions {
       margin-top: 36px;
       padding-top: 8px;
@@ -396,6 +405,11 @@
         <li><span class="en">Facilities named are playgrounds, fitness stations, a precinct pavilion, and a preschool on the ground floor of the multi-storey car park.</span><span class="zh" lang="zh-Hans">点名的设施有游乐场、健身站、邻里亭，以及多层停车场地面的学前中心。</span></li>
         <li><span class="en">Another Home &amp; Decor page on this launch lists the same 438 units, the same 167 and 271 split, the same $253,000 to $726,000 price span, the same two roads, and Mattar MRT.</span><span class="zh" lang="zh-Hans">Home &amp; Decor 关于这一轮的另一页列出同样的438个单位、同样的167和271划分、同样的25万3000新元至72万6000新元价格范围、同样的两条路，以及 Mattar 地铁站。</span></li>
       </ul>
+    </section>
+    <section class="upgrader" aria-labelledby="upgrader-heading">
+      <h2 id="upgrader-heading"><span class="en">What this means if you&#x27;re upgrading</span><span class="zh" lang="zh-Hans">如果你打算升级换房</span></h2>
+      <p><span class="en">Plus flats come with a longer occupation period and a subsidy clawback. If you are an upgrader comparing a resale flat, a Plus BTO and a condo, count those rules as a real cost, not just the price.</span><span class="zh" lang="zh-Hans">Plus组屋有较长的最低居住年限，并需要回缴部分津贴。如果你在转售组屋、Plus预购组屋和公寓之间比较，要把这些规定当作真实成本，而不只是看价格。</span></p>
+      <p class="upgrader-by"><span class="en">View by Jack Leow, CEA R074023I, PropNex Realty</span><span class="zh" lang="zh-Hans">观点：Jack Leow，CEA R074023I，PropNex Realty</span></p>
     </section>
     <section class="questions" aria-labelledby="questions-heading">
       <h2 id="questions-heading"><span class="en">Milo chat for thoughts</span><span class="zh" lang="zh-Hans">Milo chat for thoughts</span></h2>

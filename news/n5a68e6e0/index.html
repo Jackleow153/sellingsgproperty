@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K"></script>
+<!-- Google tag (gtag.js): loaded on the first scroll, tap or key press so it does not slow the first paint -->
 <script>
+  (function(){var done=false,evs=['scroll','pointerdown','touchstart','keydown'];function load(){if(done)return;done=true;evs.forEach(function(e){removeEventListener(e,load,{passive:true})});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K';document.head.appendChild(s);}evs.forEach(function(e){addEventListener(e,load,{passive:true})});})();
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -249,6 +249,15 @@
       border-radius: 50%;
       background: var(--red);
     }
+    .upgrader {
+      margin-top: 28px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--red);
+      background: #161616;
+    }
+    .upgrader h2 { margin: 0 0 8px; font-size: 1.15rem; letter-spacing: -0.02em; }
+    .upgrader p { margin: 0; color: #f2f2f2; line-height: 1.6; font-size: 1.02rem; }
+    .upgrader p.upgrader-by { margin-top: 10px; color: #a3a3a3; font-size: 0.85rem; }
     .questions {
       margin-top: 36px;
       padding-top: 8px;
@@ -401,6 +410,11 @@
         <li><span class="en">District 23, covering Bukit Batok, Choa Chu Kang and Hillview, prices the same 1,100 square foot 3-bedroom at $1,580,000, from $1,496 per square foot across 823 resale deals. The gap above the same 4-room median is $1,045,500 on the same basis. The new-launch median there is $2,139 per square foot.</span><span class="zh" lang="zh-Hans">第23区，包括武吉巴督、蔡厝港和Hillview，同样1100平方英尺的三房式标为158万新元，依据是823宗转售、每平方英尺1496新元。和同一个四房中位数的差距是104万5500新元，算法相同。那里的新盘中位数是每平方英尺2139新元。</span></li>
         <li><span class="en">Singapore recorded 1,999 resale flats at $1 million or more in the same 12 months. These medians come from HDB resale registrations and HDB rental approvals. A median is not the price of one flat.</span><span class="zh" lang="zh-Hans">同一段12个月里，全岛有1999套转售组屋成交价在100万新元或以上。这些中位数来自建屋局转售登记和租金批准。中位数不是某一套房子的价钱。</span></li>
       </ul>
+    </section>
+    <section class="upgrader" aria-labelledby="upgrader-heading">
+      <h2 id="upgrader-heading"><span class="en">What this means if you&#x27;re upgrading</span><span class="zh" lang="zh-Hans">如果你打算升级换房</span></h2>
+      <p><span class="en">If you own a Jurong West four-room flat, the town median is a starting point, not your price. Your block, storey and lease decide where you sit in the range, and that sets the cash you will have for a condo.</span><span class="zh" lang="zh-Hans">如果你拥有裕廊西的四房式组屋，市镇中位数只是起点，不是你的售价。你的组屋座、楼层和地契决定你在价格范围中的位置，也决定你买公寓能有多少现金。</span></p>
+      <p class="upgrader-by"><span class="en">View by Jack Leow, CEA R074023I, PropNex Realty</span><span class="zh" lang="zh-Hans">观点：Jack Leow，CEA R074023I，PropNex Realty</span></p>
     </section>
     <section class="questions" aria-labelledby="questions-heading">
       <h2 id="questions-heading"><span class="en">Milo chat for thoughts</span><span class="zh" lang="zh-Hans">Milo chat for thoughts</span></h2>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K"></script>
+<!-- Google tag (gtag.js): loaded on the first scroll, tap or key press so it does not slow the first paint -->
 <script>
+  (function(){var done=false,evs=['scroll','pointerdown','touchstart','keydown'];function load(){if(done)return;done=true;evs.forEach(function(e){removeEventListener(e,load,{passive:true})});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-WFWKVD161K';document.head.appendChild(s);}evs.forEach(function(e){addEventListener(e,load,{passive:true})});})();
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -249,6 +249,15 @@
       border-radius: 50%;
       background: var(--red);
     }
+    .upgrader {
+      margin-top: 28px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--red);
+      background: #161616;
+    }
+    .upgrader h2 { margin: 0 0 8px; font-size: 1.15rem; letter-spacing: -0.02em; }
+    .upgrader p { margin: 0; color: #f2f2f2; line-height: 1.6; font-size: 1.02rem; }
+    .upgrader p.upgrader-by { margin-top: 10px; color: #a3a3a3; font-size: 0.85rem; }
     .questions {
       margin-top: 36px;
       padding-top: 8px;
@@ -400,6 +409,11 @@
         <li><span class="en">Waiting times in the note are 3 years and 8 months at Bayshore Sails, 3 years and 2 months at Bayshore Oasis, 3 years and 3 months at Merpati Meadow, 2 years and 10 months at Sembawang Anchor, 3 years and 2 months at Plantation Dew, 3 years and 9 months at Toa Payoh Hillside, and from 3 years and 3 months to 3 years and 5 months at Chencharu Acres.</span><span class="zh" lang="zh-Hans">说明里的等候时间：Bayshore Sails 3年8个月，Bayshore Oasis 3年2个月，Merpati Meadow 3年3个月，Sembawang Anchor 2年10个月，Plantation Dew 3年2个月，Toa Payoh Hillside 3年9个月，Chencharu Acres 从3年3个月到3年5个月。</span></li>
         <li><span class="en">The note says HDB has launched 23,928 new flats this year, made up of 19,608 BTO flats and 4,320 Sale of Balance Flats from February.</span><span class="zh" lang="zh-Hans">说明称建屋局今年已推出23928个新单位，其中19608套预购组屋，以及2月起的4320套剩余组屋。</span></li>
       </ul>
+    </section>
+    <section class="upgrader" aria-labelledby="upgrader-heading">
+      <h2 id="upgrader-heading"><span class="en">What this means if you&#x27;re upgrading</span><span class="zh" lang="zh-Hans">如果你打算升级换房</span></h2>
+      <p><span class="en">Short BTO waiting times make new flats a closer substitute for resale. If you are selling to upgrade near Sembawang or Tengah, expect buyers to weigh a short-wait BTO against your flat.</span><span class="zh" lang="zh-Hans">预购组屋的等候时间短，使新组屋更接近转售组屋的替代品。如果你在三巴旺或登加附近卖组屋升级，要预计买家会拿短等候的预购组屋和你的组屋比较。</span></p>
+      <p class="upgrader-by"><span class="en">View by Jack Leow, CEA R074023I, PropNex Realty</span><span class="zh" lang="zh-Hans">观点：Jack Leow，CEA R074023I，PropNex Realty</span></p>
     </section>
     <section class="questions" aria-labelledby="questions-heading">
       <h2 id="questions-heading"><span class="en">Milo chat for thoughts</span><span class="zh" lang="zh-Hans">Milo chat for thoughts</span></h2>
