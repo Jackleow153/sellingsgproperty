@@ -8,6 +8,8 @@
 > 5. **Growth:** base = the average (not the median) of the competitors' URA 3-bed yearly price change over 4 years, counting only records with at least 10 resales in the past 12 months. If fewer than 2 competitors qualify, add the nearest suitable same-tenure condos within 2 km (then further); if none, use URA's non-landed index (4.7% a year, 2016–2026) and say so. Bear = half (1.5x the fall if the base is negative); bull adds a premium only for a Confirmed catalyst.
 > 6. **Verdict:** Buy if the expected price is at or below buy-at; "Buy only below [walk-away]" if between; "Walk away above [walk-away]" if above; Walk away for a unit type whose resale quantum needs over 1.8x the median household income.
 > 7. **Executive condos:** compare only with ECs (resale ECs and EC launches), same rules and the same 15% new-launch premium. The sale is after the 5-year minimum occupation period (10 years for EC sites whose tender closed on or after 8 May 2026), so no Seller's Stamp Duty. Show launch affordability under the 30% mortgage servicing ratio and the $16,000 income ceiling, and resale affordability under the 55% TDSR.
+> 8. **Condos selling now:** test the developer's current average psf (not an estimate). Buy today; sale at the later of 4 years (Seller's Stamp Duty) or a year after TOP (ECs: 5 years after TOP). Sizes from the developer's unit list. Competitors exclude the project itself.
+> 9. **Selection order:** fill from within 1 km first (similar size and completed 2011+ first, then any completed 2000+), and only then widen to 2 km and 3 km.
 
 
 Mandatory for every condo analysis page (new launch or resale). Read it before writing or updating any analysis.

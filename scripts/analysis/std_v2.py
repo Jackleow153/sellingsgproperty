@@ -59,7 +59,7 @@ def competitors(c):
     me = GEO.get(c['geo_key'])
     for p in RECENT:
         is_ec = 'EC' in p['name'] or 'Executive' in p['type']
-        if p['launchSort'] > 202611 or is_ec != bool(c.get('ec')) or _lh(p['tenure']) != lh or _slug(p['name']) == c['geo_key']: continue
+        if p['launchSort'] > 202611 or is_ec != bool(c.get('ec')) or _lh(p['tenure']) != lh or _slug(p['name']) in (c['geo_key'], *c.get('self_slugs', ())): continue
         g = GEO.get(_slug(p['name']))
         if not (me and g and 'lat' in g): continue
         d = _km(me, g) * 1000
@@ -68,10 +68,11 @@ def competitors(c):
                          launchSort=p['launchSort'], harmonised=p['launchSort'] >= HARMONISED_FROM, integ=p['mall'],
                          size_ok=bool(p['units']) and 0.4 * homes <= p['units'] <= 2.5 * homes, new=True))
     pick = []
-    # Distance is widened before size or age is relaxed: newer (completed 2011+ or a recent launch) and similar size first.
+    # Closest first (Jack, 25 Nov 2026): fill from within 1 km before widening to 2 km, then 3 km. Within a band, similar size and
+    # newer (completed 2011+ or a recent launch) come first, then any condo completed 2000 or later.
     recent = lambda x: x['kind'] != 'Resale' or (x['top'] or 0) >= 2011
-    for test in (lambda x: x['size_ok'] and recent(x), lambda x: recent(x), lambda x: x['size_ok'] and x['new'], lambda x: x['new']):
-        for band in (1000, 2000, 3000):
+    for band in (1000, 2000, 3000):
+        for test in (lambda x: x['size_ok'] and recent(x), lambda x: recent(x), lambda x: x['size_ok'] and x['new'], lambda x: x['new']):
             for x in sorted([y for y in pool if y['dist'] <= band and y not in pick and test(y)], key=lambda y: y['dist']):
                 if len(pick) < 4: pick.append(x)
             if len(pick) >= 3: break
@@ -83,7 +84,7 @@ def competitors(c):
             x['adj_i'] = INTEG if c['integrated'] and not x['integ'] else 0
             x['equiv'] = x['psf'] * (1 + x['adj_h']) * (1 + x['adj_n']) * (1 + x['adj_i'])
         else:
-            x['time'] = IDX[NOW_Q] / IDX[_q(x['launchSort'])] - 1
+            x['time'] = IDX[NOW_Q] / IDX.get(_q(x['launchSort']), IDX[NOW_Q]) - 1
             x['adj_h'] = 0 if x['harmonised'] else HARMONISE
             x['adj_n'] = 0
             x['adj_i'] = INTEG if c['integrated'] and not x['integ'] else 0
@@ -118,6 +119,7 @@ def build(pid, c):
     n = c['years']
     ex = {k: buy * (1 + v) ** n for k, v in g.items()}
     lo, hi = c['expected']; mid = (lo + hi) / 2
+    RNG = fmt_money(lo) if lo == hi else f'{fmt_money(lo)} to {fmt_money(hi)}'
     EXP = c.get('exp_word', 'expected')
     land, build_, fin, fees = c['land'], c['build'], round((c['land'] or 0) * 0.09), 180
     floor = None if land is None else [round((land + build_ + fin + fees) / 0.9 / 10) * 10, round((land + build_ + fin + fees) / 0.85 / 10) * 10]
@@ -145,11 +147,11 @@ def build(pid, c):
     near1 = [x for x in comps if x['dist'] <= 1000]
     comp_names = ', '.join(x['name'] for x in comps)
     if pv == 'Buy':
-        line = f"Buy. The {EXP} {fmt_money(lo)} to {fmt_money(hi)} psf is at or below what the closest competitors support (about {fmt_money(buy)} psf)."
+        line = f"Buy. The {EXP} {RNG} psf is at or below what the closest competitors support (about {fmt_money(buy)} psf)."
     elif pv.startswith('Buy only'):
-        line = f"Buy only below {fmt_money(walk)} psf. The {EXP} {fmt_money(lo)} to {fmt_money(hi)} psf is a little above what the closest competitors support (about {fmt_money(buy)} psf), so aim for the lower end."
+        line = f"Buy only below {fmt_money(walk)} psf. The {EXP} {RNG} psf is a little above what the closest competitors support (about {fmt_money(buy)} psf){', so aim for the lower end' if lo != hi else ', so negotiate or choose a cheaper stack'}."
     else:
-        line = f"Walk away above {fmt_money(walk)} psf. The {EXP} {fmt_money(lo)} to {fmt_money(hi)} psf is {(mid / buy - 1) * 100:.0f}% above what the closest competitors support (about {fmt_money(buy)} psf for a new launch here). Buy only at or below about {fmt_money(buy)} psf."
+        line = f"Walk away above {fmt_money(walk)} psf. The {EXP} {RNG} psf is {(mid / buy - 1) * 100:.0f}% above what the closest competitors support (about {fmt_money(buy)} psf for a new launch here). Buy only at or below about {fmt_money(buy)} psf."
     if walkers: line += f" Skip the {' and '.join(walkers)}: its resale price would outrun local buyers." if len(walkers) == 1 else f" Skip the {' and '.join(walkers)}: their resale prices would outrun local buyers."
     reasons = [
         f"The closest competitors ({comp_names}) work out to about {fmt_money(buy)} psf as a brand-new launch, after adding 5% where they were not built under the harmonised floor-area rules, a 15% new-launch premium{' and 10% for this project being integrated' if c['integrated'] else ''}.",
@@ -162,22 +164,24 @@ def build(pid, c):
     exit_score = (7 if not risky else 5 if len(risky) < len(units) else 4) - (1 if c.get('heavy_supply') else 0)
     score = []
     for nm, s, ev in c['score']:
-        if ev == 'entry': score.append([nm, entry_score, f"{EXP.capitalize()} {fmt_money(lo)} to {fmt_money(hi)} psf against about {fmt_money(buy)} psf from the closest competitors ({f'{(lo / buy - 1) * 100:+.0f}'.replace('-', '−')}% to {f'{(hi / buy - 1) * 100:+.0f}'.replace('-', '−')}%)."])
+        if ev == 'entry':
+            gp = lambda v: f'{(v / buy - 1) * 100:+.0f}'.replace('-', '−') + '%'
+            score.append([nm, entry_score, f"{EXP.capitalize()} {RNG} psf against about {fmt_money(buy)} psf from the closest competitors ({gp(lo) if lo == hi else gp(lo) + ' to ' + gp(hi)})."])
         elif ev == 'exit': score.append([nm, exit_score, ('Exit prices stay within reach of most local upgraders' if not risky else f"The {', '.join(risky)} exit prices outrun most local upgraders") + ('; heavy competing supply at the exit.' if c.get('heavy_supply') else '; little competing private supply nearby.')])
         else: score.append([nm, s, ev])
     S = dict(SRC_BASE); S.update(c['src_extra'])
     S['caveats'] = ['URA private residential transactions (caveats), Nov 2025 to Oct 2026; 4-year change from Nov 2021 to Oct 2022', f"/condo-analysis/{c['file_slug']}/#near"]
     std = {
      'v': 2, 'asOf': AS_OF, 'confidence': c['confidence'],
-     'confNote': f"No developer price list yet. Price range: {c['expected_note']} {c['sizes_note']} The verdict will be re-checked the day prices are released.",
+     'confNote': c.get('conf_note') or f"No developer price list yet. Price range: {c['expected_note']} {c['sizes_note']} The verdict will be re-checked the day prices are released.",
      'strip': [['Verdict', main if len(main) < 34 else main.replace(' psf', ''), ', '.join(f"{t}: {x['v']}" for t, x in units.items() if x['v'] != main) or 'Same for every unit type'],
                ['Buy at or below', f"{fmt_money(buy)} psf", f"{tm} about {fmt_q(round(buy * u['size'], -3))}" + (f". Below the developer's floor of about {fmt_money(floor[0])}, so a launch this low is unlikely" if buy < FLOOR0 else '')],
-               ['Walk away above', f"{fmt_money(walk)} psf", f"{tm} about {fmt_q(round(walk * u['size'], -3))}. {EXP.capitalize()} {fmt_money(lo)} to {fmt_money(hi)}"],
+               ['Walk away above', f"{fmt_money(walk)} psf", f"{tm} about {fmt_q(round(walk * u['size'], -3))}. {EXP.capitalize()} {RNG}"],
                ['Potential gain', pct(u['gm']['base']), f"Base case after costs by {c['buy_year'] + int(n)}, bought at {fmt_money(round(mid))} psf ({yr(u['gm']['base'])}). Bear {pct(u['gm']['bear'])}, bull {pct(u['gm']['bull'])}"]],
      'verdict': {'line': line, 'reasons': reasons,
                  'suits': f"Buyers who can buy at or below about {fmt_money(walk)} psf and plan to live here for 5 years or more. {c['who'].split('.')[0]}.",
                  'skip': ('Buyers who would have to pay above the walk-away price, or who may need to sell before the 5-year minimum occupation period ends.' if c.get('ec') else 'Buyers who would have to pay above the walk-away price, or sell within the 4-year Seller\'s Stamp Duty period.'),
-                 'change': [f"If the {tm} launches at or below about {fmt_money(buy)} psf, it is priced in line with its closest competitors.",
+                 'change': [(f"If the developer prices a {tm} at or below about {fmt_money(buy)} psf, it is in line with its closest competitors." if c.get('selling') else f"If the {tm} launches at or below about {fmt_money(buy)} psf, it is priced in line with its closest competitors."),
                             'If a closer or newer competitor launches or resells at a different price, the buy-at and walk-away prices move with it.',
                             'If official unit sizes are smaller than assumed, quanta fall and more local upgraders can afford the resale price.']},
      'types': [[f"{t} (about {x['size']:,} sq ft)", x['v'], f"{fmt_money(buy)} psf ({fmt_q(round(buy * x['size'], -3))})", f"{fmt_money(walk)} psf ({fmt_q(round(walk * x['size'], -3))})",
@@ -208,8 +212,8 @@ def build(pid, c):
      'plan': c['plan'], 'planLine': c['plan_line'],
      'score': score, 'scoreNote': f"Overall {sum(s[1] for s in score) / len(score):.1f} out of 10. The buy-at and walk-away prices decide the verdict; the scorecard shows how good the place is to live in.",
      'facts': c['facts'], 'pros': c['pros'], 'cons': c['cons'],
-     'compare': [[c['name'] + f" ({EXP})", f"{fmt_money(lo)}–{fmt_money(hi)}", '', '', f"About {pct(u['gm']['base'])} by {c['buy_year'] + int(n)}"]] + c['compare'],
-     'faq': [[q, a if a else f"At the {EXP} {fmt_money(lo)} to {fmt_money(hi)} psf, the base case makes about {pct(u['gm']['base'])} by {c['buy_year'] + int(n)} after stamp duty and selling costs ({yr(u['gm']['base'])}). Bought at about {fmt_money(buy)} psf, in line with its closest competitors, it makes about {pct(u['tab']['buy']['base'])}."] for q, a in c['faq_extra']]
+     'compare': [[c['name'] + f" ({EXP})", RNG.replace(' to ', '–'), '', '', f"About {pct(u['gm']['base'])} by {c['buy_year'] + int(n)}"]] + c['compare'],
+     'faq': [[q, a if a else f"At the {EXP} {RNG} psf, the base case makes about {pct(u['gm']['base'])} by {c['buy_year'] + int(n)} after stamp duty and selling costs ({yr(u['gm']['base'])}). Bought at about {fmt_money(buy)} psf, in line with its closest competitors, it makes about {pct(u['tab']['buy']['base'])}."] for q, a in c['faq_extra']]
             + [[f"What price should I pay for a {tm}?", f"At or below about {fmt_money(buy)} psf, about {fmt_q(round(buy * u['size'], -3))} for {u['size']:,} sq ft, in line with its closest competitors. Walk away above about {fmt_money(walk)} psf ({fmt_q(round(walk * u['size'], -3))}). These are estimates until the developer releases prices."]],
      'chart': {'subject': [[c['buy_year'], round(mid)], [c['buy_year'] + int(n), round(ex['base'])]],
                'buyat': [[c['buy_year'], buy], [c['buy_year'] + int(n), round(ex['base'])]],
