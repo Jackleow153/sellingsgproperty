@@ -99,20 +99,17 @@ def build(pid, c):
     comps = competitors(c)
     buy = round(sum(x['equiv'] for x in comps) / len(comps) / 10) * 10
     walk = round(buy * (1 + WALK) / 10) * 10
-    gsrc = [(x['name'], x['g']) for x in comps if x['g'] is not None]
+    # Growth: suitable record = 3-bed 4-year change (URA) with at least 10 resales in 12 months. Competitors first;
+    # if fewer than 2 qualify, add the nearest suitable same-tenure condos within 2 km; then any distance; then the index.
+    ok = lambda r: r[10] is not None and (r[6] or 0) >= 10 and not r[12] and _lh(r[2]) == c.get('leasehold', True)
+    gsrc = [(x['name'], x['g3']) for x in comps if x.get('g3') is not None and (x['deals'] or 0) >= 10]
     growth_only = []
-    if not gsrc:   # no competitor has a 4-year record: nearest same-tenure resale condos (completed 2000+) that do, for growth only
-        for r in sorted(NEAR[c['nearby_key']]['r3']['rows'], key=lambda r: r[1]):
-            g4 = r[10] if r[10] is not None else r[11]
-            if g4 is None or r[12] or _lh(r[2]) != c.get('leasehold', True) or (r[6] or 0) < 3: continue
-            gsrc.append((r[0], g4)); growth_only.append(r[0])
-            if len(gsrc) >= 3: break
-    if c.get('growth_radius'):   # suitable growth record = 3-bed 4-year change and at least 10 resales in 12 months; widen within the radius
-        gsrc = [(x['name'], x['g3']) for x in comps if x.get('g3') is not None and (x['deals'] or 0) >= 10]
-        for r in sorted(NEAR[c['nearby_key']]['r3']['rows'], key=lambda r: r[1]):
-            if len(gsrc) >= 3 or r[1] > c['growth_radius']: break
-            if r[10] is None or (r[6] or 0) < 10 or r[12] or _lh(r[2]) != c.get('leasehold', True) or any(n == r[0] for n, _ in gsrc): continue
-            gsrc.append((r[0], r[10])); growth_only.append(r[0])
+    rows = sorted(NEAR[c['nearby_key']]['r3']['rows'], key=lambda r: r[1])
+    for limit in (2000, 99999):
+        for r in rows:
+            if len(gsrc) >= 2 or r[1] > limit: break
+            if ok(r) and not any(n == r[0] for n, _ in gsrc): gsrc.append((r[0], r[10])); growth_only.append(f"{r[0]} ({r[1] / 1000:.1f} km)")
+        if gsrc: break
     if not gsrc: gsrc = [('URA non-landed index, Q3 2016 to Q3 2026', 4.7)]; growth_only.append('index')
     gs = [g for _, g in gsrc]
     base = round(sum(gs) / len(gs) / 100, 4)
@@ -190,7 +187,7 @@ def build(pid, c):
      'gain': {'timeline': c['timeline'],
               'costs': "Potential gain is after Buyer's Stamp Duty at IRAS rates, about $6,000 legal fees and a 2% agent fee plus 9% GST when you sell. Loan interest, property tax, maintenance and rent are not included.",
               'scen': [['Bear', f"{g['bear']*100:.1f}% a year", ('Half the base case' if base > 0 else 'One and a half times the base-case fall') + ': competing supply at the exit, or a softer market.'],
-                       ['Base', f"{g['base']*100:.1f}% a year", (f"Only condos with a 3-bed price record over 4 years and at least 10 resales in the past year, within {c['growth_radius'] / 1000:.0f} km (URA caveats): " if c.get('growth_radius') else "The competitors are too new for a 4-year record, so we use the nearest same-tenure condos that have one (URA caveats): " if growth_only else "The average of the competitors' yearly price change over the past 4 years (URA caveats): ") + ', '.join(f"{n} {v:.1f}%" for n, v in gsrc) + '. That period included the 2022–2023 rise.'],
+                       ['Base', f"{g['base']*100:.1f}% a year", ("No condo nearby has a suitable record (a 3-bed price change over 4 years with at least 10 resales in the past year), so we use URA's islandwide non-landed index: 4.7% a year from Q3 2016 to Q3 2026." if growth_only == ['index'] else "The average yearly 3-bed price change over the past 4 years (URA caveats) of the competitors with a suitable record (at least 10 resales in the past year)" + (f", widened to the nearest suitable condos: {', '.join(growth_only)}" if growth_only and growth_only != ['index'] else '') + ': ' + ', '.join(f"{n} {v:.1f}%" for n, v in gsrc) + '. That period included the 2022–2023 rise.')],
                        ['Bull', f"{g['bull']*100:.1f}% a year", c['bull_why']]],
               'rows': [[t, lab, fmt_money(round(e)), pct(x['tab'][k]['bear']), pct(x['tab'][k]['base']), pct(x['tab'][k]['bull']), yr(x['tab'][k]['base'])]
                        for t, x in units.items() for k, lab, e in (('buy', 'Buy-at', buy), ('exp', EXP.capitalize(), mid), ('walk', 'Walk-away', walk))],

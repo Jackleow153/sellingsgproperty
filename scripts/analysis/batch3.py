@@ -21,7 +21,7 @@ P['telok-blangah-road-site'] = dict(
  expected=(2700, 2800), expected_note='CBRE expects an average of $2,700 to $2,800 psf; PropNex expects above $2,800 (EdgeProp and CBRE, Nov 2025).',
  sizes=SIZES_RCR, sizes_note=SIZES_NOTE, bull_add=0.0,
  bull_why='No Confirmed catalyst near the site within the holding period: the Greater Southern Waterfront is a long-term plan, so the bull case equals the base case.',
- years=5, buy_year=2027, timeline=TL, towns=['Bukit Merah', 'Queenstown'], growth_radius=2000,
+ years=5, buy_year=2027, timeline=TL, towns=['Bukit Merah', 'Queenstown'],
  who='Most buyers at resale will be HDB upgraders from Bukit Merah and Queenstown, private-to-private movers in the Keppel Bay and HarbourFront area, and buyers who want the waterfront close to the city.',
  district=[['10-year price trend', 'URA non-landed index about 4.7% a year islandwide. The Keppel Bay condos nearby moved −4.9% to +0.6% a year over the past 4 years (Corals, Reflections; URA caveats), well behind the market.', 'C', 'caveats'],
            ['New vs older resale gap', 'Expected $2,700 to $2,800 psf against The Reef At King\'s Dock (completed 2024) at $2,462 and Reflections At Keppel Bay (2011) at $1,722 before the 5% area adjustment.', 'C', 'caveats'],
