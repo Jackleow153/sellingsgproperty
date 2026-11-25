@@ -53,7 +53,7 @@ def competitors(c):
         if r[12] or not psf or (n or 0) < 3 or _lh(ten) != lh: continue
         g = r[10] if r[10] is not None else r[11]
         if g is None: g = FALLBACK_4Y.get(name)
-        pool.append(dict(name=name, dist=dist, units=h, tenure=ten, top=top, psf=psf, deals=n, g=g, kind='Resale',
+        pool.append(dict(name=name, dist=dist, units=h, tenure=ten, top=top, psf=psf, deals=n, g=g, g3=r[10], kind='Resale',
                          harmonised=False, integ=name in INTEGRATED, size_ok=bool(h) and 0.4 * homes <= h <= 2.5 * homes,
                          new=bool(top) and top >= 2000))
     me = GEO.get(c['geo_key'])
@@ -99,9 +99,24 @@ def build(pid, c):
     comps = competitors(c)
     buy = round(sum(x['equiv'] for x in comps) / len(comps) / 10) * 10
     walk = round(buy * (1 + WALK) / 10) * 10
-    gs = [x['g'] for x in comps if x['g'] is not None]
-    base = round(sum(gs) / len(gs) / 100, 4) if gs else 0.03
-    g = {'bear': base / 2, 'base': base, 'bull': base + c.get('bull_add', 0)}
+    gsrc = [(x['name'], x['g']) for x in comps if x['g'] is not None]
+    growth_only = []
+    if not gsrc:   # no competitor has a 4-year record: nearest same-tenure resale condos (completed 2000+) that do, for growth only
+        for r in sorted(NEAR[c['nearby_key']]['r3']['rows'], key=lambda r: r[1]):
+            g4 = r[10] if r[10] is not None else r[11]
+            if g4 is None or r[12] or _lh(r[2]) != c.get('leasehold', True) or (r[6] or 0) < 3: continue
+            gsrc.append((r[0], g4)); growth_only.append(r[0])
+            if len(gsrc) >= 3: break
+    if c.get('growth_radius'):   # suitable growth record = 3-bed 4-year change and at least 10 resales in 12 months; widen within the radius
+        gsrc = [(x['name'], x['g3']) for x in comps if x.get('g3') is not None and (x['deals'] or 0) >= 10]
+        for r in sorted(NEAR[c['nearby_key']]['r3']['rows'], key=lambda r: r[1]):
+            if len(gsrc) >= 3 or r[1] > c['growth_radius']: break
+            if r[10] is None or (r[6] or 0) < 10 or r[12] or _lh(r[2]) != c.get('leasehold', True) or any(n == r[0] for n, _ in gsrc): continue
+            gsrc.append((r[0], r[10])); growth_only.append(r[0])
+    if not gsrc: gsrc = [('URA non-landed index, Q3 2016 to Q3 2026', 4.7)]; growth_only.append('index')
+    gs = [g for _, g in gsrc]
+    base = round(sum(gs) / len(gs) / 100, 4)
+    g = {'bear': base / 2 if base > 0 else base * 1.5, 'base': base, 'bull': base + c.get('bull_add', 0)}
     n = c['years']
     ex = {k: buy * (1 + v) ** n for k, v in g.items()}
     lo, hi = c['expected']; mid = (lo + hi) / 2
@@ -124,12 +139,14 @@ def build(pid, c):
     caps = [HDB_T[t][f][0] - OUTSTANDING for t in c['towns'] for f in HDB_T[t]]
     risky = [t for t, x in units.items() if x['up'] > max(caps) or x['inc'] > 1.5 * MEDIAN_INCOME]
     walkers = [t for t, x in units.items() if x['v'] == 'Walk away']
-    main = u['v']
+    pv = 'Buy' if mid <= buy else f'Buy only below {fmt_money(walk)} psf' if mid <= walk else f'Walk away above {fmt_money(walk)} psf'
+    keep = [t for t in units if t not in walkers]
+    main = u['v'] if u['v'] != 'Walk away' else (f"{pv.replace(' psf', '')}: {' and '.join(keep)} only" if keep else 'Walk away')
     near1 = [x for x in comps if x['dist'] <= 1000]
     comp_names = ', '.join(x['name'] for x in comps)
-    if main == 'Buy':
+    if pv == 'Buy':
         line = f"Buy. The {EXP} {fmt_money(lo)} to {fmt_money(hi)} psf is at or below what the closest competitors support (about {fmt_money(buy)} psf)."
-    elif main.startswith('Buy only'):
+    elif pv.startswith('Buy only'):
         line = f"Buy only below {fmt_money(walk)} psf. The {EXP} {fmt_money(lo)} to {fmt_money(hi)} psf is a little above what the closest competitors support (about {fmt_money(buy)} psf), so aim for the lower end."
     else:
         line = f"Walk away above {fmt_money(walk)} psf. The {EXP} {fmt_money(lo)} to {fmt_money(hi)} psf is {(mid / buy - 1) * 100:.0f}% above what the closest competitors support (about {fmt_money(buy)} psf for a new launch here). Buy only at or below about {fmt_money(buy)} psf."
@@ -142,7 +159,7 @@ def build(pid, c):
     exit_score = (7 if not risky else 5 if len(risky) < len(units) else 4) - (1 if c.get('heavy_supply') else 0)
     score = []
     for nm, s, ev in c['score']:
-        if ev == 'entry': score.append([nm, entry_score, f"{EXP.capitalize()} {fmt_money(lo)} to {fmt_money(hi)} psf against about {fmt_money(buy)} psf from the closest competitors ({(lo / buy - 1) * 100:+.0f}% to {(hi / buy - 1) * 100:+.0f}%)."])
+        if ev == 'entry': score.append([nm, entry_score, f"{EXP.capitalize()} {fmt_money(lo)} to {fmt_money(hi)} psf against about {fmt_money(buy)} psf from the closest competitors ({f'{(lo / buy - 1) * 100:+.0f}'.replace('-', '−')}% to {f'{(hi / buy - 1) * 100:+.0f}'.replace('-', '−')}%)."])
         elif ev == 'exit': score.append([nm, exit_score, ('Exit prices stay within reach of most local upgraders' if not risky else f"The {', '.join(risky)} exit prices outrun most local upgraders") + ('; heavy competing supply at the exit.' if c.get('heavy_supply') else '; little competing private supply nearby.')])
         else: score.append([nm, s, ev])
     S = dict(SRC_BASE); S.update(c['src_extra'])
@@ -172,8 +189,8 @@ def build(pid, c):
      'priceDecide': f"Buy at or below = the average of the competitors' new-launch equivalents = about {fmt_money(buy)} psf. Walk away above = 5% more = about {fmt_money(walk)} psf. The developer's floor is about {fmt_money(floor[0])} to {fmt_money(floor[1])} psf" + (', so expect the launch above our buy-at price.' if buy < floor[0] else '.'),
      'gain': {'timeline': c['timeline'],
               'costs': "Potential gain is after Buyer's Stamp Duty at IRAS rates, about $6,000 legal fees and a 2% agent fee plus 9% GST when you sell. Loan interest, property tax, maintenance and rent are not included.",
-              'scen': [['Bear', f"{g['bear']*100:.1f}% a year", 'Half the base case: competing supply at the exit, or a softer market.'],
-                       ['Base', f"{g['base']*100:.1f}% a year", "The average of the competitors' yearly price change over the past 4 years (URA caveats): " + ', '.join(f"{x['name']} {x['g']:.1f}%" for x in comps if x['g'] is not None) + '. That period included the 2022–2023 rise.'],
+              'scen': [['Bear', f"{g['bear']*100:.1f}% a year", ('Half the base case' if base > 0 else 'One and a half times the base-case fall') + ': competing supply at the exit, or a softer market.'],
+                       ['Base', f"{g['base']*100:.1f}% a year", (f"Only condos with a 3-bed price record over 4 years and at least 10 resales in the past year, within {c['growth_radius'] / 1000:.0f} km (URA caveats): " if c.get('growth_radius') else "The competitors are too new for a 4-year record, so we use the nearest same-tenure condos that have one (URA caveats): " if growth_only else "The average of the competitors' yearly price change over the past 4 years (URA caveats): ") + ', '.join(f"{n} {v:.1f}%" for n, v in gsrc) + '. That period included the 2022–2023 rise.'],
                        ['Bull', f"{g['bull']*100:.1f}% a year", c['bull_why']]],
               'rows': [[t, lab, fmt_money(round(e)), pct(x['tab'][k]['bear']), pct(x['tab'][k]['base']), pct(x['tab'][k]['bull']), yr(x['tab'][k]['base'])]
                        for t, x in units.items() for k, lab, e in (('buy', 'Buy-at', buy), ('exp', EXP.capitalize(), mid), ('walk', 'Walk-away', walk))],
