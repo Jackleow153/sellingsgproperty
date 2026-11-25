@@ -519,12 +519,15 @@ function refreshHomepage(html) {
   // eslint-disable-next-line no-new-func
   const run = new Function('document', appJs.slice(fnStart, fnEnd) + '\nreturn { projects, renderProjects, compareNewest };');
   const env = run({ getElementById: () => grid });
-  env.renderProjects(env.projects.slice().sort(env.compareNewest));
+  // Speed: pre-render only the 12 newest cards (what the page shows first). Every project stays linked from
+  // /new-launch-condos/ (linked right under the grid) and from the ItemList JSON-LD in index.html.
+  const FIRST_CARDS = 12;
+  env.renderProjects(env.projects.slice().sort(env.compareNewest).slice(0, FIRST_CARDS));
   const cStart = html.search(/<!-- \d+ project cards statically pre-rendered/);
   const cEnd = html.indexOf('-->', cStart) + 3;
   const gridEnd = html.indexOf('\n            </div>\n            \n            <div class="text-center mt-10">', cEnd);
   if (cStart < 0 || gridEnd < 0) throw new Error('static card markers missing in index.html');
-  const comment = html.slice(cStart, cEnd).replace(/<!-- \d+ project cards/, `<!-- ${env.projects.length} project cards`);
+  const comment = html.slice(cStart, cEnd).replace(/<!-- \d+ project cards/, `<!-- ${Math.min(FIRST_CARDS, env.projects.length)} project cards`);
   html = html.slice(0, cStart) + comment + '\n' + grid.innerHTML + html.slice(gridEnd);
 
   // 3) article count + hero 'tracker' panel (dated, links to the newest pages)

@@ -287,8 +287,18 @@
 
         // Filter Functions
         let currentFilter = 'all'
-        
-        function filterProjects() {
+        // Speed: the grid shows the first 12 cards; "Show all" adds the rest (all 70 used to load at once).
+        const FIRST_CARDS = 12
+
+        function updateShowAll(total, shown) {
+            const btn = document.getElementById('show-all-btn')
+            if (!btn) return
+            btn.style.display = shown < total ? '' : 'none'
+            const label = document.getElementById('show-all-label')
+            if (label) label.textContent = `Show all ${total} projects`
+        }
+
+        function filterProjects(showAll) {
             const searchInputEl = document.getElementById('search-input')
             const searchTerm = searchInputEl ? searchInputEl.value.toLowerCase() : ''
             const sortMode = document.getElementById('sort-select').value
@@ -296,6 +306,7 @@
             if (currentFilter === 'gls') {
                 const sites = landSites.filter(g => !searchTerm || (g.name + ' ' + g.location + ' ' + g.list).toLowerCase().includes(searchTerm)).slice().sort((a, b) => a.sort - b.sort)
                 renderLandSites(sites)
+                updateShowAll(0, 0)
                 return
             }
 
@@ -319,8 +330,10 @@
             else if (sortMode === 'highest-psf') filtered.sort((a, b) => (b.avgPSF || -1) - (a.avgPSF || -1))
             else if (sortMode === 'most-units') filtered.sort((a, b) => b.availableUnits - a.availableUnits)
             else filtered.sort(compareNewest)
-            
-            renderProjects(filtered)
+
+            const shown = showAll === true ? filtered : filtered.slice(0, FIRST_CARDS)
+            renderProjects(shown)
+            updateShowAll(filtered.length, shown.length)
         }
         
         // Government land sites (not yet sold): own card, own page at /land-sites/<slug>/
@@ -384,8 +397,7 @@
         }
         
         function showAllProjects() {
-            filterProjects()
-            document.getElementById('browse-section').scrollIntoView({ behavior: 'smooth' })
+            filterProjects(true)
         }
         
         // Featured This Week promo removed per request
