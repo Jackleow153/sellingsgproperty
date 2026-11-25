@@ -7,10 +7,11 @@ from batch1 import P as P1, SRC, HDB
 from batch2 import P as P2
 from batch3 import P as P3, META3, HDB3
 from batch4_ec import P as P4, META4, HDB4
+from batch5_prime import P as P5, META5, HDB5
 
 std_v2.SRC_BASE = SRC
 std_v2.HDB_T = dict(HDB)
-std_v2.HDB_T.update(HDB3); std_v2.HDB_T.update(HDB4)
+std_v2.HDB_T.update(HDB3); std_v2.HDB_T.update(HDB4); std_v2.HDB_T.update(HDB5)
 std_v2.HDB_T['Hougang'] = {'4-room': (618888, 591), '5-room': (783888, 255)}   # C: HDB resale records, Nov 2025 to Oct 2026
 
 H = dict(
@@ -58,7 +59,7 @@ H = dict(
  confidence='Low')
 
 P = {'hougang-central-site': H}
-P.update(P1); P.update(P2); P.update(P3); P.update(P4)
+P.update(P1); P.update(P2); P.update(P3); P.update(P4); P.update(P5)
 META = {  # nearby / geo keys, file slug, homes, integrated, heavy competing supply at the exit
  'hougang-central-site': ('hougang-central-mixed-use', 'hougang-central-mixed-use', 830, True, False),
  'chencharu-central-residences': ('chencharu-central-residences', 'chencharu-central-residences', 875, True, False),
@@ -69,6 +70,7 @@ META = {  # nearby / geo keys, file slug, homes, integrated, heavy competing sup
  'bedok-rise-site': ('bedok-rise-gls', 'bedok-rise-gls', 380, False, True)}
 META.update({pid: (k, k, h, False, pid != 'dorset-gardens') for pid, (k, h) in META3.items()})
 META.update({pid: (k, k, h, False, True) for pid, (k, h) in META4.items()})
+META.update({pid: (k, k, h, False, True) for pid, (k, h) in META5.items()})
 BUY_YEAR = {'chencharu-central-residences': 2027, 'one-chuan-grove': 2027, 'bayshore-drive-site': 2028}
 for pid, (nk, fs, homes, integ, heavy) in META.items():
     c = P[pid]

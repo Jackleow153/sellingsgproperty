@@ -119,8 +119,9 @@ def build(pid, c):
     ex = {k: buy * (1 + v) ** n for k, v in g.items()}
     lo, hi = c['expected']; mid = (lo + hi) / 2
     EXP = c.get('exp_word', 'expected')
-    land, build_, fin, fees = c['land'], c['build'], round(c['land'] * 0.09), 180
-    cost = land + build_ + fin + fees; floor = [round(cost / 0.9 / 10) * 10, round(cost / 0.85 / 10) * 10]
+    land, build_, fin, fees = c['land'], c['build'], round((c['land'] or 0) * 0.09), 180
+    floor = None if land is None else [round((land + build_ + fin + fees) / 0.9 / 10) * 10, round((land + build_ + fin + fees) / 0.85 / 10) * 10]
+    FLOOR0 = floor[0] if floor else 0
     units = {}
     for t, sz in c['sizes'].items():
         xq = ex['base'] * sz; inc = income_needed(xq); up = .25 * xq + bsd(xq)
@@ -140,7 +141,7 @@ def build(pid, c):
     walkers = [t for t, x in units.items() if x['v'] == 'Walk away']
     pv = 'Buy' if mid <= buy else f'Buy only below {fmt_money(walk)} psf' if mid <= walk else f'Walk away above {fmt_money(walk)} psf'
     keep = [t for t in units if t not in walkers]
-    main = u['v'] if u['v'] != 'Walk away' else (f"{pv.replace(' psf', '')}: {' and '.join(keep)} only" if keep else 'Walk away')
+    main = u['v'] if u['v'] != 'Walk away' else (pv if pv.startswith('Walk away') else f"{pv.replace(' psf', '')}: {' and '.join(keep)} only" if keep else 'Walk away')
     near1 = [x for x in comps if x['dist'] <= 1000]
     comp_names = ', '.join(x['name'] for x in comps)
     if pv == 'Buy':
@@ -170,7 +171,7 @@ def build(pid, c):
      'v': 2, 'asOf': AS_OF, 'confidence': c['confidence'],
      'confNote': f"No developer price list yet. Price range: {c['expected_note']} {c['sizes_note']} The verdict will be re-checked the day prices are released.",
      'strip': [['Verdict', main if len(main) < 34 else main.replace(' psf', ''), ', '.join(f"{t}: {x['v']}" for t, x in units.items() if x['v'] != main) or 'Same for every unit type'],
-               ['Buy at or below', f"{fmt_money(buy)} psf", f"{tm} about {fmt_q(round(buy * u['size'], -3))}" + (f". Below the developer's floor of about {fmt_money(floor[0])}, so a launch this low is unlikely" if buy < floor[0] else '')],
+               ['Buy at or below', f"{fmt_money(buy)} psf", f"{tm} about {fmt_q(round(buy * u['size'], -3))}" + (f". Below the developer's floor of about {fmt_money(floor[0])}, so a launch this low is unlikely" if buy < FLOOR0 else '')],
                ['Walk away above', f"{fmt_money(walk)} psf", f"{tm} about {fmt_q(round(walk * u['size'], -3))}. {EXP.capitalize()} {fmt_money(lo)} to {fmt_money(hi)}"],
                ['Potential gain', pct(u['gm']['base']), f"Base case after costs by {c['buy_year'] + int(n)}, bought at {fmt_money(round(mid))} psf ({yr(u['gm']['base'])}). Bear {pct(u['gm']['bear'])}, bull {pct(u['gm']['bull'])}"]],
      'verdict': {'line': line, 'reasons': reasons,
@@ -181,7 +182,7 @@ def build(pid, c):
                             'If official unit sizes are smaller than assumed, quanta fall and more local upgraders can afford the resale price.']},
      'types': [[f"{t} (about {x['size']:,} sq ft)", x['v'], f"{fmt_money(buy)} psf ({fmt_q(round(buy * x['size'], -3))})", f"{fmt_money(walk)} psf ({fmt_q(round(walk * x['size'], -3))})",
                 f"At {fmt_money(round(mid))} psf: about {pct(x['gm']['base'])} by {c['buy_year'] + int(n)}. Resale about {fmt_q(round(x['xq'], -3))} needs about {fmt_money(round(x['inc'], -2))} a month." + (f" At launch, a 75% loan needs about {fmt_money(round(x['msr'], -2))} a month under the 30% mortgage limit" + (" (above the $16,000 income ceiling)." if x['msr'] > 16000 else " (ceiling $16,000).") if c.get('ec') else '')] for t, x in units.items()],
-     'priceA': [['Land', f"{fmt_money(land)} psf ppr", 'C', None, c['land_src'] + '. psf ppr = land price per square foot of floor area the site may build.'],
+     'priceA': c['priceA_none'] if floor is None else [['Land', f"{fmt_money(land)} psf ppr", 'C', None, c['land_src'] + '. psf ppr = land price per square foot of floor area the site may build.'],
                 ['Building cost', f"about {fmt_money(build_)} psf", c['build_lab'], c['build_src'], c['build_note']],
                 ['Finance, fees, marketing, stamp duty', f"about {fmt_money(fin + fees)} psf", 'E', None, 'Land carried about 3 years at about 3% a year, plus fees, show flat, stamp duty on the land and property tax while building.'],
                 ['Developer floor price', f"about {fmt_money(floor[0])} to {fmt_money(floor[1])} psf", 'E', None, 'Cost plus a normal 10% to 15% margin. A launch below this is unlikely.']],
@@ -189,7 +190,7 @@ def build(pid, c):
      'compsNote': (f"{len(near1)} of the {len(comps)} competitors are within 1 km. " if near1 else 'No suitable competitor within 1 km, so the nearest within 2 to 3 km are used. ')
                   + ("Only executive condos are compared (an EC sells below private condos because of its buyer rules), closest first, with a similar number of homes, completed 2011 or later where possible. Resale ECs past their 5-year minimum occupation period sell to any Singaporean or PR. Resale prices" if c.get('ec') else "Chosen closest first, with the same tenure and a similar number of homes, completed 2000 or later where possible; executive condos are left out. Resale prices")
                   + " are URA medians for the past 12 months. Condos launched before June 2023 measured their areas under the old rules (including air-con ledges), so their psf is raised 5% to compare like for like.",
-     'priceDecide': f"Buy at or below = the average of the competitors' new-launch equivalents = about {fmt_money(buy)} psf. Walk away above = 5% more = about {fmt_money(walk)} psf. The developer's floor is about {fmt_money(floor[0])} to {fmt_money(floor[1])} psf" + (', so expect the launch above our buy-at price.' if buy < floor[0] else '.'),
+     'priceDecide': f"Buy at or below = the average of the competitors' new-launch equivalents = about {fmt_money(buy)} psf. Walk away above = 5% more = about {fmt_money(walk)} psf. " + ("No developer floor can be worked out: the developers already owned the land." if floor is None else f"The developer's floor is about {fmt_money(floor[0])} to {fmt_money(floor[1])} psf" + (', so expect the launch above our buy-at price.' if buy < floor[0] else '.')),
      'gain': {'timeline': c['timeline'],
               'costs': ("No Seller's Stamp Duty: the sale is after the 5-year minimum occupation period. " if c.get('ec') else '') + "Potential gain is after Buyer's Stamp Duty at IRAS rates, about $6,000 legal fees and a 2% agent fee plus 9% GST when you sell. Loan interest, property tax, maintenance and rent are not included.",
               'scen': [['Bear', f"{g['bear']*100:.1f}% a year", ('Half the base case' if base > 0 else 'One and a half times the base-case fall') + ': competing supply at the exit, or a softer market.'],
