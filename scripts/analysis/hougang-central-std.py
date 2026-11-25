@@ -46,7 +46,7 @@ std = {
    ['Verdict', 'Own-stay only', '2-bed and 3-bed. 4-bed: walk away'],
    ['Buy at or below', f"{m(t3['buyAt'])} psf", f"Below the developer's floor of about {m(A['floor'][0])}, so not a realistic launch price"],
    ['Walk away above', f"{m(t3['walk'])} psf", f"3-bed about {mq(t3['walkQuantum'])}. Analysts expect $2,500 to $2,600"],
-   ['5% test', 'Fail', f"Base case {pc(t3['at2500']['base'])} to {pc(t3['at2600']['base'])} a year at $2,500 to $2,600 psf"]],
+   ['5% test', 'Fail', f"Base case {pc(t3['at2600']['base'])} to {pc(t3['at2500']['base'])} a year at $2,500 to $2,600 psf"]],
  'verdict': {
    'line': f"Own-stay only. At any realistic launch price this won't deliver 5% a year, so buy the 2-bed or 3-bed only to live in, and walk away above about {m(t3['walk'])} psf (3-bed about {mq(t3['walkQuantum'])}). Skip the 4-bed unless you will live in it for 10 years or more.",
    'reasons': [
@@ -85,9 +85,9 @@ std = {
    'timeline': "Buy at launch (UOL targets the second half of 2027). TOP (Temporary Occupation Permit, when you get the keys) is targeted for 2030 or 2031. Seller's Stamp Duty applies for 4 years on homes bought from 4 July 2025, so the earliest clean sale is late 2031; we test a sale in 2032, about one year after TOP (5 years), and also 6 years in case completion slips. CICT expects the mall's construction to start only in 2027.",
    'costs': "Included: Buyer's Stamp Duty at IRAS rates, about $6,000 legal fees, 2% agent fee plus 9% GST when you sell. Return on cash also includes a 75% bank loan at about 2.6% a year (an assumption), interest during the progressive payments, the instalments after TOP, and about $1,500 property tax plus $0.45 psf a month maintenance after TOP. No rent is included: this is an own-stay test.",
    'key': 'Because of stamp duty and selling costs, a 5% net return needs roughly 6.1% to 6.3% a year in price growth.',
-   'scen': [['Bear', '1.75% a year', m(X['bear']), 'About half the base case: supply at exit, or a softer market.'],
-            ['Base', '3.5% a year', m(X['base']), 'Between the integrated analogs (2.5% to 3.1%) and Hougang\'s 2018–19 launches (about 4.1%), launch to a year after completion. Both periods included the 2021–2023 price jump, so we do not go higher.'],
-            ['Bull', '4.5% a year', m(X['bull']), 'Base plus 1 point for the Cross Island Line interchange, which is Confirmed for 2030.']],
+   'scen': [['Bear', f"{o['growth']['bear']*100:.2f}% a year", m(X['bear']), 'Half the base case: supply at exit, or a softer market.'],
+            ['Base', f"{o['growth']['base']*100:.2f}% a year", m(X['base']), "The median of the comparables' growth from launch to a year after completion (" + ', '.join(f"{k} {v}%" for k, v in o['comps'].items()) + "). Most of those years included the 2021–2023 price jump."],
+            ['Bull', f"{o['growth']['bull']*100:.2f}% a year", m(X['bull']), 'Base plus 1 point for the Cross Island Line interchange, which is Confirmed for 2030.']],
    'result': f"Fail. At the expected $2,500 to $2,600 psf, the base case earns about {pc(t3['at2600']['base'])} to {pc(t3['at2500']['base'])} a year after costs. It would pass only at about {m(t3['buyAt'])} psf, below the developer's floor."},
  'district': {
    'summary': 'Hougang is in a maturing phase: steady growth, deep resale liquidity, and very little new private supply nearby, because this is the first government land sale in the area since 2019.',

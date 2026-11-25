@@ -44,7 +44,9 @@ comps = {
     'The Woodleigh Residences':  cagr(2036, 2446, 6),   # Nov 2018 first units -> 2025 (TOP 2024), as in the mall study
     'Watertown':                 cagr(1169, 1358, 6),   # Jan 2012 first-month median -> 2018 (TOP 2017), as in the mall study
 }
-BASE, BEAR, BULL = 0.035, 0.0175, 0.045
+import statistics
+BASE = round(statistics.median(comps.values()), 3)   # median of comparables, launch to TOP+1 (same rule as batch1)
+BEAR, BULL = BASE / 2, BASE + 0.01                 # bull: +1 point for the Cross Island Line interchange (Confirmed, 2030)
 
 def exit_psf(g): return B * (1 + g) ** YEARS
 
@@ -123,7 +125,7 @@ HDB = {'Hougang 4-room': 618888, 'Hougang 5-room': 783888, 'Serangoon 4-room': 6
 OUTSTANDING = 150000     # E: illustrative outstanding loan, Not available as an official median
 
 units = {'2-bed': 700, '3-bed': 1000, '4-bed': 1345}   # R: ParkTown Residence sizes as a guide (Stacked Homes / 99.co)
-out = {'A': {'land': land, 'build': build, 'landFinance': land_finance, 'fees': fees, 'cost': cost, 'floor': [floor_lo, floor_hi]},
+out = {'growth': {'bear': BEAR, 'base': BASE, 'bull': BULL}, 'A': {'land': land, 'build': build, 'landFinance': land_finance, 'fees': fees, 'cost': cost, 'floor': [floor_lo, floor_hi]},
        'B': {'parktown': parktown, 'b1': b1, 'integPrem': round(integ_prem * 100, 1), 'b2': b2, 'B': B},
        'comps': {k: round(v * 100, 1) for k, v in comps.items()},
        'exit': {'base': round(exit_psf(BASE)), 'bear': round(exit_psf(BEAR)), 'bull': round(exit_psf(BULL))},
