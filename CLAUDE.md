@@ -18,7 +18,7 @@ Work as a senior SEO / AIO / GEO / UX / UI specialist who understands how people
 
 ## Condo analysis standard (mandatory)
 
-`docs/ANALYSIS-STANDARD.md` is mandatory for every condo analysis page (new launch or resale). Read it in full, including its 25 Nov 2026 amendment (which replaced the 5% test), before writing or updating any analysis: verdict first, buy-at and walk-away prices from the closest competitors (within 1 km first, same tenure, similar size, +5% for pre-2023 area rules, averages not medians), the potential gain after costs, district, exit buyers, Master Plan, scorecard, and its evidence rules. `docs/` is internal and never served (forced 404 in `_redirects`).
+`docs/ANALYSIS-STANDARD.md` is mandatory for every condo analysis page (new launch or resale). Read it in full, including its 25 Nov 2026 amendment (which replaced the 5% test), before writing or updating any analysis: verdict first, buy-at and walk-away prices from the closest competitors (within 1 km first, same tenure, similar size, +5% for pre-2023 area rules, averages not medians), the potential gain after costs, the competitors' latest 6- and 12-month transactions (data/comp-tx.json from `node scripts/ura-comps.cjs`), land bids within 2 km, rail catalysts, market checks, district, exit buyers, Master Plan, scorecard, and its evidence rules. `docs/` is internal and never served (forced 404 in `_redirects`).
 
 ## How the site is built
 

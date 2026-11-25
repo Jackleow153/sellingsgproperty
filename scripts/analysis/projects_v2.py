@@ -80,5 +80,13 @@ for pid, (nk, fs, homes, integ, heavy) in META.items():
     c.setdefault('buy_year', BUY_YEAR.get(pid))
     c['years'] = int(c['years'])
 
+REGION = {'hougang-central-site': 'OCR', 'chencharu-central-residences': 'OCR', 'one-chuan-grove': 'OCR', 'bayshore-drive-site': 'OCR',
+          'upper-thomson-road-parcel-a': 'OCR', 'lentor-signature': 'OCR', 'bedok-rise-site': 'OCR', 'telok-blangah-road-site': 'RCR',
+          'dorset-gardens': 'RCR', 'dover-drive-site': 'RCR', 'impressions-at-dairy-farm': 'OCR', 'wynwood-grand': 'OCR', 'clovelle-of-woodlands': 'OCR',
+          'solano-grand': 'OCR', 'miltonia-close-executive-condo': 'OCR', 'bukit-timah-road-site-newton': 'CCR', 'the-river-opus': 'CCR',
+          'tanjong-rhu-road-site': 'RCR', 'kallang-close-site': 'RCR', 'river-valley-green-parcel-c': 'CCR', 'peck-hay-road-site': 'CCR',
+          'dunearn-road-plot-2': 'CCR', 'holland-plain-parcel-b': 'CCR'}   # URA market segments (OCR suburbs, RCR city fringe, CCR prime)
+for pid, rg in REGION.items(): P[pid].setdefault('region', rg)
+
 if __name__ == '__main__':
     print(json.dumps({pid: std_v2.build(pid, c) for pid, c in P.items()}, ensure_ascii=False, separators=(',', ':')))

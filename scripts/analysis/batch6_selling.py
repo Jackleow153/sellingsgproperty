@@ -39,6 +39,11 @@ def _sizes(fp):
     return out
 
 
+def _lm(t):
+    m = re.search(r'(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+(20\d\d)', str(t).lower())
+    return int(m.group(2)) * 12 + ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'].index(m.group(1)) if m else None
+
+
 def _top_year(t):
     ys = [int(y) for y in re.findall(r'20[2-3]\d', t)]
     return ys[0] if ys else 2030
@@ -72,7 +77,8 @@ def make(x):
           + (f"The 5-year minimum occupation period then runs to about {sale}, when any Singaporean or PR can buy it. We look at a sale in {sale} ({n} years)." if ec
              else f"Seller's Stamp Duty applies for 4 years, so we look at a sale in {sale}, after the stamp duty ends and about a year after TOP ({n} years)."))
     c = dict(
-        name=x['name'], selling=True, ec=ec, leasehold=lh, land=land, land_src=x['land'],
+        name=x['name'], selling=True, ec=ec, region=x['region'],
+        absorb=(homes, x['soldPct'], max(1, 2026 * 12 + 10 - (_lm(x['launch']) or 2026 * 12 + 9))), leasehold=lh, land=land, land_src=x['land'],
         priceA_none=[['Land', x['land'], 'R', 's0', 'No land price per square foot of floor area was found, so no cost floor is worked out.'],
                      ['Developer floor price', 'Not available', 'C', None, 'Without a land price, no cost floor can be worked out.']],
         build=420 if ccr else 380, build_lab='E', build_src='arcadis', build_note=ARC if ccr else ARC_RCR,
