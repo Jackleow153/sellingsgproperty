@@ -264,7 +264,7 @@
                             <div class="flex flex-wrap items-center justify-between gap-2 mt-4 text-xs">
                                 <div class="px-2.5 py-px bg-slate-100 text-slate-500 rounded text-[10px]">${dateChip}</div>
                                 <div class="flex flex-wrap items-center gap-2">
-                                    ${project.id === 31 ? '<a href="https://the-one-chuan-grove.sg/" target="_blank" rel="noopener noreferrer" class="px-5 py-1.5 text-xs font-semibold bg-violet-700 text-white rounded-2xl">One Chuan Grove guide</a>' : ''}
+                                    ${({31: ['https://the-one-chuan-grove.sg/', 'One Chuan Grove guide'], 37: ['https://chencharuyishun.sg/', 'Chencharu guide'], 39: ['https://hougangcentral.sg/', 'Hougang Central guide']})[project.id] ? `<a href="${({31: 'https://the-one-chuan-grove.sg/', 37: 'https://chencharuyishun.sg/', 39: 'https://hougangcentral.sg/'})[project.id]}" target="_blank" rel="noopener noreferrer" class="px-5 py-1.5 text-xs font-semibold bg-violet-700 text-white rounded-2xl">${({31: 'One Chuan Grove guide', 37: 'Chencharu guide', 39: 'Hougang Central guide'})[project.id]}</a>` : ''}
                                     <a href="${projectUrl(project)}" class="px-5 py-1.5 text-xs font-semibold border border-violet-700 text-violet-700 hover:bg-violet-700 hover:text-white rounded-2xl transition whitespace-nowrap" aria-label="View details of ${project.name}">
                                         View Details
                                     </a>

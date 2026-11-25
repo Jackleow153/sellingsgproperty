@@ -28,6 +28,11 @@ const AS_OF_LABEL = new Date(AS_OF + 'T00:00:00Z').toLocaleDateString('en-SG', {
 // Hand-built project pages that the builder must not overwrite (id -> slug)
 const HANDBUILT = { 28: 'thomson-reserve-condo', 29: 'dunearn-house', 26: 'lentor-gardens-residences' };
 // Fact pages on the independent guide. The nav stays on the guide homepage.
+// Jack's independent single-project guide sites: one contextual link from each project page (CLAUDE.md of each guide, section 11).
+const GUIDE_SITES = {
+  37: `<p class="note">For every Chencharu Close fact with its source and label (the bus interchange and hawker centre, the unit mix, the condo vs BTO comparison and the launch window), see Jack's independent guide: <a href="https://chencharuyishun.sg/">Chencharu Central Residences guide at chencharuyishun.sg</a>.</p>`,
+  39: `<p class="note">For every Hougang Central fact with its source and label (the land price, the mall and bus interchange, the Cross Island Line, schools and the official name status), see Jack's independent guide: <a href="https://hougangcentral.sg/">Hougang Central Residences guide at hougangcentral.sg</a>.</p>`,
+};
 const CHUAN_CITE = `<p>The sourced pages to use for each question:</p>
 <ul class="links">
 <li><a href="https://the-one-chuan-grove.sg/price/">Price</a><span>No developer price list yet. Analyst range is on this page.</span></li>
@@ -291,7 +296,7 @@ ${srcList}
 ${analysis}
 <h2>Frequently asked questions</h2>
 <div class="faq">${faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('\n')}</div>
-${p.id === 31 ? CHUAN_CITE : ''}
+${p.id === 31 ? CHUAN_CITE : ''}${GUIDE_SITES[p.id] || ''}
 <h2>Related new launches</h2>
 <ul class="links">${rel.map(r => `<li><a href="${projectPath(r)}">${esc(r.name)}</a><span>D${districtOf(r)} · ${esc(YEAR_TAB[r.year])}</span></li>`).join('')}</ul>
 <p><a href="/new-launch-condos/">See every new launch condo (2024–2027) →</a></p>
