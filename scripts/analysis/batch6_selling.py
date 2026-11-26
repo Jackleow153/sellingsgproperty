@@ -54,7 +54,7 @@ def _top_year(t):
 
 
 def make(x):
-    k = x['id']; ec = k == 'coastal-cabana'
+    k = x['id']; ec = k == 'coastal-cabana' or bool(x.get('ec'))
     lh = not re.search(r'freehold|999', x['tenure'], re.I)
     homes = _num(x['units']); avg = x['avgPsf']
     app = NAME.get(k) or next((p for p in APP if norm(p['name']).startswith(norm(x['name'])[:10])), {})

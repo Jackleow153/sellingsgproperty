@@ -9,6 +9,7 @@ from batch3 import P as P3, META3, HDB3
 from batch4_ec import P as P4, META4, HDB4
 from batch5_prime import P as P5, META5, HDB5
 from batch6_selling import P as P6, META6, HDB6
+from batch7_post import P as P7, META7
 
 std_v2.SRC_BASE = SRC
 std_v2.HDB_T = dict(HDB)
@@ -60,7 +61,7 @@ H = dict(
  confidence='Low')
 
 P = {'hougang-central-site': H}
-P.update(P1); P.update(P2); P.update(P3); P.update(P4); P.update(P5); P.update(P6)
+P.update(P1); P.update(P2); P.update(P3); P.update(P4); P.update(P5); P.update(P6); P.update(P7)
 META = {  # nearby / geo keys, file slug, homes, integrated, heavy competing supply at the exit
  'hougang-central-site': ('hougang-central-mixed-use', 'hougang-central-mixed-use', 830, True, False),
  'chencharu-central-residences': ('chencharu-central-residences', 'chencharu-central-residences', 875, True, False),
@@ -73,6 +74,7 @@ META.update({pid: (k, k, h, False, pid != 'dorset-gardens') for pid, (k, h) in M
 META.update({pid: (k, k, h, False, True) for pid, (k, h) in META4.items()})
 META.update({pid: (k, k, h, False, True) for pid, (k, h) in META5.items()})
 META.update(META6)
+META.update(META7)
 BUY_YEAR = {'chencharu-central-residences': 2027, 'one-chuan-grove': 2027, 'bayshore-drive-site': 2028}
 for pid, (nk, fs, homes, integ, heavy) in META.items():
     c = P[pid]
@@ -89,4 +91,11 @@ REGION = {'hougang-central-site': 'OCR', 'chencharu-central-residences': 'OCR', 
 for pid, rg in REGION.items(): P[pid].setdefault('region', rg)
 
 if __name__ == '__main__':
-    print(json.dumps({pid: std_v2.build(pid, c) for pid, c in P.items()}, ensure_ascii=False, separators=(',', ':')))
+    out = {pid: std_v2.build(pid, c) for pid, c in P.items()}
+    for pid, c in P.items():   # sold-out post-launch condos (26 Nov 2026): the verdict is a check of the launch price, not advice to buy from the developer
+        if not c.get('sold_out'): continue
+        s = out[pid]; v = s['strip'][0][1]; walk = s['strip'][2][1]
+        s['strip'][0][1] = ('Launch price was fair value' if v == 'Buy' else 'Launch price was near the limit' if v.startswith('Buy only') else 'Launch price was high')
+        s['verdict']['line'] = ((f"Sold out. An EC cannot be sold on before completion and can be resold only after its 5-year minimum occupation period, so later buyers will buy resales from about {c['buy_year'] + c['years']}; pay no more than about {walk} in today's money. At launch: ") if c.get('ec')
+                                else f"Sold out: buy only as a sub-sale or a resale, at or below about {walk}. At launch: ") + s['verdict']['line']
+    print(json.dumps(out, ensure_ascii=False, separators=(',', ':')))
