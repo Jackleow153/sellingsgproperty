@@ -211,6 +211,8 @@ def _plan_geo():
         if g and 'lat' in g: out[k] = g
     return out
 PLANGEO = _plan_geo()
+# which plan libraries are executive condos (URA resale records, or an EC launch by name)
+PLANEC = {k: bool(next((v['ec'] for v in COMP['p'].values() if _slug(_tc(v['n'])) == k or _slug(v['n']) == k), False)) or 'cabana' in k or k.endswith('-ec') for k in FPD}
 
 
 def plan_facts(cid, beds):
@@ -817,7 +819,7 @@ def build(pid, c):
     fpk = lambda n: next((k for k in (_slug(n), re.sub(r'^the-', '', _slug(n)), 'the-' + _slug(n)) if k in FPD), None)   # 'The Panorama' is stored as 'panorama'
     ck = [(fpk(x['name']), x) for x in comps if fpk(x['name']) and fpk(x['name']) != selfk]
     if len(ck) < 3:
-        extra = sorted(((k, _km(me, g) * 1000) for k, g in PLANGEO.items() if k != selfk and k not in [a for a, _ in ck]), key=lambda t: t[1])
+        extra = sorted(((k, _km(me, g) * 1000) for k, g in PLANGEO.items() if k != selfk and k not in [a for a, _ in ck] and PLANEC.get(k, False) == bool(c.get('ec'))), key=lambda t: t[1])   # ECs with ECs only
         ck += [(k, {'name': next((x['name'] for x in comps if _slug(x['name']) == k), k.replace('-', ' ').title()), 'dist': round(d), 'key': None}) for k, d in extra if d <= 3000][:3 - len(ck)]
     fpl = {'types': [], 'rows': {}}
     for t, sz in sizes.items():
