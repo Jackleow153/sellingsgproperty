@@ -1,4 +1,4 @@
-"""Batch 6 on method v2: condos selling now (launched files in NL.L with under 95% sold). Configs are generated from each file's
+"""Batch 6 on method v2: condos selling now (every launched file in NL.L, including nearly sold-out ones). Configs are generated from each file's
 existing, sourced data (price, unit list, scores, pros and cons, sources) plus URA nearby data. Imported by projects_v2.py."""
 import json, os, re, statistics, subprocess
 from batch5_prime import district, NEAR, MP, ONEMAP, ARC, ARC_RCR
@@ -19,7 +19,11 @@ TOWNS = {'thomson-reserve': ['Bishan', 'Ang Mo Kio'], 'lucerne-grand': ['Jurong 
          'coastal-cabana': ['Pasir Ris', 'Tampines'], 'one-marina-gardens': ['Bukit Merah', 'Kallang/Whampoa'], 'elta': ['Clementi', 'Queenstown'],
          'the-sen': ['Bukit Batok', 'Bukit Panjang'], 'sora': ['Jurong East', 'Jurong West'], 'w-residences-marina-view': ['Bukit Merah', 'Kallang/Whampoa'],
          'newport-residences': ['Bukit Merah', 'Queenstown'], 'aurea': ['Kallang/Whampoa', 'Geylang'], 'the-collective-at-one-sophia': ['Kallang/Whampoa', 'Toa Payoh'],
-         'meyer-blue': ['Marine Parade', 'Bedok'], 'kassia': ['Pasir Ris', 'Tampines'], '8-bt': ['Bukit Batok', 'Bukit Panjang']}
+         'meyer-blue': ['Marine Parade', 'Bedok'], 'kassia': ['Pasir Ris', 'Tampines'], '8-bt': ['Bukit Batok', 'Bukit Panjang'],
+         # 26 Nov 2026: nearly sold-out launches and Sophia Meadow now get the full analysis too
+         'parktown-residence': ['Tampines', 'Pasir Ris'], 'springleaf-residence': ['Yishun', 'Ang Mo Kio'], 'the-orie': ['Toa Payoh', 'Bishan'],
+         'pinery-residences': ['Tampines', 'Bedok'], 'river-modern': ['Bukit Merah', 'Queenstown'], 'norwood-grand': ['Woodlands', 'Sembawang'],
+         'sophia-meadow': ['Kallang/Whampoa', 'Toa Payoh']}
 HDB6 = {'Jurong East': {'4-room': (549444, 140), '5-room': (712500, 118)}, 'Jurong West': {'4-room': (534500, 592), '5-room': (635444, 460)},
         'Pasir Ris': {'4-room': (635000, 303), '5-room': (735000, 242)}}   # C: our medians, HDB resale records Nov 2025 to Oct 2026
 AS_OF_FILE = '10 Nov 2026'
@@ -118,7 +122,7 @@ def district_ec(k, gap, supply):
             ['Rents', 'Gross yields of nearby ECs: Not available yet. URA: suburban (OCR) rents rose 3.1% in Q3 2026.', 'C', 'ura'], ['Supply risk', supply, 'C', 'caveats']]
 
 
-SELLING = [x for x in NL['L'] if x['soldPct'] < 95 and x['id'] != 'sophia-meadow']
+SELLING = list(NL['L'])   # 26 Nov 2026: every launched file, including those 95% sold or more (few units left) and Sophia Meadow
 P, META6 = {}, {}
 for x in SELLING:
     P[x['id']], META6[x['id']] = make(x)

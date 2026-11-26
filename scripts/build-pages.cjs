@@ -694,6 +694,7 @@ function caStatic0(id, f) {
 <h2>Scores</h2><ul>${[['loc', 'Location'], ['entry', 'Entry price'], ['exit', 'Exit plan'], ['food', 'Nearby food'], ['mrt', 'MRT closeness']].map(([k, n]) => `<li><strong>${n}: ${x.scores[k][0]}/10.</strong> ${esc(x.scores[k][1])}</li>`).join('')}</ul>
 <h2>Pros</h2><ul>${x.pros.map(t => `<li>${esc(t)}</li>`).join('')}</ul><h2>Cons</h2><ul>${x.cons.map(t => `<li>${esc(t)}</li>`).join('')}</ul>${srcs(x.src)}`;
   }
+  if (f.kind === 'launched' && CA.std[id]) return caStdText({...f, x: {id, name: f.p.name}});
   if (f.kind === 'launched') {
     const p = f.p;
     return `${back}<h1>${esc(p.name)}</h1><p>${esc(placeOf(p))} · District ${districtOf(p)} (${segmentOf(p)}) · ${esc(p.developer.replace(/\s*\((?:entity|entities)[^)]*\)/i, ''))}</p>
