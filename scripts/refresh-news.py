@@ -1442,6 +1442,7 @@ def write_detail_pages(items: list[dict]) -> None:
         item["path"] = f"/news/{item['id']}/"
         item["description"] = copy["description"]
 
+    rolled_off: list[str] = []
     for child in NEWS_DIR.iterdir():
         if not child.is_dir() or child.name == "images" or child.name in keep_ids:
             continue
@@ -1451,6 +1452,10 @@ def write_detail_pages(items: list[dict]) -> None:
             if file.is_file():
                 file.unlink()
         child.rmdir()
+        rolled_off.append(child.name)
+    # A story that rolls off the latest list loses its page: send its URL to /news/ (301) so Google and old links
+    # do not hit a 404 (Search Console, 26 Nov 2026).
+    retire_story_urls(rolled_off)
 
     update_sitemap(items)
     write_news_index(items)

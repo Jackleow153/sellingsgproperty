@@ -91,10 +91,10 @@ P['lentor-signature'] = dict(
  faq_extra=[['Is Lentor Signature a good investment?', None], ['How does it compare with Lentor Gardens Residences?', 'Lentor Gardens Residences launched at $2,350 psf in July 2026 on land that cost $920 psf ppr. Lentor Signature paid $1,278, so it is likely to launch well above that.']],
  src_extra={'springleaf': ['GuocoLand, Springleaf Residence 870 of 941 sold at $2,175 psf, Aug 2025 (our Springleaf Residence file)', '/condo-analysis/springleaf-residence/'],
             'lentorgardens': ['Lentor Gardens Residences launch at $2,350 psf, Jul 2026 (our Lentor Gardens Residences file)', '/condo-analysis/lentor-gardens-residences/'],
-            'caveats': ['URA private residential transactions (caveats), Nov 2025 to Oct 2026', '/condo-analysis/lentor-signature/#near'],
+            'caveats': ['URA private residential transactions (caveats), Nov 2025 to Oct 2026', '/condo-analysis/lentor-central-gls-4th-site/#near'],
             'lta_tel': ['LTA, Thomson-East Coast Line', 'https://www.lta.gov.sg/content/ltagov/en/upcoming_projects/rail_expansion/thomson_east_coast_line.html'],
             'mp': ['URA, Master Plan 2025 gazetted, 1 Dec 2025', 'https://www.ura.gov.sg/Corporate/Media-Room/Media-Releases/pr25-64'],
-            'lentorsig': ['Our Lentor Signature project page (URA tender result and sources)', '/project/lentor-signature/'],
+            'lentorsig': ['Our Lentor Signature project page (URA tender result and sources)', '/project/lentor-central-gls-4th-site/'],
             'sizes_lcr': SIZES_LCR, **COMPLETED},
  chart_comps=['Lentor Modern', 'AMO Residence', 'Jadescape'], confidence='Low',
 )
