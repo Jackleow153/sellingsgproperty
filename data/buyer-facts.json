@@ -1,0 +1,24 @@
+{
+ "_about": "Official figures used by the condo analyses for future buyers. Sources: SingStat via data.gov.sg.",
+ "income2025_excl_cpf": {
+  "4-room": 11097,
+  "5-room": 13887,
+  "condo": 22006,
+  "landed": 29717,
+  "src": "Average monthly household employment income (excluding employer CPF) among resident employed households by type of dwelling, 2025 (data.gov.sg d_ce5d8bb5c34f6b78b5b2f1fab09ccbce)"
+ },
+ "income_growth_2015_2025": {
+  "4-room": 3.64,
+  "5-room": 2.46,
+  "condo": 1.58,
+  "landed": 2.13,
+  "src": "Same series including employer CPF (d_917a2a8bb57d96d48bafc3ab0baa2b6e), 2015 to 2025 yearly change"
+ },
+ "hdb_rpi": {
+  "last": "2026-Q3",
+  "index": 202.5,
+  "cagr10": 4.16,
+  "cagr5": 6.1,
+  "src": "HDB Resale Price Index (1Q2009=100), data.gov.sg d_14f63e595975691e7c24a27ae4c07c79"
+ }
+}

@@ -7,7 +7,9 @@
 //   m6 / m12   median psf and number of resales in the last 6 and 12 full months
 //   b3         3-bedroom-size resales (90-130 sqm) in the last 12 months: median psf, median price, count
 //   lo6 / hi6  lowest and highest psf in the last 6 months; last = latest contract month
+//   tx         every resale in the last 24 months: [months ago, sq ft, psf] (for size-matched prices)
 //   g3 / gA    yearly change over 4 years (3-bedroom size / all sizes, 12-month medians, 3+ resales in each year); y1 = change over the past year
+//   landed     [lat, lon, landed sales in 5 years, in 12 months, median price in 12 months] per landed estate/street (right-sizer pool)
 //   rent       last 4 quarters of rental contracts: median monthly rent psf (all) and median 3-bedroom rent, with counts
 // Source: URA Data Service (PMI_Resi_Transaction, PMI_Resi_Rental). Key from URA_ACCESS_KEY or ~/.ura_access_key; never commit it.
 const fs = require('fs'); const path = require('path'); const os = require('os');
@@ -52,6 +54,15 @@ function svy21(N, E) {
     const q = P[k] || (P[k] = { name: p.project, street: p.street, ...svy21(+p.y, +p.x), tx: [], ten: {}, ec: false });
     for (const t of tx) { q.tx.push({ m: mi(t.contractDate), psf: +t.price / (+t.area * 10.7639), price: +t.price, sqm: +t.area }); q.ten[t.tenure] = (q.ten[t.tenure] || 0) + 1; if (t.propertyType === 'Executive Condominium') q.ec = true; }
   }
+  // landed homes (possible right-sizers): every landed sale in the 5 years, by project/street point
+  const LT = new Set(['Terrace', 'Semi-detached', 'Detached', 'Strata Terrace', 'Strata Semi-detached', 'Strata Detached']), LD = {};
+  for (const p of all) {
+    if (!p.x || !p.y) continue;
+    const tx = p.transaction.filter(t => LT.has(t.propertyType) && t.noOfUnits === '1');
+    if (!tx.length) continue;
+    const k = p.project + '|' + p.street, q = LD[k] || (LD[k] = { ...svy21(+p.y, +p.x), n5: 0, n12: 0, pr: [] });
+    for (const t of tx) { q.n5++; if (mi(t.contractDate) > LAST - 12) { q.n12++; q.pr.push(+t.price); } }
+  }
   // rents: last 4 quarters
   const qs = []; for (let i = 0; i < 4; i++) { const m = LAST - 3 * i, y = Math.floor(m / 12) % 100, qq = Math.floor((m % 12) / 3) + 1; qs.push(`${String(y).padStart(2, '0')}q${qq}`); }
   const R = {};
@@ -81,8 +92,10 @@ function svy21(N, E) {
       b3: b3.length ? [Math.round(median(b3.map(t => t.psf))), Math.round(median(b3.map(t => t.price)) / 1000) * 1000, b3.length] : null,
       last: ym(Math.max(...t12.map(t => t.m))),
       g3, gA, y1, n3,
+      tx: q.tx.filter(t => t.m > LAST - 24 && t.m <= LAST).map(t => [LAST - t.m, Math.round(t.sqm * 10.7639), Math.round(t.psf)]),
       rent: r && r.psf.length ? [+median(r.psf).toFixed(2), r.psf.length, r.b3.length ? Math.round(median(r.b3) / 50) * 50 : null, r.b3.length] : null };
   }
+  out.landed = Object.values(LD).map(q => [q.lat, q.lon, q.n5, q.n12, q.pr.length ? Math.round(median(q.pr) / 1000) * 1000 : null]);
   fs.writeFileSync(path.join(ROOT, 'data', 'comp-tx.json'), JSON.stringify(out));
   console.log('wrote data/comp-tx.json:', Object.keys(out.p).length, 'projects; resales', out.m12, '; rents', out.rentQ);
 })().catch(e => { console.error(e.message); process.exit(1); });

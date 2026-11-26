@@ -21,6 +21,7 @@ const path = require('path');
 const crypto = require('crypto');
 
 const ROOT = path.resolve(__dirname, '..');
+let STD_VER = '';   // version of the per-condo analysis files in assets/std/
 const SITE = 'https://www.sellingsgproperty.com';
 const AS_OF = process.env.AS_OF || '2026-11-13';            // data freshness date shown on pages
 const AS_OF_LABEL = new Date(AS_OF + 'T00:00:00Z').toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
@@ -603,6 +604,16 @@ const CA = (() => {
   };
   js = js.replace(/\/\* BUILD:SITE-UP START \*\/.*?\/\* BUILD:SITE-UP END \*\//, () => `/* BUILD:SITE-UP START */const SITE = ${JSON.stringify(site).replace(/</g, '\\u003c')};/* BUILD:SITE-UP END */`);
   if (!js.includes('const SITE = {"up"')) throw new Error('condo-analysis: SITE-UP marker not filled');
+  // Each analysis's data in its own file (assets/std/<id>.json), loaded only when that condo opens (speed: the full set is ~1 MB).
+  {
+    const m = js.match(/^const STD = (\{.*\});$/m); if (!m) throw new Error('condo-analysis: STD line not found');
+    const std = JSON.parse(m[1]), dir = path.join(ROOT, 'assets', 'std'); fs.mkdirSync(dir, { recursive: true });
+    const keep = new Set(Object.keys(std).map(k => k + '.json'));
+    for (const f of fs.readdirSync(dir)) if (!keep.has(f)) fs.unlinkSync(path.join(dir, f));
+    for (const [k, v] of Object.entries(std)) fs.writeFileSync(path.join(dir, k + '.json'), JSON.stringify(v));
+    const sv = crypto.createHash('sha1').update(m[1]).digest('hex').slice(0, 8); STD_VER = sv;
+    js = js.replace(m[0], () => `const STD = {}; const STD_IDS = new Set(${JSON.stringify(Object.keys(std))}); const STD_V = '${sv}';`);
+  }
   // Every condo file: id -> {kind, name, project}
   const files = new Map();
   const upId = new Map(nl.U.map(u => [u.pid, u]));
@@ -656,11 +667,11 @@ function caStdText(f) {
   const p = f.p, strip = v => String(v).replace(/<[^>]+>/g, '');
   const where = p ? placeOf(p) : `${f.x.area}, ${f.x.district}`, nm0 = p ? p.name : f.x.name, link = p ? `<p><a href="${projectPath(p)}">Project page with FAQs</a></p>` : '';
   return `<p class="small"><a href="/condo-analysis/">← All condos</a></p><h1>${esc(nm0)}: analysis and verdict</h1><p>${esc(where)} · checked ${esc(s.asOf)} · confidence ${esc(s.confidence)}</p>
-<p><strong>Verdict: ${esc(s.verdict.line)}</strong></p><ul>${s.verdict.reasons.map(r => `<li>${esc(r)}</li>`).join('')}</ul>
+<p><strong>Verdict: ${esc(s.verdict.line)}</strong></p>${s.rec ? `<h2>Jack's recommendation</h2><ul>${s.rec.map(r => `<li><strong>${esc(r[1])}:</strong> ${esc(r[2])}</li>`).join('')}</ul>` : ''}<h2>Key points</h2><ul>${(s.points || s.verdict.reasons.map(r => ['', '', '', r])).map(r => `<li>${r[1] ? `<strong>${esc(r[1])}:</strong> ` : ''}${esc(r[3])}</li>`).join('')}</ul>
 <p><strong>Buy at or below:</strong> ${esc(s.strip[1][1])}. <strong>Walk away above:</strong> ${esc(s.strip[2][1])}. <strong>Potential gain:</strong> ${esc(s.strip[3][1])} (${esc(s.strip[3][2])}).</p>
 <h2>Verdict by unit type</h2><ul>${s.types.map(t => `<li><strong>${esc(t[0])}: ${esc(t[1])}.</strong> Buy at or below ${esc(t[2])}; walk away above ${esc(t[3])}. ${esc(t[4])}</li>`).join('')}</ul>
 <h2>Closest competitors</h2><p>${esc(s.compsNote)}</p><ul>${s.comps.map(c => `<li><strong>${esc(c[0])}</strong> (${c[1] < 1000 ? Math.round(c[1] / 10) * 10 + ' m' : (c[1] / 1000).toFixed(1) + ' km'} away, ${esc(String(c[2] || ''))} homes, ${esc(c[5])}): $${c[6].toLocaleString('en-US')} psf, about $${c[11].toLocaleString('en-US')} psf as a new launch here${c[12] == null ? '' : `; ${c[12].toFixed(1)}% a year over 4 years`}.</li>`).join('')}</ul><p>${esc(s.priceDecide)}</p>
-${s.tx ? `<h2>Latest transactions of the competitors</h2><p>${esc(s.tx.line)}</p><ul>${s.tx.rows.map(r => `<li><strong>${esc(r[0])}</strong>: ${r[2] ? `$${r[2].toLocaleString('en-US')} psf over the last 6 months (${r[3]} resales), ` : ''}${r[4] ? `$${r[4].toLocaleString('en-US')} psf over 12 months (${r[5]} resales)` : esc(String(r[11]))}; this price is ${Math.round(r[14] * 100)}% ${r[14] >= 0 ? 'above' : 'below'} it.</li>`).join('')}</ul>` : ''}${s.land && s.land.rows.length ? `<h2>Land bids nearby</h2><p>${esc(s.land.line)}</p>` : ''}${s.checks && s.checks.length ? `<h2>Other checks</h2><ul>${s.checks.map(r => `<li><strong>${esc(r[0])}: ${esc(r[1])}.</strong> ${esc(r[2])}</li>`).join('')}</ul>` : ''}<h2>Potential gain</h2><p>${esc(s.gain.costs)}</p><ul>${s.gain.scen.map(r => `<li><strong>${esc(r[0])} (${esc(r[1])}):</strong> ${esc(r[2])}</li>`).join('')}</ul>
+${s.tx ? `<h2>Latest transactions of the competitors</h2><p>${esc(s.tx.line)}</p><ul>${s.tx.rows.map(r => `<li><strong>${esc(r[0])}</strong>: ${r[2] ? `$${r[2].toLocaleString('en-US')} psf over the last 6 months (${r[3]} resales), ` : ''}${r[4] ? `$${r[4].toLocaleString('en-US')} psf over 12 months (${r[5]} resales)` : esc(String(r[11]))}; this price is ${Math.round(r[14] * 100)}% ${r[14] >= 0 ? 'above' : 'below'} it.</li>`).join('')}</ul>` : ''}${s.land && s.land.rows.length ? `<h2>Land bids nearby</h2><p>${esc(s.land.line)}</p>` : ''}${s.fplans && s.fplans.types.length ? `<h2>Floor plans compared</h2><ul>${s.fplans.types.map(t => `<li><strong>${esc(t)}:</strong> ${s.fplans.rows[t].map(r => `${esc(r.name)} ${esc(r.type)} (${r.sqft ? r.sqft.toLocaleString('en-US') + ' sq ft, ' : ''}score ${r.sc}/10, efficiency ${r.eff}%${r.stor.length ? ', ' + esc(r.stor.join(', ')) : ', no store'})`).join('; ')}</li>`).join('')}</ul>` : ''}${s.checks && s.checks.length ? `<h2>Other checks</h2><ul>${s.checks.map(r => `<li><strong>${esc(r[0])}: ${esc(r[1])}.</strong> ${esc(r[2])}</li>`).join('')}</ul>` : ''}<h2>Potential gain</h2><p>${esc(s.gain.costs)}</p><ul>${s.gain.scen.map(r => `<li><strong>${esc(r[0])} (${esc(r[1])}):</strong> ${esc(r[2])}</li>`).join('')}</ul>
 <h2>District</h2><p>${esc(s.district.line)}</p>
 <h2>Future buyers</h2><p>${esc(s.exit.line)}</p>
 <h2>Master Plan</h2><p>${esc(s.planLine)}</p>
@@ -736,7 +747,9 @@ function caPage(id) {
     crumbSchema(bc),
   ];
   const body = `<div class="wrap">${crumbs(bc)}</div>\n${markup}\n<script src="/assets/condo-analysis.js?v=${CA.jsV}"></script>`;
-  return layout({ title: meta.title, description: meta.desc, canonical, body, schema, nav: 'analysis', head: `<link rel="stylesheet" href="/assets/condo-analysis.css?v=${CA.cssV}">` });
+  const stdK = f && f.x && CA.std[f.x.id] ? f.x.id : null;
+  const preStd = stdK && STD_VER ? `<link rel="preload" href="/assets/std/${stdK}.json?v=${STD_VER}" as="fetch" crossorigin="anonymous">` : '';
+  return layout({ title: meta.title, description: meta.desc, canonical, body, schema, nav: 'analysis', head: `<link rel="stylesheet" href="/assets/condo-analysis.css?v=${CA.cssV}">${preStd}` });
 }
 
 // ---------- sitemap & llms.txt ----------
