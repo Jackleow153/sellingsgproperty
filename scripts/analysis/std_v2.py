@@ -814,7 +814,8 @@ def build(pid, c):
     points.append(['🏙️', 'Supply and land prices', {'Low': 'good', 'Moderate': 'warn', 'High': 'bad'}[risk], supply['line'] + ' ' + concerns[0][3].split('. ')[0] + '.'])
     # ---------- floor plans compared (Jack, 26 Nov 2026): this project's main layout per bedroom type against the competitors' ----------
     selfk = next((k for k in (pid, c['geo_key'], *c.get('self_slugs', ())) if k in FPD), None)
-    ck = [(_slug(x['name']), x) for x in comps if _slug(x['name']) in FPD and _slug(x['name']) != selfk]
+    fpk = lambda n: next((k for k in (_slug(n), re.sub(r'^the-', '', _slug(n)), 'the-' + _slug(n)) if k in FPD), None)   # 'The Panorama' is stored as 'panorama'
+    ck = [(fpk(x['name']), x) for x in comps if fpk(x['name']) and fpk(x['name']) != selfk]
     if len(ck) < 3:
         extra = sorted(((k, _km(me, g) * 1000) for k, g in PLANGEO.items() if k != selfk and k not in [a for a, _ in ck]), key=lambda t: t[1])
         ck += [(k, {'name': next((x['name'] for x in comps if _slug(x['name']) == k), k.replace('-', ' ').title()), 'dist': round(d), 'key': None}) for k, d in extra if d <= 3000][:3 - len(ck)]
