@@ -14,10 +14,11 @@ import json, os, re, subprocess
 from std_lib import bsd, fmt_money, fmt_q, fmt_pct, income_needed, MEDIAN_INCOME, OUTSTANDING, LEGAL, SELL
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-IDX = {"2024Q4": 203.4, "2025Q1": 205.4, "2025Q2": 206.8, "2025Q3": 208.5, "2025Q4": 208.1, "2026Q1": 210.8, "2026Q2": 210.6, "2026Q3": 212.7}
+IDX = {"2021Q1": 157.1, "2021Q2": 158.8, "2021Q3": 159.9, "2021Q4": 168.4, "2022Q1": 167.9, "2022Q2": 173.9, "2022Q3": 181.6, "2022Q4": 182.1, "2023Q1": 186.8, "2023Q2": 185.7, "2023Q3": 189.8, "2023Q4": 194.2, "2024Q1": 196.1, "2024Q2": 197.3, "2024Q3": 197.5, "2024Q4": 203.4, "2025Q1": 205.4, "2025Q2": 206.8, "2025Q3": 208.5, "2025Q4": 208.1, "2026Q1": 210.8, "2026Q2": 210.6, "2026Q3": 212.7}
 NOW_Q = '2026Q3'
 HARMONISED_FROM = 202306      # launches from June 2023 follow the harmonised floor-area rules
 NEW_PREMIUM, HARMONISE, INTEG, WALK = 0.15, 0.05, 0.10, 0.05
+GROWTH_CAP = 0.047   # URA non-landed index, Q3 2016 to Q3 2026: about 4.7% a year
 INTEGRATED = {'North Park Residences', 'Sengkang Grand Residences', 'The Woodleigh Residences', 'Watertown', 'Bedok Residences',
               'Hillion Residences', 'The Poiz Residences', 'The Venue Residences', 'Park Place Residences', 'Lentor Modern'}
 # 4-year change where URA's 4-year window has too few deals (condos completed 2023): our yearly averages, 2022 to 2026
@@ -238,6 +239,47 @@ def plan_facts(cid, beds):
                 harm=bool(p.get('harm')), svg=b.get('svg') or f"/assets/fp/{cid}-{beds}.svg", pros=p.get('pros', [])[:2], cons=p.get('cons', [])[:2], src=p.get('src'))
 
 
+CBD = {'lat': 1.2840, 'lon': 103.8514}
+RING = lambda g: 'city' if _km(g, CBD) < 6 else 'middle' if _km(g, CBD) < 11 else 'outer'
+RING_NAME = {'city': 'city and city fringe (under 6 km from the CBD)', 'middle': 'middle ring (6 to 11 km from the CBD)', 'outer': 'outer suburbs (11 km or more from the CBD)'}
+
+
+def _cluster_study():
+    """Islandwide test: condos completed 2016-2022, new homes completed within 2 km within a year of them, against their 4-year price change."""
+    rows = []
+    for k, v in COMP['p'].items():
+        h = HOMES.get(k) or {}
+        if h.get('top') and h.get('units') and not v['ec']: rows.append(dict(lat=v['lat'], lon=v['lon'], top=h['top'], u=h['units'], g=v['gA'], n=v['m12'][1]))
+    test = [r for r in rows if 2016 <= r['top'] <= 2022 and r['g'] is not None and r['n'] >= 5]
+    for r in test: r['cl'] = sum(o['u'] for o in rows if o is not r and abs(o['top'] - r['top']) <= 2 and _km(r, o) <= 2)
+    out = {}
+    for ring in ('city', 'middle', 'outer'):
+        sub = sorted([r for r in test if RING(r) == ring], key=lambda r: r['cl']); m = len(sub) // 2
+        if m >= 3: out[ring] = dict(n=len(sub), med=sub[m]['cl'], low=sum(r['g'] for r in sub[:m]) / m, high=sum(r['g'] for r in sub[m:]) / (len(sub) - m))
+    allv = sorted(test, key=lambda r: r['cl']); t = len(allv) // 3
+    out['all'] = dict(n=len(allv), low=sum(r['g'] for r in allv[:t]) / t, high=sum(r['g'] for r in allv[2 * t:]) / (len(allv) - 2 * t))
+    return out
+CLUSTER = _cluster_study()
+
+
+def _passthrough():
+    L = [x for x in LAND if x['launched'] and x['price']]
+    xs = [x['psf'] for x in L]; ys = [x['price'] / x['floor'] - 1 for x in L]; ps = [x['price'] for x in L]; fs = [x['floor'] for x in L]
+    mx, my = sum(xs) / len(xs), sum(ys) / len(ys)
+    sxx = sum((a - mx) ** 2 for a in xs); sxy = sum((a - mx) * (c - my) for a, c in zip(xs, ys)); syy = sum((c - my) ** 2 for c in ys)
+    mf, mp = sum(fs) / len(fs), sum(ps) / len(ps)
+    pt = sum((a - mf) * (b - mp) for a, b in zip(fs, ps)) / sum((a - mf) ** 2 for a in fs)
+    lo = [x for x in L if x['psf'] < 1200]; hi = [x for x in L if x['psf'] >= 1200]
+    return dict(n=len(L), per100=sxy / sxx * 100, corr=sxy / (sxx * syy) ** .5, pass_=pt,
+                lo=(len(lo), sum(x['price'] / x['floor'] - 1 for x in lo) / len(lo)), hi=(len(hi), sum(x['price'] / x['floor'] - 1 for x in hi) / len(hi)))
+PASS = _passthrough()
+PIPE = {'by_year': [[2026, 5012], [2027, 8440], [2028, 9856], [2029, 6866], [2030, 6123], ['after 2030', 2259]], 'unsold': 15810, 'total60': 60600,
+        'src': ['URA, 2nd and 3rd Quarter 2026 real estate statistics (supply in the pipeline by expected completion year, excluding ECs)', 'https://www.ura.gov.sg/Corporate/Media-Room/Media-Releases/pr26-73']}
+SUPPLY_EXTRA = {'one-chuan-grove': [['the third Chuan Grove site', 930, 'on the Reserve List since 27 Oct 2026 and sold only if a developer triggers it']]}
+LAND_EXTRA = {'one-chuan-grove': [['Chuan Park (collective sale)', 116, 1190, 'Jul 2022', 'Launched', be(1190), 2579, '', 2579, 2579, 'launch average', 'Estimate: $890M sale; reports give $1,042 psf ppr at the $938M asking price and $1,256 including the upgrading premium, so about $1,190 at $890M']]}
+ABSD_SRC = ['IRAS, ABSD remission for housing developers (sell all units within 5 years; tiered clawback from 16 Feb 2024)', 'https://iras.gov.sg/taxes/stamp-duty/for-property/appeals-refunds-reliefs-and-remissions/common-stamp-duty-remissions-and-reliefs-for-property/sites-for-development-of-five-or-more-residential-units']
+
+
 _MKT = None
 def market_norm():
     """Average premium of launches selling now (and recently sold) over their closest resale competitors' latest psf (+5% for the
@@ -278,6 +320,7 @@ def _resale_pool(c, radius=3000):
     out = []
     for k, v in COMP['p'].items():
         if bool(v['ec']) != ec or _lh(v['t']) != lh or v['m12'][1] < 3 or _nm(v['n']) in selfn: continue
+        if lh and int((re.match(r'(\d+) years', v['t']) or [0, 99])[1]) < 90: continue   # a short lease (The Hillford, 60 years) is not a fair match for 99 years
         d = _km(me, v) * 1000
         if d > radius: continue
         h = HOMES.get(k) or {}
@@ -298,7 +341,7 @@ def competitors(c):
     pool = _resale_pool(c)
     for x in pool:
         x['size_ok'] = bool(x['units']) and 0.4 * homes <= x['units'] <= 2.5 * homes
-        x['new'] = bool(x['top']) and x['top'] >= 2000
+        x['new'] = bool(x['top']) and x['top'] >= 2005   # completed in the last 20 years (26 Nov 2026: older condos are a poor guide to a new launch)
     me = GEO.get(c['geo_key'])
     for p in RECENT:
         is_ec = 'EC' in p['name'] or 'Executive' in p['type']
@@ -317,10 +360,13 @@ def competitors(c):
     # Then closest first (Jack, 25 Nov 2026): fill from within 1 km before widening to 2 km, then 3 km. Within a band, similar size and
     # newer (completed 2011+ or a recent launch) come first, then any condo completed 2000 or later.
     recent = lambda x: x['kind'] != 'Resale' or (x['top'] or 0) >= 2011
-    for band in (1000, 2000, 3000):
-        for test in (lambda x: x['size_ok'] and recent(x), lambda x: recent(x), lambda x: x['size_ok'] and x['new'], lambda x: x['new']):
-            for x in sorted([y for y in pool if y['dist'] <= band and y not in pick and test(y)], key=lambda y: y['dist']):
-                if len(pick) < 5: pick.append(x)
+    big = lambda x: not x['units'] or x['units'] >= 0.25 * homes   # a boutique of under a quarter of this project's homes is not a fair match (26 Nov 2026)
+    for allow_small in (False, True):
+        for band in (1000, 2000, 3000):
+            for test in (lambda x: x['size_ok'] and recent(x), lambda x: recent(x) and (allow_small or big(x)), lambda x: x['size_ok'] and x['new'], lambda x: x['new'] and (allow_small or big(x))):
+                for x in sorted([y for y in pool if y['dist'] <= band and y not in pick and test(y)], key=lambda y: y['dist']):
+                    if len(pick) < 5: pick.append(x)
+                if len(pick) >= 3: break
             if len(pick) >= 3: break
         if len(pick) >= 3: break
     for x in pick:
@@ -352,11 +398,89 @@ def region_premium(c):
     return sum(v) / len(v), len(v), rk
 
 
+_PP = None
+AGE_MAX = 20
+
+
+def _prem_pairs():
+    """Each launch selling now (or recently sold) against each of its resale competitors: (launch, region, competitor age in years,
+    launch price moved to today over the competitor's same-size resale psf +5% for the old area rules, minus 1)."""
+    global _PP
+    if _PP is not None: return _PP
+    out, ny = [], int(NOW_Q[:4])
+    for l in NLD['L']:
+        if not l.get('avgPsf') or l['id'] not in GEO or l['id'] == 'sophia-meadow': continue
+        lm = _launch_month(l['launch']); ql = f"{lm // 12}Q{(lm % 12) // 3 + 1}" if lm else NOW_Q
+        app = next((p for p in ALLP if _nm(p['name']) == _nm(l['name']) or _nm(p['name']).startswith(_nm(l['name'])[:10])), {})
+        c = dict(name=l['name'], homes=int(re.search(r'\d[\d,]*', l['units']).group().replace(',', '')), geo_key=l['id'], nearby_key=l['id'],
+                 leasehold=_lh(l['tenure']), ec='executive' in l['name'].lower() or l['id'] == 'coastal-cabana', integrated=bool(app.get('mall')), self_slugs=(_slug(app.get('name', '')),))
+        rk = 'CCR' if 'CCR' in l['region'] else 'RCR' if 'RCR' in l['region'] else 'OCR'
+        typs = [(b, layout_psf(l['id'], b)) for b in (1, 2, 3, 4, 5)]
+        typs = [(b, v) for b, v in typs if v] or [(0, dict(psf=l['avgPsf'], sqft=900, sold=1))]
+        for x in competitors(c):
+            if x['kind'] != 'Resale' or not x['top']: continue
+            integ = 1 + (INTEG if c['integrated'] and not x['integ'] else 0); num = den = 0
+            for b, v in typs:
+                m = matched(x['key'], v['sqft'])
+                if not m: continue
+                num += (v['psf'] * IDX[NOW_Q] / IDX.get(ql, IDX[NOW_Q]) / (m['psf'] * (1 + HARMONISE) * integ) - 1) * v['sold']; den += v['sold']
+            if den: out.append((l['name'], rk, ny - x['top'], num / den))
+    _PP = out
+    return out
+
+
+def age_premium(c):
+    """New-launch premium over a resale competitor by the competitor's age (26 Nov 2026, replaces one premium per region): launches
+    selling now carry about 2.6 points more for every year of their competitor's age (113 launch-competitor pairs, 30 launches; age alone
+    explains about 40% of the spread). One level per region (OCR / RCR / CCR; ECs use OCR), one slope, leaving this condo out."""
+    rk = 'CCR' if 'CCR' in c.get('region', '') else 'RCR' if 'RCR' in c.get('region', '') else 'OCR'
+    pp = [p for p in _prem_pairs() if _nm(p[0]) != _nm(c['name'])]; n_all = len(pp)
+    for it in (0, 1):   # fit, then refit without the pairs more than 2 standard deviations from it (e.g. Norwood Grand at 95% over Rosewood Suites)
+        regs = sorted({p[1] for p in pp})
+        ma = {r: sum(p[2] for p in pp if p[1] == r) / sum(1 for p in pp if p[1] == r) for r in regs}
+        mp = {r: sum(p[3] for p in pp if p[1] == r) / sum(1 for p in pp if p[1] == r) for r in regs}
+        b = sum((p[2] - ma[p[1]]) * (p[3] - mp[p[1]]) for p in pp) / sum((p[2] - ma[p[1]]) ** 2 for p in pp)
+        if it == 0:
+            res = [p[3] - (mp[p[1]] + b * (p[2] - ma[p[1]])) for p in pp]; sd = (sum(e * e for e in res) / len(res)) ** .5
+            pp = [p for p, e in zip(pp, res) if abs(e) <= 2 * sd]
+    a = mp[rk] - b * ma[rk]
+    f = lambda age: a + b * max(0, min(AGE_MAX, age)) if age is not None else mp[rk]
+    return f, dict(rk=rk, a0=a, b=b, avg=mp[rk], n=len({p[0] for p in pp if p[1] == rk}), launches=len({p[0] for p in pp}), pairs=len(pp), dropped=n_all - len(pp))
+
+
+def _beta_nl():
+    """How psf changes with unit size in launches selling now (developers' caveats by layout): median log-log slope."""
+    import math
+    sl = []
+    for rows in FPS.values():
+        pts = {}
+        for r in rows:
+            if r[3] and r[6] and r[7] and (r[5] or 0) > 0: pts.setdefault(r[3], []).append(((r[6] + r[7]) / 2, r[5]))
+        if len(pts) < 3: continue
+        xs = [math.log(k) for k in pts]; ys = [math.log(sum(q * w for q, w in v) / sum(w for _, w in v)) for v in pts.values()]
+        mx, my = sum(xs) / len(xs), sum(ys) / len(ys); sxx = sum((u - mx) ** 2 for u in xs)
+        if sxx: sl.append(sum((u - mx) * (w - my) for u, w in zip(xs, ys)) / sxx)
+    sl = sorted(v for v in sl if abs(v) <= 0.5)
+    return (sl[len(sl) // 2] if sl else 0.0), len(sl)
+
+
+BETA_NL, BETA_NL_N = _beta_nl()
+
+
+def _first_sentence(t):
+    """First sentence, not cut at abbreviations such as 'St.' (St. Gabriel's)."""
+    return re.split(r'(?<!\bSt)\.\s', t)[0].rstrip('.')
+
+
 def build(pid, c):
     comps = competitors(c)
-    prem_n, prem_cnt, prem_rk = region_premium(c)
+    prem_f, pinfo = age_premium(c); ny = int(NOW_Q[:4])
     for x in comps:
-        if x['kind'] == 'Resale': x['adj_n'] = prem_n
+        if x['kind'] == 'Resale': x['adj_n'] = prem_f(ny - x['top'] if x['top'] else None)
+    prs = [x['adj_n'] for x in comps if x['kind'] == 'Resale']
+    prem_txt = (f"{min(prs) * 100:.0f}%" if round(min(prs) * 100) == round(max(prs) * 100) else f"{min(prs) * 100:.0f}% to {max(prs) * 100:.0f}%") if prs else ''
+    prem_why = (f"a new-launch premium that rises with each competitor's age ({prem_txt} here): launches selling now in the {pinfo['rk']} charge about {pinfo['a0'] * 100:.0f}% over a just-completed resale "
+                f"and about {pinfo['b'] * 100:.1f} points more for each year of its age ({pinfo['launches']} launches against {pinfo['pairs']} of their resale competitors, this one and the {pinfo['dropped']} most extreme pairs left out)")
     # ---- like-for-like by size (Jack, 26 Nov 2026): each unit type against the competitors' resales of about the same size ----
     sizes = c['sizes']; tm = '3-bed' if '3-bed' in sizes else list(sizes)[0]
     lo0, hi0 = c['expected']; mid0 = (lo0 + hi0) / 2
@@ -369,22 +493,33 @@ def build(pid, c):
         bd = int(t[0]) if t[0].isdigit() else 3
         if own.get(t): f = own[t]['psf'] / mid0; how = 'caveats'
         elif fromp and fromp.get(bd): f = fromp[bd] / (sum(fromp.values()) / len(fromp)); how = 'from'
-        else: f = (S / s_avg) ** beta; how = 'curve'
+        else: f = (S / s_avg) ** BETA_NL; how = 'curve'
         eqs = []
         for x in comps:
             if x['kind'] == 'Resale':
                 m = matched(x['key'], S)
-                if m: eqs.append((x, m, m['psf'] * (1 + x['adj_h']) * (1 + prem_n) * (1 + x['adj_i'])))
+                if not m:   # no resales of this size: estimate from its own nearest size, using the competitors' price-by-size pattern
+                    refs = [(abs(S2 - S), S2, matched(x['key'], S2)) for S2 in sizes.values() if S2 != S]
+                    refs = [r for r in refs if r[2]]
+                    if refs:
+                        _, S2, m2 = min(refs, key=lambda r: r[0])
+                        m = dict(psf=m2['psf'] * (S / S2) ** beta, n=None, win='est', lo=None, hi=None)
+                    else:
+                        t_ = (COMP['p'].get(x['key']) or {}).get('tx') or []
+                        msz = sorted(sq for _, sq, _ in t_)[len(t_) // 2] if t_ else S
+                        m = dict(psf=x['psf'] * (S / msz) ** beta, n=None, win='est', lo=None, hi=None)
+                eqs.append((x, m, m['psf'] * (1 + x['adj_h']) * (1 + x['adj_n']) * (1 + x['adj_i'])))
             else:
                 lp = layout_psf(_slug(x['name']), bd); base_ = lp['psf'] if lp else x['psf']
                 eqs.append((x, dict(psf=base_, n=None, win=None, layout=bool(lp)), base_ * (1 + x['time']) * (1 + x['adj_h']) * (1 + x['adj_i'])))
-        if not eqs: eqs = [(x, dict(psf=x['psf'], n=None, win=None), x['psf'] * (1 + x['adj_h']) * (1 + prem_n) * (1 + x['adj_i'])) for x in comps]
-        bb = round(sum(e for _, _, e in eqs) / len(eqs) / 10) * 10
+        if not eqs: eqs = [(x, dict(psf=x['psf'], n=None, win=None), x['psf'] * (1 + x['adj_h']) * (1 + x['adj_n']) * (1 + x['adj_i'])) for x in comps]
+        le = [e for x_, _, e in eqs if x_['kind'] != 'Resale' and x_['dist'] <= 2000]; re_ = [e for x_, _, e in eqs if x_['kind'] == 'Resale']
+        # a launch of the last 24 months within 2 km is the most direct evidence of today's new-home prices: half the weight (26 Nov 2026)
+        bb = round(((sum(le) / len(le) + sum(re_) / len(re_)) / 2 if le and re_ else sum(e for _, _, e in eqs) / len(eqs)) / 10) * 10
         per[t] = dict(S=S, eqs=eqs, buy=bb, walk=round(bb * (1 + WALK) / 10) * 10, lo=round(lo0 * f / 10) * 10, hi=round(hi0 * f / 10) * 10, mid=mid0 * f, how=how)
     for x in comps:   # competitor table follows the main unit type
         e = next((q for q in per[tm]['eqs'] if q[0] is x), None)
-        if e: x['psf'], x['equiv'] = e[1]['psf'], e[2]; x['basis'] = (f"{tm} size, last {e[1]['win']} months ({e[1]['n']})" if e[1].get('n') else x.get('basis'))
-        if x['kind'] == 'Resale': x['adj_n'] = prem_n
+        if e: x['psf'], x['equiv'] = e[1]['psf'], e[2]; x['basis'] = (f"{tm} size, last {e[1]['win']} months ({e[1]['n']})" if e[1].get('n') else f"{tm} size estimated from its other sizes" if e[1].get('win') == 'est' else x.get('basis'))
     buy = per[tm]['buy']
     me = GEO.get(c['geo_key']); EXS = {}
     # Master Plan / rail catalysts: an existing station within 1 km that gains a Confirmed new line, or listed precinct items
@@ -416,13 +551,15 @@ def build(pid, c):
         if gsrc: break
     if not gsrc: gsrc = [('URA non-landed index, Q3 2016 to Q3 2026', 4.7)]; growth_only.append('index')
     gs = [g for _, g in gsrc]
-    base = round(sum(gs) / len(gs) / 100, 4)
-    g = {'bear': base / 2 if base > 0 else base * 1.5, 'base': base, 'bull': base + bull_add}
+    base_raw = sum(gs) / len(gs) / 100
+    base = round(max(0.0, min(base_raw, GROWTH_CAP)), 4)   # common sense (26 Nov 2026): kept between flat and the market's 10-year pace
+    g = {'bear': round(base_raw, 4) if base_raw < 0 else base / 2, 'base': base, 'bull': base + bull_add}
+    cap_note = f" That averages {base_raw * 100:.1f}% a year, above the market's 10-year pace, so the base case is capped at {GROWTH_CAP * 100:.1f}% (URA non-landed index, 2016 to 2026): 2022 to 2026 included an unusual rise, and a new launch bought at a premium rarely outgrows the market for years." if base_raw > GROWTH_CAP else (f" That averages a fall of {abs(base_raw) * 100:.1f}% a year; a fall carried on for 10 years is not a fair middle case, so the base case is flat and the bear case keeps the fall going." if base_raw < 0 else "")
     n = c['years']
     ex = {k: buy * (1 + v) ** n for k, v in g.items()}
     lo, hi, mid = per[tm]['lo'], per[tm]['hi'], per[tm]['mid']
     RNG = fmt_money(lo) if lo == hi else f'{fmt_money(lo)} to {fmt_money(hi)}'
-    pc0 = lambda v: (f"{v * 100:+.0f}%").replace('-', '−')
+    pc0 = lambda v: '0%' if round(v * 100) == 0 else (f"{v * 100:+.0f}%").replace('-', '−')
     tx = []
     for x in comps:
         if x['kind'] != 'Resale':
@@ -506,7 +643,7 @@ def build(pid, c):
         units[t] = dict(size=sz, xq=xq, inc=inc, up=up, gm=gm, v=v, msr=msr, ex=ext, P=P,
                         tab={lab: {k: gain(e, sz, ext[k]) for k in g} for lab, e in (('buy', P['buy']), ('exp', P['mid']), ('walk', P['walk']))})
     tm = '3-bed' if '3-bed' in units else list(units)[0]; u = units[tm]
-    pct = lambda x: f"{x*100:+.0f}%".replace('+-', '−').replace('-', '−')
+    pct = lambda x: '0%' if round(x * 100) == 0 else f"{x*100:+.0f}%".replace('+-', '−').replace('-', '−')
     yr = lambda x: fmt_pct(((1 + x) ** (1 / n) - 1) * 100) + ' a year'
     # ---------- future buyers (Jack, 26 Nov 2026): who can buy each unit type from you at the sale, using their own capital ----------
     sale_y = c['buy_year'] + int(n); yrs = max(0, sale_y - 2026)
@@ -559,7 +696,7 @@ def build(pid, c):
     if fam: line += f" {' and '.join(fam)} {'is' if len(fam) == 1 else 'are'} the most wanted size{'s' if len(fam) > 1 else ''} in this {prof['kind'].lower()}."
     if walkers: line += f" The {' and '.join(walkers)} {'has' if len(walkers) == 1 else 'have'} a very thin resale pool: buy only to live in."
     reasons = [
-        f"The closest competitors ({comp_names}) work out to about {fmt_money(buy)} psf as a brand-new launch, after adding 5% where they were not built under the harmonised floor-area rules, a {prem_n * 100:.0f}% new-launch premium (what launches selling now in the {prem_rk} charge over their closest resale, {prem_cnt} launches){' and 10% for this project being integrated' if c['integrated'] else ''}.",
+        f"The closest competitors ({comp_names}) work out to about {fmt_money(buy)} psf as a brand-new launch, after adding 5% where they were not built under the harmonised floor-area rules, {prem_why}{', and 10% for this project being integrated' if c['integrated'] else ''}." + (" A launch nearby from the last 2 years counts for half: it is the most direct evidence of what new homes here cost today." if any(x['kind'] != 'Resale' and x['dist'] <= 2000 for x in comps) and any(x['kind'] == 'Resale' for x in comps) else ''),
         f"Bought at the {EXP} {fmt_money(round(mid))} psf, the base case makes about {pct(u['gm']['base'])} after stamp duty and selling costs by {c['buy_year'] + int(n)} ({yr(u['gm']['base'])}); bought at {fmt_money(buy)} psf it makes about {pct(u['tab']['buy']['base'])}.",
         f"Who can buy a {tm} from you (tested at today's {fmt_q(round(mid * u['size'], -3))}; about {fmt_q(round(u['xq'], -3))} by {sale_y} in the base case): " + '; '.join(f"{p[0].split(' (')[0]} {'yes' if p[1] is True else 'with some savings' if p[1] == 'part' else 'no' if p[1] is False else 'see rents'}" for p in u['pools']) + f". Resale pool: {u['rating'].lower()}."]
     if c.get('ec'):
@@ -598,7 +735,7 @@ def build(pid, c):
            ['🛑', 'Walk away', f"Above {fmt_money(walk)} psf (a {best} above about {fmt_q(round(walk * bu['size'], -3))})." + f" The {EXP} {RNG} psf is {'within' if hi <= walk else 'partly above' if lo <= walk else 'above'} that."]]
     if walkers: rec.append(['🚫', 'Own stay only', f"The {(', '.join(walkers[:-1]) + ' and ' + walkers[-1]) if len(walkers) > 1 else walkers[0]}: few buyer groups could fund it today, so buy it only to live in long term."])
     if fam: rec.insert(1, ['🛏️', 'Best size here', f"{' and '.join(fam)}: this is an {prof['kind'].lower()}" + (", and family sizes sell fastest (Thomson Reserve's 3- and 4-bedders sold out at launch; its 2-bedders were the slowest)." if prof['kind'] != 'Rental and investment area' else ', where smaller units suit investors and tenants.')])
-    rec.append(['⏳', 'Hold', f"Plan to keep it until about {c['buy_year'] + int(n)} ({int(n)} years)" + (": the 5-year minimum occupation period applies." if c.get('ec') else ": Seller's Stamp Duty applies if you sell within 4 years.")])
+    rec.append(['⏳', 'Hold', f"Plan to keep it until about {c['buy_year'] + int(n)} ({n:g} years)" + (": the 5-year minimum occupation period applies." if c.get('ec') else ": Seller's Stamp Duty applies if you sell within 4 years.")])
     if ref: rec.append(['🔍', 'Before you book', f"Compare your unit's psf with {ref['name']} ({fmt_money(ref['psf'])} psf, {ref['basis']}) and ask for the price of each stack; a higher floor or better facing should not push you past {fmt_money(walk)} psf."])
     if hi_up: rec.append(['🏗️', 'Watch', f"The {hi_up[0]} launch nearby: likely at about {fmt_money(hi_up[8])}" + (f" to {fmt_money(hi_up[9])}" if hi_up[9] != hi_up[8] else '') + f" psf ({'analysts' if hi_up[10] == 'analysts' else 'our estimate'}). It sets the next price benchmark for this area."])
     gauge = {'tm': tm, 'lo': lo, 'hi': hi, 'buy': buy, 'walk': walk, 'floor': (floor[0] if floor and not c.get('selling') else None), 'next': [hi_up[0], hi_up[8], hi_up[9], 'analysts' if hi_up[10] == 'analysts' else 'estimate'] if hi_up else None,
@@ -610,6 +747,71 @@ def build(pid, c):
     profit = {t: {k: round(pf(x['P']['mid'], x, k), -3) for k in g} for t, x in units.items()}
     profit_buy = {t: round(pf(x['P']['buy'], x), -3) for t, x in units.items()}
     profit = {'exp': profit, 'buy': profit_buy, 'main': best}
+    # ---------- supply and land prices: should buyers worry? (Jack, 26 Nov 2026) ----------
+    ring = RING(me); ly = (c.get('launch_year') or c['buy_year'])
+    newp = []
+    for p_ in ALLP:
+        g_ = GEO.get(_slug(p_['name']))
+        if not g_ or 'lat' not in g_ or _nm(p_['name']) == _nm(c['name']) or _slug(p_['name']) in (c['geo_key'], *c.get('self_slugs', ())) or p_['launchSort'] < 202301: continue
+        d_ = _km(me, g_) * 1000
+        if d_ <= 2000: newp.append([p_['name'], round(d_), p_['units'], p_['launchSort'] // 100, 'Launched' if p_['psf'] and p_['launchSort'] <= 202611 else 'Coming', p_['psf'], p_['launchSort']])
+    newp.sort(key=lambda r: r[1])
+    lm = lambda ls: (ls // 100) * 12 + ls % 100
+    my_ls = c.get('launch_sort') or next((p_['launchSort'] for p_ in ALLP if _slug(p_['name']) in (c['geo_key'], *c.get('self_slugs', ())) or _nm(p_['name']) == _nm(c['name'])), ly * 100 + 6)
+    same = [r for r in newp if abs(lm(r[6]) - lm(my_ls)) <= 30 and r[2]]   # launches within about 2.5 years: they complete within about 2 years of each other
+    cl_homes = sum(r[2] for r in same)   # other new homes completing within about 2 years of this one (launch years as a proxy)
+    depth = sum(v['m12'][1] for v in COMP['p'].values() if not v['ec'] == (not c.get('ec')) and _km(me, v) <= 2)
+    cs = CLUSTER.get(ring)
+    drag = (cs['low'] - cs['high']) if cs else 0
+    risk = 'High' if cs and cl_homes > 1.5 * max(cs['med'], 400) and drag > 0.5 else 'Moderate' if cs and cl_homes > max(cs['med'], 400) else 'Low'
+    sup_ans = (f"Besides this project's own {c['homes']:,} homes, " + (f"about {cl_homes:,} new homes within 2 km launch within about 2 years of it ({', '.join(r[0] for r in same[:4])})" if same else "no other new homes within 2 km launch within about 2 years of it") + f"; the condo resale market within 2 km handles about {depth:,} resales a year. "
+               + (f"Our test of {cs['n']} condos completed 2016 to 2022 in the {RING_NAME[ring]}: those with more than {cs['med']:,} other new homes completing within 2 km and 2 years grew {cs['high']:.1f}% a year over the past 4 years, against {cs['low']:.1f}% for those with fewer (URA caveats). " if cs else '')
+               + {'High': 'That points to a real drag on resale prices around completion: plan to hold longer, and pick the unit types and stacks that stand out.',
+                  'Moderate': 'Expect some competition when units complete together, mainly on rents and resale speed, but no collapse: the local buyer pool is deep.',
+                  'Low': 'Supply nearby is not a big concern here.'}[risk])
+    lr = sorted(land_rows + LAND_EXTRA.get(pid, []), key=lambda r: r[1])
+    if c.get('land'): lr = lr + [[c['name'] + ' (this project)', 0, c['land'], '', 'This project', be(c['land']), None, f"{tm} at about {fmt_money(round(mid))} psf ({EXP})", 0, 0, '']]
+    prior = [r for r in lr if r[4] == 'Launched' and r[6]]
+    land_ans = ''
+    if c.get('land') and prior:
+        pr = max(prior, key=lambda r: r[2])
+        pa = next((p_ for p_ in ALLP if _nm(p_['name']).startswith(_nm(pr[0].split(' (')[0])[:10])), None)
+        tq = _q(pa['launchSort']) if pa else NOW_Q; mkt = IDX[NOW_Q] / IDX.get(tq, IDX[NOW_Q]) - 1
+        dl, db, dp = c['land'] / pr[2] - 1, be(c['land']) / pr[5] - 1, mid / pr[6] - 1
+        rr = (1 + dp) / (1 + mkt) - 1
+        real_txt = 'about the same as its buyers did' if abs(rr) < 0.01 else f"about {abs(rr) * 100:.0f}% {'more' if rr > 0 else 'less'} than its buyers did"
+        land_ans = (f"This site's land ({fmt_money(c['land'])} psf ppr) cost {pc0(dl)} more than {pr[0]}'s ({fmt_money(pr[2])}), which lifts the developer's break-even by about {pc0(db)}. "
+                    f"A {tm} here at about {fmt_money(round(mid))} psf is {pc0(dp)} above {pr[0]}'s {fmt_money(pr[6])} launch average; private prices have risen about {pc0(mkt)} since then (URA index), so in today's money you pay {real_txt}, "
+                    + ("while the developer's costs rose more: the developer absorbs most of the higher land bid. " if (1 + dp) / (1 + mkt) - 1 < db else "about as much as the developer's higher costs: the land bid is being passed on. "))
+    land_ans += (f"Across {PASS['n']} launches since 2023, launch prices rose roughly dollar for dollar with break-even (about ${PASS['pass_'] * 100:.0f} per $100), so developers kept a similar dollar margin while their percentage margin shrank "
+                 f"({PASS['hi'][1] * 100:.0f}% above break-even on land of $1,200 psf ppr or more, {PASS['lo'][1] * 100:.0f}% on cheaper land). Part of that is location: dearer land is usually where homes sell for more anyway. "
+                 f"So a high bid does show up in prices, but only as far as buyers will pay against nearby homes. The test that protects you is the price against same-size competitors: our buy-at and walk-away prices.")
+    clock = ''
+    adate = re.search(r'(20\d\d)', str(c.get('land_src', '')) + ' ' + ' '.join(str(f_[4]) for f_ in c.get('facts', []) if 'Land' in f_[0]))
+    if c.get('selling') and c.get('absorb'):
+        u_, sp_, mo_ = c['absorb']
+        clock = (f"{sp_}% sold so far. Developers must sell every unit within 5 years of buying the land or repay most of a 40% stamp duty (IRAS); "
+                 + ("with most units sold, there is little pressure to cut prices." if sp_ >= 80 else "with many units left, late discounts or deals on slower stacks are possible as the deadline nears, but the best stacks rarely get cheaper."))
+    else:
+        clock = "Developers must sell every unit within 5 years of buying the land or repay most of a 40% stamp duty (IRAS). That pushes them to price to sell at launch; slow sellers sometimes offer deals near the deadline, but the best stacks rarely get cheaper."
+    nxt_ans = ((f"The next launch nearby, {hi_up[0]}, is likely at about {fmt_money(hi_up[8])}" + (f" to {fmt_money(hi_up[9])}" if hi_up[9] != hi_up[8] else '') + f" psf, {'above' if hi_up[8] > mid else 'close to' if hi_up[9] >= mid * .97 else 'below'} this project's {tm}. "
+                + ("Waiting for it is unlikely to get you a cheaper new home here, and a dearer neighbour helps support this project's resale price." if hi_up[8] >= mid else "A cheaper neighbour later could cap this project's resale price; compare both before committing."))
+               if hi_up else "No other land site nearby is waiting to launch, so there is no newer, cheaper launch to wait for here.")
+    pipe_ans = (f"Islandwide, about {sum(y[1] for y in PIPE['by_year'] if y[0] in (2027, 2028)):,} private homes complete in 2027 and 2028 and {PIPE['unsold']:,} homes in the pipeline were still unsold at mid-2026 (URA). "
+                "That is enough to keep price growth moderate, but local supply and the local buyer pool matter more for your resale.")
+    concerns = [['🏙️', 'Will too many new condos nearby hurt my price?', risk, sup_ans],
+                ['💸', 'The developer paid more for the land. Am I paying more?', 'Low' if mid <= buy else 'Moderate' if mid <= walk else 'High', land_ans],
+                ['🏷️', 'Will the developer cut prices later?', 'Low' if (c.get('absorb') and c['absorb'][1] >= 80) else 'Moderate', clock],
+                ['⏳', 'Should I wait for the next launch nearby?', 'Low' if (not hi_up or hi_up[8] >= mid) else 'Moderate', nxt_ans],
+                ['🇸🇬', 'What about supply across Singapore?', 'Moderate', pipe_ans]]
+    extra_sup = SUPPLY_EXTRA.get(pid, [])
+    if extra_sup: sup_ans += ' ' + ' '.join(f"Possible extra supply: {e[0]} (about {e[1]:,} homes), {e[2]}." for e in extra_sup)
+    supply = {'risk': risk, 'ring': RING_NAME[ring], 'homes': cl_homes, 'depth': depth, 'projects': newp[:8], 'ladder': [r[:7] + [r[11] if len(r) > 11 else (r[7] if r[4] == 'This project' else '')] for r in lr], 'concerns': concerns,
+              'pipe': PIPE['by_year'],
+              'line': (f"Supply risk here: {risk.lower()}. " + ("You are not paying for the developer's land bid: you pay what same-size competitors support. " if mid <= walk else "The price is above what same-size competitors support, whatever the land cost. ")
+                       + ("No cheaper new launch is coming nearby." if (not hi_up or hi_up[8] >= mid) else "A cheaper new launch may come nearby."))}
+    EXS['pipe'] = PIPE['src']; EXS['absd_dev'] = ABSD_SRC
+    points.append(['🏙️', 'Supply and land prices', {'Low': 'good', 'Moderate': 'warn', 'High': 'bad'}[risk], supply['line'] + ' ' + concerns[0][3].split('. ')[0] + '.'])
     # ---------- floor plans compared (Jack, 26 Nov 2026): this project's main layout per bedroom type against the competitors' ----------
     selfk = next((k for k in (pid, c['geo_key'], *c.get('self_slugs', ())) if k in FPD), None)
     ck = [(_slug(x['name']), x) for x in comps if _slug(x['name']) in FPD and _slug(x['name']) != selfk]
@@ -653,7 +855,7 @@ def build(pid, c):
                ['Walk away above', f"{fmt_money(walk)} psf", f"{tm} about {fmt_q(round(walk * u['size'], -3))}. This project's {tm}: about {RNG}"],
                ['Potential gain', pct(u['gm']['base']), f"Base case after costs by {c['buy_year'] + int(n)}, bought at {fmt_money(round(mid))} psf ({yr(u['gm']['base'])}). Bear {pct(u['gm']['bear'])}, bull {pct(u['gm']['bull'])}"]],
      'verdict': {'line': line, 'reasons': reasons,
-                 'suits': f"Buyers who can buy at or below about {fmt_money(walk)} psf and plan to live here for 5 years or more. {c['who'].split('.')[0]}.",
+                 'suits': f"Buyers who can buy at or below about {fmt_money(walk)} psf and plan to live here for 5 years or more. {_first_sentence(c['who'])}.",
                  'skip': ('Buyers who would have to pay above the walk-away price, or who may need to sell before the 5-year minimum occupation period ends.' if c.get('ec') else 'Buyers who would have to pay above the walk-away price, or sell within the 4-year Seller\'s Stamp Duty period.'),
                  'change': [(f"If the developer prices a {tm} at or below about {fmt_money(buy)} psf, it is in line with its closest competitors." if c.get('selling') else f"If the {tm} launches at or below about {fmt_money(buy)} psf, it is priced in line with its closest competitors."),
                             'If a closer or newer competitor launches or resells at a different price, the buy-at and walk-away prices move with it.',
@@ -672,11 +874,12 @@ def build(pid, c):
                   + "Near-twins come first: up to two condos within 1.5 km with a similar number of homes (half to double) completed in 2016 or later. Then every suitable condo within 1 km (same tenure, completed 2011 or later first), widening to 2 km and 3 km only if fewer than 3"
                   + (". Resale ECs past their 5-year minimum occupation period sell to any Singaporean or PR" if c.get('ec') else '; executive condos are left out')
                   + ". Resale prices are URA medians for the last 6 months where there were at least 5 resales, otherwise the last 12 months. Condos launched before June 2023 measured their areas under the old rules (including air-con ledges), so their psf is raised 5% to compare like for like.",
-     'priceDecide': f"Like for like by size: for each unit type we take each resale competitor's average psf for units within about 15% of that size (last 6 months, or 12 or 24 if too few). Each is raised by the {prem_n * 100:.0f}% new-launch premium that launches selling now in the {prem_rk} carry over their closest resale ({prem_cnt} launches). Buy at or below = the average of the competitors' new-launch equivalents for that size; walk away above = 5% more. " + '; '.join(f"{t}: buy at or below {fmt_money(per[t]['buy'])}, walk away above {fmt_money(per[t]['walk'])}, this project about {fmt_money(round(per[t]['mid']))} psf" for t in sizes) + ". " + ("This project's price by unit type is from the developer's caveats. " if any(per[t]['how'] == 'caveats' for t in sizes) else "This project's price by unit type follows the developer's launch 'from' prices. " if any(per[t]['how'] == 'from' for t in sizes) else f"This project's price by unit type follows how psf changes with size among the competitors (smaller units usually cost more per sq ft). ") + f" " + ("No developer floor can be worked out: the developers already owned the land." if floor is None else f"The developer breaks even at about {fmt_money(floor[0])} psf (EdgeProp's method); launches since 2023 priced on average {MARGIN['avg'] * 100:.0f}% above break-even, which points to about {fmt_money(floor[1])} psf" + (', so expect the launch above our buy-at price.' if buy < floor[0] else '.')),
+     'prem': {'txt': prem_txt, 'rk': pinfo['rk'], 'a0': round(pinfo['a0'], 3), 'b': round(pinfo['b'], 4), 'n': pinfo['launches'], 'pairs': pinfo['pairs']},
+     'priceDecide': f"Like for like by size: for each unit type we take each resale competitor's average psf for units within about 15% of that size (last 6 months, or 12 or 24 if too few). Where a competitor has too few resales of a size, that size is estimated from its own nearest size, so every unit type is judged against the same competitors. Each is raised by {prem_why}. Buy at or below = the average of the competitors' new-launch equivalents for that size (a launch nearby from the last 2 years counts for half); walk away above = 5% more. " + '; '.join(f"{t}: buy at or below {fmt_money(per[t]['buy'])}, walk away above {fmt_money(per[t]['walk'])}, this project about {fmt_money(round(per[t]['mid']))} psf" for t in sizes) + ". " + ("This project's price by unit type is from the developer's caveats. " if any(per[t]['how'] == 'caveats' for t in sizes) else "This project's price by unit type follows the developer's launch 'from' prices. " if any(per[t]['how'] == 'from' for t in sizes) else f"This project's price by unit type follows how psf changes with size in launches selling now (developers' caveats, {BETA_NL_N} launches): it changes little, about {(2 ** BETA_NL - 1) * 100:+.0f}% per sq ft for a unit twice the size. ") + ("No developer floor can be worked out: the developers already owned the land." if floor is None else f"The developer breaks even at about {fmt_money(floor[0])} psf (EdgeProp's method); launches since 2023 priced on average {MARGIN['avg'] * 100:.0f}% above break-even, which points to about {fmt_money(floor[1])} psf" + (', so expect the launch above our buy-at price.' if buy < floor[0] else '.')),
      'gain': {'timeline': c['timeline'],
               'costs': ("No Seller's Stamp Duty: the sale is after the 5-year minimum occupation period. " if c.get('ec') else '') + "Potential gain is after Buyer's Stamp Duty at IRAS rates, about $6,000 legal fees and a 2% agent fee plus 9% GST when you sell. Loan interest, property tax, maintenance and rent are not included.",
-              'scen': [['Bear', f"{g['bear']*100:.1f}% a year", ('Half the base case' if base > 0 else 'One and a half times the base-case fall') + ': competing supply at the exit, or a softer market.'],
-                       ['Base', f"{g['base']*100:.1f}% a year", ("No condo nearby has a suitable record (a 3-bed price change over 4 years with at least 10 resales in the past year), so we use URA's islandwide non-landed index: 4.7% a year from Q3 2016 to Q3 2026." if growth_only == ['index'] else "The average yearly 3-bed price change over the past 4 years (URA caveats) of the competitors with a suitable record (at least 10 resales in the past year)" + (f", widened to the nearest suitable condos: {', '.join(growth_only)}" if growth_only and growth_only != ['index'] else '') + ': ' + ', '.join(f"{n} {v:.1f}%" for n, v in gsrc) + '. That period included the 2022–2023 rise.')],
+              'scen': [['Bear', f"{g['bear']*100:.1f}% a year", ('The competitors\' own fall over the past 4 years carries on' if base_raw < 0 else 'Half the base case') + ': competing supply at the exit, or a softer market.'],
+                       ['Base', f"{g['base']*100:.1f}% a year", ("No condo nearby has a suitable record (a 3-bed price change over 4 years with at least 10 resales in the past year), so we use URA's islandwide non-landed index: 4.7% a year from Q3 2016 to Q3 2026." if growth_only == ['index'] else "The average yearly 3-bed price change over the past 4 years (URA caveats) of the competitors with a suitable record (at least 10 resales in the past year)" + (f", widened to the nearest suitable condos: {', '.join(growth_only)}" if growth_only and growth_only != ['index'] else '') + ': ' + ', '.join(f"{n} {v:.1f}%" for n, v in gsrc) + '. That period included the 2022–2023 rise.' + cap_note)],
                        ['Bull', f"{g['bull']*100:.1f}% a year", bull_why]],
               'rows': [[t, lab, fmt_money(round(e)), pct(x['tab'][k]['bear']), pct(x['tab'][k]['base']), pct(x['tab'][k]['bull']), yr(x['tab'][k]['base'])]
                        for t, x in units.items() for k, lab, e in (('buy', 'Buy-at', x['P']['buy']), ('exp', EXP.capitalize(), x['P']['mid']), ('walk', 'Walk-away', x['P']['walk']))],
@@ -705,7 +908,7 @@ def build(pid, c):
      'compare': [[c['name'] + f" ({EXP})", RNG.replace(' to ', '–'), '', '', f"About {pct(u['gm']['base'])} by {c['buy_year'] + int(n)}"]] + c['compare'],
      'faq': [[q, a if a else f"At the {EXP} {RNG} psf, the base case makes about {pct(u['gm']['base'])} by {c['buy_year'] + int(n)} after stamp duty and selling costs ({yr(u['gm']['base'])}). Bought at about {fmt_money(buy)} psf, in line with its closest competitors, it makes about {pct(u['tab']['buy']['base'])}."] for q, a in c['faq_extra']]
             + [[f"What price should I pay for a {tm}?", f"At or below about {fmt_money(buy)} psf, about {fmt_q(round(buy * u['size'], -3))} for {u['size']:,} sq ft, in line with its closest competitors. Walk away above about {fmt_money(walk)} psf ({fmt_q(round(walk * u['size'], -3))}). These are estimates until the developer releases prices."]],
-     'points': points, 'rec': rec, 'gauge': gauge, 'steps': steps, 'profit': profit, 'fplans': fpl,
+     'points': points, 'rec': rec, 'gauge': gauge, 'steps': steps, 'profit': profit, 'fplans': fpl, 'supply': supply,
      'src': S,
     }
     return std
