@@ -11,7 +11,7 @@ SellingSgProperty is an educational and property advisory platform operated by C
 ## Tools
 
 - COV Calculation — An estimate to help an HDB buyer see a realistic resale price before paying cash over valuation. Postal code, unit number, and floor area in sq ft. Drawn from published HDB resale transactions. A sense-check, not an official HDB valuation and not a guarantee of zero COV: https://www.sellingsgproperty.com/cov.html
-- Undervalued Pty — Condo Buy-Low Screen. Compares older Singapore private condo resale medians with newer resale condos and post-launch projects in the same postal district, using URA private residential caveats. Shows the price gap and the size-adjusted gap. A separate section shows registered HDB resale gaps for the same town and flat type, using the HDB open dataset. Those HDB prices are not mixed into the URA condo medians: https://www.sellingsgproperty.com/undervalued-pty/
+- Find Undervalued Singapore Property (condos and HDB, by district). Each completed Singapore condo is compared with its closest like-for-like competitors (same tenure, similar project size, within 1 km or 2 km, same unit size, adjusted for building age) from URA caveats; a condo is undervalued when its resales average at least 10% below what those competitors support and it passes robustness and rent checks. Includes a top 10 by price gap, condos selling now judged against their buy-at prices, and separate HDB resale gaps (older vs newer lease, same town and flat type, HDB open data): https://www.sellingsgproperty.com/undervalued-pty/
 
 ## New Launch Projects (2024–2027)
 

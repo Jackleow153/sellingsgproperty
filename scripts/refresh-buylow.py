@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Weekly HDB resale refresh for the Undervalued Pty page.
 
-The URA private-condo screen in undervalued-pty/index.html stays as it is.
-This script writes a separate section on the same page from registered HDB
-resale prices. Those prices are never folded into the URA caveat medians.
+The condo screen on the same page is written by scripts/build-value-page.py
+(value:* markers) from scripts/analysis/value_screen.py; this script never
+touches it. It writes a separate section from registered HDB resale prices.
+Those prices are never folded into the URA condo comparison.
 
 The live source is the Housing & Development Board dataset "Resale flat
 prices based on registration date, from Jan 2017 onwards" on data.gov.sg
@@ -403,12 +404,12 @@ def build_document(raw_rows: list[dict], source: str, as_of: datetime) -> dict:
     elif source == "hdb":
         lead = (
             "Registered HDB resale prices from the HDB open dataset on data.gov.sg, cleaned on "
-            + when + ". These are past transactions, not asking prices, and they are not mixed into the URA condo medians below."
+            + when + ". These are past transactions, not asking prices, and they are not mixed into the condo comparison."
         )
     else:
         lead = (
             "HDB-shaped resale rows from a local file, cleaned on "
-            + when + ". These are past transactions, not asking prices, and they are not mixed into the URA condo medians below."
+            + when + ". These are past transactions, not asking prices, and they are not mixed into the condo comparison."
         )
     note = (
         f"{lead} Resales in this screen were registered from {span}. "
