@@ -7,7 +7,7 @@
 Selling-now condos come from their condo analyses (assets/std/<id>.json, built by scripts/build-pages.cjs), so run the
 site build first when those change. The HDB section (listed-now markers, scripts/refresh-buylow.py) is never touched.
 """
-import glob, html, json, os, re, sys
+import datetime, glob, html, json, os, re, sys
 from collections import Counter, defaultdict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -18,10 +18,14 @@ from value_screen import DNAME, REGION_BY_D  # noqa: E402
 class VS: DNAME, REGION_BY_D = DNAME, REGION_BY_D
 
 PAGE = os.path.join(ROOT, 'undervalued-pty', 'index.html')
-CHECKED = '27 Nov 2026'
 COMP = json.load(open(os.path.join(ROOT, 'data', 'comp-tx.json')))
 VD = json.load(open(os.path.join(ROOT, 'data', 'value-screen.json')))
 R = VD['rows']
+# 'Updated' is the day the value screen last ran on fresh data (value_screen.py stamps it), not the day this page was rebuilt
+CHECKED_ISO = VD.get('checked', '2026-11-27')
+_cd = datetime.date.fromisoformat(CHECKED_ISO)
+CHECKED = f"{_cd.day} {_cd.strftime('%b %Y')}"
+CROSSCHECK = '27 Nov 2026'   # the Stacked Homes cross-check of the flagged condos
 E = html.escape
 
 
@@ -407,7 +411,7 @@ METHOD = f"""
         <ul>
           <li><strong>Not screened:</strong> condos completed before 2004, leases under 90 years, condos with fewer than 3 resales of a unit size in 12 months, and condos with fewer than 2 suitable competitors within 2 km.</li>
           <li><strong>Districts:</strong> {DSRC.get('URA caveats', 0)} condos from URA caveats, {sum(v for k, v in DSRC.items() if k and k.startswith('same street'))} from another condo on the same street in URA caveats, {DSRC.get('Stacked Homes condo directory', 0)} from the Stacked Homes condo directory.</li>
-          <li><strong>Cross-checks ({CHECKED}):</strong> completion year, number of homes, tenure, district and recent prices of the condos on the undervalued and check-why lists were compared with the Stacked Homes condo directory. Where it disagreed on the number of homes (Waterscape at Cavenagh: 70 there, 200 on EdgeProp, 99.co and listing sites), the majority figure is used.</li>
+          <li><strong>Cross-checks ({CROSSCHECK}):</strong> completion year, number of homes, tenure, district and recent prices of the condos on the undervalued and check-why lists were compared with the Stacked Homes condo directory. Where it disagreed on the number of homes (Waterscape at Cavenagh: 70 there, 200 on EdgeProp, 99.co and listing sites), the majority figure is used.</li>
         </ul>
       </section>
       <p class="src">Sources: URA private residential transactions (caveats, resales only, {COMP['m12']}) and rental contracts ({COMP['rentQ'].upper()}) from the URA data service; URA private residential price index, non-landed, Q3 2026 (data.gov.sg); completion year, homes and location from EdgeProp project pages and OneMap; districts from URA caveats and the Stacked Homes condo directory; selling-now prices and buy-at prices from this site's condo analyses. Checked {CHECKED}.</p>
@@ -536,7 +540,7 @@ LD_APP = {
     "name": "Find Undervalued Singapore Property", "alternateName": "Undervalued Condo Screen", "applicationCategory": "BusinessApplication",
     "applicationSubCategory": "Property comparison", "operatingSystem": "Web", "url": "https://www.sellingsgproperty.com/undervalued-pty/",
     "description": f"Free screen of {N_COND} Singapore resale condos and {len(SELL)} condos selling now, grouped by postal district. A condo is undervalued when it sells at least 10% below what its closest like-for-like competitors support: same tenure, similar project size, within 1 km (2 km if needed), same unit size, age-adjusted, from URA caveats. Separate HDB resale gaps.",
-    "dateModified": "2026-11-27", "isAccessibleForFree": True, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "SGD"},
+    "dateModified": CHECKED_ISO, "isAccessibleForFree": True, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "SGD"},
     "featureList": ["Compare each resale condo with its closest competitors of the same tenure and similar project size",
                     "Competitors within 1 km first, 2 km only if needed", "Like-for-like prices at the same unit size, adjusted for building age",
                     "Rent check against the same competitors", "Condos selling now judged by their buy-at prices", "Grouped by postal district",
@@ -742,9 +746,12 @@ def main():
     art = page.index('"@type": "Article"')
     seg = page[art:page.index('</script>', art)]
     seg2 = re.sub(r'"description": "[^"]*"', lambda m: '"description": ' + json.dumps(desc), seg, count=1)
-    seg2 = re.sub(r'"dateModified": "[^"]*"', '"dateModified": "2026-11-27"', seg2, count=1)
+    seg2 = re.sub(r'"dateModified": "[^"]*"', '"dateModified": "' + CHECKED_ISO + '"', seg2, count=1)
     page = page.replace(seg, seg2)
     open(PAGE, 'w').write(page)
+    sm = os.path.join(ROOT, 'sitemap.xml'); t = open(sm).read()
+    t2 = re.sub(r'(<loc>https://www\.sellingsgproperty\.com/undervalued-pty/</loc>\s*<lastmod>)[^<]*', lambda m: m.group(1) + CHECKED_ISO, t)
+    if t2 != t: open(sm, 'w').write(t2)
     print(f'wrote {os.path.relpath(PAGE, ROOT)}: {N_COND} resale condos, {N_U} undervalued, {len(SELL)} selling ({N_SELL_U} 10%+ below buy-at); {len(page):,} bytes; desc {len(desc)} chars')
 
 

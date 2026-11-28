@@ -14,7 +14,7 @@ For every completed condo with recent resales (URA caveats, data/comp-tx.json), 
 Selling and post-launch condos come from the condo analyses (their buy-at prices, same rules, 1 km then 2 km then 3 km).
 Run: python3 scripts/analysis/value_screen.py  ->  data/value-screen.json
 """
-import json, math, os, re, statistics, sys
+import datetime, json, math, os, re, statistics, sys
 sys.path.insert(0, os.path.dirname(__file__))
 import std_v2 as S
 
@@ -232,6 +232,6 @@ def verdicts(res):
 if __name__ == '__main__':
     fit_slopes(); print('age slopes', {k: f"{v * 100:.2f}% a year ({PAIRS[k]} pairs)" for k, v in SLOPE.items()})
     res = verdicts(screen())
-    json.dump(dict(asOf=S.COMP.get('asOf'), m12=S.COMP.get('m12'), slopes=SLOPE, pairs=PAIRS, rows=res),
+    json.dump(dict(checked=datetime.date.today().isoformat(), asOf=S.COMP.get('asOf'), m12=S.COMP.get('m12'), slopes=SLOPE, pairs=PAIRS, rows=res),
               open(os.path.join(ROOT, 'data', 'value-screen.json'), 'w'), separators=(',', ':'))
     print(len(res), 'condo-size bands screened;', len({r['key'] for r in res}), 'condos')
