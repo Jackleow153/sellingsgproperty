@@ -757,6 +757,7 @@ NAV_HTML = """
         <a href="/insights/">Insights</a>
         <a href="/news/" class="active" aria-current="page">News</a>
         <a href="/undervalued-pty/">Undervalued Pty</a>
+        <a href="/hdb-resale-timeline/">HDB Resale Timeline</a>
         <a href="/condo-analysis/">Condo Analysis</a>
         <a href="/contact/">Get my free situation check.</a>
         <a href="/mortgage-calculator/">Mortgage loan calculator</a>
@@ -770,6 +771,7 @@ NAV_HTML = """
       <a href="/insights/">Insights</a>
       <a href="/news/" class="active" aria-current="page">News</a>
       <a href="/undervalued-pty/">Undervalued Pty</a>
+        <a href="/hdb-resale-timeline/">HDB Resale Timeline</a>
       <a href="/condo-analysis/">Condo Analysis</a>
       <a href="/contact/">Get my free situation check.</a>
       <a href="/mortgage-calculator/">Mortgage loan calculator</a>

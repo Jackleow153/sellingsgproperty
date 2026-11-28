@@ -11,9 +11,124 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HDB Resale Transaction Timeline · Projector</title>
-<meta name="description" content="Enter your OTP grant and exercise dates to project the seven key milestones of your HDB resale transaction, through to key handover.">
+<title>HDB Resale Timeline Calculator: OTP to Keys in Days | SellingSgProperty</title>
+<meta name="description" content="Enter your OTP grant date to project every step of an HDB resale in days: valuation, OTP exercise, resale application, HDB acceptance, endorsement, approval and key handover.">
 <link rel="canonical" href="https://www.sellingsgproperty.com/hdb-resale-timeline/">
+<meta property="og:title" content="HDB Resale Timeline Calculator: OTP to Keys in Days">
+<meta property="og:description" content="Enter your OTP grant date to project every step of an HDB resale in days: valuation, OTP exercise, resale application, HDB acceptance, endorsement, approval and key handover.">
+<meta property="og:url" content="https://www.sellingsgproperty.com/hdb-resale-timeline/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_SG">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "@id": "https://www.sellingsgproperty.com/hdb-resale-timeline/#app",
+ "name": "HDB Resale Timeline Calculator",
+ "url": "https://www.sellingsgproperty.com/hdb-resale-timeline/",
+ "description": "Free calculator that projects every step of a Singapore HDB resale in days, from OTP to key handover: Request for Value, OTP exercise, resale application, HDB acceptance, endorsement, approval and completion, checked against HDB's rules.",
+ "applicationCategory": "BusinessApplication",
+ "operatingSystem": "Web",
+ "isAccessibleForFree": true,
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "SGD"
+ },
+ "dateModified": "2026-11-28",
+ "author": {
+  "@id": "https://www.sellingsgproperty.com/#jackleow"
+ },
+ "provider": {
+  "@id": "https://www.sellingsgproperty.com/#organization"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How long does an HDB resale take from OTP to keys?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "About 100 to 120 days. The buyer has 21 days to exercise the OTP, both parties then submit the resale application, HDB accepts it within up to 28 working days, and completion follows within 8 weeks (56 days) of acceptance. In a real case, both portions were submitted on 20 Oct 2026 and the resale completed on 18 Jan 2027, 90 days later."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How long is the OTP option period for an HDB resale flat?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "21 calendar days. The buyer must exercise the Option to Purchase by 4pm on the 21st calendar day after it is granted. The option fee is $1 to $1,000, and the option and exercise fees together cannot exceed $5,000."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "When must the buyer submit the Request for Value?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "By the next working day after the option date, if the buyer needs HDB's valuation, for example for a housing loan or CPF use. HDB says the value is typically available on the HDB Flat Portal within 10 working days."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How long does HDB take to accept a resale application?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Up to 28 working days after both parties have submitted their portions, if everything is in order. Either party may submit first; the other must submit within 7 calendar days. HDB tells both parties by SMS and email when it accepts."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "When do the buyer and seller endorse the resale documents?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "HDB prepares the documents about 3 weeks after it accepts the application. Both parties endorse them on the HDB Flat Portal and pay the fees online within the time HDB gives, or the application may be cancelled. HDB grants approval once all documents are endorsed."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "When is the HDB resale completion date?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Within 8 weeks (56 days) of HDB's acceptance of the resale application, on the date stated in HDB's acceptance letter. HDB treats that date as the earliest possible completion and will not bring it forward."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can the seller stay in the flat after completion?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes, if the buyer agrees. HDB allows a temporary extension of stay of up to 3 months from the resale completion date, and no further extension beyond that."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Home",
+   "item": "https://www.sellingsgproperty.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "HDB Resale Timeline",
+   "item": "https://www.sellingsgproperty.com/hdb-resale-timeline/"
+  }
+ ]
+}
+</script>
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/fraunces-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>/* Inter + Fraunces + JetBrains Mono (SIL OFL 1.1; licences in /assets/fonts/), self-hosted instead of Google Fonts */
@@ -59,26 +174,6 @@
     max-width: 780px;
     margin: 0 auto;
     padding: 48px 28px 96px;
-  }
-
-  /* ============ Header ============ */
-  .brand {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--mute);
-    margin-bottom: 32px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .brand::before {
-    content: '';
-    display: block;
-    width: 28px;
-    height: 1px;
-    background: var(--mute-2);
   }
 
   h1 {
@@ -572,6 +667,34 @@
     .notes { padding: 22px 20px; }
   }
 
+
+  .byline { font-size: 14px; color: var(--mute); margin: -8px 0 28px; }
+  .byline a { color: var(--ink); }
+  .hero-date.range { font-size: 40px; }
+  .guide { margin-top: 48px; display: grid; gap: 14px; }
+  .guide h2 { font-family: var(--serif); font-weight: 500; font-size: 28px; line-height: 1.15; margin: 0; }
+  .guide p { color: var(--mute); line-height: 1.6; margin: 0; }
+  .guide-table { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; }
+  .guide table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  .guide th, .guide td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+  .guide th { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); background: var(--panel-soft); }
+  .guide td:first-child { font-weight: 600; min-width: 130px; }
+  .guide td:nth-child(2) { min-width: 140px; }
+  .guide td a { color: var(--accent); font-size: 12px; }
+  .case { background: var(--accent-soft); border-left: 3px solid var(--accent); padding: 14px 16px; border-radius: 0 6px 6px 0; font-size: 15px; line-height: 1.55; }
+  .faq details { border-top: 1px solid var(--rule); }
+  .faq details:last-of-type { border-bottom: 1px solid var(--rule); }
+  .faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 0; min-height: 44px; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; font-size: 22px; color: var(--mute); }
+  .faq details[open] summary::after { content: "–"; }
+  .faq summary h3 { font-family: var(--serif); font-weight: 500; font-size: 18px; margin: 0; }
+  .faq details p { padding: 0 0 16px; }
+  .cta { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 18px 20px; display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: center; justify-content: space-between; }
+  .cta p { flex: 1 1 280px; }
+  .cta-btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; background: var(--ink); color: #fff; text-decoration: none; font-weight: 600; font-size: 14px; }
+  @media (max-width: 640px) { .hero-date.range { font-size: 26px; } .guide h2 { font-size: 23px; } }
+  @media print { .guide.faq, .guide.cta, .byline a { display: none; } }
   /* ============ Print ============ */
   @media print {
     .inputs, .warn, .pdf-bar { display: none; }
@@ -580,11 +703,67 @@
     .row { break-inside: avoid; }
   }
 </style>
+<style>
+  .site-nav { background:#fff; color:#0f172a; border-bottom:1px solid #e2e8f0; position:sticky; top:0; z-index:40; font-family:Inter, system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .site-nav-inner { max-width:1536px; margin:0 auto; padding:0 32px; height:80px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+  .brand { text-decoration:none; color:#0f172a; line-height:1; }
+  .brand strong { display:block; font-size:1.7rem; font-weight:900; letter-spacing:-0.04em; }
+  .brand span { display:block; margin-top:2px; color:#6d28d9; font-size:9px; font-weight:600; letter-spacing:0.18em; }
+  .nav-links { display:flex; align-items:center; gap:4px; }
+  .nav-links a { text-decoration:none; color:#334155; font-size:0.84rem; font-weight:500; padding:8px 8px; border-bottom:3px solid transparent; white-space:nowrap; }
+  .nav-links a:hover { color:#0f172a; }
+  .nav-links a.active { color:#6d28d9; font-weight:700; border-bottom-color:#6d28d9; }
+  .menu-btn { display:none; width:44px; height:44px; border:0; background:transparent; font-size:1.4rem; cursor:pointer; color:#475569; }
+  .mobile-panel { display:none; background:#fff; color:#0f172a; border-top:1px solid #e2e8f0; padding:8px 24px 20px; }
+  .mobile-panel.open { display:block; }
+  .mobile-panel a { display:block; text-decoration:none; padding:12px 4px; font-weight:500; border-bottom:1px solid #f1f5f9; color:#0f172a; }
+  .mobile-panel a.active { color:#6d28d9; font-weight:700; }
+  @media (max-width: 1360px) {
+    .nav-links { display:none; }
+    .menu-btn { display:inline-flex; align-items:center; justify-content:center; }
+    .site-nav-inner { padding:0 16px; }
+  }
+</style>
+<style>@media print { .site-nav { display: none; } }</style>
 </head>
 <body>
+<nav class="site-nav" aria-label="Primary">
+    <div class="site-nav-inner">
+      <a class="brand" href="/">
+        <strong>SellingSgProperty.</strong>
+        <span>SG</span>
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <a href="/insights/">Insights</a>
+        <a href="/news/">News</a>
+        <a href="/undervalued-pty/">Undervalued Pty</a>
+        <a href="/hdb-resale-timeline/" class="active" aria-current="page">HDB Resale Timeline</a>
+        <a href="/condo-analysis/">Condo Analysis</a>
+        <a href="/contact/">Get my free situation check.</a>
+        <a href="/mortgage-calculator/">Mortgage loan calculator</a>
+        <a href="/cov.html">COV Calculation</a>
+      </div>
+      <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-panel" aria-label="Open navigation menu">☰</button>
+    </div>
+    <div class="mobile-panel" id="mobile-panel">
+      <a href="/">Home</a>
+      <a href="/about/">About</a>
+      <a href="/insights/">Insights</a>
+      <a href="/news/">News</a>
+      <a href="/undervalued-pty/">Undervalued Pty</a>
+        <a href="/hdb-resale-timeline/" class="active" aria-current="page">HDB Resale Timeline</a>
+      <a href="/condo-analysis/">Condo Analysis</a>
+      <a href="/contact/">Get my free situation check.</a>
+      <a href="/mortgage-calculator/">Mortgage loan calculator</a>
+      <a href="/cov.html">COV Calculation</a>
+    </div>
+  </nav>
   <main class="page">
     <h1>Project your HDB<br>resale <em>timeline</em>.</h1>
-    <p class="intro">Enter the OTP grant date. The exercise date and portal submission auto-fill to their defaults (both adjustable). Remaining milestones project through to key handover using conservative HDB processing estimates.</p>
+    <p class="intro">Enter the OTP grant date. The exercise date and portal submission auto-fill to their defaults (both adjustable). Remaining milestones are projected through to key handover from HDB's published rules, counted in days, with weekends and public holidays skipped where HDB counts working days.</p>
+    <p class="byline">By <a href="/about/">Jack Leow</a> (CEA R074023I, PropNex Realty) · Checked against HDB's rules · Updated 28 Nov 2026</p>
 
     <section class="inputs" aria-label="Timeline inputs">
       <div class="field">
@@ -605,14 +784,14 @@
             <span class="days-suffix">days</span>
           </div>
         </div>
-        <p class="field-note">Default: <strong>7 days after exercise</strong>. Adjust the days box or the date directly. Must complete within 60 days of exercise.</p>
+        <p class="field-note">Default: <strong>7 days after exercise</strong>, when both portions are in. Either party may submit first; the other must submit within 7 calendar days (HDB).</p>
       </div>
     </section>
 
     <div class="warn" id="warn" role="alert"></div>
 
     <section class="hero" aria-label="Projected handover date">
-      <div class="hero-label">Projected key handover</div>
+      <div class="hero-label">Projected completion and key handover</div>
       <div class="hero-row">
         <div class="hero-date" id="hero-date">—</div>
         <div class="hero-sub" id="hero-sub">Enter dates to project<strong id="hero-strong">&nbsp;</strong></div>
@@ -628,16 +807,37 @@
     <section class="notes" aria-label="Assumptions used">
       <h3>Assumptions used</h3>
       <ul>
-        <li><strong>OTP exercise:</strong> defaults to Day 21 (the maximum window under HDB rules). Adjustable to model earlier exercise.</li>
-        <li><strong>Portal submission:</strong> defaults to 7 days after OTP exercise. Adjustable — HDB allows submission up to 60 days after exercise.</li>
-        <li><strong>HDB acceptance:</strong> 5 weeks after portal submission (35 days) — upper bound of the typical 4–5 week HDB range, used to give a conservative estimate.</li>
-        <li><strong>Approval letter:</strong> about 2 weeks after HDB acceptance (14 days used).</li>
-        <li><strong>Completion &amp; handover:</strong> about 4 weeks after approval letter (28 days used).</li>
-        <li><strong>Extension of stay:</strong> optional — the date shown is the latest allowable (up to 3 months post-completion).</li>
-        <li>The timeline uses conservative (later) estimates where a range exists, so actual completion may arrive sooner. Weekends and public holidays are not adjusted for.</li>
+        <li><strong>Request for Value:</strong> only if the buyer needs HDB's valuation; due by the next working day after the option date. HDB says the value is typically available within 10 working days. <a href="https://www.hdb.gov.sg/-/media/managing-my-home/selling-a-flat/process-for-selling-a-flat/option-to-purchase/OTP-Important-Notes.pdf" rel="noopener">HDB, OTP important notes</a></li>
+        <li><strong>OTP exercise:</strong> defaults to day 21, the last day (by 4pm). Adjustable to model an earlier exercise.</li>
+        <li><strong>Resale application:</strong> defaults to 7 days after exercise, when both portions are in. Either party may submit first; the other must submit within 7 calendar days.</li>
+        <li><strong>HDB acceptance (projected window):</strong> HDB accepts within 28 working days of both portions being submitted, if everything is in order; that is the late end. Applications in order are often accepted sooner, so the early end assumes 20 working days (about 4 weeks): our estimate, not an HDB figure. Working days skip weekends and Singapore public holidays (MOM, 2025 to 2027).</li>
+        <li><strong>Endorsement:</strong> HDB prepares the resale documents about 21 days after acceptance; both parties endorse them and pay the fees online. <a href="https://www.hdb.gov.sg/cs/infoweb/residential/buying-a-flat/buying-procedure-for-resale-flats/resale-application/acceptance-and-approval?anchor=approval" rel="noopener">HDB, acceptance and approval</a></li>
+        <li><strong>Approval:</strong> HDB grants approval once all documents are endorsed. HDB gives no fixed date, so it is shown as a window before completion.</li>
+        <li><strong>Completion and handover:</strong> within 8 weeks (56 days) of acceptance, on the date stated in HDB's acceptance letter, which HDB will not bring forward.</li>
+        <li><strong>Extension of stay:</strong> optional; the date shown is the latest allowed, 3 months after completion. <a href="https://www.hdb.gov.sg/residential/selling-a-flat/resale-application/request-for-temporary-extension-of-stay" rel="noopener">HDB, temporary extension of stay</a></li>
+        <li><strong>Real case:</strong> both portions submitted on 20 Oct 2026, completed on 18 Jan 2027 (90 days). The calculator's window for that submission date is 13 to 25 Jan 2027.</li>
+        <li>All dates after submission are projections. HDB's acceptance letter gives your actual completion date.</li>
       </ul>
     </section>
 
+
+    <section class="guide" aria-labelledby="g-h">
+      <h2 id="g-h">HDB resale timeline at a glance</h2>
+      <p>Every step of a Singapore HDB resale, in days, from HDB's own rules. The calculator above turns these into dates for your OTP.</p>
+      <div class="guide-table"><table>
+        <thead><tr><th>Stage</th><th>How long</th><th>What happens</th></tr></thead>
+        <tbody><tr><td>OTP granted</td><td>Day 0</td><td>Seller grants the Option to Purchase; buyer pays an option fee of $1 to $1,000. <a href="https://www.hdb.gov.sg/-/media/managing-my-home/selling-a-flat/process-for-selling-a-flat/option-to-purchase/OTP-Important-Notes.pdf" rel="noopener">HDB</a></td></tr><tr><td>Request for Value (if needed)</td><td>By the next working day</td><td>Buyer asks HDB for a valuation on the HDB Flat Portal; the value is typically ready within 10 working days. <a href="https://www.hdb.gov.sg/-/media/managing-my-home/selling-a-flat/process-for-selling-a-flat/option-to-purchase/OTP-Important-Notes.pdf" rel="noopener">HDB</a></td></tr><tr><td>OTP exercised</td><td>By 4pm on day 21</td><td>Buyer exercises the OTP and pays the exercise fee; option and exercise fees together cannot exceed $5,000. <a href="https://www.hdb.gov.sg/-/media/managing-my-home/selling-a-flat/process-for-selling-a-flat/option-to-purchase/Resale-Terms--Conditions.pdf" rel="noopener">HDB</a></td></tr><tr><td>Resale application</td><td>Second party within 7 calendar days of the first</td><td>Either party submits its portion on the HDB Flat Portal first; the other follows within 7 calendar days. <a href="https://www.hdb.gov.sg/cs/infoweb/residential/selling-a-flat/resale-application/application" rel="noopener">HDB</a></td></tr><tr><td>HDB acceptance</td><td>Up to 28 working days</td><td>HDB checks eligibility and documents, then tells both parties by SMS and email. Acceptance starts the 8-week countdown. <a href="https://www.hdb.gov.sg/-/media/managing-my-home/selling-a-flat/process-for-selling-a-flat/option-to-purchase/OTP-Important-Notes.pdf" rel="noopener">HDB</a></td></tr><tr><td>Endorsement</td><td>About 21 days after acceptance</td><td>Both parties endorse the resale documents and pay the fees online within the time HDB gives. <a href="https://www.hdb.gov.sg/cs/infoweb/residential/buying-a-flat/buying-procedure-for-resale-flats/resale-application/acceptance-and-approval?anchor=approval" rel="noopener">HDB</a></td></tr><tr><td>Approval</td><td>After both parties endorse</td><td>HDB grants approval for the resale once all documents are endorsed. <a href="https://www.hdb.gov.sg/-/media/managing-my-home/selling-a-flat/process-for-selling-a-flat/option-to-purchase/Resale-Terms--Conditions.pdf" rel="noopener">HDB</a></td></tr><tr><td>Completion and keys</td><td>Within 56 days (8 weeks) of acceptance</td><td>Completion on the date in HDB's acceptance letter; the buyer becomes the owner and receives the keys. <a href="https://www.hdb.gov.sg/-/media/managing-my-home/selling-a-flat/process-for-selling-a-flat/option-to-purchase/OTP-Important-Notes.pdf" rel="noopener">HDB</a></td></tr><tr><td>Extension of stay (optional)</td><td>Up to 3 months after completion</td><td>If agreed, the seller may stay on temporarily; HDB allows no longer than 3 months. <a href="https://www.hdb.gov.sg/residential/selling-a-flat/resale-application/request-for-temporary-extension-of-stay" rel="noopener">HDB</a></td></tr></tbody>
+      </table></div>
+      <div class="case"><strong>A real case.</strong> Both portions of the resale application were submitted on 20 Oct 2026 and the resale completed on 18 Jan 2027, 90 days later. For that submission date the calculator projects completion between 13 and 25 Jan 2027.</div>
+    </section>
+    <section class="guide faq" aria-labelledby="f-h">
+      <h2 id="f-h">Questions sellers and buyers ask</h2>
+      <details><summary><h3>How long does an HDB resale take from OTP to keys?</h3></summary><p>About 100 to 120 days. The buyer has 21 days to exercise the OTP, both parties then submit the resale application, HDB accepts it within up to 28 working days, and completion follows within 8 weeks (56 days) of acceptance. In a real case, both portions were submitted on 20 Oct 2026 and the resale completed on 18 Jan 2027, 90 days later.</p></details><details><summary><h3>How long is the OTP option period for an HDB resale flat?</h3></summary><p>21 calendar days. The buyer must exercise the Option to Purchase by 4pm on the 21st calendar day after it is granted. The option fee is $1 to $1,000, and the option and exercise fees together cannot exceed $5,000.</p></details><details><summary><h3>When must the buyer submit the Request for Value?</h3></summary><p>By the next working day after the option date, if the buyer needs HDB's valuation, for example for a housing loan or CPF use. HDB says the value is typically available on the HDB Flat Portal within 10 working days.</p></details><details><summary><h3>How long does HDB take to accept a resale application?</h3></summary><p>Up to 28 working days after both parties have submitted their portions, if everything is in order. Either party may submit first; the other must submit within 7 calendar days. HDB tells both parties by SMS and email when it accepts.</p></details><details><summary><h3>When do the buyer and seller endorse the resale documents?</h3></summary><p>HDB prepares the documents about 3 weeks after it accepts the application. Both parties endorse them on the HDB Flat Portal and pay the fees online within the time HDB gives, or the application may be cancelled. HDB grants approval once all documents are endorsed.</p></details><details><summary><h3>When is the HDB resale completion date?</h3></summary><p>Within 8 weeks (56 days) of HDB's acceptance of the resale application, on the date stated in HDB's acceptance letter. HDB treats that date as the earliest possible completion and will not bring it forward.</p></details><details><summary><h3>Can the seller stay in the flat after completion?</h3></summary><p>Yes, if the buyer agrees. HDB allows a temporary extension of stay of up to 3 months from the resale completion date, and no further extension beyond that.</p></details>
+    </section>
+    <section class="guide cta">
+      <p><strong>Selling or buying an HDB flat?</strong> Get a free check of your timeline, the cash and CPF you will have, and what you can buy next.</p>
+      <a class="cta-btn" href="/contact/">Get my free situation check</a>
+    </section>
     <div class="pdf-bar">
       <button type="button" class="pdf-btn" id="pdf-btn" onclick="downloadPDF()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -652,15 +852,35 @@
   </main>
 
   <script>
+    document.getElementById("menu-btn").addEventListener("click", function () {
+      var panel = document.getElementById("mobile-panel");
+      var open = panel.classList.toggle("open");
+      this.setAttribute("aria-expanded", open ? "true" : "false");
+      this.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+      this.textContent = open ? "×" : "☰";
+    });
+  </script>
+  <script>
     const stages = [
-      { key: 'otp',        eyebrow: 'Day 0',                    title: 'OTP granted',                            desc: '$1,000 option fee paid to seller. Buyer obtains an HDB valuation report.' },
-      { key: 'exercise',   eyebrow: 'Day 21 · maximum window',  title: 'OTP exercised',                          desc: 'Up to $4,000 exercise fee paid. Sale becomes contractually binding.' },
-      { key: 'upload',     eyebrow: 'About 1 week after exercise', title: 'Submitted on HDB Resale Portal',      desc: 'Buyer and seller upload separately, within 7 days of each other.' },
-      { key: 'accepted',   eyebrow: 'About 5 weeks later',      title: 'HDB accepts the application',            desc: 'Final appointment date issued. Both parties log in to acknowledge documents.' },
-      { key: 'approval',   eyebrow: 'About 2 weeks later',      title: 'Approval letter issued',                 desc: 'HDB confirms the resale to buyer and seller.' },
-      { key: 'completion', eyebrow: 'About 4 weeks later',      title: 'Completion appointment & handover',      desc: 'Keys handed over at HDB Hub. Seller receives cash proceeds; CPF refund follows within 15 working days.' },
-      { key: 'extension',  eyebrow: 'Optional · latest by',     title: 'Extension of stay ends',                 desc: 'If arranged, seller may remain in the flat for up to 3 months post-completion.', optional: true }
+      { key: 'otp',        eyebrow: 'Day 0',                                   title: 'OTP granted',                         desc: 'The seller grants the Option to Purchase. The buyer pays an option fee of $1 to $1,000.' },
+      { key: 'rfv',        eyebrow: 'Next working day · if a valuation is needed', title: 'Request for Value due',          desc: 'If the buyer needs HDB\'s valuation (for a loan or CPF), the request must be submitted on the HDB Flat Portal by the next working day after the option date.', optional: true },
+      { key: 'value',      eyebrow: 'About 10 working days after the request',  title: 'HDB value available',                desc: 'HDB emails the buyer when the value is ready on the HDB Flat Portal, typically within 10 working days.', optional: true },
+      { key: 'exercise',   eyebrow: 'Day 21 · last day',                       title: 'OTP exercised',                       desc: 'The buyer exercises the OTP by 4pm on the 21st calendar day and pays the exercise fee. Option and exercise fees together cannot exceed $5,000.' },
+      { key: 'upload',     eyebrow: '7 days after exercise',                   title: 'Resale application submitted',        desc: 'Either party submits its portion on the HDB Flat Portal first; the other must submit within 7 calendar days.' },
+      { key: 'accepted',   eyebrow: '20 to 28 working days later',             title: 'HDB accepts the application',         desc: 'If everything is in order, HDB tells both parties by SMS and email. The acceptance date starts the 56-day countdown, and the letter states the completion date.' },
+      { key: 'endorse',    eyebrow: 'About 21 days after acceptance',          title: 'Documents ready to endorse',          desc: 'Buyer and seller endorse the resale documents on the HDB Flat Portal and pay the fees online within the time HDB gives, or the application may be cancelled.' },
+      { key: 'approval',   eyebrow: 'After both parties endorse',              title: 'HDB approves the resale',             desc: 'HDB grants approval once all documents are endorsed, ahead of the completion appointment.', },
+      { key: 'completion', eyebrow: 'Within 56 days of acceptance',            title: 'Completion & key handover',           desc: 'The resale completes on the date in HDB\'s acceptance letter. The buyer becomes the owner and receives the keys; the seller receives the sale proceeds.' },
+      { key: 'extension',  eyebrow: 'Optional · latest by',                    title: 'Extension of stay ends',              desc: 'If agreed, the seller may stay on for up to 3 months after completion (HDB temporary extension of stay).', optional: true }
     ];
+
+    // Singapore public holidays on weekdays and weekends (MOM via data.gov.sg, 2025 to 2027); working days skip weekends and these
+    const HOLIDAYS = new Set(["2025-01-01", "2025-01-29", "2025-01-30", "2025-03-31", "2025-04-18", "2025-05-01", "2025-05-03", "2025-05-12", "2025-06-07", "2025-08-09", "2025-10-20", "2025-12-25", "2026-01-01", "2026-02-17", "2026-02-18", "2026-03-21", "2026-04-03", "2026-05-01", "2026-05-27", "2026-05-31", "2026-06-01", "2026-08-09", "2026-08-10", "2026-11-08", "2026-11-09", "2026-12-25", "2027-01-01", "2027-02-06", "2027-02-07", "2027-02-08", "2027-03-10", "2027-03-26", "2027-05-01", "2027-05-17", "2027-05-20", "2027-08-09", "2027-10-28", "2027-12-25"]);
+    function iso(d) { return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }
+    function isWorking(d) { const w = d.getDay(); return w !== 0 && w !== 6 && !HOLIDAYS.has(iso(d)); }
+    function addWorkingDays(date, n) { let d = new Date(date); let k = 0; while (k < n) { d.setDate(d.getDate() + 1); if (isWorking(d)) k++; } return d; }
+    const ACCEPT_EARLY = 20, ACCEPT_LATE = 28;
+    function addMonths(date, n) { const d = new Date(date); const day = d.getDate(); d.setMonth(d.getMonth() + n); if (d.getDate() < day) d.setDate(0); return d; }
 
     function parseDate(str) {
       if (!str) return null;
@@ -716,14 +936,18 @@
     function compute(otp, exercise, upload) {
       if (!otp) return null;
       const dates = { otp };
+      dates.rfv = addWorkingDays(otp, 1);
+      dates.value = addWorkingDays(dates.rfv, 10);
       if (exercise) {
         dates.exercise = exercise;
         if (upload) {
           dates.upload     = upload;
-          dates.accepted   = addDays(upload, 35);
-          dates.approval   = addDays(dates.accepted, 14);
-          dates.completion = addDays(dates.approval, 28);
-          dates.extension  = addDays(dates.completion, 91);
+          // projected window: HDB accepts within 28 working days at most; the early end assumes 20 working days (about 4 weeks)
+          dates.accepted   = [addWorkingDays(upload, ACCEPT_EARLY), addWorkingDays(upload, ACCEPT_LATE)];
+          dates.endorse    = dates.accepted.map(a => addDays(a, 21));
+          dates.completion = dates.accepted.map(a => addDays(a, 56));
+          dates.approval   = [dates.endorse[0], addDays(dates.completion[1], -1)];
+          dates.extension  = addMonths(dates.completion[1], 3);
         }
       }
       return dates;
@@ -755,13 +979,14 @@
         if (upload < exercise) {
           warnEl.textContent = 'Portal submission is before OTP exercise — please check.';
           warnEl.classList.add('show');
-        } else if (diffDays(upload, exercise) > 60) {
-          warnEl.textContent = `Portal submission is ${diffDays(upload, exercise)} days after exercise — beyond the 60-day HDB submission window.`;
-          warnEl.classList.add('show');
         }
       }
 
       const dates = compute(otp, exercise, upload);
+      if (!warnEl.classList.contains('show') && dates && dates.exercise && dates.value && dates.exercise < dates.value) {
+        warnEl.textContent = `If you need HDB's valuation, it is typically ready around ${fmtDDMMYY(dates.value)}, after this exercise date. Check that the value is out before you exercise.`;
+        warnEl.classList.add('show');
+      }
       const timeline = document.getElementById('timeline');
       const heroDate = document.getElementById('hero-date');
       const heroSub  = document.getElementById('hero-sub');
@@ -769,11 +994,10 @@
 
       // Hero
       if (dates && dates.completion) {
-        heroDate.textContent = fmtDDMMYY(dates.completion);
-        const totalDays = diffDays(dates.completion, dates.otp);
-        const weeks = Math.round(totalDays / 7);
-        heroSub.childNodes[0].textContent = `${fmtDayLong(dates.completion)}`;
-        heroStrong.textContent = `About ${weeks} weeks · ${totalDays} days from OTP`;
+        heroDate.textContent = `${fmtDDMMYY(dates.completion[0])} – ${fmtDDMMYY(dates.completion[1])}`;
+        heroDate.classList.add('range');
+        heroSub.childNodes[0].textContent = 'Projected window';
+        heroStrong.textContent = `${diffDays(dates.completion[0], dates.otp)} to ${diffDays(dates.completion[1], dates.otp)} days from OTP · HDB's acceptance letter fixes the date`;
       } else {
         heroDate.textContent = '—';
         heroSub.childNodes[0].textContent = 'Enter dates to project';
@@ -787,24 +1011,21 @@
       }
 
       timeline.innerHTML = stages.map(stage => {
-        const d = dates[stage.key];
-        const dateStr = fmtDDMMYY(d);
-        const subStr  = fmtWeekMonth(d);
+        const v = dates[stage.key];
+        const isRange = Array.isArray(v);
+        const d = isRange ? v[0] : v;
         const optClass = stage.optional ? ' optional' : '';
-        let dayCount = '';
-        if (d && dates.otp && stage.key !== 'otp') {
-          const dd = diffDays(d, dates.otp);
-          dayCount = `<div class="day-count">Day ${dd}</div>`;
+        let dateBig = fmtDDMMYY(d), dateSub = fmtWeekMonth(d), dayCount = '';
+        if (d && dates.otp && stage.key !== 'otp') dayCount = `<div class="day-count">Day ${diffDays(d, dates.otp)}</div>`;
+        if (isRange && v[0] && v[1]) {
+          dateBig = `${fmtDDMMYY(v[0])} to ${fmtDDMMYY(v[1])}`;
+          dateSub = 'projected';
+          dayCount = `<div class="day-count">Day ${diffDays(v[0], dates.otp)} to ${diffDays(v[1], dates.otp)}</div>`;
         }
-        // Dynamic eyebrows reflect actual overrides
         let eyebrow = stage.eyebrow;
-        if (stage.key === 'exercise' && d && dates.otp) {
-          const delta = diffDays(d, dates.otp);
-          eyebrow = `Day ${delta} of OTP`;
-        } else if (stage.key === 'upload' && d && dates.exercise) {
-          const delta = diffDays(d, dates.exercise);
-          eyebrow = `${delta} days after exercise`;
-        }
+        if (stage.key === 'exercise' && d && dates.otp) eyebrow = `Day ${diffDays(d, dates.otp)} of OTP`;
+        else if (stage.key === 'upload' && d && dates.exercise) eyebrow = `${diffDays(d, dates.exercise)} days after exercise`;
+        else if (stage.key === 'accepted' && isRange && dates.upload) eyebrow = `20 to 28 working days later · ${diffDays(v[0], dates.upload)} to ${diffDays(v[1], dates.upload)} days`;
         return `
           <article class="row${optClass}">
             <div class="spine" aria-hidden="true"><div class="marker"></div></div>
@@ -814,8 +1035,8 @@
               <div class="desc">${stage.desc}</div>
             </div>
             <div class="date-col">
-              <div class="date-big">${dateStr}</div>
-              <div class="date-sub">${subStr}</div>
+              <div class="date-big">${dateBig}</div>
+              <div class="date-sub">${dateSub}</div>
               ${dayCount}
             </div>
           </article>
