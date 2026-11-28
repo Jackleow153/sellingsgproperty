@@ -21,6 +21,16 @@ PAGE = os.path.join(ROOT, 'undervalued-pty', 'index.html')
 COMP = json.load(open(os.path.join(ROOT, 'data', 'comp-tx.json')))
 VD = json.load(open(os.path.join(ROOT, 'data', 'value-screen.json')))
 R = VD['rows']
+try: CTX = json.load(open(os.path.join(ROOT, 'data', 'value-context.json')))
+except Exception: CTX = {'p': {}, 'mop_years': [2020, 2026]}
+
+
+def clean(n): return re.sub(r'\s+\.\s+', ' ', n)   # URA writes 'KINGSFORD . HILLVIEW PEAK'
+
+
+for _r in R:
+    _r['name'] = clean(_r['name'])
+    for _c in _r['comps']: _c['name'] = clean(_c['name'])
 # 'Updated' is the day the value screen last ran on fresh data (value_screen.py stamps it), not the day this page was rebuilt
 CHECKED_ISO = VD.get('checked', '2026-11-27')
 _cd = datetime.date.fromisoformat(CHECKED_ISO)
@@ -120,6 +130,51 @@ def rent_line(r):
     return ('Rents (URA rental contracts, last 4 quarters): ' + '; '.join(parts) + '.') if parts else 'Rents: too few rental contracts to compare.'
 
 
+def comma(n): return f"{int(round(n, -1)):,}"
+
+
+def ctx_resale(key):
+    c = CTX['p'].get(key)
+    if not c: return ''
+    w, m0 = c.get('walk'), c['mrt'][0]
+    same = lambda a, b: re.sub(r'\s*(mrt|lrt)$', '', a.lower().strip()) == re.sub(r'\s*(mrt|lrt)$', '', b.lower().strip())
+    if w:
+        mrt = f"{w['station']} ({w['line']}), about {w['m']:,} m, {'an' if str(w['minutes']).startswith('8') or w['minutes'] in (11, 18) else 'a'} {w['minutes']}-minute walk (varies by block)"
+        if not same(w['station'], m0['station']):
+            mrt += f"; the closest exit in a straight line is {m0['station']} {m0['kind']}, about {m0['m']:,} m"
+    else:
+        mrt = f"{m0['station']} {m0['kind']} exit about {m0['m']:,} m in a straight line"
+    if m0['kind'] == 'LRT':
+        hm = next((x for x in c['mrt'] if x['kind'] == 'MRT'), None)
+        if hm: mrt += f"; the nearest MRT exit is {hm['station']}, about {hm['m']:,} m in a straight line"
+    for r in c.get('rail') or []:
+        mrt += f". Rail plan: the {r['line']} at {r['station']}, targeted {r['year']} (LTA)"
+    y0, y1 = CTX.get('mop_years', [2020, 2026])
+    towns = sorted(c['mop'].items(), key=lambda t: -t[1])
+    buy = []
+    if towns:
+        tot = sum(n for _, n in towns)
+        buy.append(f"HDB upgraders from {and_list([t for t, _ in towns])}, where about {comma(tot)} four-room and bigger flats completed in {y0}–{y1} reach their minimum occupation period (MOP) between {y0 + 5} and {y1 + 5}")
+    else:
+        buy.append(f"few HDB upgraders: no HDB town within 1 km completed four-room or bigger flats in {y0}–{y1}")
+    if c['landed5'] >= 150: buy.append(f"landed owners right-sizing (about {comma(c['landed5'])} landed homes resold within 1.5 km in 5 years)")
+    if c.get('hub') and c['hub'][1] <= 3: buy.append(f"people working at {c['hub'][0]}, about {c['hub'][1]:.1f} km away")
+    b = '; '.join(buy); b = b[0].upper() + b[1:]
+    return (f"<div class=\"vc-ctx\"><p><b>MRT:</b> {E(mrt)}.</p><p><b>Likely future buyers:</b> {E(b)}.</p></div>")
+
+
+def ctx_sell(sid):
+    d = STD.get(sid) or {}
+    facts = {f[0]: f[1] for f in d.get('facts', [])}
+    mrt = facts.get('MRT')
+    rail = [r for r in d.get('plan', []) if str(r[5]).startswith('rail') and r[2] != 'Open']
+    who = (d.get('exit') or {}).get('who')
+    if not (mrt or who): return ''
+    m = (mrt or '').rstrip('.')
+    for r in rail: m += f". Rail plan: {r[0]} ({r[1].lower()}, {r[2].lower()})"
+    return ("<div class=\"vc-ctx\">" + (f"<p><b>MRT:</b> {E(m)}.</p>" if m else '') + (f"<p><b>Likely future buyers:</b> {E(who.rstrip('.'))}.</p>" if who else '') + "</div>")
+
+
 def resale_card(rs):
     r = rs[0]; tag = r['tag']; lvl = LEVEL[tag]
     good = [x for x in rs if not x['odd']]
@@ -141,6 +196,7 @@ def resale_card(rs):
             f"<div class=\"vc-gap\"><strong>{pc(r['cgap'])} below</strong><small>its {len(ncomp)} closest competitors, same size, same tenure</small></div></div>"
             f"<p class=\"vc-tag\"><span class=\"badge b-{tag}\">{t}</span> <span class=\"mut\">Resale · {r['region']}.</span> {E(tt)}</p>"
             f"<div class=\"alts\"><table class=\"vc-sizes\"><thead><tr><th>Unit size</th><th class=\"n\">Its resales, avg psf (sales)</th><th class=\"n\">Competitors support</th><th class=\"n\">Gap</th><th class=\"n\">Price at that size</th></tr></thead><tbody>{sizes}</tbody></table></div>"
+            + ctx_resale(r['key']) +
             f"<p class=\"vc-note\">{E(rent_line(r))}</p>"
             + (f"<ul class=\"vc-why\">{''.join(f'<li>{E(w)}</li>' for w in why)}</ul>" if why else '')
             + f"<details class=\"vc-more\"><summary>The competitors: {E(', '.join(ncomp))} ({'up to 2 km' if far else 'all within 1 km'})</summary>{comps_table(rs)}</details>"
@@ -190,6 +246,7 @@ def sell_card(s):
             f"<div class=\"vc-gap\"><strong>{head}</strong><small>{sub}</small></div></div>"
             f"<p class=\"vc-tag\"><span class=\"badge b-{badge[0]}\">{badge[1]}</span> <span class=\"mut\">Selling now · {s['region']}.</span> Verdict in its analysis: {E(s['verdict'])}.</p>"
             f"<div class=\"alts\"><table class=\"vc-sizes\"><thead><tr><th>Unit type</th><th class=\"n\">Developer's current average psf</th><th class=\"n\">Buy at or below</th><th class=\"n\">Walk away above</th><th class=\"n\">Gap</th><th>Verdict</th></tr></thead><tbody>{rows}</tbody></table></div>"
+            + ctx_sell(s['id']) +
             f"<p class=\"vc-note\">Competitors used: {E(', '.join(s['comps']))}. Same rules as the resale screen (same tenure, similar size, 1 km first), then converted to a new-launch price with the premium launches are paying now. Analysis dated {E(s['asof'])}.</p>"
             f"<p class=\"vc-link\"><a href=\"/condo-analysis/{s['id']}/\">Full analysis of {E(s['name'])}</a></p></article>")
 
@@ -410,6 +467,7 @@ METHOD = f"""
         </div>
         <ul>
           <li><strong>Not screened:</strong> condos completed before 2004, leases under 90 years, condos with fewer than 3 resales of a unit size in 12 months, and condos with fewer than 2 suitable competitors within 2 km.</li>
+          <li><strong>MRT and future buyers on the cards:</strong> walking distance and time to the nearest MRT from the Stacked Homes condo directory (they vary by block: for Normanton Park other portals quote 1.1 to 1.2 km against 1.5 km, for Grandeur 8 about 680 m against 830 m); the closest MRT or LRT exit in a straight line from LTA's MRT station exits (data.gov.sg), shown as well when it names a different station; rail plans only where LTA has confirmed a new line at a station within 1 km. HDB upgraders: four-room and bigger flats completed in {CTX.get('mop_years', [2020, 2026])[0]}–{CTX.get('mop_years', [2020, 2026])[1]} in the HDB towns whose planning area (URA Master Plan 2025) lies within 1 km, from HDB property information (data.gov.sg); landed owners: landed resales within 1.5 km over 5 years (URA); office hubs are approximate points. Selling-now cards use the MRT, rail and buyer facts in their condo analyses.</li>
           <li><strong>Districts:</strong> {DSRC.get('URA caveats', 0)} condos from URA caveats, {sum(v for k, v in DSRC.items() if k and k.startswith('same street'))} from another condo on the same street in URA caveats, {DSRC.get('Stacked Homes condo directory', 0)} from the Stacked Homes condo directory.</li>
           <li><strong>Cross-checks ({CROSSCHECK}):</strong> completion year, number of homes, tenure, district and recent prices of the condos on the undervalued and check-why lists were compared with the Stacked Homes condo directory. Where it disagreed on the number of homes (Waterscape at Cavenagh: 70 there, 200 on EdgeProp, 99.co and listing sites), the majority figure is used.</li>
         </ul>
@@ -580,6 +638,8 @@ CSS = """
 .vc td, .vc th { padding: 8px 10px; }
 .vc tr.odd td { color: var(--muted); }
 .vc-note { font-size: 0.86rem; color: var(--muted); }
+.vc-ctx { display: grid; gap: 6px; font-size: 0.9rem; color: var(--muted); border-left: 2px solid var(--line); padding-left: 12px; }
+.vc-ctx b { color: var(--ink); font-weight: 600; }
 .vc-why { margin: 0; padding-left: 1.1rem; font-size: 0.88rem; color: var(--muted); display: grid; gap: 4px; }
 .vc-more summary, .dist-all summary { cursor: pointer; font-size: 0.92rem; min-height: 44px; display: flex; align-items: center; text-decoration: underline; text-underline-offset: 3px; }
 .vc-more[open] summary, .dist-all[open] summary { margin-bottom: 6px; }

@@ -1,0 +1,1058 @@
+{
+"_about":"MRT and likely-future-buyer facts for the cards on /undervalued-pty/ (28 Nov 2026).",
+"src":{
+"mrt":[
+"LTA MRT Station Exit (data.gov.sg)",
+"https://data.gov.sg/datasets/d_b39d3a0871985372d7e1637193335da5/view"
+],
+"pa":[
+"URA Master Plan 2025 Planning Area Boundary (data.gov.sg)",
+"https://data.gov.sg/datasets/d_2cc750190544007400b2cfd5d7f53209/view"
+],
+"hdb":[
+"HDB Property Information (data.gov.sg)",
+"https://data.gov.sg/datasets/d_17f5382f26140b1fdae0ba2ef6239d2f/view"
+]
+},
+"mop_years":[
+2020,
+2026
+],
+"p":{
+"10 EVELYN|EVELYN ROAD":{
+"name":"10 Evelyn",
+"mrt":[
+{
+"station":"Newton",
+"kind":"MRT",
+"exit":"Exit C",
+"m":380
+},
+{
+"station":"Novena",
+"kind":"MRT",
+"exit":"Exit B",
+"m":520
+}
+],
+"walk":null,
+"rail":[],
+"pa":"NOVENA",
+"towns":[
+"Kallang/Whampoa"
+],
+"mop":{
+"Kallang/Whampoa":2027
+},
+"landed5":309,
+"hub":[
+"Novena",
+0.6
+]
+},
+"8 @ MOUNT SOPHIA|MOUNT SOPHIA":{
+"name":"8 @ Mount Sophia",
+"mrt":[
+{
+"station":"Dhoby Ghaut",
+"kind":"MRT",
+"exit":"Exit F",
+"m":150
+},
+{
+"station":"Bencoolen",
+"kind":"MRT",
+"exit":"Exit B",
+"m":500
+}
+],
+"walk":null,
+"rail":[],
+"pa":null,
+"towns":[
+"Central Area",
+"Kallang/Whampoa"
+],
+"mop":{
+"Kallang/Whampoa":2027
+},
+"landed5":47,
+"hub":[
+"Orchard",
+1.6
+]
+},
+"CITYSCAPE @FARRER PARK|MERGUI ROAD":{
+"name":"Cityscape @Farrer Park",
+"mrt":[
+{
+"station":"Farrer Park",
+"kind":"MRT",
+"exit":"Exit B",
+"m":610
+},
+{
+"station":"Novena",
+"kind":"MRT",
+"exit":"Exit A",
+"m":870
+}
+],
+"walk":{
+"station":"Farrer Park",
+"line":"NE",
+"minutes":9,
+"m":760,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/cityscape-at-farrer-park/"
+]
+},
+"rail":[],
+"pa":"KALLANG",
+"towns":[
+"Kallang/Whampoa",
+"Central Area"
+],
+"mop":{
+"Kallang/Whampoa":2027
+},
+"landed5":132,
+"hub":[
+"Novena",
+0.9
+]
+},
+"EIGHT RIVERSUITES|WHAMPOA EAST":{
+"name":"Eight Riversuites",
+"mrt":[
+{
+"station":"Boon Keng",
+"kind":"MRT",
+"exit":"Exit A",
+"m":370
+},
+{
+"station":"Geylang Bahru",
+"kind":"MRT",
+"exit":"Exit A",
+"m":780
+}
+],
+"walk":{
+"station":"Boon Keng",
+"line":"NE",
+"minutes":7,
+"m":560,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/eight-riversuites/"
+]
+},
+"rail":[],
+"pa":"KALLANG",
+"towns":[
+"Kallang/Whampoa",
+"Toa Payoh",
+"Geylang"
+],
+"mop":{
+"Kallang/Whampoa":2027,
+"Toa Payoh":7200,
+"Geylang":3914
+},
+"landed5":43,
+"hub":[
+"Novena",
+2.3
+]
+},
+"FLAMINGO VALLEY|SIGLAP ROAD":{
+"name":"Flamingo Valley",
+"mrt":[
+{
+"station":"Bedok",
+"kind":"MRT",
+"exit":"Exit A",
+"m":970
+},
+{
+"station":"Siglap",
+"kind":"MRT",
+"exit":"Exit 2",
+"m":1040
+}
+],
+"walk":{
+"station":"Kembangan",
+"line":"EW",
+"minutes":17,
+"m":1400,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/flamingo-valley/"
+]
+},
+"rail":[],
+"pa":"BEDOK",
+"towns":[
+"Bedok"
+],
+"mop":{
+"Bedok":1031
+},
+"landed5":961,
+"hub":[
+"Paya Lebar",
+3.4
+]
+},
+"GRANDEUR 8|ANG MO KIO CENTRAL 3":{
+"name":"Grandeur 8",
+"mrt":[
+{
+"station":"Yio Chu Kang",
+"kind":"MRT",
+"exit":"Exit B",
+"m":600
+},
+{
+"station":"Ang Mo Kio",
+"kind":"MRT",
+"exit":"Exit D",
+"m":800
+}
+],
+"walk":{
+"station":"Yio Chu Kang",
+"line":"NS",
+"minutes":10,
+"m":830,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/grandeur-8/"
+]
+},
+"rail":[
+{
+"line":"Cross Island Line (Phase 1)",
+"year":2030,
+"station":"Ang Mo Kio"
+}
+],
+"pa":"ANG MO KIO",
+"towns":[
+"Ang Mo Kio"
+],
+"mop":{
+"Ang Mo Kio":1049
+},
+"landed5":84,
+"hub":null
+},
+"HAIG COURT|HAIG ROAD":{
+"name":"Haig Court",
+"mrt":[
+{
+"station":"Tanjong Katong",
+"kind":"MRT",
+"exit":"Exit 3",
+"m":680
+},
+{
+"station":"Marine Parade",
+"kind":"MRT",
+"exit":"Exit 2",
+"m":860
+}
+],
+"walk":{
+"station":"Tanjong Katong",
+"line":"TE",
+"minutes":12,
+"m":1000,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/haig-court/"
+]
+},
+"rail":[],
+"pa":"MARINE PARADE",
+"towns":[
+"Marine Parade",
+"Geylang"
+],
+"mop":{
+"Geylang":3914
+},
+"landed5":590,
+"hub":[
+"Paya Lebar",
+1.4
+]
+},
+"HILLSTA|PHOENIX ROAD":{
+"name":"Hillsta",
+"mrt":[
+{
+"station":"Phoenix",
+"kind":"LRT",
+"exit":"Exit A",
+"m":280
+},
+{
+"station":"Teck Whye",
+"kind":"LRT",
+"exit":"Exit A",
+"m":290
+},
+{
+"station":"Bukit Panjang",
+"kind":"MRT",
+"exit":"Exit A",
+"m":550
+}
+],
+"walk":{
+"station":"Phoenix LRT",
+"line":"BP",
+"minutes":3,
+"m":290,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/hillsta/"
+]
+},
+"rail":[],
+"pa":"BUKIT BATOK",
+"towns":[
+"Bukit Batok",
+"Choa Chu Kang",
+"Bukit Panjang"
+],
+"mop":{
+"Bukit Batok":1710,
+"Choa Chu Kang":528,
+"Bukit Panjang":728
+},
+"landed5":96,
+"hub":null
+},
+"KINGSFORD . HILLVIEW PEAK|HILLVIEW RISE":{
+"name":"Kingsford . Hillview Peak",
+"mrt":[
+{
+"station":"Hillview",
+"kind":"MRT",
+"exit":"Exit B",
+"m":440
+},
+{
+"station":"Cashew",
+"kind":"MRT",
+"exit":"Exit A",
+"m":560
+}
+],
+"walk":{
+"station":"Hillview",
+"line":"DT",
+"minutes":8,
+"m":660,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/kingsford-hillview-peak/"
+]
+},
+"rail":[],
+"pa":"BUKIT BATOK",
+"towns":[
+"Bukit Batok",
+"Bukit Panjang"
+],
+"mop":{
+"Bukit Batok":1710,
+"Bukit Panjang":728
+},
+"landed5":234,
+"hub":null
+},
+"MARINA BAY SUITES|CENTRAL BOULEVARD":{
+"name":"Marina Bay Suites",
+"mrt":[
+{
+"station":"Downtown",
+"kind":"MRT",
+"exit":"Exit F",
+"m":70
+},
+{
+"station":"Raffles Place",
+"kind":"MRT",
+"exit":"Exit I",
+"m":240
+}
+],
+"walk":{
+"station":"Downtown",
+"line":"DT",
+"minutes":2,
+"m":160,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/marina-bay-suites/"
+]
+},
+"rail":[],
+"pa":"DOWNTOWN CORE",
+"towns":[
+"Central Area"
+],
+"mop":{},
+"landed5":0,
+"hub":[
+"Marina Bay",
+0.3
+]
+},
+"MIDTOWN RESIDENCES|UPPER SERANGOON ROAD":{
+"name":"Midtown Residences",
+"mrt":[
+{
+"station":"Hougang",
+"kind":"MRT",
+"exit":"Exit B",
+"m":270
+},
+{
+"station":"Buangkok",
+"kind":"MRT",
+"exit":"Exit B",
+"m":1330
+}
+],
+"walk":{
+"station":"Hougang",
+"line":"NE",
+"minutes":7,
+"m":600,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/midtown-residences/"
+]
+},
+"rail":[
+{
+"line":"Cross Island Line (Phase 1)",
+"year":2030,
+"station":"Hougang"
+}
+],
+"pa":"HOUGANG",
+"towns":[
+"Hougang",
+"Sengkang"
+],
+"mop":{
+"Hougang":1536,
+"Sengkang":3093
+},
+"landed5":294,
+"hub":null
+},
+"NORMANTON PARK|NORMANTON PARK":{
+"name":"Normanton Park",
+"mrt":[
+{
+"station":"Kent Ridge",
+"kind":"MRT",
+"exit":"Exit B",
+"m":1140
+},
+{
+"station":"Pasir Panjang",
+"kind":"MRT",
+"exit":"Exit A",
+"m":1160
+}
+],
+"walk":{
+"station":"Kent Ridge",
+"line":"CC",
+"minutes":18,
+"m":1500,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/normanton-park/"
+]
+},
+"rail":[],
+"pa":"QUEENSTOWN",
+"towns":[
+"Queenstown",
+"Bukit Merah"
+],
+"mop":{
+"Queenstown":1200
+},
+"landed5":93,
+"hub":[
+"Mapletree Business City",
+1.4
+]
+},
+"ONE-NORTH RESIDENCES|ONE-NORTH GATEWAY":{
+"name":"One-North Residences",
+"mrt":[
+{
+"station":"One-North",
+"kind":"MRT",
+"exit":"Exit B",
+"m":280
+},
+{
+"station":"Buona Vista",
+"kind":"MRT",
+"exit":"Exit D",
+"m":520
+}
+],
+"walk":{
+"station":"One-North",
+"line":"CC",
+"minutes":7,
+"m":560,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/one-north-residences/"
+]
+},
+"rail":[],
+"pa":"QUEENSTOWN",
+"towns":[
+"Queenstown",
+"Bukit Timah"
+],
+"mop":{
+"Queenstown":1200
+},
+"landed5":39,
+"hub":[
+"one-north",
+0.4
+]
+},
+"PARC SOPHIA|ADIS ROAD":{
+"name":"Parc Sophia",
+"mrt":[
+{
+"station":"Dhoby Ghaut",
+"kind":"MRT",
+"exit":"Exit F",
+"m":280
+},
+{
+"station":"Bencoolen",
+"kind":"MRT",
+"exit":"Exit B",
+"m":420
+}
+],
+"walk":{
+"station":"Bencoolen",
+"line":"DT",
+"minutes":10,
+"m":850,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/parc-sophia/"
+]
+},
+"rail":[],
+"pa":"ROCHOR",
+"towns":[
+"Central Area",
+"Kallang/Whampoa"
+],
+"mop":{
+"Kallang/Whampoa":2027
+},
+"landed5":45,
+"hub":[
+"Orchard",
+1.8
+]
+},
+"STELLAR RV|RIVER VALLEY ROAD":{
+"name":"Stellar Rv",
+"mrt":[
+{
+"station":"Great World",
+"kind":"MRT",
+"exit":"Exit 3",
+"m":490
+},
+{
+"station":"Havelock",
+"kind":"MRT",
+"exit":"Exit 4",
+"m":820
+}
+],
+"walk":{
+"station":"Great World",
+"line":"TE",
+"minutes":9,
+"m":780,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/stellar-rv/"
+]
+},
+"rail":[],
+"pa":"TANGLIN",
+"towns":[
+"Bukit Merah"
+],
+"mop":{},
+"landed5":49,
+"hub":[
+"Orchard",
+1.1
+]
+},
+"TANAMERA CREST|PARI DEDAP WALK":{
+"name":"Tanamera Crest",
+"mrt":[
+{
+"station":"Tanah Merah",
+"kind":"MRT",
+"exit":"Exit B",
+"m":740
+},
+{
+"station":"Bedok Reservoir",
+"kind":"MRT",
+"exit":"Exit B",
+"m":1070
+}
+],
+"walk":{
+"station":"Tanah Merah",
+"line":"EW",
+"minutes":14,
+"m":1200,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/tanamera-crest/"
+]
+},
+"rail":[],
+"pa":"BEDOK",
+"towns":[
+"Bedok",
+"Tampines"
+],
+"mop":{
+"Bedok":1031,
+"Tampines":12798
+},
+"landed5":395,
+"hub":[
+"Changi Business Park",
+2.1
+]
+},
+"THE GARDEN RESIDENCES|SERANGOON NORTH VIEW":{
+"name":"The Garden Residences",
+"mrt":[
+{
+"station":"Serangoon",
+"kind":"MRT",
+"exit":"Exit F",
+"m":1670
+},
+{
+"station":"Lorong Chuan",
+"kind":"MRT",
+"exit":"Exit A",
+"m":1690
+}
+],
+"walk":{
+"station":"Lorong Chuan",
+"line":"CC",
+"minutes":25,
+"m":2000,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/the-garden-residences/"
+]
+},
+"rail":[],
+"pa":"SERANGOON",
+"towns":[
+"Serangoon",
+"Hougang"
+],
+"mop":{
+"Hougang":1536
+},
+"landed5":1014,
+"hub":null
+},
+"THE QUINTET|CHOA CHU KANG STREET 64":{
+"name":"The Quintet",
+"mrt":[
+{
+"station":"Yew Tee",
+"kind":"MRT",
+"exit":"Exit B",
+"m":380
+},
+{
+"station":"Choa Chu Kang",
+"kind":"MRT",
+"exit":"Exit C",
+"m":1640
+}
+],
+"walk":{
+"station":"Yew Tee",
+"line":"NS",
+"minutes":8,
+"m":680,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/the-quintet/"
+]
+},
+"rail":[],
+"pa":"CHOA CHU KANG",
+"towns":[
+"Choa Chu Kang"
+],
+"mop":{
+"Choa Chu Kang":528
+},
+"landed5":94,
+"hub":null
+},
+"THE RAINTREE|BUKIT DRIVE":{
+"name":"The Raintree",
+"mrt":[
+{
+"station":"Beauty World",
+"kind":"MRT",
+"exit":"Exit A",
+"m":750
+},
+{
+"station":"Hume",
+"kind":"MRT",
+"exit":"Exit 2",
+"m":980
+}
+],
+"walk":{
+"station":"Beauty World",
+"line":"DT",
+"minutes":12,
+"m":960,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/the-raintree/"
+]
+},
+"rail":[],
+"pa":"BUKIT PANJANG",
+"towns":[
+"Bukit Panjang",
+"Bukit Timah",
+"Bukit Batok"
+],
+"mop":{
+"Bukit Panjang":728,
+"Bukit Batok":1710
+},
+"landed5":200,
+"hub":[
+"Jurong Lake District",
+4.0
+]
+},
+"THE SCOTTS TOWER|SCOTTS ROAD":{
+"name":"The Scotts Tower",
+"mrt":[
+{
+"station":"Newton",
+"kind":"MRT",
+"exit":"Exit B",
+"m":380
+},
+{
+"station":"Orchard",
+"kind":"MRT",
+"exit":"Exit 1",
+"m":650
+}
+],
+"walk":null,
+"rail":[],
+"pa":"NEWTON",
+"towns":[
+"Kallang/Whampoa"
+],
+"mop":{
+"Kallang/Whampoa":2027
+},
+"landed5":216,
+"hub":[
+"Orchard",
+0.7
+]
+},
+"UPTOWN @ FARRER|PERUMAL ROAD":{
+"name":"Uptown @ Farrer",
+"mrt":[
+{
+"station":"Farrer Park",
+"kind":"MRT",
+"exit":"Exit G",
+"m":80
+},
+{
+"station":"Boon Keng",
+"kind":"MRT",
+"exit":"Exit C",
+"m":790
+}
+],
+"walk":{
+"station":"Farrer Park",
+"line":"NE",
+"minutes":4,
+"m":300,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/uptown-at-farrer/"
+]
+},
+"rail":[],
+"pa":"KALLANG",
+"towns":[
+"Kallang/Whampoa",
+"Central Area"
+],
+"mop":{
+"Kallang/Whampoa":2027
+},
+"landed5":58,
+"hub":[
+"Novena",
+1.6
+]
+},
+"V ON SHENTON|SHENTON WAY":{
+"name":"V On Shenton",
+"mrt":[
+{
+"station":"Shenton Way",
+"kind":"MRT",
+"exit":"Exit 3",
+"m":120
+},
+{
+"station":"Tanjong Pagar",
+"kind":"MRT",
+"exit":"Exit E",
+"m":250
+}
+],
+"walk":{
+"station":"Tanjong Pagar",
+"line":"EW",
+"minutes":6,
+"m":480,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/v-on-shenton/"
+]
+},
+"rail":[],
+"pa":"DOWNTOWN CORE",
+"towns":[
+"Central Area",
+"Bukit Merah"
+],
+"mop":{},
+"landed5":13,
+"hub":[
+"Tanjong Pagar (CBD)",
+0.4
+]
+},
+"VERDALE|DE SOUZA AVENUE":{
+"name":"Verdale",
+"mrt":[
+{
+"station":"Beauty World",
+"kind":"MRT",
+"exit":"Exit B",
+"m":790
+},
+{
+"station":"Hume",
+"kind":"MRT",
+"exit":"Exit 2",
+"m":1040
+}
+],
+"walk":{
+"station":"Beauty World",
+"line":"DT",
+"minutes":12,
+"m":1000,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/verdale/"
+]
+},
+"rail":[],
+"pa":"BUKIT TIMAH",
+"towns":[
+"Bukit Timah",
+"Bukit Panjang",
+"Bukit Batok"
+],
+"mop":{
+"Bukit Panjang":728,
+"Bukit Batok":1710
+},
+"landed5":258,
+"hub":[
+"Jurong Lake District",
+3.3
+]
+},
+"WATERFORD RESIDENCE|KIM YAM ROAD":{
+"name":"Waterford Residence",
+"mrt":[
+{
+"station":"Fort Canning",
+"kind":"MRT",
+"exit":"Exit A",
+"m":520
+},
+{
+"station":"Great World",
+"kind":"MRT",
+"exit":"Exit 1",
+"m":660
+}
+],
+"walk":{
+"station":"Fort Canning",
+"line":"DT",
+"minutes":10,
+"m":790,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/waterford-residence/"
+]
+},
+"rail":[],
+"pa":"RIVER VALLEY",
+"towns":[
+"Central Area",
+"Bukit Merah"
+],
+"mop":{},
+"landed5":40,
+"hub":[
+"Orchard",
+1.4
+]
+},
+"WATERMARK ROBERTSON QUAY|RODYK STREET":{
+"name":"Watermark Robertson Quay",
+"mrt":[
+{
+"station":"Havelock",
+"kind":"MRT",
+"exit":"Exit 4",
+"m":440
+},
+{
+"station":"Great World",
+"kind":"MRT",
+"exit":"Exit 1",
+"m":590
+}
+],
+"walk":{
+"station":"Fort Canning",
+"line":"DT",
+"minutes":12,
+"m":1000,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/watermark-robertson-quay/"
+]
+},
+"rail":[],
+"pa":"SINGAPORE RIVER",
+"towns":[
+"Central Area",
+"Bukit Merah"
+],
+"mop":{},
+"landed5":15,
+"hub":[
+"Raffles Place (CBD)",
+1.6
+]
+},
+"WATERSCAPE AT CAVENAGH|CAVENAGH ROAD":{
+"name":"Waterscape At Cavenagh",
+"mrt":[
+{
+"station":"Somerset",
+"kind":"MRT",
+"exit":"Exit D",
+"m":450
+},
+{
+"station":"Dhoby Ghaut",
+"kind":"MRT",
+"exit":"Exit D",
+"m":630
+}
+],
+"walk":{
+"station":"Somerset",
+"line":"NS",
+"minutes":10,
+"m":790,
+"src":[
+"Stacked Homes condo directory",
+"https://directory.stackedhomes.com/condo/waterscape-at-cavenagh/"
+]
+},
+"rail":[],
+"pa":"NEWTON",
+"towns":[
+"Central Area",
+"Kallang/Whampoa"
+],
+"mop":{
+"Kallang/Whampoa":2027
+},
+"landed5":68,
+"hub":[
+"Orchard",
+1.0
+]
+}
+}
+}

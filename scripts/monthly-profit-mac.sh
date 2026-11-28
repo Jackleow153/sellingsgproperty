@@ -23,7 +23,7 @@ node scripts/ura-comps.cjs || echo "ura-comps failed: undervalued screen keeps l
 python3 -c "import json,sys; p=json.load(open('data/comp-tx.json'))['p']; r=sum(1 for v in p.values() if v.get('rent')); sys.exit(0 if len(p)>=1500 and r>=0.5*len(p) else 1)" \
   || { echo "comp-tx.json failed the sanity check: restored last month's file"; git checkout -q -- data/comp-tx.json; }
 if [ "$before" != "$(shasum data/comp-tx.json 2>/dev/null)" ]; then
-  python3 scripts/analysis/value_screen.py && python3 scripts/build-value-page.py || { echo "value screen failed"; git checkout -q -- data/value-screen.json undervalued-pty sitemap.xml; }
+  python3 scripts/analysis/value_screen.py && python3 scripts/analysis/value_context.py && python3 scripts/build-value-page.py || { echo "value screen failed"; git checkout -q -- data/value-screen.json data/value-context.json data/geo undervalued-pty sitemap.xml; }
 fi
 if [ -z "$(git status --porcelain -- data assets condo-analysis undervalued-pty sitemap.xml)" ]; then echo "No change."; exit 0; fi
 git add -A -- data assets condo-analysis undervalued-pty sitemap.xml
